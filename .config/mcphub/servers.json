@@ -1,37 +1,62 @@
 {
+  "nativeMCPServers": {
+    "mcphub": {
+      "autoApprove": [
+        "get_current_servers"
+      ]
+    },
+    "neovim": {
+      "autoApprove": [
+        "read_multiple_files",
+        "read_file",
+        "list_directory",
+        "find_files"
+      ]
+    }
+  },
   "mcpServers": {
     "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx",
       "autoApprove": [
         "resolve-library-id",
         "get-library-docs"
-      ],
-      "type": "streamable-http",
-      "url": "https://mcp.context7.com/mcp"
-    },
-    "fetch": {
-      "args": [
-        "mcp-server-fetch"
-      ],
-      "command": "uvx",
-      "disabled": false
-    },
-    "filesystem": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "${CWD}"
-      ],
-      "command": "npx"
+      ]
     },
     "sequentialthinking": {
       "args": [
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
       ],
+      "disabled": false,
+      "command": "npx",
       "autoApprove": [
         "sequentialthinking"
+      ]
+    },
+    "filesystem": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "${cmd:pwd}"
       ],
-      "command": "npx"
+      "disabled": false,
+      "command": "npx",
+      "autoApprove": [
+        "directory_tree",
+        "get_file_info",
+        "list_allowed_directories",
+        "list_directory",
+        "list_directory_with_sizes",
+        "read_file",
+        "read_media_file",
+        "read_multiple_files",
+        "read_text_file",
+        "search_files"
+      ]
     }
   }
 }
