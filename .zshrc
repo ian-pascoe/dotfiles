@@ -73,7 +73,11 @@ if [ -d "$OPENCODE_PATH" ]; then
   export PATH=$OPENCODE_PATH:$PATH
 fi
 
+# Zoxide
+eval "$(zoxide init zsh)"
+
 # Aliases
+alias cd='z'
 alias ls='lsd'
 alias cat='bat --paging=never'
 
