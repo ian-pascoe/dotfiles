@@ -86,3 +86,12 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   tmux attach-session -t default || tmux new-session -s default
 fi
 
+# bun
+export BUN_INSTALL="$HOME/.bun"
+if [ -d "$BUN_INSTALL" ]; then
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# bun completions
+[ -s "/home/e21146146/.bun/_bun" ] && source "/home/e21146146/.bun/_bun"
+
