@@ -41,6 +41,9 @@
   home = {
     username = "e21146146";
     homeDirectory = "/home/e21146146";
+    shell = {
+      enableNushellIntegration = true;
+    };
   };
 
   # Add stuff for your user as you see fit:
@@ -50,6 +53,20 @@
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+  programs.nushell = {
+    enable = true;
+    environmentVariables = {
+      http_proxy = "http://REDACTED:80/";
+      https_proxy = "http://REDACTED:80/";
+      no_proxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
+      HTTP_PROXY = "http://REDACTED:80/";
+      HTTPS_PROXY = "http://REDACTED:80/";
+      NO_PROXY = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
+    };
+    shellAliases = {
+      ll = "ls -l";
+    };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
