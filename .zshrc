@@ -18,7 +18,7 @@ if [ -d "$LOCALBIN_PATH" ]; then
   export PATH="$LOCALBIN_PATH:$PATH"
 fi
 
-# True Color
+# Terminal Color
 export COLORTERM='truecolor'
 
 # Language Config
@@ -95,5 +95,4 @@ alias cat='bat --paging=never'
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux attach-session -t default || tmux new-session -s default
 fi
-
 
