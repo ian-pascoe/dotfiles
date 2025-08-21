@@ -28,6 +28,7 @@
       python3Full
       rustc
       cargo
+      nixd
     ];
   };
 
@@ -61,6 +62,7 @@
     vimdiffAlias = true;
   };
   programs.bun.enable = true;
+  programs.opencode.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
