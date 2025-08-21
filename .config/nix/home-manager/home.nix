@@ -29,6 +29,7 @@
       rustc
       cargo
       nixd
+      gcc
     ];
   };
 
