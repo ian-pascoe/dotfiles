@@ -43,6 +43,8 @@
       https_proxy = "http://proxygov.ray.com:80/";
       HTTP_PROXY = "http://proxygov.ray.com:80/";
       HTTPS_PROXY = "http://proxygov.ray.com:80/";
+      all_proxy = "http://proxygov.ray.com:80/";
+      ALL_PROXY = "http://proxygov.ray.com:80/";
       no_proxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
       NO_PROXY = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
     };
