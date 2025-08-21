@@ -12,6 +12,10 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Darwin
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -19,6 +23,7 @@
     nixpkgs,
     nixos-wsl,
     home-manager,
+    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -41,7 +46,15 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
-        modules = [./home-manager/home.nix];
+        modules = [./home-manager/home-linux.nix];
+      };
+    };
+
+    darwinConfigurations = {
+      "Ians-Macbook-Pro" = nix-darwin.lib.darwinSystem {
+        specialArgs = {inherit inputs outputs;};
+        # > Our main darwin configuration file <
+        modules = [./darwin/darwin.nix];
       };
     };
   };
