@@ -39,7 +39,9 @@
     (builtins.filter (f: f != "." && f != ".." && f != "README.txt" && builtins.match ".+\\.cer$" f != null)
       (builtins.attrNames (builtins.readDir "${certs}/PEM")));
   in {
-    pki.certificateFiles = pemFiles;
+    pki.certificateFiles = [ 
+      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+    ] ++ pemFiles;
   };
 
   networking.hostName = "EC1414438";
