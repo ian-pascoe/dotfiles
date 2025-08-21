@@ -29,18 +29,31 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
+
+  security = let
+    certs = pkgs.fetchzip {
+        url = "https://pki.rtx.com/certificate/RTX_Cert_Bundle-current.zip";
+        sha256 = "sha256-4UqqonCQThHkt5dsq3FQJrUWP0D07mmlDdBjmTTlRmY=";
+    };
+    pemFiles = map (f: "${certs}/PEM/${f}")
+    (builtins.filter (f: f != "." && f != ".." && f != "README.txt" && builtins.match ".+\\.cer$" f != null)
+      (builtins.attrNames (builtins.readDir "${certs}/PEM")));
+  in {
+    pki.certificateFiles = [ 
+      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+    ] ++ pemFiles;
+  };
+
   networking.hostName = "EC1414438";
   networking.proxy.default = "http://REDACTED:80/";
   networking.proxy.noProxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
-  security.pki.certificateFiles = [ 
-    "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-    ./rtx-ca-bundle.crt
-  ];
+
+  virtualisation.docker.enable = true;
 
   users.users = {
     "1146146" = {
       isNormalUser = true;
-      extraGroups = ["wheel"];
+      extraGroups = ["wheel" "docker"];
       shell = pkgs.nushell;
     };
   };

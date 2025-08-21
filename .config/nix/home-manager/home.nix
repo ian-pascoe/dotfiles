@@ -30,11 +30,23 @@
       cargo
       nixd
       gcc
+      git-credential-manager
     ];
   };
 
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+    extraConfig = {
+      credential = {
+        helper = "manager";
+        credentialStore = "cache";
+        "https://github.com".username = "ian-pascoe";
+        "https://github-us.utc.com".username = "e21146146";
+      };
+    };
+  };
   programs.gh.enable = true;
   programs.nushell = {
     enable = true;
@@ -47,17 +59,34 @@
       ALL_PROXY = "http://REDACTED:80/";
       no_proxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
       NO_PROXY = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
+      SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
+      SSL_CERT_DIR = "${pkgs.cacert}/etc/ssl/certs";
+      REQUESTS_CA_BUNDLE = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
     };
     settings = {
       show_banner = false;
+      buffer_editor = "nvim";
     };
     shellAliases = {
-      ll = "ls -al";
+      ls = "lsd";
+      ll = "lsd -Al";
+      cat = "bat --pager=never";
+      cd = "z";
       nrs = "sudo nixos-rebuild switch --flake ~/.config/nix#EC1414438";
       hms = "home-manager switch --flake ~/.config/nix#1146146@EC1414438";
     };
   };
   programs.starship.enable = true;
+  programs.lsd.enable = true;
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "Nord";
+    };
+  };
+  programs.ripgrep.enable = true;
+  programs.fzf.enable = true;
+  programs.zoxide.enable = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -66,6 +95,7 @@
   };
   programs.bun.enable = true;
   programs.opencode.enable = true;
+  programs.uv.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
