@@ -49,7 +49,7 @@
     };
     shellAliases = {
       ll = "ls -al";
-      nrs = "nixos-rebuild switch --flake ~/.config/nix#EC1414438";
+      nrs = "sudo nixos-rebuild switch --flake ~/.config/nix#EC1414438";
       hms = "home-manager switch --flake ~/.config/nix#1146146@EC1414438";
     };
   };
