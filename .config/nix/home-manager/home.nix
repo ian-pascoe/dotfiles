@@ -59,9 +59,9 @@
       ALL_PROXY = "http://REDACTED:80/";
       no_proxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
       NO_PROXY = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
-      SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
-      SSL_CERT_DIR = "${pkgs.cacert}/etc/ssl/certs";
-      REQUESTS_CA_BUNDLE = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
+      SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+      SSL_CERT_DIR = "/etc/ssl/certs";
+      REQUESTS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
     };
     settings = {
       show_banner = false;
