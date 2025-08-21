@@ -48,6 +48,9 @@ if [[ -f "$ZSH_AUTOSUGGESTIONS_PATH" ]]; then
   source "$ZSH_AUTOSUGGESTIONS_PATH"
 fi
 
+# Zoxide
+eval "$(zoxide init zsh)"
+
 # Cargo
 if [[ -f "$HOME/.cargo/env" ]]; then
   . "$HOME/.cargo/env"
@@ -73,12 +76,19 @@ if [ -d "$OPENCODE_PATH" ]; then
   export PATH=$OPENCODE_PATH:$PATH
 fi
 
-# Zoxide
-eval "$(zoxide init zsh)"
+# bun
+export BUN_INSTALL="$HOME/.bun"
+if [ -d "$BUN_INSTALL" ]; then
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+# bun completions
+[ -s "/home/e21146146/.bun/_bun" ] && source "/home/e21146146/.bun/_bun"
 
 # Aliases
 alias cd='z'
 alias ls='lsd'
+alias ll='lsd -l'
+alias lal='lsd -Al'
 alias cat='bat --paging=never'
 
 # Auto-start tmux with session reuse
@@ -86,12 +96,4 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   tmux attach-session -t default || tmux new-session -s default
 fi
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-if [ -d "$BUN_INSTALL" ]; then
-  export PATH="$BUN_INSTALL/bin:$PATH"
-fi
-
-# bun completions
-[ -s "/home/e21146146/.bun/_bun" ] && source "/home/e21146146/.bun/_bun"
 
