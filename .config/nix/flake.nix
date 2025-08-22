@@ -16,6 +16,9 @@
     # Darwin
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Homebrew
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs = {
@@ -24,6 +27,7 @@
     nixos-wsl,
     home-manager,
     nix-darwin,
+    nix-homebrew,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -46,7 +50,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
-        modules = [./home-manager/home-linux.nix];
+        modules = [./home-manager/wsl/home.nix];
       };
     };
 
@@ -54,7 +58,26 @@
       "Ians-Macbook-Pro" = nix-darwin.lib.darwinSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main darwin configuration file <
-        modules = [./darwin/darwin.nix];
+        modules = [
+          ./darwin/configuration.nix
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "ianpascoe";
+              autoMigrate = true;
+            };
+          }
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.extraSpecialArgs = {inherit inputs outputs;};
+            home-manager.users.ianpascoe = import ./home-manager/darwin/home.nix;
+          }
+        ];
       };
     };
   };
