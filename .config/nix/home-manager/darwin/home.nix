@@ -29,12 +29,21 @@
   };
 
   programs.bash.enable = true;
-  programs.zsh.enable = true;
+  programs.zsh = {
+    envExtra = ''
+      export GCM_CREDENTIAL_STORE="gpg"
+
+      # Ensure GPG agent is available
+      export GPG_TTY=$(tty)
+    '';
+  };
 
   programs.git.extraConfig = {
+    user.email = "ian.g.pascoe@gmail.com";
+    user.name = "Ian Pascoe";
     credential = {
       helper = "manager";
-      credentialStore = "cache";
+      credentialStore = "gpg";
       "https://github.com".username = "ian-pascoe";
     };
   };
