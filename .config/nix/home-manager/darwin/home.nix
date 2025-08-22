@@ -1,8 +1,16 @@
 { pkgs, ...}: {
     home = {
       shell = {
+        enableBashIntegration = true;
         enableZshIntegration = true;
         enableNushellIntegration = true;
+      };
+      shellAliases = {
+        ls = "lsd";
+        ll = "lsd -Al";
+        cat = "bat --pager=never";
+        cd = "z";
+        nds = "sudo nix run nix-darwin/master#darwin-rebuild --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
       };
       packages = with pkgs; [
         unzip
@@ -37,13 +45,6 @@
         show_banner = false;
         buffer_editor = "nvim";
       };
-      shellAliases = {
-        ls = "lsd";
-        ll = "lsd -Al";
-        cat = "bat --pager=never";
-        cd = "z";
-        nds = "sudo nix run nix-darwin/master#darwin-rebuild --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
-      };
     };
     programs.starship.enable = true;
     programs.lsd.enable = true;
@@ -65,11 +66,19 @@
     programs.bun.enable = true;
     programs.opencode.enable = true;
     programs.uv.enable = true;
+    programs.ghostty = {
+      enable = true;
+      settings = {
+        theme = "catppuccin-mocha";
+        font-size = 12;
+        font-family = "JetBrains Mono";
+      };
+    };
 
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";
     
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     home.stateVersion = "25.05";
-  };
+  }
 
