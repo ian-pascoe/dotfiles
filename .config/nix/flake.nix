@@ -31,54 +31,74 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    # Common variables
+    system = "x86_64-linux";
+    commonArgs = {inherit inputs outputs;};
+
+    # Helper functions
+    mkNixosSystem = modules:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = commonArgs;
+        inherit modules;
+      };
+
+    mkDarwinSystem = modules:
+      nix-darwin.lib.darwinSystem {
+        specialArgs = commonArgs;
+        inherit modules;
+      };
+
+    mkDarwinHomeManagerConfig = user: config: {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.backupFileExtension = "backup";
+      home-manager.extraSpecialArgs = commonArgs;
+      home-manager.users.${user} = import config;
+    };
+
+    mkWslHomeConfiguration = system: modules:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = commonArgs;
+        inherit modules;
+      };
+
+    mkHomebrewConfig = user: {
+      nix-homebrew = {
+        enable = true;
+        enableRosetta = true;
+        inherit user;
+        autoMigrate = true;
+      };
+    };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild switch --flake .#EC1414438'
     nixosConfigurations = {
-      EC1414438 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix nixos-wsl.nixosModules.wsl];
-      };
+      EC1414438 = mkNixosSystem [
+        ./nixos/configuration.nix
+        nixos-wsl.nixosModules.wsl
+      ];
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager switch --flake .#1146146@EC1414438'
     homeConfigurations = {
-      "1146146@EC1414438" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        # > Our main home-manager configuration file <
-        modules = [./home-manager/wsl/home.nix];
-      };
+      "1146146@EC1414438" = mkWslHomeConfiguration system [./home-manager/wsl/home.nix];
     };
 
+    # Darwin configuration entrypoint
+    # Available through 'darwin-rebuild switch --flake .#Ians-Macbook-Pro'
     darwinConfigurations = {
-      "Ians-Macbook-Pro" = nix-darwin.lib.darwinSystem {
-        specialArgs = {inherit inputs outputs;};
-        # > Our main darwin configuration file <
-        modules = [
-          ./darwin/configuration.nix
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;
-              enableRosetta = true;
-              user = "ianpascoe";
-              autoMigrate = true;
-            };
-          }
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-            home-manager.users.ianpascoe = import ./home-manager/darwin/home.nix;
-          }
-        ];
-      };
+      "Ians-Macbook-Pro" = mkDarwinSystem [
+        ./darwin/configuration.nix
+        nix-homebrew.darwinModules.nix-homebrew
+        (mkHomebrewConfig "ianpascoe")
+        home-manager.darwinModules.home-manager
+        (mkDarwinHomeManagerConfig "ianpascoe" ./home-manager/darwin/home.nix)
+      ];
     };
   };
 }

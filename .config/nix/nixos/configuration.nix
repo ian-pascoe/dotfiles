@@ -5,15 +5,15 @@
   lib,
   config,
   pkgs,
+  rtxCerts,
   ...
 }: {
-  wsl.enable = true;
+  imports = [
+    ../modules/nixpkgs-config.nix
+    ../modules/rtx-certs.nix
+  ];
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+  wsl.enable = true;
 
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
@@ -29,22 +29,13 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  security = let
-    certs = pkgs.fetchzip {
-      url = "https://pki.rtx.com/certificate/RTX_Cert_Bundle-current.zip";
-      sha256 = "sha256-4UqqonCQThHkt5dsq3FQJrUWP0D07mmlDdBjmTTlRmY=";
-    };
-    pemFiles =
-      map (f: "${certs}/PEM/${f}")
-      (builtins.filter (f: f != "." && f != ".." && f != "README.txt" && builtins.match ".+\\.cer$" f != null)
-        (builtins.attrNames (builtins.readDir "${certs}/PEM")));
-  in {
+  security = {
     pki.installCACerts = true;
     pki.certificateFiles =
       [
         "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
       ]
-      ++ pemFiles;
+      ++ rtxCerts.pemFiles;
   };
 
   networking.hostName = "EC1414438";
