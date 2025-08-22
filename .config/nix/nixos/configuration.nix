@@ -29,19 +29,21 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-
   security = let
     certs = pkgs.fetchzip {
-        url = "https://pki.rtx.com/certificate/RTX_Cert_Bundle-current.zip";
-        sha256 = "sha256-4UqqonCQThHkt5dsq3FQJrUWP0D07mmlDdBjmTTlRmY=";
+      url = "https://pki.rtx.com/certificate/RTX_Cert_Bundle-current.zip";
+      sha256 = "sha256-4UqqonCQThHkt5dsq3FQJrUWP0D07mmlDdBjmTTlRmY=";
     };
-    pemFiles = map (f: "${certs}/PEM/${f}")
-    (builtins.filter (f: f != "." && f != ".." && f != "README.txt" && builtins.match ".+\\.cer$" f != null)
-      (builtins.attrNames (builtins.readDir "${certs}/PEM")));
+    pemFiles =
+      map (f: "${certs}/PEM/${f}")
+      (builtins.filter (f: f != "." && f != ".." && f != "README.txt" && builtins.match ".+\\.cer$" f != null)
+        (builtins.attrNames (builtins.readDir "${certs}/PEM")));
   in {
-    pki.certificateFiles = [ 
-      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-    ] ++ pemFiles;
+    pki.certificateFiles =
+      [
+        "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+      ]
+      ++ pemFiles;
   };
 
   networking.hostName = "EC1414438";
@@ -54,7 +56,7 @@
     "1146146" = {
       isNormalUser = true;
       extraGroups = ["wheel" "docker"];
-      shell = pkgs.nushell;
+      shell = pkgs.zsh;
     };
   };
   wsl.defaultUser = "1146146";
