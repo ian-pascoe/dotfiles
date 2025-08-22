@@ -39,6 +39,7 @@
       (builtins.filter (f: f != "." && f != ".." && f != "README.txt" && builtins.match ".+\\.cer$" f != null)
         (builtins.attrNames (builtins.readDir "${certs}/PEM")));
   in {
+    pki.installCACerts = true;
     pki.certificateFiles =
       [
         "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
@@ -51,6 +52,9 @@
   networking.proxy.noProxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
 
   virtualisation.docker.enable = true;
+
+  programs.nix-ld.enable = true;
+  programs.zsh.enable = true;
 
   users.users = {
     "1146146" = {
