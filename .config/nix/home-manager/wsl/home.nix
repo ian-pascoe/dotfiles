@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ../../modules/common-home.nix
+    ../modules/common-home.nix
     ../../modules/nixpkgs-config.nix
     ../../modules/rtx-certs.nix
   ];
@@ -42,6 +42,10 @@
       export SSL_CERT_DIR="/etc/ssl/certs"
       export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
       export JAVAX_NET_SSL_TRUSTSTORE="${rtxCerts.trustStore}"
+      export GCM_CREDENTIAL_STORE="gpg"
+      
+      # Ensure GPG agent is available
+      export GPG_TTY=$(tty)
     '';
   };
 
@@ -50,9 +54,11 @@
     user.name = "Ian Pascoe";
     credential = {
       helper = "manager";
-      credentialStore = "cache";
+      credentialStore = "gpg";
       "https://github.com".username = "ian-pascoe";
+      "https://github.com".provider = "github";
       "https://github-us.utc.com".username = "e21146146";
+      "https://github-us.utc.com".provider = "github";
     };
   };
 
