@@ -1,7 +1,5 @@
 {
   inputs,
-  lib,
-  config,
   pkgs,
   ...
 }: {
@@ -13,18 +11,36 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
-      allowBroken = true;
     };
   };
 
   nix.settings.experimental-features = "nix-command flakes";
 
-  system.primaryUser = "ianpascoe";
-  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-
-  environment = {
-    systemPackages = [ pkgs.nushell ];
-    shells = [ pkgs.nushell ];
+  system = {
+    primaryUser = "ianpascoe";
+    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+    defaults = {
+      dock = {
+        autohide = true;
+        persistent-apps = [
+          {
+            app = "/System/Applications/Launchpad.app";
+          }
+          {
+            app = "/Applications/Google Chrome.app";
+          }
+          {
+            app = "/System/Applications/Messages.app";
+          }
+          {
+            app = "/System/Applications/FaceTime.app";
+          }
+          {
+            app = "/Applications/Ghostty.app";
+          }
+        ];
+      };
+    };
   };
 
   programs.bash.enable = true;
@@ -33,15 +49,31 @@
     enableAutosuggestions = true;
   };
 
+  fonts.packages = [
+    pkgs.nerd-fonts.jetbrains-mono
+  ];
+
   homebrew = {
     enable = true;
+    brews = [
+      "mas"
+    ];
+    casks = [
+      "ghostty@tip"
+      "google-chrome"
+      "raycast"
+      "karabiner-elements"
+    ];
+    masApps = {
+      WireGuard = 1451685025;
+    };
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";
       upgrade = true;
     };
   };
-  
+
   users.users.ianpascoe = {
     name = "ianpascoe";
     home = "/Users/ianpascoe";

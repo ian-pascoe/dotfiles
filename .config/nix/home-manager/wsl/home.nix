@@ -1,12 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -19,7 +13,7 @@
     username = "1146146";
     homeDirectory = "/home/1146146";
     shell = {
-      enableNushellIntegration = true;
+      enableShellIntegration = true;
     };
     packages = with pkgs; [
       unzip
@@ -29,7 +23,9 @@
       rustc
       cargo
       nixd
+      alejandra
       gcc
+      libiconv
       git-credential-manager
     ];
   };
@@ -48,25 +44,22 @@
     };
   };
   programs.gh.enable = true;
-  programs.nushell = {
+  programs.zsh = {
     enable = true;
-    environmentVariables = {
-      http_proxy = "http://REDACTED:80/";
-      https_proxy = "http://REDACTED:80/";
-      HTTP_PROXY = "http://REDACTED:80/";
-      HTTPS_PROXY = "http://REDACTED:80/";
-      all_proxy = "http://REDACTED:80/";
-      ALL_PROXY = "http://REDACTED:80/";
-      no_proxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
-      NO_PROXY = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
-      SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
-      SSL_CERT_DIR = "/etc/ssl/certs";
-      REQUESTS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
-    };
-    settings = {
-      show_banner = false;
-      buffer_editor = "nvim";
-    };
+    autosuggestion.enable = true;
+    envExtra = ''
+      export http_proxy="http://REDACTED:80/"
+      export https_proxy="http://REDACTED:80/"
+      export HTTP_PROXY="http://REDACTED:80/"
+      export HTTPS_PROXY="http://REDACTED:80/"
+      export all_proxy="http://REDACTED:80/"
+      export ALL_PROXY="http://REDACTED:80/"
+      export no_proxy="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
+      export NO_PROXY="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
+      export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
+      export SSL_CERT_DIR="/etc/ssl/certs"
+      export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+    '';
     shellAliases = {
       ls = "lsd";
       ll = "lsd -Al";
