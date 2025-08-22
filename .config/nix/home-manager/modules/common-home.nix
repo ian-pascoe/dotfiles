@@ -25,6 +25,10 @@
 
   programs = {
     home-manager.enable = true;
+    zsh = {
+      enable = true;
+      autosuggestion.enable = true;
+    };
     starship.enable = true;
     lsd.enable = true;
     bat = {
@@ -48,6 +52,8 @@
       enable = true;
       lfs.enable = true;
     };
+    java.enable = true;
+    gradle.enable = true;
   };
 
   home = {
