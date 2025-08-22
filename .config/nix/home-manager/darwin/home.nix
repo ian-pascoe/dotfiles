@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [../../modules/common-home.nix];
+  imports = [../modules/common-home.nix];
 
   home = {
     packages = with pkgs; [
