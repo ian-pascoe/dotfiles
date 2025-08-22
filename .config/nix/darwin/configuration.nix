@@ -13,6 +13,7 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
+      allowBroken = true;
     };
   };
 
@@ -26,6 +27,7 @@
     shells = [ pkgs.nushell ];
   };
 
+  programs.bash.enable = true;
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
