@@ -3,12 +3,12 @@
   "theme": "system",
   "mcp": {
     "context7": {
-      "enabled": true
+      "enabled": true,
       "type": "local",
       "command": ["bunx", "--bun", "-y", "@upstash/context7-mcp"],
     },
     "sequential-thinking": {
-      "enabled": true
+      "enabled": true,
       "type": "local",
       "command": [
         "bunx",
