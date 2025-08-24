@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  terminalBackground = pkgs.fetchurl {
+    url = "https://images8.alphacoders.com/135/1351417.png";
+    sha256 = "sha256-tKNdnOxEwoyc3mtPrGnahDWe4ZwzaVtrPACaNUT4UTo=";
+  };
+in {
   imports = [../modules/common-home.nix];
 
   home = {
@@ -12,7 +17,7 @@
         text = ''
           font-family = "JetBrainsMono Nerd Font Mono"
           font-size = 14
-          background-image = "/Users/ianpascoe/Pictures/terminal-background.png"
+          background-image = "${terminalBackground}"
           background-image-fit = cover
           background-image-opacity = 0.1
         '';
