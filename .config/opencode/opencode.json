@@ -3,22 +3,19 @@
   "theme": "system",
   "mcp": {
     "context7": {
-      "type": "local",
-      "command": [
-        "bunx",
-        "-y",
-        "@upstash/context7-mcp"
-      ],
       "enabled": true
+      "type": "local",
+      "command": ["bunx", "--bun", "-y", "@upstash/context7-mcp"],
     },
     "sequential-thinking": {
+      "enabled": true
       "type": "local",
       "command": [
         "bunx",
+        "--bun",
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
       ],
-      "enabled": true
     }
   }
 }
