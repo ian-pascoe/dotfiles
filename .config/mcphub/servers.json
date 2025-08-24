@@ -1,9 +1,7 @@
 {
   "nativeMCPServers": {
     "mcphub": {
-      "autoApprove": [
-        "get_current_servers"
-      ]
+      "autoApprove": ["get_current_servers"]
     },
     "neovim": {
       "autoApprove": [
@@ -16,35 +14,27 @@
   },
   "mcpServers": {
     "context7": {
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ],
-      "command": "npx",
-      "autoApprove": [
-        "resolve-library-id",
-        "get-library-docs"
-      ]
+      "command": "bunx",
+      "args": ["--bun", "-y", "@upstash/context7-mcp"],
+      "autoApprove": ["resolve-library-id", "get-library-docs"]
     },
     "sequentialthinking": {
+      "command": "bunx",
       "args": [
+        "--bun",
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
       ],
-      "disabled": false,
-      "command": "npx",
-      "autoApprove": [
-        "sequentialthinking"
-      ]
+      "autoApprove": ["sequentialthinking"]
     },
     "filesystem": {
+      "command": "bunx",
       "args": [
+        "--bun",
         "-y",
         "@modelcontextprotocol/server-filesystem",
         "${cmd:pwd}"
       ],
-      "disabled": false,
-      "command": "npx",
       "autoApprove": [
         "directory_tree",
         "get_file_info",
