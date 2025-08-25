@@ -8,6 +8,8 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   nix.settings.experimental-features = "nix-command flakes";
+  nix.gc.automatic = true;
+  nix.optimise.automatic = true;
 
   system = {
     primaryUser = "ianpascoe";
@@ -17,7 +19,13 @@
         autohide = true;
         persistent-apps = [
           {
+            app = "/System/Applications/System Settings.app";
+          }
+          {
             app = "/System/Applications/Launchpad.app";
+          }
+          {
+            spacer = {small = true;};
           }
           {
             app = "/Applications/Google Chrome.app";
@@ -30,6 +38,9 @@
           }
           {
             app = "/Applications/Ghostty.app";
+          }
+          {
+            app = "/System/Applications/Notes.app";
           }
         ];
       };

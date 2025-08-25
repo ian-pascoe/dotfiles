@@ -5,6 +5,10 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Index Database
+    nix-index-database.url = "github:nix-community/nix-index-database/main";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     # WSL
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +28,7 @@
   outputs = {
     self,
     nixpkgs,
+    nix-index-database,
     nixos-wsl,
     home-manager,
     nix-darwin,
@@ -44,6 +49,13 @@
         inherit modules;
       };
 
+    mkWslHomeConfiguration = system: modules:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = commonArgs;
+        inherit modules;
+      };
+
     mkDarwinSystem = modules:
       nix-darwin.lib.darwinSystem {
         specialArgs = commonArgs;
@@ -57,13 +69,6 @@
       home-manager.extraSpecialArgs = commonArgs;
       home-manager.users.${user} = import config;
     };
-
-    mkWslHomeConfiguration = system: modules:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = commonArgs;
-        inherit modules;
-      };
 
     mkHomebrewConfig = user: {
       nix-homebrew = {
@@ -79,6 +84,8 @@
     nixosConfigurations = {
       EC1414438 = mkNixosSystem [
         ./nixos/configuration.nix
+        nix-index-database.nixosModules.nix-index
+        {programs.nix-index-database.comma.enable = true;}
         nixos-wsl.nixosModules.wsl
       ];
     };
@@ -94,6 +101,8 @@
     darwinConfigurations = {
       "Ians-Macbook-Pro" = mkDarwinSystem [
         ./darwin/configuration.nix
+        nix-index-database.darwinModules.nix-index
+        {programs.nix-index-database.comma.enable = true;}
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
         home-manager.darwinModules.home-manager
