@@ -1,8 +1,16 @@
-{pkgs, ...}: let
-  terminalBackground = pkgs.fetchurl {
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  wallpaper = pkgs.fetchurl {
     url = "https://images8.alphacoders.com/135/1351417.png";
     sha256 = "sha256-tKNdnOxEwoyc3mtPrGnahDWe4ZwzaVtrPACaNUT4UTo=";
   };
+  setWallpaperScript = pkgs.writeShellScriptBin "set-wallpaper" ''
+    #!/bin/sh
+    /usr/bin/osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${wallpaper}\""
+  '';
 in {
   imports = [../modules/common-home.nix];
 
@@ -17,9 +25,11 @@ in {
         text = ''
           font-family = "JetBrainsMono Nerd Font Mono"
           font-size = 14
-          background-image = "${terminalBackground}"
+          cursor-style = block
+          shell-integration-features = no-cursor
+          background-image = "${wallpaper}"
           background-image-fit = cover
-          background-image-opacity = 0.1
+          background-image-opacity = 0.25
         '';
       };
     };
@@ -30,6 +40,13 @@ in {
 
     sessionVariables = {
       EDITOR = "nvim";
+    };
+
+    activation = {
+      "setWallpaper" = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        echo "Setting wallpaper"
+        ${setWallpaperScript}/bin/set-wallpaper
+      '';
     };
   };
 
