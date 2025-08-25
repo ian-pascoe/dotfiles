@@ -25,7 +25,7 @@ in {
     };
 
     shellAliases = {
-      nds = "sudo nix run nix-darwin/master#darwin-rebuild --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
+      nds = "sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
     };
 
     sessionVariables = {
