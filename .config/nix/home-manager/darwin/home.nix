@@ -36,10 +36,7 @@ in {
 
     shellAliases = {
       nds = "sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
-    };
-
-    sessionVariables = {
-      EDITOR = "nvim";
+      nfu = "nix flake update --flake ~/.config/nix";
     };
 
     activation = {

@@ -11,16 +11,10 @@
     nixd
     alejandra
     gcc
+    gnumake
     git-credential-manager
     gnupg
     pass
-    (pkgs.writeShellScriptBin "mcp-hub-installer" ''
-      #!/bin/bash
-      if ! command -v mcp-hub &> /dev/null; then
-        echo "Installing mcp-hub globally..."
-        npm install -g mcp-hub@latest
-      fi
-    '')
   ];
 
   programs = {
@@ -45,13 +39,10 @@
       vimdiffAlias = true;
     };
     bun.enable = true;
-    opencode.enable = true;
     uv.enable = true;
     gh.enable = true;
-    git = {
-      enable = true;
-      lfs.enable = true;
-    };
+    git.enable = true;
+    git.lfs.enable = true;
     java.enable = true;
     gradle.enable = true;
   };
