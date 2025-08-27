@@ -71,6 +71,9 @@
     masApps = {
       WireGuard = 1451685025;
     };
+    taps = [
+      "sst/tap/opencode"
+    ];
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";

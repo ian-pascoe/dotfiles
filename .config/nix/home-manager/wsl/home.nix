@@ -4,7 +4,22 @@
   pkgs,
   rtxCerts,
   ...
-}: {
+}: let
+  opencode = pkgs.stdenv.mkDerivation rec {
+    pname = "opencode";
+    version = "0.5.28";
+    src = pkgs.fetchzip {
+      url = "https://github.com/sst/opencode/releases/download/v${version}/opencode-linux-x64.zip";
+      hash = "sha256-5paEFZXQhybRcF8MJwUd9g79kDURaXcwMzaa/VgJXb8=";
+    };
+    phases = ["installPhase" "patchPhase"];
+    installPhase = ''
+      mkdir -p $out/bin
+      cp $src/opencode $out/bin/opencode
+      chmod +x $out/bin/opencode
+    '';
+  };
+in {
   imports = [
     ../modules/common-home.nix
     ../../modules/nixpkgs-config.nix
@@ -16,13 +31,14 @@
     homeDirectory = "/home/1146146";
 
     packages = with pkgs; [
-      lsof
       libiconv
+      opencode
     ];
 
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/.config/nix#EC1414438";
       hms = "home-manager switch --flake ~/.config/nix#1146146@EC1414438";
+      nfu = "nix flake update --flake ~/.config/nix";
     };
   };
 
