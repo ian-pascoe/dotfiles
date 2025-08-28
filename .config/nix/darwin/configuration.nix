@@ -61,6 +61,7 @@
     enable = true;
     brews = [
       "mas"
+      "sst/tap/opencode"
     ];
     casks = [
       "ghostty@tip"
@@ -72,7 +73,7 @@
       WireGuard = 1451685025;
     };
     taps = [
-      "sst/tap/opencode"
+      "sst/tap"
     ];
     onActivation = {
       autoUpdate = true;
