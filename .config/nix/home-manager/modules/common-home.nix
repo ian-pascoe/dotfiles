@@ -3,6 +3,7 @@
     pkg-config
     unzip
     lsof
+    icu
     nodejs_24
     go
     python3Full
