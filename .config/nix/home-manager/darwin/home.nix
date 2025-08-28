@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  stdenv,
   ...
 }: let
   wallpaper = pkgs.fetchurl {
@@ -11,12 +12,19 @@
     #!/bin/sh
     /usr/bin/osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${wallpaper}\""
   '';
+  devEnv = stdenv.mkDerivation {
+    name = "dev-env";
+    buildInputs = with pkgs; [
+      darwin.libiconv
+      darwin.ICU
+    ];
+  };
 in {
   imports = [../modules/common-home.nix];
 
   home = {
-    packages = with pkgs; [
-      darwin.libiconv
+    packages = [
+      devEnv
     ];
 
     file = {
