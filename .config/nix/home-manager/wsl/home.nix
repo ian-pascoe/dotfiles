@@ -7,7 +7,7 @@
 }: let
   opencode = pkgs.stdenv.mkDerivation rec {
     pname = "opencode";
-    version = "0.5.28";
+    version = "0.6.3";
     src = pkgs.fetchzip {
       url = "https://github.com/sst/opencode/releases/download/v${version}/opencode-linux-x64.zip";
       hash = "sha256-5paEFZXQhybRcF8MJwUd9g79kDURaXcwMzaa/VgJXb8=";
@@ -33,6 +33,8 @@ in {
     packages = with pkgs; [
       libiconv
       opencode
+      ant
+      maven
     ];
 
     shellAliases = {
@@ -44,6 +46,7 @@ in {
 
   programs.zsh = {
     envExtra = ''
+      # Proxy settings
       export http_proxy="http://REDACTED:80/"
       export https_proxy="http://REDACTED:80/"
       export HTTP_PROXY="http://REDACTED:80/"
@@ -52,10 +55,18 @@ in {
       export ALL_PROXY="http://REDACTED:80/"
       export no_proxy="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
       export NO_PROXY="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
+
+      # Used by lemminx
+      export HTTP_PROXY_HOST="REDACTED"
+      export HTTP_PROXY_PORT="80"
+
+      # SSL certificate settings
       export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
       export SSL_CERT_DIR="/etc/ssl/certs"
       export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
       export JAVAX_NET_SSL_TRUSTSTORE="${rtxCerts.trustStore}"
+
+      # Git Credential Manager settings
       export GCM_CREDENTIAL_STORE="gpg"
 
       # Ensure GPG agent is available
