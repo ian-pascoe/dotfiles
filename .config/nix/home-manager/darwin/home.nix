@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  stdenv,
   ...
 }: let
   wallpaper = pkgs.fetchurl {
@@ -12,21 +11,17 @@
     #!/bin/sh
     /usr/bin/osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${wallpaper}\""
   '';
-  devEnv = stdenv.mkDerivation {
-    name = "dev-env";
-    buildInputs = with pkgs; [
-      darwin.libiconv
-      darwin.ICU
-    ];
-  };
+  libraryPath = lib.makeLibraryPath [
+    pkgs.libiconv
+    pkgs.icu
+  ];
 in {
   imports = [../modules/common-home.nix];
 
   home = {
-    packages = [
-      devEnv
-    ];
-
+    sessionVariables = {
+      LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
+    };
     file = {
       ".config/ghostty/config" = {
         enable = true;
