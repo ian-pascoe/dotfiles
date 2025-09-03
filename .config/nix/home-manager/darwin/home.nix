@@ -16,7 +16,7 @@
     pkgs.icu
   ];
 in {
-  imports = [../modules/common-home.nix];
+  imports = [../common/home.nix];
 
   home = {
     sessionVariables = {
