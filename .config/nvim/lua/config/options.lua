@@ -5,6 +5,9 @@
 -- use blink.cmp for ai completions
 vim.g.ai_cmp = true
 
+-- enable line wrap
+vim.opt.wrap = true
+
 -- change listchars
 vim.opt.listchars = {
   tab = "→ ",
