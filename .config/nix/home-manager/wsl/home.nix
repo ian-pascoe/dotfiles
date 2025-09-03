@@ -5,12 +5,12 @@
   rtxCerts,
   ...
 }: let
-  opencode = pkgs.stdenv.mkDerivation rec {
+  opencodeLatest = pkgs.stdenv.mkDerivation rec {
     pname = "opencode";
     version = "0.6.3";
     src = pkgs.fetchzip {
       url = "https://github.com/sst/opencode/releases/download/v${version}/opencode-linux-x64.zip";
-      hash = "sha256-5paEFZXQhybRcF8MJwUd9g79kDURaXcwMzaa/VgJXb8=";
+      hash = "sha256-wrsMOZgWO1lgDSXDLJb0VN0M3itImnP1YSXGAQg51Pg=";
     };
     phases = ["installPhase" "patchPhase"];
     installPhase = ''
@@ -32,7 +32,7 @@ in {
 
     packages = with pkgs; [
       libiconv
-      opencode
+      opencodeLatest
       ant
       maven
     ];

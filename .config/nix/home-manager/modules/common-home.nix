@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     pkg-config
     unzip
+    fd
     lsof
     nodejs_24
     go
