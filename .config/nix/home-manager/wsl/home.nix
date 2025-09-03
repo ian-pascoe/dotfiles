@@ -64,7 +64,11 @@ in {
       export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
       export SSL_CERT_DIR="/etc/ssl/certs"
       export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
-      export JAVAX_NET_SSL_TRUSTSTORE="${rtxCerts.trustStore}"
+      # Java specific
+      export JDK_JAVA_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
+      export JAVA_TOOL_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
+      export JAVA_OPTS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
+      export _JAVA_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
 
       # Git Credential Manager settings
       export GCM_CREDENTIAL_STORE="gpg"

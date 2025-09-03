@@ -16,15 +16,21 @@ return {
   },
   { -- neogit
     "NeogitOrg/neogit",
+    event = "VeryLazy",
+    cmd = "Neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim", -- diff integration
       "folke/snacks.nvim", -- picker integration
     },
-    event = "VeryLazy",
-    cmd = "Neogit",
     keys = {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "LazyFile",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {},
   },
 }
