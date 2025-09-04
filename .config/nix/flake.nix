@@ -73,7 +73,7 @@
     };
   in {
     # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild switch --flake .#EC1414438'
+    # Available through 'nixos-rebuild switch --flake .#EC1414438j'
     nixosConfigurations = {
       EC1414438 = mkNixosSystem [
         ./nixos/configuration.nix
