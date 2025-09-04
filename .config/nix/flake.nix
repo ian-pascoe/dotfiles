@@ -49,20 +49,13 @@
         inherit modules;
       };
 
-    mkWslHomeConfiguration = system: modules:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = commonArgs;
-        inherit modules;
-      };
-
     mkDarwinSystem = modules:
       nix-darwin.lib.darwinSystem {
         specialArgs = commonArgs;
         inherit modules;
       };
 
-    mkDarwinHomeManagerConfig = user: config: {
+    mkHomeManagerConfig = user: config: {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "backup";
@@ -87,13 +80,9 @@
         nix-index-database.nixosModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
         nixos-wsl.nixosModules.wsl
+        home-manager.nixosModules.home-manager
+        (mkHomeManagerConfig "1146146" ./home-manager/wsl/home.nix)
       ];
-    };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager switch --flake .#1146146@EC1414438'
-    homeConfigurations = {
-      "1146146@EC1414438" = mkWslHomeConfiguration system [./home-manager/wsl/home.nix];
     };
 
     # Darwin configuration entrypoint
@@ -106,7 +95,7 @@
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
         home-manager.darwinModules.home-manager
-        (mkDarwinHomeManagerConfig "ianpascoe" ./home-manager/darwin/home.nix)
+        (mkHomeManagerConfig "ianpascoe" ./home-manager/darwin/home.nix)
       ];
     };
   };
