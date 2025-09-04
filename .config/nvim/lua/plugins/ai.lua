@@ -1,9 +1,20 @@
 return {
   { -- Opencode agent
     "NickvanDyke/opencode.nvim",
-    event = "VeryLazy",
-    ---@type opencode.Opts
-    opts = {},
+    dependencies = {
+      {
+        "folke/snacks.nvim",
+        opts = {
+          input = { enabled = true },
+        },
+      },
+    },
+    config = function()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {}
+
+      vim.opt.autoread = true
+    end,
     keys = {
       {
         "<leader>aoo",

@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
+  dotfiles = "${config.home.homeDirectory}/dotfiles";
+in {
   home.packages = with pkgs; [
     pkg-config
     unzip
@@ -26,10 +33,7 @@
     };
     starship.enable = true;
     lsd.enable = true;
-    bat = {
-      enable = true;
-      config.theme = "Nord";
-    };
+    bat.enable = true;
     ripgrep.enable = true;
     fzf.enable = true;
     zoxide.enable = true;
@@ -44,6 +48,8 @@
     gh.enable = true;
     git.enable = true;
     git.lfs.enable = true;
+    lazygit.enable = true;
+    awscli.enable = true;
     java.enable = true;
     gradle.enable = true;
   };
@@ -98,6 +104,26 @@
       $DRY_RUN_CMD ${pkgs.pass}/bin/pass init "$KEY_ID"
     fi
   '';
+
+  home.activation.cloneDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -d "${dotfiles}" ]; then
+      ${pkgs.git}/bin/git clone https://github.com/ian-pascoe/dotfiles.git "${dotfiles}"
+    else
+      (cd "${dotfiles}" && ${pkgs.git}/bin/git pull --ff-only)
+    fi
+  '';
+  home.file = {
+    ".config/bat".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/bat";
+    ".config/k9s".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/k9s";
+    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/karabiner";
+    ".config/lsd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/lsd";
+    ".config/nix".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nix";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
+    ".config/opencode".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/opencode";
+    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship.toml";
+  };
+
+  xdg.enable = true;
 
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "25.05";

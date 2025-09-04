@@ -35,11 +35,12 @@ in {
       opencodeLatest
       ant
       maven
+      kubectl
+      kubernetes-helm
     ];
 
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/.config/nix#EC1414438";
-      hms = "home-manager switch --flake ~/.config/nix#1146146@EC1414438";
       nfu = "nix flake update --flake ~/.config/nix";
     };
   };
@@ -75,6 +76,10 @@ in {
 
       # Ensure GPG agent is available
       export GPG_TTY=$(tty)
+
+      # AWS
+      export AWS_PROFILE="saml"
+      export AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
     '';
   };
 
@@ -104,4 +109,6 @@ in {
     "systemProp.https.connectionTimeout" = "120000";
     "systemProp.https.socketTimeout" = "120000";
   };
+
+  programs.k9s.enable = true;
 }
