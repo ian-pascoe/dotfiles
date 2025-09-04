@@ -38,19 +38,19 @@
     inherit (self) outputs;
 
     # Common variables
-    system = "x86_64-linux";
     commonArgs = {inherit inputs outputs;};
 
     # Helper functions
     mkNixosSystem = modules:
       nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = "x86_64-linux";
         specialArgs = commonArgs;
         inherit modules;
       };
 
     mkDarwinSystem = modules:
       nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
         specialArgs = commonArgs;
         inherit modules;
       };
@@ -81,7 +81,7 @@
         {programs.nix-index-database.comma.enable = true;}
         nixos-wsl.nixosModules.wsl
         home-manager.nixosModules.home-manager
-        (mkHomeManagerConfig "1146146" ./home-manager/wsl/home.nix)
+        (mkHomeManagerConfig "e21146146" ./home-manager/wsl/home.nix)
       ];
     };
 
