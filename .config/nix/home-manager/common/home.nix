@@ -107,20 +107,20 @@ in {
 
   home.activation.cloneDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [ ! -d "${dotfiles}" ]; then
-      ${pkgs.git}/bin/git clone https://github.com/ian-pascoe/dotfiles.git "${dotfiles}"
+      ${pkgs.git}/bin/git clone https://github.com/ian-pascoe/dotfiles "${dotfiles}"
     else
       (cd "${dotfiles}" && ${pkgs.git}/bin/git pull --ff-only)
     fi
   '';
   home.file = {
-    ".config/bat".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/bat";
-    ".config/k9s".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/k9s";
-    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/karabiner";
-    ".config/lsd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/lsd";
-    ".config/nix".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nix";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
-    ".config/opencode".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/opencode";
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship.toml";
+    ".config/bat".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/bat";
+    ".config/k9s".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/k9s";
+    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/karabiner";
+    ".config/lsd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/lsd";
+    ".config/nix".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/nix";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/nvim";
+    ".config/opencode".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/opencode";
+    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/starship.toml";
   };
 
   xdg.enable = true;

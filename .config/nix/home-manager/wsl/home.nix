@@ -27,8 +27,8 @@ in {
   ];
 
   home = {
-    username = "1146146";
-    homeDirectory = "/home/1146146";
+    username = "e21146146";
+    homeDirectory = "/home/e21146146";
 
     packages = with pkgs; [
       libiconv

@@ -76,13 +76,13 @@
   };
 
   users.users = {
-    "1146146" = {
+    "e21146146" = {
       isNormalUser = true;
       extraGroups = ["wheel" "docker"];
       shell = pkgs.zsh;
     };
   };
-  wsl.defaultUser = "1146146";
+  wsl.defaultUser = "e21146146";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.05";
