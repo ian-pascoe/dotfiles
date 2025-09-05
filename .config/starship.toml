@@ -2,6 +2,7 @@
 
 format = """
 $os\
+$username\
 [](fg:rose bg:overlay)\
 $directory\
 [](fg:overlay bg:pine)\
@@ -31,11 +32,18 @@ disabled = false
 style = "bg:rose fg:overlay"
 format = "[ $symbol]($style)"
 
+[username]
+disabled = false
+style_user = "bg:rose fg:overlay"
+style_root = "bg:rose fg:love bold"
+format = "[$user]($style)"
+show_always = true
+
 [directory]
 disabled = false
 read_only = " 󰌾"
 style = "fg:rose bg:overlay"
-format = "[ $path ]($style)"
+format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
@@ -49,18 +57,19 @@ truncation_symbol = "…/"
 disabled = false
 symbol = " "
 style = "bg:pine fg:white"
-format = '[ $symbol$branch ]($style)'
+format = '[ $symbol$branch]($style)'
 
 [git_status]
 disabled = false
 style = "bg:pine fg:white"
-format = '[($all_status$ahead_behind )]($style)'
+format = '[($all_status$ahead_behind)]($style)'
 
 [time]
 disabled = false
-time_format = "%R"             # Hour:Minute Format
+time_format = "%r"            # Hour:Minute Format
+use_12hr = true
 style = "bg:overlay fg:rose"
-format = '[  $time ]($style)'
+format = '[  $time]($style)'
 
 # ==================
 # Nerd font symbols
