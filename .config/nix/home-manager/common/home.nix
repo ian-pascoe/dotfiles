@@ -5,6 +5,7 @@
   ...
 }: let
   dotfiles = "${config.home.homeDirectory}/dotfiles";
+  configEntries = ["bat" "k9s" "karabiner" "lsd" "nix" "nvim" "opencode" "startship.toml"];
 in {
   home.packages = with pkgs; [
     pkg-config
@@ -112,16 +113,10 @@ in {
       (cd "${dotfiles}" && ${pkgs.git}/bin/git pull --ff-only)
     fi
   '';
-  home.file = {
-    ".config/bat".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/bat";
-    ".config/k9s".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/k9s";
-    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/karabiner";
-    ".config/lsd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/lsd";
-    ".config/nix".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/nix";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/nvim";
-    ".config/opencode".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/opencode";
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/starship.toml";
-  };
+
+  home.file = lib.genAttrs (map (entry: ".config/${entry}") configEntries) (name: {
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${name}";
+  });
 
   xdg.enable = true;
 
