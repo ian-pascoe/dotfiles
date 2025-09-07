@@ -64,7 +64,6 @@
     casks = [
       "ghostty@tip"
       "google-chrome"
-      "raycast"
       "karabiner-elements"
     ];
     masApps = {
@@ -87,12 +86,7 @@
   };
 
   services = {
-    sketchybar = {
-      enable = true;
-      extraPackages = with pkgs; [
-        sbarlua
-      ];
-    };
+    sketchybar.enable = true;
     skhd.enable = true;
     yabai.enable = true;
   };

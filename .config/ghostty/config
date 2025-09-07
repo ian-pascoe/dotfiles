@@ -1,0 +1,14 @@
+# Ghostty Config
+
+# font
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+
+# cursor
+cursor-style = block
+shell-integration-features = no-cursor
+
+# bg image
+background-image = "~/.config/ghostty/background.png"
+background-image-fit = cover
+background-image-opacity = 0.25
