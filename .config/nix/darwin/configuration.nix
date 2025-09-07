@@ -86,6 +86,17 @@
     shell = pkgs.zsh;
   };
 
+  services = {
+    sketchybar = {
+      enable = true;
+      extraPackages = with pkgs; [
+        sbarlua
+      ];
+    };
+    skhd.enable = true;
+    yabai.enable = true;
+  };
+
   # $ darwin-rebuild changelog
   system.stateVersion = 6;
 }

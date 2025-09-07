@@ -23,16 +23,10 @@ in {
       LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
     };
     file = {
-      ".config/ghostty/config" = {
+      ".config/sketchybar/helpers/generated.lua" = {
         enable = true;
         text = ''
-          font-family = "JetBrainsMono Nerd Font Mono"
-          font-size = 14
-          cursor-style = block
-          shell-integration-features = no-cursor
-          background-image = "${wallpaper}"
-          background-image-fit = cover
-          background-image-opacity = 0.25
+          package.cpath = package.cpath .. ";${pkgs.sbarlua}/lib/lua/5.4/sketchybar.so"
         '';
       };
     };
