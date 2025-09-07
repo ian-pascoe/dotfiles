@@ -5,7 +5,7 @@
   ...
 }: let
   dotfiles = "${config.home.homeDirectory}/dotfiles";
-  configEntries = ["bat" "k9s" "karabiner" "lsd" "nix" "nvim" "opencode" "skhd" "yabai" "starship.toml"];
+  configEntries = ["bat" "k9s" "karabiner" "lsd" "nix" "nvim" "opencode" "sketchybar" "skhd" "yabai" "starship.toml"];
 in {
   home.packages = with pkgs; [
     pkg-config
