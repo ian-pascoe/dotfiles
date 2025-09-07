@@ -22,8 +22,9 @@ in {
     sessionVariables = {
       LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
     };
+
     file = {
-      ".config/sketchybar/helpers/generated.lua" = {
+      ".config/sketchybar/helpers/init.lua" = {
         enable = true;
         text = ''
           package.cpath = package.cpath .. ";${pkgs.sbarlua}/lib/lua/5.4/sketchybar.so"
