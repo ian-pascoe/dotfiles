@@ -23,15 +23,6 @@ in {
       LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
     };
 
-    file = {
-      ".config/sketchybar/helpers/init.lua" = {
-        enable = true;
-        text = ''
-          package.cpath = package.cpath .. ";${pkgs.sbarlua}/lib/lua/5.4/sketchybar.so"
-        '';
-      };
-    };
-
     shellAliases = {
       nds = "sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
       nfu = "nix flake update --flake ~/.config/nix";
@@ -42,6 +33,12 @@ in {
         echo "Setting wallpaper"
         ${setWallpaperScript}/bin/set-wallpaper
       '';
+    };
+
+    file = {
+      ".local/share/sketchybar_lua/sketchybar.so" = {
+        source = "${pkgs.sbarlua}/lib/lua/5.4/sketchybar.so";
+      };
     };
   };
 
