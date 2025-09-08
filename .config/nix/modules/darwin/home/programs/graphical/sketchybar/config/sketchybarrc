@@ -3,9 +3,7 @@
 Sbar = require("sketchybar")
 
 Sbar.begin_config()
-require("bar")
-require("default")
-require("items")
+require("init")
 Sbar.hotload(true)
 Sbar.end_config()
 
