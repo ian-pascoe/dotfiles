@@ -2,7 +2,7 @@ local settings = require("settings")
 local colors = require("colors")
 
 -- Equivalent to the --default domain
-SketchyBar.default({
+Sbar.default({
 	updates = "when_shown",
 	icon = {
 		font = {
