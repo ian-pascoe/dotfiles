@@ -15,6 +15,6 @@
     force = true;
   };
   home.shellAliases = {
-    cat = "bat --style=plain";
+    cat = "bat --paging=never";
   };
 }
