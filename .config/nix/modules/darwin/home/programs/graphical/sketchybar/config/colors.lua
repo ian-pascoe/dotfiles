@@ -1,4 +1,4 @@
-return {
+local colors = {
 	black = 0xff232136, -- base
 	white = 0xffe0def4, -- text
 	red = 0xffeb6f92, -- love
@@ -21,6 +21,8 @@ return {
 	bg1 = 0xff2a283e, -- highlightLow
 	bg2 = 0xff393552, -- overlay
 
+	text = 0xffc6c3d0, -- textDim
+
 	with_alpha = function(color, alpha)
 		if alpha > 1.0 or alpha < 0.0 then
 			return color
@@ -28,3 +30,18 @@ return {
 		return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
 	end,
 }
+
+colors.random_cat_color = {
+	colors.red,
+	colors.green,
+	colors.blue,
+	colors.yellow,
+	colors.orange,
+	colors.magenta,
+}
+
+colors.getRandomCatColor = function()
+	return colors.random_cat_color[math.random(1, #colors.random_cat_color)]
+end
+
+return colors
