@@ -63,4 +63,6 @@ in {
     "systemProp.https.connectionTimeout" = "120000";
     "systemProp.https.socketTimeout" = "120000";
   };
+
+  home.stateVersion = "25.05";
 }

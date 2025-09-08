@@ -8,7 +8,7 @@
     pkgs.icu
   ];
 in {
-  environment.sessionVariables = {
+  environment.variables = {
     LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
   };
 }
