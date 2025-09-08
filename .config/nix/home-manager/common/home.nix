@@ -30,6 +30,7 @@ in {
     python3Full
     rustc
     cargo
+    lua5_4
     nixd
     alejandra
     gcc

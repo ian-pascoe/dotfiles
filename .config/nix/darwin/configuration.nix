@@ -85,10 +85,17 @@
     shell = pkgs.zsh;
   };
 
+  environment.systemPackages = with pkgs; [
+    jq
+  ];
+
   services = {
     sketchybar.enable = true;
     skhd.enable = true;
-    yabai.enable = true;
+    yabai = {
+      enable = true;
+      enableScriptingAddition = true;
+    };
   };
 
   # $ darwin-rebuild changelog
