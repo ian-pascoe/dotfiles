@@ -1,5 +1,5 @@
 {
   imports = [
-    ./emulators
+    ./ghostty
   ];
 }
