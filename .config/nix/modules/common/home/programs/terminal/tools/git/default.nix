@@ -48,11 +48,8 @@
     fi
   '';
 
-  home.sessionVariables = ''
-    # Git Credential Manager settings
-    export GCM_CREDENTIAL_STORE="gpg"
-
-    # Ensure GPG agent is available
-    export GPG_TTY=$(tty)
-  '';
+  home.sessionVariables = {
+    GCM_CREDENTIAL_STORE="gpg";
+    GPG_TTY="$(tty)";
+  };
 }

@@ -42,8 +42,5 @@
     configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
   };
 
-  fonts = {
-    enableDefaultPackages = false;
-    packages = [pkgs.nerd-fonts.jetbrains-mono];
-  };
+  fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
 }
