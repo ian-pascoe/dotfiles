@@ -15,13 +15,11 @@ in {
   imports = [
     ../../modules/common/home/packages
     ../../modules/common/home/programs
+    ../../modules/darwin/home/packages
+    ../../modules/darwin/home/programs
   ];
 
   home = {
-    packages = with pkgs; [
-      mousecape
-    ];
-
     shellAliases = {
       nds = "sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
       nfu = "nix flake update --flake ~/.config/nix";
@@ -33,22 +31,6 @@ in {
         ${setWallpaperScript}/bin/set-wallpaper
       '';
     };
-
-    file = {
-      ".local/share/sketchybar_lua" = {
-        source = "${pkgs.sbarlua}/lib/lua/5.4";
-      };
-    };
-  };
-
-  programs.bash.enable = true;
-  programs.zsh = {
-    envExtra = ''
-      export GCM_CREDENTIAL_STORE="gpg"
-
-      # Ensure GPG agent is available
-      export GPG_TTY=$(tty)
-    '';
   };
 
   programs.git.extraConfig = {

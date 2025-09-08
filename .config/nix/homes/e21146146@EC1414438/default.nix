@@ -7,9 +7,9 @@
 }: let
 in {
   imports = [
-    ../../modules/util/rtx/certs
     ../../modules/common/home/packages
     ../../modules/common/home/programs
+    ../../modules/util/rtx/certs
   ];
 
   home = {
