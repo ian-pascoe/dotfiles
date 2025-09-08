@@ -3,7 +3,6 @@
     enable = true;
     brews = [
       "mas"
-      "sst/tap/opencode"
     ];
     casks = [
       "ghostty@tip"
@@ -13,9 +12,7 @@
     masApps = {
       WireGuard = 1451685025;
     };
-    taps = [
-      "sst/tap"
-    ];
+    taps = [];
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";
