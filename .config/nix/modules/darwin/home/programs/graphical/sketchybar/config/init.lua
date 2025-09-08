@@ -1,10 +1,11 @@
-Sbar = require("sketchybar")
+sbar = require("sketchybar")
 
-Sbar.begin_config()
+sbar.begin_config()
+sbar.hotload(true)
+
 require("bar")
 require("default")
 require("items")
-Sbar.hotload(true)
-Sbar.end_config()
 
-Sbar.event_loop()
+sbar.end_config()
+sbar.event_loop()
