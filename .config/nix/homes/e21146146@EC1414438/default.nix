@@ -7,8 +7,7 @@
 }: let
 in {
   imports = [
-    ../../modules/common/home/packages
-    ../../modules/common/home/programs
+    ../../modules/common/home
     ../../modules/util/rtx/certs
   ];
 
@@ -63,6 +62,4 @@ in {
     "systemProp.https.connectionTimeout" = "120000";
     "systemProp.https.socketTimeout" = "120000";
   };
-
-  home.stateVersion = "25.05";
 }
