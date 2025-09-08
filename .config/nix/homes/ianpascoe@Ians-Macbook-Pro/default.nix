@@ -13,10 +13,8 @@
   '';
 in {
   imports = [
-    ../../modules/common/home/packages
-    ../../modules/common/home/programs
-    ../../modules/darwin/home/packages
-    ../../modules/darwin/home/programs
+    ../../modules/common/home
+    ../../modules/darwin/home
   ];
 
   home = {
@@ -42,8 +40,4 @@ in {
       "https://github.com".username = "ian-pascoe";
     };
   };
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-  home.stateVersion = "25.05";
 }
