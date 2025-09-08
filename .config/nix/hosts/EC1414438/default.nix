@@ -9,8 +9,8 @@
   ...
 }: {
   imports = [
-    ../modules/nixpkgs-config.nix
-    ../modules/rtx-certs.nix
+    ../../modules/common/nix
+    ../../modules/rtx/certs
   ];
 
   wsl.enable = true;

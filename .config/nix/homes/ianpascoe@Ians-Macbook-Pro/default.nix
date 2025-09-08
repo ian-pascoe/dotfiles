@@ -17,7 +17,7 @@
   ];
 in {
   imports = [
-    ../common
+    ../../modules/common/home
   ];
 
   home = {
