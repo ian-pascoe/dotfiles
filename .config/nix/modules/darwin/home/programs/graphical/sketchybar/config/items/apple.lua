@@ -1,34 +1,39 @@
+local colors = require("colors").sections
 local icons = require("icons")
-local colors = require("colors")
 
-local popup_toggle = "sketchybar --set $NAME popup.drawing=toggle"
-
-local apple_logo = Sbar.add("item", {
-	padding_right = 15,
-	click_script = popup_toggle,
-	icon = {
-		string = icons.apple,
-		font = {
-			style = "Black",
-			size = 16.0,
-		},
-		color = colors.green,
-	},
-	label = {
-		drawing = false,
-	},
-	popup = {
-		height = 35,
-	},
+local apple = sbar.add("item", {
+  icon = {
+    font = { size = 16 },
+    string = icons.apple,
+    padding_right = 15,
+    padding_left = 15,
+    color = colors.apple,
+  },
+  label = { drawing = false },
+  click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s 0",
 })
 
-local apple_prefs = Sbar.add("item", {
-	position = "popup." .. apple_logo.name,
-	icon = icons.preferences,
-	label = "Preferences",
-})
-
-apple_prefs:subscribe("mouse.clicked", function(_)
-	Sbar.exec("open -a 'System Preferences'")
-	apple_logo:set({ popup = { drawing = false } })
+apple:subscribe("mouse.clicked", function()
+  sbar.animate("tanh", 8, function()
+    apple:set {
+      background = {
+        shadow = {
+          distance = 0,
+        },
+      },
+      y_offset = -4,
+      padding_left = 8,
+      padding_right = 0,
+    }
+    apple:set {
+      background = {
+        shadow = {
+          distance = 4,
+        },
+      },
+      y_offset = 0,
+      padding_left = 4,
+      padding_right = 4,
+    }
+  end)
 end)
