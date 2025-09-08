@@ -16,12 +16,15 @@
     pkgs.icu
   ];
 in {
-  imports = [../common/home.nix];
+  imports = [
+    ../common
+  ];
 
   home = {
     packages = with pkgs; [
       mousecape
     ];
+
     sessionVariables = {
       LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
     };
@@ -36,6 +39,12 @@ in {
         echo "Setting wallpaper"
         ${setWallpaperScript}/bin/set-wallpaper
       '';
+    };
+
+    file = {
+      ".local/share/sketchybar_lua" = {
+        source = "${pkgs.sbarlua}/lib/lua/5.4";
+      };
     };
   };
 

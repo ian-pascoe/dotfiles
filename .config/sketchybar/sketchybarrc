@@ -1,4 +1,15 @@
 #!/usr/bin/env lua
 
-require("helpers")
-require("init")
+-- Add the sketchybar module to the package cpath
+package.cpath = package.cpath .. ";/Users/" .. os.getenv("USER") .. "/.local/share/sketchybar_lua/sketchybar.so"
+
+SketchyBar = require("sketchybar")
+
+SketchyBar.begin_config()
+require("bar")
+require("default")
+require("items")
+SketchyBar.hotload(true)
+SketchyBar.end_config()
+
+SketchyBar.event_loop()

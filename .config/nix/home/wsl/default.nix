@@ -21,8 +21,7 @@
   };
 in {
   imports = [
-    ../common/home.nix
-    ../../modules/nixpkgs-config.nix
+    ../common
     ../../modules/rtx-certs.nix
   ];
 

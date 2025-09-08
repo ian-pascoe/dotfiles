@@ -23,7 +23,6 @@
 
     # Homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -68,8 +67,8 @@
       nix-homebrew = {
         enable = true;
         enableRosetta = true;
-        inherit user;
         autoMigrate = true;
+        inherit user;
       };
     };
   in {
@@ -77,12 +76,12 @@
     # Available through 'nixos-rebuild switch --flake .#EC1414438j'
     nixosConfigurations = {
       EC1414438 = mkNixosSystem [
-        ./nixos/configuration.nix
+        ./hosts/nixos
         nix-index-database.nixosModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
         nixos-wsl.nixosModules.wsl
         home-manager.nixosModules.home-manager
-        (mkHomeManagerConfig "e21146146" ./home-manager/wsl/home.nix)
+        (mkHomeManagerConfig "e21146146" ./home/wsl)
       ];
     };
 
@@ -90,13 +89,13 @@
     # Available through 'darwin-rebuild switch --flake .#Ians-Macbook-Pro'
     darwinConfigurations = {
       "Ians-Macbook-Pro" = mkDarwinSystem [
-        ./darwin/configuration.nix
+        ./hosts/darwin
         nix-index-database.darwinModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
         home-manager.darwinModules.home-manager
-        (mkHomeManagerConfig "ianpascoe" ./home-manager/darwin/home.nix)
+        (mkHomeManagerConfig "ianpascoe" ./home/darwin)
       ];
     };
   };
