@@ -49,15 +49,6 @@
     shell = pkgs.zsh;
   };
 
-  services = {
-    sketchybar.enable = true;
-    skhd.enable = true;
-    yabai = {
-      enable = true;
-      enableScriptingAddition = true;
-    };
-  };
-
   # $ darwin-rebuild changelog
   system.stateVersion = 6;
 }
