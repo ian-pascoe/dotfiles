@@ -1,21 +1,15 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../modules/common/nix
+    ../../modules/common/programs
+    ../../modules/darwin/libraries
+    ../../modules/darwin/homebrew
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  nix.settings.experimental-features = "nix-command flakes";
-  nix.gc.automatic = true;
-  nix.optimise.automatic = true;
-
   system = {
     primaryUser = "ianpascoe";
-    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
     defaults = {
       dock = {
         autohide = true;
@@ -49,47 +43,11 @@
     };
   };
 
-  programs.bash.enable = true;
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-  };
-
-  fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
-
-  homebrew = {
-    enable = true;
-    brews = [
-      "mas"
-      "sst/tap/opencode"
-    ];
-    casks = [
-      "ghostty@tip"
-      "google-chrome"
-      "karabiner-elements"
-    ];
-    masApps = {
-      WireGuard = 1451685025;
-    };
-    taps = [
-      "sst/tap"
-    ];
-    onActivation = {
-      autoUpdate = true;
-      cleanup = "zap";
-      upgrade = true;
-    };
-  };
-
   users.users.ianpascoe = {
     name = "ianpascoe";
     home = "/Users/ianpascoe";
     shell = pkgs.zsh;
   };
-
-  environment.systemPackages = with pkgs; [
-    jq
-  ];
 
   services = {
     sketchybar.enable = true;

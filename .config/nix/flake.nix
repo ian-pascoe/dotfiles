@@ -73,7 +73,7 @@
     };
   in {
     # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild switch --flake .#EC1414438j'
+    # Available through 'nixos-rebuild switch --flake .#EC1414438'
     nixosConfigurations = {
       EC1414438 = mkNixosSystem [
         nixos-wsl.nixosModules.wsl
@@ -81,7 +81,7 @@
         nix-index-database.nixosModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
         home-manager.nixosModules.home-manager
-        (mkHomeManagerConfig "e21146146" "./homes/e21146146@EC1414438")
+        (mkHomeManagerConfig "e21146146" ./homes/${"e21146146@EC1414438"})
       ];
     };
 
@@ -95,7 +95,7 @@
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
         home-manager.darwinModules.home-manager
-        (mkHomeManagerConfig "ianpascoe" "./homes/ianpascoe@Ians-Macbook-Pro")
+        (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Ians-Macbook-Pro"})
       ];
     };
   };
