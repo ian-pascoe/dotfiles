@@ -1,0 +1,22 @@
+{
+  imports = [
+    ./awscli
+    ./bat
+    ./bun
+    ./fd
+    ./fzf
+    ./gh
+    ./git
+    ./gradle
+    ./java
+    ./jq
+    ./k9s
+    ./lazygit
+    ./lsd
+    ./opencode
+    ./ripgrep
+    ./starship
+    ./uv
+    ./zoxide
+  ];
+}

@@ -11,23 +11,16 @@
     #!/bin/sh
     /usr/bin/osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${wallpaper}\""
   '';
-  libraryPath = lib.makeLibraryPath [
-    pkgs.libiconv
-    pkgs.icu
-  ];
 in {
   imports = [
-    ../../modules/common/home
+    ../../modules/common/home/packages
+    ../../modules/common/home/programs
   ];
 
   home = {
     packages = with pkgs; [
       mousecape
     ];
-
-    sessionVariables = {
-      LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
-    };
 
     shellAliases = {
       nds = "sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/.config/nix#Ians-Macbook-Pro";

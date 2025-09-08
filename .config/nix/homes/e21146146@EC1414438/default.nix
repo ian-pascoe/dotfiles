@@ -5,24 +5,11 @@
   rtxCerts,
   ...
 }: let
-  opencodeLatest = pkgs.stdenv.mkDerivation rec {
-    pname = "opencode";
-    version = "0.6.3";
-    src = pkgs.fetchzip {
-      url = "https://github.com/sst/opencode/releases/download/v${version}/opencode-linux-x64.zip";
-      hash = "sha256-wrsMOZgWO1lgDSXDLJb0VN0M3itImnP1YSXGAQg51Pg=";
-    };
-    phases = ["installPhase" "patchPhase"];
-    installPhase = ''
-      mkdir -p $out/bin
-      cp $src/opencode $out/bin/opencode
-      chmod +x $out/bin/opencode
-    '';
-  };
 in {
   imports = [
-    ../../modules/rtx/certs
-    ../../modules/common/home
+    ../../modules/util/rtx/certs
+    ../../modules/common/home/packages
+    ../../modules/common/home/programs
   ];
 
   home = {
@@ -30,8 +17,6 @@ in {
     homeDirectory = "/home/e21146146";
 
     packages = with pkgs; [
-      libiconv
-      opencodeLatest
       ant
       maven
       kubectl
@@ -46,36 +31,6 @@ in {
 
   programs.zsh = {
     envExtra = ''
-      # Proxy settings
-      export http_proxy="http://REDACTED:80/"
-      export https_proxy="http://REDACTED:80/"
-      export HTTP_PROXY="http://REDACTED:80/"
-      export HTTPS_PROXY="http://REDACTED:80/"
-      export all_proxy="http://REDACTED:80/"
-      export ALL_PROXY="http://REDACTED:80/"
-      export no_proxy="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
-      export NO_PROXY="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
-
-      # Used by lemminx
-      export HTTP_PROXY_HOST="REDACTED"
-      export HTTP_PROXY_PORT="80"
-
-      # SSL certificate settings
-      export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
-      export SSL_CERT_DIR="/etc/ssl/certs"
-      export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
-      # Java specific
-      export JDK_JAVA_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-      export JAVA_TOOL_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-      export JAVA_OPTS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-      export _JAVA_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-
-      # Git Credential Manager settings
-      export GCM_CREDENTIAL_STORE="gpg"
-
-      # Ensure GPG agent is available
-      export GPG_TTY=$(tty)
-
       # AWS
       export AWS_PROFILE="saml"
       export AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
@@ -108,6 +63,4 @@ in {
     "systemProp.https.connectionTimeout" = "120000";
     "systemProp.https.socketTimeout" = "120000";
   };
-
-  programs.k9s.enable = true;
 }
