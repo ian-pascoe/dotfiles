@@ -21,8 +21,8 @@
   };
 in {
   imports = [
-    ../common
-    ../../modules/rtx-certs.nix
+    ../../modules/rtx/certs
+    ../../modules/common/home
   ];
 
   home = {

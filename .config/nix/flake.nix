@@ -76,12 +76,12 @@
     # Available through 'nixos-rebuild switch --flake .#EC1414438j'
     nixosConfigurations = {
       EC1414438 = mkNixosSystem [
+        nixos-wsl.nixosModules.wsl
         ./hosts/nixos
         nix-index-database.nixosModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
-        nixos-wsl.nixosModules.wsl
         home-manager.nixosModules.home-manager
-        (mkHomeManagerConfig "e21146146" ./home/wsl)
+        (mkHomeManagerConfig "e21146146" "./homes/e21146146@EC1414438")
       ];
     };
 
@@ -89,13 +89,13 @@
     # Available through 'darwin-rebuild switch --flake .#Ians-Macbook-Pro'
     darwinConfigurations = {
       "Ians-Macbook-Pro" = mkDarwinSystem [
-        ./hosts/darwin
+        ./hosts/Ians-Macbook-Pro
         nix-index-database.darwinModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
         home-manager.darwinModules.home-manager
-        (mkHomeManagerConfig "ianpascoe" ./home/darwin)
+        (mkHomeManagerConfig "ianpascoe" "./homes/ianpascoe@Ians-Macbook-Pro")
       ];
     };
   };

@@ -3,7 +3,9 @@
   pkgs,
   ...
 }: {
-  imports = [../modules/nixpkgs-config.nix];
+  imports = [
+    ../../modules/common/nix
+  ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
