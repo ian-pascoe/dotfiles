@@ -7,6 +7,6 @@
   };
   xdg.configFile.nvim = {
     source = ./config;
-    force = true;
+    recursive = true;
   };
 }

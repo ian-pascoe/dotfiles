@@ -4,6 +4,6 @@
   };
   xdg.configFile.opencode = {
     source = ./config;
-    force = true;
+    recursive = true;
   };
 }

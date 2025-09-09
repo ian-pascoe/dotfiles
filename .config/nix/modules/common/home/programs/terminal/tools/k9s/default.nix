@@ -4,6 +4,6 @@
   };
   xdg.configFile.k9s = {
     source = ./config;
-    force = true;
+    recursive = true;
   };
 }
