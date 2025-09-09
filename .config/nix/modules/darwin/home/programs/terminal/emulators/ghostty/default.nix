@@ -3,5 +3,6 @@
   xdg.configFile.ghostty = {
     source = ./config;
     recursive = true;
+    force = true;
   };
 }

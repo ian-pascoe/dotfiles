@@ -1,4 +1,11 @@
 {
+  config,
+  dotfiles,
+  ...
+}: {
+  imports = [
+    ../../../../../../util/home/dotfiles
+  ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -6,7 +13,8 @@
     vimdiffAlias = true;
   };
   xdg.configFile.nvim = {
-    source = ./config;
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/nvim";
     recursive = true;
+    force = true;
   };
 }
