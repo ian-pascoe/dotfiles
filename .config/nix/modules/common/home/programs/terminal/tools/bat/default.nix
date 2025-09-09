@@ -12,7 +12,7 @@
   };
   xdg.configFile.bat = {
     source = ./config;
-    force = true;
+    recursive = true;
   };
   home.shellAliases = {
     cat = "bat --paging=never";

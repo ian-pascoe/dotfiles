@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/lua
+#!/usr/bin/env lua
 
 require("util")
 require("init")

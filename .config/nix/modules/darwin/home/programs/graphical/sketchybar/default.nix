@@ -1,9 +1,9 @@
-{config, ...}: {
+{
   programs.sketchybar = {
     enable = true;
     configType = "lua";
     config = {
-      source = config.lib.file.mkOutOfStoreSymlink ./config;
+      source = ./config;
       recursive = true;
     };
   };
