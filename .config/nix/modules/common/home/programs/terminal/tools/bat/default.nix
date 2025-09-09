@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  dotfiles,
+  ...
+}: {
+  imports = [
+    ../../../../../../util/home/dotfiles
+  ];
   programs.bat = {
     enable = true;
     extraPackages = with pkgs.bat-extras; [
@@ -11,8 +19,7 @@
     ];
   };
   xdg.configFile.bat = {
-    source = ./config;
-    recursive = true;
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/bat";
     force = true;
   };
   home.shellAliases = {

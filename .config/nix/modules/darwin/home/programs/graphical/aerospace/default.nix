@@ -1,11 +1,18 @@
-let
-  tomlContent = builtins.readFile ./config/aerospace.toml;
-  parsedToml = builtins.fromTOML tomlContent;
-in {
+{
+  config,
+  dotfiles,
+  ...
+}: {
+  imports = [
+    ../../../../../util/home/dotfiles
+  ];
   programs.aerospace = {
     enable = true;
     launchd.enable = true;
-    userSettings = parsedToml;
+  };
+  xdg.configFile.aerospace = {
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/aerospace";
+    force = true;
   };
   home.shellAliases = {
     restart-aerospace = ''launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.aerospace'';

@@ -14,7 +14,6 @@
   };
   xdg.configFile.nvim = {
     source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/nvim";
-    recursive = true;
     force = true;
   };
 }
