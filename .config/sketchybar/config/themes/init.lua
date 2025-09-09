@@ -1,4 +1,8 @@
+---@class Theme
+---@field toColors fun(): config.colors
+
 ---@class config.themes
+---@field rose_pine config.themes.rose_pine
 local M = {}
 
 setmetatable(M, {

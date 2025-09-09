@@ -1,6 +1,7 @@
 ---@class config.settings
 local M = {
-	font = "JetBrainsMono Nerd Font",
+	font = "SF Pro",
+	nerd_font = "JetBrainsMono Nerd Font",
 	paddings = 3,
 }
 
