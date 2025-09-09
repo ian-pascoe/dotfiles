@@ -11,6 +11,7 @@
     configType = "lua";
     config = {
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/sketchybar";
+      recursive = true;
     };
   };
   home.shellAliases = {

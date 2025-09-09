@@ -1,5 +1,3 @@
-Util = require("util")
-
 ---@class config
 ---@field colors config.colors
 ---@field icons config.icons
