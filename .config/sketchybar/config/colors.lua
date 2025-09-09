@@ -1,26 +1,28 @@
 ---@class config.colors
-local M = {
-	black = 0xff181926,
-	white = 0xffcad3f5,
-	red = 0xffed8796,
-	green = 0xffa6da95,
-	blue = 0xff8aadf4,
-	yellow = 0xffeed49f,
-	orange = 0xfff5a97f,
-	magenta = 0xffc6a0f6,
-	grey = 0xff939ab7,
-	transparent = 0x00000000,
+---@field background integer
+---@field foreground integer
+---@field card {background: integer, foreground: integer}
+---@field popup {background: integer, foreground: integer}
+---@field primary {background: integer, foreground: integer}
+---@field secondary {background: integer, foreground: integer}
+---@field accent {background: integer, foreground: integer}
+---@field muted {background: integer, foreground: integer}
+---@field destructive {background: integer, foreground: integer}
+---@field transparent integer
+---@field border integer
+local M = require("config.themes").rose_pine.toColors()
 
-	bar = {
-		bg = 0xd01e1e2e,
-		border = 0xff494d64,
-	},
-	popup = {
-		bg = 0xff1e1e2e,
-		border = 0xffcad3f5,
-	},
-	bg1 = 0x803c3e4f,
-	bg2 = 0xff494d64,
-}
+M.green = 0xffa6da95
+M.yellow = 0xffeed49f
+M.peach = 0xfff5a97f
+M.red = 0xffed8796
+
+---@type fun(color: integer, alpha?: number): integer
+function M.with_alpha(color, alpha)
+	if alpha > 1.0 or alpha < 0.0 then
+		return color
+	end
+	return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
+end
 
 return M

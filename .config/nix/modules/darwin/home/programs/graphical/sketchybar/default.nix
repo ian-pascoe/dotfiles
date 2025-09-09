@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   dotfiles,
   ...
@@ -9,6 +10,9 @@
   programs.sketchybar = {
     enable = true;
     configType = "lua";
+    extraPackages = with pkgs; [
+      aerospace
+    ];
     config = {
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/sketchybar";
       recursive = true;

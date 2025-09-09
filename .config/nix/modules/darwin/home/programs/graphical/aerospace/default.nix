@@ -10,6 +10,11 @@
     enable = true;
     launchd.enable = true;
   };
+  home.file = {
+    ".config/aerospace/aerospace.toml" = {
+      enable = false; # Disable built-in defaults
+    };
+  };
   xdg.configFile.aerospace = {
     source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/aerospace";
     force = true;
