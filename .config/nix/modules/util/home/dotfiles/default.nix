@@ -17,6 +17,10 @@ in {
       fi
     '';
   };
+  xdg.configFile.nix = {
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/nix";
+    force = true;
+  };
   _module.args.dotfiles = {
     path = dotfiles;
     repo = dotfilesRepo;
