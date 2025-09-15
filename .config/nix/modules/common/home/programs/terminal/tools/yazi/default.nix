@@ -3,7 +3,7 @@
   dotfiles,
   ...
 }: {
-  import = [
+  imports = [
     ../../../../../../util/home/dotfiles
   ];
 
