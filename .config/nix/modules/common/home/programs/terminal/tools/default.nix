@@ -17,6 +17,7 @@
     ./ripgrep
     ./starship
     ./uv
+    ./yazi
     ./zoxide
   ];
 }
