@@ -14,5 +14,3 @@ Set-Alias -Name find -Value fd
 function Make-Link ($target, $link) {
     New-Item -Path $link -ItemType SymbolicLink -Value $target
 }
-
-$Env:KOMOREBI_CONFIG_HOME = 'C:\Users\1146146\.config\komorebi'
