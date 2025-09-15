@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   certs = pkgs.fetchzip {
     url = "https://pki.rtx.com/certificate/RTX_Cert_Bundle-current.zip";
-    sha256 = "sha256-4UqqonCQThHkt5dsq3FQJrUWP0D07mmlDdBjmTTlRmY=";
+    sha256 = "sha256-q/LYu3oGy1D/r3P2pI7d4IulOfLXV/xt0hFt2mc3i0o=";
   };
 
   pemFiles =
@@ -33,4 +33,3 @@ in {
     trustStore = "${rtxCacerts}/lib/openjdk/lib/security/cacerts";
   };
 }
-
