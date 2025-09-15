@@ -1,13 +1,8 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  pkgs,
-  rtxCerts,
-  ...
-}: let
+{rtxCerts, ...}: let
 in {
   imports = [
     ../../modules/common/home
+    ../../modules/nixos/home
     ../../modules/util/rtx/certs
   ];
 
@@ -15,25 +10,15 @@ in {
     username = "e21146146";
     homeDirectory = "/home/e21146146";
 
-    packages = with pkgs; [
-      ant
-      maven
-      kubectl
-      kubernetes-helm
-    ];
-
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/.config/nix#EC1414438";
       nfu = "nix flake update --flake ~/.config/nix";
     };
-  };
 
-  programs.zsh = {
-    envExtra = ''
-      # AWS
-      export AWS_PROFILE="saml"
-      export AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
-    '';
+    sessionVariables = {
+      AWS_PROFILE = "saml";
+      AWS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
+    };
   };
 
   programs.git.extraConfig = {
