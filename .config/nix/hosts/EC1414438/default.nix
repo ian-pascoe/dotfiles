@@ -30,31 +30,30 @@
   };
 
   environment = {
-    sessionVariables = ''
-      # Proxy settings
-      export http_proxy="http://REDACTED:80/"
-      export https_proxy="http://REDACTED:80/"
-      export HTTP_PROXY="http://REDACTED:80/"
-      export HTTPS_PROXY="http://REDACTED:80/"
-      export all_proxy="http://REDACTED:80/"
-      export ALL_PROXY="http://REDACTED:80/"
-      export no_proxy="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
-      export NO_PROXY="localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com"
+    sessionVariables = {
+      http_proxy = "http://REDACTED:80/";
+      https_proxy = "http://REDACTED:80/";
+      HTTP_PROXY = "http://REDACTED:80/";
+      HTTPS_PROXY = "http://REDACTED:80/";
+      all_proxy = "http://REDACTED:80/";
+      ALL_PROXY = "http://REDACTED:80/";
+      no_proxy = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
+      NO_PROXY = "localhost,127.0.0.1,.raytheon.com,.ray.com,.rtx.com,.utc.com,.adxrt.com,.registry.npmjs.org,.eks.amazonaws.com";
 
       # Used by lemminx
-      export HTTP_PROXY_HOST="REDACTED"
-      export HTTP_PROXY_PORT="80"
+      HTTP_PROXY_HOST = "REDACTED";
+      HTTP_PROXY_PORT = "80";
 
       # SSL certificate settings
-      export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
-      export SSL_CERT_DIR="/etc/ssl/certs"
-      export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+      SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+      SSL_CERT_DIR = "/etc/ssl/certs";
+      REQUESTS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
       # Java specific
-      export JDK_JAVA_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-      export JAVA_TOOL_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-      export JAVA_OPTS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-      export _JAVA_OPTIONS="-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}"
-    '';
+      JDK_JAVA_OPTIONS = "-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
+      JAVA_TOOL_OPTIONS = "-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
+      JAVA_OPTS = "-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
+      JAVA_OPTIONS = "-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
+    };
   };
 
   users.users = {
@@ -62,6 +61,7 @@
       isNormalUser = true;
       extraGroups = ["wheel" "docker"];
       shell = pkgs.zsh;
+      ignoreShellProgramCheck = true;
     };
   };
   wsl.defaultUser = "e21146146";

@@ -3,7 +3,7 @@
     lsof
     nodejs_24
     go
-    python3Full
+    python313
     rustc
     cargo
     lua5_4
@@ -14,5 +14,6 @@
     git-credential-manager
     gnupg
     pass
+    xclip
   ];
 }

@@ -77,7 +77,7 @@
     nixosConfigurations = {
       EC1414438 = mkNixosSystem [
         nixos-wsl.nixosModules.wsl
-        ./hosts/nixos
+        ./hosts/EC1414438
         nix-index-database.nixosModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
         home-manager.nixosModules.home-manager
