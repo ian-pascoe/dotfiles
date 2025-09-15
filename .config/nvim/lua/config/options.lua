@@ -5,6 +5,10 @@
 -- use blink.cmp for ai completions
 vim.g.ai_cmp = true
 
+if LazyVim.is_win() then
+  LazyVim.terminal.setup("powershell") -- I use nushell on Windows
+end
+
 -- enable line wrap
 vim.opt.wrap = true
 
