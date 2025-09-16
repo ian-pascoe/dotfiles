@@ -20,14 +20,13 @@ bars:
       acrylic: false
       dark_mode: true
       round_corners: false
-      round_corners_type: "normal"
-      border_color: "system"
+      border_color: None
     window_flags:
-      always_on_top: false
+      always_on_top: true
       windows_app_bar: true
     dimensions:
       width: "100%"
-      height: 38
+      height: 32
     padding:
       top: 10
       left: 10
@@ -36,24 +35,26 @@ bars:
     widgets:
       left:
         - "home"
+        - "glazewm_binding_mode"
         - "glazewm_workspaces"
         - "glazewm_tiling_direction"
       center:
         - "active_window"
-      right:
         - "media"
+      right:
         - "cpu"
         - "memory"
+        - "disk"
         - "wifi"
-        - "microphone"
         - "volume"
-        - "clock"
+        - "microphone"
         - "notifications"
+        - "clock"
 widgets:
   home:
     type: "yasb.home.HomeWidget"
     options:
-      label: "<span>\udb80\udedc</span>"
+      label: "<span>\udb82\udd53</span>"
       menu_list:
         - { title: "User Home", path: "~" }
         - { title: "Downloads", path: "~\\Downloads" }
@@ -62,118 +63,23 @@ widgets:
       system_menu: true
       power_menu: true
       blur: false
-  media:
-    type: "yasb.media.MediaWidget"
+  glazewm_binding_mode:
+    type: "glazewm.binding_mode.GlazewmBindingModeWidget"
     options:
-      label: "{title}"
-      label_alt: "{artist} - {title}"
-      max_field_size:
-        label: 16
-        label_alt: 24
-      show_thumbnail: true
-      controls_only: false
-      controls_left: true
-      controls_hide: true
-      hide_empty: true
-      thumbnail_alpha: 100
-      thumbnail_padding: 16
-      thumbnail_corner_radius: 0
-      thumbnail_edge_fade: true
+      hide_if_no_active: false
+      label_if_no_active: "normal"
+      default_icon: ""
       icons:
-        prev_track: "\udb81\udcae"
-        next_track: "\udb81\udcad"
-        play: "\udb81\udc0a"
-        pause: "\udb80\udfe4"
-      media_menu:
-        blur: false
-        round_corners: false
-        alignment: "right"
-        direction: "down"
-        offset_top: 6
-        offset_left: 0
-        thumbnail_corner_radius: 4
-        thumbnail_size: 100
-        max_title_size: 80
-        max_artist_size: 20
-        show_source: true
-      label_shadow:
-        enabled: true
-        color: "#000000"
-        radius: 2
-        offset: [1, 1]
-      scrolling_label:
-        enabled: true
-        update_interval_ms: 50
-        style: "left" # can be "left", "right", "bounce", "bounce-ease"
-        separator: " | "
-        label_padding: 1
+        none: ""
+        resize: ""
+      binding_modes_to_cycle_through: [
+          "none", # none handles if no binding mode is active
+          "resize",
+        ]
       callbacks:
-        on_left: "toggle_media_menu"
-        on_middle: "do_nothing"
-        on_right: "toggle_label"
-  active_window:
-    type: "yasb.active_window.ActiveWindowWidget"
-    options:
-      label: "{win[title]}"
-      label_alt: "[class_name='{win[class_name]}' exe='{win[process][name]}' hwnd={win[hwnd]}]"
-      label_no_window: ""
-      label_icon: true
-      label_icon_size: 14
-      max_length: 30
-      max_length_ellipsis: "..."
-      monitor_exclusive: true
-  clock:
-    type: "yasb.clock.ClockWidget"
-    options:
-      label: "\uf017 {%r}"
-      label_alt: "{%A, %d %B %Y %H:%M}"
-      timezones: []
-      calendar:
-        blur: false
-        round_corners: false
-        alignment: "center"
-        direction: "down"
-      callbacks:
-        on_left: "toggle_calendar"
-        on_right: "toggle_label"
-  volume:
-    type: "yasb.volume.VolumeWidget"
-    options:
-      label: "<span>{icon}</span> {level}"
-      label_alt: "{volume}"
-      tooltip: false
-      volume_icons:
-        - "\ueee8"
-        - "\uf026"
-        - "\uf027"
-        - "\uf027"
-        - "\uf028"
-      callbacks:
-        on_left: "toggle_mute"
-        on_right: "exec cmd.exe /c start ms-settings:sound"
-  microphone:
-    type: "yasb.microphone.MicrophoneWidget"
-    options:
-      label: "<span>{icon}</span> {level}"
-      label_alt: "<span>{icon}</span> {level}%"
-      icons:
-        normal: "\udb80\udf6c"
-        muted: "\udb80\udf6d"
-      callbacks:
-        on_left: "toggle_mute"
+        on_left: "next_binding_mode"
         on_middle: "toggle_label"
-        on_right: "exec cmd.exe /c start ms-settings:sound"
-  notifications:
-    type: "yasb.notifications.NotificationsWidget"
-    options:
-      label: "<span>\uf476</span> {count}"
-      label_alt: "{count} notifications"
-      hide_empty: true
-      tooltip: false
-      callbacks:
-        on_left: "toggle_notification"
-        on_right: "do_nothing"
-        on_middle: "toggle_label"
+        on_right: "disable_binding_mode"
   glazewm_workspaces:
     type: "glazewm.workspaces.GlazewmWorkspacesWidget"
     options:
@@ -189,12 +95,12 @@ widgets:
       app_icons:
         enabled_populated: true
         enabled_active: true
-        size: 16
+        size: 8
         max_icons: 4
         hide_label: false
         hide_duplicates: false
         hide_floating: false
-      animation: false
+      animation: true
   glazewm_tiling_direction:
     type: "glazewm.tiling_direction.GlazewmTilingDirectionWidget"
     options:
@@ -205,12 +111,82 @@ widgets:
         color: "black"
         radius: 3
         offset: [1, 1]
+  active_window:
+    type: "yasb.active_window.ActiveWindowWidget"
+    options:
+      label: "{win[title]}"
+      label_alt: "[class_name='{win[class_name]}' exe='{win[process][name]}' hwnd={win[hwnd]}]"
+      label_no_window: ""
+      label_icon: true
+      label_icon_size: 16
+      max_length: 32
+      max_length_ellipsis: "..."
+      monitor_exclusive: true
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "<span>\udb80\udf87</span> {title}"
+      label_alt: "<span>\udb80\udf87</span> {title}"
+      hide_empty: true
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+      max_field_size:
+        label: 55
+        label_alt: 80
+      show_thumbnail: true
+      controls_only: false
+      controls_left: true
+      thumbnail_alpha: 80
+      thumbnail_padding: 0
+      thumbnail_corner_radius: 8
+      thumbnail_edge_fade: true
+      scrolling_label:
+        enabled: false
+        update_interval_ms: 100
+        style: "left" # can be "left", "right", "bounce", "bounce-ease"
+        separator: " | "
+        label_padding: 0
+        # Easing curve params: https://www.desmos.com/calculator/j7eamemxzi
+        ease_slope: 20
+        ease_pos: 0.8
+        ease_min: 0.5
+      icons:
+        prev_track: "\uf048"
+        next_track: "\uf051"
+        play: "\uf04b"
+        pause: "\uf04c"
+      media_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "small"
+        border_color: "system"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        thumbnail_corner_radius: 4
+        thumbnail_size: 80
+        max_title_size: 80
+        max_artist_size: 20
+        show_source: true
+      media_menu_icons:
+        play: "\uf04b"
+        pause: "\uf04c"
+        prev_track: "\uf048"
+        next_track: "\uf051"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
   cpu:
     type: "yasb.cpu.CpuWidget"
     options:
       label: "<span>\uf4bc</span> {info[percent][total]}%"
       label_alt: "<span>\uf437</span> {info[histograms][cpu_percent]}"
-      update_interval: 2000
+      update_interval: 1000
       cpu_thresholds:
         low: 25
         medium: 50
@@ -236,9 +212,9 @@ widgets:
   memory:
     type: "yasb.memory.MemoryWidget"
     options:
-      label: "<span>\uf4bc</span> {virtual_mem_free}/{virtual_mem_total}"
-      label_alt: "<span>\uf4bc</span> VIRT: {virtual_mem_percent}% SWAP: {swap_mem_percent}%"
-      update_interval: 5000
+      label: "<span>\uefc5</span> {virtual_mem_percent}%"
+      label_alt: "<span>\uefc5</span> VIRT: {virtual_mem_percent}% SWAP: {swap_mem_percent}%"
+      update_interval: 1000
       callbacks:
         on_left: "toggle_label"
         on_middle: "do_nothing"
@@ -262,11 +238,30 @@ widgets:
         color: "black"
         radius: 3
         offset: [1, 1]
+  disk:
+    type: "yasb.disk.DiskWidget"
+    options:
+      label: "<span>\uf0a0</span>{space[used][percent]}"
+      label_alt: "{volume_label} {space[used][gb]} / {space[total][gb]}"
+      volume_label: "C"
+      update_interval: 60
+      callbacks:
+        on_left: "toggle_label"
+        on_right: "exec explorer C:\\" # Open disk C in file explorer
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
+      disk_thresholds:
+        low: 25
+        medium: 50
+        high: 90
   wifi:
     type: "yasb.wifi.WifiWidget"
     options:
       label: "<span>{wifi_icon}</span>"
-      label_alt: "{wifi_name} {wifi_strength}%"
+      label_alt: "<span>{wifi_icon}</span>{wifi_name}"
       update_interval: 5000
       callbacks:
         on_left: "toggle_menu"
@@ -275,7 +270,7 @@ widgets:
       ethernet_label: "<span>{wifi_icon}</span>"
       ethernet_label_alt: "<span>{wifi_icon}</span>{ip_addr}"
       ethernet_icon: "\ueba9"
-      get_exact_wifi_strength: false # Optional. Will require location access permission if true.
+      get_exact_wifi_strength: true # Optional. Will require location access permission if true.
       wifi_icons:
         - "\udb82\udd2e" # Icon for 0% strength
         - "\udb82\udd1f" # Icon for 1-24% strength
@@ -298,3 +293,55 @@ widgets:
         offset_left: 0
         wifi_icons_secured: ["\ue670", "\ue671", "\ue672", "\ue673"]
         wifi_icons_unsecured: ["\uec3c", "\uec3d", "\uec3e", "\uec3f"]
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span>{level}"
+      label_alt: "<span>{icon}</span>{level}%"
+      tooltip: false
+      volume_icons:
+        - "\ueee8"
+        - "\uf026"
+        - "\uf027"
+        - "\uf027"
+        - "\uf028"
+      callbacks:
+        on_left: "toggle_mute"
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+  microphone:
+    type: "yasb.microphone.MicrophoneWidget"
+    options:
+      label: "<span>{icon}</span>{level}"
+      label_alt: "<span>{icon}</span>{level}%"
+      icons:
+        normal: "\udb80\udf6c"
+        muted: "\udb80\udf6d"
+      callbacks:
+        on_left: "toggle_mute"
+        on_middle: "toggle_label"
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+  notifications:
+    type: "yasb.notifications.NotificationsWidget"
+    options:
+      label: "<span>\uf476</span>{count}"
+      label_alt: "{count} notifications"
+      hide_empty: false
+      tooltip: true
+      callbacks:
+        on_left: "toggle_notification"
+        on_right: "do_nothing"
+        on_middle: "toggle_label"
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "<span>\uf017</span>{%r}"
+      label_alt: "{%A, %d %B %Y %H:%M}"
+      timezones: []
+      calendar:
+        blur: false
+        round_corners: false
+        alignment: "center"
+        direction: "down"
+      callbacks:
+        on_left: "toggle_calendar"
+        on_right: "toggle_label"

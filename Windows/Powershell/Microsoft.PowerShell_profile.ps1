@@ -14,3 +14,5 @@ Set-Alias -Name find -Value fd
 function Make-Link ($target, $link) {
     New-Item -Path $link -ItemType SymbolicLink -Value $target
 }
+
+. ([ScriptBlock]::Create((& scoop-search --hook | Out-String)))
