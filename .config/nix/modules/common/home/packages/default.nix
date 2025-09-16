@@ -7,13 +7,10 @@
     rustc
     cargo
     lua5_4
-    nixd
-    alejandra
     gcc
     gnumake
-    git-credential-manager
-    gnupg
-    pass
     xclip
+    kubectl
+    kubernetes-helm
   ];
 }

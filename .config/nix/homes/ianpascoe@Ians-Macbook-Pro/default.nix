@@ -35,8 +35,6 @@ in {
     user.email = "ian.g.pascoe@gmail.com";
     user.name = "Ian Pascoe";
     credential = {
-      helper = "manager";
-      credentialStore = "gpg";
       "https://github.com".username = "ian-pascoe";
     };
   };

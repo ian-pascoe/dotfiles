@@ -13,6 +13,7 @@
     ./k9s
     ./lazygit
     ./lsd
+    ./maven
     ./opencode
     ./ripgrep
     ./starship
