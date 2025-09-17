@@ -1,5 +1,5 @@
 {
-  services.dbus = {
+  programs.hyprland = {
     enable = true;
   };
 }
