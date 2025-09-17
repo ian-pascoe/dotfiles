@@ -1,11 +1,13 @@
 {
   services.xserver = {
     enable = true;
-    displayManager.lightdm.enable = true;
     desktopManager.xfce.enable = true;
+    displayManager.gdm.enable = true;
+    windowManager.hypr.enable = true;
   };
 
   environment.extraInit = ''
-    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+    export DISPLAY=localhost:0.0
+    export LIBGL_ALWAYS_INDIRECT=1
   '';
 }
