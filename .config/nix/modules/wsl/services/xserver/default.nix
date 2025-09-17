@@ -5,7 +5,7 @@
     desktopManager.xfce.enable = true;
   };
 
-  environment.sessionVariables = {
-    DISPLAY = "$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0";
-  };
+  environment.extraInit = ''
+    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+  '';
 }
