@@ -1,9 +1,7 @@
 {pkgs, ...}: {
   imports = [
-    ../../modules/common/nix
-    ../../modules/common/programs
-    ../../modules/darwin/libraries
-    ../../modules/darwin/homebrew
+    ../../modules/common
+    ../../modules/darwin
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
