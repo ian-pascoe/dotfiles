@@ -5,5 +5,6 @@
     ./git
     ./gradle
     ./maven
+    ./saml2aws
   ];
 }

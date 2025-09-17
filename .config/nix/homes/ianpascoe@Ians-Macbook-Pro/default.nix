@@ -30,12 +30,4 @@ in {
       '';
     };
   };
-
-  programs.git.extraConfig = {
-    user.email = "ian.g.pascoe@gmail.com";
-    user.name = "Ian Pascoe";
-    credential = {
-      "https://github.com".username = "ian-pascoe";
-    };
-  };
 }
