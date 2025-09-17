@@ -1,6 +1,6 @@
 return {
   { -- disable auto pairs
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     enabled = false,
   },
   { -- override blink keymap preset

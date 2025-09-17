@@ -1,7 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    playwright
-    playwright-driver
     playwright-driver.browsers
     saml2aws
   ];
