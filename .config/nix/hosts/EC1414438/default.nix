@@ -6,22 +6,13 @@
   ...
 }: {
   imports = [
-    ../../modules/common/nix
-    ../../modules/nixos/programs
-    ../../modules/nixos/services
+    ../../modules/common
+    ../../modules/nixos
+    ../../modules/rtx
     ../../modules/util/rtx/certs
   ];
 
   wsl.enable = true;
-
-  security = {
-    pki.installCACerts = true;
-    pki.certificateFiles =
-      [
-        "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-      ]
-      ++ rtxCerts.pemFiles;
-  };
 
   networking = {
     hostName = "EC1414438";
@@ -61,7 +52,6 @@
       isNormalUser = true;
       extraGroups = ["wheel" "docker"];
       shell = pkgs.zsh;
-      ignoreShellProgramCheck = true;
     };
   };
   wsl.defaultUser = "e21146146";
