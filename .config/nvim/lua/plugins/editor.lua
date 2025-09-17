@@ -18,7 +18,7 @@ return {
   },
   { -- better file explorer
     "stevearc/oil.nvim",
-    dependencies = { "echasnovski/mini.icons" },
+    dependencies = { "nvim-mini/mini.icons" },
     lazy = false,
     ---@module "oil"
     ---@type oil.setupOpts
@@ -72,13 +72,5 @@ return {
     keys = {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
     },
-  },
-  { -- show context at top of buffer
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "LazyFile",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ---@type TSContext.Config
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {},
   },
 }

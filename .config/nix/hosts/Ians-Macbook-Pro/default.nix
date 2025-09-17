@@ -46,7 +46,4 @@
     home = "/Users/ianpascoe";
     shell = pkgs.zsh;
   };
-
-  # $ darwin-rebuild changelog
-  system.stateVersion = 6;
 }
