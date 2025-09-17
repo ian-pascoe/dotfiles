@@ -4,7 +4,6 @@
   ];
   programs.git = {
     enable = true;
-    package = pkgs.gitFull;
     lfs.enable = true;
     extraConfig = {
       user.email = "ian.pascoe@rtx.com";
