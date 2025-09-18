@@ -256,18 +256,18 @@
  * ---------------------
  */
 .home-widget {
-  background-color: rgb(var(--rose));
+  background-color: rgba(var(--rose), var(--opacity-low));
   border-top-left-radius: var(--radius-2xl);
   border-bottom-left-radius: var(--radius-2xl);
   margin: var(--spacing-0) var(--spacing-sm) var(--spacing-0) var(--spacing-0);
   padding: var(--spacing-0) var(--spacing-3xl);
 }
 .home-widget:hover {
-  background-color: rgba(var(--rose), var(--opacity-semi));
+  background-color: rgba(var(--rose), var(--opacity-disabled));
 }
 .home-widget .icon {
   font-size: var(--font-5xl);
-  color: rgb(var(--overlay));
+  color: rgb(var(--rose));
 }
 .home-menu {
   background-color: rgba(var(--surface), var(--opacity-mostly));
@@ -872,21 +872,21 @@
  * ---------------
  */
 .clock-widget {
-  background-color: rgb(var(--rose));
+  background-color: rgba(var(--rose), var(--opacity-low));
   border-top-right-radius: var(--radius-2xl);
   border-bottom-right-radius: var(--radius-2xl);
   margin: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-sm);
-  padding: var(--spacing-0) var(--spacing-sm);
+  padding: var(--spacing-0) var(--spacing-lg);
 }
 .clock-widget:hover {
-  background-color: rgba(var(--rose), var(--opacity-semi));
+  background-color: rgba(var(--rose), var(--opacity-disabled));
 }
 .clock-widget .label {
-  color: rgb(var(--overlay));
+  color: rgb(var(--rose));
 }
 .clock-widget .icon {
-  font-size: var(--font-2xl);
-  color: rgb(var(--overlay));
+  font-size: var(--font-xl);
+  color: rgb(var(--rose));
 }
 
 /*
