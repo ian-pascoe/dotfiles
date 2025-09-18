@@ -4,6 +4,10 @@ watch_stylesheet: true
 watch_config: true
 debug: false
 update_check: true # Enable automatic update check.
+komorebi:
+  start_command: "komorebic start"
+  stop_command: "komorebic stop"
+  reload_command: "komorebic stop && komorebic start"
 bars:
   primary-bar:
     enabled: true
@@ -107,7 +111,7 @@ widgets:
     options:
       offline_label: "GlazeWM Offline"
       hide_empty_workspaces: false
-      hide_if_offline: false
+      hide_if_offline: true
       enable_scroll_switching: true
       btn_shadow:
         enabled: true
