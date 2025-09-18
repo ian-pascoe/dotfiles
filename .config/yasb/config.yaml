@@ -210,8 +210,8 @@ widgets:
   cpu:
     type: "yasb.cpu.CpuWidget"
     options:
-      label: "<span>\uf4bc</span> {info[percent][total]}%"
-      label_alt: "<span>\uf437</span> {info[histograms][cpu_percent]}"
+      label: "<span>\uf4bc</span>{info[percent][total]}%"
+      label_alt: "<span>\uf437</span>{info[histograms][cpu_percent]}"
       update_interval: 1000
       cpu_thresholds:
         low: 25
