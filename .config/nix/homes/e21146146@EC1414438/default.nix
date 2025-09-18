@@ -2,6 +2,7 @@
   imports = [
     ../../modules/common/home
     ../../modules/nixos/home
+    ../../modules/wsl/home
     ../../modules/rtx/home
   ];
 
