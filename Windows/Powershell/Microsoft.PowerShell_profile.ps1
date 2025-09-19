@@ -1,6 +1,5 @@
 # Imports
-Import-Module PSReadLine
-Import-Module Terminal-Icons
+Import-Module Terminal-Icons -ErrorAction SilentlyContinue
 
 # Starship
 Invoke-Expression (&starship init powershell)
@@ -51,8 +50,8 @@ function global:$functionName {
        
        # Try to resolve the path part
        try {
-         `$resolvedPath = Resolve-Path `$pathPart -ErrorAction Stop
-         `$windowsPath = `$resolvedPath.ProviderPath
+         `$resolvedPath = [System.IO.Path]::GetFullPath(`$pathPart)
+         `$windowsPath = `$resolvedPath
          `$wslPath = (wsl wslpath -a -u `$windowsPath.Replace('\','\\')).Trim()
          `$convertedArgs += `$optionPart + `$wslPath
        }
@@ -64,10 +63,9 @@ function global:$functionName {
      else {
        # Try to resolve the argument as a standalone path
        try {
-         `$resolvedPath = Resolve-Path `$arg -ErrorAction Stop
-          # Convert Windows path to WSL path using wslpath
-          `$windowsPath = `$resolvedPath.ProviderPath
-          `$wslPath = (wsl wslpath -a -u `$windowsPath.Replace('\','\\')).Trim()
+         `$resolvedPath = [System.IO.Path]::GetFullPath(`$arg)
+         `$windowsPath = `$resolvedPath
+         `$wslPath = (wsl wslpath -a -u `$windowsPath.Replace('\','\\')).Trim()
          `$convertedArgs += `$wslPath
        }
        catch {
