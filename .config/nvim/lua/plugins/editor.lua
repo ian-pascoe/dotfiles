@@ -61,7 +61,6 @@ return {
   },
   { -- neogit
     "NeogitOrg/neogit",
-    event = "VeryLazy",
     cmd = "Neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -71,6 +70,20 @@ return {
     opts = {},
     keys = {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
+    },
+  },
+  { -- yazi
+    "mikavilpas/yazi.nvim",
+    cmd = "Yazi",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    ---@module "yazi"
+    ---@type YaziConfig
+    opts = {
+      open_for_directories = true,
+    },
+    keys = {
+      { "<leader>y", "<cmd>Yazi<cr>", desc = "yazi" },
+      { "<leader>Y", "<cmd>Yazi cwd<cr>", desc = "yazi (cwd)" },
     },
   },
 }
