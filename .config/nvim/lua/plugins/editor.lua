@@ -69,7 +69,20 @@ return {
     },
     opts = {},
     keys = {
-      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
+      {
+        "<leader>gg",
+        function()
+          require("neogit").open({ cwd = LazyVim.root.git() })
+        end,
+        desc = "Neogit",
+      },
+      {
+        "<leader>gG",
+        function()
+          require("neogit").open({ cwd = vim.fn.getcwd() })
+        end,
+        desc = "Neogit (cwd)",
+      },
     },
   },
   { -- yazi

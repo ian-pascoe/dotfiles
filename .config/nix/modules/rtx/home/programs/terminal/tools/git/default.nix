@@ -6,6 +6,7 @@
     enable = true;
     lfs.enable = true;
     extraConfig = {
+      core.autocrlf = false;
       user.email = "ian.pascoe@rtx.com";
       user.name = "Ian Pascoe";
       credential = {
