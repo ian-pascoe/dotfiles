@@ -5,6 +5,7 @@
 ---@field popup {background: integer, foreground: integer}
 ---@field primary {background: integer, foreground: integer}
 ---@field secondary {background: integer, foreground: integer}
+---@field tertiary {background: integer, foreground: integer}
 ---@field accent {background: integer, foreground: integer}
 ---@field muted {background: integer, foreground: integer}
 ---@field destructive {background: integer, foreground: integer}

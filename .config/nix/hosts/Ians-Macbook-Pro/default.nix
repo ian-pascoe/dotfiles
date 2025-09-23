@@ -16,7 +16,7 @@
             app = "/System/Applications/System Settings.app";
           }
           {
-            app = "/System/Applications/Launchpad.app";
+            app = "/System/Applications/Apps.app";
           }
           {
             spacer = {small = true;};

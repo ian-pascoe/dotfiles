@@ -1,9 +1,10 @@
 local settings = require("config.settings")
 local colors = require("config.colors")
 
--- Equivalent to the --default domain
 Sbar.default({
 	updates = "when_shown",
+	padding_left = settings.paddings,
+	padding_right = settings.paddings,
 	icon = {
 		color = colors.foreground,
 		font = {
@@ -11,8 +12,8 @@ Sbar.default({
 			style = "Bold",
 			size = 18.0,
 		},
-		padding_left = settings.paddings,
-		padding_right = settings.paddings,
+		padding_left = settings.paddings / 2,
+		padding_right = settings.paddings / 2,
 	},
 	label = {
 		color = colors.foreground,
@@ -20,26 +21,22 @@ Sbar.default({
 			family = settings.font,
 			size = 14.0,
 		},
-		padding_left = settings.paddings,
-		padding_right = settings.paddings,
+		padding_left = settings.paddings / 2,
+		padding_right = settings.paddings / 2,
 	},
 	background = {
-		corner_radius = 9,
-		height = 30,
-		padding_left = settings.paddings,
-		padding_right = settings.paddings,
+		corner_radius = 10,
+		height = settings.bar_height - 8,
 	},
 	popup = {
 		height = 30,
 		horizontal = false,
 		background = {
 			border_color = colors.border,
-			border_width = 2,
+			border_width = 1,
 			color = colors.popup.background,
-			corner_radius = 11,
-			shadow = {
-				drawing = true,
-			},
+			corner_radius = 10,
+			shadow = { drawing = true },
 		},
 	},
 })

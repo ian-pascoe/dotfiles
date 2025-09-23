@@ -2,6 +2,7 @@
   imports = [
     ./awscli
     ./bat
+    ./btop
     ./bun
     ./fd
     ./fzf

@@ -1,15 +1,7 @@
 Util = require("util")
+require("util.sketchybar")
 
----@class Sketchybar.AddOptions
-
----@class Sketchybar.Item
-
----@class Sketchybar
----@field begin_config fun()
----@field end_config fun()
----@field hotload fun(enable: boolean)
----@field event_loop fun()
----@field add fun(type: "item" | "space", name: string, options: Sketchybar.AddOptions): Sketchybar.Item
+---@type Sketchybar
 Sbar = require("sketchybar")
 
 Sbar.begin_config()

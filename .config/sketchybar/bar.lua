@@ -1,18 +1,19 @@
-local config = require("config")
+local colors = require("config.colors")
+local settings = require("config.settings")
 
--- Equivalent to the --bar domain
 Sbar.bar({
-	height = 40,
-	color = config.colors.with_alpha(config.colors.background, 0.5),
-	border_color = config.colors.border,
-	border_width = 1,
+	position = "top",
+	sticky = true,
+	topmost = false,
+	height = settings.bar_height,
 	margin = 10,
 	y_offset = 10,
 	corner_radius = 10,
-	shadow = true,
-	sticky = true,
-	padding_right = 10,
-	padding_left = 10,
+	padding_right = 0,
+	padding_left = 0,
+	color = colors.with_alpha(colors.background, 0.7),
 	blur_radius = 20,
-	topmost = false,
+	border_color = colors.border,
+	border_width = 1,
+	shadow = true,
 })

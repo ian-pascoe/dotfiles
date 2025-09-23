@@ -1,6 +1,7 @@
 ---@class config.icons
 local M = {
 	apple = "",
+	home = "󰥓",
 	settings = "󰒓",
 	signout = "󰍃",
 	power = "󰐥",
@@ -14,8 +15,8 @@ local M = {
 
 	volume = {
 		_100 = "􀊩",
-		_59 = "􀊥",
-		_29 = "􀊡",
+		_66 = "􀊥",
+		_33 = "􀊡",
 		_0 = "􀊣",
 	},
 	battery = {
@@ -53,6 +54,7 @@ M.app_icons = {
 	["Google Chrome"] = " ",
 	["Ghostty"] = "󰊠 ",
 	["Messages"] = "󰍡 ",
+	["System Settings"] = "󰒓 ",
 }
 
 function M.map(app_name)

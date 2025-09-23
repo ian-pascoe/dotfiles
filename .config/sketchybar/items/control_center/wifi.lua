@@ -5,7 +5,6 @@ local colors = require("config.colors")
 local popup_width = 250
 
 local wifi = Sbar.add("item", "wifi", {
-	align = "right",
 	position = "right",
 	click_script = "sketchybar --set $NAME popup.drawing=toggle",
 	icon = {
@@ -16,12 +15,12 @@ local wifi = Sbar.add("item", "wifi", {
 		},
 	},
 	background = {
-		padding_left = 5,
+		padding_left = 10,
 	},
 	label = { drawing = false },
 	update_freq = 60,
 	popup = {
-		align = "right",
+		align = "left",
 	},
 })
 
@@ -45,7 +44,7 @@ local ssid = Sbar.add("item", {
 	},
 	background = {
 		height = 2,
-		color = colors.muted,
+		color = colors.muted.background,
 		y_offset = -15,
 	},
 })
@@ -148,7 +147,6 @@ end)
 wifi:subscribe({
 	"mouse.entered",
 }, function(_)
-	wifi:set({ popup = { drawing = true } })
 	Sbar.exec("networksetup -getcomputername", function(result)
 		hostname:set({ label = result })
 	end)
@@ -164,6 +162,7 @@ wifi:subscribe({
 	Sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
 		router:set({ label = result })
 	end)
+	wifi:set({ popup = { drawing = true } })
 end)
 
 local function copy_label_to_clipboard(env)

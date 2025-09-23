@@ -1,0 +1,150 @@
+---@class Sketchybar.BarOptions
+---@field color? integer Color of the bar (argb_hex, default: 0x44000000)
+---@field border_color? integer Color of the bars border (argb_hex, default: 0xffff0000)
+---@field position? "top"|"bottom" Position of the bar on the screen (default: "top")
+---@field height? integer Height of the bar (default: 25)
+---@field notch_display_height? integer Override of the height of the bar on notched displays (default: 0)
+---@field margin? integer Margin around the bar (default: 0)
+---@field y_offset? integer Vertical offset of the bar from its default position (default: 0)
+---@field corner_radius? integer | Sketchybar.CornerRadiusOptions Corner radius of the bar (default: 0)
+---@field border_width? integer Border width of the bars border (default: 0)
+---@field blur_radius? integer Blur radius applied to the background of the bar (default: 0)
+---@field padding_left? integer Padding between the left bar border and the leftmost item (default: 0)
+---@field padding_right? integer Padding between the right bar border and the rightmost item (default: 0)
+---@field notch_width? integer The width of the notch to be accounted for on the internal display (default: 200)
+---@field notch_offset? integer Additional y_offset exclusively applied to notched screens (default: 0)
+---@field display? "main"|"all"|integer[] Display to show the bar on (default: "all")
+---@field hidden? boolean|"current" If all / the current bar is hidden (default: false)
+---@field topmost? boolean|"window" If the bar should be drawn on top of everything or windows (default: false)
+---@field sticky? boolean Makes the bar sticky during space changes (default: true)
+---@field font_smoothing? boolean If fonts should be smoothened (default: false)
+---@field shadow? boolean If the bar should draw a shadow (default: false)
+
+---@class Sketchybar.ItemOptions
+---@field drawing? boolean | "toggle" If the item should be drawn into the bar (default: true)
+---@field position? "left"|"right"|"center"|"q"|"e" Position of the item in the bar
+---@field space? integer[] Spaces to show this item on (default: 0)
+---@field display? integer[]|"active" Displays to show this item on (default: 0)
+---@field ignore_association? boolean Ignores all space / display associations while on (default: false)
+---@field y_offset? integer Vertical offset applied to the item (default: 0)
+---@field padding_left? integer The padding applied left of the item (default: 0)
+---@field padding_right? integer The padding applied right of the item (default: 0)
+---@field width? integer|"dynamic" Makes the item use a fixed width given in points (default: "dynamic")
+---@field scroll_texts? boolean Controls the automatic scroll of all items texts (default: false)
+---@field blur_radius? integer The blur radius applied to the background of the item (default: 0)
+---@field icon? string | Sketchybar.TextOptions Icon of the item
+---@field label? string | Sketchybar.TextOptions Label of the item
+---@field script? string Script to run on an event
+---@field click_script? string Script to run on a mouse click
+---@field update_freq? integer Time in seconds between routine script executions (default: 0)
+---@field updates? boolean|"when_shown" If and when the item updates (default: true)
+---@field mach_helper? string Registers a helper for direct event notifications
+---@field background? Sketchybar.BackgroundOptions Items support all background properties
+---@field popup? Sketchybar.PopupOptions Items support all popup properties
+---@field slider? Sketchybar.SliderOptions Items of type "slider" support all slider properties
+
+---@class Sketchybar.TextOptions
+---@field drawing? boolean | "toggle" If the text is rendered (default: true)
+---@field highlight? boolean If the text uses the highlight_color or the regular color (default: false)
+---@field color? integer Color used to render the text (default: 0xffffffff)
+---@field highlight_color? integer Highlight color of the text (default: 0xff000000)
+---@field padding_left? integer Padding to the left of the text (default: 0)
+---@field padding_right? integer Padding to the right of the text (default: 0)
+---@field y_offset? integer Vertical offset applied to the text (default: 0)
+---@field font? string | Sketchybar.FontOptions The font to be used for the text (default: "Hack Nerd Font:Bold:14.0")
+---@field string? string Sets the text to the specified string
+---@field scroll_duration? integer Sets the scroll speed of text (default: 100)
+---@field max_chars? integer Sets the maximum characters to display (default: 0)
+---@field width? integer|"dynamic" Makes the text use a fixed width (default: "dynamic")
+---@field align? "center"|"left"|"right" Aligns the text in its container (default: "left")
+---@field background? Sketchybar.BackgroundOptions Texts support all background properties
+---@field shadow? Sketchybar.ShadowOptions Texts support all shadow properties
+
+---@class Sketchybar.FontOptions
+---@field family? string The font family to be used for the text (default: "Hack Nerd Font")
+---@field style? string The font style to be used for the text (default: "Bold")
+---@field size? number The font size to be used for the text (default: 14.0)
+
+---@class Sketchybar.BackgroundOptions
+---@field drawing? boolean | "toggle" If the background should be rendered (default: false)
+---@field color? integer Fill color of the background (default: 0x00000000)
+---@field border_color? integer Color of the backgrounds border (default: 0x00000000)
+---@field border_width? integer Width of the background border (default: 0)
+---@field height? integer Overrides the height of the background (default: 0)
+---@field corner_radius? integer | Sketchybar.CornerRadiusOptions Corner radius of the background (default: 0)
+---@field padding_left? integer Padding to the left of the background (default: 0)
+---@field padding_right? integer Padding to the right of the background (default: 0)
+---@field y_offset? integer Vertical offset applied to the background (default: 0)
+---@field clip? number By how much the background clips the bar (default: 0.0)
+---@field image? string|Sketchybar.ImageOptions The image to display in the bar
+---@field shadow? Sketchybar.ShadowOptions Backgrounds support all shadow properties
+
+---@class Sketchybar.ImageOptions
+---@field drawing? boolean | "toggle" If the image should draw (default: false)
+---@field scale? number The scale factor that should be applied to the image (default: 1.0)
+---@field border_color? integer Color of the image border (default: 0x00000000)
+---@field border_width? integer Width of the image border (default: 0)
+---@field corner_radius? integer | Sketchybar.CornerRadiusOptions Corner radius of the image (default: 0)
+---@field padding_left? integer Padding to the left of the image (default: 0)
+---@field padding_right? integer Padding to the right of the image (default: 0)
+---@field y_offset? integer Vertical offset applied to the image (default: 0)
+---@field string? string The image to display in the bar
+---@field shadow? Sketchybar.ShadowOptions Images support all shadow properties
+
+---@class Sketchybar.PopupOptions
+---@field drawing? boolean | "toggle" If the popup should be rendered (default: false)
+---@field horizontal? boolean If the popup should render horizontally (default: false)
+---@field topmost? boolean If the popup should always be on top of all other windows (default: true)
+---@field height? integer The vertical spacing between items in a popup (default: bar height)
+---@field blur_radius? integer The blur applied to the popup background (default: 0)
+---@field y_offset? integer Vertical offset applied to the popup (default: 0)
+---@field align? "left"|"right"|"center" Alignment of the popup with its parent item in the bar (default: "left")
+---@field background? Sketchybar.BackgroundOptions Popups support all background properties
+
+---@class Sketchybar.ShadowOptions
+---@field drawing? boolean | "toggle" If the shadow should be drawn (default: false)
+---@field color? integer Color of the shadow (default: 0xff000000)
+---@field angle? integer Angle of the shadow (default: 30)
+---@field distance? integer Distance of the shadow (default: 5)
+
+---@class Sketchybar.CornerRadiusOptions
+---@field top_left? integer Corner radius of the top left corner (default: 0)
+---@field top_right? integer Corner radius of the top right corner (default: 0)
+---@field bottom_left? integer Corner radius of the bottom left corner (default: 0)
+---@field bottom_right? integer Corner radius of the bottom right corner (default: 0)
+
+---@class Sketchybar.SliderOptions
+---@field width? integer Width of the slider (default: 100)
+---@field percentage? integer Percentage filled of the slider (default: 0)
+---@field highlight_color? integer Color of the filled part of the slider (default: 0xffffffff)
+---@field knob? string | Sketchybar.TextOptions Text options for the knob of the slider
+---@field background? Sketchybar.BackgroundOptions Background options for the slider
+
+---@class Sketchybar.Item
+---@field subscribe fun(self: Sketchybar.Item, event: string | string[], callback: fun(env?: table))
+---@field set fun(self: Sketchybar.Item, options: Sketchybar.ItemOptions)
+---@field query fun(self: Sketchybar.Item): Sketchybar.ItemOptions
+---@field name string
+
+---@class Sketchybar
+---@field begin_config fun()
+---@field end_config fun()
+---@field hotload fun(enable: boolean)
+---@field event_loop fun()
+---@field bar fun(options: Sketchybar.BarOptions)
+---@field default fun(options: Sketchybar.ItemOptions)
+---@field add fun(type: "item" | "space" | "alias", options: Sketchybar.ItemOptions): Sketchybar.Item
+---@field add fun(type: "item" | "space" | "alias", name: string, options: Sketchybar.ItemOptions): Sketchybar.Item
+---@field add fun(type: "bracket", members: string[], options: Sketchybar.ItemOptions): Sketchybar.Item
+---@field add fun(type: "bracket", name: string, members: string[], options: Sketchybar.ItemOptions): Sketchybar.Item
+---@field add fun(type: "slider" | "graph", width: integer, options: Sketchybar.ItemOptions): Sketchybar.Item
+---@field add fun(type: "slider" | "graph", name: string, width: integer, options: Sketchybar.ItemOptions): Sketchybar.Item
+---@field add fun(type: "event", name: string, notification?: string): Sketchybar.Item
+---@field exec fun(command: string, callback?: fun(result:string))
+---@field animate fun(curve: string, duration: integer, callback: fun())
+---@field trigger fun(event: string, env?: table)
+---@field query fun(name: string): Sketchybar.ItemOptions
+---@field query fun(name: "bar"): Sketchybar.BarOptions
+---@field set fun(name: string, options: Sketchybar.ItemOptions)
+---@field set fun(name: "bar", options: Sketchybar.BarOptions)
+---@field delay fun(seconds: number, callback: fun())

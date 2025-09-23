@@ -1,10 +1,10 @@
 -- Left
-require("items.apple")
+require("items.home")
 require("items.spaces")
 
 -- Center
 require("items.front_app")
 
 -- Right
-require("items.calendar")
+require("items.clock")
 require("items.control_center")

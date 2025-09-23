@@ -13,6 +13,10 @@ setmetatable(M, {
 	end,
 })
 
+--- Splits a string into a table based on a given separator.
+---@param inputstr string
+---@param sep string|nil
+---@return string[]
 function M.split(inputstr, sep)
 	if sep == nil then
 		sep = "%s"
@@ -24,6 +28,23 @@ function M.split(inputstr, sep)
 	return t
 end
 
+--- Applies a function to each element of a table and returns a new table with the results.
+---@generic T, U
+---@param func fun(T): U
+---@param tbl T[]
+---@return U[]
+function M.map(func, tbl)
+	local result = {}
+	for i, v in ipairs(tbl) do
+		result[i] = func(v)
+	end
+	return result
+end
+
+--- Removes duplicate values from a table while preserving order.
+---@generic T
+---@param t T[]
+---@return T[]
 function M.deduplicate(t)
 	local seen = {}
 	local res = {}
@@ -36,6 +57,13 @@ function M.deduplicate(t)
 	end
 
 	return res
+end
+
+--- Trims leading and trailing whitespace from a string.
+---@param s string
+---@return string
+function M.trim(s)
+	return s:match("^%s*(.-)%s*$") or s
 end
 
 return M

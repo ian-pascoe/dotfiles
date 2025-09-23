@@ -1,14 +1,16 @@
+local colors = require("config.colors")
+
+local volume = require("items.control_center.volume")
 local battery = require("items.control_center.battery")
 local wifi = require("items.control_center.wifi")
-local volume = require("items.control_center.volume")
 
-local items = {
-	battery.name,
+Sbar.add("bracket", {
 	wifi.name,
-	volume.icon.name,
-}
-
-Sbar.add("bracket", items, {
+	battery.name,
+	volume.name,
+}, {
 	position = "right",
-	align = "right",
+	background = {
+		color = colors.with_alpha(colors.background, 0.8),
+	},
 })
