@@ -1,7 +1,6 @@
 local calendar = Sbar.add("item", "calendar", {
 	position = "right",
 	align = "right",
-	icon = { drawing = false },
 	label = {
 		align = "right",
 		font = {
@@ -13,7 +12,10 @@ local calendar = Sbar.add("item", "calendar", {
 })
 
 local function update()
-	calendar:set({ label = { string = os.date("%a. %d %b.") .. " " .. os.date("%r") } })
+	calendar:set({
+		icon = { string = "󰅐" },
+		label = { string = os.date("%r") },
+	})
 end
 
 calendar:subscribe("routine", update)

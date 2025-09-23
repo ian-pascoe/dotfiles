@@ -8,14 +8,13 @@
 ---@field accent {background: integer, foreground: integer}
 ---@field muted {background: integer, foreground: integer}
 ---@field destructive {background: integer, foreground: integer}
----@field transparent integer
+---@field warning {background: integer, foreground: integer}
+---@field info {background: integer, foreground: integer}
+---@field success {background: integer, foreground: integer}
 ---@field border integer
 local M = require("config.themes").rose_pine.toColors()
 
-M.green = 0xffa6da95
-M.yellow = 0xffeed49f
-M.peach = 0xfff5a97f
-M.red = 0xffed8796
+M.transparent = 0x00000000
 
 ---@type fun(color: integer, alpha?: number): integer
 function M.with_alpha(color, alpha)

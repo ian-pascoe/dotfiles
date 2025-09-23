@@ -29,8 +29,10 @@ function M.toColors()
 		accent = { background = M.pine, foreground = M.base },
 		muted = { background = M.muted, foreground = M.base },
 		destructive = { background = M.love, foreground = M.base },
+		warning = { background = M.gold, foreground = M.base },
+		info = { background = M.foam, foreground = M.base },
+		success = { background = M.pine, foreground = M.base },
 		border = M.highlight_med,
-		transparent = 0x00000000,
 	}
 end
 
