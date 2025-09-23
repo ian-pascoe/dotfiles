@@ -11,4 +11,7 @@ shell-integration-features = no-cursor
 # bg image
 background-image = "~/.config/ghostty/background.png"
 background-image-fit = cover
-background-image-opacity = 0.25
+background-image-opacity = 0.15
+
+# theme
+theme = "rose-pine"
