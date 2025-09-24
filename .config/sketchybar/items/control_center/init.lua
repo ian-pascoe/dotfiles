@@ -16,8 +16,8 @@ local wifi = require("items.control_center.wifi")
 Sbar.add("bracket", {
 	wifi.name,
 	battery.name,
-	volume.name,
-	microphone.name,
+	volume.button.name,
+	microphone.button.name,
 }, {
 	position = "right",
 	background = {

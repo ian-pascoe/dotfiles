@@ -1,4 +1,6 @@
 ---@class util
+---@field sketchybar util.sketchybar
+---@field battery util.battery
 local M = {}
 
 setmetatable(M, {

@@ -1,2 +1,3 @@
 all:
-	(cd input_volume_change && $(MAKE)) >/dev/null
+	(cd cpu_load && $(MAKE))
+	(cd input_volume && $(MAKE))

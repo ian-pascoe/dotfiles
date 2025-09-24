@@ -1,12 +1,15 @@
 -- Start input volume change event provider
 Sbar.exec(
-	"killall input_volume_change >/dev/null; $HOME/.config/sketchybar/helpers/event_providers/input_volume_change/bin/input_volume_change"
+	"killall input_volume >/dev/null; $HOME/.config/sketchybar/helpers/event_providers/input_volume/bin/input_volume input_volume_change"
 )
 
-local colors = require("config.colors")
-local icons = require("config.icons")
+local config = require("config")
+local colors = config.colors
+local icons = config.icons
 
-local microphone_icon = Sbar.add("item", "microphone_icon", {
+local M = {}
+
+M.button = Sbar.add("item", "microphone.button", {
 	position = "right",
 	padding_left = 4,
 	padding_right = 8,
@@ -27,7 +30,7 @@ local microphone_icon = Sbar.add("item", "microphone_icon", {
 		corner_radius = 10,
 	},
 })
-microphone_icon:subscribe("mouse.clicked", function()
+M.button:subscribe("mouse.clicked", function()
 	Sbar.exec("osascript -e 'get volume settings'", function(volume_info)
 		local input_volume_match = volume_info:match("input volume:(%d+)")
 		local input_volume = tonumber(input_volume_match or 0)
@@ -43,22 +46,29 @@ microphone_icon:subscribe("mouse.clicked", function()
 		Sbar.trigger("forced")
 	end)
 end)
-microphone_icon:subscribe("mouse.entered", function()
-	microphone_icon:set({
+M.button:subscribe("mouse.entered", function()
+	M.button:set({
 		popup = { drawing = true },
 		background = { color = colors.with_alpha(colors.secondary.background, 0.25) },
 	})
 end)
-microphone_icon:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
-	microphone_icon:set({
+M.button:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+	M.button:set({
 		popup = { drawing = false },
 		background = { color = colors.transparent },
 	})
 end)
+M.button:subscribe("mouse.scrolled", function(env)
+	local delta = env.INFO.delta
+	if not (env.INFO.modifier == "ctrl") then
+		delta = delta * 10.0
+	end
+	Sbar.exec('osascript -e "set volume input volume (input volume of (get volume settings) + ' .. delta .. ')"')
+end)
 
-local microphone_slider = Sbar.add("slider", "microphone_slider", 100, {
+M.slider = Sbar.add("slider", "M.slider", 100, {
 	width = 100,
-	position = "popup." .. microphone_icon.name,
+	position = "popup." .. M.button.name,
 	padding_left = 10,
 	padding_right = 10,
 	icon = { drawing = false },
@@ -77,7 +87,7 @@ local microphone_slider = Sbar.add("slider", "microphone_slider", 100, {
 		},
 	},
 })
-microphone_slider:subscribe("mouse.clicked", function(env)
+M.slider:subscribe("mouse.clicked", function(env)
 	Sbar.exec("osascript -e 'set volume input volume " .. env["PERCENTAGE"] .. "'")
 end)
 
@@ -97,7 +107,7 @@ local function update_microphone_display(input_volume)
 		icon = icons.microphone._10
 	end
 
-	microphone_icon:set({
+	M.button:set({
 		icon = {
 			string = icon,
 			color = (input_volume == 0) and colors.muted.background or colors.foreground,
@@ -107,16 +117,16 @@ local function update_microphone_display(input_volume)
 			string = tostring(input_volume) .. "%",
 		},
 	})
-	microphone_slider:set({ slider = { percentage = input_volume } })
+	M.slider:set({ slider = { percentage = input_volume } })
 end
 
 -- Subscribe to the event provider trigger
-microphone_icon:subscribe("input_volume_change", function(env)
+M.button:subscribe("input_volume_change", function(env)
 	local input_volume = tonumber(env.volume) or 0
 	local is_muted = env.muted == "true"
 	update_microphone_display(input_volume)
 end)
-microphone_icon:subscribe({ "forced" }, function(_)
+M.button:subscribe({ "forced" }, function(_)
 	Sbar.exec("osascript -e 'get volume settings'", function(volume_info)
 		local input_volume_match = volume_info:match("input volume:(%d+)")
 		local input_volume = tonumber(input_volume_match or 0)
@@ -124,4 +134,4 @@ microphone_icon:subscribe({ "forced" }, function(_)
 	end)
 end)
 
-return microphone_icon
+return M

@@ -6,7 +6,6 @@
     ];
     casks = [
       "ghostty@tip"
-      "google-chrome"
       "karabiner-elements"
       "betterdisplay"
     ];

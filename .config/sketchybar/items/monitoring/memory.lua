@@ -1,15 +1,22 @@
 local config = require("config")
 
-local memory = Sbar.add("graph", "monitoring.memory", 42, {
+local memory = Sbar.add("graph", "monitoring.memory", 52, {
 	position = "right",
 	padding_left = 4,
-	padding_right = 8,
+	padding_right = 4,
 	graph = {
 		color = config.colors.accent.background,
 	},
 	icon = {
 		string = config.icons.memory,
-		y_offset = -5,
+		font = {
+			size = 10,
+		},
+		width = 0,
+		align = "left",
+		padding_left = 3,
+		padding_right = 0,
+		y_offset = 2,
 	},
 	label = {
 		string = "??%",
@@ -19,13 +26,13 @@ local memory = Sbar.add("graph", "monitoring.memory", 42, {
 		width = 0,
 		align = "right",
 		padding_left = 0,
-		padding_right = 0,
+		padding_right = 3,
 		y_offset = 2,
 	},
 	background = {
+		drawing = true,
 		height = config.settings.bar_height - 20,
 	},
-	y_offset = 5,
 	update_freq = 5,
 })
 
@@ -51,7 +58,7 @@ memory:subscribe({ "routine", "forced" }, function()
 
 		memory:set({
 			graph = { color = color },
-			label = { string = string.format("%.0f%%", memory_used) },
+			label = { string = string.format("%.1f%%", memory_used) },
 		})
 	end)
 end)

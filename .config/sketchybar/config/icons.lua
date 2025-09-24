@@ -61,6 +61,11 @@ local M = {
 			_0 = "󰢟",
 		},
 	},
+	media = {
+		back = "􀊊",
+		forward = "􀊌",
+		play_pause = "􀊈",
+	},
 }
 
 M.app_icons = {

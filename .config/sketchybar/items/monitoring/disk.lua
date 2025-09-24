@@ -1,15 +1,22 @@
 local config = require("config")
 
-local disk = Sbar.add("graph", "monitoring.disk", 42, {
+local disk = Sbar.add("graph", "monitoring.disk", 52, {
 	position = "right",
 	padding_left = 4,
-	padding_right = 4,
+	padding_right = 8,
 	graph = {
 		color = config.colors.accent.background,
 	},
 	icon = {
 		string = config.icons.disk,
-		y_offset = -5,
+		font = {
+			size = 10,
+		},
+		width = 0,
+		align = "left",
+		padding_left = 3,
+		padding_right = 0,
+		y_offset = 2,
 	},
 	label = {
 		string = "??%",
@@ -19,13 +26,13 @@ local disk = Sbar.add("graph", "monitoring.disk", 42, {
 		width = 0,
 		align = "right",
 		padding_left = 0,
-		padding_right = 0,
+		padding_right = 3,
 		y_offset = 2,
 	},
 	background = {
-		height = config.settings.bar_height - 10,
+		drawing = true,
+		height = config.settings.bar_height - 20,
 	},
-	y_offset = 5,
 	update_freq = 30,
 })
 
@@ -50,7 +57,7 @@ disk:subscribe({ "routine", "forced" }, function()
 
 		disk:set({
 			graph = { color = color },
-			label = { string = string.format("%.0f%%", disk_used) },
+			label = { string = string.format("%.1f%%", disk_used) },
 		})
 	end)
 end)

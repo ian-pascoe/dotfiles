@@ -21,6 +21,7 @@ local clock = Sbar.add("item", "calendar", {
 		color = colors.with_alpha(colors.primary.background, 0.15),
 		height = settings.bar_height,
 	},
+	click_script = "open -a Calendar",
 	update_freq = 1,
 })
 

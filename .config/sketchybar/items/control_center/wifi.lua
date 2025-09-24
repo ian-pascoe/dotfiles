@@ -2,7 +2,7 @@ local icons = require("config.icons")
 local settings = require("config.settings")
 local colors = require("config.colors")
 
-local popup_width = 250
+local popup_width = 200
 
 local wifi = Sbar.add("item", "wifi", {
 	position = "right",
@@ -18,26 +18,25 @@ local wifi = Sbar.add("item", "wifi", {
 		padding_left = 0,
 		padding_right = 4,
 	},
-	click_script = "sketchybar --set $NAME popup.drawing=toggle",
-	update_freq = 60,
 	popup = {
 		align = "left",
 	},
+	click_script = "sketchybar --set $NAME popup.drawing=toggle",
+	update_freq = 60,
 })
 
 local ssid = Sbar.add("item", {
 	position = "popup." .. wifi.name,
+	align = "center",
+	width = popup_width,
 	icon = {
 		font = {
 			style = "Bold",
 		},
 		string = icons.wifi_router,
 	},
-	width = popup_width,
-	align = "center",
 	label = {
 		font = {
-			size = 15,
 			style = "Bold",
 		},
 		max_chars = 18,
@@ -58,7 +57,7 @@ local hostname = Sbar.add("item", {
 		font = {
 			family = settings.font,
 			style = "Bold",
-			size = 14,
+			size = 12,
 		},
 		width = popup_width / 2,
 	},
@@ -78,7 +77,7 @@ local ip = Sbar.add("item", {
 		font = {
 			family = settings.font,
 			style = "Bold",
-			size = 14,
+			size = 12,
 		},
 		width = popup_width / 2,
 	},
@@ -97,7 +96,7 @@ local mask = Sbar.add("item", {
 		font = {
 			family = settings.font,
 			style = "Bold",
-			size = 14,
+			size = 12,
 		},
 		width = popup_width / 2,
 	},
@@ -116,7 +115,7 @@ local router = Sbar.add("item", {
 		font = {
 			family = settings.font,
 			style = "Bold",
-			size = 14,
+			size = 12,
 		},
 		width = popup_width / 2,
 	},

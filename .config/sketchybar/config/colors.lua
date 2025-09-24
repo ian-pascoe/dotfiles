@@ -16,6 +16,8 @@
 local M = require("config.themes").rose_pine.toColors()
 
 M.transparent = 0x00000000
+M.white = 0xffffffff
+M.black = 0xff000000
 
 ---@type fun(color: integer, alpha?: number): integer
 function M.with_alpha(color, alpha)
