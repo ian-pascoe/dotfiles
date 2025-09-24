@@ -2,7 +2,6 @@
   imports = [
     ./packages
     ./programs
-    ../../util/home/dotfiles
   ];
   home.shell = {
     enableShellIntegration = true;

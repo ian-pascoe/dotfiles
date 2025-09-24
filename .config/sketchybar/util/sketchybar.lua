@@ -42,6 +42,7 @@
 ---@field background? Sketchybar.BackgroundOptions Items support all background properties
 ---@field popup? Sketchybar.PopupOptions Items support all popup properties
 ---@field slider? Sketchybar.SliderOptions Items of type "slider" support all slider properties
+---@field graph? Sketchybar.GraphOptions Items of type "graph" support all graph properties
 
 ---@class Sketchybar.TextOptions
 ---@field drawing? boolean | "toggle" If the text is rendered (default: true)
@@ -120,10 +121,16 @@
 ---@field knob? string | Sketchybar.TextOptions Text options for the knob of the slider
 ---@field background? Sketchybar.BackgroundOptions Background options for the slider
 
+---@class Sketchybar.GraphOptions
+---@field color? integer Color of the graph (default: 0xffffffff)
+---@field fill_color? integer Fill color of the graph (default: 0x00000000)
+---@field width? number Width of the graph (default: 0.5)
+
 ---@class Sketchybar.Item
 ---@field subscribe fun(self: Sketchybar.Item, event: string | string[], callback: fun(env?: table))
 ---@field set fun(self: Sketchybar.Item, options: Sketchybar.ItemOptions)
 ---@field query fun(self: Sketchybar.Item): Sketchybar.ItemOptions
+---@field push fun(self: Sketchybar.Item, values: number[])
 ---@field name string
 
 ---@class Sketchybar

@@ -4,6 +4,8 @@ local M = {
 	home = "󰥓",
 	settings = "󰒓",
 	signout = "󰍃",
+	lock = "󰌾",
+	restart = "󰜉",
 	power = "󰐥",
 	service = "󰢍",
 	resize = "󰩨",
@@ -12,12 +14,24 @@ local M = {
 	wifi_router = "󰑩",
 	wifi_off = "󱚼",
 	clipboard = "󰅇",
+	cpu = "",
+	memory = "",
+	disk = "",
+	ellipsis = "",
 
 	volume = {
 		_100 = "􀊩",
 		_66 = "􀊥",
 		_33 = "􀊡",
+		_10 = "􀊡",
 		_0 = "􀊣",
+	},
+	microphone = {
+		_100 = "󰍬",
+		_66 = "󰍬",
+		_33 = "󰍬",
+		_10 = "󰍬",
+		_0 = "󰍭",
 	},
 	battery = {
 		non_charging = {
@@ -51,17 +65,21 @@ local M = {
 
 M.app_icons = {
 	["Font Book"] = "",
-	["Google Chrome"] = " ",
-	["Ghostty"] = "󰊠 ",
-	["Messages"] = "󰍡 ",
-	["System Settings"] = "󰒓 ",
+	["Google Chrome"] = "",
+	["Ghostty"] = "󰊠",
+	["Messages"] = "󰍡",
+	["System Settings"] = "󰒓",
+	["Activity Monitor"] = "󰍛",
+	["Notes"] = "",
+	["FaceTime"] = "",
+	["Disk Utility"] = "",
 }
 
 function M.map(app_name)
 	if M.app_icons[app_name] then
 		return M.app_icons[app_name]
 	else
-		return " "
+		return ""
 	end
 end
 

@@ -10,12 +10,8 @@ return {
     opts = {
       servers = {
         nil_ls = {
-          enabled = false, -- use nixd instead
-        },
-        nixd = {
-          mason = false, -- nix handles install
-          enabled = not LazyVim.is_win(), --disable on windows
-          cmd = { "nixd" },
+          enabled = not LazyVim.is_win(), -- disable on windows
+          cmd = { "nil", "--stdio" },
         },
       },
     },

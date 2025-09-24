@@ -3,7 +3,7 @@ local icons = require("config.icons")
 
 local popup_width = 150
 
-local home_icon = Sbar.add("item", "home_icon", {
+local home = Sbar.add("item", "home_icon", {
 	padding_left = 0,
 	icon = {
 		string = icons.home,
@@ -21,24 +21,24 @@ local home_icon = Sbar.add("item", "home_icon", {
 	click_script = "sketchybar --set $NAME popup.drawing=toggle",
 	popup = {},
 })
-home_icon:subscribe("mouse.entered", function()
-	home_icon:set({
+home:subscribe("mouse.entered", function()
+	home:set({
 		popup = { drawing = true },
 		background = { color = colors.with_alpha(colors.primary.background, 0.25) },
 	})
 end)
-home_icon:subscribe({
+home:subscribe({
 	"mouse.exited",
 	"mouse.exited.global",
 }, function()
-	home_icon:set({
+	home:set({
 		popup = { drawing = false },
 		background = { color = colors.with_alpha(colors.primary.background, 0.15) },
 	})
 end)
 
-local home_prefs = Sbar.add("item", "home_icon_popup", {
-	position = "popup." .. home_icon.name,
+local home_prefs = Sbar.add("item", "home.prefs", {
+	position = "popup." .. home.name,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -66,11 +66,43 @@ home_prefs:subscribe("mouse.exited", function()
 end)
 home_prefs:subscribe("mouse.clicked", function(_)
 	Sbar.exec("open -a 'System Preferences'")
-	home_icon:set({ popup = { drawing = false } })
+	home:set({ popup = { drawing = false } })
 end)
 
-local signout = Sbar.add("item", "signout", {
-	position = "popup." .. home_icon.name,
+local lock = Sbar.add("item", "home.lock", {
+	position = "popup." .. home.name,
+	padding_left = 0,
+	padding_right = 0,
+	icon = {
+		string = icons.lock,
+		padding_left = 10,
+		width = popup_width / 2,
+		align = "left",
+	},
+	label = {
+		string = "Lock",
+		padding_right = 10,
+		width = popup_width / 2,
+		align = "right",
+	},
+})
+lock:subscribe("mouse.entered", function()
+	lock:set({
+		background = { color = colors.with_alpha(colors.primary.background, 0.25) },
+	})
+end)
+lock:subscribe("mouse.exited", function()
+	lock:set({
+		background = { color = colors.transparent },
+	})
+end)
+lock:subscribe("mouse.clicked", function(_)
+	Sbar.exec("pmset displaysleepnow")
+	home:set({ popup = { drawing = false } })
+end)
+
+local signout = Sbar.add("item", "home.signout", {
+	position = "popup." .. home.name,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -98,11 +130,43 @@ signout:subscribe("mouse.exited", function()
 end)
 signout:subscribe("mouse.clicked", function(_)
 	Sbar.exec("osascript -e 'tell application \"System Events\" to log out'")
-	home_icon:set({ popup = { drawing = false } })
+	home:set({ popup = { drawing = false } })
+end)
+
+local restart = Sbar.add("item", "home.restart", {
+	position = "popup." .. home.name,
+	padding_left = 0,
+	padding_right = 0,
+	icon = {
+		string = icons.restart,
+		padding_left = 10,
+		width = popup_width / 2,
+		align = "left",
+	},
+	label = {
+		string = "Restart",
+		padding_right = 10,
+		width = popup_width / 2,
+		align = "right",
+	},
+})
+restart:subscribe("mouse.entered", function()
+	restart:set({
+		background = { color = colors.with_alpha(colors.primary.background, 0.25) },
+	})
+end)
+restart:subscribe("mouse.exited", function()
+	restart:set({
+		background = { color = colors.transparent },
+	})
+end)
+restart:subscribe("mouse.clicked", function(_)
+	Sbar.exec("osascript -e 'tell application \"System Events\" to restart'")
+	home:set({ popup = { drawing = false } })
 end)
 
 local shutdown = Sbar.add("item", "shutdown", {
-	position = "popup." .. home_icon.name,
+	position = "popup." .. home.name,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -130,5 +194,5 @@ shutdown:subscribe("mouse.exited", function()
 end)
 shutdown:subscribe("mouse.clicked", function(_)
 	Sbar.exec("osascript -e 'tell application \"System Events\" to shut down'")
-	home_icon:set({ popup = { drawing = false } })
+	home:set({ popup = { drawing = false } })
 end)

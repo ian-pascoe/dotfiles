@@ -12,6 +12,5 @@
     xclip
     kubectl
     kubernetes-helm
-    nixd
   ];
 }

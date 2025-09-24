@@ -21,6 +21,7 @@ in {
     shellAliases = {
       nds = "sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/.config/nix#Ians-Macbook-Pro";
       nfu = "nix flake update --flake ~/.config/nix";
+      ncg = "sudo nix-collect-garbage -d";
     };
 
     activation = {

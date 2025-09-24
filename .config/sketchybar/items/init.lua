@@ -8,3 +8,4 @@ require("items.front_app")
 -- Right
 require("items.clock")
 require("items.control_center")
+require("items.monitoring")

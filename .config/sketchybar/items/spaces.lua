@@ -29,21 +29,21 @@ spaces_mode:subscribe("aerospace_mode_change", function(env)
 end)
 
 Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_result)
-	local monitor_ids = monitor_result:gmatch("[^\n]+")
-	for m_id in monitor_ids do
-		m_id = Util.trim(m_id)
-		local m_num = tonumber(m_id) or 0
-		Sbar.exec("aerospace list-workspaces --monitor " .. m_num, function(workspace_result)
-			local workspace_ids = workspace_result:gmatch("[^\n]+")
-			for w_id in workspace_ids do
-				w_id = Util.trim(w_id)
-				local w_num = tonumber(w_id) or 0
-				local space_item = Sbar.add("item", "space_item." .. w_num, {
+	local mids = monitor_result:gmatch("[^\n]+")
+	for mid in mids do
+		mid = Util.trim(mid)
+		local mnum = tonumber(mid) or 0
+		Sbar.exec("aerospace list-workspaces --monitor " .. mnum, function(workspace_result)
+			local wids = workspace_result:gmatch("[^\n]+")
+			for wid in wids do
+				wid = Util.trim(wid)
+				local wnum = tonumber(wid) or 0
+				local space_item = Sbar.add("item", "space_item." .. wnum, {
 					position = "left",
 					padding_left = settings.paddings / 4,
 					padding_right = settings.paddings / 4,
 					icon = {
-						string = w_id,
+						string = wid,
 						padding_left = 8,
 						padding_right = 8,
 						color = colors.foreground,
@@ -58,7 +58,7 @@ Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_r
 						highlight_color = colors.primary.background,
 						font = {
 							family = settings.nerd_font,
-							size = 14,
+							size = 10,
 						},
 						y_offset = 1,
 					},
@@ -69,14 +69,14 @@ Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_r
 						border_width = 1,
 						corner_radius = 25,
 					},
-					associated_display = m_num,
+					associated_display = mnum,
 					blur_radius = 10,
 					update_freq = 2,
 				})
 
 				local function set_focused(result)
 					local focused_num = tonumber(result)
-					local is_focused = focused_num == w_num
+					local is_focused = focused_num == wnum
 					local color = is_focused and colors.primary.background or colors.border
 					space_item:set({
 						icon = { highlight = is_focused },
@@ -93,10 +93,9 @@ Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_r
 					end
 
 					Sbar.exec(
-						"aerospace list-windows --workspace " .. w_num .. ' --format "%{app-name}"',
+						"aerospace list-windows --workspace " .. wnum .. ' --format "%{app-name}"',
 						function(result)
 							local icon_line = ""
-							local no_app = true
 
 							if result and result ~= "" then
 								local apps = {}
@@ -107,28 +106,35 @@ Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_r
 								end
 
 								-- Convert to icon line
+								local i = 1
+								local max_icons = 4
 								for app, _ in pairs(apps) do
-									no_app = false
-									icon_line = icon_line .. icons.map(app)
+									if i > max_icons then
+										icon_line = icon_line .. " " .. icons.ellipsis
+										break
+									end
+
+									if i > 1 and i ~= #apps then
+										icon_line = icon_line .. " " .. icons.map(app)
+									else
+										icon_line = icon_line .. icons.map(app)
+									end
+									i = i + 1
 								end
 							end
 
-							if no_app then
-								icon_line = ""
-							end
-
-							space_item:set({ label = { drawing = not no_app, string = icon_line } })
+							space_item:set({ label = { drawing = icon_line ~= "", string = icon_line } })
 						end
 					)
 				end)
 
 				space_item:subscribe("mouse.clicked", function(env)
 					if env.BUTTON == "left" then
-						Sbar.exec("aerospace workspace " .. w_num)
+						Sbar.exec("aerospace workspace " .. wnum)
 					elseif env.BUTTON == "right" then
 						-- TODO: destroy / create?
 						-- For right-click, just focus the workspace
-						Sbar.exec("aerospace workspace " .. w_num)
+						Sbar.exec("aerospace workspace " .. wnum)
 					end
 				end)
 			end

@@ -6,18 +6,19 @@ local popup_width = 250
 
 local wifi = Sbar.add("item", "wifi", {
 	position = "right",
-	click_script = "sketchybar --set $NAME popup.drawing=toggle",
+	padding_left = 8,
+	padding_right = 4,
 	icon = {
 		string = icons.wifi,
-		font = {
-			family = settings.nerd_font,
-			style = "Regular",
-		},
+		padding_left = 4,
+		padding_right = 4,
 	},
-	background = {
-		padding_left = 10,
+	label = {
+		drawing = false,
+		padding_left = 0,
+		padding_right = 4,
 	},
-	label = { drawing = false },
+	click_script = "sketchybar --set $NAME popup.drawing=toggle",
 	update_freq = 60,
 	popup = {
 		align = "left",
@@ -141,7 +142,10 @@ wifi:subscribe({
 	"mouse.exited",
 	"mouse.exited.global",
 }, function(_)
-	wifi:set({ popup = { drawing = false } })
+	wifi:set({
+		popup = { drawing = false },
+		background = { color = colors.transparent },
+	})
 end)
 
 wifi:subscribe({
@@ -162,7 +166,10 @@ wifi:subscribe({
 	Sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
 		router:set({ label = result })
 	end)
-	wifi:set({ popup = { drawing = true } })
+	wifi:set({
+		popup = { drawing = true },
+		background = { color = colors.with_alpha(colors.secondary.background, 0.25) },
+	})
 end)
 
 local function copy_label_to_clipboard(env)

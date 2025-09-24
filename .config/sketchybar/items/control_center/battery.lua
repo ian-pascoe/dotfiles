@@ -74,6 +74,17 @@ local percent = 0
 
 local battery = Sbar.add("item", "battery", {
 	position = "right",
+	padding_left = 4,
+	padding_right = 4,
+	icon = {
+		padding_left = 4,
+		padding_right = 4,
+	},
+	label = {
+		drawing = false,
+		padding_left = 0,
+		padding_right = 4,
+	},
 	click_script = "sketchybar --set $NAME popup.drawing=toggle",
 	popup = {
 		align = "center",
@@ -84,14 +95,22 @@ battery:subscribe({
 	"mouse.exited",
 	"mouse.exited.global",
 }, function(_)
-	battery:set({ popup = { drawing = false } })
+	battery:set({
+		popup = { drawing = false },
+		background = { color = colors.transparent },
+	})
 end)
 battery:subscribe("mouse.entered", function(_)
-	battery:set({ popup = { drawing = true } })
+	battery:set({
+		popup = { drawing = true },
+		background = { color = colors.with_alpha(colors.secondary.background, 0.25) },
+	})
 end)
 
 local battery_details = Sbar.add("item", "battery_details", {
 	position = "popup." .. battery.name,
+	padding_left = 4,
+	padding_right = 4,
 })
 
 battery:subscribe({

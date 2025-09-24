@@ -8,6 +8,7 @@
       "ghostty@tip"
       "google-chrome"
       "karabiner-elements"
+      "betterdisplay"
     ];
     masApps = {
       WireGuard = 1451685025;

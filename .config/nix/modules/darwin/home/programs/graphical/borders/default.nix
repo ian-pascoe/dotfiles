@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   dotfiles,
   ...
@@ -8,6 +9,13 @@
   ];
   services.jankyborders = {
     enable = true;
+  };
+  launchd.agents.jankyborders = {
+    config = {
+      EnvironmentVariables = {
+        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${pkgs.jankyborders}/bin";
+      };
+    };
   };
   xdg.configFile."borders/bordersrc" = {
     enable = false; # disable automatic generation of bordersrc

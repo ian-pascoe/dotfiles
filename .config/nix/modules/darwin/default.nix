@@ -2,6 +2,7 @@
   imports = [
     ./homebrew
     ./libraries
+    ./system
   ];
 
   # $ darwin-rebuild changelog

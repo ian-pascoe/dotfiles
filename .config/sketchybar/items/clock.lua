@@ -4,7 +4,7 @@ local settings = require("config.settings")
 
 local clock = Sbar.add("item", "calendar", {
 	position = "right",
-	align = "right",
+	width = 150,
 	padding_right = 0,
 	icon = {
 		color = colors.primary.background,
