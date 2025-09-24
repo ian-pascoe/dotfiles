@@ -21,7 +21,6 @@ local volume_icon = Sbar.add("item", "volume_icon", {
 		color = colors.transparent,
 		corner_radius = 10,
 	},
-	updates = true,
 })
 volume_icon:subscribe("mouse.clicked", function()
 	Sbar.exec("osascript -e 'get volume settings'", function(volume_info)
@@ -72,7 +71,6 @@ local volume_slider = Sbar.add("slider", "volume_slider", 100, {
 			drawing = true,
 		},
 	},
-	updates = true,
 })
 volume_slider:subscribe("mouse.clicked", function(env)
 	Sbar.exec("osascript -e 'set volume output volume " .. env["PERCENTAGE"] .. "'")
@@ -93,8 +91,14 @@ volume_icon:subscribe({ "volume_change", "forced" }, function(env)
 	end
 
 	volume_icon:set({
-		icon = { string = icon },
-		label = { drawing = new_volume > 0, string = tostring(new_volume) .. "%" },
+		icon = {
+			string = icon,
+			color = (new_volume == 0) and colors.muted.background or colors.foreground,
+		},
+		label = {
+			drawing = new_volume > 0,
+			string = tostring(new_volume) .. "%",
+		},
 	})
 	volume_slider:set({ slider = { percentage = new_volume } })
 end)
