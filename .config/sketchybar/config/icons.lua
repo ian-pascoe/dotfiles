@@ -20,11 +20,11 @@ local M = {
 	ellipsis = "",
 
 	volume = {
-		_100 = "􀊩",
-		_66 = "􀊥",
-		_33 = "􀊡",
-		_10 = "􀊡",
-		_0 = "􀊣",
+		_100 = "",
+		_66 = "",
+		_33 = "",
+		_10 = "",
+		_0 = "󰸈",
 	},
 	microphone = {
 		_100 = "󰍬",
@@ -62,15 +62,16 @@ local M = {
 		},
 	},
 	media = {
-		back = "􀊊",
-		forward = "􀊌",
-		play_pause = "􀊈",
+		back = "",
+		forward = "",
+		play_pause = "󰐎",
 	},
 }
 
 M.app_icons = {
 	["Font Book"] = "",
 	["Google Chrome"] = "",
+	["Chromium"] = "",
 	["Ghostty"] = "󰊠",
 	["Messages"] = "󰍡",
 	["System Settings"] = "󰒓",
@@ -78,6 +79,7 @@ M.app_icons = {
 	["Notes"] = "",
 	["FaceTime"] = "",
 	["Disk Utility"] = "",
+	["Finder"] = "",
 }
 
 function M.map(app_name)

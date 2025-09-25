@@ -3,9 +3,14 @@ local icons = require("config.icons")
 local front_app = Sbar.add("item", "front_app", {
 	position = "center",
 	display = "active",
+	icon = {
+		padding_right = 2,
+		font = {
+			size = 16,
+		},
+	},
 	label = {
-		padding_left = 5,
-		padding_right = 10,
+		padding_left = 2,
 	},
 })
 

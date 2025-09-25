@@ -11,7 +11,6 @@ return {
       servers = {
         nil_ls = {
           enabled = not LazyVim.is_win(), -- disable on windows
-          cmd = { "nil", "--stdio" },
         },
       },
     },
