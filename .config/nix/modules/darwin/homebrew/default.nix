@@ -3,6 +3,7 @@
     enable = true;
     brews = [
       "mas"
+      "rofi"
     ];
     casks = [
       "ghostty@tip"
@@ -11,6 +12,7 @@
       "karabiner-elements"
       "betterdisplay"
       "rofi"
+      "xquartz" # needed for rofi
     ];
     masApps = {
       WireGuard = 1451685025;
