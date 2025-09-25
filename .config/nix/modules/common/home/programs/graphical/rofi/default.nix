@@ -1,13 +1,14 @@
 {
   config,
   dotfiles,
+  pkgs,
   ...
 }: {
   imports = [
-    ../../../../util/home/dotfiles
+    ../../../../../util/home/dotfiles
   ];
   programs.rofi = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux; # mac install handled via homebrew
   };
   xdg.configFile.rofi = {
     source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/rofi";
