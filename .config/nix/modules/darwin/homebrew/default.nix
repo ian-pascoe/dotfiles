@@ -3,7 +3,6 @@
     enable = true;
     brews = [
       "mas"
-      "rofi"
     ];
     casks = [
       "ghostty@tip"

@@ -4,6 +4,5 @@
     ./borders
     ./karabiner
     ./sketchybar
-    ./xquartz
   ];
 }
