@@ -1,79 +1,110 @@
+Sbar.exec(
+	"killall media_stream >/dev/null; $HOME/.config/sketchybar/helpers/event_providers/media_stream/bin/media_stream media_stream_change"
+)
+
 local config = require("config")
 local icons = config.icons
 local colors = config.colors
 
-local whitelist = {
-	["Spotify"] = true,
-	["Music"] = true,
-}
+---@class items.media
+local M = {}
 
-local media_cover = Sbar.add("item", {
+local max_chars = 32
+
+M.button = Sbar.add("item", "media.button", {
 	position = "right",
-	background = {
-		image = {
-			string = "media.artwork",
-			scale = 0.85,
-		},
-		color = colors.transparent,
+	icon = {
+		drawing = false,
+		string = icons.media.music,
+		padding_left = 8,
+		padding_right = 8,
 	},
-	label = { drawing = false },
-	icon = { drawing = false },
-	drawing = false,
-	updates = true,
+	label = {
+		drawing = false,
+		width = 0,
+		max_chars = max_chars,
+		padding_left = 0,
+		padding_right = 8,
+	},
+	background = {
+		drawing = false,
+		color = colors.with_alpha(colors.accent.background, 0.8),
+	},
 	popup = {
+		drawing = false,
 		align = "center",
 		horizontal = true,
 	},
+	click_script = "sketchybar --set $NAME popup.drawing=toggle",
 })
 
-local media_artist = Sbar.add("item", {
-	position = "right",
-	drawing = false,
-	padding_left = 3,
-	padding_right = 0,
-	width = 0,
-	icon = { drawing = false },
-	label = {
-		width = 0,
-		font = { size = 9 },
-		color = colors.with_alpha(colors.white, 0.6),
-		max_chars = 18,
-		y_offset = 6,
-	},
-})
+M.popup = {
+	back = Sbar.add("item", "media.popup.back", {
+		position = "popup." .. M.button.name,
+		icon = {
+			string = icons.media.back,
+		},
+		label = {
+			drawing = false,
+		},
+		click_script = "media-control previous-track",
+	}),
+	play_pause = Sbar.add("item", "media.popup.play_pause", {
+		position = "popup." .. M.button.name,
+		icon = {
+			string = icons.media.play_pause,
+			font = {
+				size = 20,
+			},
+		},
+		label = {
+			drawing = false,
+		},
+		click_script = "media-control toggle-play-pause",
+	}),
+	next = Sbar.add("item", "media.popup.next", {
+		position = "popup." .. M.button.name,
+		icon = {
+			string = icons.media.forward,
+		},
+		label = {
+			drawing = false,
+		},
+		click_script = "media-control next-track",
+	}),
+}
 
-local media_title = Sbar.add("item", {
-	position = "right",
-	drawing = false,
-	padding_left = 3,
-	padding_right = 0,
-	icon = { drawing = false },
-	label = {
-		font = { size = 11 },
-		width = 0,
-		max_chars = 16,
-		y_offset = -5,
-	},
-})
+M.button:subscribe("media_stream_change", function(env)
+	local playing = env.playing == "true"
+	local title = env.title
+	local artist = env.artist
 
-Sbar.add("item", {
-	position = "popup." .. media_cover.name,
-	icon = { string = icons.media.back },
-	label = { drawing = false },
-	click_script = "nowplaying-cli previous",
-})
-Sbar.add("item", {
-	position = "popup." .. media_cover.name,
-	icon = { string = icons.media.play_pause },
-	label = { drawing = false },
-	click_script = "nowplaying-cli togglePlayPause",
-})
-Sbar.add("item", {
-	position = "popup." .. media_cover.name,
-	icon = { string = icons.media.forward },
-	label = { drawing = false },
-	click_script = "nowplaying-cli next",
-})
+	local drawing = title ~= nil and title ~= "" and artist ~= nil and artist ~= ""
+
+	local title_artist = title .. " - " .. artist
+	if #title_artist > max_chars then
+		title_artist = title_artist:sub(1, max_chars - 3) .. "..."
+	end
+
+	M.button:set({
+		icon = {
+			drawing = drawing,
+		},
+		label = {
+			drawing = drawing,
+			string = title_artist,
+		},
+		background = {
+			drawing = drawing,
+		},
+	})
+
+	M.popup.play_pause:set({
+		icon = {
+			string = playing and icons.media.pause or icons.media.play,
+		},
+	})
+end)
 
 local interrupt = 0
 local function animate_detail(detail)
@@ -84,42 +115,26 @@ local function animate_detail(detail)
 		return
 	end
 
-	Sbar.animate("tanh", 30, function()
-		media_artist:set({ label = { width = detail and "dynamic" or 0 } })
-		media_title:set({ label = { width = detail and "dynamic" or 0 } })
+	Sbar.animate("tanh", 20, function()
+		M.button:set({
+			label = { width = detail and "dynamic" or 0 },
+		})
 	end)
 end
 
-media_cover:subscribe("media_change", function(env)
-	if whitelist[env.INFO.app] then
-		local drawing = (env.INFO.state == "playing")
-		media_artist:set({ drawing = drawing, label = env.INFO.artist })
-		media_title:set({ drawing = drawing, label = env.INFO.title })
-		media_cover:set({ drawing = drawing })
-
-		if drawing then
-			animate_detail(true)
-			interrupt = interrupt + 1
-			Sbar.delay(5, animate_detail)
-		else
-			media_cover:set({ popup = { drawing = false } })
-		end
-	end
-end)
-
-media_cover:subscribe("mouse.entered", function(_)
+M.button:subscribe("mouse.entered", function(_)
 	interrupt = interrupt + 1
 	animate_detail(true)
 end)
 
-media_cover:subscribe("mouse.exited", function(_)
+M.button:subscribe("mouse.exited", function(_)
 	animate_detail(false)
 end)
 
-media_cover:subscribe("mouse.clicked", function(_)
-	media_cover:set({ popup = { drawing = "toggle" } })
+M.button:subscribe("mouse.exited.global", function(_)
+	M.button:set({
+		popup = { drawing = false },
+	})
 end)
 
-media_title:subscribe("mouse.exited.global", function(_)
-	media_cover:set({ popup = { drawing = false } })
-end)
+return M

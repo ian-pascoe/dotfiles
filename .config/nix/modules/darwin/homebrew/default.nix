@@ -3,6 +3,7 @@
     enable = true;
     brews = [
       "mas"
+      "media-control"
     ];
     casks = [
       "ghostty@tip"

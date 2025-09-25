@@ -5,7 +5,7 @@ Sbar.bar({
 	position = "top",
 	sticky = true,
 	topmost = false,
-	height = settings.bar_height,
+	height = settings.heights.bar,
 	margin = 10,
 	y_offset = 10,
 	corner_radius = 8,

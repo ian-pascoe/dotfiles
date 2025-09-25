@@ -6,17 +6,17 @@ local popup_width = 200
 
 local wifi = Sbar.add("item", "wifi", {
 	position = "right",
-	padding_left = 8,
-	padding_right = 4,
+	padding_left = 0,
+	padding_right = 0,
 	icon = {
 		string = icons.wifi,
-		padding_left = 4,
-		padding_right = 4,
+		padding_left = 8,
+		padding_right = 8,
 	},
 	label = {
 		drawing = false,
 		padding_left = 0,
-		padding_right = 4,
+		padding_right = 8,
 	},
 	popup = {
 		align = "left",

@@ -31,10 +31,21 @@ local disk = Sbar.add("graph", "monitoring.disk", 52, {
 	},
 	background = {
 		drawing = true,
-		height = config.settings.bar_height - 20,
+		height = config.settings.heights.graph,
+		corner_radius = 5,
 	},
 	update_freq = 30,
 })
+disk:subscribe("mouse.entered", function()
+	disk:set({
+		background = { color = config.colors.with_alpha(config.colors.secondary.background, 0.25) },
+	})
+end)
+disk:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+	disk:set({
+		background = { color = config.colors.transparent },
+	})
+end)
 
 disk:subscribe({ "routine", "forced" }, function()
 	Sbar.exec("df -h /System/Volumes/Data | tail -1 | awk '{print $5}'", function(result)

@@ -1,54 +1,76 @@
 local colors = require("config.colors")
 local icons = require("config.icons")
 local settings = require("config.settings")
+local front_app = require("items.front_app")
 
-local spaces_mode = Sbar.add("item", "spaces_mode", {
+---@class items.spaces
+local M = {}
+
+---@type Sketchybar.Item[][]
+M.spaces = {}
+
+---@type Sketchybar.Item[]
+M.groups = {}
+
+M.mode = Sbar.add("item", "spaces.mode", {
 	position = "left",
-	padding_left = settings.paddings / 2,
-	padding_right = settings.paddings / 2,
+	padding_left = 0,
+	padding_right = 0,
 	icon = { drawing = false },
 	label = {
 		string = "main",
-		padding_left = 10,
-		padding_right = 10,
-	},
-	background = {
-		drawing = true,
-		color = colors.with_alpha(colors.secondary.background, 0.8),
-		border_color = colors.border,
-		border_width = 1,
-		corner_radius = 25,
+		color = colors.primary.foreground,
+		padding_left = settings.paddings.md,
+		padding_right = settings.paddings.md,
 	},
 	blur_radius = 10,
 })
-spaces_mode:subscribe("aerospace_mode_change", function(env)
+M.mode:subscribe("aerospace_mode_change", function(env)
 	local mode = env.MODE or "main"
-	spaces_mode:set({
+	M.mode:set({
 		label = { string = mode },
 	})
 end)
 
 Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_result)
-	local mids = monitor_result:gmatch("[^\n]+")
-	for mid in mids do
+	local mids = {}
+	for mid in monitor_result:gmatch("[^\n]+") do
+		mid = Util.trim(mid)
+		if mid ~= "" then
+			table.insert(mids, mid)
+		end
+	end
+
+	for _, mid in ipairs(mids) do
 		mid = Util.trim(mid)
 		local mnum = tonumber(mid) or 0
+		M.spaces[mnum] = {}
 		Sbar.exec("aerospace list-workspaces --monitor " .. mnum, function(workspace_result)
-			local wids = workspace_result:gmatch("[^\n]+")
-			for wid in wids do
+			local wids = {}
+			for wid in workspace_result:gmatch("[^\n]+") do
+				wid = Util.trim(wid)
+				if wid ~= "" then
+					table.insert(wids, wid)
+				end
+			end
+
+			for widx, wid in ipairs(wids) do
 				wid = Util.trim(wid)
 				local wnum = tonumber(wid) or 0
-				local space_item = Sbar.add("item", "space_item." .. wnum, {
+				local space = Sbar.add("item", "spaces.space." .. wnum, {
 					position = "left",
-					padding_left = settings.paddings / 4,
-					padding_right = settings.paddings / 4,
+					padding_left = 0,
+					padding_right = (widx == #wids) and settings.paddings.xl or 0,
 					icon = {
 						string = wid,
 						padding_left = 8,
 						padding_right = 8,
 						color = colors.foreground,
 						highlight_color = colors.primary.background,
-						font = { family = settings.font, size = 14 },
+						font = {
+							family = settings.fonts.regular,
+							size = 14,
+						},
 					},
 					label = {
 						drawing = false,
@@ -57,78 +79,46 @@ Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_r
 						color = colors.foreground,
 						highlight_color = colors.primary.background,
 						font = {
-							family = settings.nerd_font,
+							family = settings.fonts.nerd,
 							size = 10,
 						},
 						y_offset = 1,
 					},
 					background = {
-						drawing = true,
-						color = colors.with_alpha(colors.card.background, 0.8),
+						height = settings.heights.widget - 3,
+						color = colors.with_alpha(colors.card.background, 0.9),
 						border_color = colors.border,
 						border_width = 1,
-						corner_radius = 25,
+						corner_radius = 0,
 					},
 					associated_display = mnum,
 					blur_radius = 10,
-					update_freq = 2,
 				})
+
+				M.spaces[mnum][wnum] = space
 
 				local function set_focused(result)
 					local focused_num = tonumber(result)
 					local is_focused = focused_num == wnum
 					local color = is_focused and colors.primary.background or colors.border
-					space_item:set({
-						icon = { highlight = is_focused },
-						label = { highlight = is_focused },
-						background = { border_color = color },
-					})
+					Sbar.animate("tanh", 5, function()
+						space:set({
+							icon = { highlight = is_focused },
+							label = { highlight = is_focused },
+							background = { border_color = color },
+						})
+					end)
 				end
 
-				space_item:subscribe({ "aerospace_workspace_change", "routine", "forced" }, function(env)
+				space:subscribe({ "aerospace_workspace_change", "forced" }, function(env)
 					if env.FOCUSED ~= nil then
 						set_focused(env.FOCUSED)
 					else
 						Sbar.exec("aerospace list-workspaces --focused", set_focused)
 					end
-
-					Sbar.exec(
-						"aerospace list-windows --workspace " .. wnum .. ' --format "%{app-name}"',
-						function(result)
-							local icon_line = ""
-
-							if result and result ~= "" then
-								local apps = {}
-								for app in result:gmatch("[^\n]+") do
-									if app and app ~= "" and app ~= "None" then
-										apps[app] = true -- Use as set to avoid duplicates
-									end
-								end
-
-								-- Convert to icon line
-								local i = 1
-								local max_icons = 4
-								for app, _ in pairs(apps) do
-									if i > max_icons then
-										icon_line = icon_line .. " " .. icons.ellipsis
-										break
-									end
-
-									if i > 1 and i ~= #apps then
-										icon_line = icon_line .. " " .. icons.map(app)
-									else
-										icon_line = icon_line .. icons.map(app)
-									end
-									i = i + 1
-								end
-							end
-
-							space_item:set({ label = { drawing = icon_line ~= "", string = icon_line } })
-						end
-					)
 				end)
 
-				space_item:subscribe("mouse.clicked", function(env)
+				space:subscribe("mouse.clicked", function(env)
 					if env.BUTTON == "left" then
 						Sbar.exec("aerospace workspace " .. wnum)
 					elseif env.BUTTON == "right" then
@@ -138,6 +128,75 @@ Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_r
 					end
 				end)
 			end
+
+			-- Create group after all workspaces for this monitor are processed.
+			-- Workspace numbers can be global/sparse (not starting at 1 per monitor), so we cannot rely on ipairs.
+			local ordered_workspace_nums = {}
+			for wnum, _ in pairs(M.spaces[mnum]) do
+				table.insert(ordered_workspace_nums, wnum)
+			end
+			table.sort(ordered_workspace_nums)
+			local group_items = {}
+			for _, wnum in ipairs(ordered_workspace_nums) do
+				table.insert(group_items, M.spaces[mnum][wnum].name)
+			end
+			table.insert(group_items, 1, M.mode.name)
+			M.groups[mnum] = Sbar.add("bracket", "spaces.group." .. mnum, group_items, {
+				position = "left",
+				background = {
+					color = colors.with_alpha(colors.primary.background, 0.9),
+					border_width = 1,
+					border_color = colors.border,
+				},
+				associated_display = mnum,
+			})
+			-- Move the front_app to the end of the group
+			Sbar.exec("sketchybar --move " .. front_app.widget.name .. " after " .. M.groups[mnum].name)
 		end)
 	end
 end)
+
+M.app_watcher = Sbar.add("item", "spaces.window_watcher", {
+	drawing = false,
+	updates = true,
+	update_freq = 1,
+})
+M.app_watcher:subscribe({ "routine", "forced" }, function()
+	for _, spaces in pairs(M.spaces) do
+		for wnum, space in pairs(spaces) do
+			Sbar.exec("aerospace list-windows --workspace " .. wnum .. ' --format "%{app-name}"', function(result)
+				local icon_line = ""
+
+				if result and result ~= "" then
+					local apps = {}
+					for app in result:gmatch("[^\n]+") do
+						if app and app ~= "" and app ~= "None" then
+							apps[app] = true -- Use as set to avoid duplicates
+						end
+					end
+
+					-- Convert to icon line
+					local i = 1
+					local max_icons = 4
+					for app, _ in pairs(apps) do
+						if i > max_icons then
+							icon_line = icon_line .. " " .. icons.ellipsis
+							break
+						end
+
+						if i > 1 and i ~= #apps then
+							icon_line = icon_line .. " " .. icons.map(app)
+						else
+							icon_line = icon_line .. icons.map(app)
+						end
+						i = i + 1
+					end
+				end
+
+				space:set({ label = { drawing = icon_line ~= "", string = icon_line } })
+			end)
+		end
+	end
+end)
+
+return M

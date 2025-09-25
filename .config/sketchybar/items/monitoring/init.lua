@@ -2,8 +2,8 @@ local config = require("config")
 
 Sbar.add("item", "spacer." .. math.random(1, 1000), {
 	position = "right",
-	padding_left = config.settings.paddings / 2,
-	padding_right = config.settings.paddings / 2,
+	padding_left = config.settings.paddings.xs,
+	padding_right = config.settings.paddings.xs,
 	icon = { drawing = false },
 	label = { drawing = false },
 })

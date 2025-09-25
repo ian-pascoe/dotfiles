@@ -1,7 +1,7 @@
 -- Execute the event provider binary which provides the event "cpu_update" for
--- the cpu load data, which is fired every 1.0 seconds.
+-- the cpu load data, which is fired every 2.0 seconds.
 Sbar.exec(
-	"killall cpu_load >/dev/null; $HOME/.config/sketchybar/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 1.0"
+	"killall cpu_load >/dev/null; $HOME/.config/sketchybar/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0"
 )
 
 local config = require("config")
@@ -37,9 +37,20 @@ local cpu = Sbar.add("graph", "monitoring.cpu", 52, {
 	},
 	background = {
 		drawing = true,
-		height = config.settings.bar_height - 20,
+		height = config.settings.heights.graph,
+		corner_radius = 5,
 	},
 })
+cpu:subscribe("mouse.entered", function()
+	cpu:set({
+		background = { color = config.colors.with_alpha(config.colors.secondary.background, 0.25) },
+	})
+end)
+cpu:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+	cpu:set({
+		background = { color = config.colors.transparent },
+	})
+end)
 
 cpu:subscribe("cpu_update", function(env)
 	-- Also available: env.user_load, env.sys_load

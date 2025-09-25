@@ -17,6 +17,7 @@
     ./maven
     ./opencode
     ./ripgrep
+    ./spotify-player
     ./starship
     ./uv
     ./yazi

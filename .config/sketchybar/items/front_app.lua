@@ -1,7 +1,9 @@
 local icons = require("config.icons")
 
-local front_app = Sbar.add("item", "front_app", {
-	position = "center",
+local M = {}
+
+M.widget = Sbar.add("item", "front_app", {
+	position = "left",
 	display = "active",
 	icon = {
 		padding_right = 2,
@@ -14,10 +16,16 @@ local front_app = Sbar.add("item", "front_app", {
 	},
 })
 
-front_app:subscribe("front_app_switched", function(env)
+M.widget:subscribe("front_app_switched", function(env)
 	local app_name = env.INFO
-	front_app:set({
-		label = { string = app_name },
-		icon = { string = icons.map(app_name) },
+	M.widget:set({
+		icon = {
+			string = "󰅂 " .. icons.map(app_name),
+		},
+		label = {
+			string = app_name,
+		},
 	})
 end)
+
+return M

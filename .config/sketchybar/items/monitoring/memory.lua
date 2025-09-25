@@ -31,10 +31,21 @@ local memory = Sbar.add("graph", "monitoring.memory", 52, {
 	},
 	background = {
 		drawing = true,
-		height = config.settings.bar_height - 20,
+		height = config.settings.heights.graph,
+		corner_radius = 5,
 	},
 	update_freq = 5,
 })
+memory:subscribe("mouse.entered", function()
+	memory:set({
+		background = { color = config.colors.with_alpha(config.colors.secondary.background, 0.25) },
+	})
+end)
+memory:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+	memory:set({
+		background = { color = config.colors.transparent },
+	})
+end)
 
 memory:subscribe({ "routine", "forced" }, function()
 	Sbar.exec("memory_pressure", function(result)

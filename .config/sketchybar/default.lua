@@ -3,30 +3,30 @@ local colors = require("config.colors")
 
 Sbar.default({
 	updates = "when_shown",
-	padding_left = settings.paddings,
-	padding_right = settings.paddings,
+	padding_left = settings.paddings.md,
+	padding_right = settings.paddings.md,
 	icon = {
 		color = colors.foreground,
 		font = {
-			family = settings.nerd_font,
+			family = settings.fonts.nerd,
 			style = "Bold",
 			size = 14.0,
 		},
-		padding_left = settings.paddings / 2,
-		padding_right = settings.paddings / 2,
+		padding_left = settings.paddings.xs,
+		padding_right = settings.paddings.xs,
 	},
 	label = {
 		color = colors.foreground,
 		font = {
-			family = settings.font,
+			family = settings.fonts.regular,
 			size = 11.0,
 		},
-		padding_left = settings.paddings / 2,
-		padding_right = settings.paddings / 2,
+		padding_left = settings.paddings.xs,
+		padding_right = settings.paddings.xs,
 	},
 	background = {
 		corner_radius = 10,
-		height = settings.bar_height - 8,
+		height = settings.heights.widget,
 	},
 	popup = {
 		height = 30,

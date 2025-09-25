@@ -5,16 +5,16 @@ local percent = 0
 
 local battery = Sbar.add("item", "battery", {
 	position = "right",
-	padding_left = 4,
-	padding_right = 4,
+	padding_left = 0,
+	padding_right = 0,
 	icon = {
-		padding_left = 4,
-		padding_right = 4,
+		padding_left = 8,
+		padding_right = 8,
 	},
 	label = {
 		drawing = false,
 		padding_left = 0,
-		padding_right = 4,
+		padding_right = 8,
 	},
 	click_script = "sketchybar --set $NAME popup.drawing=toggle",
 	popup = {
@@ -68,13 +68,15 @@ battery:subscribe({
 			end
 		end
 
+		local show_label = percent < 50
 		battery:set({
 			icon = {
 				string = icon,
+				padding_right = show_label and 4 or 8,
 				color = color,
 			},
 			label = {
-				drawing = percent < 50,
+				drawing = show_label,
 				string = percent .. "%",
 			},
 		})

@@ -62,6 +62,9 @@ local M = {
 		},
 	},
 	media = {
+		music = "󰝚",
+		play = "",
+		pause = "",
 		back = "",
 		forward = "",
 		play_pause = "󰐎",
@@ -80,6 +83,8 @@ M.app_icons = {
 	["FaceTime"] = "",
 	["Disk Utility"] = "",
 	["Finder"] = "",
+	["Spotify"] = "",
+	["Music"] = "󰝚",
 }
 
 function M.map(app_name)
