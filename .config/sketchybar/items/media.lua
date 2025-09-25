@@ -28,7 +28,7 @@ M.button = Sbar.add("item", "media.button", {
 	},
 	background = {
 		drawing = false,
-		color = colors.with_alpha(colors.accent.background, 0.8),
+		color = colors.with_alpha(colors.accent.background, 0.5),
 	},
 	popup = {
 		drawing = false,
