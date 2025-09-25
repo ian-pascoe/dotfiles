@@ -11,8 +11,6 @@
       "spotify"
       "karabiner-elements"
       "betterdisplay"
-      "rofi"
-      "xquartz" # needed for rofi
     ];
     masApps = {
       WireGuard = 1451685025;
