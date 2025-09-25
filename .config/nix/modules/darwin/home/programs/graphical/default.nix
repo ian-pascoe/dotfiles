@@ -1,8 +1,8 @@
 {
   imports = [
     ./aerospace
-    ./borders
-    ./karabiner
+    ./jankyborders
+    ./karabiner-elements
     ./sketchybar
   ];
 }

@@ -5,10 +5,9 @@
       "mas"
     ];
     casks = [
-      "ghostty@tip"
+      # "ghostty@tip"
       "google-chrome"
       "spotify"
-      "karabiner-elements"
       "betterdisplay"
     ];
     masApps = {
