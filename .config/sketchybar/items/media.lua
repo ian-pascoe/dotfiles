@@ -13,6 +13,7 @@ local max_chars = 32
 
 M.button = Sbar.add("item", "media.button", {
 	position = "right",
+	associated_display = "active",
 	icon = {
 		drawing = false,
 		string = icons.media.music,

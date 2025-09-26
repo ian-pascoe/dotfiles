@@ -5,16 +5,16 @@
     <proxy>
       <id>raytheon-http-proxy</id>
       <protocol>http</protocol>
-      <host>REDACTED</host>
-      <port>80</port>
-      <nonProxyHosts>localhost|127.0.0.0/8|*.ray.com|*.raytheon.com|*.utc.com|*.rtx.com</nonProxyHosts>
+      <host>${env.HTTP_PROXY_HOST}</host>
+      <port>${env.HTTP_PROXY_PORT}</port>
+      <nonProxyHosts>${env.HTTP_NON_PROXY_HOSTS}</nonProxyHosts>
     </proxy>
     <proxy>
       <id>raytheon-https-proxy</id>
       <protocol>https</protocol>
-      <host>REDACTED</host>
-      <port>80</port>
-      <nonProxyHosts>localhost|127.0.0.0/8|*.ray.com|*.raytheon.com|*.utc.com|*.rtx.com</nonProxyHosts>
+      <host>${env.HTTPS_PROXY_HOST}</host>
+      <port>${env.HTTPS_PROXY_PORT}</port>
+      <nonProxyHosts>${env.HTTPS_NON_PROXY_HOSTS}</nonProxyHosts>
     </proxy>
   </proxies>
 </settings>

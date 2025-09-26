@@ -94,7 +94,6 @@ Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_r
 					associated_display = mnum,
 					blur_radius = 10,
 				})
-
 				M.spaces[mnum][wnum] = space
 
 				local function set_focused(result)
