@@ -5,21 +5,35 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # NUR
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Index Database
-    nix-index-database.url = "github:nix-community/nix-index-database/main";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # WSL
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Darwin
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -28,6 +42,7 @@
   outputs = {
     self,
     nixpkgs,
+    nur,
     nix-index-database,
     nixos-wsl,
     home-manager,
@@ -77,9 +92,10 @@
     nixosConfigurations = {
       EC1414438 = mkNixosSystem [
         nixos-wsl.nixosModules.wsl
-        ./hosts/EC1414438
+        nur.modules.nixos.default
         nix-index-database.nixosModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
+        ./hosts/EC1414438
         home-manager.nixosModules.home-manager
         (mkHomeManagerConfig "e21146146" ./homes/${"e21146146@EC1414438"})
       ];
@@ -89,9 +105,10 @@
     # Available through 'darwin-rebuild switch --flake .#Ians-Macbook-Pro'
     darwinConfigurations = {
       "Ians-Macbook-Pro" = mkDarwinSystem [
-        ./hosts/Ians-Macbook-Pro
+        nur.modules.darwin.default
         nix-index-database.darwinModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
+        ./hosts/Ians-Macbook-Pro
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
         home-manager.darwinModules.home-manager
