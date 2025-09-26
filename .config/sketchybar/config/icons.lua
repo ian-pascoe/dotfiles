@@ -85,6 +85,7 @@ M.app_icons = {
 	["Finder"] = "",
 	["Spotify"] = "",
 	["Music"] = "󰝚",
+	["Reminders"] = "",
 }
 
 function M.map(app_name)

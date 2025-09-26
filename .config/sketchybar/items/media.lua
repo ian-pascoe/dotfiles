@@ -80,10 +80,12 @@ M.button:subscribe("media_stream_change", function(env)
 	local artist = env.artist
 
 	local drawing = title ~= nil and title ~= "" and artist ~= nil and artist ~= ""
-
-	local title_artist = title .. " - " .. artist
-	if #title_artist > max_chars then
-		title_artist = title_artist:sub(1, max_chars - 3) .. "..."
+	local title_artist = ""
+	if drawing then
+		title_artist = title .. " - " .. artist
+		if #title_artist > max_chars then
+			title_artist = title_artist:sub(1, max_chars - 3) .. "..."
+		end
 	end
 
 	M.button:set({

@@ -10,7 +10,7 @@
         AppleAccentColor = 1;
       };
       "com.apple.spaces" = {
-        spans-displays = true;
+        spans-displays = false;
       };
     };
   };
