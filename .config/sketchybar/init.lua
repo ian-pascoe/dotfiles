@@ -1,6 +1,10 @@
+-- Global utilities
 Util = require("util")
+
+-- Load sketchybar types
 require("util.sketchybar")
 
+-- Global Sketchybar instance
 ---@type Sketchybar
 Sbar = require("sketchybar")
 

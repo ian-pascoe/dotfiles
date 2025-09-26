@@ -69,4 +69,12 @@ function M.trim(s)
 	return s:match("^%s*(.-)%s*$") or s
 end
 
+--- Sleeps for a specified number of seconds (blocking).
+---@param seconds number
+function M.sleep(seconds)
+	local start = os.time()
+	while os.time() - start < seconds do
+	end
+end
+
 return M

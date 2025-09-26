@@ -159,7 +159,7 @@ end)
 M.app_watcher = Sbar.add("item", "spaces.window_watcher", {
 	drawing = false,
 	updates = true,
-	update_freq = 1,
+	update_freq = 2,
 })
 M.app_watcher:subscribe({ "routine", "forced" }, function()
 	for _, spaces in pairs(M.spaces) do

@@ -12,6 +12,8 @@
     configType = "lua";
     extraPackages = with pkgs; [
       aerospace
+      blueutil
+      coreutils
     ];
     config = {
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/sketchybar";

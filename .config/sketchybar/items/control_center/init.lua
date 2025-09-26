@@ -10,12 +10,14 @@ Sbar.add("item", "spacer." .. math.random(1, 1000), {
 
 local microphone = require("items.control_center.microphone")
 local volume = require("items.control_center.volume")
+local bluetooth = require("items.control_center.bluetooth")
 local battery = require("items.control_center.battery")
 local wifi = require("items.control_center.wifi")
 
 Sbar.add("bracket", {
 	wifi.name,
 	battery.name,
+	bluetooth.button.name,
 	volume.button.name,
 	microphone.button.name,
 }, {

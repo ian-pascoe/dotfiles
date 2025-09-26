@@ -18,6 +18,10 @@ local M = {
 	memory = "",
 	disk = "",
 	ellipsis = "",
+	bluetooth = {
+		on = "󰂯",
+		off = "󰂲",
+	},
 
 	volume = {
 		_100 = "",

@@ -150,6 +150,7 @@ local M = {}
 ---@field add fun(type: "slider" | "graph", width: integer, options: Sketchybar.ItemOptions): Sketchybar.Item
 ---@field add fun(type: "slider" | "graph", name: string, width: integer, options: Sketchybar.ItemOptions): Sketchybar.Item
 ---@field add fun(type: "event", name: string, notification?: string): Sketchybar.Item
+---@field remove fun(name: string)
 ---@field exec fun(command: string, callback?: fun(result:string))
 ---@field animate fun(curve: string, duration: integer, callback: fun())
 ---@field trigger fun(event: string, env?: table)
