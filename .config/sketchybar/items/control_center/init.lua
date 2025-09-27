@@ -1,5 +1,5 @@
 local config = require("config")
-local colors = config.colors
+local settings = config.settings
 
 ---@class items.control_center
 local M = {}
@@ -24,32 +24,11 @@ M.padding = Sbar.add("item", "control_center.padding", {
 	label = { drawing = false },
 })
 
-M.button = Sbar.add("item", "control_center.button", {
+M.button = require("components.button"):new("control_center.button", "ghost", {
 	position = "right",
-	padding_left = 0,
-	padding_right = 0,
-	icon = {
-		string = config.icons.control_center,
-		padding_left = 8,
-		padding_right = 8,
-	},
+	icon = { string = config.icons.control_center },
 	label = { drawing = false },
-	background = {
-		color = config.colors.transparent,
-	},
 })
-M.button:subscribe("mouse.entered", function()
-	M.button:set({
-		popup = { drawing = true },
-		background = { color = colors.with_alpha(colors.secondary.background, 0.25) },
-	})
-end)
-M.button:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
-	M.button:set({
-		popup = { drawing = false },
-		background = { color = colors.transparent },
-	})
-end)
 
 local microphone = require("items.control_center.microphone")
 local volume = require("items.control_center.volume")
@@ -58,18 +37,20 @@ local battery = require("items.control_center.battery")
 local wifi = require("items.control_center.wifi")
 
 local controls_shown = false
-M.button:subscribe("mouse.clicked", function()
+M.button:on_click(function()
 	if controls_shown then
 		controls_shown = false
 		Sbar.animate("tanh", 20, function()
-			M.button:set({
-				icon = { string = config.icons.control_center, padding_right = 8 },
-			})
 			microphone.button:set({ width = 0 })
 			volume.button:set({ width = 0 })
 			bluetooth.button:set({ width = 0 })
 			battery.button:set({ width = 0 })
 			wifi.button:set({ width = 0 })
+			M.button:set({
+				icon = {
+					string = config.icons.control_center,
+				},
+			})
 		end)
 		Sbar.delay(0.21, function()
 			microphone.button:set({ drawing = false })
@@ -82,7 +63,9 @@ M.button:subscribe("mouse.clicked", function()
 		controls_shown = true
 		Sbar.animate("tanh", 20, function()
 			M.button:set({
-				icon = { string = "", padding_right = 12 },
+				icon = {
+					string = "",
+				},
 			})
 			microphone.button:set({ drawing = true })
 			volume.button:set({ drawing = true })

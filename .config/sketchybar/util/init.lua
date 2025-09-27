@@ -77,4 +77,74 @@ function M.sleep(seconds)
 	end
 end
 
+--- Deeply extends a destination table with one or more source tables.
+---@param dest table
+---@param ... table
+---@return table
+function M.tbl_deep_extend(dest, ...)
+	local sources = { ... }
+	for i = 1, #sources do
+		local src = sources[i]
+		for k, v in pairs(src) do
+			if type(v) == "table" then
+				if type(dest[k] or false) == "table" then
+					M.tbl_deep_extend(dest[k], v)
+				else
+					dest[k] = v
+				end
+			else
+				dest[k] = v
+			end
+		end
+	end
+	return dest
+end
+
+--- Creates a deep copy of a table.
+---@param orig table
+---@return table
+function M.tbl_deep_copy(orig)
+	local orig_type = type(orig)
+	local copy
+	if orig_type == "table" then
+		copy = {}
+		for orig_key, orig_value in next, orig, nil do
+			copy[M.tbl_deep_copy(orig_key)] = M.tbl_deep_copy(orig_value)
+		end
+		setmetatable(copy, M.tbl_deep_copy(getmetatable(orig)))
+	else -- number, string, boolean, etc
+		copy = orig
+	end
+	return copy
+end
+
+--- Creates a shallow copy of a table.
+---@param orig table
+---@return table
+function M.tbl_shallow_copy(orig)
+	local copy = {}
+	for k, v in pairs(orig) do
+		copy[k] = v
+	end
+	return copy
+end
+
+--- Returns a list of keys in a table.
+---@param t table
+---@return string[]
+function M.tbl_keys(t)
+	local keys = {}
+	for k, _ in pairs(t) do
+		table.insert(keys, k)
+	end
+	return keys
+end
+
+--- Checks if a table is empty.
+---@param t table
+---@return boolean
+function M.tbl_is_empty(t)
+	return next(t) == nil
+end
+
 return M
