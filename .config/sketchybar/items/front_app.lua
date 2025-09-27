@@ -1,5 +1,6 @@
 local icons = require("config.icons")
 
+---@class items.front_app
 local M = {}
 
 M.widget = Sbar.add("item", "front_app", {

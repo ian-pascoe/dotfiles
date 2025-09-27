@@ -1,6 +1,9 @@
 local config = require("config")
 
-local memory = Sbar.add("graph", "monitoring.memory", 52, {
+---@class items.monitoring.memory
+local M = {}
+
+M.button = Sbar.add("graph", "monitoring.memory", 52, {
 	position = "right",
 	padding_left = 4,
 	padding_right = 4,
@@ -36,23 +39,23 @@ local memory = Sbar.add("graph", "monitoring.memory", 52, {
 	},
 	update_freq = 5,
 })
-memory:subscribe("mouse.entered", function()
-	memory:set({
+M.button:subscribe("mouse.entered", function()
+	M.button:set({
 		background = { color = config.colors.with_alpha(config.colors.secondary.background, 0.25) },
 	})
 end)
-memory:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
-	memory:set({
+M.button:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+	M.button:set({
 		background = { color = config.colors.transparent },
 	})
 end)
 
-memory:subscribe({ "routine", "forced" }, function()
+M.button:subscribe({ "routine", "forced" }, function()
 	Sbar.exec("memory_pressure", function(result)
 		local total_memory = tonumber(result:match("System%-wide memory free percentage: (%d+)%%"))
 		local memory_used = 100 - (total_memory or 0)
 
-		memory:push({
+		M.button:push({
 			memory_used / 100,
 		})
 
@@ -67,15 +70,15 @@ memory:subscribe({ "routine", "forced" }, function()
 			end
 		end
 
-		memory:set({
+		M.button:set({
 			graph = { color = color },
 			label = { string = string.format("%.1f%%", memory_used) },
 		})
 	end)
 end)
 
-memory:subscribe("mouse.clicked", function()
+M.button:subscribe("mouse.clicked", function()
 	Sbar.exec("open -a 'Activity Monitor'")
 end)
 
-return memory
+return M

@@ -11,9 +11,11 @@
       "spotify"
       "karabiner-elements"
       "betterdisplay"
+      "pearcleaner"
     ];
     masApps = {
       WireGuard = 1451685025;
+      Infuse = 1136220934;
     };
     taps = [];
     greedyCasks = true;

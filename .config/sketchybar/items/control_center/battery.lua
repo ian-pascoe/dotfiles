@@ -1,10 +1,15 @@
 local config = require("config")
 local colors = config.colors
 
+---@class items.control_center.battery
+local M = {}
+
 local percent = 0
 
-local battery = Sbar.add("item", "battery", {
+M.button = Sbar.add("item", "battery.button", {
+	drawing = false,
 	position = "right",
+	width = 0,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -22,29 +27,29 @@ local battery = Sbar.add("item", "battery", {
 	},
 	update_freq = 30,
 })
-battery:subscribe({
+M.button:subscribe({
 	"mouse.exited",
 	"mouse.exited.global",
 }, function(_)
-	battery:set({
+	M.button:set({
 		popup = { drawing = false },
 		background = { color = colors.transparent },
 	})
 end)
-battery:subscribe("mouse.entered", function(_)
-	battery:set({
+M.button:subscribe("mouse.entered", function(_)
+	M.button:set({
 		popup = { drawing = true },
 		background = { color = colors.with_alpha(colors.secondary.background, 0.25) },
 	})
 end)
 
-local battery_details = Sbar.add("item", "battery_details", {
-	position = "popup." .. battery.name,
+M.tooltip = Sbar.add("item", "battery.tooltip", {
+	position = "popup." .. M.button.name,
 	padding_left = 4,
 	padding_right = 4,
 })
 
-battery:subscribe({
+M.button:subscribe({
 	"routine",
 	"forced",
 	"power_source_change",
@@ -69,7 +74,7 @@ battery:subscribe({
 		end
 
 		local show_label = percent < 50
-		battery:set({
+		M.button:set({
 			icon = {
 				string = icon,
 				padding_right = show_label and 4 or 8,
@@ -80,7 +85,7 @@ battery:subscribe({
 				string = percent .. "%",
 			},
 		})
-		battery_details:set({
+		M.tooltip:set({
 			label = {
 				string = (charging and "Charging" or "On Battery") .. " - " .. percent .. "%",
 			},
@@ -88,4 +93,4 @@ battery:subscribe({
 	end)
 end)
 
-return battery
+return M

@@ -13,9 +13,9 @@ local memory = require("items.monitoring.memory")
 local cpu = require("items.monitoring.cpu")
 
 Sbar.add("bracket", "monitoring", {
-	cpu.name,
-	memory.name,
-	disk.name,
+	cpu.button.name,
+	memory.button.name,
+	disk.button.name,
 }, {
 	position = "right",
 	background = {

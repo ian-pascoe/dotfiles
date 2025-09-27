@@ -22,6 +22,7 @@ local M = {
 		on = "󰂯",
 		off = "󰂲",
 	},
+	control_center = "",
 
 	volume = {
 		_100 = "",
@@ -90,6 +91,8 @@ M.app_icons = {
 	["Spotify"] = "",
 	["Music"] = "󰝚",
 	["Reminders"] = "",
+	["App Store"] = "",
+	["Pearcleaner"] = "󱨎",
 }
 
 function M.map(app_name)

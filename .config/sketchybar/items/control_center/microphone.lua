@@ -20,7 +20,9 @@ local set_last_volume = function(volume)
 end
 
 M.button = Sbar.add("item", "microphone.button", {
+	drawing = false,
 	position = "right",
+	width = 0,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -78,7 +80,10 @@ M.button:subscribe("mouse.scrolled", function(env)
 	Sbar.exec('osascript -e "set volume input volume (input volume of (get volume settings) + ' .. delta .. ')"')
 end)
 
-M.slider = Sbar.add("slider", "M.slider", 100, {
+---@type table<string, Sketchybar.Item>
+M.popup = {}
+
+M.popup.slider = Sbar.add("slider", "microphone.popup.slider", 100, {
 	width = 100,
 	position = "popup." .. M.button.name,
 	padding_left = 10,
@@ -100,7 +105,7 @@ M.slider = Sbar.add("slider", "M.slider", 100, {
 	},
 })
 
-M.slider:subscribe("mouse.clicked", function(env)
+M.popup.slider:subscribe("mouse.clicked", function(env)
 	Sbar.exec("osascript -e 'set volume input volume " .. env["PERCENTAGE"] .. "'")
 end)
 
@@ -134,7 +139,7 @@ local function update_microphone_display(input_volume)
 				string = tostring(input_volume) .. "%",
 			},
 		})
-		M.slider:set({
+		M.popup.slider:set({
 			slider = { percentage = input_volume },
 		})
 	end)

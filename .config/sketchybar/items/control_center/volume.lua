@@ -3,6 +3,7 @@ local colors = config.colors
 local icons = config.icons
 local settings = config.settings
 
+---@class items.control_center.volume
 local M = {}
 
 local last_volume = 0
@@ -14,8 +15,10 @@ local set_last_volume = function(volume)
 	end
 end
 
-M.button = Sbar.add("item", "M.icon", {
+M.button = Sbar.add("item", "volume.button", {
+	drawing = false,
 	position = "right",
+	width = 0,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -73,7 +76,10 @@ M.button:subscribe("mouse.scrolled", function(env)
 	Sbar.exec('osascript -e "set volume output volume (output volume of (get volume settings) + ' .. delta .. ')"')
 end)
 
-M.slider = Sbar.add("slider", "volume_slider", 100, {
+---@type table<string, Sketchybar.Item>
+M.popup = {}
+
+M.popup.slider = Sbar.add("slider", "volume.popup.slider", 100, {
 	width = 100,
 	position = "popup." .. M.button.name,
 	padding_left = 10,
@@ -96,7 +102,7 @@ M.slider = Sbar.add("slider", "volume_slider", 100, {
 	updates = "when_shown",
 })
 
-M.slider:subscribe("mouse.clicked", function(env)
+M.popup.slider:subscribe("mouse.clicked", function(env)
 	Sbar.exec("osascript -e 'set volume output volume " .. env["PERCENTAGE"] .. "'")
 end)
 
@@ -128,7 +134,7 @@ local function update_volume_display(new_volume)
 				string = tostring(new_volume) .. "%",
 			},
 		})
-		M.slider:set({
+		M.popup.slider:set({
 			slider = { percentage = new_volume },
 		})
 	end)

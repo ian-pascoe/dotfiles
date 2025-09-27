@@ -6,7 +6,9 @@ local colors = config.colors
 local M = {}
 
 M.button = Sbar.add("item", "bluetooth.button", {
+	drawing = false,
 	position = "right",
+	width = 0,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -63,11 +65,14 @@ M.button:subscribe("mouse.clicked", function()
 	end)
 end)
 
----@type table<string, Sketchybar.Item>
-M.paired = {}
+---@type table<string, any>
+M.popup = {}
 
 ---@type table<string, Sketchybar.Item>
-M.connected = {}
+M.popup.paired = {}
+
+---@type table<string, Sketchybar.Item>
+M.popup.connected = {}
 
 -- Sanitize a string so it can be safely used as a SketchyBar item name
 local function sanitize_name(s)
@@ -120,7 +125,7 @@ M.button:subscribe({
 
 		-- Get paired and connected devices
 		Sbar.exec("blueutil --paired", function(paired)
-			M.paired.header = Sbar.add("item", "bluetooth.paired.header", {
+			M.popup.paired.header = Sbar.add("item", "bluetooth.popup.paired.header", {
 				icon = {
 					drawing = false,
 				},
@@ -139,7 +144,7 @@ M.button:subscribe({
 				local label = device:match('"(.*)"')
 				local safe_label = sanitize_name(label)
 				local address = parse_address(device)
-				M.paired[safe_label] = Sbar.add("item", "bluetooth.paired.device." .. safe_label, {
+				M.popup.paired[safe_label] = Sbar.add("item", "bluetooth.popup.paired.device." .. safe_label, {
 					icon = {
 						drawing = false,
 					},
@@ -155,7 +160,7 @@ M.button:subscribe({
 
 			-- Fetch connected devices
 			Sbar.exec("blueutil --connected", function(connected)
-				M.connected.header = Sbar.add("item", "bluetooth.connected.header", {
+				M.popup.connected.header = Sbar.add("item", "bluetooth.popup.connected.header", {
 					icon = {
 						drawing = false,
 					},
@@ -173,18 +178,19 @@ M.button:subscribe({
 					local label = device:match('"(.*)"')
 					local safe_label = sanitize_name(label)
 					local address = parse_address(device)
-					M.connected[safe_label] = Sbar.add("item", "bluetooth.connected.device." .. safe_label, {
-						icon = {
-							drawing = false,
-						},
-						label = {
-							string = label .. (address and "" or " (no addr)"),
-						},
-						position = "popup." .. M.button.name,
-						click_script = address
-								and ('if [ "$(blueutil --is-connected ' .. address .. ')" = 1 ]; then blueutil --disconnect ' .. address .. "; else blueutil --connect " .. address .. "; fi; sketchybar --trigger bluetooth_update")
-							or nil,
-					})
+					M.popup.connected[safe_label] =
+						Sbar.add("item", "bluetooth.popup.connected.device." .. safe_label, {
+							icon = {
+								drawing = false,
+							},
+							label = {
+								string = label .. (address and "" or " (no addr)"),
+							},
+							position = "popup." .. M.button.name,
+							click_script = address
+									and ('if [ "$(blueutil --is-connected ' .. address .. ')" = 1 ]; then blueutil --disconnect ' .. address .. "; else blueutil --connect " .. address .. "; fi; sketchybar --trigger bluetooth_update")
+								or nil,
+						})
 				end
 			end)
 		end)

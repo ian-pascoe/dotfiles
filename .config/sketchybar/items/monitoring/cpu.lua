@@ -6,7 +6,10 @@ Sbar.exec(
 
 local config = require("config")
 
-local cpu = Sbar.add("graph", "monitoring.cpu", 52, {
+---@class items.monitoring.cpu
+local M = {}
+
+M.button = Sbar.add("graph", "monitoring.cpu", 52, {
 	position = "right",
 	padding_left = 8,
 	padding_right = 4,
@@ -41,21 +44,21 @@ local cpu = Sbar.add("graph", "monitoring.cpu", 52, {
 		corner_radius = 5,
 	},
 })
-cpu:subscribe("mouse.entered", function()
-	cpu:set({
+M.button:subscribe("mouse.entered", function()
+	M.button:set({
 		background = { color = config.colors.with_alpha(config.colors.secondary.background, 0.25) },
 	})
 end)
-cpu:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
-	cpu:set({
+M.button:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+	M.button:set({
 		background = { color = config.colors.transparent },
 	})
 end)
 
-cpu:subscribe("cpu_update", function(env)
+M.button:subscribe("cpu_update", function(env)
 	-- Also available: env.user_load, env.sys_load
 	local load = tonumber(env.total_load)
-	cpu:push({ load / 100. })
+	M.button:push({ load / 100. })
 
 	local color = config.colors.success.background
 	if load > 30 then
@@ -68,14 +71,14 @@ cpu:subscribe("cpu_update", function(env)
 		end
 	end
 
-	cpu:set({
+	M.button:set({
 		graph = { color = color },
 		label = { string = string.format("%.1f%%", load) },
 	})
 end)
 
-cpu:subscribe("mouse.clicked", function()
+M.button:subscribe("mouse.clicked", function()
 	Sbar.exec("open -a 'Activity Monitor'")
 end)
 
-return cpu
+return M

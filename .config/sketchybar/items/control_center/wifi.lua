@@ -2,10 +2,15 @@ local icons = require("config.icons")
 local settings = require("config.settings")
 local colors = require("config.colors")
 
+---@class items.control_center.wifi
+local M = {}
+
 local popup_width = 200
 
-local wifi = Sbar.add("item", "wifi", {
+M.button = Sbar.add("item", "wifi.button", {
+	drawing = false,
 	position = "right",
+	width = 0,
 	padding_left = 0,
 	padding_right = 0,
 	icon = {
@@ -25,8 +30,11 @@ local wifi = Sbar.add("item", "wifi", {
 	update_freq = 60,
 })
 
-local ssid = Sbar.add("item", {
-	position = "popup." .. wifi.name,
+---@type table<string, Sketchybar.Item>
+M.popup = {}
+
+M.popup.ssid = Sbar.add("item", "wifi.popup.ssid", {
+	position = "popup." .. M.button.name,
 	align = "center",
 	width = popup_width,
 	icon = {
@@ -49,13 +57,13 @@ local ssid = Sbar.add("item", {
 	},
 })
 
-local hostname = Sbar.add("item", {
-	position = "popup." .. wifi.name,
+M.popup.hostname = Sbar.add("item", "wifi.popup.hostname", {
+	position = "popup." .. M.button.name,
 	icon = {
 		align = "left",
 		string = "Hostname:",
 		font = {
-			family = settings.font,
+			family = settings.fonts.regular,
 			style = "Bold",
 			size = 12,
 		},
@@ -69,13 +77,13 @@ local hostname = Sbar.add("item", {
 	},
 })
 
-local ip = Sbar.add("item", {
-	position = "popup." .. wifi.name,
+M.popup.ip = Sbar.add("item", "wifi.popup.ip", {
+	position = "popup." .. M.button.name,
 	icon = {
 		align = "left",
 		string = "IP:",
 		font = {
-			family = settings.font,
+			family = settings.fonts.regular,
 			style = "Bold",
 			size = 12,
 		},
@@ -88,13 +96,13 @@ local ip = Sbar.add("item", {
 	},
 })
 
-local mask = Sbar.add("item", {
-	position = "popup." .. wifi.name,
+M.popup.mask = Sbar.add("item", "wifi.popup.mask", {
+	position = "popup." .. M.button.name,
 	icon = {
 		align = "left",
 		string = "Subnet mask:",
 		font = {
-			family = settings.font,
+			family = settings.fonts.regular,
 			style = "Bold",
 			size = 12,
 		},
@@ -107,13 +115,13 @@ local mask = Sbar.add("item", {
 	},
 })
 
-local router = Sbar.add("item", {
-	position = "popup." .. wifi.name,
+M.popup.router = Sbar.add("item", "wifi.popup.router", {
+	position = "popup." .. M.button.name,
 	icon = {
 		align = "left",
 		string = "Router:",
 		font = {
-			family = settings.font,
+			family = settings.fonts.regular,
 			style = "Bold",
 			size = 12,
 		},
@@ -126,10 +134,10 @@ local router = Sbar.add("item", {
 	},
 })
 
-wifi:subscribe({ "wifi_change", "system_woke" }, function()
+M.button:subscribe({ "wifi_change", "system_woke" }, function()
 	Sbar.exec("ipconfig getifaddr en0", function(ip_address)
 		local connected = (ip_address ~= "")
-		wifi:set({
+		M.button:set({
 			icon = {
 				string = connected and icons.wifi or icons.wifi_off,
 			},
@@ -137,35 +145,35 @@ wifi:subscribe({ "wifi_change", "system_woke" }, function()
 	end)
 end)
 
-wifi:subscribe({
+M.button:subscribe({
 	"mouse.exited",
 	"mouse.exited.global",
 }, function(_)
-	wifi:set({
+	M.button:set({
 		popup = { drawing = false },
 		background = { color = colors.transparent },
 	})
 end)
 
-wifi:subscribe({
+M.button:subscribe({
 	"mouse.entered",
 }, function(_)
 	Sbar.exec("networksetup -getcomputername", function(result)
-		hostname:set({ label = result })
+		M.popup.hostname:set({ label = result })
 	end)
 	Sbar.exec("ipconfig getifaddr en0", function(result)
-		ip:set({ label = result })
+		M.popup.ip:set({ label = result })
 	end)
 	Sbar.exec("ipconfig getsummary en0 | awk -F ' SSID : '  '/ SSID : / {print $2}'", function(result)
-		ssid:set({ label = result })
+		M.popup.ssid:set({ label = result })
 	end)
 	Sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Subnet mask: ' '/^Subnet mask: / {print $2}'", function(result)
-		mask:set({ label = result })
+		M.popup.mask:set({ label = result })
 	end)
 	Sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
-		router:set({ label = result })
+		M.popup.router:set({ label = result })
 	end)
-	wifi:set({
+	M.button:set({
 		popup = { drawing = true },
 		background = { color = colors.with_alpha(colors.secondary.background, 0.25) },
 	})
@@ -180,10 +188,10 @@ local function copy_label_to_clipboard(env)
 	end)
 end
 
-ssid:subscribe("mouse.clicked", copy_label_to_clipboard)
-hostname:subscribe("mouse.clicked", copy_label_to_clipboard)
-ip:subscribe("mouse.clicked", copy_label_to_clipboard)
-mask:subscribe("mouse.clicked", copy_label_to_clipboard)
-router:subscribe("mouse.clicked", copy_label_to_clipboard)
+M.popup.ssid:subscribe("mouse.clicked", copy_label_to_clipboard)
+M.popup.hostname:subscribe("mouse.clicked", copy_label_to_clipboard)
+M.popup.ip:subscribe("mouse.clicked", copy_label_to_clipboard)
+M.popup.mask:subscribe("mouse.clicked", copy_label_to_clipboard)
+M.popup.router:subscribe("mouse.clicked", copy_label_to_clipboard)
 
-return wifi
+return M

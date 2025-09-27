@@ -2,11 +2,15 @@ local icons = require("config.icons")
 local colors = require("config.colors")
 local settings = require("config.settings")
 
-local clock = Sbar.add("item", "calendar", {
+---@class items.clock
+local M = {}
+
+M.widget = Sbar.add("item", "calendar", {
 	position = "right",
 	width = 150,
 	padding_right = 0,
 	icon = {
+		string = icons.clock,
 		color = colors.primary.background,
 		padding_left = 25,
 		padding_right = 5,
@@ -25,9 +29,10 @@ local clock = Sbar.add("item", "calendar", {
 	update_freq = 1,
 })
 
-clock:subscribe({ "routine", "forced" }, function()
-	clock:set({
-		icon = { string = icons.clock },
+M.widget:subscribe({ "routine", "forced" }, function()
+	M.widget:set({
 		label = { string = os.date("%r") },
 	})
 end)
+
+return M
