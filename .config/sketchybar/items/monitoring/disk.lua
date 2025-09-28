@@ -3,8 +3,10 @@ local config = require("config")
 ---@class items.monitoring.disk
 local M = {}
 
-M.button = Sbar.add("graph", "monitoring.disk", 52, {
+M.graph = Sbar.add("graph", "monitoring.disk", 52, {
+	drawing = false,
 	position = "right",
+	width = 0,
 	padding_left = 4,
 	padding_right = 8,
 	graph = {
@@ -39,22 +41,22 @@ M.button = Sbar.add("graph", "monitoring.disk", 52, {
 	},
 	update_freq = 30,
 })
-M.button:subscribe("mouse.entered", function()
-	M.button:set({
+M.graph:subscribe("mouse.entered", function()
+	M.graph:set({
 		background = { color = config.colors.with_alpha(config.colors.secondary.background, 0.25) },
 	})
 end)
-M.button:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
-	M.button:set({
+M.graph:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+	M.graph:set({
 		background = { color = config.colors.transparent },
 	})
 end)
 
-M.button:subscribe({ "routine", "forced" }, function()
+M.graph:subscribe({ "routine", "forced" }, function()
 	Sbar.exec("df -h /System/Volumes/Data | tail -1 | awk '{print $5}'", function(result)
 		local disk_used = tonumber(result:match("(%d+)%%"))
 
-		M.button:push({
+		M.graph:push({
 			disk_used / 100,
 		})
 
@@ -69,14 +71,14 @@ M.button:subscribe({ "routine", "forced" }, function()
 			end
 		end
 
-		M.button:set({
+		M.graph:set({
 			graph = { color = color },
 			label = { string = string.format("%.1f%%", disk_used) },
 		})
 	end)
 end)
 
-M.button:subscribe("mouse.clicked", function()
+M.graph:subscribe("mouse.clicked", function()
 	Sbar.exec("open -a 'Disk Utility'")
 end)
 

@@ -1,5 +1,9 @@
 local config = require("config")
+local colors = config.colors
+local icons = config.icons
 local settings = config.settings
+
+local Button = require("components.button")
 
 ---@class items.control_center
 local M = {}
@@ -16,17 +20,17 @@ setmetatable(M, {
 	end,
 })
 
-M.padding = Sbar.add("item", "control_center.padding", {
+M.spacer = Sbar.add("item", "control_center.spacer", {
 	position = "right",
-	padding_left = config.settings.paddings.xs,
-	padding_right = config.settings.paddings.xs,
+	padding_left = settings.paddings.xs,
+	padding_right = settings.paddings.xs,
 	icon = { drawing = false },
 	label = { drawing = false },
 })
 
-M.button = require("components.button"):new("control_center.button", "ghost", {
+M.button = Button:new("control_center.button", "ghost", {
 	position = "right",
-	icon = { string = config.icons.control_center },
+	icon = { string = icons.control_center },
 	label = { drawing = false },
 })
 
@@ -48,7 +52,7 @@ M.button:on_click(function()
 			wifi.button:set({ width = 0 })
 			M.button:set({
 				icon = {
-					string = config.icons.control_center,
+					string = icons.control_center,
 				},
 			})
 		end)
@@ -92,7 +96,7 @@ M.group = Sbar.add("bracket", "control_center.group", {
 }, {
 	position = "right",
 	background = {
-		color = config.colors.with_alpha(config.colors.background, 0.8),
+		color = colors.with_alpha(colors.background, 0.8),
 	},
 })
 

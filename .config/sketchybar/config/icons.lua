@@ -23,6 +23,7 @@ local M = {
 		off = "󰂲",
 	},
 	control_center = "",
+	monitoring = "",
 
 	volume = {
 		_100 = "",
