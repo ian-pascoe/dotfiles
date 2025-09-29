@@ -80,7 +80,7 @@ M.graph:subscribe({ "routine", "forced" }, function()
 end)
 
 M.graph:subscribe("mouse.clicked", function()
-	Sbar.exec("open -a 'Disk Utility'")
+	Sbar.exec("open -na Ghostty --args -e zsh -c btop")
 end)
 
 return M

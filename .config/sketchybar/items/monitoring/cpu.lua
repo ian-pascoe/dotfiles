@@ -81,7 +81,7 @@ M.graph:subscribe("cpu_update", function(env)
 end)
 
 M.graph:subscribe("mouse.clicked", function()
-	Sbar.exec("open -a 'Activity Monitor'")
+	Sbar.exec("open -na Ghostty --args -e zsh -c btop")
 end)
 
 return M
