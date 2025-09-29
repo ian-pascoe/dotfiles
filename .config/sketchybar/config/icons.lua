@@ -95,6 +95,7 @@ M.app_icons = {
 	["App Store"] = "",
 	["Pearcleaner"] = "󱨎",
 	["Weather"] = "",
+	["Helium"] = "",
 }
 
 function M.map(app_name)

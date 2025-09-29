@@ -35,6 +35,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Mac App Util
+    mac-app-util.url = "github:hraban/mac-app-util";
+
     # Homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
@@ -47,6 +50,7 @@
     nixos-wsl,
     home-manager,
     nix-darwin,
+    mac-app-util,
     nix-homebrew,
     ...
   } @ inputs: let
@@ -108,10 +112,16 @@
         nur.modules.darwin.default
         nix-index-database.darwinModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
+        mac-app-util.darwinModules.default
         ./hosts/Ians-Macbook-Pro
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
         home-manager.darwinModules.home-manager
+        {
+          home-manager.sharedModules = [
+            mac-app-util.homeManagerModules.default
+          ];
+        }
         (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Ians-Macbook-Pro"})
       ];
     };
