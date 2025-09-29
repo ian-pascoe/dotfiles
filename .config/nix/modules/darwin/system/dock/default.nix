@@ -27,10 +27,10 @@
     # 12: Notification Center
     # 13: Lock Screen
     # 14: Quick Notes
-    wvous-tl-corner = 2;
-    wvous-tr-corner = 12;
-    wvous-bl-corner = 14;
-    wvous-br-corner = 4;
+    wvous-tl-corner = 0;
+    wvous-tr-corner = 0;
+    wvous-bl-corner = 0;
+    wvous-br-corner = 0;
     persistent-apps = [
       {
         app = "/System/Applications/System Settings.app";
