@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   homebrew = {
     enable = true;
     brews = [
@@ -18,7 +18,7 @@
       Infuse = 1136220934;
       WireGuard = 1451685025;
     };
-    taps = [];
+    taps = builtins.attrNames config.nix-homebrew.taps;
     greedyCasks = true;
     onActivation = {
       autoUpdate = true;

@@ -40,6 +40,15 @@
 
     # Homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -52,6 +61,8 @@
     nix-darwin,
     mac-app-util,
     nix-homebrew,
+    homebrew-core,
+    homebrew-cask,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -86,8 +97,13 @@
       nix-homebrew = {
         enable = true;
         enableRosetta = true;
-        autoMigrate = true;
         inherit user;
+        autoMigrate = true;
+        taps = {
+          "homebrew/homebrew-core" = homebrew-core;
+          "homebrew/homebrew-cask" = homebrew-cask;
+        };
+        mutableTaps = false;
       };
     };
   in {
