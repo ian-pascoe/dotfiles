@@ -44,7 +44,7 @@
         };
       }
       {
-        app = "/Applications/Google Chrome.app";
+        app = "/Applications/Helium.app";
       }
       {
         app = "/System/Applications/Messages.app";

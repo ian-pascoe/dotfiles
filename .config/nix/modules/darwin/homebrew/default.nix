@@ -7,7 +7,7 @@
     ];
     casks = [
       "ghostty@tip"
-      "google-chrome"
+      "helium-browser"
       "spotify"
       "karabiner-elements"
       "betterdisplay"

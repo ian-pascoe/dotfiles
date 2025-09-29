@@ -82,7 +82,7 @@ M.app_icons = {
 	["Google Chrome"] = "",
 	["Chromium"] = "",
 	["Ghostty"] = "󰊠",
-	["Messages"] = "󰍡",
+	["Messages"] = "󰍥",
 	["System Settings"] = "󰒓",
 	["Activity Monitor"] = "󰍛",
 	["Notes"] = "",
@@ -94,6 +94,7 @@ M.app_icons = {
 	["Reminders"] = "",
 	["App Store"] = "",
 	["Pearcleaner"] = "󱨎",
+	["Weather"] = "",
 }
 
 function M.map(app_name)
