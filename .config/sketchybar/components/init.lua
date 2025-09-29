@@ -1,6 +1,5 @@
 ---@class components
 ---@field button components.button
----@field popup components.popup
 local M = {}
 
 setmetatable(M, {

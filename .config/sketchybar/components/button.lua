@@ -33,50 +33,72 @@ local DEFAULTS = {
 		corner_radius = settings.radii.md,
 	},
 }
+
+---@type Sketchybar.ItemOptions
 local HOVER_DEFAULTS = {
 	background = {
 		color = colors.with_alpha(colors.primary.background, 0.8),
 	},
 }
 
--- Variant defaults are built from deep copies so they do not mutate or share nested tables with DEFAULTS
-local SECONDARY_DEFAULTS = Util.tbl_deep_copy(DEFAULTS)
-Util.tbl_deep_extend(SECONDARY_DEFAULTS, {
+---@type Sketchybar.ItemOptions
+local SECONDARY_DEFAULTS = Util.tbl_deep_extend({}, DEFAULTS, {
 	icon = { color = colors.secondary.foreground },
 	label = { color = colors.secondary.foreground },
 	background = { color = colors.secondary.background },
 })
+---@type Sketchybar.ItemOptions
 local SECONDARY_HOVER_DEFAULTS = {
 	background = { color = colors.with_alpha(colors.secondary.background, 0.8) },
 }
 
-local TERTIARY_DEFAULTS = Util.tbl_deep_copy(DEFAULTS)
-Util.tbl_deep_extend(TERTIARY_DEFAULTS, {
+---@type Sketchybar.ItemOptions
+local TERTIARY_DEFAULTS = Util.tbl_deep_extend({}, DEFAULTS, {
 	icon = { color = colors.tertiary.foreground },
 	label = { color = colors.tertiary.foreground },
 	background = { color = colors.tertiary.background },
 })
+---@type Sketchybar.ItemOptions
 local TERTIARY_HOVER_DEFAULTS = {
 	background = { color = colors.with_alpha(colors.tertiary.background, 0.8) },
 }
 
-local ACCENT_DEFAULTS = Util.tbl_deep_copy(DEFAULTS)
-Util.tbl_deep_extend(ACCENT_DEFAULTS, {
+---@type Sketchybar.ItemOptions
+local ACCENT_DEFAULTS = Util.tbl_deep_extend({}, DEFAULTS, {
 	icon = { color = colors.accent.foreground },
 	label = { color = colors.accent.foreground },
 	background = { color = colors.accent.background },
 })
+---@type Sketchybar.ItemOptions
 local ACCENT_HOVER_DEFAULTS = {
 	background = { color = colors.with_alpha(colors.accent.background, 0.8) },
 }
 
-local GHOST_DEFAULTS = Util.tbl_deep_copy(DEFAULTS)
-Util.tbl_deep_extend(GHOST_DEFAULTS, {
+---@type Sketchybar.ItemOptions
+local GHOST_DEFAULTS = Util.tbl_deep_extend({}, DEFAULTS, {
 	icon = { color = colors.foreground },
 	label = { color = colors.foreground },
 	background = { color = colors.transparent },
 })
+---@type Sketchybar.ItemOptions
 local GHOST_HOVER_DEFAULTS = {
+	icon = { color = colors.accent.foreground },
+	label = { color = colors.accent.foreground },
+	background = { color = colors.with_alpha(colors.accent.background, 0.8) },
+}
+
+---@type Sketchybar.ItemOptions
+local OUTLINE_DEFAULTS = Util.tbl_deep_extend({}, DEFAULTS, {
+	icon = { color = colors.foreground },
+	label = { color = colors.foreground },
+	background = {
+		color = colors.transparent,
+		border_color = colors.border,
+		border_width = 1,
+	},
+})
+---@type Sketchybar.ItemOptions
+local OUTLINE_HOVER_DEFAULTS = {
 	icon = { color = colors.accent.foreground },
 	label = { color = colors.accent.foreground },
 	background = { color = colors.with_alpha(colors.accent.background, 0.8) },
@@ -84,7 +106,7 @@ local GHOST_HOVER_DEFAULTS = {
 
 --- Creates a new Button instance.
 ---@param name string
----@param variant? "primary" | "secondary" | "tertiary" | "accent" | "ghost"
+---@param variant? "primary" | "secondary" | "tertiary" | "accent" | "ghost" | "outline"
 ---@param options? components.button.options
 ---@return components.button
 function Button:new(name, variant, options)
@@ -112,6 +134,9 @@ function Button:new(name, variant, options)
 	elseif variant == "ghost" then
 		resolved_options = Util.tbl_deep_extend({}, GHOST_DEFAULTS, options)
 		resolved_hover_options = Util.tbl_deep_extend({}, GHOST_HOVER_DEFAULTS, hover_options)
+	elseif variant == "outline" then
+		resolved_options = Util.tbl_deep_extend({}, OUTLINE_DEFAULTS, options)
+		resolved_hover_options = Util.tbl_deep_extend({}, OUTLINE_HOVER_DEFAULTS, hover_options)
 	else
 		resolved_options = Util.tbl_deep_extend({}, DEFAULTS, options)
 		resolved_hover_options = Util.tbl_deep_extend({}, HOVER_DEFAULTS, hover_options)
@@ -149,12 +174,32 @@ function Button:new(name, variant, options)
 	return instance
 end
 
---- Sets item options on hover, and reverts them when hover ends.
----@param options? Sketchybar.ItemOptions
-function Button:on_hover(options)
-	if options then
-		self.hover_options = Util.tbl_deep_extend(self.hover_options or {}, options)
+--- Action to perform on hover.
+---@param options_or_fn? Sketchybar.ItemOptions | fun(hovering: boolean) options to apply on hover, or function to call on hover/leave
+---@param override_default_behavior? boolean if true, does not apply default hover behavior (setting hover options)
+function Button:on_hover(options_or_fn, override_default_behavior)
+	if type(options_or_fn) == "function" then
+		local fn = options_or_fn
+		self.item:subscribe("mouse.entered", function()
+			if not override_default_behavior then
+				self.item:set(self.hover_options)
+			end
+			fn(true)
+		end)
+		self.item:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+			if not override_default_behavior then
+				self.item:set(self.base_options)
+			end
+			fn(false)
+		end)
+		return
 	end
+
+	local hover_options = options_or_fn
+	if hover_options then
+		self.hover_options = Util.tbl_deep_extend({}, self.hover_options or {}, hover_options)
+	end
+
 	self.item:subscribe("mouse.entered", function()
 		self.item:set(self.hover_options)
 	end)
@@ -175,11 +220,11 @@ function Button:set(options)
 	local hover = options.hover
 	options.hover = nil
 	if next(options) ~= nil then
-		self.base_options = Util.tbl_deep_extend(self.base_options, options)
+		self.base_options = Util.tbl_deep_extend({}, self.base_options, options)
 		self.item:set(options)
 	end
 	if hover then
-		self.hover_options = Util.tbl_deep_extend(self.hover_options, hover)
+		self.hover_options = Util.tbl_deep_extend({}, self.hover_options, hover)
 		self:on_hover() -- refresh subscriptions with updated hover options
 	end
 	self.options = Util.tbl_deep_extend({}, self.base_options, { hover = self.hover_options })

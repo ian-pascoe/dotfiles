@@ -13,13 +13,13 @@
       "betterdisplay"
       "pearcleaner"
     ];
+    greedyCasks = true;
     masApps = {
       Bitwarden = 1352778147;
       Infuse = 1136220934;
       WireGuard = 1451685025;
     };
     taps = builtins.attrNames config.nix-homebrew.taps;
-    greedyCasks = true;
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";

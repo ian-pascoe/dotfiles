@@ -45,6 +45,7 @@ M.graph = Sbar.add("graph", "monitoring.cpu", 52, {
 		height = config.settings.heights.graph,
 		corner_radius = 5,
 	},
+	updates = true, -- allow updates when collapsed
 })
 M.graph:subscribe("mouse.entered", function()
 	M.graph:set({

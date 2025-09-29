@@ -24,9 +24,9 @@ M.button = Sbar.add("item", "home.button", {
 	click_script = "sketchybar --set $NAME popup.drawing=toggle",
 	popup = {},
 })
+
 M.button:subscribe("mouse.entered", function()
 	M.button:set({
-		popup = { drawing = true },
 		background = { color = colors.with_alpha(colors.primary.background, 0.25) },
 	})
 end)

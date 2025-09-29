@@ -20,6 +20,12 @@ setmetatable(M, {
 	end,
 })
 
+--- Whether the monitoring items are currently shown
+local items_shown = false
+
+--- Keeps track of whether the mouse is still hovering over the button
+local still_hovering = false
+
 M.spacer = Sbar.add("item", "monitoring.spacer", {
 	position = "right",
 	padding_left = settings.paddings.xs,
@@ -32,13 +38,41 @@ M.button = Button:new("monitoring.button", "ghost", {
 	position = "right",
 	icon = { string = icons.monitoring },
 	label = { drawing = false },
+	popup = {
+		drawing = false,
+		align = "center",
+	},
 })
+
+M.tooltip = Sbar.add("item", "monitoring.tooltip", {
+	position = "popup." .. M.button.name,
+	icon = { drawing = false },
+})
+
+M.button:on_hover(function(hovering)
+	still_hovering = hovering
+	if hovering then
+		Sbar.delay(0.5, function()
+			if still_hovering then
+				M.button:set({
+					popup = { drawing = true },
+				})
+				M.tooltip:set({
+					label = { string = items_shown and "Collapse" or "Monitoring" },
+				})
+			end
+		end)
+	else
+		M.button:set({
+			popup = { drawing = false },
+		})
+	end
+end)
 
 local disk = require("items.monitoring.disk")
 local memory = require("items.monitoring.memory")
 local cpu = require("items.monitoring.cpu")
 
-local items_shown = false
 M.button:on_click(function()
 	if items_shown then
 		items_shown = false

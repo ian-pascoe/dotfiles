@@ -20,6 +20,12 @@ setmetatable(M, {
 	end,
 })
 
+--- Whether the control center items are currently shown.
+local items_shown = false
+
+--- Keeps track of whether the mouse is still hovering over the button.
+local still_hovering = false
+
 M.spacer = Sbar.add("item", "control_center.spacer", {
 	position = "right",
 	padding_left = settings.paddings.xs,
@@ -32,7 +38,36 @@ M.button = Button:new("control_center.button", "ghost", {
 	position = "right",
 	icon = { string = icons.control_center },
 	label = { drawing = false },
+	popup = {
+		drawing = false,
+		align = "center",
+	},
 })
+
+M.tooltip = Sbar.add("item", "control_center.tooltip", {
+	position = "popup." .. M.button.name,
+	icon = { drawing = false },
+})
+
+M.button:on_hover(function(hovering)
+	still_hovering = hovering
+	if hovering then
+		Sbar.delay(0.5, function()
+			if still_hovering then
+				M.button:set({
+					popup = { drawing = true },
+				})
+				M.tooltip:set({
+					label = { string = items_shown and "Collapse" or "Control Center" },
+				})
+			end
+		end)
+	else
+		M.button:set({
+			popup = { drawing = false },
+		})
+	end
+end)
 
 local microphone = require("items.control_center.microphone")
 local volume = require("items.control_center.volume")
@@ -40,10 +75,9 @@ local bluetooth = require("items.control_center.bluetooth")
 local battery = require("items.control_center.battery")
 local wifi = require("items.control_center.wifi")
 
-local controls_shown = false
 M.button:on_click(function()
-	if controls_shown then
-		controls_shown = false
+	if items_shown then
+		items_shown = false
 		Sbar.animate("tanh", 20, function()
 			microphone.button:set({ width = 0 })
 			volume.button:set({ width = 0 })
@@ -64,7 +98,7 @@ M.button:on_click(function()
 			wifi.button:set({ drawing = false })
 		end)
 	else
-		controls_shown = true
+		items_shown = true
 		Sbar.animate("tanh", 20, function()
 			M.button:set({
 				icon = {

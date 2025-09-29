@@ -84,7 +84,7 @@ end
 function M.tbl_deep_extend(dest, ...)
 	local sources = { ... }
 	for i = 1, #sources do
-		local src = sources[i]
+		local src = M.tbl_deep_copy(sources[i])
 		for k, v in pairs(src) do
 			if type(v) == "table" then
 				if type(dest[k] or false) == "table" then

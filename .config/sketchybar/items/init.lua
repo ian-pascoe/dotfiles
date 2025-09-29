@@ -1,5 +1,6 @@
 -- Left
 require("items.home")
+require("items.apps")
 require("items.spaces")
 
 -- Center

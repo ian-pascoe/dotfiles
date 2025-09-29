@@ -129,9 +129,9 @@
         nix-index-database.darwinModules.nix-index
         {programs.nix-index-database.comma.enable = true;}
         mac-app-util.darwinModules.default
-        ./hosts/Ians-Macbook-Pro
         nix-homebrew.darwinModules.nix-homebrew
         (mkHomebrewConfig "ianpascoe")
+        ./hosts/Ians-Macbook-Pro
         home-manager.darwinModules.home-manager
         {
           home-manager.sharedModules = [

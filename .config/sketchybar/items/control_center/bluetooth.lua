@@ -22,6 +22,9 @@ M.button = Sbar.add("item", "bluetooth.button", {
 		padding_left = 0,
 		padding_right = 8,
 	},
+	background = {
+		color = colors.transparent,
+	},
 	popup = {
 		height = 30,
 	},
@@ -29,14 +32,20 @@ M.button = Sbar.add("item", "bluetooth.button", {
 })
 
 M.button:subscribe("mouse.entered", function()
-	M.button:set({ popup = { drawing = true } })
+	M.button:set({
+		popup = { drawing = true },
+		background = { color = colors.with_alpha(colors.secondary.background, 0.25) },
+	})
 end)
 
 M.button:subscribe({
 	"mouse.exited.global",
 	"mouse.exited",
 }, function()
-	M.button:set({ popup = { drawing = false } })
+	M.button:set({
+		popup = { drawing = false },
+		background = { color = colors.transparent },
+	})
 end)
 
 -- Toggle bluetooth with mouse click
