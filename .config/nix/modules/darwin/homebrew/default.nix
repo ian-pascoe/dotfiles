@@ -14,8 +14,9 @@
       "pearcleaner"
     ];
     masApps = {
-      WireGuard = 1451685025;
+      Bitwarden = 1352778147;
       Infuse = 1136220934;
+      WireGuard = 1451685025;
     };
     taps = [];
     greedyCasks = true;

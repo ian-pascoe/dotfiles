@@ -15,7 +15,7 @@
     tilesize = 50;
     # Hot corners
     # Possible values:
-    #  0: no-op
+    #  1: no-op
     #  2: Mission Control
     #  3: Show application windows
     #  4: Desktop
@@ -27,10 +27,10 @@
     # 12: Notification Center
     # 13: Lock Screen
     # 14: Quick Notes
-    wvous-tl-corner = 0;
-    wvous-tr-corner = 0;
-    wvous-bl-corner = 0;
-    wvous-br-corner = 0;
+    wvous-tl-corner = 1;
+    wvous-tr-corner = 1;
+    wvous-bl-corner = 1;
+    wvous-br-corner = 1;
     persistent-apps = [
       {
         app = "/System/Applications/System Settings.app";
