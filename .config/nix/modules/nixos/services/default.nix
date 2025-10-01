@@ -3,6 +3,5 @@
     ./dbus
     ./display-manager
     ./docker
-    ./xserver
   ];
 }
