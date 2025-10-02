@@ -144,4 +144,27 @@ return {
       { "<leader>Y", "<cmd>Yazi cwd<cr>", desc = "yazi (cwd)" },
     },
   },
+  {
+    "epwalsh/obsidian.nvim",
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    ---@module "obsidian"
+    ---@type obsidian.config.ClientOpts
+    ---@diagnostic disable-next-line: missing-fields
+    opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/vaults/personal",
+        },
+        {
+          name = "family",
+          path = "~/vaults/family",
+        },
+      },
+    },
+  },
 }

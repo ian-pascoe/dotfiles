@@ -99,6 +99,7 @@ M.app_icons = {
 	["Bitwarden"] = "",
 	["WireGuard"] = "󰖂",
 	["Mail"] = "",
+	["Obsidian"] = "",
 }
 
 function M.map(app_name)
