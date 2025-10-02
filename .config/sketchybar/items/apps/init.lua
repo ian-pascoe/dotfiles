@@ -6,10 +6,12 @@ local M = {}
 
 local helium = require("items.apps.helium")
 local ghostty = require("items.apps.ghostty")
+local spotify = require("items.apps.spotify")
 
 M.group = Sbar.add("bracket", "apps.group", {
 	helium.button.name,
 	ghostty.button.name,
+	spotify.button.name,
 }, {
 	position = "left",
 })
