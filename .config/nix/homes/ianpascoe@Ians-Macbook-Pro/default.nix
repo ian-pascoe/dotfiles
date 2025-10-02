@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   wallpaper = pkgs.fetchurl {
     url = "https://images8.alphacoders.com/135/1351417.png";
     sha256 = "sha256-tKNdnOxEwoyc3mtPrGnahDWe4ZwzaVtrPACaNUT4UTo=";
@@ -11,7 +12,8 @@
     #!/bin/sh
     /usr/bin/osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${wallpaper}\""
   '';
-in {
+in
+{
   imports = [
     ../../modules/common/home
     ../../modules/darwin/home
@@ -25,7 +27,7 @@ in {
     };
 
     activation = {
-      "setWallpaper" = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      "setWallpaper" = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         echo "Setting wallpaper"
         ${setWallpaperScript}/bin/set-wallpaper
       '';

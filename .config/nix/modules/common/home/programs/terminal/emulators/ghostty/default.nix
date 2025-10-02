@@ -4,7 +4,8 @@
   lib,
   dotfiles,
   ...
-}: {
+}:
+{
   imports = [
     ../../../../../../util/home/dotfiles
   ];

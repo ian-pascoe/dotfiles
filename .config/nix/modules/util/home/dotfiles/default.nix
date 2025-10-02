@@ -3,12 +3,14 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
   dotfilesRepo = "https://github.com/ian-pascoe/dotfiles.git";
-in {
+in
+{
   home.activation = {
-    "setupDotfiles" = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    "setupDotfiles" = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       echo "Setting up dotfiles"
       if [ -d "${dotfiles}/.git" ]; then
         (cd "${dotfiles}" && ${pkgs.git}/bin/git pull --ff-only)

@@ -6,6 +6,7 @@ return {
         nil_ls = {
           enabled = not LazyVim.is_win(), -- disable on windows
           mason = false, -- installed via nix
+          cmd = { "nil" },
         },
       },
     },

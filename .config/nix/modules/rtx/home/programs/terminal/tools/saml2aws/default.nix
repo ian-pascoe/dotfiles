@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   playwright_chromium_rev = pkgs.playwright.browsersJSON.chromium.revision;
-in {
+in
+{
   home.packages = with pkgs; [
     playwright.browsers
     saml2aws

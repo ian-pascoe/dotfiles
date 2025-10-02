@@ -3,7 +3,8 @@
   config,
   dotfiles,
   ...
-}: {
+}:
+{
   imports = [
     ../../../../../../util/home/dotfiles
   ];

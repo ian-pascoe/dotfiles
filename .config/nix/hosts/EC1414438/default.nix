@@ -1,6 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../../modules/common
     ../../modules/nixos
@@ -13,7 +14,10 @@
   users.users = {
     "e21146146" = {
       isNormalUser = true;
-      extraGroups = ["wheel" "docker"];
+      extraGroups = [
+        "wheel"
+        "docker"
+      ];
       shell = pkgs.zsh;
     };
   };

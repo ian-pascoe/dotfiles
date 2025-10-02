@@ -1,4 +1,5 @@
-{rtxCerts, ...}: {
+{ rtxCerts, ... }:
+{
   imports = [
     ../../../../../../util/rtx/certs
   ];

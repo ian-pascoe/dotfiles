@@ -2,12 +2,14 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   libraryPath = lib.makeLibraryPath [
     pkgs.libiconv
     pkgs.icu
   ];
-in {
+in
+{
   environment.variables = {
     LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
   };
