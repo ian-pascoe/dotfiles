@@ -15,5 +15,6 @@
     kubernetes-helm
     nil
     nixfmt
+    nixfmt-tree
   ];
 }
