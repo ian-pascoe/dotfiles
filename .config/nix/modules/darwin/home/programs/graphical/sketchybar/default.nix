@@ -14,7 +14,7 @@
     extraPackages = with pkgs; [
       aerospace
       blueutil
-      coreutils
+      uutils-coreutils
     ];
     config = {
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/sketchybar";

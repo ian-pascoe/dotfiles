@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    lsof
+    uutils-coreutils # GNU coreutils, written in Rust
+    lsof # List open files
     nodejs_24
     go
     python313
@@ -10,9 +11,6 @@
     lua5_4
     gcc
     gnumake
-    xclip
-    kubectl
-    kubernetes-helm
     nil
     nixfmt
     nixfmt-tree
