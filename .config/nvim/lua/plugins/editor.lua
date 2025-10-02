@@ -15,6 +15,40 @@ return {
         },
       },
     },
+    keys = {
+      {
+        "<leader>fd",
+        function()
+          require("snacks").picker.files({
+            cwd = LazyVim.root(),
+            hidden = true,
+            follow = true,
+            cmd = "fd",
+            args = { "--type", "d" },
+            transform = function(entry)
+              return vim.fn.isdirectory(entry.file) == 1
+            end,
+          })
+        end,
+        desc = "Find directories",
+      },
+      {
+        "<leader>fD",
+        function()
+          require("snacks").picker.files({
+            cwd = vim.fn.getcwd(),
+            hidden = true,
+            follow = true,
+            cmd = "fd",
+            args = { "--type", "d" },
+            transform = function(entry)
+              return vim.fn.isdirectory(entry.file) == 1
+            end,
+          })
+        end,
+        desc = "Find directories (cwd)",
+      },
+    },
   },
   { -- better file explorer
     "stevearc/oil.nvim",

@@ -98,6 +98,7 @@ M.app_icons = {
 	["Helium"] = "",
 	["Bitwarden"] = "",
 	["WireGuard"] = "󰖂",
+	["Mail"] = "",
 }
 
 function M.map(app_name)

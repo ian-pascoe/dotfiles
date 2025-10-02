@@ -59,6 +59,9 @@ M.popup.prefs = Sbar.add("item", "home.popup.prefs", {
 		width = popup_width / 2,
 		align = "right",
 	},
+	background = {
+		color = colors.transparent,
+	},
 })
 M.popup.prefs:subscribe("mouse.entered", function()
 	M.popup.prefs:set({
@@ -90,6 +93,9 @@ M.popup.lock = Sbar.add("item", "home.popup.lock", {
 		padding_right = 10,
 		width = popup_width / 2,
 		align = "right",
+	},
+	background = {
+		color = colors.transparent,
 	},
 })
 M.popup.lock:subscribe("mouse.entered", function()
@@ -123,6 +129,9 @@ M.popup.signout = Sbar.add("item", "home.popup.signout", {
 		width = popup_width / 2,
 		align = "right",
 	},
+	background = {
+		color = colors.transparent,
+	},
 })
 M.popup.signout:subscribe("mouse.entered", function()
 	M.popup.signout:set({
@@ -155,6 +164,9 @@ M.popup.restart = Sbar.add("item", "home.popup.restart", {
 		width = popup_width / 2,
 		align = "right",
 	},
+	background = {
+		color = colors.transparent,
+	},
 })
 M.popup.restart:subscribe("mouse.entered", function()
 	M.popup.restart:set({
@@ -186,6 +198,9 @@ M.popup.shutdown = Sbar.add("item", "home.popup.shutdown", {
 		padding_right = 10,
 		width = popup_width / 2,
 		align = "right",
+	},
+	background = {
+		color = colors.transparent,
 	},
 })
 M.popup.shutdown:subscribe("mouse.entered", function()

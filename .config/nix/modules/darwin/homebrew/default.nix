@@ -12,6 +12,8 @@
       "karabiner-elements"
       "betterdisplay"
       "pearcleaner"
+      "hiddenbar"
+      "aldente"
     ];
     greedyCasks = true;
     masApps = {

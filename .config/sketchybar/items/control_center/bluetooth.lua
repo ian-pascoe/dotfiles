@@ -5,6 +5,8 @@ local colors = config.colors
 ---@class items.control_center.bluetooth
 local M = {}
 
+local popup_width = 200
+
 M.button = Sbar.add("item", "bluetooth.button", {
 	drawing = false,
 	position = "right",
@@ -26,7 +28,7 @@ M.button = Sbar.add("item", "bluetooth.button", {
 		color = colors.transparent,
 	},
 	popup = {
-		height = 30,
+		drawing = false,
 	},
 	update_freq = 60,
 })
@@ -135,6 +137,7 @@ M.button:subscribe({
 		-- Get paired and connected devices
 		Sbar.exec("blueutil --paired", function(paired)
 			M.popup.paired.header = Sbar.add("item", "bluetooth.popup.paired.header", {
+				width = popup_width,
 				icon = {
 					drawing = false,
 				},
@@ -153,23 +156,39 @@ M.button:subscribe({
 				local label = device:match('"(.*)"')
 				local safe_label = sanitize_name(label)
 				local address = parse_address(device)
-				M.popup.paired[safe_label] = Sbar.add("item", "bluetooth.popup.paired.device." .. safe_label, {
+				local paired_device = Sbar.add("item", "bluetooth.popup.paired.device." .. safe_label, {
+					width = popup_width,
 					icon = {
 						drawing = false,
 					},
 					label = {
 						string = label .. (address and "" or " (no addr)"),
 					},
+					background = {
+						color = colors.transparent,
+					},
 					position = "popup." .. M.button.name,
 					click_script = address
 							and ('if [ "$(blueutil --is-connected ' .. address .. ')" = 1 ]; then blueutil --disconnect ' .. address .. "; else blueutil --connect " .. address .. "; fi; sketchybar --trigger bluetooth_update")
 						or nil,
 				})
+				M.popup.paired[safe_label] = paired_device
+				paired_device:subscribe({ "mouse.entered" }, function()
+					paired_device:set({
+						background = { color = colors.with_alpha(colors.primary.background, 0.25) },
+					})
+				end)
+				paired_device:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+					paired_device:set({
+						background = { color = colors.transparent },
+					})
+				end)
 			end
 
 			-- Fetch connected devices
 			Sbar.exec("blueutil --connected", function(connected)
 				M.popup.connected.header = Sbar.add("item", "bluetooth.popup.connected.header", {
+					width = popup_width,
 					icon = {
 						drawing = false,
 					},
@@ -187,19 +206,33 @@ M.button:subscribe({
 					local label = device:match('"(.*)"')
 					local safe_label = sanitize_name(label)
 					local address = parse_address(device)
-					M.popup.connected[safe_label] =
-						Sbar.add("item", "bluetooth.popup.connected.device." .. safe_label, {
-							icon = {
-								drawing = false,
-							},
-							label = {
-								string = label .. (address and "" or " (no addr)"),
-							},
-							position = "popup." .. M.button.name,
-							click_script = address
-									and ('if [ "$(blueutil --is-connected ' .. address .. ')" = 1 ]; then blueutil --disconnect ' .. address .. "; else blueutil --connect " .. address .. "; fi; sketchybar --trigger bluetooth_update")
-								or nil,
+					local connected_device = Sbar.add("item", "bluetooth.popup.connected.device." .. safe_label, {
+						width = popup_width,
+						icon = {
+							drawing = false,
+						},
+						label = {
+							string = label .. (address and "" or " (no addr)"),
+						},
+						background = {
+							color = colors.transparent,
+						},
+						position = "popup." .. M.button.name,
+						click_script = address
+								and ('if [ "$(blueutil --is-connected ' .. address .. ')" = 1 ]; then blueutil --disconnect ' .. address .. "; else blueutil --connect " .. address .. "; fi; sketchybar --trigger bluetooth_update")
+							or nil,
+					})
+					M.popup.connected[safe_label] = connected_device
+					connected_device:subscribe({ "mouse.entered" }, function()
+						connected_device:set({
+							background = { color = colors.with_alpha(colors.primary.background, 0.25) },
 						})
+					end)
+					connected_device:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
+						connected_device:set({
+							background = { color = colors.transparent },
+						})
+					end)
 				end
 			end)
 		end)

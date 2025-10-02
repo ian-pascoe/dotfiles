@@ -1,2 +1,2 @@
 all:
-	(cd event_providers && $(MAKE)) >/dev/null
+	(cd event_providers && $(MAKE))

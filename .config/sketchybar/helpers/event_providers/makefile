@@ -1,3 +1,4 @@
 all:
 	(cd cpu_load && $(MAKE))
 	(cd input_volume && $(MAKE))
+	(cd display_connection && $(MAKE))
