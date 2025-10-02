@@ -12,5 +12,7 @@
     xclip
     kubectl
     kubernetes-helm
+    nil
+    nixfmt
   ];
 }
