@@ -1,8 +1,10 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    uutils-coreutils # GNU coreutils, written in Rust
+    uutils-coreutils-noprefix # GNU coreutils, written in Rust
     lsof # List open files
+
+    # Development tools
     nodejs_24
     go
     python313
@@ -11,6 +13,8 @@
     lua5_4
     gcc
     gnumake
+
+    # Nix LSP and formatting tools
     nil
     nixfmt
     nixfmt-tree
