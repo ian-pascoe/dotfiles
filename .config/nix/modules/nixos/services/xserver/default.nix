@@ -2,12 +2,8 @@
   pkgs,
   lib,
   ...
-<<<<<<< HEAD
 }:
 {
-=======
-}: {
->>>>>>> ff94daf (Revert "fix proxy config")
   environment.systemPackages = with pkgs; [
     xorg.xeyes # for testing
   ];
