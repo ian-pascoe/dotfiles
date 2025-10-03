@@ -54,7 +54,7 @@ M.graph:subscribe({ "mouse.exited", "mouse.exited.global" }, function()
 end)
 
 M.graph:subscribe({ "routine", "forced" }, function()
-	Sbar.exec("df -h /System/Volumes/Data | tail -1 | awk '{print $5}'", function(result)
+	Sbar.exec("df -h /System/Volumes/Data | tail -1 | awk '{print $6}'", function(result)
 		local disk_used = tonumber(result:match("(%d+)%%"))
 
 		M.graph:push({
