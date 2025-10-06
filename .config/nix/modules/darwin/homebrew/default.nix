@@ -15,6 +15,7 @@
       "pearcleaner"
       "hiddenbar"
       "aldente"
+      "nextcloud"
     ];
     greedyCasks = true;
     masApps = {
