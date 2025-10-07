@@ -6,7 +6,6 @@
     ./bun
     ./fd
     ./fzf
-    ./gh
     ./git
     ./gradle
     ./java
