@@ -7,7 +7,7 @@
       "media-control"
     ];
     casks = [
-      "ghostty@tip"
+      "ghostty"
       "helium-browser"
       "spotify"
       "karabiner-elements"
