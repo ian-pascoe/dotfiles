@@ -3,5 +3,6 @@
     ./packages
     ./programs
     ./services
+    ./wallpaper
   ];
 }
