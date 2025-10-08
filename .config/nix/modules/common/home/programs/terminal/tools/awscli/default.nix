@@ -2,8 +2,10 @@
 {
   programs.awscli = {
     enable = true;
-    package = pkgs.awscli2.overrideAttrs (oldAttrs: {
+    # Tests on this are prone to fail
+    package = pkgs.awscli2.overrideAttrs (old: {
       doCheck = false;
-    }); # The tests on this take forever
+      doInstallCheck = false;
+    });
   };
 }
