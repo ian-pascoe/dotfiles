@@ -10,7 +10,7 @@
     shellAliases = {
       nfu = "nix flake update --flake ~/.config/nix";
       # Garbage collect both system and user profiles
-      ncg = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+      ncg = "sudo -HE nix-collect-garbage -d && nix-collect-garbage -d";
     };
   };
   xdg.enable = true;
