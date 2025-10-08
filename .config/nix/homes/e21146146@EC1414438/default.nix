@@ -11,9 +11,7 @@
     homeDirectory = "/home/e21146146";
 
     shellAliases = {
-      nrs = "source ~/proxy.sh; sudo -E nixos-rebuild switch --flake ~/.config/nix#EC1414438 --impure";
-      nfu = "nix flake update --flake ~/.config/nix";
-      ncg = "sudo nix-collect-garbage -d";
+      nrs = "[ -f ~/nix-env.sh ] && source ~/nix-env.sh || echo 'nix-env.sh not found!'; sudo -HE nixos-rebuild switch --flake /home/e21146146/.config/nix#EC1414438 --impure";
     };
   };
 }
