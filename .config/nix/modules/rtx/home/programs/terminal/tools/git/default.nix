@@ -4,9 +4,6 @@
     lfs.enable = true;
     userEmail = "ian.pascoe@rtx.com";
     userName = "Ian Pascoe";
-    extraConfig = {
-      core.autocrlf = false;
-    };
   };
 
   programs.gh = {
