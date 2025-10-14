@@ -1,25 +1,26 @@
 {
-  pkgs,
   lib,
   ...
 }:
 {
   programs.git = lib.mkDefault {
     enable = true;
-    package = pkgs.gitFull;
     lfs.enable = true;
-    extraConfig = {
-      user.email = "ian.g.pascoe@gmail.com";
-      user.name = "Ian Pascoe";
-      credential = {
-        "https://github.com".username = "ian-pascoe";
-      };
-    };
+    userEmail = "ian.g.pascoe@gmail.com";
+    userName = "Ian Pascoe";
   };
-  programs.gh = {
+
+  programs.gh = lib.mkDefault {
     enable = true;
     gitCredentialHelper = {
       enable = true;
+      hosts = [
+        "https://github.com"
+        "https://gist.github.com"
+      ];
+    };
+    settings = {
+      git_protocol = "https";
     };
   };
 }
