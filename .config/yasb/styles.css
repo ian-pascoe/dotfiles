@@ -542,6 +542,38 @@
  * CPU
  * -------------
  */
+.libre-cpu-widget {
+  background-color: rgba(var(--overlay), var(--opacity-semi));
+  border: var(--size-xs) solid rgb(var(--highlight-high));
+  border-top-left-radius: var(--radius-xl);
+  border-bottom-left-radius: var(--radius-xl);
+  padding: var(--spacing-2xs) var(--spacing-md);
+  margin: var(--spacing-xs) var(--spacing-0) var(--spacing-xs) var(--spacing-sm);
+}
+.libre-cpu-widget .label {
+  color: rgb(var(--text));
+}
+.libre-cpu-widget .icon {
+  color: rgb(var(--foam));
+}
+.libre-cpu-widget .label.status-low {
+  color: rgb(var(--text));
+}
+.libre-cpu-widget .label.status-medium {
+  color: rgb(var(--gold));
+}
+.libre-cpu-widget .label.status-high {
+  color: rgb(var(--love));
+}
+.libre-cpu-widget .label.status-critical {
+  color: rgb(var(--love));
+}
+
+/*
+ * -------------
+ * CPU
+ * -------------
+ */
 .cpu-widget {
   background-color: rgba(var(--overlay), var(--opacity-semi));
   border: var(--size-xs) solid rgb(var(--highlight-high));

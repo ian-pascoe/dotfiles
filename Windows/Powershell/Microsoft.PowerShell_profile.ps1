@@ -12,25 +12,29 @@ Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
 # Aliases
 Set-Alias -Name ls -Value lsd
-Set-Alias -Name cat -Value bat
-Set-Alias -Name cd -Value z -Option AllScope
-Set-Alias -Name find -Value fd
-
 function ll {
-  lsd -la $args
+  lsd -l $args
 }
 function lla {
   lsd -la $args
 }
 
-function Make-Link ($target, $link) {
+function catAlias {
+  bat --paging=never $args
+}
+Set-Alias -Name cat -Value catAlias -Option AllScope
+
+Set-Alias -Name cd -Value z -Option AllScope
+Set-Alias -Name find -Value fd
+
+function ln ($target, $link) {
   New-Item -Path $link -ItemType SymbolicLink -Value $target
 }
 
 # WSL fallback for command not found
 $ExecutionContext.InvokeCommand.CommandNotFoundAction = {
   param($CommandName, $CommandLookupEventArgs)
-  
+
   # Check if WSL is available
   if (Get-Command wsl -ErrorAction SilentlyContinue) {
     # Check if the command exists in WSL
