@@ -3,7 +3,7 @@
 -- Add any additional options here
 
 if LazyVim.is_win() then
-  LazyVim.terminal.setup("powershell") -- I use nushell on Windows
+  LazyVim.terminal.setup("pwsh")
 end
 
 -- enable line wrap
