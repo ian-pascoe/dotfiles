@@ -30,6 +30,7 @@
 
       # Node Specific
       NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-bundle.crt";
+      NODE_USE_SYSTEM_CA = "1";
     };
   };
 }

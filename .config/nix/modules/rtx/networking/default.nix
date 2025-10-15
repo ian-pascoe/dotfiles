@@ -26,6 +26,8 @@
       HTTPS_PROXY_HOST = builtins.getEnv "HTTPS_PROXY_HOST";
       HTTPS_PROXY_PORT = builtins.getEnv "HTTPS_PROXY_PORT";
       HTTPS_NON_PROXY_HOSTS = builtins.getEnv "HTTPS_NON_PROXY_HOSTS";
+
+      NODE_USE_ENV_PROXY = "1";
     };
   };
 }

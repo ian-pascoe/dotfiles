@@ -21,4 +21,8 @@ in
     SAML2AWS_BROWSER_EXECUTABLE_PATH = "${playwright-driver.browsers}/chromium-${playwright_chromium_rev}/chrome-linux/chrome";
     SAML2AWS_DISABLE_KEYCHAIN = "true";
   };
+
+  home.shellAliases = {
+    xeta-aws-login = "saml2aws login --verbose --skip-prompt --idp-account=xetagov";
+  };
 }
