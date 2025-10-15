@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
-  programs.gradle = {
+  programs.gradle = lib.mkDefault {
     enable = true;
   };
 }

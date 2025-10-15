@@ -3,17 +3,30 @@
     ./packages
     ./programs
   ];
+
+  xdg.enable = true;
+
   home = {
     shell = {
       enableShellIntegration = true;
     };
+
     shellAliases = {
       nfu = "nix flake update --flake ~/.config/nix";
       # Garbage collect both system and user profiles
       ncg = "sudo -HE nix-collect-garbage -d && nix-collect-garbage -d";
     };
+
+    sessionVariables = {
+      XDG_BIN_HOME = "$HOME/.local/bin";
+    };
+
+    sessionPath = [
+      "$XDG_BIN_HOME"
+    ];
   };
-  xdg.enable = true;
+
   systemd.user.startServices = "sd-switch";
+
   home.stateVersion = "25.05";
 }
