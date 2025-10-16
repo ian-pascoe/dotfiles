@@ -164,6 +164,10 @@ return {
           name = "family",
           path = "~/vaults/family",
         },
+        {
+          name = "family",
+          path = "~/vaults/work",
+        },
       },
     },
   },
