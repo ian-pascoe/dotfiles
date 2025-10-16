@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   dotfiles,
   ...
@@ -11,8 +10,6 @@
 
   programs.opencode = {
     enable = true;
-    # TODO: Switch back to official package when it's fixed.
-    package = pkgs.nur.repos.falconprogrammer.opencode-sst;
   };
 
   xdg.configFile.opencode = {
