@@ -18,5 +18,6 @@
     nil
     nixfmt
     nixfmt-tree
+    statix
   ];
 }

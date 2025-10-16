@@ -6,13 +6,20 @@ return {
     },
   },
   {
+    "mason-org/mason.nvim",
+    opts = {
+      ensure_installed = { "npm-groovy-lint" },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
       opts.servers = opts.servers or {}
 
       local classpath = vim.list_extend({
         vim.fn.stdpath("data") .. "/mason/packages/groovy-language-server/build/libs/groovy-language-server-all.jar",
-      }, vim.fn.glob(vim.fn.expand("~/.groovy/libs/*.jar"), false, true))
+      }, vim.fn.glob(os.getenv("HOME") .. "/.groovy/lib/*.jar", false, true))
+
       ---@type lazyvim.lsp.Config
       opts.servers.groovyls = {
         cmd = {
@@ -22,8 +29,6 @@ return {
           "net.prominic.groovyls.GroovyLanguageServer",
         },
       }
-      ---@type lazyvim.lsp.Config
-      opts.servers["npm-groovy-lint"] = {}
 
       opts.setup = opts.setup or {}
       -- Not really sure why I have to do this, but the cmd option doesn't seem to be picked up otherwise
@@ -35,11 +40,13 @@ return {
     end,
   },
   {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        groovy = { "npm-groovy-lint" },
-      },
-    },
+    "nvimtools/none-ls.nvim",
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      vim.list_extend(opts.sources or {}, {
+        nls.builtins.formatting.npm_groovy_lint,
+        nls.builtins.diagnostics.npm_groovy_lint,
+      })
+    end,
   },
 }

@@ -90,9 +90,11 @@
         };
 
       mkHomeManagerConfig = user: config: {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "backup";
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "backup";
+        };
         home-manager.extraSpecialArgs = commonArgs;
         home-manager.users.${user} = import config;
       };
