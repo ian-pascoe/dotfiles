@@ -2,8 +2,10 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userEmail = "ian.pascoe@rtx.com";
-    userName = "Ian Pascoe";
+    settings = {
+      user.email = "ian.pascoe@rtx.com";
+      user.name = "Ian Pascoe";
+    };
   };
 
   programs.gh = {

@@ -6,8 +6,10 @@
   programs.git = lib.mkDefault {
     enable = true;
     lfs.enable = true;
-    userEmail = "ian.g.pascoe@gmail.com";
-    userName = "Ian Pascoe";
+    settings = {
+      user.email = "ian.g.pascoe@gmail.com";
+      user.name = "Ian Pascoe";
+    };
   };
 
   programs.gh = lib.mkDefault {
