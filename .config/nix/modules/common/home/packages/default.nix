@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     uutils-coreutils-noprefix # GNU coreutils, written in Rust
     lsof # List open files
+    openssl
 
     # Development tools
     nodejs_24
