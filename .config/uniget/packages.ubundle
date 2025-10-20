@@ -93,13 +93,6 @@
       "ManagerName": "Scoop"
     },
     {
-      "Id": "cargo-update",
-      "Name": "Cargo Update",
-      "Version": "18.0.0",
-      "Source": "crates.io",
-      "ManagerName": "Cargo"
-    },
-    {
       "Id": "corretto-jdk",
       "Name": "Corretto Jdk",
       "Version": "21.0.8.9.1",
