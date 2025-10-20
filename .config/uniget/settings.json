@@ -1,0 +1,23 @@
+{
+  "ChangeBackupFileName": "packages",
+  "ChangeBackupOutputDirectory": "C:\\Users\\e21146146\\.dotfiles\\.config\\uniget",
+  "DefaultVcpkgTriplet": "x64-windows",
+  "DependencyManagement.json": "{\r\n  \u0022cargo-update\u0022: \u0022attempted\u0022\r\n}",
+  "DisableAutoUpdateWingetUI": "",
+  "DisabledManagers.json": "{\r\n  \u0022Winget\u0022: true,\r\n  \u0022Chocolatey\u0022: true,\r\n  \u0022PowerShell\u0022: true\r\n}",
+  "DisableInstantSearch.json": "{\r\n  \u0022Discover\u0022: false,\r\n  \u0022Updates\u0022: false,\r\n  \u0022Installed\u0022: false,\r\n  \u0022Bundles\u0022: false\r\n}",
+  "DisableTelemetry": "",
+  "DisableTimeoutOnPackageListingTasks": "",
+  "EnablePackageBackup": "",
+  "EnablePackageBackup_CLOUD": "",
+  "EnableProxy": "",
+  "GitHubUserLogin": "ian-pascoe",
+  "PackageListViewMode.json": "{\r\n  \u0022Discover\u0022: 0,\r\n  \u0022Updates\u0022: 0,\r\n  \u0022Installed\u0022: 0,\r\n  \u0022Bundles\u0022: 0\r\n}",
+  "PermissionTestFile": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "PreferredTheme": "auto",
+  "ProxyURL": "REDACTED",
+  "ShownTelemetryBanner": "",
+  "SidepanelWidths.json": "{\r\n  \u0022Discover\u0022: 250\r\n}",
+  "UpdatesCheckInterval": "600",
+  "WindowGeometry": "1278,69,1278,1367,0"
+}

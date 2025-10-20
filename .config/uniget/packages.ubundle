@@ -1,0 +1,490 @@
+{
+  "export_version": 3,
+  "packages": [
+    {
+      "Id": "7tsp",
+      "Name": "7tsp",
+      "Version": "0.6",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "7zip",
+      "Name": "7zip",
+      "Version": "25.01",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "JetBrainsMono-NF",
+      "Name": "JetBrainsMono NF",
+      "Version": "3.4.0",
+      "Source": "nerd-fonts",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "JetBrainsMono-NF-Mono",
+      "Name": "JetBrainsMono NF Mono",
+      "Version": "3.4.0",
+      "Source": "nerd-fonts",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "JetBrainsMono-NF-Propo",
+      "Name": "JetBrainsMono NF Propo",
+      "Version": "3.4.0",
+      "Source": "nerd-fonts",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "Terminal-Icons",
+      "Name": "Terminal Icons",
+      "Version": "0.11.0",
+      "Source": "PSGallery",
+      "ManagerName": "PowerShell7"
+    },
+    {
+      "Id": "autohotkey",
+      "Name": "Autohotkey",
+      "Version": "2.0.19",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "aws",
+      "Name": "Aws",
+      "Version": "2.31.18",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "bat",
+      "Name": "Bat",
+      "Version": "0.26.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "bitwarden",
+      "Name": "Bitwarden",
+      "Version": "2025.10.0",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "btop-lhm",
+      "Name": "Btop Lhm",
+      "Version": "1.0.5",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "bun",
+      "Name": "Bun",
+      "Version": "1.3.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "cargo-binstall",
+      "Name": "Cargo Binstall",
+      "Version": "1.15.7",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "cargo-update",
+      "Name": "Cargo Update",
+      "Version": "18.0.0",
+      "Source": "crates.io",
+      "ManagerName": "Cargo"
+    },
+    {
+      "Id": "corretto-jdk",
+      "Name": "Corretto Jdk",
+      "Version": "21.0.8.9.1",
+      "Source": "java",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "dark",
+      "Name": "Dark",
+      "Version": "3.14.1",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "dotnet-sdk",
+      "Name": "Dotnet Sdk",
+      "Version": "9.0.306",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "everything",
+      "Name": "Everything",
+      "Version": "1.4.1.1029",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "everything-cli",
+      "Name": "Everything Cli",
+      "Version": "1.1.0.30",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "fd",
+      "Name": "Fd",
+      "Version": "10.3.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "ffmpeg",
+      "Name": "Ffmpeg",
+      "Version": "8.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "file",
+      "Name": "File",
+      "Version": "5.45",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "flow-launcher",
+      "Name": "Flow Launcher",
+      "Version": "2.0.2",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "fzf",
+      "Name": "Fzf",
+      "Version": "0.66.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "ghostscript",
+      "Name": "Ghostscript",
+      "Version": "10.06.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "git",
+      "Name": "Git",
+      "Version": "2.51.1",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "glazewm",
+      "Name": "Glazewm",
+      "Version": "3.9.1",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "go",
+      "Name": "Go",
+      "Version": "1.25.3",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "gradle",
+      "Name": "Gradle",
+      "Version": "9.1.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "gsudo",
+      "Name": "Gsudo",
+      "Version": "2.6.1",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "helium",
+      "Name": "Helium",
+      "Version": "0.5.7.1",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "innounp",
+      "Name": "Innounp",
+      "Version": "2.65.2",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "jd-gui",
+      "Name": "Jd Gui",
+      "Version": "1.6.6",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "jid",
+      "Name": "Jid",
+      "Version": "0.7.6",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "jq",
+      "Name": "Jq",
+      "Version": "1.8.1",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "less",
+      "Name": "Less",
+      "Version": "685",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "librehardwaremonitor",
+      "Name": "Librehardwaremonitor",
+      "Version": "0.9.4",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "lsd",
+      "Name": "Lsd",
+      "Version": "1.2.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "mingw",
+      "Name": "Mingw",
+      "Version": "15.2.0-rt_v13-rev0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "nextcloud",
+      "Name": "Nextcloud",
+      "Version": "3.17.3",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "nodejs",
+      "Name": "Nodejs",
+      "Version": "25.0.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "nu",
+      "Name": "Nu",
+      "Version": "0.108.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "obsidian",
+      "Name": "Obsidian",
+      "Version": "1.9.14",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "opencode",
+      "Name": "Opencode",
+      "Version": "0.15.8",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "openjdk",
+      "Name": "Openjdk",
+      "Version": "25-36",
+      "Source": "java",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "openssl",
+      "Name": "Openssl",
+      "Version": "3.6.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "pip",
+      "Name": "Pip",
+      "Version": "25.2",
+      "Source": "pip",
+      "ManagerName": "Pip"
+    },
+    {
+      "Id": "poppler",
+      "Name": "Poppler",
+      "Version": "25.07.0-0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "putty",
+      "Name": "Putty",
+      "Version": "0.83",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "python",
+      "Name": "Python",
+      "Version": "3.14.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "qalculate",
+      "Name": "Qalculate",
+      "Version": "5.8.0",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "rainmeter",
+      "Name": "Rainmeter",
+      "Version": "4.5.23.3836",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "resvg",
+      "Name": "Resvg",
+      "Version": "0.45.1",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "ripgrep",
+      "Name": "Ripgrep",
+      "Version": "15.0.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "rustup",
+      "Name": "Rustup",
+      "Version": "1.28.2",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "scoop-search",
+      "Name": "Scoop Search",
+      "Version": "2.1.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "starship",
+      "Name": "Starship",
+      "Version": "1.23.0",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "syncthing",
+      "Name": "Syncthing",
+      "Version": "2.0.10",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "unigetui",
+      "Name": "Unigetui",
+      "Version": "3.3.5",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "vcpkg",
+      "Name": "Vcpkg",
+      "Version": "2025.09.17",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "vcredist2022",
+      "Name": "Vcredist2022",
+      "Version": "14.44.35211.0",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "vcxsrv",
+      "Name": "Vcxsrv",
+      "Version": "21.1.16.1",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "windhawk",
+      "Name": "Windhawk",
+      "Version": "1.6.1",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "windows-terminal",
+      "Name": "Windows Terminal",
+      "Version": "1.23.12811.0",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "winfetch",
+      "Name": "Winfetch",
+      "Version": "2.5.1",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "yasb",
+      "Name": "Yasb",
+      "Version": "1.8.3",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "yazi",
+      "Name": "Yazi",
+      "Version": "25.5.31",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "zoom",
+      "Name": "Zoom",
+      "Version": "6.6.1.15968",
+      "Source": "extras",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "zoxide",
+      "Name": "Zoxide",
+      "Version": "0.9.8",
+      "Source": "main",
+      "ManagerName": "Scoop"
+    }
+  ],
+  "incompatible_packages_info": "Incompatible packages cannot be installed from UniGetUI, either because they came from a local source (for example Local PC) or because the package manager was unavailable. Nevertheless, they have been listed here for logging purposes.",
+  "incompatible_packages": []
+}
