@@ -16,6 +16,7 @@
       "hiddenbar"
       "aldente"
       "nextcloud"
+      "figma"
     ];
     greedyCasks = true;
     masApps = {
