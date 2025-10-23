@@ -24,7 +24,14 @@ function Update-PowerShell {
 
     if ($updateNeeded) {
       Write-Host "Updating PowerShell..." -ForegroundColor Yellow
-      Start-Process powershell.exe -ArgumentList "-NoProfile -Command winget upgrade Microsoft.PowerShell --accept-source-agreements --accept-package-agreements" -Wait -NoNewWindow
+      $msiAsset = $latestReleaseInfo.assets | Where-Object { $_.name -like "*win-x64.msi" } | Select-Object -First 1
+      $msiUrl = $msiAsset.browser_download_url
+      $msiPath = "$env:TEMP\PowerShell-$latestVersion-win-x64.msi"
+      Write-Host "Downloading PowerShell $latestVersion..." -ForegroundColor Cyan
+      Invoke-WebRequest -Uri $msiUrl -OutFile $msiPath
+      Write-Host "Installing PowerShell..." -ForegroundColor Cyan
+      Start-Process msiexec.exe -ArgumentList "/i `"$msiPath`" /qn /norestart" -Wait -NoNewWindow
+      Remove-Item $msiPath -Force -ErrorAction SilentlyContinue
       Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
     } else {
       Write-Host "Your PowerShell is up to date." -ForegroundColor Green
