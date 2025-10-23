@@ -3,8 +3,8 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # NUR
     nur = {
@@ -56,7 +56,7 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
+      nixpkgs-stable,
       nur,
       nix-index-database,
       nixos-wsl,
@@ -74,8 +74,8 @@
       # Common variables
       commonArgs = { inherit inputs outputs; };
 
-      unstableOverlay = final: prev: {
-        unstable = import nixpkgs-unstable {
+      stableOverlay = final: prev: {
+        stable = import nixpkgs-stable {
           inherit (final) system;
           config.allowUnfree = true;
         };
@@ -90,7 +90,7 @@
           modules = modules ++ [
             {
               nixpkgs.overlays = [
-                unstableOverlay
+                stableOverlay
               ];
             }
           ];
@@ -104,7 +104,7 @@
           modules = modules ++ [
             {
               nixpkgs.overlays = [
-                unstableOverlay
+                stableOverlay
               ];
             }
           ];
