@@ -26,6 +26,7 @@
       # Some more libraries that I needed to run programs
       libiconv
       icu
+      readline
     ];
   };
 }

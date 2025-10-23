@@ -8,21 +8,19 @@
   imports = [
     ../../../../../../util/home/dotfiles
   ];
+
   programs.bat = {
     enable = true;
-    extraPackages = with pkgs.bat-extras; [
-      batdiff
-      batgrep
-      batman
-      batpipe
-      batwatch
-      prettybat
+    extraPackages = [
+      pkgs.bat-extras.core
     ];
   };
+
   xdg.configFile.bat = {
     source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/bat";
     force = true;
   };
+
   home.shellAliases = {
     cat = "bat --paging=never";
   };

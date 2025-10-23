@@ -4,13 +4,37 @@
   ...
 }:
 let
-  libraryPath = lib.makeLibraryPath [
-    pkgs.libiconv
-    pkgs.icu
+  libs = with pkgs; [
+    # List by default
+    zlib
+    zstd
+    stdenv.cc.cc
+    curl
+    openssl
+    libssh
+    bzip2
+    libxml2
+    libsodium
+    util-linux
+    xz
+
+    # Required
+    glib
+    gtk2
+
+    # Others I need
+    darwin.libiconv
+    icu
+    darwin.ICU
+    readline
   ];
+  devLibs = map (pkg: pkg.dev or pkg) libs;
 in
 {
+  environment.systemPackages = libs;
+
   environment.variables = {
-    LIBRARY_PATH = ''${libraryPath}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
+    LIBRARY_PATH = lib.makeSearchPath "lib" libs;
+    CPATH = lib.makeSearchPath "include" devLibs;
   };
 }
