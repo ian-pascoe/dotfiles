@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   dotfiles,
   ...
@@ -10,6 +11,7 @@
 
   programs.opencode = {
     enable = true;
+    package = pkgs.unstable.opencode; # Stable is way too old
   };
 
   xdg.configFile.opencode = {

@@ -3,7 +3,8 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # NUR
     nur = {
@@ -55,6 +56,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       nur,
       nix-index-database,
       nixos-wsl,
@@ -72,13 +74,26 @@
       # Common variables
       commonArgs = { inherit inputs outputs; };
 
+      unstableOverlay = final: prev: {
+        unstable = import nixpkgs-unstable {
+          inherit (final) system;
+          config.allowUnfree = true;
+        };
+      };
+
       # Helper functions
       mkNixosSystem =
         modules:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = commonArgs;
-          inherit modules;
+          modules = modules ++ [
+            {
+              nixpkgs.overlays = [
+                unstableOverlay
+              ];
+            }
+          ];
         };
 
       mkDarwinSystem =
@@ -86,7 +101,13 @@
         nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = commonArgs;
-          inherit modules;
+          modules = modules ++ [
+            {
+              nixpkgs.overlays = [
+                unstableOverlay
+              ];
+            }
+          ];
         };
 
       mkHomeManagerConfig = user: config: {
