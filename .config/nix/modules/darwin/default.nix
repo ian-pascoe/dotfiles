@@ -1,6 +1,7 @@
 {
   imports = [
     ./homebrew
+    ./libraries
     ./programs
     ./system
   ];

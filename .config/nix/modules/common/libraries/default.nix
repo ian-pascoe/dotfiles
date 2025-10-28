@@ -23,9 +23,7 @@ let
     gtk2
 
     # Others I need
-    darwin.libiconv
     icu
-    darwin.ICU
     readline
   ];
   devLibs = map (pkg: pkg.dev or pkg) libs;
