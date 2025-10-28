@@ -11,6 +11,13 @@ if(Get-Module -ListAvailable -Name gsudoModule) {
   Write-Host "gsudoModule not found. Please install gsudo for elevated command support." -ForegroundColor Yellow
 }
 
+function Test-Command {
+  param (
+    [string]$commandName
+  )
+  return Get-Command $commandName -ErrorAction SilentlyContinue
+}
+
 function Update-PowerShell {
   try {
     Write-Host "Checking for PowerShell updates..." -ForegroundColor Cyan
@@ -83,7 +90,7 @@ function df {
   Get-Volume
 }
 
-function unzip ($file) {
+function unzip($file) {
   Write-Output("Extracting", $file, "to", $pwd)
   $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
   Expand-Archive -Path $fullFile -DestinationPath $pwd

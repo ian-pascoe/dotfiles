@@ -53,7 +53,7 @@
     {
       "Id": "aws",
       "Name": "Aws",
-      "Version": "2.31.18",
+      "Version": "2.31.22",
       "Source": "main",
       "ManagerName": "Scoop"
     },
@@ -81,21 +81,21 @@
     {
       "Id": "bun",
       "Name": "Bun",
-      "Version": "1.3.0",
+      "Version": "1.3.1",
       "Source": "main",
       "ManagerName": "Scoop"
     },
     {
       "Id": "cargo-binstall",
       "Name": "Cargo Binstall",
-      "Version": "1.15.7",
+      "Version": "1.15.9",
       "Source": "main",
       "ManagerName": "Scoop"
     },
     {
       "Id": "corretto-jdk",
       "Name": "Corretto Jdk",
-      "Version": "21.0.8.9.1",
+      "Version": "21.0.9.10.1",
       "Source": "java",
       "ManagerName": "Scoop"
     },
@@ -111,6 +111,13 @@
       "Name": "Dotnet Sdk",
       "Version": "9.0.306",
       "Source": "main",
+      "ManagerName": "Scoop"
+    },
+    {
+      "Id": "eclipse-jee",
+      "Name": "Eclipse Jee",
+      "Version": "2025-09",
+      "Source": "extras",
       "ManagerName": "Scoop"
     },
     {
@@ -158,7 +165,7 @@
     {
       "Id": "fzf",
       "Name": "Fzf",
-      "Version": "0.66.0",
+      "Version": "0.66.1",
       "Source": "main",
       "ManagerName": "Scoop"
     },
@@ -207,7 +214,7 @@
     {
       "Id": "helium",
       "Name": "Helium",
-      "Version": "0.5.7.1",
+      "Version": "0.5.8.1",
       "Source": "extras",
       "ManagerName": "Scoop"
     },
@@ -270,7 +277,7 @@
     {
       "Id": "nextcloud",
       "Name": "Nextcloud",
-      "Version": "3.17.3",
+      "Version": "4.0.0",
       "Source": "extras",
       "ManagerName": "Scoop"
     },
@@ -298,14 +305,14 @@
     {
       "Id": "opencode",
       "Name": "Opencode",
-      "Version": "0.15.10",
+      "Version": "0.15.18",
       "Source": "extras",
       "ManagerName": "Scoop"
     },
     {
       "Id": "openjdk",
       "Name": "Openjdk",
-      "Version": "25-36",
+      "Version": "25.0.1-8",
       "Source": "java",
       "ManagerName": "Scoop"
     },
@@ -368,7 +375,7 @@
     {
       "Id": "ripgrep",
       "Name": "Ripgrep",
-      "Version": "15.0.0",
+      "Version": "15.1.0",
       "Source": "main",
       "ManagerName": "Scoop"
     },
@@ -389,7 +396,7 @@
     {
       "Id": "starship",
       "Name": "Starship",
-      "Version": "1.23.0",
+      "Version": "1.24.0",
       "Source": "main",
       "ManagerName": "Scoop"
     },
@@ -410,7 +417,7 @@
     {
       "Id": "vcpkg",
       "Name": "Vcpkg",
-      "Version": "2025.09.17",
+      "Version": "2025.10.17",
       "Source": "main",
       "ManagerName": "Scoop"
     },
@@ -466,7 +473,7 @@
     {
       "Id": "zoom",
       "Name": "Zoom",
-      "Version": "6.6.1.15968",
+      "Version": "6.6.6.19875",
       "Source": "extras",
       "ManagerName": "Scoop"
     },

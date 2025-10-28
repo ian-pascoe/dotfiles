@@ -9,6 +9,7 @@
     settings = {
       user.email = "ian.g.pascoe@gmail.com";
       user.name = "Ian Pascoe";
+      core.ignorecase = false;
     };
   };
 
