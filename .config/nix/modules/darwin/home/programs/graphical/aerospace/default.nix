@@ -19,6 +19,7 @@
       enable = false;
     };
   };
+
   xdg.configFile.aerospace = {
     source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/.config/aerospace";
     force = true;
