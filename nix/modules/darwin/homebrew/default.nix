@@ -5,6 +5,7 @@
     brews = [
       "mas"
       "media-control"
+      "wallpaper"
     ];
     casks = [
       "ghostty"
