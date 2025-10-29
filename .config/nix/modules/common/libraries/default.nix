@@ -25,6 +25,7 @@ let
     # Others I need
     icu
     readline
+    ncurses
   ];
   devLibs = map (pkg: pkg.dev or pkg) libs;
 in

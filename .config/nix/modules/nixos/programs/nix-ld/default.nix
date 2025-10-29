@@ -27,6 +27,7 @@
       libiconv
       icu
       readline
+      ncurses
     ];
   };
 }
