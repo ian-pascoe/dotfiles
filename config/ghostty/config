@@ -1,0 +1,21 @@
+# Ghostty Config
+
+# window options
+macos-titlebar-style = hidden
+window-padding-x = 10
+window-padding-y = 10
+
+# close options
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+# font options
+font-family = "JetBrainsMono NF"
+font-size = 14
+
+# cursor options
+cursor-style = block
+shell-integration-features = no-cursor
+
+# theme options
+theme = "Rose Pine"
