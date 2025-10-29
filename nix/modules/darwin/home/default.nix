@@ -3,6 +3,6 @@
     ./packages
     ./programs
     ./services
-    ./wallpaper
+    ./theme
   ];
 }

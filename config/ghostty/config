@@ -1,5 +1,7 @@
 # Ghostty Config
 
+config-file = ?"~/.config/theme/ghostty.conf"
+
 # window options
 macos-titlebar-style = hidden
 window-padding-x = 10
@@ -15,7 +17,8 @@ font-size = 14
 
 # cursor options
 cursor-style = block
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,ssh-env
 
-# theme options
-theme = "Rose Pine"
+# background options
+background-opacity = 0.9
+

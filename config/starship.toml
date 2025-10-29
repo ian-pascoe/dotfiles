@@ -3,46 +3,34 @@
 format = """
 $os\
 $username\
-[](fg:rose bg:overlay)\
+[](fg:cyan bg:black)\
 $directory\
-[](fg:overlay bg:pine)\
+[](fg:black bg:green)\
 $git_branch\
 $git_status\
-[](fg:pine bg:overlay)\
+[](fg:green bg:black)\
 $time\
-[](fg:overlay)\
+[](fg:black)\
 \n\
 $character\
 """
 
-# Rose pine theme
-palette = "rose-pine"
-
-[palettes.rose-pine]
-overlay = '#26233a'
-love = '#eb6f92'
-gold = '#f6c177'
-rose = '#ebbcba'
-pine = '#31748f'
-foam = '#9ccfd8'
-iris = '#c4a7e7'
-
 [os]
 disabled = false
-style = "bg:rose fg:overlay"
+style = "bg:cyan fg:black"
 format = "[ $symbol]($style)"
 
 [username]
 disabled = false
-style_user = "bg:rose fg:overlay"
-style_root = "bg:rose fg:love bold"
+style_user = "bg:cyan fg:black bold"
+style_root = "bg:blue fg:red bold"
 format = "[$user]($style)"
 show_always = true
 
 [directory]
 disabled = false
 read_only = " 󰌾"
-style = "fg:rose bg:overlay"
+style = "fg:purple bg:black"
 format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -56,19 +44,19 @@ truncation_symbol = "…/"
 [git_branch]
 disabled = false
 symbol = " "
-style = "bg:pine fg:white"
+style = "bg:green fg:white"
 format = '[ $symbol$branch]($style)'
 
 [git_status]
 disabled = false
-style = "bg:pine fg:white"
+style = "bg:green fg:white"
 format = '[($all_status$ahead_behind)]($style)'
 
 [time]
 disabled = false
 time_format = "%r"            # Hour:Minute Format
 use_12hr = true
-style = "bg:overlay fg:rose"
+style = "bg:black fg:cyan"
 format = '[  $time]($style)'
 
 # ==================
