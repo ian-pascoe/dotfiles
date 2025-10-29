@@ -33,7 +33,7 @@ in
   environment.systemPackages = libs;
 
   environment.variables = {
-    LIBRARY_PATH = lib.makeSearchPath "lib" libs;
-    CPATH = lib.makeSearchPath "include" devLibs;
+    LIBRARY_PATH = lib.mkDefault (lib.makeSearchPath "lib" libs);
+    CPATH = lib.mkDefault (lib.makeSearchPath "include" devLibs);
   };
 }
