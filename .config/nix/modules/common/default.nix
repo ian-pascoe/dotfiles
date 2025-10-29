@@ -1,7 +1,6 @@
 {
   imports = [
     ./nix
-    ./libraries
     ./programs
   ];
 }
