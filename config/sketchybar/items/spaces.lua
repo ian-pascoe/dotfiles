@@ -116,7 +116,7 @@ local function update_spaces()
 							padding_left = 8,
 							padding_right = 8,
 							color = colors.foreground,
-							highlight_color = colors.primary.background,
+							highlight_color = colors.secondary.background,
 							font = {
 								family = settings.fonts.regular,
 								size = 14,
@@ -127,7 +127,7 @@ local function update_spaces()
 							padding_left = 0,
 							padding_right = 8,
 							color = colors.foreground,
-							highlight_color = colors.primary.background,
+							highlight_color = colors.secondary.background,
 							font = {
 								family = settings.fonts.nerd,
 								size = 10,
@@ -150,7 +150,7 @@ local function update_spaces()
 					local function set_focused(result)
 						local focused_num = tonumber(result)
 						local is_focused = focused_num == wnum
-						local color = is_focused and colors.primary.background or colors.border
+						local color = is_focused and colors.secondary.background or colors.border
 						Sbar.animate("tanh", 5, function()
 							space:set({
 								icon = { highlight = is_focused },
