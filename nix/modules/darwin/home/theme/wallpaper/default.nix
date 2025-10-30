@@ -7,7 +7,7 @@
     activation = {
       "setWallpaper" = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         echo "Configuring desktop wallpaper"
-        wallpaper ~/.config/theme/backgrounds
+        /opt/homebrew/bin/wallpaper set ~/.config/theme/backgrounds
       '';
     };
   };

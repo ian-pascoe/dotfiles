@@ -1,29 +1,92 @@
-return {
-  { -- disable default
-    "folke/tokyonight.nvim",
-    enabled = false,
-  },
-  { -- disable default
-    "catppuccin/nvim",
-    enabled = false,
-  },
-  { -- add rose-pine
-    "rose-pine/neovim",
-    name = "rose-pine",
+local get_theme_handle = io.popen("readlink ~/.config/theme | xargs basename")
+local theme
+if get_theme_handle then
+  theme = get_theme_handle:read("*a"):gsub("\n", "")
+  get_theme_handle:close()
+end
+
+---@type table[]
+local M = {
+  { -- transparency
+    "xiyaowong/transparent.nvim",
+    build = ":TransparentEnable",
     lazy = false,
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      require("rose-pine").setup({
-        variant = "auto",
-        extend_background_behind_borders = false,
-        styles = {
-          transparency = true,
-        },
-      })
-    end,
-  },
-  { -- tell LazyVim to use rose-pine
-    "LazyVim/LazyVim",
-    opts = { colorscheme = "rose-pine" },
+    priority = 1001,
+    opts = {
+      extra_groups = {
+        "NormalFloat",
+      },
+    },
   },
 }
+
+if theme == "tokyonight" then
+  M = vim.list_extend(M, {
+    { -- add tokyonight
+      "folke/tokyonight.nvim",
+      name = "tokyonight",
+      lazy = false,
+      priority = 1000,
+    },
+    { -- tell LazyVim to use tokyonight
+      "LazyVim/LazyVim",
+      opts = { colorscheme = "tokyonight" },
+    },
+  })
+end
+
+if theme == "catppuccin" then
+  M = vim.list_extend(M, {
+    { -- add catppuccin
+      "catppuccin/nvim",
+      name = "catppuccin",
+      lazy = false,
+      priority = 1000,
+    },
+    { -- tell LazyVim to use catppuccin
+      "LazyVim/LazyVim",
+      opts = { colorscheme = "catppuccin" },
+    },
+  })
+end
+
+if theme == "nord" then
+  M = vim.list_extend(M, {
+    { -- add nord
+      "shaunsingh/nord.nvim",
+      name = "nord",
+      lazy = false,
+      priority = 1000,
+      opts = function()
+        vim.g.nord_disable_background = vim.g.transparent_enabled
+      end,
+      config = function()
+        require("nord").set()
+      end,
+    },
+    { -- tell LazyVim to use nord
+      "LazyVim/LazyVim",
+      opts = { colorscheme = "nord" },
+    },
+  })
+end
+
+if not theme or theme == "rose-pine" then
+  M = vim.list_extend(M, {
+    { -- add rose-pine
+      "rose-pine/neovim",
+      name = "rose-pine",
+      lazy = false,
+      priority = 1000,
+      opts = {
+        styles = { transparency = vim.g.transparent_enabled },
+      },
+    },
+    { -- tell LazyVim to use rose-pine
+      "LazyVim/LazyVim",
+      opts = { colorscheme = "rose-pine" },
+    },
+  })
+end
+
+return M

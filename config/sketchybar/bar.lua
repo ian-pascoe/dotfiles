@@ -1,5 +1,6 @@
-local colors = require("config.colors")
-local settings = require("config.settings")
+local config = require("config")
+local colors = config.colors
+local settings = config.settings
 
 Sbar.bar({
 	position = "top",
