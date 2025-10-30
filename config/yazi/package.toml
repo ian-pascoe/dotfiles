@@ -1,7 +1,7 @@
-[plugin]
-deps = []
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "8f1d971"
+hash = "63b6c222bf2103b3023389dde5e2ecfe"
 
-[[flavor.deps]]
-use = "Mintass/rose-pine"
-rev = "8343340"
-hash = "e2336631865c0f90276dcbc553d532fc"
+[flavor]
+deps = []
