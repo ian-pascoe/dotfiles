@@ -19,8 +19,8 @@
         source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-theme.sh";
         force = true;
       };
-      ".local/bin/set-bg-next" = {
-        source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-bg-next.sh";
+      ".local/bin/set-bg" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-bg.sh";
         force = true;
       };
     };

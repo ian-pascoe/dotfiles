@@ -34,7 +34,7 @@ function M.toColors()
 		success = { background = M.nord14, foreground = M.nord0 },
 		warning = { background = M.nord13, foreground = M.nord0 },
 		destructive = { background = M.nord11, foreground = M.nord0 },
-		border = M.nord2,
+		border = M.nord3,
 	}
 end
 
