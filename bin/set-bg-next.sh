@@ -5,7 +5,10 @@
 BACKGROUNDS_DIR="$HOME/.config/theme/backgrounds/"
 CURRENT_BACKGROUND_LINK="$HOME/.config/background"
 
-mapfile -d '' -t BACKGROUNDS < <(find -L "$BACKGROUNDS_DIR" -type f -print0 | sort -z)
+BACKGROUNDS=()
+while IFS= read -r -d '' file; do
+	BACKGROUNDS+=("$file")
+done < <(find -L "$BACKGROUNDS_DIR" -type f -print0 | sort -z)
 TOTAL=${#BACKGROUNDS[@]}
 
 if [[ $TOTAL -eq 0 ]]; then
@@ -43,7 +46,7 @@ else
 
 	if [[ "$OSTYPE" == "darwin"* ]]; then
 		echo "Setting wallpaper for macOS"
-		wallpaper set "$CURRENT_BACKGROUND_LINK"
+		osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$CURRENT_BACKGROUND_LINK\""
 	else
 		echo "Nothing to do for non-macOS systems"
 	fi

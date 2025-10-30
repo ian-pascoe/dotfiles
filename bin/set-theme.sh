@@ -36,7 +36,6 @@ mkdir -p ~/.config/k9s/skins
 ln -snf "$CURRENT_THEME_DIR/k9s.yaml" ~/.config/k9s/skins/current.yaml
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-	echo "Setting wallpaper for macOS"
 	launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.sketchybar   # restart sketchybar
 	launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.jankyborders # restart jankyborders
 fi

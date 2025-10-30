@@ -7,7 +7,6 @@
 {
   imports = [
     ../../../util/home/dotfiles
-    ./wallpaper
   ];
 
   home = {

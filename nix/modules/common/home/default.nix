@@ -2,6 +2,7 @@
   imports = [
     ./packages
     ./programs
+    ./theme
   ];
 
   xdg.enable = true;
