@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   dotfiles,
   ...
 }:
@@ -22,7 +21,7 @@
 
   home.activation = {
     setupYazi = lib.hm.dag.entryAfter [ "programs.yazi.enable" ] ''
-      export PATH="${pkgs.git}/bin:$PATH"
+      export PATH="${config.programs.git.package}/bin:$PATH"
       ${config.programs.yazi.package}/bin/ya pkg install
     '';
   };
