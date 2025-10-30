@@ -20,5 +20,8 @@
     nixfmt
     nixfmt-tree
     statix
+
+    # Some other fun ones
+    pipes-sh
   ];
 }
