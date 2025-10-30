@@ -3,34 +3,34 @@
 format = """
 $os\
 $username\
-[](fg:cyan bg:black)\
+[](fg:blue bg:bright-black)\
 $directory\
-[](fg:black bg:green)\
+[](fg:bright-black bg:green)\
 $git_branch\
 $git_status\
-[](fg:green bg:black)\
+[](fg:green bg:bright-black)\
 $time\
-[](fg:black)\
+[](fg:bright-black)\
 \n\
 $character\
 """
 
 [os]
 disabled = false
-style = "bg:cyan fg:black"
+style = "bg:blue fg:black bold"
 format = "[ $symbol]($style)"
 
 [username]
 disabled = false
-style_user = "bg:cyan fg:black bold"
-style_root = "bg:blue fg:red bold"
+style_user = "bg:blue fg:black bold"
+style_root = "bg:red fg:white bold"
 format = "[$user]($style)"
 show_always = true
 
 [directory]
 disabled = false
-read_only = " 󰌾"
-style = "fg:purple bg:black"
+read_only = "󰌾"
+style = "fg:cyan bg:bright-black bold"
 format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -44,19 +44,19 @@ truncation_symbol = "…/"
 [git_branch]
 disabled = false
 symbol = " "
-style = "bg:green fg:white"
+style = "bg:green fg:black bold"
 format = '[ $symbol$branch]($style)'
 
 [git_status]
 disabled = false
-style = "bg:green fg:white"
+style = "bg:green fg:black"
 format = '[($all_status$ahead_behind)]($style)'
 
 [time]
 disabled = false
-time_format = "%r"            # Hour:Minute Format
+time_format = "%r"                 # Hour:Minute Format
 use_12hr = true
-style = "bg:black fg:cyan"
+style = "bg:bright-black fg:white"
 format = '[  $time]($style)'
 
 # ==================

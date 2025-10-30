@@ -2,6 +2,7 @@
 ---@field colors config.colors
 ---@field icons config.icons
 ---@field settings config.settings
+---@field themes config.themes
 local M = {}
 
 setmetatable(M, {

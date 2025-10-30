@@ -1,3 +1,6 @@
+local config = require("config")
+local themes = config.themes
+
 ---@class config.colors
 ---@field background integer
 ---@field foreground integer
@@ -29,9 +32,11 @@ M.setup = function()
 
 	local colors
 	if M.theme == "nord" then
-		colors = require("config.themes").nord.toColors()
+		colors = themes.nord.toColors()
+	elseif M.theme == "catppuccin" then
+		colors = themes.catppuccin.toColors()
 	else
-		colors = require("config.themes").rose_pine.toColors()
+		colors = themes.rose_pine.toColors()
 	end
 
 	for k, v in pairs(colors) do

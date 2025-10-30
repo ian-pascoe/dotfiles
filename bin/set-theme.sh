@@ -20,6 +20,13 @@ fi
 echo "Linking new theme: $THEME_NAME"
 ln -snf "$THEME_PATH" "$CURRENT_THEME_DIR"
 
+# Starship
+if [ -f "$CURRENT_THEME_DIR/starship.toml" ]; then
+	ln -snf "$CURRENT_THEME_DIR/starship.toml" "$HOME/.config/starship.toml"
+else
+	ln -snf "$HOME/.dotfiles/config/starship.toml" "$HOME/.config/starship.toml"
+fi
+
 # BTop
 mkdir -p "$HOME/.config/btop/themes"
 ln -snf "$CURRENT_THEME_DIR/btop.theme" "$HOME/.config/btop/themes/current.theme"
@@ -52,4 +59,4 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.jankyborders # restart jankyborders
 fi
 
-set-bg-next
+set-bg 1
