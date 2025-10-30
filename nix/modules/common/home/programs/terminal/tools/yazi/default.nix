@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   dotfiles,
   ...
@@ -16,5 +17,11 @@
   xdg.configFile.yazi = {
     source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/yazi";
     force = true;
+  };
+
+  home.activation = {
+    setupYazi = lib.hm.dag.entryAfter [ "programs.yazi.enable" ] ''
+      ${config.programs.yazi.package}/bin/ya pkg install
+    '';
   };
 }

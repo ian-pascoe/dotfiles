@@ -3,6 +3,5 @@
     ./packages
     ./programs
     ./services
-    ./theme
   ];
 }
