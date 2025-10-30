@@ -20,6 +20,10 @@
         source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-theme.sh";
         force = true;
       };
+      ".local/bin/set-bg-next" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-bg-next.sh";
+        force = true;
+      };
     };
 
     activation = {
