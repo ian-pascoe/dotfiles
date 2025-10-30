@@ -42,6 +42,10 @@ if theme == "catppuccin" then
       name = "catppuccin",
       lazy = false,
       priority = 1000,
+      opts = {
+        transparent_background = vim.g.transparent_enabled,
+        float = { transparent = vim.g.transparent_enabled },
+      },
     },
     { -- tell LazyVim to use catppuccin
       "LazyVim/LazyVim",

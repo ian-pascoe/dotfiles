@@ -15,7 +15,7 @@
 ---@field border integer
 local M = {}
 
----@type "rose-pine" | "nord" | nil
+---@type "rose-pine" | "nord" | "catppuccin" | nil
 M.theme = nil
 
 M.setup = function()
