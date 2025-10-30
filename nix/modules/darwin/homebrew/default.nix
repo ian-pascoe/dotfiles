@@ -17,6 +17,7 @@
       "aldente"
       "nextcloud"
       "figma"
+      "zoom"
     ];
     greedyCasks = true;
     masApps = {
