@@ -56,6 +56,8 @@ else
 
 	if [[ "$OSTYPE" == "darwin"* ]]; then
 		echo "Setting wallpaper for macOS"
+		rm -rf ~/Library/Application\ Support/Dock/desktoppicture.db
+		killall Dock
 		osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$NEW_BACKGROUND\""
 	else
 		echo "Nothing to do for non-macOS systems"

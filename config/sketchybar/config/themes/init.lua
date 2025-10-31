@@ -5,6 +5,7 @@
 ---@field rose_pine config.themes.rose_pine
 ---@field nord config.themes.nord
 ---@field catppuccin config.themes.catppuccin
+---@field tokyonight config.themes.tokyonight
 local M = {}
 
 setmetatable(M, {
