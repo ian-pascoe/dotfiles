@@ -1,4 +1,5 @@
 ﻿#Requires AutoHotkey v2.0
+#SingleInstance Force
 ; AutoHotkey v2 Script
 ; Maps Caps Lock to:
 ; - Ctrl when held down with other keys

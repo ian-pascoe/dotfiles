@@ -27,11 +27,15 @@
 
     activation = {
       "setTheme" = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        if [ ! -d ${config.home.homeDirectory}/.config/theme ]; then
-          echo "Applying theme settings"
-          ${config.home.homeDirectory}/.local/bin/set-theme rose-pine
+        #!/bin/bash
+        export PATH="${config.home.path}/bin:${config.home.homeDirectory}/.local/bin:$PATH"
+        if [ ! -d ${config.xdg.configHome}/theme ]; then
+          echo "Applying Rose Pine (default) theme"
+          run ${config.home.homeDirectory}/.local/bin/set-theme rose-pine
         else
-          echo "Theme directory already exists, skipping theme setup"
+          echo "Re-applying current theme in case there are changes"
+          theme=$(readlink ${config.xdg.configHome}/theme | xargs basename)
+          run ${config.home.homeDirectory}/.local/bin/set-theme "$theme"
         fi
       '';
     };

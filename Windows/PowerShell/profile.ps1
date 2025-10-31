@@ -49,31 +49,45 @@ function Update-PowerShell {
   }
 }
 
-# Starship
-Invoke-Expression (&starship init powershell)
-
-# Zoxide
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
-
-# Scoop search
-. ([ScriptBlock]::Create((& scoop-search --hook | Out-String)))
-
-# Aliases
-Set-Alias -Name ls -Value lsd
-function ll {
-  lsd -l $args
-}
-function lla {
-  lsd -lA $args
+# starship
+if (Test-Command -commandName "starship") {
+  Invoke-Expression (&starship init powershell)
 }
 
-function Get-FileList {
-  bat --paging=never $args
+# zoxide
+if (Test-Command -commandName "zoxide") {
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+  Set-Alias -Name cd -Value z -Option AllScope
 }
-Set-Alias -Name cat -Value Get-FileList -Option AllScope
 
-Set-Alias -Name cd -Value z -Option AllScope
-Set-Alias -Name find -Value fd
+# scoop-search
+if (Test-Command -commandName "scoop-search") {
+  . ([ScriptBlock]::Create((& scoop-search --hook | Out-String)))
+}
+
+# lsd
+if (Test-Command -commandName "lsd") {
+  Set-Alias -Name ls -Value lsd -Option AllScope
+  function ll {
+    lsd -l $args
+  }
+  function lla {
+    lsd -lA $args
+  }
+}
+
+# bat
+if (Test-Command -commandName "bat") {
+  function Get-FileList {
+    bat --paging=never $args
+  }
+  Set-Alias -Name cat -Value Get-FileList -Option AllScope
+}
+
+# fd-find
+if (Test-Command -commandName "fd") {
+  Set-Alias -Name find -Value fd -Option AllScope
+}
 
 ## Utility functions
 
@@ -82,8 +96,23 @@ function touch($file) {
   "" | Out-File -FilePath $file -Encoding ASCII
 }
 
-function ln($target, $link) {
-  New-Item -Path $link -ItemType SymbolicLink -Value $target
+function New-Symlink {
+  param(
+    [string]$Target,
+    [string]$Link,
+    [switch]$Force = $false
+  )
+  if ($Force -and (Test-Path $Link)) {
+    Remove-Item $Link -Recurse -Force
+  }
+  New-Item -Path $Link -ItemType SymbolicLink -Value $Target
+}
+function ln($target, $link, [switch]$f) {
+  New-Symlink -Target $target -Link $link -Force:$f
+}
+
+function rm($path, [switch]$r=$false, [switch]$f=$false) {
+  Remove-Item -Path $path -Recurse:$r -Force:$f
 }
 
 function df {
@@ -135,8 +164,22 @@ function flushdns {
 }
 
 # Environment Utilities
-function export($name, $value) {
-  Set-Item -force -path "env:$name" -value $value;
+function Set-EnvironmentVariable() {
+  param(
+    [string]$Name,
+    [string]$Value,
+    [switch]$Persist=$false,
+    [ValidateSet("Process", "User", "Machine")]
+    [string]$Level = 'User'
+  )
+  Set-Item -force -path "env:$Name" -value $Value;
+  if ($Persist) {
+    [Environment]::SetEnvironmentVariable($Name, $Value, $Level)
+  }
+}
+
+function export($name, $value, [switch]$p=$false) {
+  Set-EnvironmentVariable -Name $name -Value $value -Persist:$p
 }
 
 function which($name) {
@@ -189,7 +232,7 @@ function Clear-Cache {
 
 # Quick Access to Editing the Profile
 function Edit-Profile {
-  nvim $PROFILE
+  nvim $PROFILE.CurrentUserAllHosts
 }
 Set-Alias -Name ep -Value Edit-Profile
 
