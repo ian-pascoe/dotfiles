@@ -37,6 +37,13 @@ if theme == "tokyonight" then
       opts = { colorscheme = "tokyonight" },
     },
   })
+else
+  M = vim.list_extend(M, {
+    { -- remove tokyonight if not used
+      "folke/tokyonight.nvim",
+      enabled = false,
+    },
+  })
 end
 
 if theme == "catppuccin" then
@@ -56,6 +63,13 @@ if theme == "catppuccin" then
     { -- tell LazyVim to use catppuccin
       "LazyVim/LazyVim",
       opts = { colorscheme = "catppuccin" },
+    },
+  })
+else
+  M = vim.list_extend(M, {
+    { -- remove catppuccin if not used
+      "catppuccin/nvim",
+      enabled = false,
     },
   })
 end
