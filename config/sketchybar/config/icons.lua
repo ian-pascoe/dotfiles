@@ -104,6 +104,7 @@ M.app_icons = {
 	["Calendar"] = "󰃭",
 	["Nextcloud"] = "",
 	["Figma"] = "",
+	["zoom.us"] = "",
 }
 
 function M.map(app_name)

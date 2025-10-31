@@ -5,7 +5,8 @@ if get_theme_handle then
   get_theme_handle:close()
 end
 
----@type table[]
+---@module "lazy"
+---@type LazyPluginSpec[]
 local M = {
   { -- transparency
     "xiyaowong/transparent.nvim",
@@ -27,6 +28,9 @@ if theme == "tokyonight" then
       name = "tokyonight",
       lazy = false,
       priority = 1000,
+      opts = {
+        transparent = vim.g.transparent_enabled,
+      },
     },
     { -- tell LazyVim to use tokyonight
       "LazyVim/LazyVim",

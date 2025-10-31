@@ -41,11 +41,16 @@ return {
   },
   {
     "nvimtools/none-ls.nvim",
+    ft = { "groovy" },
     opts = function(_, opts)
       local nls = require("null-ls")
-      vim.list_extend(opts.sources or {}, {
-        nls.builtins.formatting.npm_groovy_lint,
-        nls.builtins.diagnostics.npm_groovy_lint,
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.formatting.npm_groovy_lint.with({
+          filetypes = { "groovy" },
+        }),
+        nls.builtins.diagnostics.npm_groovy_lint.with({
+          filetypes = { "groovy" },
+        }),
       })
     end,
   },

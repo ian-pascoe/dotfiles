@@ -22,6 +22,6 @@
     statix
 
     # Some other fun ones
-    pipes-sh
+    pipes
   ];
 }
