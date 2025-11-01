@@ -89,6 +89,23 @@ if (Test-Command -commandName "fd") {
   Set-Alias -Name find -Value fd -Option AllScope
 }
 
+# ripgrep
+if (Test-Command -commandName "rg") {
+  Set-Alias -Name grep -Value rg -Option AllScope
+}
+
+if (Test-Command -commandName "yazi") {
+  function y {
+    $tmp = (New-TemporaryFile).FullName
+    yazi $args --cwd-file="$tmp"
+    $cwd = Get-Content -Path $tmp -Encoding UTF8
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+      Set-Location -LiteralPath (Resolve-Path -LiteralPath $cwd).Path
+    }
+    Remove-Item -Path $tmp
+  }
+}
+
 ## Utility functions
 
 # File System Utilities
@@ -96,19 +113,33 @@ function touch($file) {
   "" | Out-File -FilePath $file -Encoding ASCII
 }
 
+function New-Link {
+  param(
+    [string]$Target,
+    [string]$Link,
+    [switch]$Force = $false,
+    [ValidateSet("HardLink", "SymbolicLink")]
+    [string]$LinkType = "HardLink"
+  )
+  if ($Force -and (Test-Path $Link)) {
+    Remove-Item $Link -Recurse -Force
+  }
+  New-Item -Path $Link -ItemType $LinkType -Value $Target
+}
 function New-Symlink {
   param(
     [string]$Target,
     [string]$Link,
     [switch]$Force = $false
   )
-  if ($Force -and (Test-Path $Link)) {
-    Remove-Item $Link -Recurse -Force
-  }
-  New-Item -Path $Link -ItemType SymbolicLink -Value $Target
+  New-Link -Target $Target -Link $Link -LinkType SymbolicLink -Force:$Force
 }
-function ln($target, $link, [switch]$f) {
-  New-Symlink -Target $target -Link $link -Force:$f
+function ln($target, $link, [switch]$f, [switch]$s=$false) {
+  if ($s) {
+    New-Link -Target $target -Link $link -LinkType SymbolicLink -Force:$f
+  } else {
+    New-Link -Target $target -Link $link -LinkType HardLink -Force:$f
+  }
 }
 
 function rm($path, [switch]$r=$false, [switch]$f=$false) {

@@ -36,7 +36,11 @@ if (-not $SkipWindows) {
   if (-not (Test-Path "$env:XDG_BIN_HOME")) {
     New-Item -ItemType Directory -Path "$env:XDG_BIN_HOME"
   }
-  Copy-Item -Path "$PSScriptRoot\..\bin\*.ps1" -Destination "$env:XDG_BIN_HOME" -Force
+
+  $scripts = Get-ChildItem -Path "$PSScriptRoot\..\bin" -Filter *.ps1
+  foreach ($script in $scripts) {
+    New-Symlink -Target $script.FullName -Link "$env:XDG_BIN_HOME\$($script.Name)" -Force
+  }
 
   # setup scoop
   if (-not (Test-Command -commandName scoop)) {
@@ -69,16 +73,17 @@ if (-not $SkipWindows) {
   # Update btop to apply the changes
   scoop update --force btop && scoop cleanup btop
 
+  # k9s
+  New-Symlink -Target "$PSScriptRoot\..\config\k9s" -Link "$env:XDG_CONFIG_HOME\k9s" -Force
+
+  # lsd
+  New-Symlink -Target "$PSScriptRoot\..\config\lsd" -Link "$env:XDG_CONFIG_HOME\lsd" -Force
+
   # scoop
   New-Symlink -Target "$PSScriptRoot\..\config\scoop" -Link "$env:XDG_CONFIG_HOME\scoop" -Force
 
   # starship
   New-Symlink -Target "$PSScriptRoot\..\config\starship.toml" -Link "$env:XDG_CONFIG_HOME\starship.toml" -Force
-
-  # yazi
-  Set-EnvironmentVariable -Name YAZI_CONFIG_HOME -Value "$env:XDG_CONFIG_HOME\yazi" -Persist
-  New-Symlink -Target "$PSScriptRoot\..\config\yazi" -Link "$env:YAZI_CONFIG_HOME" -Force
-  ya pkg install
 
   # winfetch
   Set-EnvironmentVariable -Name WINFETCH_CONFIG_PATH -Value "$env:XDG_CONFIG_HOME\winfetch\config.ps1" -Persist
@@ -86,9 +91,11 @@ if (-not $SkipWindows) {
 
   # apps with more involved setup
   & "$PSScriptRoot\PowerShell\Scripts\Setup-AutoHotkey.ps1"
+  & "$PSScriptRoot\PowerShell\Scripts\Setup-FlowLauncher.ps1"
   & "$PSScriptRoot\PowerShell\Scripts\Setup-GlazeWM.ps1"
   & "$PSScriptRoot\PowerShell\Scripts\Setup-VcXsrv.ps1"
   & "$PSScriptRoot\PowerShell\Scripts\Setup-YASB.ps1"
+  & "$PSScriptRoot\PowerShell\Scripts\Setup-Yazi.ps1"
 }
 
 if (-not $SkipWSL) {
@@ -101,7 +108,8 @@ if (-not $SkipTheme) {
     Set-Theme "Rose-Pine"
   } else {
     Write-Host "Reapplying theme"
-    $theme = (Get-Item "$env:USERPROFILE\.config\theme").Target
+    $themeDir = (Get-Item "$env:USERPROFILE\.config\theme").Target
+    $theme = Split-Path $themeDir -Leaf
     Set-Theme $theme
   }
 } 
