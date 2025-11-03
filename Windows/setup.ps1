@@ -1,6 +1,7 @@
 #Requires -RunAsAdministrator
 
 param(
+  [string]$CustomProgramDir = "$env:SYSTEMDRIVE\Program Files",
   [string]$ScoopDir = "$env:USERPROFILE\scoop",
   [switch]$SkipWindows = $false,
   [switch]$SkipWSL = $false,
@@ -14,10 +15,24 @@ if (-not $SkipWindows) {
   Update-Powershell
 
   # setup important env vars
+  Set-EnvironmentVariable -Name CustomProgramFiles -Value $CustomProgramDir -Persist
   Set-EnvironmentVariable -Name HOME -Value "$env:USERPROFILE" -Persist
-  Set-EnvironmentVariable -Name PATH -Value "$env:USERPROFILE\.local\bin;$env:PATH" -Persist
+  if ($env:PATH -notlike "*$env:CustomProgramFiles\PowerShell\current*") {
+    Set-EnvironmentVariable -Name PATH -Value "$env:CustomProgramFiles\PowerShell\current;$env:PATH" -Persist
+  }
+  if ($env:PATH -notlike "*$env:USERPROFILE\.local\bin*") {
+    Set-EnvironmentVariable -Name PATH -Value "$env:USERPROFILE\.local\bin;$env:PATH" -Persist
+  }
   Set-EnvironmentVariable -Name POWERSHELL_TELEMETRY_OPTOUT -Value "true" -Persist
-  Set-EnvironmentVariable -Name PSModulePath -Value "$env:USERPROFILE\Documents\PowerShell\Modules;$env:USERPROFILE\Documents\WindowsPowerShell\Modules;$env:PSModulePath" -Persist
+  if ($env:PSModulePath -notlike "*$env:USERPROFILE\Documents\PowerShell\Modules*") {
+    Set-EnvironmentVariable -Name PSModulePath -Value "$env:USERPROFILE\Documents\PowerShell\Modules;$env:PSModulePath" -Persist
+  }
+  if ($env:PSModulePath -notlike "*$env:USERPROFILE\Documents\WindowsPowerShell\Modules*") {
+    Set-EnvironmentVariable -Name PSModulePath -Value "$env:USERPROFILE\Documents\WindowsPowerShell\Modules;$env:PSModulePath" -Persist
+  }
+  if ($env:PSModulePath -notlike "*$CustomProgramDir\PowerShell\Modules*") {
+    Set-EnvironmentVariable -Name PSModulePath -Value "$CustomProgramDir\PowerShell\Modules;$env:PSModulePath" -Persist
+  }
   Set-EnvironmentVariable -Name XDG_BIN_HOME -Value "$env:USERPROFILE\.local\bin" -Persist
   Set-EnvironmentVariable -Name XDG_CACHE_HOME -Value "$env:USERPROFILE\.cache" -Persist
   Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:USERPROFILE\.config" -Persist
@@ -29,8 +44,13 @@ if (-not $SkipWindows) {
   if (-not (Test-Path "$env:USERPROFILE\Documents\PowerShell")) {
     New-Item -ItemType Directory -Path "$env:USERPROFILE\Documents\PowerShell"
   }
-  New-Symlink -Target "$PSScriptRoot/PowerShell/profile.ps1" -Link "$env:USERPROFILE\Documents\PowerShell\profile.ps1" -Force
-  New-Symlink -Target "$PSScriptRoot/PowerShell/powershell.config.json" -Link "$env:USERPROFILE\Documents\PowerShell\powershell.config.json" -Force
+  New-Symlink -Target "$PSScriptRoot\PowerShell\profile.ps1" -Link "$env:USERPROFILE\Documents\PowerShell\profile.ps1" -Force
+  New-Symlink -Target "$PSScriptRoot\PowerShell\powershell.config.json" -Link "$env:USERPROFILE\Documents\PowerShell\powershell.config.json" -Force
+
+  if (-not (Test-Path "$env:USERPROFILE\Documents\WindowsPowerShell")) {
+    New-Item -ItemType Directory -Path "$env:USERPROFILE\Documents\WindowsPowerShell"
+  }
+  New-Symlink -Target "$PSScriptRoot\WindowsPowerShell\profile.ps1" -Link "$env:USERPROFILE\Documents\WindowsPowerShell\profile.ps1" -Force
 
   # setup local bin
   if (-not (Test-Path "$env:XDG_BIN_HOME")) {
@@ -64,14 +84,21 @@ if (-not $SkipWindows) {
     New-Item -ItemType Directory -Path "$env:XDG_CONFIG_HOME"
   }
 
+  # alacritty
+  if (-not (Test-Path "$env:APPDATA\alacritty")) {
+    New-Item -ItemType Directory -Path "$env:APPDATA\alacritty"
+  }
+  New-Symlink -Target "$PSScriptRoot\..\config\alacritty\alacritty.toml" -Link "$env:APPDATA\alacritty\alacritty.toml" -Force
+
   # bat
   Set-EnvironmentVariable -Name BAT_CONFIG_DIR -Value "$env:XDG_CONFIG_HOME\bat" -Persist
   New-Symlink -Target "$PSScriptRoot\..\config\bat" -Link "$env:BAT_CONFIG_DIR" -Force
 
   # btop
   New-Symlink -Target "$PSScriptRoot\..\config\btop" -Link "$env:SCOOP\persist\btop" -Force
+  New-Symlink -Target "$PSScriptRoot\..\config\btop" -Link "$env:XDG_CONFIG_HOME\btop" -Force
   # Update btop to apply the changes
-  scoop update --force btop && scoop cleanup btop
+  scoop update --force btop && scoop cleanup -a
 
   # k9s
   New-Symlink -Target "$PSScriptRoot\..\config\k9s" -Link "$env:XDG_CONFIG_HOME\k9s" -Force

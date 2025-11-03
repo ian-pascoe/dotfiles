@@ -32,14 +32,15 @@ function Update-PowerShell {
 
     if ($updateNeeded) {
       Write-Host "Updating PowerShell..." -ForegroundColor Yellow
-      $msiAsset = $latestReleaseInfo.assets | Where-Object { $_.name -like "*win-x64.msi" } | Select-Object -First 1
-      $msiUrl = $msiAsset.browser_download_url
-      $msiPath = "$env:TEMP\PowerShell-$latestVersion-win-x64.msi"
+      $zipAsset = $latestReleaseInfo.assets | Where-Object { $_.name -like "*win-x64.zip" } | Select-Object -First 1
+      $zipUrl = $zipAsset.browser_download_url
+      $zipPath = "$env:TEMP\PowerShell-$latestVersion-win-x64.zip"
       Write-Host "Downloading PowerShell $latestVersion..." -ForegroundColor Cyan
-      Invoke-WebRequest -Uri $msiUrl -OutFile $msiPath
+      Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
       Write-Host "Installing PowerShell..." -ForegroundColor Cyan
-      Start-Process msiexec.exe -ArgumentList "/i `"$msiPath`" /qn /norestart" -Wait -NoNewWindow
-      Remove-Item $msiPath -Force -ErrorAction SilentlyContinue
+      Expand-Archive -Path $zipPath -DestinationPath "$env:CustomProgramFiles\PowerShell\$latestVersion" -Force
+      New-Symlink -Target "$env:CustomProgramFiles\PowerShell\$latestVersion" -Link "$env:CustomProgramFiles\PowerShell\current" -Force
+      Remove-Item $zipPath -Force -ErrorAction SilentlyContinue
       Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
     } else {
       Write-Host "Your PowerShell is up to date." -ForegroundColor Green

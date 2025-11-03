@@ -4,10 +4,6 @@ watch_stylesheet: true
 watch_config: true
 debug: false
 update_check: true # Enable automatic update check.
-komorebi:
-  start_command: "komorebic start"
-  stop_command: "komorebic stop"
-  reload_command: "komorebic stop && komorebic start"
 bars:
   primary-bar:
     enabled: true
@@ -76,12 +72,12 @@ widgets:
       app_list:
         - {
             icon: "",
-            launch: "C:\\APPS\\scoop\\apps\\helium\\current\\chrome.exe",
+            launch: "$env:SCOOP\\apps\\helium\\current\\chrome.exe",
             name: "Helium Browser",
           }
         - {
             icon: "",
-            launch: "C:\\APPS\\scoop\\apps\\windows-terminal\\current\\WindowsTerminal.exe",
+            launch: "$env:SCOOP\\apps\\alacritty\\current\\alacritty.exe",
             name: "Terminal",
           }
       label_shadow:
