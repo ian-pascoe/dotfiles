@@ -20,28 +20,21 @@ fi
 echo "Linking new theme: $THEME_NAME"
 ln -snf "$THEME_PATH" "$CURRENT_THEME_DIR"
 
-# Starship
-if [ -f "$CURRENT_THEME_DIR/starship.toml" ]; then
-	ln -snf "$CURRENT_THEME_DIR/starship.toml" "$HOME/.config/starship.toml"
-else
-	ln -snf "$HOME/.dotfiles/config/starship.toml" "$HOME/.config/starship.toml"
-fi
-
-# BTop
-mkdir -p "$HOME/.config/btop/themes"
-ln -snf "$CURRENT_THEME_DIR/btop.theme" "$HOME/.config/btop/themes/current.theme"
-
-# LSD
-ln -snf "$CURRENT_THEME_DIR/lsd.yaml" "$HOME/.config/lsd/colors.yaml"
-
 # Bat
 mkdir -p "$HOME/.config/bat/themes"
 ln -snf "$CURRENT_THEME_DIR/bat.tmTheme" "$HOME/.config/bat/themes/current.tmTheme"
 bat cache --build
 
+# BTop
+mkdir -p "$HOME/.config/btop/themes"
+ln -snf "$CURRENT_THEME_DIR/btop.theme" "$HOME/.config/btop/themes/current.theme"
+
 # K9s
 mkdir -p "$HOME/.config/k9s/skins"
 ln -snf "$CURRENT_THEME_DIR/k9s.yaml" "$HOME/.config/k9s/skins/current.yaml"
+
+# LSD
+ln -snf "$CURRENT_THEME_DIR/lsd.yaml" "$HOME/.config/lsd/colors.yaml"
 
 # Yazi
 ln -snf "$CURRENT_THEME_DIR/yazi/theme.toml" "$HOME/.config/yazi/theme.toml"
@@ -51,7 +44,7 @@ if [ -d "$CURRENT_THEME_DIR/yazi/flavors" ]; then
 	done
 else
 	# If no flavors directory, make sure ya pkg installs the theme
-	ya pkg install
+	ya pkg install &>/dev/null
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

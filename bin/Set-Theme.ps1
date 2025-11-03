@@ -16,45 +16,12 @@ if (-not (Test-Path $THEME_PATH -PathType Container)) {
 }
 
 Write-Host "Linking new theme: $THEME_NAME"
-
 if (Test-Path $CURRENT_THEME_DIR) {
   Remove-Item $CURRENT_THEME_DIR -Force -ErrorAction SilentlyContinue
 }
 New-Item -ItemType SymbolicLink -Path $CURRENT_THEME_DIR -Target $THEME_PATH | Out-Null
 
-$StarshipTheme = Join-Path $CURRENT_THEME_DIR "starship.toml"
-$StarshipConfig = "$env:USERPROFILE\.config\starship.toml"
-if (Test-Path $StarshipTheme) {
-  if (Test-Path $StarshipConfig) {
-    Remove-Item $StarshipConfig -Force
-  }
-  New-Item -ItemType SymbolicLink -Path $StarshipConfig -Target $StarshipTheme | Out-Null
-} else {
-  $DefaultStarship = "$env:USERPROFILE\.dotfiles\config\starship.toml"
-  if (Test-Path $StarshipConfig) {
-    Remove-Item $StarshipConfig -Force
-  }
-  New-Item -ItemType SymbolicLink -Path $StarshipConfig -Target $DefaultStarship | Out-Null
-}
-
-$BtopThemesDir = "$env:SCOOP\persist\btop\themes"
-if (-not (Test-Path $BtopThemesDir)) {
-  New-Item -ItemType Directory -Path $BtopThemesDir | Out-Null
-}
-$BtopTheme = Join-Path $CURRENT_THEME_DIR "btop.theme"
-$BtopLink = Join-Path $BtopThemesDir "current.theme"
-if (Test-Path $BtopLink) {
-  Remove-Item $BtopLink -Force
-}
-New-Item -ItemType SymbolicLink -Path $BtopLink -Target $BtopTheme | Out-Null
-
-$LsdColors = Join-Path $CURRENT_THEME_DIR "lsd.yaml"
-$LsdLink = "$env:USERPROFILE\.config\lsd\colors.yaml"
-if (Test-Path $LsdLink) {
-  Remove-Item $LsdLink -Force
-}
-New-Item -ItemType SymbolicLink -Path $LsdLink -Target $LsdColors | Out-Null
-
+# bat
 $BatThemesDir = "$env:BAT_CONFIG_DIR\themes"
 if (-not (Test-Path $BatThemesDir)) {
   New-Item -ItemType Directory -Path $BatThemesDir | Out-Null
@@ -67,7 +34,45 @@ if (Test-Path $BatLink) {
 New-Item -ItemType SymbolicLink -Path $BatLink -Target $BatTheme | Out-Null
 bat cache --build
 
-$K9sSkinsDir = "$env:USERPROFILE\.config\k9s\skins"
+# btop
+$BtopThemesDir = "$env:SCOOP\persist\btop\themes"
+if (-not (Test-Path $BtopThemesDir)) {
+  New-Item -ItemType Directory -Path $BtopThemesDir | Out-Null
+}
+$BtopTheme = Join-Path $CURRENT_THEME_DIR "btop.theme"
+$BtopLink = Join-Path $BtopThemesDir "current.theme"
+if (Test-Path $BtopLink) {
+  Remove-Item $BtopLink -Force
+}
+New-Item -ItemType SymbolicLink -Path $BtopLink -Target $BtopTheme | Out-Null
+scoop update -f btop && scoop cleanup -a
+
+# flow launcher
+$FlowLauncherThemesDir = "$env:SCOOP\persist\flow-launcher\UserData\Themes"
+if (-not (Test-Path $FlowLauncherThemesDir)) {
+  New-Item -ItemType Directory -Path $FlowLauncherThemesDir | Out-Null
+}
+$FlowLauncherTheme = Join-Path $CURRENT_THEME_DIR "flow-launcher.xaml"
+if (Test-Path $FlowLauncherTheme) {
+  $FlowLauncherLink = Join-Path $FlowLauncherThemesDir "current.xaml"
+  if (Test-Path $FlowLauncherLink) {
+    Remove-Item $FlowLauncherLink -Force
+  }
+  New-Item -ItemType SymbolicLink -Path $FlowLauncherLink -Target $FlowLauncherTheme | Out-Null
+
+  # Restart Flow Launcher scheduled task
+  Stop-Process -Name Flow.Launcher -Force -ErrorAction SilentlyContinue
+  $taskName = "FlowLauncher"
+  $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+  if ($task) {
+    Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+    Start-ScheduledTask -TaskName $taskName
+    Write-Host "Restarted Flow Launcher" -ForegroundColor Cyan
+  }
+}
+
+# k9s
+$K9sSkinsDir = "$env:LOCALAPPDATA\k9s\skins"
 if (-not (Test-Path $K9sSkinsDir)) {
   New-Item -ItemType Directory -Path $K9sSkinsDir | Out-Null
 }
@@ -78,16 +83,24 @@ if (Test-Path $K9sLink) {
 }
 New-Item -ItemType SymbolicLink -Path $K9sLink -Target $K9sTheme | Out-Null
 
+# lsd
+$LsdColors = Join-Path $CURRENT_THEME_DIR "lsd.yaml"
+$LsdLink = "$env:USERPROFILE\.config\lsd\colors.yaml"
+if (Test-Path $LsdLink) {
+  Remove-Item $LsdLink -Force
+}
+New-Item -ItemType SymbolicLink -Path $LsdLink -Target $LsdColors | Out-Null
+
+# yazi
 $YaziTheme = Join-Path $CURRENT_THEME_DIR "yazi\theme.toml"
-$YaziLink = "$env:USERPROFILE\.config\yazi\theme.toml"
+$YaziLink = "$env:YAZI_CONFIG_HOME\theme.toml"
 if (Test-Path $YaziLink) {
   Remove-Item $YaziLink -Force
 }
 New-Item -ItemType SymbolicLink -Path $YaziLink -Target $YaziTheme | Out-Null
-
 $YaziFlavorsDir = Join-Path $CURRENT_THEME_DIR "yazi\flavors"
 if (Test-Path $YaziFlavorsDir -PathType Container) {
-  $YaziConfigFlavors = "$env:USERPROFILE\.config\yazi\flavors"
+  $YaziConfigFlavors = "$env:YAZI_CONFIG_HOME\flavors"
   if (-not (Test-Path $YaziConfigFlavors)) {
     New-Item -ItemType Directory -Path $YaziConfigFlavors | Out-Null
   }
@@ -102,17 +115,7 @@ if (Test-Path $YaziFlavorsDir -PathType Container) {
   ya pkg install
 }
 
-$FlowLauncherThemesDir = "$env:SCOOP\persist\flow-launcher\UserData\Themes"
-if (-not (Test-Path $FlowLauncherThemesDir)) {
-  New-Item -ItemType Directory -Path $FlowLauncherThemesDir | Out-Null
-}
-$FlowLauncherTheme = Join-Path $CURRENT_THEME_DIR "flow-launcher.xaml"
-$FlowLauncherLink = Join-Path $FlowLauncherThemesDir "current.xaml"
-if (Test-Path $FlowLauncherLink) {
-  Remove-Item $FlowLauncherLink -Force
-}
-New-Item -ItemType HardLink -Path $FlowLauncherLink -Target $FlowLauncherTheme | Out-Null
-
+# Reload YASB to apply the new theme
 yasbc reload
 
 & "$PSScriptRoot\Set-BG.ps1" -BackgroundIndex 1

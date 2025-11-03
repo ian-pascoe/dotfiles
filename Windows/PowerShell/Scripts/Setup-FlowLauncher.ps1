@@ -13,7 +13,7 @@ if ($existingTask) {
 Stop-Process -Name Flow.Launcher -Force -ErrorAction SilentlyContinue
 
 $flowLauncherSettingsPath = "$env:SCOOP\persist\flow-launcher\UserData\Settings\Settings.json"
-New-Link -Target "$PSScriptRoot\..\..\..\config\flow-launcher\Settings.json" -Link $flowLauncherSettingsPath -Force
+New-Symlink -Target "$PSScriptRoot\..\..\..\config\flow-launcher\Settings.json" -Link $flowLauncherSettingsPath -Force
 
 $cmd = "$env:SCOOP\apps\flow-launcher\current\Flow.Launcher.exe"
 $action = New-ScheduledTaskAction -Execute $cmd

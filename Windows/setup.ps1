@@ -101,7 +101,7 @@ if (-not $SkipWindows) {
   scoop update --force btop && scoop cleanup -a
 
   # k9s
-  New-Symlink -Target "$PSScriptRoot\..\config\k9s" -Link "$env:XDG_CONFIG_HOME\k9s" -Force
+  New-Symlink -Target "$PSScriptRoot\..\config\k9s" -Link "$env:LOCALAPPDATA\k9s" -Force
 
   # lsd
   New-Symlink -Target "$PSScriptRoot\..\config\lsd" -Link "$env:XDG_CONFIG_HOME\lsd" -Force

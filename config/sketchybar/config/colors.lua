@@ -18,7 +18,7 @@ local themes = config.themes
 ---@field border integer
 local M = {}
 
----@type "rose-pine" | "nord" | "catppuccin" | "tokyonight" | nil
+---@type "rose-pine" | "nord" | "catppuccin" | "tokyo-night" | nil
 M.theme = nil
 
 M.setup = function()
@@ -35,7 +35,7 @@ M.setup = function()
 		colors = themes.nord.toColors()
 	elseif M.theme == "catppuccin" then
 		colors = themes.catppuccin.toColors()
-	elseif M.theme == "tokyonight" then
+	elseif M.theme == "tokyo-night" then
 		colors = themes.tokyonight.toColors()
 	else
 		colors = themes.rose_pine.toColors()

@@ -1,15 +1,6 @@
 # Import Modules and External Profiles
-# Ensure Terminal-Icons module is installed before importing
-if (-not (Get-Module -ListAvailable -Name Terminal-Icons)) {
-  Install-Module -Name Terminal-Icons -Scope CurrentUser -Force -SkipPublisherCheck
-}
-Import-Module -Name Terminal-Icons
-
-if(Get-Module -ListAvailable -Name gsudoModule) {
-  Import-Module gsudoModule
-} else {
-  Write-Host "gsudoModule not found. Please install gsudo for elevated command support." -ForegroundColor Yellow
-}
+Import-Module PSReadLine -ErrorAction SilentlyContinue
+Import-Module gsudoModule -ErrorAction SilentlyContinue
 
 function Test-Command {
   param (
@@ -50,20 +41,15 @@ function Update-PowerShell {
   }
 }
 
-# starship
+# starship init
 if (Test-Command -commandName "starship") {
-  Invoke-Expression (&starship init powershell)
+  Invoke-Expression (& { (starship init powershell --print-full-init | Out-String) })
 }
 
 # zoxide
 if (Test-Command -commandName "zoxide") {
   Invoke-Expression (& { (zoxide init powershell | Out-String) })
   Set-Alias -Name cd -Value z -Option AllScope
-}
-
-# scoop-search
-if (Test-Command -commandName "scoop-search") {
-  . ([ScriptBlock]::Create((& scoop-search --hook | Out-String)))
 }
 
 # lsd
@@ -273,6 +259,11 @@ function winutil {
   Invoke-RestMethod https://chistitus.com/win | Invoke-Expression
 }
 
+# Open NixOS WSL
+function nix {
+  wsl -d NixOS --cd ~
+}
+
 # Enhanced PowerShell Experience
 # Enhanced PSReadLine Configuration
 $PSReadLineOptions = @{
@@ -306,8 +297,7 @@ Set-PSReadLineOption -AddToHistoryHandler {
 }
 
 function Set-PredictionSource {
-  # Improved prediction settings
-  Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+  Set-PSReadLineOption -PredictionSource History
   Set-PSReadLineOption -MaximumHistoryCount 10000
 }
 Set-PredictionSource
@@ -321,66 +311,3 @@ $scriptblock = {
     }
 }
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock $scriptblock
-
-# WSL fallback for command not found
-$ExecutionContext.InvokeCommand.CommandNotFoundAction = {
-  param($CommandName, $CommandLookupEventArgs)
-
-  # Check if WSL is available
-  if (Get-Command wsl -ErrorAction SilentlyContinue) {
-    # Check if the command exists in WSL
-    $wslCheck = wsl which $CommandName 2>$null
-    if ($LASTEXITCODE -eq 0 -and $wslCheck) {
-      $currentDir = (Get-Location).Path.Replace('\','\\')
-      # Create a function that will handle the WSL call
-      $functionName = "WSLFallback_$CommandName"
-      $functionBody = @"
-function global:$functionName {
-   `$convertedArgs = @()
-   foreach (`$arg in `$args) {
-     # Check if argument is in --option=path format
-     if (`$arg -match '^(--[^=]+=)(.+)$') {
-       `$optionPart = `$Matches[1]
-       `$pathPart = `$Matches[2]
-       
-       # Try to resolve the path part
-       try {
-         `$resolvedPath = [System.IO.Path]::GetFullPath(`$pathPart)
-         `$windowsPath = `$resolvedPath
-         `$wslPath = (wsl wslpath -a -u `$windowsPath.Replace('\','\\')).Trim()
-         `$convertedArgs += `$optionPart + `$wslPath
-       }
-       catch {
-         # If path part is not valid, use original argument
-         `$convertedArgs += `$arg
-       }
-     }
-     else {
-       # Try to resolve the argument as a standalone path
-       try {
-         `$resolvedPath = [System.IO.Path]::GetFullPath(`$arg)
-         `$windowsPath = `$resolvedPath
-         `$wslPath = (wsl wslpath -a -u `$windowsPath.Replace('\','\\')).Trim()
-         `$convertedArgs += `$wslPath
-       }
-       catch {
-         # If it's not a valid path, use the argument as-is
-         `$convertedArgs += `$arg
-       }
-     }
-   }
-   # Convert current PowerShell directory to WSL path and execute there
-   `$wslCurrentDir = (wsl wslpath -a -u $currentDir).Trim()
-   
-   wsl --cd `$wslCurrentDir $CommandName @convertedArgs
-}
-"@
-      
-      # Execute the function definition
-      Invoke-Expression $functionBody
-      
-      # Set the command to our new function
-      $CommandLookupEventArgs.Command = Get-Command $functionName
-    }
-  }
-}

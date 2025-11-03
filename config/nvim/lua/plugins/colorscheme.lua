@@ -21,7 +21,7 @@ local M = {
   },
 }
 
-if theme == "tokyonight" then
+if theme == "tokyo-night" then
   M = vim.list_extend(M, {
     { -- add tokyonight
       "folke/tokyonight.nvim",

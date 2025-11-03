@@ -1,70 +1,67 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+command_timeout = 1000
 
-format = """
-$os\
-$username\
-[](fg:blue bg:bright-black)\
-$directory\
-[](fg:bright-black bg:green)\
-$git_branch\
-$git_status\
-[](fg:green bg:bright-black)\
-$time\
-[](fg:bright-black)\
-\n\
-$character\
-"""
+format = "[$os$username$directory$git_branch$git_status]($style)\n$shell$character"
 
 [os]
 disabled = false
-style = "bg:blue fg:black bold"
-format = "[ $symbol]($style)"
+format = "[$symbol]($style)"
+style = "cyan"
 
 [username]
 disabled = false
-style_user = "bg:blue fg:black bold"
-style_root = "bg:red fg:white bold"
-format = "[$user]($style)"
 show_always = true
+format = "[$user]($style) "
+style_root = "bold red"
+style_user = "bold cyan"
 
 [directory]
 disabled = false
-read_only = "󰌾"
-style = "fg:cyan bg:bright-black bold"
-format = "[ $path]($style)"
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = "…/"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
+repo_root_style = "bold cyan"
+repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
 disabled = false
 symbol = " "
-style = "bg:green fg:black bold"
-format = '[ $symbol$branch]($style)'
+format = "[$symbol$branch]($style) "
+style = "italic cyan"
 
 [git_status]
 disabled = false
-style = "bg:green fg:black"
-format = '[($all_status$ahead_behind)]($style)'
+format = '[$all_status]($style)'
+style = "cyan"
+ahead = "⇡${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+behind = "⇣${count} "
+conflicted = " "
+up_to_date = " "
+untracked = "? "
+modified = " "
+stashed = ""
+staged = ""
+renamed = ""
+deleted = ""
 
-[time]
+[shell]
 disabled = false
-time_format = "%r"                 # Hour:Minute Format
-use_12hr = true
-style = "bg:bright-black fg:white"
-format = '[  $time]($style)'
+format = "[$indicator ]($style)"
+style = 'bright-black'
+pwsh_indicator = "pwsh"
+unknown_indicator = "?"
 
-# ==================
-# Nerd font symbols
-# ==================
+[character]
+disabled = false
+error_symbol = "[❯](bold red)"
+success_symbol = "[❯](bold cyan)"
+vimcmd_symbol = "[](bold cyan)"
+vimcmd_visual_symbol = "[](bold yellow)"
+vimcmd_replace_symbol = "[](bold red)"
+vimcmd_replace_one_symbol = "[](bold red)"
 
 [aws]
-symbol = "  "
+symbol = " "
 
 [buf]
 symbol = " "
@@ -105,17 +102,23 @@ symbol = " "
 [fennel]
 symbol = " "
 
+[fortran]
+symbol = " "
+
 [fossil_branch]
 symbol = " "
 
 [gcloud]
-symbol = "  "
+symbol = " "
 
 [git_commit]
-tag_symbol = '  '
+tag_symbol = ' '
 
 [golang]
 symbol = " "
+
+[gradle]
+symbol = " "
 
 [guix_shell]
 symbol = " "
@@ -168,6 +171,7 @@ Alpine = " "
 AlmaLinux = " "
 Amazon = " "
 Android = " "
+AOSC = " "
 Arch = " "
 Artix = " "
 CachyOS = " "
@@ -239,11 +243,14 @@ symbol = "󱘗 "
 [scala]
 symbol = " "
 
+[status]
+symbol = " "
+
 [swift]
 symbol = " "
 
+[xmake]
+symbol = " "
+
 [zig]
 symbol = " "
-
-[gradle]
-symbol = " "
