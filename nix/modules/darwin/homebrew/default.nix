@@ -5,6 +5,7 @@
     brews = [
       "mas"
       "media-control"
+      "opencode"
     ];
     casks = [
       "ghostty"
