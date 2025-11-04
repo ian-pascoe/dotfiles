@@ -10,7 +10,7 @@
   ];
 
   programs.opencode = {
-    enable = false; # installed via bun
+    enable = true;
     package = pkgs.nur.repos.falconprogrammer.opencode-sst; # fallback if main is broken
   };
 
