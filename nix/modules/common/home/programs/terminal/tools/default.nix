@@ -14,6 +14,7 @@
     ./lazygit
     ./lsd
     ./maven
+    ./node
     ./opencode
     ./ripgrep
     ./spotify-player
