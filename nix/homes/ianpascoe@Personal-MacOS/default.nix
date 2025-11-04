@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   imports = [
     ../../modules/common/home
@@ -6,7 +7,7 @@
 
   home = {
     shellAliases = {
-      nds = "sudo -HE nix run nix-darwin/master#darwin-rebuild -- switch --flake /Users/ianpascoe/.nix#Ians-Macbook-Pro --impure";
+      nds = "sudo -HE nix run nix-darwin/master#darwin-rebuild -- switch --flake ${config.home.homeDirectory}/.nix#Ians-Macbook-Pro --impure";
     };
   };
 }

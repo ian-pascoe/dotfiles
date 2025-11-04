@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   imports = [
     ../../modules/common/home
@@ -11,7 +12,7 @@
     homeDirectory = "/home/ianpascoe";
 
     shellAliases = {
-      nrs = "sudo -HE nixos-rebuild switch --flake /home/e21146146/.nix#Work-WSL --impure";
+      nrs = "sudo -HE nixos-rebuild switch --flake ${config.home.homeDirectory}/.nix#Work-WSL --impure";
     };
   };
 }
