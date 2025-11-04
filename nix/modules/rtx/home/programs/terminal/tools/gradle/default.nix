@@ -4,15 +4,11 @@
     ../../../../../../util/rtx/certs
   ];
 
-  programs.gradle = {
-    enable = true;
-    settings = {
-      "org.gradle.jvmargs" =
-        "-Djava.net.useSystemProxies=true -Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
-    };
+  programs.gradle.settings = {
+    "org.gradle.jvmargs" = "-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
   };
 
   home.sessionVariables = {
-    GRADLE_OPTS = "-Djava.net.useSystemProxies=true -Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
+    GRADLE_OPTS = "-Djavax.net.ssl.trustStore=${rtxCerts.trustStore}";
   };
 }
