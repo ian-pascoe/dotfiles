@@ -14,12 +14,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local get_theme_handle = io.popen("readlink ~/.config/theme | xargs basename")
-local theme = "rose-pine"
-if get_theme_handle then
-  theme = get_theme_handle:read("*a"):gsub("\n", "")
-  get_theme_handle:close()
-end
+local theme = Util.get_theme()
 
 require("lazy").setup({
   spec = {

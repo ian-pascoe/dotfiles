@@ -1,10 +1,20 @@
+<#
+.SYNOPSIS
+  Sets the desktop background to the next image in the backgrounds directory or to a specified index.
+.DESCRIPTION
+  This script cycles through background images stored in the user's .config\theme\backgrounds directory.
+  It creates a symbolic link to the current background and updates the desktop wallpaper accordingly.
+.PARAMETER BackgroundIndex
+  Optional. The index of the background image to set (1-based). If not provided, the script cycles to the next image.
+#>
+
 param(
   [Parameter(Mandatory = $false)]
   [int]$BackgroundIndex
 )
 
-$BACKGROUNDS_DIR = "$env:USERPROFILE\.config\theme\backgrounds"
-$CURRENT_BACKGROUND_LINK = "$env:USERPROFILE\.config\background"
+$BACKGROUNDS_DIR = "$env:XDG_CONFIG_HOME\theme\backgrounds"
+$CURRENT_BACKGROUND_LINK = "$env:XDG_CONFIG_HOME\background"
 
 $BACKGROUNDS = Get-ChildItem -Path $BACKGROUNDS_DIR -File -Recurse | Sort-Object FullName
 $TOTAL = $BACKGROUNDS.Count

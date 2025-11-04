@@ -16,11 +16,11 @@
         force = true;
       };
       ".local/bin/set-theme" = {
-        source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-theme.sh";
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-theme";
         force = true;
       };
       ".local/bin/set-bg" = {
-        source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-bg.sh";
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/set-bg";
         force = true;
       };
     };

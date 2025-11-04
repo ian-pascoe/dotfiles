@@ -1,10 +1,20 @@
+<#
+.SYNOPSIS
+  Sets the current theme by creating symbolic links to the selected theme's resources.
+.DESCRIPTION
+  This script links the specified theme from the user's .themes directory to the current theme configuration directory.
+  It also updates themes for various applications including bat, btop, Flow Launcher, k9s, lsd, and yazi.
+.PARAMETER ThemeName
+  The name of the theme to set. HTML tags and spaces will be sanitized.
+#>
+
 param(
   [Parameter(Mandatory = $true)]
   [string]$ThemeName
 )
 
 $THEMES_DIR = "$env:USERPROFILE\.themes"
-$CURRENT_THEME_DIR = "$env:USERPROFILE\.config\theme"
+$CURRENT_THEME_DIR = "$env:XDG_CONFIG_HOME\theme"
 
 $THEME_NAME = $ThemeName -replace '<[^>]+>', '' -replace ' ', '-'
 $THEME_NAME = $THEME_NAME.ToLower()
@@ -85,7 +95,7 @@ New-Item -ItemType SymbolicLink -Path $K9sLink -Target $K9sTheme | Out-Null
 
 # lsd
 $LsdColors = Join-Path $CURRENT_THEME_DIR "lsd.yaml"
-$LsdLink = "$env:USERPROFILE\.config\lsd\colors.yaml"
+$LsdLink = "$env:XDG_CONFIG_HOME\lsd\colors.yaml"
 if (Test-Path $LsdLink) {
   Remove-Item $LsdLink -Force
 }

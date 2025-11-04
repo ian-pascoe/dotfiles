@@ -256,7 +256,7 @@ Set-Alias -Name ep -Value Edit-Profile
 
 # Open Winutil
 function winutil {
-  Invoke-RestMethod https://chistitus.com/win | Invoke-Expression
+  Invoke-RestMethod https://christitus.com/win | Invoke-Expression
 }
 
 # Open NixOS WSL
@@ -267,12 +267,12 @@ function nix {
 # Enhanced PowerShell Experience
 # Enhanced PSReadLine Configuration
 $PSReadLineOptions = @{
+  BellStyle = 'None'
   EditMode = 'Windows'
   HistoryNoDuplicates = $true
   HistorySearchCursorMovesToEnd = $true
   PredictionSource = 'History'
-  PredictionViewStyle = 'ListView'
-  BellStyle = 'None'
+  PredictionViewStyle = 'InlineView'
 }
 Set-PSReadLineOption @PSReadLineOptions
 
@@ -297,7 +297,7 @@ Set-PSReadLineOption -AddToHistoryHandler {
 }
 
 function Set-PredictionSource {
-  Set-PSReadLineOption -PredictionSource History
+  Set-PSReadLineOption -PredictionSource HistoryAndPlugin
   Set-PSReadLineOption -MaximumHistoryCount 10000
 }
 Set-PredictionSource

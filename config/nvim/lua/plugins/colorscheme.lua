@@ -1,9 +1,4 @@
-local get_theme_handle = io.popen("readlink ~/.config/theme | xargs basename")
-local theme
-if get_theme_handle then
-  theme = get_theme_handle:read("*a"):gsub("\n", "")
-  get_theme_handle:close()
-end
+local theme = Util.get_theme()
 
 ---@module "lazy"
 ---@type LazyPluginSpec[]
@@ -41,6 +36,7 @@ else
   M = vim.list_extend(M, {
     { -- remove tokyonight if not used
       "folke/tokyonight.nvim",
+      name = "tokyonight",
       enabled = false,
     },
   })
@@ -69,6 +65,7 @@ else
   M = vim.list_extend(M, {
     { -- remove catppuccin if not used
       "catppuccin/nvim",
+      name = "catppuccin",
       enabled = false,
     },
   })

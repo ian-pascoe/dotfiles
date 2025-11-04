@@ -127,6 +127,26 @@ if (-not $SkipWindows) {
 
 if (-not $SkipWSL) {
   New-Symlink -Target "$PSScriptRoot\..\Windows\wslconfig" -Link "$env:USERPROFILE\.wslconfig" -Force
+  wsl --install --no-distribution && wsl --update
+  $wslDistroList = (wsl -l -v) -replace '\x00', ''
+  if (-not ($wslDistroList | Select-String -Pattern "NixOS")) {
+    $nixosGitHubApiUrl = "https://api.github.com/repos/nix-community/NixOS-WSL/releases/latest"
+    $nixosReleaseInfo = Invoke-RestMethod -Uri $nixosGitHubApiUrl
+    $nixosAsset = $nixosReleaseInfo.assets | Where-Object { $_.name -like "*.wsl" } | Select-Object -First 1
+    $nixosUrl = $nixosAsset.browser_download_url
+    $nixosWslPath = "$env:TEMP\NixOS.wsl"
+    Write-Host "Downloading NixOS WSL distribution..." -ForegroundColor Cyan
+    Invoke-WebRequest -Uri $nixosUrl -OutFile $nixosWslPath
+    Write-Host "Installing NixOS WSL distribution..." -ForegroundColor Cyan
+    wsl --import NixOS "$env:USERPROFILE\WSL\NixOS" $nixosWslPath --version 2
+    Remove-Item $nixosWslPath -Force -ErrorAction SilentlyContinue
+    Write-Host "NixOS distribution installed." -ForegroundColor Green
+  } else {
+    Write-Host "NixOS distribution already installed." -ForegroundColor Green
+  }
+
+  $allCertsPath = "$env:TEMP\AllCertificates"
+  & "$PSScriptRoot\..\bin\Get-AllCertificates.ps1" -OutputDir "$allCertsPath"
 }
 
 if (-not $SkipTheme) {

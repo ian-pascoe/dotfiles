@@ -6,7 +6,6 @@
     openssl
 
     # Development tools
-    nodejs_24
     go
     python313
     rustc

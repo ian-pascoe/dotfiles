@@ -3,9 +3,8 @@
     ./ant
     ./awscli
     ./git
-    ./gradle
+    ./java
     ./jiracli
-    ./maven
     ./saml2aws
   ];
 }
