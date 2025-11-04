@@ -35,15 +35,13 @@ if (Test-Path $caBundlePath) {
 }
 
 # Get all certificates from LocalMachine store
-Get-ChildItem -Recurse -Path Cert:\LocalMachine `
-| Where-Object { $_ -is [System.Security.Cryptography.X509Certificates.X509Certificate2] -and $_.NotAfter.Date -gt (Get-Date).Date } `
-| ForEach-Object {
-
-  # Write Cert Info (ex. for CSV holding Meta Data); Log Info having full names and additional values for reference
-  Write-Output "$($_.Thumbprint);$($_.GetSerialNumberString());$($_.Archived);$($_.GetExpirationDateString());$($_.EnhancedKeyUsageList);$($_.GetName())"
+$certCount = 0
+$certs = Get-ChildItem -Recurse -Path Cert:\LocalMachine | Where-Object { $_ -is [System.Security.Cryptography.X509Certificates.X509Certificate2] }
+foreach ($cert in $certs) {
+  $certCount++
 
   # append "Thumbprint" of Cert for unique file names
-  $name = "$($_.Thumbprint)--$($_.Subject)" -replace '[\W]', '_'
+  $name = "$($cert.Thumbprint)--$($cert.Subject)" -replace '[\W]', '_'
   $max = $name.Length
 
   # reduce length to prevent filesystem errors
@@ -55,23 +53,29 @@ Get-ChildItem -Recurse -Path Cert:\LocalMachine `
   # build path
   $path = "{0}\{1}.{2}" -f $OutputDir,$name,$CertExtension
   if (Test-Path $path) {
-    Write-Output "Skipping existing cert file: $path"
+    Write-Host "Skipping existing cert file: $path"
     continue 
   } # next if cert was already written
 
-  $oPem=new-object System.Text.StringBuilder
+  $oPem=New-Object System.Text.StringBuilder
   [void]$oPem.AppendLine("-----BEGIN CERTIFICATE-----")
-  [void]$oPem.AppendLine([System.Convert]::ToBase64String($_.RawData,$InsertLineBreaks ? 1 : 0))
+  $base64Options = if ($InsertLineBreaks) {
+    1 
+  } else {
+    0 
+  }
+  [void]$oPem.AppendLine([System.Convert]::ToBase64String($cert.RawData, $base64Options))
   [void]$oPem.AppendLine("-----END CERTIFICATE-----")
 
   $pemContent = $oPem.toString()
-  $pemContent | add-content $path
+  $pemContent | Add-Content $path
   
   # Append to CA bundle with a comment header
-  Add-Content -Path $caBundlePath -Value "# Subject: $($_.Subject)"
-  Add-Content -Path $caBundlePath -Value "# Issuer: $($_.Issuer)"
-  Add-Content -Path $caBundlePath -Value "# Thumbprint: $($_.Thumbprint)"
+  Add-Content -Path $caBundlePath -Value "# Subject: $($cert.Subject)"
+  Add-Content -Path $caBundlePath -Value "# Issuer: $($cert.Issuer)"
+  Add-Content -Path $caBundlePath -Value "# Thumbprint: $($cert.Thumbprint)"
   Add-Content -Path $caBundlePath -Value $pemContent
 }
 
-Write-Output "`nCA bundle created at: $caBundlePath"
+Write-Host "`nProcessed $certCount certificates"
+Write-Host "CA bundle created at: $caBundlePath"

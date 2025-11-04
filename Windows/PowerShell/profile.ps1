@@ -171,6 +171,12 @@ function trash($path) {
   }
 }
 
+function Get-WSLPath($windowsPath) {
+  $escapedPath = $windowsPath.Replace('\', '\\')
+  $wslPath = wsl -d NixOS -- wslpath -a "$escapedPath"
+  return $wslPath
+}
+
 # Network Utilities
 function Get-PubIP {
   (Invoke-WebRequest http://ifconfig.me/ip).Content 

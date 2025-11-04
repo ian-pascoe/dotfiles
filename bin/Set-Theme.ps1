@@ -129,3 +129,5 @@ if (Test-Path $YaziFlavorsDir -PathType Container) {
 yasbc reload
 
 & "$PSScriptRoot\Set-BG.ps1" -BackgroundIndex 1
+
+wsl -d NixOS -- zsh -c "set-theme $ThemeName"

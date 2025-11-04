@@ -1,6 +1,7 @@
 #Requires -RunAsAdministrator
 
 param(
+  [string]$DotfilesDir = "$PSScriptRoot\..",
   [string]$CustomProgramDir = "$env:SYSTEMDRIVE\Program Files",
   [string]$ScoopDir = "$env:USERPROFILE\scoop",
   [switch]$SkipWindows = $false,
@@ -145,8 +146,16 @@ if (-not $SkipWSL) {
     Write-Host "NixOS distribution already installed." -ForegroundColor Green
   }
 
-  $allCertsPath = "$env:TEMP\AllCertificates"
+  $allCertsPath = "$env:HOME\.cache\certificates"
+  Write-Host "Exporting certificates..." -ForegroundColor Cyan
   & "$PSScriptRoot\..\bin\Get-AllCertificates.ps1" -OutputDir "$allCertsPath"
+
+  $wslSetupScriptPath = Get-WSLPath "$PSScriptRoot\setup-wsl.sh"
+  $wslDotfilesDir = Get-WSLPath "$DotfilesDir"
+  $wslCertBundlePath = Get-WSLPath "$allCertsPath\ca-bundle.crt"
+  $scriptCmd = "chmod +x '$wslSetupScriptPath' && '$wslSetupScriptPath' '$env:HOME' '$wslDotfilesDir' '$wslCertBundlePath'"
+  Write-Host "Running WSL setup script...`n$scriptCmd" -ForegroundColor Cyan
+  wsl -d NixOS -- bash -c "$scriptCmd"
 }
 
 if (-not $SkipTheme) {
