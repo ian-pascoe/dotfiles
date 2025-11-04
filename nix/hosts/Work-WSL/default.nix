@@ -9,10 +9,10 @@
     ../../modules/rtx
   ];
 
-  networking.hostName = "EC1414438";
+  networking.hostName = "Work-WSL";
 
   users.users = {
-    "e21146146" = {
+    "ianpascoe" = {
       isNormalUser = true;
       extraGroups = [
         "wheel"
@@ -21,5 +21,5 @@
       shell = pkgs.zsh;
     };
   };
-  wsl.defaultUser = "e21146146";
+  wsl.defaultUser = "ianpascoe";
 }

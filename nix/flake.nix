@@ -136,37 +136,37 @@
     in
     {
       # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild switch --flake .#EC1414438'
+      # Available through 'nixos-rebuild switch --flake .#Work-WSL'
       nixosConfigurations = {
-        EC1414438 = mkNixosSystem [
+        Work-WSL = mkNixosSystem [
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
           nix-index-database.nixosModules.nix-index
           { programs.nix-index-database.comma.enable = true; }
-          ./hosts/EC1414438
+          ./hosts/Work-WSL
           home-manager.nixosModules.home-manager
-          (mkHomeManagerConfig "e21146146" ./homes/${"e21146146@EC1414438"})
+          (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Work-WSL"})
         ];
       };
 
       # Darwin configuration entrypoint
-      # Available through 'darwin-rebuild switch --flake .#Ians-Macbook-Pro'
+      # Available through 'darwin-rebuild switch --flake .#Personal-MacOS'
       darwinConfigurations = {
-        "Ians-Macbook-Pro" = mkDarwinSystem [
+        Personal-MacOS = mkDarwinSystem [
           nur.modules.darwin.default
           nix-index-database.darwinModules.nix-index
           { programs.nix-index-database.comma.enable = true; }
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
           (mkHomebrewConfig "ianpascoe")
-          ./hosts/Ians-Macbook-Pro
+          ./hosts/Personal-MacOS
           home-manager.darwinModules.home-manager
           {
             home-manager.sharedModules = [
               mac-app-util.homeManagerModules.default
             ];
           }
-          (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Ians-Macbook-Pro"})
+          (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Personal-MacOS"})
         ];
       };
     };

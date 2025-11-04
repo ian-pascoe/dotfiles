@@ -7,11 +7,11 @@
   ];
 
   home = {
-    username = "e21146146";
-    homeDirectory = "/home/e21146146";
+    username = "ianpascoe";
+    homeDirectory = "/home/ianpascoe";
 
     shellAliases = {
-      nrs = "sudo -HE nixos-rebuild switch --flake /home/e21146146/.nix#EC1414438 --impure";
+      nrs = "sudo -HE nixos-rebuild switch --flake /home/e21146146/.nix#Work-WSL --impure";
     };
   };
 }
