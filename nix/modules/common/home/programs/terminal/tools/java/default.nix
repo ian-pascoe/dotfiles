@@ -4,8 +4,8 @@
     enable = true;
   };
 
-  home.sessionVariables = lib.mkDefault {
-    JAVA_TOOL_OPTIONS = "-Djava.net.useSystemProxies=true";
-    _JAVA_OPTIONS = "-Djava.net.useSystemProxies=true";
+  home.sessionVariables = {
+    JAVA_TOOL_OPTIONS = lib.mkDefault "-Djava.net.useSystemProxies=true";
+    _JAVA_OPTIONS = lib.mkDefault "-Djava.net.useSystemProxies=true";
   };
 }
