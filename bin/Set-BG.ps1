@@ -7,7 +7,6 @@
 .PARAMETER BackgroundIndex
   Optional. The index of the background image to set (1-based). If not provided, the script cycles to the next image.
 #>
-
 param(
   [Parameter(Mandatory = $false)]
   [int]$BackgroundIndex

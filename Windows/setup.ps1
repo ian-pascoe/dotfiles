@@ -1,5 +1,25 @@
+<#
+.SYNOPSIS
+  Setup Windows environment with dotfiles and configurations.
+.DESCRIPTION
+  This script sets up the Windows environment by linking dotfiles, installing packages via Scoop,
+  configuring applications, and optionally setting up WSL with NixOS.
+.PARAMETER DotfilesDir
+  The directory containing the dotfiles. Default is the parent directory of the script.
+.PARAMETER CustomProgramDir
+  The directory for custom program installations. Default is "C:\Program Files".
+.PARAMETER ScoopDir
+  The directory for Scoop installation. Default is "$env:USERPROFILE\scoop".
+.PARAMETER SkipWindows
+  If specified, skips the Windows-specific setup.
+.PARAMETER SkipWSL
+  If specified, skips the WSL setup.
+.PARAMETER SkipTheme
+  If specified, skips the theme application.
+.EXAMPLE
+  .\setup.ps1 -DotfilesDir "C:\Users\User\dotfiles" -CustomProgramDir "D:\CustomPrograms" -ScoopDir "D:\Scoop"
+#>
 #Requires -RunAsAdministrator
-
 param(
   [string]$DotfilesDir = "$PSScriptRoot\..",
   [string]$CustomProgramDir = "$env:SYSTEMDRIVE\Program Files",
@@ -96,10 +116,8 @@ if (-not $SkipWindows) {
   New-Symlink -Target "$PSScriptRoot\..\config\bat" -Link "$env:BAT_CONFIG_DIR" -Force
 
   # btop
-  New-Symlink -Target "$PSScriptRoot\..\config\btop" -Link "$env:SCOOP\persist\btop" -Force
-  New-Symlink -Target "$PSScriptRoot\..\config\btop" -Link "$env:XDG_CONFIG_HOME\btop" -Force
-  # Update btop to apply the changes
-  scoop update --force btop && scoop cleanup -a
+  New-Symlink -Target "$PSScriptRoot\..\config\btop\btop.conf" -Link "$env:SCOOP\apps\btop\current\btop.conf" -Force
+  New-Symlink -Target "$PSScriptRoot\..\config\btop\btop.conf" -Link "$env:SCOOP\persist\btop\btop.conf" -Force
 
   # k9s
   New-Symlink -Target "$PSScriptRoot\..\config\k9s" -Link "$env:LOCALAPPDATA\k9s" -Force

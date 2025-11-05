@@ -7,7 +7,6 @@
 .PARAMETER ThemeName
   The name of the theme to set. HTML tags and spaces will be sanitized.
 #>
-
 param(
   [Parameter(Mandatory = $true)]
   [string]$ThemeName
@@ -45,7 +44,7 @@ New-Item -ItemType SymbolicLink -Path $BatLink -Target $BatTheme | Out-Null
 bat cache --build
 
 # btop
-$BtopThemesDir = "$env:SCOOP\persist\btop\themes"
+$BtopThemesDir = "$env:SCOOP\apps\btop\current\themes"
 if (-not (Test-Path $BtopThemesDir)) {
   New-Item -ItemType Directory -Path $BtopThemesDir | Out-Null
 }
@@ -55,7 +54,12 @@ if (Test-Path $BtopLink) {
   Remove-Item $BtopLink -Force
 }
 New-Item -ItemType SymbolicLink -Path $BtopLink -Target $BtopTheme | Out-Null
-scoop update -f btop && scoop cleanup -a
+$BtopPersistedThemesDir = "$env:SCOOP\persist\btop\themes"
+$BtopPersistedLink = Join-Path $BtopPersistedThemesDir "current.theme"
+if (Test-Path $BtopPersistedLink) {
+  Remove-Item $BtopPersistedLink -Force
+}
+New-Item -ItemType SymbolicLink -Path $BtopPersistedLink -Target $BtopTheme | Out-Null
 
 # flow launcher
 $FlowLauncherThemesDir = "$env:SCOOP\persist\flow-launcher\UserData\Themes"

@@ -260,6 +260,12 @@ function Edit-Profile {
 }
 Set-Alias -Name ep -Value Edit-Profile
 
+# Update and cleanup all scoop packages
+function Update-Scoop {
+  scoop update -a
+  scoop cleanup -a
+}
+
 # Open Winutil
 function winutil {
   Invoke-RestMethod https://christitus.com/win | Invoke-Expression

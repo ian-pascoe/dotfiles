@@ -68,10 +68,6 @@ return {
           return false
         end,
       },
-      win_options = {
-        signcolumn = "yes:2",
-        statuscolumn = "",
-      },
     },
     keys = {
       {
@@ -96,13 +92,6 @@ return {
         desc = "Explorer oil (cwd)",
       },
     },
-  },
-  {
-    "FerretDetective/oil-git-signs.nvim",
-    ft = "oil",
-    ---@module "oil-git-signs"
-    ---@type oil_git_signs.Config
-    opts = {},
   },
   { -- neogit
     "NeogitOrg/neogit",

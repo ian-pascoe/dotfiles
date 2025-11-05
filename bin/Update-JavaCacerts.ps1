@@ -12,7 +12,6 @@
     Requires administrator privileges to access the LocalMachine certificate store.
 #>
 #Requires -RunAsAdministrator
-
 param(
   [string]$JavaHome = $env:JAVA_HOME,
   [string]$StorePass = "changeit"

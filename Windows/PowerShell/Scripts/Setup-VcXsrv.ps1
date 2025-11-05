@@ -1,4 +1,3 @@
-
 #Requires -RunAsAdministrator
 
 $taskName = "VcXsrv"
