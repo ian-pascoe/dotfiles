@@ -12,7 +12,7 @@ param(
   [int]$BackgroundIndex
 )
 
-$BACKGROUNDS_DIR = "$env:XDG_CONFIG_HOME\theme\backgrounds"
+$BACKGROUNDS_DIR = "$env:CURRENT_THEME_DIR\backgrounds"
 $CURRENT_BACKGROUND_LINK = "$env:XDG_CONFIG_HOME\background"
 
 $BACKGROUNDS = Get-ChildItem -Path $BACKGROUNDS_DIR -File -Recurse | Sort-Object FullName
@@ -52,10 +52,7 @@ if ($PSBoundParameters.ContainsKey('BackgroundIndex')) {
   }
 }
 
-if (Test-Path $CURRENT_BACKGROUND_LINK) {
-  Remove-Item $CURRENT_BACKGROUND_LINK -Force
-}
-New-Item -ItemType SymbolicLink -Path $CURRENT_BACKGROUND_LINK -Target $NEW_BACKGROUND | Out-Null
+New-Symlink -Target $NEW_BACKGROUND -Link $CURRENT_BACKGROUND_LINK -Force
 
 Add-Type @"
 using System;

@@ -23,15 +23,7 @@ function Update-PowerShell {
 
     if ($updateNeeded) {
       Write-Host "Updating PowerShell..." -ForegroundColor Yellow
-      $zipAsset = $latestReleaseInfo.assets | Where-Object { $_.name -like "*win-x64.zip" } | Select-Object -First 1
-      $zipUrl = $zipAsset.browser_download_url
-      $zipPath = "$env:TEMP\PowerShell-$latestVersion-win-x64.zip"
-      Write-Host "Downloading PowerShell $latestVersion..." -ForegroundColor Cyan
-      Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
-      Write-Host "Installing PowerShell..." -ForegroundColor Cyan
-      Expand-Archive -Path $zipPath -DestinationPath "$env:CustomProgramFiles\PowerShell\$latestVersion" -Force
-      New-Symlink -Target "$env:CustomProgramFiles\PowerShell\$latestVersion" -Link "$env:CustomProgramFiles\PowerShell\current" -Force
-      Remove-Item $zipPath -Force -ErrorAction SilentlyContinue
+      Start-Process powershell.exe -ArgumentList "-NoProfile -Command winget upgrade Microsoft.PowerShell --accept-source-agreements --accept-package-agreements" -Wait -NoNewWindow
       Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
     } else {
       Write-Host "Your PowerShell is up to date." -ForegroundColor Green
@@ -264,6 +256,7 @@ Set-Alias -Name ep -Value Edit-Profile
 function Update-Scoop {
   scoop update -a
   scoop cleanup -a
+  scoop export -c > "$env:XDG_CONFIG_HOME\scoop\scoopfile.json"
 }
 
 # Open Winutil

@@ -19,6 +19,7 @@
     ./ripgrep
     ./spotify-player
     ./starship
+    ./tmux
     ./uv
     ./yazi
     ./zoxide

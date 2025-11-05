@@ -6,10 +6,8 @@
   configuring applications, and optionally setting up WSL with NixOS.
 .PARAMETER DotfilesDir
   The directory containing the dotfiles. Default is the parent directory of the script.
-.PARAMETER CustomProgramDir
-  The directory for custom program installations. Default is "C:\Program Files".
 .PARAMETER ScoopDir
-  The directory for Scoop installation. Default is "$env:USERPROFILE\scoop".
+  The directory for Scoop installation. Default is "$env:HOME\scoop".
 .PARAMETER SkipWindows
   If specified, skips the Windows-specific setup.
 .PARAMETER SkipWSL
@@ -22,8 +20,7 @@
 #Requires -RunAsAdministrator
 param(
   [string]$DotfilesDir = "$PSScriptRoot\..",
-  [string]$CustomProgramDir = "$env:SYSTEMDRIVE\Program Files",
-  [string]$ScoopDir = "$env:USERPROFILE\scoop",
+  [string]$ScoopDir = "$env:HOME\scoop",
   [switch]$SkipWindows = $false,
   [switch]$SkipWSL = $false,
   [switch]$SkipTheme = $false
@@ -36,42 +33,36 @@ if (-not $SkipWindows) {
   Update-Powershell
 
   # setup important env vars
-  Set-EnvironmentVariable -Name CustomProgramFiles -Value $CustomProgramDir -Persist
-  Set-EnvironmentVariable -Name HOME -Value "$env:USERPROFILE" -Persist
-  if ($env:PATH -notlike "*$env:CustomProgramFiles\PowerShell\current*") {
-    Set-EnvironmentVariable -Name PATH -Value "$env:CustomProgramFiles\PowerShell\current;$env:PATH" -Persist
-  }
-  if ($env:PATH -notlike "*$env:USERPROFILE\.local\bin*") {
-    Set-EnvironmentVariable -Name PATH -Value "$env:USERPROFILE\.local\bin;$env:PATH" -Persist
+  Set-EnvironmentVariable -Name HOME -Value "$env:HOME" -Persist
+  if ($env:PATH -notlike "*$env:HOME\.local\bin*") {
+    Set-EnvironmentVariable -Name PATH -Value "$env:HOME\.local\bin;$env:PATH" -Persist
   }
   Set-EnvironmentVariable -Name POWERSHELL_TELEMETRY_OPTOUT -Value "true" -Persist
-  if ($env:PSModulePath -notlike "*$env:USERPROFILE\Documents\PowerShell\Modules*") {
-    Set-EnvironmentVariable -Name PSModulePath -Value "$env:USERPROFILE\Documents\PowerShell\Modules;$env:PSModulePath" -Persist
+  if ($env:PSModulePath -notlike "*$env:HOME\Documents\PowerShell\Modules*") {
+    Set-EnvironmentVariable -Name PSModulePath -Value "$env:HOME\Documents\PowerShell\Modules;$env:PSModulePath" -Persist
   }
-  if ($env:PSModulePath -notlike "*$env:USERPROFILE\Documents\WindowsPowerShell\Modules*") {
-    Set-EnvironmentVariable -Name PSModulePath -Value "$env:USERPROFILE\Documents\WindowsPowerShell\Modules;$env:PSModulePath" -Persist
+  if ($env:PSModulePath -notlike "*$env:HOME\Documents\WindowsPowerShell\Modules*") {
+    Set-EnvironmentVariable -Name PSModulePath -Value "$env:HOME\Documents\WindowsPowerShell\Modules;$env:PSModulePath" -Persist
   }
-  if ($env:PSModulePath -notlike "*$CustomProgramDir\PowerShell\Modules*") {
-    Set-EnvironmentVariable -Name PSModulePath -Value "$CustomProgramDir\PowerShell\Modules;$env:PSModulePath" -Persist
-  }
-  Set-EnvironmentVariable -Name XDG_BIN_HOME -Value "$env:USERPROFILE\.local\bin" -Persist
-  Set-EnvironmentVariable -Name XDG_CACHE_HOME -Value "$env:USERPROFILE\.cache" -Persist
-  Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:USERPROFILE\.config" -Persist
-  Set-EnvironmentVariable -Name XDG_DATA_HOME -Value "$env:USERPROFILE\.local\share" -Persist
-  Set-EnvironmentVariable -Name XDG_DESKTOP_DIR -Value "$env:USERPROFILE\Desktop" -Persist
-  Set-EnvironmentVariable -Name XDG_DOWNLOAD_DIR -Value "$env:USERPROFILE\Downloads" -Persist
+  Set-EnvironmentVariable -Name XDG_BIN_HOME -Value "$env:HOME\.local\bin" -Persist
+  Set-EnvironmentVariable -Name XDG_CACHE_HOME -Value "$env:HOME\.cache" -Persist
+  Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:XDG_CONFIG_HOME" -Persist
+  Set-EnvironmentVariable -Name XDG_DATA_HOME -Value "$env:HOME\.local\share" -Persist
+  Set-EnvironmentVariable -Name XDG_DESKTOP_DIR -Value "$env:HOME\Desktop" -Persist
+  Set-EnvironmentVariable -Name XDG_DOWNLOAD_DIR -Value "$env:HOME\Downloads" -Persist
+  Set-EnvironmentVariable -Name THEMES_DIR -Value "$env:HOME\.themes" -Persist
 
   # link powershell profile/config
-  if (-not (Test-Path "$env:USERPROFILE\Documents\PowerShell")) {
-    New-Item -ItemType Directory -Path "$env:USERPROFILE\Documents\PowerShell"
+  if (-not (Test-Path "$env:HOME\Documents\PowerShell")) {
+    New-Item -ItemType Directory -Path "$env:HOME\Documents\PowerShell"
   }
-  New-Symlink -Target "$PSScriptRoot\PowerShell\profile.ps1" -Link "$env:USERPROFILE\Documents\PowerShell\profile.ps1" -Force
-  New-Symlink -Target "$PSScriptRoot\PowerShell\powershell.config.json" -Link "$env:USERPROFILE\Documents\PowerShell\powershell.config.json" -Force
+  New-Symlink -Target "$PSScriptRoot\PowerShell\profile.ps1" -Link "$env:HOME\Documents\PowerShell\profile.ps1" -Force
+  New-Symlink -Target "$PSScriptRoot\PowerShell\powershell.config.json" -Link "$env:HOME\Documents\PowerShell\powershell.config.json" -Force
 
-  if (-not (Test-Path "$env:USERPROFILE\Documents\WindowsPowerShell")) {
-    New-Item -ItemType Directory -Path "$env:USERPROFILE\Documents\WindowsPowerShell"
+  if (-not (Test-Path "$env:HOME\Documents\WindowsPowerShell")) {
+    New-Item -ItemType Directory -Path "$env:HOME\Documents\WindowsPowerShell"
   }
-  New-Symlink -Target "$PSScriptRoot\WindowsPowerShell\profile.ps1" -Link "$env:USERPROFILE\Documents\WindowsPowerShell\profile.ps1" -Force
+  New-Symlink -Target "$PSScriptRoot\WindowsPowerShell\profile.ps1" -Link "$env:HOME\Documents\WindowsPowerShell\profile.ps1" -Force
 
   # setup local bin
   if (-not (Test-Path "$env:XDG_BIN_HOME")) {
@@ -99,7 +90,7 @@ if (-not $SkipWindows) {
   scoop update -a && scoop cleanup -a
 
   # configure apps/links
-  New-Symlink -Target "$PSScriptRoot\..\themes" -Link "$env:USERPROFILE\.themes" -Force
+  New-Symlink -Target "$PSScriptRoot\..\themes" -Link "$env:THEMES_DIR" -Force
 
   if (-not (Test-Path "$env:XDG_CONFIG_HOME")) {
     New-Item -ItemType Directory -Path "$env:XDG_CONFIG_HOME"
@@ -145,7 +136,7 @@ if (-not $SkipWindows) {
 }
 
 if (-not $SkipWSL) {
-  New-Symlink -Target "$PSScriptRoot\..\Windows\wslconfig" -Link "$env:USERPROFILE\.wslconfig" -Force
+  New-Symlink -Target "$PSScriptRoot\..\Windows\wslconfig" -Link "$env:HOME\.wslconfig" -Force
   wsl --install --no-distribution && wsl --update
   $wslDistroList = (wsl -l -v) -replace '\x00', ''
   if (-not ($wslDistroList | Select-String -Pattern "NixOS")) {
@@ -157,14 +148,14 @@ if (-not $SkipWSL) {
     Write-Host "Downloading NixOS WSL distribution..." -ForegroundColor Cyan
     Invoke-WebRequest -Uri $nixosUrl -OutFile $nixosWslPath
     Write-Host "Installing NixOS WSL distribution..." -ForegroundColor Cyan
-    wsl --import NixOS "$env:USERPROFILE\WSL\NixOS" $nixosWslPath --version 2
+    wsl --import NixOS "$env:HOME\WSL\NixOS" $nixosWslPath --version 2
     Remove-Item $nixosWslPath -Force -ErrorAction SilentlyContinue
     Write-Host "NixOS distribution installed." -ForegroundColor Green
   } else {
     Write-Host "NixOS distribution already installed." -ForegroundColor Green
   }
 
-  $allCertsPath = "$env:HOME\.cache\certificates"
+  $allCertsPath = "$env:XDG_CACHE_HOME\certificates"
   Write-Host "Exporting certificates..." -ForegroundColor Cyan
   & "$PSScriptRoot\..\bin\Get-AllCertificates.ps1" -OutputDir "$allCertsPath"
 
@@ -172,18 +163,18 @@ if (-not $SkipWSL) {
   $wslDotfilesDir = Get-WSLPath "$DotfilesDir"
   $wslCertBundlePath = Get-WSLPath "$allCertsPath\ca-bundle.crt"
   $scriptCmd = "chmod +x '$wslSetupScriptPath' && '$wslSetupScriptPath' '$env:HOME' '$wslDotfilesDir' '$wslCertBundlePath'"
-  Write-Host "Running WSL setup script...`n$scriptCmd" -ForegroundColor Cyan
+  Write-Host "Running WSL setup script..." -ForegroundColor Cyan
   wsl -d NixOS -- bash -c "$scriptCmd"
+  Write-Host "WSL setup completed." -ForegroundColor Green
 }
 
 if (-not $SkipTheme) {
-  if (-not (Test-Path "$env:USERPROFILE\.config\theme")) {
+  if (-not (Test-Path "$env:XDG_CONFIG_HOME\theme")) {
     Write-Host "Linking Rose Pine (default) theme"
     Set-Theme "Rose-Pine"
   } else {
     Write-Host "Reapplying theme"
-    $themeDir = (Get-Item "$env:USERPROFILE\.config\theme").Target
-    $theme = Split-Path $themeDir -Leaf
+    $theme = (Get-Item "$env:XDG_CONFIG_HOME\theme").Target | Split-Path -Leaf
     Set-Theme $theme
   }
 } 

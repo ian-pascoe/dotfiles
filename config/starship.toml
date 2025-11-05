@@ -5,8 +5,8 @@ format = "[$os$username$directory$git_branch$git_status]($style)\n$shell$charact
 
 [os]
 disabled = false
-format = "[$symbol]($style)"
-style = "cyan"
+format = "[$symbol]($style) "
+style = "blue"
 
 [username]
 disabled = false
@@ -19,26 +19,30 @@ style_user = "bold cyan"
 disabled = false
 truncation_length = 2
 truncation_symbol = "…/"
-repo_root_style = "bold cyan"
-repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+read_only = "󱀰"
+style = "bold purple"
+format = "[$read_only]($read_only_style)[$path]($style)"
+before_repo_root_style = "bold green"
+repo_root_style = "bold green"
+repo_root_format = "[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style) "
 
 [git_branch]
 disabled = false
-symbol = " "
-format = "[$symbol$branch]($style) "
-style = "italic cyan"
+symbol = ""
+format = "[$symbol $branch]($style) "
+style = "italic purple"
 
 [git_status]
 disabled = false
-format = '[$all_status]($style)'
+format = '[$all_status]($style) '
 style = "cyan"
-ahead = "⇡${count} "
-diverged = "⇕⇡${ahead_count}⇣${behind_count} "
-behind = "⇣${count} "
-conflicted = " "
-up_to_date = " "
-untracked = "? "
-modified = " "
+ahead = "[⇡${count}](red) "
+diverged = "[⇕⇡${ahead_count} ⇣${behind_count}](red) "
+behind = "[⇣${count}](red) "
+conflicted = "[](red) "
+up_to_date = "[](green) "
+untracked = "[?](blue) "
+modified = "[](yellow) "
 stashed = ""
 staged = ""
 renamed = ""
@@ -46,7 +50,7 @@ deleted = ""
 
 [shell]
 disabled = false
-format = "[$indicator ]($style)"
+format = "[$indicator]($style) "
 style = 'bright-black'
 pwsh_indicator = "pwsh"
 unknown_indicator = "?"
@@ -54,203 +58,203 @@ unknown_indicator = "?"
 [character]
 disabled = false
 error_symbol = "[❯](bold red)"
-success_symbol = "[❯](bold cyan)"
-vimcmd_symbol = "[](bold cyan)"
-vimcmd_visual_symbol = "[](bold yellow)"
-vimcmd_replace_symbol = "[](bold red)"
-vimcmd_replace_one_symbol = "[](bold red)"
+success_symbol = "[❯](bold green)"
+vimcmd_symbol = "[](green)"
+vimcmd_visual_symbol = "[](yellow)"
+vimcmd_replace_symbol = "[](red)"
+vimcmd_replace_one_symbol = "[](red)"
 
 [aws]
-symbol = " "
+symbol = ""
 
 [buf]
-symbol = " "
+symbol = ""
 
 [bun]
-symbol = " "
+symbol = ""
 
 [c]
-symbol = " "
+symbol = ""
 
 [cpp]
-symbol = " "
+symbol = ""
 
 [cmake]
-symbol = " "
+symbol = ""
 
 [conda]
-symbol = " "
+symbol = ""
 
 [crystal]
-symbol = " "
+symbol = ""
 
 [dart]
-symbol = " "
+symbol = ""
 
 [deno]
-symbol = " "
+symbol = ""
 
 [docker_context]
-symbol = " "
+symbol = ""
 
 [elixir]
-symbol = " "
+symbol = ""
 
 [elm]
-symbol = " "
+symbol = ""
 
 [fennel]
-symbol = " "
+symbol = ""
 
 [fortran]
-symbol = " "
+symbol = ""
 
 [fossil_branch]
-symbol = " "
+symbol = ""
 
 [gcloud]
-symbol = " "
+symbol = ""
 
 [git_commit]
-tag_symbol = ' '
+tag_symbol = ''
 
 [golang]
-symbol = " "
+symbol = ""
 
 [gradle]
-symbol = " "
+symbol = ""
 
 [guix_shell]
-symbol = " "
+symbol = ""
 
 [haskell]
-symbol = " "
+symbol = ""
 
 [haxe]
-symbol = " "
+symbol = ""
 
 [hg_branch]
-symbol = " "
+symbol = ""
 
 [hostname]
-ssh_symbol = " "
+ssh_symbol = ""
 
 [java]
-symbol = " "
+symbol = ""
 
 [julia]
-symbol = " "
+symbol = ""
 
 [kotlin]
-symbol = " "
+symbol = ""
 
 [lua]
-symbol = " "
+symbol = ""
 
 [memory_usage]
-symbol = "󰍛 "
+symbol = "󰍛"
 
 [meson]
-symbol = "󰔷 "
+symbol = "󰔷"
 
 [nim]
-symbol = "󰆥 "
+symbol = "󰆥"
 
 [nix_shell]
-symbol = " "
+symbol = ""
 
 [nodejs]
-symbol = " "
+symbol = ""
 
 [ocaml]
-symbol = " "
+symbol = ""
 
 [os.symbols]
-Alpaquita = " "
-Alpine = " "
-AlmaLinux = " "
-Amazon = " "
-Android = " "
-AOSC = " "
-Arch = " "
-Artix = " "
-CachyOS = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "󰛓 "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
-Kali = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-Nobara = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-RockyLinux = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Void = " "
-Windows = "󰍲 "
+Alpaquita = ""
+Alpine = ""
+AlmaLinux = ""
+Amazon = ""
+Android = ""
+AOSC = ""
+Arch = ""
+Artix = ""
+CachyOS = ""
+CentOS = ""
+Debian = ""
+DragonFly = ""
+Emscripten = ""
+EndeavourOS = ""
+Fedora = ""
+FreeBSD = ""
+Garuda = "󰛓"
+Gentoo = ""
+HardenedBSD = "󰞌"
+Illumos = "󰈸"
+Kali = ""
+Linux = ""
+Mabox = ""
+Macos = ""
+Manjaro = ""
+Mariner = ""
+MidnightBSD = ""
+Mint = ""
+NetBSD = ""
+NixOS = ""
+Nobara = ""
+OpenBSD = "󰈺"
+openSUSE = ""
+OracleLinux = "󰌷"
+Pop = ""
+Raspbian = ""
+Redhat = ""
+RedHatEnterprise = ""
+RockyLinux = ""
+Redox = "󰀘"
+Solus = "󰠳"
+SUSE = ""
+Ubuntu = ""
+Unknown = ""
+Void = ""
+Windows = "󰍲"
 
 [package]
-symbol = "󰏗 "
+symbol = "󰏗"
 
 [perl]
-symbol = " "
+symbol = ""
 
 [php]
-symbol = " "
+symbol = ""
 
 [pijul_channel]
-symbol = " "
+symbol = ""
 
 [pixi]
-symbol = "󰏗 "
+symbol = "󰏗"
 
 [python]
-symbol = " "
+symbol = ""
 
 [rlang]
-symbol = "󰟔 "
+symbol = "󰟔"
 
 [ruby]
-symbol = " "
+symbol = ""
 
 [rust]
-symbol = "󱘗 "
+symbol = "󱘗"
 
 [scala]
-symbol = " "
+symbol = ""
 
 [status]
-symbol = " "
+symbol = ""
 
 [swift]
-symbol = " "
+symbol = ""
 
 [xmake]
-symbol = " "
+symbol = ""
 
 [zig]
-symbol = " "
+symbol = ""
