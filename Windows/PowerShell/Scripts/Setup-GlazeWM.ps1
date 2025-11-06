@@ -1,32 +1,55 @@
 #Requires -RunAsAdministrator
 
-$taskName = "GlazeWM"
-
-$existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
-if ($existingTask) {
-  if ($existingTask.State -eq 'Running') {
-    Stop-ScheduledTask -TaskName $taskName
-    Write-Host "Stopped existing task: $taskName" -ForegroundColor Yellow
+try {
+  $taskName = "GlazeWM"
+  $glazewmExe = "$env:SCOOP\apps\glazewm\current\cli\glazewm.exe"
+  
+  if (-not (Test-Path $glazewmExe)) {
+    Write-SetupLog -Message "GlazeWM not found at $glazewmExe, skipping setup" -Level Warning
+    return
   }
-  Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-}
-Stop-Process -Name glazewm -Force -ErrorAction SilentlyContinue
 
-$glazewmPath = "$env:USERPROFILE\.glzr\glazewm"
-New-Symlink -Target "$PSScriptRoot\..\..\..\config\glazewm" -Link $glazewmPath -Force
+  $glazewmPath = "$env:USERPROFILE\.glzr\glazewm"
+  New-Symlink -Target "$PSScriptRoot\..\..\..\config\glazewm" -Link $glazewmPath -Force
 
-$cliCmd = "$env:SCOOP\apps\glazewm\current\cli\glazewm.exe start"
-$action = New-ScheduledTaskAction -Execute "Powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -Command `"$cliCmd`""
-$trigger = New-ScheduledTaskTrigger -AtLogOn -User "$env:USERDOMAIN\$env:USERNAME"
-$principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" -LogonType Interactive -RunLevel Highest
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
+  $cliCmd = "$glazewmExe start"
+  $executor = "Powershell.exe"
+  $arguments = "-NoProfile -WindowStyle Hidden -Command `"$cliCmd`""
   
-Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Glaze Window Manager Startup"
-  
-Write-Host "Created scheduled task: $taskName" -ForegroundColor Green
-  
-$task = Get-ScheduledTask -TaskName $taskName
-if ($task.State -ne 'Running') {
-  Start-ScheduledTask -TaskName $taskName
-  Write-Host "Started task: $taskName" -ForegroundColor Cyan
+  # Check if task needs to be created or updated
+  if (Test-ScheduledTaskNeedsUpdate -TaskName $taskName -ExecutablePath $executor -Arguments $arguments) {
+    Write-SetupLog -Message "Creating/updating scheduled task: $taskName" -Level Info
+    
+    $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+    if ($existingTask) {
+      if ($existingTask.State -eq 'Running') {
+        Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+        Start-Sleep -Milliseconds 500
+      }
+      Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+    }
+    
+    Stop-Process -Name glazewm -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Milliseconds 500
+
+    $action = New-ScheduledTaskAction -Execute $executor -Argument $arguments
+    $trigger = New-ScheduledTaskTrigger -AtLogOn -User "$env:USERDOMAIN\$env:USERNAME"
+    $principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" -LogonType Interactive -RunLevel Highest
+    $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
+      
+    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Glaze Window Manager Startup" | Out-Null
+      
+    Write-SetupLog -Message "Created scheduled task: $taskName" -Level Success
+  } else {
+    Write-SetupLog -Message "Scheduled task $taskName is up to date" -Level Info
+  }
+    
+  $task = Get-ScheduledTask -TaskName $taskName
+  if ($task.State -ne 'Running') {
+    Start-ScheduledTask -TaskName $taskName
+    Write-SetupLog -Message "Started task: $taskName" -Level Info
+  }
+} catch {
+  Write-SetupLog -Message "Failed to setup GlazeWM: $_" -Level Error
+  throw
 }

@@ -77,7 +77,7 @@ widgets:
           }
         - {
             icon: "",
-            launch: "$env:SCOOP\\apps\\alacritty\\current\\alacritty.exe",
+            launch: "$env:SCOOP\\apps\\windows-terminal\\current\\WindowsTerminal.exe",
             name: "Terminal",
           }
       label_shadow:

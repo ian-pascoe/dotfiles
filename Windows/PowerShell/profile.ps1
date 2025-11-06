@@ -1,5 +1,6 @@
 # Import Modules and External Profiles
 Import-Module PSReadLine -ErrorAction SilentlyContinue
+Import-Module Terminal-Icons -ErrorAction SilentlyContinue
 Import-Module gsudoModule -ErrorAction SilentlyContinue
 
 function Test-Command {
@@ -9,8 +10,174 @@ function Test-Command {
   return Get-Command $commandName -ErrorAction SilentlyContinue
 }
 
-function Update-PowerShell {
+function Write-Log {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Message,
+    [ValidateSet("Info", "Success", "Warning", "Error")]
+    [string]$Level = "Info"
+  )
+  
+  $color = switch ($Level) {
+    "Info" {
+      "Cyan" 
+    }
+    "Success" {
+      "Green" 
+    }
+    "Warning" {
+      "Yellow" 
+    }
+    "Error" {
+      "Red" 
+    }
+  }
+  
+  $prefix = switch ($Level) {
+    "Info" {
+      "[INFO]" 
+    }
+    "Success" {
+      "[SUCCESS]" 
+    }
+    "Warning" {
+      "[WARNING]" 
+    }
+    "Error" {
+      "[ERROR]" 
+    }
+  }
+  
+  Write-Host "$prefix $Message" -ForegroundColor $color
+}
+
+function Invoke-WithErrorHandling {
+  param(
+    [Parameter(Mandatory = $true)]
+    [scriptblock]$ScriptBlock,
+    [Parameter(Mandatory = $true)]
+    [string]$ErrorMessage,
+    [switch]$ContinueOnError = $false
+  )
+  
   try {
+    & $ScriptBlock
+    return $true
+  } catch {
+    Write-Log -Message "$ErrorMessage : $_" -Level Error
+    if (-not $ContinueOnError) {
+      throw
+    }
+    return $false
+  }
+}
+
+function Test-PathInEnvironmentVariable {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Path,
+    [Parameter(Mandatory = $true)]
+    [string]$VariableName
+  )
+  
+  $currentValue = [Environment]::GetEnvironmentVariable($VariableName, 'User')
+  if (-not $currentValue) {
+    $currentValue = [Environment]::GetEnvironmentVariable($VariableName, 'Machine')
+  }
+  if (-not $currentValue) {
+    $currentValue = [Environment]::GetEnvironmentVariable($VariableName, 'Process')
+  }
+  
+  if (-not $currentValue) {
+    return $false
+  }
+  
+  # Normalize paths for comparison
+  $normalizedPath = $Path.TrimEnd('\', '/').Replace('/', '\')
+  $paths = $currentValue -split ';' | ForEach-Object { 
+    $_.TrimEnd('\', '/').Replace('/', '\') 
+  }
+  
+  return $paths -contains $normalizedPath
+}
+
+function Add-ToEnvironmentVariable {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Path,
+    [Parameter(Mandatory = $true)]
+    [string]$VariableName,
+    [switch]$Prepend = $false,
+    [ValidateSet("Process", "User", "Machine")]
+    [string]$Level = 'User'
+  )
+  
+  if (Test-PathInEnvironmentVariable -Path $Path -VariableName $VariableName) {
+    Write-Log -Message "$Path already in $VariableName" -Level Info
+    return $false
+  }
+  
+  $currentValue = [Environment]::GetEnvironmentVariable($VariableName, $Level)
+  if (-not $currentValue) {
+    $currentValue = ""
+  }
+  
+  $newValue = if ($Prepend) {
+    if ($currentValue) {
+      "$Path;$currentValue" 
+    } else {
+      $Path 
+    }
+  } else {
+    if ($currentValue) {
+      "$currentValue;$Path" 
+    } else {
+      $Path 
+    }
+  }
+  
+  Set-Item -Force -Path "env:$VariableName" -Value $newValue
+  [Environment]::SetEnvironmentVariable($VariableName, $newValue, $Level)
+  Write-Log -Message "Added $Path to $VariableName" -Level Success
+  return $true
+}
+
+function Test-ScheduledTaskNeedsUpdate {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$TaskName,
+    [Parameter(Mandatory = $true)]
+    [string]$ExecutablePath,
+    [string]$Arguments = ""
+  )
+  
+  $task = Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue
+  if (-not $task) {
+    return $true
+  }
+  
+  $action = $task.Actions | Select-Object -First 1
+  if (-not $action) {
+    return $true
+  }
+  
+  # Normalize paths for comparison
+  $currentExe = $action.Execute.TrimEnd('\', '/').Replace('/', '\')
+  $newExe = $ExecutablePath.TrimEnd('\', '/').Replace('/', '\')
+  
+  if ($currentExe -ne $newExe) {
+    return $true
+  }
+  
+  if ($action.Arguments -ne $Arguments) {
+    return $true
+  }
+  
+  return $false
+}
+
+function Update-PowerShell {
+  Invoke-WithErrorHandling -ErrorMessage "Failed to update Powershell" -ScriptBlock {
     Write-Host "Checking for PowerShell updates..." -ForegroundColor Cyan
     $updateNeeded = $false
     $currentVersion = $PSVersionTable.PSVersion.ToString()
@@ -28,8 +195,6 @@ function Update-PowerShell {
     } else {
       Write-Host "Your PowerShell is up to date." -ForegroundColor Green
     }
-  } catch {
-    Write-Error "Failed to update PowerShell. Error: $_"
   }
 }
 

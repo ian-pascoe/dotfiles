@@ -8,10 +8,13 @@
     enable = true;
   };
 
-  home.file = {
-    ".tmux.conf" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/.tmux.conf";
+  xdg.configFile = {
+    "tmux" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/tmux";
       force = true;
+    };
+    "tmux/tmux.conf" = {
+      enable = false;
     };
   };
 }

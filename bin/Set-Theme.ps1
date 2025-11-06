@@ -85,6 +85,17 @@ $LsdColors = Join-Path $CURRENT_THEME_DIR "lsd.yaml"
 $LsdLink = "$env:XDG_CONFIG_HOME\lsd\colors.yaml"
 New-Symlink -Target $LsdColors -Link $LsdLink -Force
 
+# windows terminal
+$wtSettingsFile = Join-Path $env:SCOOP "persist\windows-terminal\settings\settings.json"
+$wtSettingsContent = Get-Content $wtSettingsFile -Raw | ConvertFrom-Json
+# change profiles.default.colorScheme to the new theme name
+$wtSettingsContent.profiles.defaults.colorScheme = $THEME_NAME
+# change theme to the new theme name
+$wtSettingsContent.theme = $THEME_NAME
+# Write back the updated settings
+$wtUpdatedSettingsContent = $wtSettingsContent | ConvertTo-Json -Depth 99
+$wtUpdatedSettingsContent -replace "`r`n", "`n" | Set-Content $wtSettingsFile -NoNewline
+
 # yazi
 $YaziTheme = Join-Path $CURRENT_THEME_DIR "yazi\theme.toml"
 $YaziLink = "$env:YAZI_CONFIG_HOME\theme.toml"
