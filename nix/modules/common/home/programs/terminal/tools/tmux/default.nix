@@ -25,7 +25,7 @@
       source = "${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect";
     };
     "tmux/plugins/tmux-fzf" = {
-      source = "${pkgs.tmuxPlugins.fzf}/share/tmux-plugins/tmux-fzf";
+      source = "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf";
     };
   };
 }
