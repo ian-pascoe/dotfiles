@@ -178,7 +178,7 @@ keybindings:
 - bindings:
   - alt+enter
   commands:
-  - shell-exec %SCOOP%\apps\alacritty\current\alacritty.exe
+  - shell-exec %SCOOP%\apps\windows-terminal\current\wt.exe
 - bindings:
   - alt+shift+enter
   commands:

@@ -1,7 +1,7 @@
 { lib, ... }:
 {
-  programs.java = lib.mkDefault {
-    enable = true;
+  programs.java = {
+    enable = lib.mkDefault true;
   };
 
   home.sessionVariables = {

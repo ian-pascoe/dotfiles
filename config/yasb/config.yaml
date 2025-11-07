@@ -70,16 +70,15 @@ widgets:
     options:
       label: "{data}"
       app_list:
-        - {
-            icon: "",
-            launch: "$env:SCOOP\\apps\\helium\\current\\chrome.exe",
-            name: "Helium Browser",
-          }
-        - {
-            icon: "",
-            launch: "$env:SCOOP\\apps\\windows-terminal\\current\\WindowsTerminal.exe",
-            name: "Terminal",
-          }
+        - name: "Helium Browser"
+          launch: "$env:SCOOP\\apps\\helium\\current\\chrome.exe"
+          icon: ""
+        - name: "Terminal"
+          launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe"
+          icon: ""
+        - name: "NixOS Terminal"
+          launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe new-tab --profile NixOS"
+          icon: "󱄅"
       label_shadow:
         enabled: true
         color: "black"

@@ -1,7 +1,7 @@
 { lib, ... }:
 {
-  services.displayManager.sddm = lib.mkDefault {
-    enable = true;
-    wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = lib.mkDefault true;
+    wayland.enable = lib.mkDefault true;
   };
 }
