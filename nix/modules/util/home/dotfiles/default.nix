@@ -16,9 +16,7 @@ in
       activation = {
         "setupDotfiles" = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           echo "Setting up dotfiles"
-          if [ -d "${dotfilesPath}/.git" ]; then
-            (cd "${dotfilesPath}" && ${git}/bin/git pull --ff-only)
-          else
+          if [ ! -d "${dotfilesPath}/.git" ]; then
             ${git}/bin/git clone "${dotfilesRepo}" "${dotfilesPath}"
           fi
         '';
