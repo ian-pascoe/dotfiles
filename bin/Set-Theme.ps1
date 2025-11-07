@@ -71,6 +71,17 @@ if (Test-Path $FlowLauncherTheme) {
   }
 }
 
+# glazewm
+$glazewmSettingsFile = Join-Path $env:HOME ".glzr\glazewm\config.yaml"
+$glazewmSettingsContent = Get-Content $glazewmSettingsFile -Raw | ConvertFrom-Yaml
+$glazewmThemeFile = Join-Path $CURRENT_THEME_DIR "glazewm.yaml"
+$glazewmThemeContent = Get-Content $glazewmThemeFile -Raw | ConvertFrom-Yaml
+$glazewmSettingsContent.window_effects.focused_window.border.color = $glazewmThemeContent.window_effects.focused_window.border.color
+$glazewmSettingsContent.window_effects.other_windows.border.color = $glazewmThemeContent.window_effects.other_windows.border.color
+$glazewmUpdatedSettingsContent = $glazewmSettingsContent | ConvertTo-Yaml
+$glazewmUpdatedSettingsContent -replace "`r`n", "`n" | Set-Content $glazewmSettingsFile -NoNewline
+glazewm command wm-reload-config
+
 # k9s
 $K9sSkinsDir = "$env:LOCALAPPDATA\k9s\skins"
 if (-not (Test-Path $K9sSkinsDir)) {

@@ -25,6 +25,9 @@ param(
   [switch]$SkipWSL = $false,
   [switch]$SkipTheme = $false
 )
+Install-Module -Name PSReadLine -Force -Scope CurrentUser
+Install-Module -Name PowerShell-Yaml -Force -Scope CurrentUser
+Install-Module -Name Terminal-Icons -Force -Scope CurrentUser
 
 # source the powershell profile
 try {

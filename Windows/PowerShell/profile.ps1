@@ -1,6 +1,7 @@
 # Import Modules and External Profiles
 Import-Module PSReadLine -ErrorAction SilentlyContinue
 Import-Module Terminal-Icons -ErrorAction SilentlyContinue
+Import-Module PowerShell-Yaml -ErrorAction SilentlyContinue
 Import-Module gsudoModule -ErrorAction SilentlyContinue
 
 function Test-Command {
