@@ -90,6 +90,14 @@ if theme == "nord" then
       opts = { colorscheme = "nord" },
     },
   })
+else
+  M = vim.list_extend(M, {
+    { -- remove nord if not used
+      "shaunsingh/nord.nvim",
+      name = "nord",
+      enabled = false,
+    },
+  })
 end
 
 if not theme or theme == "rose-pine" then
@@ -106,6 +114,14 @@ if not theme or theme == "rose-pine" then
     { -- tell LazyVim to use rose-pine
       "LazyVim/LazyVim",
       opts = { colorscheme = "rose-pine" },
+    },
+  })
+else
+  M = vim.list_extend(M, {
+    { -- remove rose-pine if not used
+      "rose-pine/neovim",
+      name = "rose-pine",
+      enabled = false,
     },
   })
 end

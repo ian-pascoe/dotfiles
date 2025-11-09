@@ -22,6 +22,7 @@
     ./tmux
     ./uv
     ./yazi
+    ./zellij
     ./zoxide
   ];
 }
