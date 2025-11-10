@@ -4,7 +4,6 @@
     uutils-coreutils-noprefix # GNU coreutils, written in Rust
     lsof # List open files
     openssl
-    moreutils
 
     # Development tools
     go
