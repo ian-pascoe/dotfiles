@@ -1,24 +1,5 @@
 return {
   {
-    "christoomey/vim-tmux-navigator",
-    enabled = vim.fn.getenv("TMUX") ~= nil and vim.fn.getenv("TMUX") ~= "",
-    cmd = {
-      "TmuxNavigateLeft",
-      "TmuxNavigateDown",
-      "TmuxNavigateUp",
-      "TmuxNavigateRight",
-      "TmuxNavigatePrevious",
-      "TmuxNavigatorProcessList",
-    },
-    keys = {
-      { mode = { "n", "t" }, "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-      { mode = { "n", "t" }, "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-      { mode = { "n", "t" }, "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-      { mode = { "n", "t" }, "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-    },
-  },
-  {
     "folke/snacks.nvim",
     ---@module "snacks"
     ---@type snacks.Config
