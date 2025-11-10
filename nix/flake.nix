@@ -12,27 +12,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Index Database
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # WSL
     nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
+      url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Darwin
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -58,7 +52,6 @@
       nixpkgs,
       nixpkgs-stable,
       nur,
-      nix-index-database,
       nixos-wsl,
       home-manager,
       nix-darwin,
@@ -141,8 +134,6 @@
         Work-WSL = mkNixosSystem [
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
-          nix-index-database.nixosModules.nix-index
-          { programs.nix-index-database.comma.enable = true; }
           ./hosts/Work-WSL
           home-manager.nixosModules.home-manager
           (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Work-WSL"})
@@ -154,8 +145,6 @@
       darwinConfigurations = {
         Personal-MacOS = mkDarwinSystem [
           nur.modules.darwin.default
-          nix-index-database.darwinModules.nix-index
-          { programs.nix-index-database.comma.enable = true; }
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
           (mkHomebrewConfig "ianpascoe")

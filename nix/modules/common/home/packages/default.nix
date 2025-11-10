@@ -1,8 +1,9 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    uutils-coreutils-noprefix # GNU coreutils, written in Rust
-    lsof # List open files
+    # Core utilities
+    coreutils
+    lsof
     openssl
 
     # Development tools

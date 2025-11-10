@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-	echo "Usage: $0 <theme-name>"
-	exit 1
+  echo "Usage: $0 <theme-name>"
+  exit 1
 fi
 
 THEMES_DIR="$HOME/.themes/"
@@ -13,8 +13,8 @@ THEME_PATH="$THEMES_DIR/$THEME_NAME"
 
 # Check if the theme entered exists
 if [[ ! -d "$THEME_PATH" ]]; then
-	echo "Theme '$THEME_NAME' does not exist in $THEMES_DIR"
-	exit 1
+  echo "Theme '$THEME_NAME' does not exist in $THEMES_DIR"
+  exit 1
 fi
 
 echo "Linking new theme: $THEME_NAME"
@@ -39,17 +39,14 @@ ln -snf "$CURRENT_THEME_DIR/lsd.yaml" "$HOME/.config/lsd/colors.yaml"
 # Yazi
 ln -snf "$CURRENT_THEME_DIR/yazi/theme.toml" "$HOME/.config/yazi/theme.toml"
 if [ -d "$CURRENT_THEME_DIR/yazi/flavors" ]; then
-	for flavor in "$CURRENT_THEME_DIR/yazi/flavors/"*; do
-		ln -snf "$flavor" "$HOME/.config/yazi/flavors/$(basename "$flavor")"
-	done
-else
-	# If no flavors directory, make sure ya pkg installs the theme
-	ya pkg install &>/dev/null
+  for flavor in "$CURRENT_THEME_DIR/yazi/flavors/"*; do
+    ln -snf "$flavor" "$HOME/.config/yazi/flavors/$(basename "$flavor")"
+  done
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-	launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.sketchybar   # restart sketchybar
-	launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.jankyborders # restart jankyborders
+  launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.sketchybar   # restart sketchybar
+  launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.jankyborders # restart jankyborders
 fi
 
 set-bg 1

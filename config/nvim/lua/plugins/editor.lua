@@ -135,29 +135,50 @@ return {
   },
   {
     "epwalsh/obsidian.nvim",
-    lazy = true,
-    ft = "markdown",
+    ft = { "markdown" },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    ---@module "obsidian"
-    ---@type obsidian.config.ClientOpts
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {
-      workspaces = {
-        {
-          name = "personal",
-          path = "~/vaults/personal",
-        },
-        {
-          name = "family",
-          path = "~/vaults/family",
-        },
-        {
-          name = "family",
-          path = "~/vaults/work",
-        },
-      },
-    },
+    opts = function(_, opts)
+      local vaults_path = vim.fn.finddir("vaults", os.getenv("HOME"))
+      if vaults_path == "" then
+        return opts
+      end
+
+      local personal_vault_name = "personal"
+      local personal_vault_path = vim.fn.finddir(personal_vault_name, vaults_path)
+      if personal_vault_path ~= "" then
+        opts.workspaces = vim.list_extend(opts.workspaces or {}, {
+          {
+            name = personal_vault_name,
+            path = personal_vault_path,
+          },
+        })
+      end
+
+      local family_vault_name = "family"
+      local family_vault_path = vim.fn.finddir(family_vault_name, vaults_path)
+      if family_vault_path ~= "" then
+        opts.workspaces = vim.list_extend(opts.workspaces or {}, {
+          {
+            name = family_vault_name,
+            path = family_vault_path,
+          },
+        })
+      end
+
+      local work_vault_name = "work"
+      local work_vault_path = vim.fn.finddir(work_vault_name, vaults_path)
+      if work_vault_path ~= "" then
+        opts.workspaces = vim.list_extend(opts.workspaces or {}, {
+          {
+            name = work_vault_name,
+            path = work_vault_path,
+          },
+        })
+      end
+
+      return opts
+    end,
   },
 }

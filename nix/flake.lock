@@ -122,7 +122,6 @@
       },
       "original": {
         "owner": "nix-community",
-        "ref": "master",
         "repo": "home-manager",
         "type": "github"
       }
@@ -130,11 +129,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1762790058,
-        "narHash": "sha256-INQPWJKf4ps1pMg6L74yv2HW02RUGZiX0hV9ZpO+zk4=",
+        "lastModified": 1762792192,
+        "narHash": "sha256-fnHEeWmYzeBqr1oBGmvIvj1kMaIO7r2wSqwGX1dAoEc=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "b088aa3cc11177f3f94d9c91d2f6baf24fab6fc9",
+        "rev": "a2290cc0c0272437d5ae5677dfcc9feb848ee5c1",
         "type": "github"
       },
       "original": {
@@ -198,7 +197,6 @@
       },
       "original": {
         "owner": "nix-darwin",
-        "ref": "master",
         "repo": "nix-darwin",
         "type": "github"
       }
@@ -221,27 +219,6 @@
         "type": "github"
       }
     },
-    "nix-index-database": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1762660502,
-        "narHash": "sha256-C9F1C31ys0V7mnp4EcDy7L1cLZw/sCTEXqqTtGnvu08=",
-        "owner": "nix-community",
-        "repo": "nix-index-database",
-        "rev": "15c5451c63f4c612874a43846bfe3fa828b03eee",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "main",
-        "repo": "nix-index-database",
-        "type": "github"
-      }
-    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -259,7 +236,6 @@
       },
       "original": {
         "owner": "nix-community",
-        "ref": "main",
         "repo": "NixOS-WSL",
         "type": "github"
       }
@@ -336,11 +312,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762789724,
-        "narHash": "sha256-LS1uG6Fpapm0Op/Xo0gqS6sbCgsv3xCoscNqTXNYqp8=",
+        "lastModified": 1762793041,
+        "narHash": "sha256-grpW+M4PeHj0q0leozBR3m7hA7d1dTb8FrKIJPebcQY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "8e22b8fe828e7b7e9f29b9ebdd86b6081b0d8918",
+        "rev": "0c0249549e625452a1da9d165db8261c1b0e1372",
         "type": "github"
       },
       "original": {
@@ -357,7 +333,6 @@
         "mac-app-util": "mac-app-util",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
-        "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable",
