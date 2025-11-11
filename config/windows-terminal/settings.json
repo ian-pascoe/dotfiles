@@ -25,7 +25,7 @@
   ],
   "profiles": {
     "defaults": {
-      "colorScheme": "tokyo-night",
+      "colorScheme": "catppuccin",
       "cursorShape": "filledBox",
       "font": {
         "builtinGlyphs": false,
@@ -152,7 +152,7 @@
   "showTabsInTitlebar": true,
   "snapToGridOnResize": false,
   "tabWidthMode": "equal",
-  "theme": "tokyo-night",
+  "theme": "catppuccin",
   "themes": [
     {
       "name": "catppuccin",

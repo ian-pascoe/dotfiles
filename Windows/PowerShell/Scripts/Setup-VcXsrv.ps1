@@ -5,7 +5,7 @@ try {
   $cmd = "$env:SCOOP\apps\vcxsrv\current\xlaunch.exe"
   
   if (-not (Test-Path $cmd)) {
-    Write-SetupLog -Message "VcXsrv not found at $cmd, skipping setup" -Level Warning
+    Write-Log -Message "VcXsrv not found at $cmd, skipping setup" -Level Warning
     return
   }
 
@@ -16,7 +16,7 @@ try {
   
   # Check if task needs to be created or updated
   if (Test-ScheduledTaskNeedsUpdate -TaskName $taskName -ExecutablePath $cmd -Arguments $cmdArgs) {
-    Write-SetupLog -Message "Creating/updating scheduled task: $taskName" -Level Info
+    Write-Log -Message "Creating/updating scheduled task: $taskName" -Level Info
     
     $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
     if ($existingTask) {
@@ -37,17 +37,17 @@ try {
       
     Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "VcXsrv X Server Startup" | Out-Null
       
-    Write-SetupLog -Message "Created scheduled task: $taskName" -Level Success
+    Write-Log -Message "Created scheduled task: $taskName" -Level Success
   } else {
-    Write-SetupLog -Message "Scheduled task $taskName is up to date" -Level Info
+    Write-Log -Message "Scheduled task $taskName is up to date" -Level Info
   }
     
   $task = Get-ScheduledTask -TaskName $taskName
   if ($task.State -ne 'Running') {
     Start-ScheduledTask -TaskName $taskName
-    Write-SetupLog -Message "Started task: $taskName" -Level Info
+    Write-Log -Message "Started task: $taskName" -Level Info
   }
 } catch {
-  Write-SetupLog -Message "Failed to setup VcXsrv: $_" -Level Error
+  Write-Log -Message "Failed to setup VcXsrv: $_" -Level Error
   throw
 }

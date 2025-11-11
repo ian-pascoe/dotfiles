@@ -6,7 +6,7 @@ try {
 
   $ahkExePath = "$env:SCOOP\apps\autohotkey\current\v2\AutoHotkey64.exe"
   if (-not (Test-Path $ahkExePath)) {
-    Write-SetupLog -Message "AutoHotkey not found at $ahkExePath, skipping setup" -Level Warning
+    Write-Log -Message "AutoHotkey not found at $ahkExePath, skipping setup" -Level Warning
     return
   }
 
@@ -18,7 +18,7 @@ try {
     
     # Check if task needs to be created or updated
     if (Test-ScheduledTaskNeedsUpdate -TaskName $taskName -ExecutablePath $ahkExePath -Arguments $arguments) {
-      Write-SetupLog -Message "Creating/updating scheduled task: $taskName" -Level Info
+      Write-Log -Message "Creating/updating scheduled task: $taskName" -Level Info
       
       $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
       if ($existingTask) {
@@ -36,18 +36,18 @@ try {
       
       Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "AutoHotkey script: $($script.Name)" | Out-Null
       
-      Write-SetupLog -Message "Created scheduled task: $taskName" -Level Success
+      Write-Log -Message "Created scheduled task: $taskName" -Level Success
     } else {
-      Write-SetupLog -Message "Scheduled task $taskName is up to date" -Level Info
+      Write-Log -Message "Scheduled task $taskName is up to date" -Level Info
     }
     
     $task = Get-ScheduledTask -TaskName $taskName
     if ($task.State -ne 'Running') {
       Start-ScheduledTask -TaskName $taskName
-      Write-SetupLog -Message "Started task: $taskName" -Level Info
+      Write-Log -Message "Started task: $taskName" -Level Info
     }
   }
 } catch {
-  Write-SetupLog -Message "Failed to setup AutoHotkey: $_" -Level Error
+  Write-Log -Message "Failed to setup AutoHotkey: $_" -Level Error
   throw
 }

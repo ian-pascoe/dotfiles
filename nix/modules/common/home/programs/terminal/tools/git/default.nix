@@ -18,6 +18,7 @@
         sort = "-committerdate"; # Show most recently updated branches first
       };
       core = {
+        autocrlf = false; # Disable automatic line ending conversion
         ignorecase = false; # Case-sensitive filenames
       };
       column = {

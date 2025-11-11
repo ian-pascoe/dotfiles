@@ -2,7 +2,7 @@
 
 try {
   if (-not (Test-Command -commandName ya)) {
-    Write-SetupLog -Message "Yazi not found, skipping setup" -Level Warning
+    Write-Log -Message "Yazi not found, skipping setup" -Level Warning
     return
   }
 

@@ -11,7 +11,7 @@ layout {
         border_char "─"
         border_format "#[fg=bright_black]{char}"
         border_position "top"
-        hide_frame_for_single_pane "true"
+        hide_frame_for_single_pane "false"
         mode_normal "#[bg=blue] "
         mode_tmux "#[bg=red] "
         tab_normal "#[fg=bright_black] {name} "
@@ -24,6 +24,18 @@ layout {
         datetime_format "%A, %d %b %Y %H:%M"
         datetime_timezone "America/New_York"
       }
+    }
+  }
+  tab name="dev" split_direction="vertical" {
+    pane name="editor" {
+      command "yazi"
+      cwd "~"
+    }
+  }
+  tab name="term" split_direction="vertical" {
+    pane name="zsh" {
+      command "zsh"
+      cwd "~"
     }
   }
 }

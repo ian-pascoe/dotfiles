@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if grep -qEi "(Microsoft|WSL)" /proc/version; then
-  powershell.exe -NoProfile -Command "Get-Clipboard" | sed 's/\r//g'
+  win32yank.exe -o --lf
 else
   command wl-paste "$@"
 fi
