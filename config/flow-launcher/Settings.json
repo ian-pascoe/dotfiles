@@ -146,7 +146,7 @@
   "AlwaysStartEn": false,
   "QuerySearchPrecision": "Regular",
   "AutoUpdates": false,
-  "WindowLeft": 1024,
+  "WindowLeft": 768,
   "WindowTop": 311.1,
   "PreviousScreenWidth": 0,
   "PreviousScreenHeight": 0,
@@ -175,9 +175,9 @@
   "CustomScreenNumber": 1,
   "IgnoreHotkeysOnFullscreen": false,
   "Proxy": {
-    "Enabled": true,
-    "Server": "proxygov.ray.com",
-    "Port": 80,
+    "Enabled": false,
+    "Server": null,
+    "Port": 0,
     "UserName": null,
     "Password": null
   },

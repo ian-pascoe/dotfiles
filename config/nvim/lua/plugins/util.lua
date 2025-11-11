@@ -21,6 +21,9 @@ return {
   { -- smart nav
     "mrjones2014/smart-splits.nvim",
     lazy = false,
+    opts = {
+      zellij_move_focus_or_tab = true,
+    },
     keys = {
       { "<C-h>", smart_nav("h"), desc = "Move to left split" },
       { "<C-j>", smart_nav("j"), desc = "Move to down split" },

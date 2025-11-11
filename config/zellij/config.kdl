@@ -5,10 +5,7 @@ session_serialization true
 serialize_pane_viewport true
 scrollback_lines_to_serialize 10000
 show_startup_tips false
-simplified_ui true
-ui {
-  pane_frames false
-}
+theme "ansi"
 web_client {
   font "monospace"
 }
@@ -58,9 +55,6 @@ keybinds clear-defaults=true {
     }
   }
   tmux {
-    bind "Ctrl b" {
-      SwitchToMode "locked"
-    }
     bind "s" {
       LaunchOrFocusPlugin "session-manager" {
         floating true
@@ -68,7 +62,7 @@ keybinds clear-defaults=true {
       }
       SwitchToMode "normal"
     }
-    bind "v" {
+    bind "[" {
       SwitchToMode "scroll"
     }
     bind "/" {
@@ -78,6 +72,12 @@ keybinds clear-defaults=true {
     bind "?" {
       SwitchToMode "entersearch"
       SearchInput 0
+    }
+    bind "m" {
+      SwitchToMode "move"
+    }
+    bind "r" {
+      SwitchToMode "resize"
     }
     bind "," {
       SwitchToMode "renametab"
@@ -110,6 +110,10 @@ keybinds clear-defaults=true {
       ToggleFocusFullscreen
       SwitchToMode "normal"
     }
+    bind "$" {
+      ToggleActiveSyncTab
+      SwitchToMode "normal"
+    }
     bind "-" {
       NewPane "down"
       SwitchToMode "normal"
@@ -118,23 +122,19 @@ keybinds clear-defaults=true {
       NewPane "right"
       SwitchToMode "normal"
     }
-    bind "H" {
-      Resize "Increase left"
-    }
-    bind "J" {
-      Resize "Increase down"
-    }
-    bind "K" {
-      Resize "Increase up"
-    }
-    bind "L" {
-      Resize "Increase right"
-    }
   }
   scroll {
-    bind "Ctrl r" {
+    bind "/" {
       SwitchToMode "entersearch"
       SearchInput 0
+    }
+    bind "?" {
+      SwitchToMode "entersearch"
+      SearchInput 0
+    }
+    bind "v" {
+      EditScrollback
+      SwitchToMode "normal"
     }
   }
   search {
@@ -155,17 +155,23 @@ keybinds clear-defaults=true {
     }
   }
   shared_among "scroll" "search" {
-    bind "j" {
-      ScrollDown
-    }
-    bind "k" {
+    bind "up" {
       ScrollUp
+    }
+    bind "down" {
+      ScrollDown
     }
     bind "PageDown" {
       PageScrollDown
     }
     bind "PageUp" {
       PageScrollUp
+    }
+    bind "j" {
+      ScrollDown
+    }
+    bind "k" {
+      ScrollUp
     }
     bind "Ctrl b" {
       PageScrollUp
@@ -178,6 +184,12 @@ keybinds clear-defaults=true {
     }
     bind "Ctrl d" {
       HalfPageScrollDown
+    }
+    bind "g" {
+      ScrollToTop
+    }
+    bind "G" {
+      ScrollToBottom
     }
   }
   entersearch {
@@ -206,6 +218,34 @@ keybinds clear-defaults=true {
       SwitchToMode "normal"
     }
   }
+  move {
+    bind "h" {
+      MovePane "left"
+    }
+    bind "j" {
+      MovePane "down"
+    }
+    bind "k" {
+      MovePane "up"
+    }
+    bind "l" {
+      MovePane "right"
+    }
+  }
+  resize {
+    bind "h" {
+      Resize "left"
+    }
+    bind "j" {
+      Resize "down"
+    }
+    bind "k" {
+      Resize "up"
+    }
+    bind "l" {
+      Resize "right"
+    }
+  }
 }
 plugins {
   about location="zellij:about"
@@ -220,10 +260,10 @@ plugins {
   strider location="zellij:strider"
   tab-bar location="zellij:tab-bar"
   vim-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
-  zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
   welcome-screen location="zellij:session-manager" {
     welcome_screen true
   }
+  zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
 }
 load_plugins {
   vim-navigator

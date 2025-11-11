@@ -25,7 +25,7 @@
   ],
   "profiles": {
     "defaults": {
-      "colorScheme": "nord",
+      "colorScheme": "tokyo-night",
       "cursorShape": "filledBox",
       "font": {
         "builtinGlyphs": false,
@@ -54,6 +54,7 @@
       }
     ]
   },
+  "rendering.software": true,
   "schemes": [
     {
       "background": "#1E1E2E",
@@ -140,7 +141,7 @@
       "cyan": "#7DCFFF",
       "foreground": "#C0CAF5",
       "green": "#9ECE6A",
-      "name": "tokyonight",
+      "name": "tokyo-night",
       "purple": "#BB9AF7",
       "red": "#F7768E",
       "selectionBackground": "#33467C",
@@ -149,13 +150,15 @@
     }
   ],
   "showTabsInTitlebar": true,
+  "snapToGridOnResize": false,
   "tabWidthMode": "equal",
-  "theme": "nord",
+  "theme": "tokyo-night",
   "themes": [
     {
       "name": "catppuccin",
       "tab": {
         "background": "#1E1E2EFF",
+        "iconStyle": "default",
         "showCloseButton": "always",
         "unfocusedBackground": null
       },
@@ -165,6 +168,9 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
         "useMica": false
       }
     },
@@ -172,6 +178,7 @@
       "name": "nord",
       "tab": {
         "background": "#2E3440FF",
+        "iconStyle": "default",
         "showCloseButton": "always",
         "unfocusedBackground": null
       },
@@ -181,6 +188,9 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
         "useMica": false
       }
     },
@@ -188,6 +198,7 @@
       "name": "rose-pine",
       "tab": {
         "background": "#191724FF",
+        "iconStyle": "default",
         "showCloseButton": "always",
         "unfocusedBackground": null
       },
@@ -197,13 +208,17 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
         "useMica": false
       }
     },
     {
-      "name": "tokyonight",
+      "name": "tokyo-night",
       "tab": {
         "background": "#1A1B26FF",
+        "iconStyle": "default",
         "showCloseButton": "always",
         "unfocusedBackground": null
       },
@@ -213,6 +228,9 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
         "useMica": false
       }
     }

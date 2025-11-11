@@ -122,8 +122,6 @@ if (Test-Path $YaziFlavorsDir -PathType Container) {
     $FlavorLink = Join-Path $YaziConfigFlavors $_.Name
     New-Symlink -Target $_.FullName -Link $FlavorLink -Force
   }
-} else {
-  ya pkg install
 }
 
 # Reload YASB to apply the new theme

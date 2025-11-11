@@ -14,7 +14,7 @@ bars:
       center: false
     animation:
       enabled: true
-      duration: 400
+      duration: 200
     blur_effect:
       enabled: false
       acrylic: false
@@ -28,10 +28,10 @@ bars:
       width: "100%"
       height: 36
     padding:
-      top: 10
-      left: 10
+      top: 5
+      left: 5
       bottom: 0
-      right: 10
+      right: 5
     widgets:
       left:
         - "home"
