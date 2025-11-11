@@ -1,4 +1,4 @@
----@param dir "h"|"j"|"k"|"l" the direction to navigate
+---@param dir "h"|"j"|"k"|"l"|nil the direction to navigate
 ---@return fun() function to navigate in the given direction
 local function smart_nav(dir)
   return function()
@@ -11,6 +11,8 @@ local function smart_nav(dir)
       vim.schedule(ss.move_cursor_up)
     elseif dir == "l" then
       vim.schedule(ss.move_cursor_right)
+    else
+      vim.schedule(ss.move_cursor_previous)
     end
   end
 end
