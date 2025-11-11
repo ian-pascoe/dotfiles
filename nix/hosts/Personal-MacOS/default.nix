@@ -1,14 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   imports = [
     ../../modules/common
     ../../modules/darwin
   ];
   nixpkgs.hostPlatform = "aarch64-darwin";
-  system.primaryUser = "ianpascoe";
-  users.users.ianpascoe = {
-    name = "ianpascoe";
-    home = "/Users/ianpascoe";
+  system.primaryUser = "${username}";
+  users.users."${username}" = {
+    name = "${username}";
+    home = "/Users/${username}";
     shell = pkgs.zsh;
   };
 }

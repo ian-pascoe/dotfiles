@@ -1,6 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -euo pipefail  # Exit on error, undefined variables, and pipe failures
+if [ "$(whoami)" != "root" ]; then
+  echo "This script must be run as root. Please run with sudo."
+  exit 1
+fi
 
 # Colors for output
 RED='\033[0;31m'
@@ -11,59 +14,73 @@ NC='\033[0m' # No Color
 
 # Logging functions
 log_info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
+  echo -e "${BLUE}[INFO]${NC} $1"
 }
 
 log_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
+  echo -e "${GREEN}[SUCCESS]${NC} $1"
 }
 
 log_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
+  echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
 log_error() {
-    echo -e "${RED}[ERROR]${NC} $1" >&2
+  echo -e "${RED}[ERROR]${NC} $1" >&2
 }
 
 # Error handler
 error_exit() {
-    log_error "$1"
-    exit 1
+  log_error "$1"
+  exit 1
 }
 
 # Validate arguments
-windowsHome="$1"
-dotfilesDir="$2"
-sslCertBundle="$3"
+windowsUsername="$1"
+windowsHome="$2"
+dotfilesRepoPath="$3"
+sslCertBundle="$4"
 
-if [ -z "$windowsHome" ] || [ -z "$dotfilesDir" ] || [ -z "$sslCertBundle" ]; then
-	log_error "Missing required arguments"
-	echo "Usage: $0 <windows-home> <dotfiles-directory> <ssl-cert-bundle-path>"
-	exit 1
+if [ -z "$windowsUsername" ] || [ -z "$windowsHome" ] || [ -z "$dotfilesRepoPath" ] || [ -z "$sslCertBundle" ]; then
+  log_error "Missing required arguments"
+  echo "Usage: $0 <username> <windows-home> <dotfiles-directory> <ssl-cert-bundle-path>"
+  exit 1
 fi
 
 log_info "Setting up WSL environment..."
 log_info "Windows Home: $windowsHome"
-log_info "Dotfiles Directory: $dotfilesDir"
+log_info "dotfiles Repo Directory: $dotfilesRepoPath"
 log_info "SSL Certificate Bundle: $sslCertBundle"
 
 # Validate paths exist
 if [ ! -d "$windowsHome" ]; then
-    error_exit "Windows home directory does not exist: $windowsHome"
+  error_exit "Windows home directory does not exist: $windowsHome"
 fi
 
-if [ ! -d "$dotfilesDir" ]; then
-    error_exit "Dotfiles directory does not exist: $dotfilesDir"
+if [ ! -d "$dotfilesRepoPath" ]; then
+  error_exit "dotfiles repo directory does not exist: $dotfilesRepoPath"
 fi
 
 if [ ! -f "$sslCertBundle" ]; then
-    error_exit "SSL certificate bundle file does not exist: $sslCertBundle"
+  error_exit "SSL certificate bundle file does not exist: $sslCertBundle"
 fi
 
-if [ ! -d "$dotfilesDir/nix" ]; then
-    error_exit "Nix configuration directory does not exist: $dotfilesDir/nix"
+if [ ! -d "$dotfilesRepoPath/nix" ]; then
+  error_exit "Nix configuration directory does not exist: $dotfilesRepoPath/nix"
 fi
+
+# Create the user and home directory
+newUserHome="/home/$windowsUsername"
+if ! id -u "$windowsUsername" &>/dev/null; then
+  log_info "Creating user: $windowsUsername"
+  useradd -m -d "$newUserHome" "$windowsUsername" || error_exit "Failed to create user: $windowsUsername"
+  log_success "User $windowsUsername created successfully"
+else
+  newUserHome=$(eval echo "~$windowsUsername")
+  log_info "User $windowsUsername already exists"
+fi
+
+export NIX_DEFAULT_USER="$windowsUsername"
 
 # Set up proxy environment variables
 log_info "Configuring proxy settings..."
@@ -77,51 +94,63 @@ log_success "Proxy settings configured"
 
 # Function to create or update symlink
 create_symlink() {
-    local target="$1"
-    local link_name="$2"
-    local description="$3"
-    
-    # Check if symlink already exists and points to correct target
-    if [ -L "$link_name" ]; then
-        local current_target=$(readlink -f "$link_name" 2>/dev/null || echo "")
-        local new_target=$(readlink -f "$target" 2>/dev/null || echo "$target")
-        
-        if [ "$current_target" = "$new_target" ]; then
-            log_info "$description symlink already up to date: $link_name -> $target"
-            return 0
-        else
-            log_warning "$description symlink exists but points to wrong target, updating..."
-        fi
-    elif [ -e "$link_name" ]; then
-        log_warning "$description exists but is not a symlink, backing up..."
-        mv "$link_name" "${link_name}.backup.$(date +%Y%m%d_%H%M%S)" || error_exit "Failed to backup $link_name"
+  local target="$1"
+  local link_name="$2"
+  local description="$3"
+
+  # Check if symlink already exists and points to correct target
+  if [ -L "$link_name" ]; then
+    local current_target=$(readlink -f "$link_name" 2>/dev/null || echo "")
+    local new_target=$(readlink -f "$target" 2>/dev/null || echo "$target")
+
+    if [ "$current_target" = "$new_target" ]; then
+      log_info "$description symlink already up to date: $link_name -> $target"
+      return 0
+    else
+      log_warning "$description symlink exists but points to wrong target, updating..."
     fi
-    
-    log_info "Creating $description symlink: $link_name -> $target"
-    ln -snf "$target" "$link_name" || error_exit "Failed to create symlink: $link_name"
-    log_success "$description symlink created successfully"
+  elif [ -e "$link_name" ]; then
+    log_warning "$description exists but is not a symlink, backing up..."
+    mv "$link_name" "${link_name}.backup.$(date +%Y%m%d_%H%M%S)" || error_exit "Failed to backup $link_name"
+  fi
+
+  log_info "Creating $description symlink: $link_name -> $target"
+  ln -snf "$target" "$link_name" || error_exit "Failed to create symlink: $link_name"
+  log_success "$description symlink created successfully"
 }
 
 # Create symlinks
 log_info "Setting up symlinks..."
-create_symlink "$windowsHome" "$HOME/.windows" "Windows home"
-create_symlink "$dotfilesDir" "$HOME/.dotfiles" "Dotfiles"
-create_symlink "$dotfilesDir/nix" "$HOME/.nix" "Nix configuration"
+create_symlink "$dotfilesRepoPath" "$newUserHome/.dotfiles" "dotfiles Repo"
+create_symlink "$dotfilesRepoPath/nix" "$newUserHome/.nix" "Nix configuration"
 log_success "All symlinks configured"
+
+chown -RL "$windowsUsername":users "$newUserHome/.dotfiles/"
+chmod -RL 774 "$newUserHome/.dotfiles/"
+
+chown -RL "$windowsUsername":users "$newUserHome/.nix/"
+chmod -RL 774 "$newUserHome/.nix/"
+log_success "Ownership of symlinked directories set to '$windowsUsername:users'"
 
 # Build NixOS configuration
 log_info "Building NixOS configuration for WSL..."
 log_info "This may take several minutes..."
 
-if ! command -v nixos-rebuild &> /dev/null; then
-    error_exit "nixos-rebuild command not found. Is NixOS installed in WSL?"
+if ! command -v nixos-rebuild &>/dev/null; then
+  error_exit "nixos-rebuild command not found. Is NixOS installed in WSL?"
 fi
 
+# make dotfiles repo safe for root
+cat <<EOF >/root/.gitconfig
+[safe]
+  directory = "${dotfilesRepoPath%/}"
+EOF
+
 # Run nixos-rebuild with error handling
-if sudo -HE nixos-rebuild switch --flake "$HOME/.nix#Work-WSL" --impure; then
-    log_success "NixOS configuration built successfully"
+if nixos-rebuild switch --flake "$newUserHome/.nix#Work-WSL" --impure; then
+  log_success "NixOS configuration built successfully"
 else
-    error_exit "Failed to build NixOS configuration (exit code: $?)"
+  error_exit "Failed to build NixOS configuration (exit code: $?)"
 fi
 
 log_success "WSL environment setup completed successfully!"

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, username, ... }:
 {
   imports = [
     ../../modules/common/home
@@ -8,8 +8,8 @@
   ];
 
   home = {
-    username = "ianpascoe";
-    homeDirectory = "/home/ianpascoe";
+    inherit username;
+    homeDirectory = "/home/${username}";
 
     shellAliases = {
       nrs = "sudo -HE nixos-rebuild switch --flake ${config.home.homeDirectory}/.nix#Work-WSL --impure";

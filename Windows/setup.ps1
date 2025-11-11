@@ -5,9 +5,9 @@
   This script sets up the Windows environment by linking dotfiles, installing packages via Scoop,
   configuring applications, and optionally setting up WSL with NixOS.
 .PARAMETER DotfilesDir
-  The directory containing the dotfiles. Default is the parent directory of the script.
+  The directory containing the dotfiles repository. Default is the parent directory of the script, which should be correct.
 .PARAMETER ScoopDir
-  The directory for Scoop installation. Default is "$env:HOME\scoop".
+  The directory for Scoop installation. Default is "$env:USERPROFILE\scoop".
 .PARAMETER SkipWindows
   If specified, skips the Windows-specific setup.
 .PARAMETER SkipWSL
@@ -15,12 +15,13 @@
 .PARAMETER SkipTheme
   If specified, skips the theme application.
 .EXAMPLE
-  .\setup.ps1 -DotfilesDir "C:\Users\User\dotfiles" -CustomProgramDir "D:\CustomPrograms" -ScoopDir "D:\Scoop"
+  .\setup.ps1
+  Runs the full setup for Windows and WSL.
 #>
 #Requires -RunAsAdministrator
 param(
   [string]$DotfilesDir = "$PSScriptRoot\..",
-  [string]$ScoopDir = "$env:HOME\scoop",
+  [string]$ScoopDir = "$env:USERPROFILE\scoop",
   [switch]$SkipWindows = $false,
   [switch]$SkipWSL = $false,
   [switch]$SkipTheme = $false
@@ -211,7 +212,7 @@ if (-not $SkipWSL) {
   
   Invoke-WithErrorHandling -ErrorMessage "Failed to setup NixOS distribution" -ScriptBlock {
     $wslDistroList = (wsl -l -v) -replace '\x00', ''
-    if (-not ($wslDistroList | Select-String -Pattern "NixOS")) {
+    if (-not ($wslDistroList | Select-String -Pattern "\s*NixOS\s")) {
       Write-Log -Message "Downloading NixOS WSL distribution..." -Level Info
       $nixosGitHubApiUrl = "https://api.github.com/repos/nix-community/NixOS-WSL/releases/latest"
       $nixosReleaseInfo = Invoke-RestMethod -Uri $nixosGitHubApiUrl
@@ -235,7 +236,7 @@ if (-not $SkipWSL) {
       }
       
       Write-Log -Message "Installing NixOS WSL distribution..." -Level Info
-      $installPath = "$env:HOME\WSL\NixOS"
+      $installPath = "$env:HOME\.wsl\nixos"
       if (-not (Test-Path (Split-Path $installPath -Parent))) {
         New-Item -ItemType Directory -Path (Split-Path $installPath -Parent) -Force | Out-Null
       }
@@ -272,13 +273,14 @@ if (-not $SkipWSL) {
     
     $allCertsPath = "$env:XDG_CACHE_HOME\certificates"
     $wslSetupScriptPath = Get-WSLPath $wslSetupScript
+    $wslWindowsHomePath = Get-WSLPath "$env:HOME"
     $wslDotfilesDir = Get-WSLPath "$DotfilesDir"
     $wslCertBundlePath = Get-WSLPath "$allCertsPath\ca-bundle.crt"
     
-    $scriptCmd = "chmod +x '$wslSetupScriptPath' && '$wslSetupScriptPath' '$env:HOME' '$wslDotfilesDir' '$wslCertBundlePath'"
+    $scriptCmd = "chmod +x '$wslSetupScriptPath' && '$wslSetupScriptPath' '$env:USERNAME' '$wslWindowsHomePath' '$wslDotfilesDir' '$wslCertBundlePath'"
     Write-Log -Message "Running WSL setup script..." -Level Info
     
-    wsl -d NixOS -- bash -c "$scriptCmd"
+    wsl -d NixOS --user root -- bash -c "$scriptCmd"
     if ($LASTEXITCODE -ne 0) {
       throw "WSL setup script exited with code $LASTEXITCODE"
     }

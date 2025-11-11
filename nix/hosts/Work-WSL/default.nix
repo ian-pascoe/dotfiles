@@ -1,6 +1,6 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   imports = [
     ../../modules/common
@@ -11,15 +11,13 @@
 
   networking.hostName = "Work-WSL";
 
-  users.users = {
-    "ianpascoe" = {
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "docker"
-      ];
-      shell = pkgs.zsh;
-    };
+  users.users."${username}" = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
+    shell = pkgs.zsh;
   };
-  wsl.defaultUser = "ianpascoe";
+  wsl.defaultUser = "${username}";
 }

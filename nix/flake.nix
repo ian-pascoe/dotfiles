@@ -64,8 +64,22 @@
     let
       inherit (self) outputs;
 
+      username =
+        let
+          defaultEnvUser = builtins.getEnv "NIX_DEFAULT_USER";
+          envUser = builtins.getEnv "USER";
+        in
+        if defaultEnvUser != "" then
+          defaultEnvUser
+        else if envUser != "" then
+          envUser
+        else
+          "ianpascoe";
+
       # Common variables
-      commonArgs = { inherit inputs outputs; };
+      commonArgs = {
+        inherit inputs outputs username;
+      };
 
       stableOverlay = final: prev: {
         stable = import nixpkgs-stable {
@@ -103,21 +117,21 @@
           ];
         };
 
-      mkHomeManagerConfig = user: config: {
+      mkHomeManagerConfig = config: {
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
           backupFileExtension = "backup";
         };
         home-manager.extraSpecialArgs = commonArgs;
-        home-manager.users.${user} = import config;
+        home-manager.users.${username} = import config;
       };
 
-      mkHomebrewConfig = user: {
+      mkHomebrewConfig = {
         nix-homebrew = {
           enable = true;
           enableRosetta = true;
-          inherit user;
+          user = username;
           autoMigrate = true;
           taps = {
             "homebrew/homebrew-core" = homebrew-core;
@@ -136,7 +150,7 @@
           nur.modules.nixos.default
           ./hosts/Work-WSL
           home-manager.nixosModules.home-manager
-          (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Work-WSL"})
+          (mkHomeManagerConfig ./homes/${"user@Work-WSL"})
         ];
       };
 
@@ -147,7 +161,7 @@
           nur.modules.darwin.default
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
-          (mkHomebrewConfig "ianpascoe")
+          mkHomebrewConfig
           ./hosts/Personal-MacOS
           home-manager.darwinModules.home-manager
           {
@@ -155,7 +169,7 @@
               mac-app-util.homeManagerModules.default
             ];
           }
-          (mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Personal-MacOS"})
+          (mkHomeManagerConfig ./homes/${"user@Personal-MacOS"})
         ];
       };
     };
