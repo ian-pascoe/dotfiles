@@ -69,6 +69,14 @@ if [ ! -d "$dotfilesRepoPath/nix" ]; then
   error_exit "Nix configuration directory does not exist: $dotfilesRepoPath/nix"
 fi
 
+# Check if a user with UID 1000 exists and delete it
+EXISTING_USER=$(getent passwd 1000 | cut -d: -f1)
+if [ -n "$EXISTING_USER" ]; then
+  log_warning "Deleting existing user with UID 1000: $EXISTING_USER"
+  pkill -u "$EXISTING_USER" 2>/dev/null || true
+  userdel -rf "$EXISTING_USER" 2>/dev/null || true
+fi
+
 # Create the user and home directory
 newUserHome="/home/$windowsUsername"
 if ! id -u "$windowsUsername" &>/dev/null; then
