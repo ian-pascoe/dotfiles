@@ -25,7 +25,7 @@
   ],
   "profiles": {
     "defaults": {
-      "colorScheme": "catppuccin",
+      "colorScheme": "nord",
       "cursorShape": "filledBox",
       "font": {
         "builtinGlyphs": false,
@@ -152,7 +152,7 @@
   "showTabsInTitlebar": true,
   "snapToGridOnResize": false,
   "tabWidthMode": "equal",
-  "theme": "catppuccin",
+  "theme": "nord",
   "themes": [
     {
       "name": "catppuccin",

@@ -59,7 +59,7 @@ if (-not $SkipWindows) {
 
   # setup important env vars
   Write-Log -Message "Configuring environment variables..." -Level Info
-  Set-EnvironmentVariable -Name HOME -Value "$env:HOME" -Persist
+  Set-EnvironmentVariable -Name HOME -Value "$env:USERPROFILE" -Persist
   Set-EnvironmentVariable -Name EDITOR -Value "nvim" -Persist
   Add-ToEnvironmentVariable -Path "$env:HOME\.local\bin" -VariableName PATH -Prepend -Level User
   Set-EnvironmentVariable -Name POWERSHELL_TELEMETRY_OPTOUT -Value "true" -Persist
@@ -67,7 +67,7 @@ if (-not $SkipWindows) {
   Add-ToEnvironmentVariable -Path "$env:HOME\Documents\WindowsPowerShell\Modules" -VariableName PSModulePath -Level User
   Set-EnvironmentVariable -Name XDG_BIN_HOME -Value "$env:HOME\.local\bin" -Persist
   Set-EnvironmentVariable -Name XDG_CACHE_HOME -Value "$env:HOME\.cache" -Persist
-  Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:XDG_CONFIG_HOME" -Persist
+  Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:HOME\.config" -Persist
   Set-EnvironmentVariable -Name XDG_DATA_HOME -Value "$env:HOME\.local\share" -Persist
   Set-EnvironmentVariable -Name XDG_DESKTOP_DIR -Value "$env:HOME\Desktop" -Persist
   Set-EnvironmentVariable -Name XDG_DOWNLOAD_DIR -Value "$env:HOME\Downloads" -Persist
