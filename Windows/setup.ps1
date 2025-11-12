@@ -49,6 +49,8 @@ foreach ($func in $requiredFunctions) {
 
 if (-not $SkipWindows) {
   Write-Log -Message "Starting Windows setup..." -Level Info
+
+  & "$PSScriptRoot\PowerShell\Scripts\Setup-Proxy.ps1"
   
   Update-Powershell
 
@@ -122,7 +124,7 @@ if (-not $SkipWindows) {
 
   # install packages
   Write-Log -Message "Installing Scoop packages..." -Level Info
-  Invoke-WithErrorHandling -ErrorMessage "Failed to import Scoop packages" -ContinueOnError -ScriptBlock {
+  Invoke-WithErrorHandling -ErrorMessage "Failed to import Scoop packages" -ScriptBlock {
     if (-not (Test-Path "$PSScriptRoot\..\config\scoop\scoopfile.json")) {
       throw "Scoopfile not found at $PSScriptRoot\..\config\scoop\scoopfile.json"
     }
@@ -167,6 +169,13 @@ if (-not $SkipWindows) {
     # starship
     New-Symlink -Target "$PSScriptRoot\..\config\starship.toml" -Link "$env:XDG_CONFIG_HOME\starship.toml" -Force
 
+    # windows-terminal
+    $WindowsSettingsDir = "$env:SCOOP\persist\windows-terminal\settings"
+    if (-not (Test-Path $WindowsSettingsDir)) {
+      New-Item -ItemType Directory -Path $WindowsSettingsDir | Out-Null
+    }
+    New-Symlink -Target "$PSScriptRoot\..\config\windows-terminal\settings.json" -Link "$WindowsSettingsDir\settings.json" -Force
+
     # winfetch
     Set-EnvironmentVariable -Name WINFETCH_CONFIG_PATH -Value "$env:XDG_CONFIG_HOME\winfetch\config.ps1" -Persist
     New-Symlink -Target "$PSScriptRoot\..\config\winfetch" -Link (& Split-Path "$env:WINFETCH_CONFIG_PATH" -Parent) -Force
@@ -187,7 +196,7 @@ if (-not $SkipWindows) {
   
   foreach ($script in $setupScripts) {
     $scriptPath = "$PSScriptRoot\PowerShell\Scripts\$script"
-    Invoke-WithErrorHandling -ErrorMessage "Failed to run $script" -ContinueOnError -ScriptBlock {
+    Invoke-WithErrorHandling -ErrorMessage "Failed to run $script" -ScriptBlock {
       if (-not (Test-Path $scriptPath)) {
         throw "Script not found: $scriptPath"
       }
@@ -205,8 +214,12 @@ if (-not $SkipWSL) {
     New-Symlink -Target "$PSScriptRoot\..\Windows\wslconfig" -Link "$env:HOME\.wslconfig" -Force
   }
   
-  Invoke-WithErrorHandling -ErrorMessage "Failed to install WSL" -ContinueOnError -ScriptBlock {
+  Invoke-WithErrorHandling -ErrorMessage "Failed to install WSL" -ScriptBlock {
     wsl --install --no-distribution
+  }
+
+  wsl --shutdown
+  Invoke-WithErrorHandling -ErrorMessage "Failed to install WSL" -ContinueOnError -ScriptBlock {
     wsl --update
   }
   
@@ -249,7 +262,7 @@ if (-not $SkipWSL) {
     }
   }
 
-  Invoke-WithErrorHandling -ErrorMessage "Failed to export certificates" -ContinueOnError -ScriptBlock {
+  Invoke-WithErrorHandling -ErrorMessage "Failed to export certificates" -ScriptBlock {
     $allCertsPath = "$env:XDG_CACHE_HOME\certificates"
     Write-Log -Message "Exporting certificates..." -Level Info
     

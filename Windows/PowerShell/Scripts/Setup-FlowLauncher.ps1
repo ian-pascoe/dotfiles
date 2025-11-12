@@ -9,8 +9,11 @@ try {
     return
   }
 
-  $flowLauncherSettingsPath = "$env:SCOOP\persist\flow-launcher\UserData\Settings\Settings.json"
-  New-Symlink -Target "$PSScriptRoot\..\..\..\config\flow-launcher\Settings.json" -Link $flowLauncherSettingsPath -Force
+  $flowLauncherSettingsDir = "$env:SCOOP\persist\flow-launcher\UserData\Settings"
+  if (-not (Test-Path $flowLauncherSettingsDir)) {
+    New-Item -ItemType Directory -Path $flowLauncherSettingsDir -Force | Out-Null
+  }
+  New-Symlink -Target "$PSScriptRoot\..\..\..\config\flow-launcher\Settings.json" -Link "$flowLauncherSettingsDir\Settings.json" -Force
 
   # Check if task needs to be created or updated
   if (Test-ScheduledTaskNeedsUpdate -TaskName $taskName -ExecutablePath $cmd) {
