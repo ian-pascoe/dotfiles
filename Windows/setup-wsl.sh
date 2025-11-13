@@ -81,7 +81,7 @@ fi
 newUserHome="/home/$windowsUsername"
 if ! id -u "$windowsUsername" &>/dev/null; then
   log_info "Creating user: $windowsUsername"
-  useradd -m -d "$newUserHome" "$windowsUsername" || error_exit "Failed to create user: $windowsUsername"
+  useradd -u 1000 -g 100 -m -d "$newUserHome" "$windowsUsername" || error_exit "Failed to create user: $windowsUsername"
   log_success "User $windowsUsername created successfully"
 else
   newUserHome=$(eval echo "~$windowsUsername")
@@ -108,8 +108,10 @@ create_symlink() {
 
   # Check if symlink already exists and points to correct target
   if [ -L "$link_name" ]; then
-    local current_target=$(readlink -f "$link_name" 2>/dev/null || echo "")
-    local new_target=$(readlink -f "$target" 2>/dev/null || echo "$target")
+    local current_target new_target
+
+    current_target=$(readlink -f "$link_name" 2>/dev/null || echo "")
+    new_target=$(readlink -f "$target" 2>/dev/null || echo "$target")
 
     if [ "$current_target" = "$new_target" ]; then
       log_info "$description symlink already up to date: $link_name -> $target"
@@ -130,15 +132,11 @@ create_symlink() {
 # Create symlinks
 log_info "Setting up symlinks..."
 create_symlink "$dotfilesRepoPath" "$newUserHome/.dotfiles" "dotfiles Repo"
-create_symlink "$dotfilesRepoPath/nix" "$newUserHome/.nix" "Nix configuration"
 log_success "All symlinks configured"
 
-chown -RL "$windowsUsername":users "$newUserHome/.dotfiles/"
-chmod -RL 774 "$newUserHome/.dotfiles/"
-
-chown -RL "$windowsUsername":users "$newUserHome/.nix/"
-chmod -RL 774 "$newUserHome/.nix/"
-log_success "Ownership of symlinked directories set to '$windowsUsername:users'"
+log_info "Setting ownership and permissions for symlinked directories..."
+chown -RL 1000:100 "$newUserHome/.dotfiles"
+log_success "Ownership of symlinked directories set to '1000:100'"
 
 # Build NixOS configuration
 log_info "Building NixOS configuration for WSL..."
@@ -160,5 +158,11 @@ if nixos-rebuild switch --flake "$newUserHome/.nix#Work-WSL" --impure; then
 else
   error_exit "Failed to build NixOS configuration (exit code: $?)"
 fi
+
+# Clear all caches
+rm -rf "$newUserHome/.cache"
+
+# Make sure everything in home is correctly owned
+chown -R 1000:100 "$newUserHome"
 
 log_success "WSL environment setup completed successfully!"

@@ -422,7 +422,12 @@ Set-Alias -Name ep -Value Edit-Profile
 function Update-Scoop {
   scoop update -a
   scoop cleanup -a
-  scoop export -c > "$env:XDG_CONFIG_HOME\scoop\scoopfile.json"
+}
+
+# Update winget and scoop packages
+function Update-AllPackages {
+  winget upgrade --all
+  Update-Scoop
 }
 
 # Open Winutil
@@ -468,7 +473,7 @@ Set-PSReadLineOption -AddToHistoryHandler {
 }
 
 function Set-PredictionSource {
-  Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+  Set-PSReadLineOption -PredictionSource History
   Set-PSReadLineOption -MaximumHistoryCount 10000
 }
 Set-PredictionSource

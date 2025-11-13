@@ -66,9 +66,9 @@
 
       username =
         let
-          defaultEnvUser = builtins.getEnv "NIX_DEFAULT_USER";
+          envUser = builtins.getEnv "NIX_DEFAULT_USER";
         in
-        if defaultEnvUser != "" then defaultEnvUser else "nixuser";
+        if envUser != "" then envUser else "nixuser";
 
       # Common variables
       commonArgs = {

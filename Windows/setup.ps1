@@ -66,7 +66,6 @@ if (-not $SkipWindows) {
   Add-ToEnvironmentVariable -Path "$env:HOME\.local\bin" -VariableName PATH -Prepend -Level User
   Set-EnvironmentVariable -Name POWERSHELL_TELEMETRY_OPTOUT -Value "true" -Persist
   Add-ToEnvironmentVariable -Path "$env:HOME\Documents\PowerShell\Modules" -VariableName PSModulePath -Level User
-  Add-ToEnvironmentVariable -Path "$env:HOME\Documents\WindowsPowerShell\Modules" -VariableName PSModulePath -Level User
   Set-EnvironmentVariable -Name XDG_BIN_HOME -Value "$env:HOME\.local\bin" -Persist
   Set-EnvironmentVariable -Name XDG_CACHE_HOME -Value "$env:HOME\.cache" -Persist
   Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:HOME\.config" -Persist
@@ -83,11 +82,6 @@ if (-not $SkipWindows) {
     }
     New-Symlink -Target "$PSScriptRoot\PowerShell\profile.ps1" -Link "$env:HOME\Documents\PowerShell\profile.ps1" -Force
     New-Symlink -Target "$PSScriptRoot\PowerShell\powershell.config.json" -Link "$env:HOME\Documents\PowerShell\powershell.config.json" -Force
-
-    if (-not (Test-Path "$env:HOME\Documents\WindowsPowerShell")) {
-      New-Item -ItemType Directory -Path "$env:HOME\Documents\WindowsPowerShell" | Out-Null
-    }
-    New-Symlink -Target "$PSScriptRoot\WindowsPowerShell\profile.ps1" -Link "$env:HOME\Documents\WindowsPowerShell\profile.ps1" -Force
   }
 
   # setup local bin
@@ -128,6 +122,7 @@ if (-not $SkipWindows) {
     if (-not (Test-Path "$PSScriptRoot\..\config\scoop\scoopfile.json")) {
       throw "Scoopfile not found at $PSScriptRoot\..\config\scoop\scoopfile.json"
     }
+    scoop install git 7zip
     scoop import "$PSScriptRoot\..\config\scoop\scoopfile.json"
   }
   
@@ -215,11 +210,11 @@ if (-not $SkipWSL) {
   }
   
   Invoke-WithErrorHandling -ErrorMessage "Failed to install WSL" -ScriptBlock {
-    wsl --install --no-distribution
+    wsl --install --no-distribution --no-launch
   }
 
   wsl --shutdown
-  Invoke-WithErrorHandling -ErrorMessage "Failed to install WSL" -ContinueOnError -ScriptBlock {
+  Invoke-WithErrorHandling -ErrorMessage "Failed to update WSL" -ContinueOnError -ScriptBlock {
     wsl --update
   }
   
