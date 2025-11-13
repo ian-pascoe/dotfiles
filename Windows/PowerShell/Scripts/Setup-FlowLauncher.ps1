@@ -5,8 +5,7 @@ try {
   $cmd = "$env:SCOOP\apps\flow-launcher\current\Flow.Launcher.exe"
   
   if (-not (Test-Path $cmd)) {
-    Write-Log -Message "Flow Launcher not found at $cmd, skipping setup" -Level Warning
-    return
+    throw "Flow Launcher command not found"
   }
 
   $flowLauncherSettingsDir = "$env:SCOOP\persist\flow-launcher\UserData\Settings"

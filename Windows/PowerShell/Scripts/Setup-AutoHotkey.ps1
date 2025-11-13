@@ -6,8 +6,7 @@ try {
 
   $ahkExePath = "$env:SCOOP\apps\autohotkey\current\v2\AutoHotkey64.exe"
   if (-not (Test-Path $ahkExePath)) {
-    Write-Log -Message "AutoHotkey not found at $ahkExePath, skipping setup" -Level Warning
-    return
+    throw "AutoHotkey command not found"
   }
 
   $ahkScripts = Get-ChildItem -Path $autohotkeyPath -Filter "*.ahk" -ErrorAction Stop

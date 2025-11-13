@@ -5,8 +5,7 @@ try {
   $glazewmExe = "$env:SCOOP\apps\glazewm\current\cli\glazewm.exe"
   
   if (-not (Test-Path $glazewmExe)) {
-    Write-Log -Message "GlazeWM not found at $glazewmExe, skipping setup" -Level Warning
-    return
+    throw "GlazeWM command not found"
   }
 
   $glazewmPath = "$env:USERPROFILE\.glzr\glazewm"

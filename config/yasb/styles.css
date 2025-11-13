@@ -648,15 +648,33 @@
 .disk-widget {
   background-color: rgba(var(--popup-background), var(--opacity-semi));
   border: var(--size-xs) solid rgb(var(--border));
-  border-top-right-radius: var(--radius-xl);
-  border-bottom-right-radius: var(--radius-xl);
   padding: var(--spacing-2xs) var(--spacing-md);
-  margin: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) var(--spacing-0);
+  margin: var(--spacing-xs) var(--spacing-0) var(--spacing-xs) var(--spacing-0);
 }
 .disk-widget .label {
   /**/
 }
 .disk-widget .icon {
+  color: rgb(var(--success));
+}
+
+/*
+ * ---------------
+ * Battery
+ * ---------------
+ */
+.battery-widget {
+  background-color: rgba(var(--popup-background), var(--opacity-semi));
+  border: var(--size-xs) solid rgb(var(--border));
+  border-top-right-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
+  padding: var(--spacing-2xs) var(--spacing-md);
+  margin: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) var(--spacing-0);
+}
+.battery-widget .label {
+  /**/
+}
+.battery-widget .icon {
   color: rgb(var(--success));
 }
 

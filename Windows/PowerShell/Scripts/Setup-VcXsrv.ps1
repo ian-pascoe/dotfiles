@@ -5,8 +5,7 @@ try {
   $cmd = "$env:SCOOP\apps\vcxsrv\current\xlaunch.exe"
   
   if (-not (Test-Path $cmd)) {
-    Write-Log -Message "VcXsrv not found at $cmd, skipping setup" -Level Warning
-    return
+    throw "VcXsrv command not found"
   }
 
   $vcxsrvPath = "$env:XDG_CONFIG_HOME\vcxsrv"

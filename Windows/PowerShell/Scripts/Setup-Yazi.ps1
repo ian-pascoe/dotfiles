@@ -1,9 +1,8 @@
 #Requires -RunAsAdministrator
 
 try {
-  if (-not (Test-Command -commandName ya)) {
-    Write-Log -Message "Yazi not found, skipping setup" -Level Warning
-    return
+  if (-not (Test-Command -Name ya)) {
+    throw "Yazi command not found"
   }
 
   Set-EnvironmentVariable -Name YAZI_CONFIG_HOME -Value "$env:XDG_CONFIG_HOME\yazi" -Persist

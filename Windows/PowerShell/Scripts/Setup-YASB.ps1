@@ -5,8 +5,7 @@ try {
   $cmd = "$env:SCOOP\apps\yasb\current\yasb.exe"
   
   if (-not (Test-Path $cmd)) {
-    Write-Log -Message "YASB not found at $cmd, skipping setup" -Level Warning
-    return
+    throw "Yasb command not found"
   }
 
   $yasbPath = "$env:XDG_CONFIG_HOME\yasb"

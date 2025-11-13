@@ -98,7 +98,7 @@ if (-not $SkipWindows) {
   }
 
   # setup scoop
-  if (-not (Test-Command -commandName scoop)) {
+  if (-not (Test-Command -Name scoop)) {
     Write-Log -Message "Installing Scoop package manager..." -Level Info
     Invoke-WithErrorHandling -ErrorMessage "Failed to install Scoop" -ScriptBlock {
       Set-EnvironmentVariable -Name SCOOP -Value $ScoopDir -Persist
@@ -106,7 +106,7 @@ if (-not $SkipWindows) {
       Invoke-Expression "& {$(Invoke-RestMethod -Uri https://get.scoop.sh)} -RunAsAdmin"
       
       # Verify Scoop was installed
-      if (-not (Test-Command -commandName scoop)) {
+      if (-not (Test-Command -Name scoop)) {
         throw "Scoop installation completed but 'scoop' command not found"
       }
     }
@@ -125,12 +125,14 @@ if (-not $SkipWindows) {
     scoop install git 7zip
     scoop import "$PSScriptRoot\..\config\scoop\scoopfile.json"
   }
-  
   Invoke-WithErrorHandling -ErrorMessage "Failed to update/cleanup Scoop packages" -ContinueOnError -ScriptBlock {
     scoop update -a
     scoop cleanup -a
   }
-  & icacls $env:SCOOP /setowner $env:USERNAME /T /C | Out-Null
+  Invoke-WithErrorHandling -ErrorMessage "Failed to set Scoop ownership" -ScriptBlock {
+    Write-Log -Message "Setting Scoop directory ownership to current user..." -Level Info
+    & icacls $env:SCOOP /setowner $env:USERNAME /T /C | Out-Null
+  }
 
   # configure apps/links
   Write-Log -Message "Configuring application symlinks..." -Level Info

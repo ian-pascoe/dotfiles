@@ -6,9 +6,10 @@ Import-Module gsudoModule -ErrorAction SilentlyContinue
 
 function Test-Command {
   param (
-    [string]$commandName
+    [Parameter(Mandatory = $true)]
+    [string]$Name
   )
-  return Get-Command $commandName -ErrorAction SilentlyContinue
+  return Get-Command $Name -ErrorAction SilentlyContinue
 }
 
 function Write-Log {
@@ -200,18 +201,18 @@ function Update-PowerShell {
 }
 
 # starship init
-if (Test-Command -commandName "starship") {
+if (Test-Command -Name "starship") {
   Invoke-Expression (& { (starship init powershell --print-full-init | Out-String) })
 }
 
 # zoxide
-if (Test-Command -commandName "zoxide") {
+if (Test-Command -Name "zoxide") {
   Invoke-Expression (& { (zoxide init powershell | Out-String) })
   Set-Alias -Name cd -Value z -Option AllScope
 }
 
 # lsd
-if (Test-Command -commandName "lsd") {
+if (Test-Command -Name "lsd") {
   Set-Alias -Name ls -Value lsd -Option AllScope
   function ll {
     lsd -l $args
@@ -222,7 +223,7 @@ if (Test-Command -commandName "lsd") {
 }
 
 # bat
-if (Test-Command -commandName "bat") {
+if (Test-Command -Name "bat") {
   function Get-FileList {
     bat --paging=never $args
   }
@@ -230,16 +231,16 @@ if (Test-Command -commandName "bat") {
 }
 
 # fd-find
-if (Test-Command -commandName "fd") {
+if (Test-Command -Name "fd") {
   Set-Alias -Name find -Value fd -Option AllScope
 }
 
 # ripgrep
-if (Test-Command -commandName "rg") {
+if (Test-Command -Name "rg") {
   Set-Alias -Name grep -Value rg -Option AllScope
 }
 
-if (Test-Command -commandName "yazi") {
+if (Test-Command -Name "yazi") {
   function y {
     $tmp = (New-TemporaryFile).FullName
     yazi $args --cwd-file="$tmp"
@@ -263,11 +264,17 @@ function New-Link {
     [string]$Target,
     [string]$Link,
     [switch]$Force = $false,
+    [switch]$NoBackup = $false,
     [ValidateSet("HardLink", "SymbolicLink")]
     [string]$LinkType = "HardLink"
   )
   if ($Force -and (Test-Path $Link)) {
-    Remove-Item $Link -Recurse -Force
+    if ($NoBackup) {
+      Remove-Item $Link -Recurse -Force
+    } else {
+      $backupPath = "$Link.backup"
+      Move-Item -Path $Link -Destination $backupPath -Force
+    }
   }
   New-Item -Path $Link -ItemType $LinkType -Value $Target
 }
@@ -287,8 +294,22 @@ function ln($target, $link, [switch]$f, [switch]$s=$false) {
   }
 }
 
-function rm($path, [switch]$r=$false, [switch]$f=$false) {
-  Remove-Item -Path $path -Recurse:$r -Force:$f
+function rm {
+  param(
+    [Parameter(Mandatory=$true, Position=0)]
+    [string[]]$Path,
+    [switch]$r,
+    [switch]$f,
+    [switch]$rf,
+    [switch]$fr
+  )
+  if ($rf -or $fr) {
+    $r = $true
+    $f = $true
+  }
+  foreach ($p in $Path) {
+    Remove-Item -LiteralPath $p -Recurse:$r -Force:$f
+  }
 }
 
 function df {

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 if grep -qEi "(Microsoft|WSL)" /proc/version; then
   win32yank.exe -i
 else
