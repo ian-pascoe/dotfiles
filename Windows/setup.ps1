@@ -130,6 +130,7 @@ if (-not $SkipWindows) {
     scoop update -a
     scoop cleanup -a
   }
+  & icacls $env:SCOOP /setowner $env:USERNAME /T /C | Out-Null
 
   # configure apps/links
   Write-Log -Message "Configuring application symlinks..." -Level Info
