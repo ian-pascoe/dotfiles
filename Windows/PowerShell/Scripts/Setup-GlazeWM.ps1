@@ -8,8 +8,11 @@ try {
     throw "GlazeWM command not found"
   }
 
-  $glazewmPath = "$env:USERPROFILE\.glzr\glazewm"
-  New-Symlink -Target "$PSScriptRoot\..\..\..\config\glazewm" -Link $glazewmPath -Force
+  $glzrDir = "$env:USERPROFILE\.glzr"
+  if (-not (Test-Path $glzrDir)) {
+    New-Item -ItemType Directory -Path $glzrDir | Out-Null
+  }
+  New-Symlink -Target "$PSScriptRoot\..\..\..\config\glazewm" -Link "$glzrDir\glazewm" -Force
 
   $cliCmd = "$glazewmExe start"
   $executor = "Powershell.exe"

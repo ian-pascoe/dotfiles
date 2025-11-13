@@ -192,7 +192,15 @@ function Update-PowerShell {
 
     if ($updateNeeded) {
       Write-Host "Updating PowerShell..." -ForegroundColor Yellow
-      Start-Process powershell.exe -ArgumentList "-NoProfile -Command winget upgrade Microsoft.PowerShell --accept-source-agreements --accept-package-agreements" -Wait -NoNewWindow
+      # Check if PowerShell is installed via winget
+      $wingetList = winget list --id Microsoft.PowerShell --exact 2>&1
+      $isInstalled = $wingetList -match "Microsoft\.PowerShell"
+      
+      if ($isInstalled) {
+        Start-Process powershell.exe -ArgumentList "-NoProfile -Command winget upgrade Microsoft.PowerShell --accept-source-agreements --accept-package-agreements" -Wait -NoNewWindow
+      } else {
+        Start-Process powershell.exe -ArgumentList "-NoProfile -Command winget install Microsoft.PowerShell --accept-source-agreements --accept-package-agreements" -Wait -NoNewWindow
+      }
       Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
     } else {
       Write-Host "Your PowerShell is up to date." -ForegroundColor Green
@@ -264,17 +272,11 @@ function New-Link {
     [string]$Target,
     [string]$Link,
     [switch]$Force = $false,
-    [switch]$NoBackup = $false,
     [ValidateSet("HardLink", "SymbolicLink")]
     [string]$LinkType = "HardLink"
   )
   if ($Force -and (Test-Path $Link)) {
-    if ($NoBackup) {
-      Remove-Item $Link -Recurse -Force
-    } else {
-      $backupPath = "$Link.backup"
-      Move-Item -Path $Link -Destination $backupPath -Force
-    }
+    Remove-Item $Link -Recurse -Force
   }
   New-Item -Path $Link -ItemType $LinkType -Value $Target
 }

@@ -26,9 +26,6 @@ param(
   [switch]$SkipWSL = $false,
   [switch]$SkipTheme = $false
 )
-Install-Module -Name PSReadLine -Force -Scope CurrentUser
-Install-Module -Name PowerShell-Yaml -Force -Scope CurrentUser
-Install-Module -Name Terminal-Icons -Force -Scope CurrentUser
 
 # source the powershell profile
 try {
@@ -49,6 +46,11 @@ foreach ($func in $requiredFunctions) {
 
 if (-not $SkipWindows) {
   Write-Log -Message "Starting Windows setup..." -Level Info
+
+  Install-Module -Name PSReadLine -Force -Scope CurrentUser
+  Install-Module -Name PowerShell-Yaml -Force -Scope CurrentUser
+  Install-Module -Name Terminal-Icons -Force -Scope CurrentUser
+  Install-Script -Name Refresh-EnvironmentVariables -Force
 
   & "$PSScriptRoot\PowerShell\Scripts\Setup-Proxy.ps1"
   
@@ -96,7 +98,7 @@ if (-not $SkipWindows) {
       New-Symlink -Target $script.FullName -Link "$env:XDG_BIN_HOME\$($script.Name)" -Force
     }
   }
-
+  
   # setup scoop
   if (-not (Test-Command -Name scoop)) {
     Write-Log -Message "Installing Scoop package manager..." -Level Info
@@ -133,6 +135,9 @@ if (-not $SkipWindows) {
     Write-Log -Message "Setting Scoop directory ownership to current user..." -Level Info
     & icacls $env:SCOOP /setowner $env:USERNAME /T /C | Out-Null
   }
+
+  # Refresh environment after installs
+  Refresh-EnvironmentVariables
 
   # configure apps/links
   Write-Log -Message "Configuring application symlinks..." -Level Info
@@ -200,6 +205,27 @@ if (-not $SkipWindows) {
       }
       & $scriptPath
     }
+  }
+
+  Invoke-WithErrorHandling -ErrorMessage "Failed to setup etasOS git repository" -ScriptBlock {
+    $DotfilesGitDir = "$DotfilesDir\.git"
+    if (-not (Test-Path $DotfilesGitDir)) {
+      Write-Log -Message "Initializing dotfiles git repository..." -Level Info
+      $cwd = Get-Location
+      Set-Location $DotfilesDir
+      git init
+      git remote add origin https://github.com/ian-pascoe/dotfiles.git
+      git checkout -B unstable origin/unstable -f
+      Set-Location $cwd
+      Write-Log -Message "dotfiles git repository initialized" -Level Success
+    }
+    Write-Log -Message "Setting dotfiles directory ownership to current user..." -Level Info
+    & icacls $DotfilesDir /setowner $env:USERNAME /T /C | Out-Null
+  }
+
+  Invoke-WithErrorHandling -ErrorMessage "Failed to set permissions on user home" -ScriptBlock {
+    Write-Log -Message "Setting user home directory ownership to current user..." -Level Info
+    & icacls $env:USERPROFILE /setowner $env:USERNAME /T /C | Out-Null
   }
   
   Write-Log -Message "Windows setup completed" -Level Success

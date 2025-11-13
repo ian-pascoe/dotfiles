@@ -58,7 +58,7 @@ try {
 
   $DotfilesPath = Join-Path $env:USERPROFILE ".dotfiles"
   if (Test-Path $DotfilesPath) {
-    throw "Dotfiles directory already exists at $DotfilesPath. Just run the setup script from there. Or, remove it to start over."
+    throw "Dotfiles directory already exists at $DotfilesPath. Just run the setup script from there."
   }
   Copy-Item -Path $RepoFolder.FullName -Destination $DotfilesPath -Recurse -Force
     
