@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }:
 let
@@ -21,7 +20,7 @@ in
 {
   security = {
     pki.installCACerts = true;
-    pki.certificateFiles = lib.mkBefore certificateFiles;
+    pki.certificateFiles = certificateFiles;
   };
 
   environment.variables = {

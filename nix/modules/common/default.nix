@@ -1,6 +1,7 @@
 { username, ... }:
 {
   imports = [
+    ./networking
     ./nix
     ./programs
     ./security
