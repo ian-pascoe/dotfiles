@@ -2,25 +2,12 @@
   pkgs,
   ...
 }:
-let
-  certificateFiles =
-    let
-      envCerts = builtins.getEnv "NIX_SSL_CERT_FILE";
-    in
-    if envCerts != "" then
-      [
-        "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-        envCerts
-      ]
-    else
-      [
-        "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-      ];
-in
 {
   security = {
     pki.installCACerts = true;
-    pki.certificateFiles = certificateFiles;
+    pki.certificateFiles = [
+      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+    ];
   };
 
   environment.variables = {
