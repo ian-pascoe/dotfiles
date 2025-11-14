@@ -27,12 +27,16 @@ param(
   [switch]$SkipTheme = $false
 )
 
+Install-Module -Name PSReadLine -Force -Scope CurrentUser
+Install-Module -Name PowerShell-Yaml -Force -Scope CurrentUser
+Install-Module -Name Terminal-Icons -Force -Scope CurrentUser
+Install-Script -Name Refresh-EnvironmentVariables -Force -Scope CurrentUser
+
 # source the powershell profile
 try {
   . "$PSScriptRoot/PowerShell/profile.ps1"
 } catch {
-  Write-Error "Failed to load PowerShell profile: $_"
-  exit 1
+  Write-Host "[WARNING] Failed to load PowerShell profile: $_. Attempting to proceed..."
 }
 
 # Validate required functions are available
@@ -46,11 +50,6 @@ foreach ($func in $requiredFunctions) {
 
 if (-not $SkipWindows) {
   Write-Log -Message "Starting Windows setup..." -Level Info
-
-  Install-Module -Name PSReadLine -Force -Scope CurrentUser
-  Install-Module -Name PowerShell-Yaml -Force -Scope CurrentUser
-  Install-Module -Name Terminal-Icons -Force -Scope CurrentUser
-  Install-Script -Name Refresh-EnvironmentVariables -Force
 
   & "$PSScriptRoot\PowerShell\Scripts\Setup-Proxy.ps1"
   
@@ -130,10 +129,6 @@ if (-not $SkipWindows) {
   Invoke-WithErrorHandling -ErrorMessage "Failed to update/cleanup Scoop packages" -ContinueOnError -ScriptBlock {
     scoop update -a
     scoop cleanup -a
-  }
-  Invoke-WithErrorHandling -ErrorMessage "Failed to set Scoop ownership" -ScriptBlock {
-    Write-Log -Message "Setting Scoop directory ownership to current user..." -Level Info
-    & icacls $env:SCOOP /setowner $env:USERNAME /T /C | Out-Null
   }
 
   # Refresh environment after installs
@@ -223,9 +218,10 @@ if (-not $SkipWindows) {
     & icacls $DotfilesDir /setowner $env:USERNAME /T /C | Out-Null
   }
 
-  Invoke-WithErrorHandling -ErrorMessage "Failed to set permissions on user home" -ScriptBlock {
-    Write-Log -Message "Setting user home directory ownership to current user..." -Level Info
-    & icacls $env:USERPROFILE /setowner $env:USERNAME /T /C | Out-Null
+  Invoke-WithErrorHandling -ErrorMessage "Failed to set permissions on directories" -ContinueOnError -ScriptBlock {
+    Write-Log -Message "Setting ownership of SCOOP and HOME directories to current user. This will take a while..." -Level Info
+    & icacls "$env:SCOOP" /setowner $env:USERNAME /T /C | Out-Null
+    & icacls "$env:HOME" /setowner $env:USERNAME /T /C | Out-Null
   }
   
   Write-Log -Message "Windows setup completed" -Level Success

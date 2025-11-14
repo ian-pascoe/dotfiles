@@ -3,9 +3,9 @@
     enable = true;
   };
 
-  environment.extraInit = ''
-    export DISPLAY=localhost:0
-    export LIBGL_ALWAYS_INDIRECT=true
-    export LIBGL_ALWAYS_SOFTWARE=true
-  '';
+  environment.variables = {
+    DISPLAY = "localhost:0";
+    LIBGL_ALWAYS_INDIRECT = 1;
+    LIBGL_ALWAYS_SOFTWARE = 1;
+  };
 }

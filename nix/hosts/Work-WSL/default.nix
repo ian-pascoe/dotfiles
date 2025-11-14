@@ -11,13 +11,17 @@
 
   networking.hostName = "Work-WSL";
 
-  users.users."${username}" = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "docker"
-    ];
-    shell = pkgs.zsh;
+  wsl.enable = true;
+  wsl.defaultUser = username;
+
+  users.users = {
+    "${username}" = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "docker"
+      ];
+      shell = pkgs.zsh;
+    };
   };
-  wsl.defaultUser = "${username}";
 }

@@ -3,6 +3,7 @@
   imports = [
     ./nix
     ./programs
+    ./security
   ];
 
   environment.variables = {

@@ -71,9 +71,7 @@
         if envUser != "" then envUser else "nixuser";
 
       # Common variables
-      commonArgs = {
-        inherit inputs outputs username;
-      };
+      commonArgs = { inherit inputs outputs username; };
 
       stableOverlay = final: prev: {
         stable = import nixpkgs-stable {
