@@ -1,3 +1,6 @@
 [wsl2]
 networkingMode=mirrored
-autoProxy=true
+autoProxy=false
+
+[experimental]
+autoMemoryReclaim=Gradual

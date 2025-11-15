@@ -51,8 +51,6 @@ foreach ($func in $requiredFunctions) {
 if (-not $SkipWindows) {
   Write-Log -Message "Starting Windows setup..." -Level Info
 
-  & "$PSScriptRoot\PowerShell\Scripts\Setup-Proxy.ps1"
-  
   Update-Powershell
 
   Invoke-WithErrorHandling -ErrorMessage "Failed to update winget packages" -ContinueOnError -ScriptBlock {
@@ -64,9 +62,9 @@ if (-not $SkipWindows) {
   Write-Log -Message "Configuring environment variables..." -Level Info
   Set-EnvironmentVariable -Name HOME -Value "$env:USERPROFILE" -Persist
   Set-EnvironmentVariable -Name EDITOR -Value "nvim" -Persist
-  Add-ToEnvironmentVariable -Path "$env:HOME\.local\bin" -VariableName PATH -Prepend -Level User
+  Add-ToEnvironmentVariable -Value "$env:HOME\.local\bin" -Name PATH -Prepend -Level User
   Set-EnvironmentVariable -Name POWERSHELL_TELEMETRY_OPTOUT -Value "true" -Persist
-  Add-ToEnvironmentVariable -Path "$env:HOME\Documents\PowerShell\Modules" -VariableName PSModulePath -Level User
+  Add-ToEnvironmentVariable -Value "$env:HOME\Documents\PowerShell\Modules" -Name PSModulePath -Level User
   Set-EnvironmentVariable -Name XDG_BIN_HOME -Value "$env:HOME\.local\bin" -Persist
   Set-EnvironmentVariable -Name XDG_CACHE_HOME -Value "$env:HOME\.cache" -Persist
   Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:HOME\.config" -Persist
@@ -229,6 +227,12 @@ if (-not $SkipWindows) {
 
 if (-not $SkipWSL) {
   Write-Log -Message "Starting WSL setup..." -Level Info
+
+  Add-ToEnvironmentVariable -Value "all_proxy" -Name WSLENV -Level User -Separator :
+  Add-ToEnvironmentVariable -Value "http_proxy" -Name WSLENV -Level User -Separator :
+  Add-ToEnvironmentVariable -Value "https_proxy" -Name WSLENV -Level User -Separator :
+  Add-ToEnvironmentVariable -Value "ftp_proxy" -Name WSLENV -Level User -Separator :
+  Add-ToEnvironmentVariable -Value "no_proxy" -Name WSLENV -Level User -Separator :
   
   Invoke-WithErrorHandling -ErrorMessage "Failed to setup WSL config" -ScriptBlock {
     New-Symlink -Target "$PSScriptRoot\..\Windows\wslconfig" -Link "$env:HOME\.wslconfig" -Force

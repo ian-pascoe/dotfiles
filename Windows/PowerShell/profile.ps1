@@ -74,20 +74,21 @@ function Invoke-WithErrorHandling {
   }
 }
 
-function Test-PathInEnvironmentVariable {
+function Test-ValueInEnvironmentVariable {
   param(
     [Parameter(Mandatory = $true)]
-    [string]$Path,
+    [string]$Value,
     [Parameter(Mandatory = $true)]
-    [string]$VariableName
+    [string]$Name,
+    [string]$Separator = ";"
   )
   
-  $currentValue = [Environment]::GetEnvironmentVariable($VariableName, 'User')
+  $currentValue = [Environment]::GetEnvironmentVariable($Name, 'User')
   if (-not $currentValue) {
-    $currentValue = [Environment]::GetEnvironmentVariable($VariableName, 'Machine')
+    $currentValue = [Environment]::GetEnvironmentVariable($Name, 'Machine')
   }
   if (-not $currentValue) {
-    $currentValue = [Environment]::GetEnvironmentVariable($VariableName, 'Process')
+    $currentValue = [Environment]::GetEnvironmentVariable($Name, 'Process')
   }
   
   if (-not $currentValue) {
@@ -95,8 +96,8 @@ function Test-PathInEnvironmentVariable {
   }
   
   # Normalize paths for comparison
-  $normalizedPath = $Path.TrimEnd('\', '/').Replace('/', '\')
-  $paths = $currentValue -split ';' | ForEach-Object { 
+  $normalizedPath = $Value.TrimEnd('\', '/').Replace('/', '\')
+  $paths = $currentValue -split $Separator | ForEach-Object { 
     $_.TrimEnd('\', '/').Replace('/', '\') 
   }
   
@@ -106,41 +107,40 @@ function Test-PathInEnvironmentVariable {
 function Add-ToEnvironmentVariable {
   param(
     [Parameter(Mandatory = $true)]
-    [string]$Path,
+    [string]$Value,
     [Parameter(Mandatory = $true)]
-    [string]$VariableName,
+    [string]$Name,
     [switch]$Prepend = $false,
     [ValidateSet("Process", "User", "Machine")]
-    [string]$Level = 'User'
+    [string]$Level = 'User',
+    [string]$Separator = ";"
   )
   
-  if (Test-PathInEnvironmentVariable -Path $Path -VariableName $VariableName) {
-    Write-Log -Message "$Path already in $VariableName" -Level Info
+  if (Test-ValueInEnvironmentVariable -Value $Value -Name $Name -Separator $Separator) {
+    Write-Log -Message "$Value already in $Name" -Level Info
     return $false
   }
   
-  $currentValue = [Environment]::GetEnvironmentVariable($VariableName, $Level)
+  $currentValue = [Environment]::GetEnvironmentVariable($Name, $Level)
   if (-not $currentValue) {
     $currentValue = ""
   }
   
   $newValue = if ($Prepend) {
     if ($currentValue) {
-      "$Path;$currentValue" 
+      "$Value$Separator$currentValue" 
     } else {
-      $Path 
+      $Value 
     }
   } else {
     if ($currentValue) {
-      "$currentValue;$Path" 
+      "$currentValue$Separator$Value" 
     } else {
-      $Path 
+      $Value 
     }
   }
-  
-  Set-Item -Force -Path "env:$VariableName" -Value $newValue
-  [Environment]::SetEnvironmentVariable($VariableName, $newValue, $Level)
-  Write-Log -Message "Added $Path to $VariableName" -Level Success
+
+  Set-EnvironmentVariable -Name $Name -Value $newValue -Level $Level
   return $true
 }
 

@@ -89,16 +89,7 @@ else
 fi
 
 export NIX_DEFAULT_USER="$windowsUsername"
-
-# Set up proxy environment variables
-log_info "Configuring proxy settings..."
-export http_proxy="$HTTP_PROXY"
-export HTTPS_PROXY="$HTTP_PROXY"
-export https_proxy="$HTTP_PROXY"
-export ALL_PROXY="$HTTP_PROXY"
-export all_proxy="$HTTP_PROXY"
 export NIX_SSL_CERT_FILE="$sslCertBundle"
-log_success "Proxy settings configured"
 
 # Function to create or update symlink
 create_symlink() {
@@ -153,7 +144,7 @@ cat <<EOF >/root/.gitconfig
 EOF
 
 # Run nixos-rebuild with error handling
-if nixos-rebuild switch --flake "$newUserHome/.nix#Work-WSL" --impure; then
+if nixos-rebuild switch --flake "$newUserHome/.dotfiles/nix#Work-WSL" --impure; then
   log_success "NixOS configuration built successfully"
 else
   error_exit "Failed to build NixOS configuration (exit code: $?)"
