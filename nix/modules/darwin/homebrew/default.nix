@@ -6,6 +6,7 @@
       "mas"
       "media-control"
       "opencode"
+      "nextdns"
     ];
     casks = [
       "ghostty"
