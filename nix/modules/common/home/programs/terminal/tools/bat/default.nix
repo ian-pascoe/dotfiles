@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   dotfiles,
   ...
@@ -11,9 +10,6 @@
 
   programs.bat = {
     enable = true;
-    extraPackages = [
-      pkgs.bat-extras.core
-    ];
   };
 
   xdg.configFile.bat = {

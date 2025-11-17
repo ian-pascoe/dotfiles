@@ -1,19 +1,22 @@
 {
   pkgs,
   config,
-  lib,
   ...
 }:
 {
-  networking = lib.mkIf pkgs.stdenv.isLinux {
-    proxy = {
-      allProxy = builtins.getEnv "all_proxy";
-      httpProxy = builtins.getEnv "http_proxy";
-      httpsProxy = builtins.getEnv "https_proxy";
-      ftpProxy = builtins.getEnv "ftp_proxy";
-      noProxy = builtins.getEnv "no_proxy";
-    };
-  };
+  networking =
+    if pkgs.stdenv.isLinux then
+      {
+        proxy = {
+          allProxy = builtins.getEnv "all_proxy";
+          httpProxy = builtins.getEnv "http_proxy";
+          httpsProxy = builtins.getEnv "https_proxy";
+          ftpProxy = builtins.getEnv "ftp_proxy";
+          noProxy = builtins.getEnv "no_proxy";
+        };
+      }
+    else
+      { };
 
   # Set upper case versions of the proxy environment variables
   environment.variables =
