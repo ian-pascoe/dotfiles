@@ -17,10 +17,7 @@ $Branch = "master"
 $GitHubBaseUrl = "https://github.com"
 
 Write-Host "=== Dotfiles Installation ===" -ForegroundColor Cyan
-Write-Host ""
-
-Write-Host ""
-Write-Host "Authenticating with GitHub Enterprise..." -ForegroundColor Cyan
+Write-Host "Downloading dotfiles from GitHub..." -ForegroundColor Cyan
 
 # Create temporary directory
 $TempDir = Join-Path $env:TEMP "dotfiles-$(Get-Date -Format 'yyyyMMddHHmmss')"
@@ -28,15 +25,15 @@ New-Item -ItemType Directory -Path $TempDir -Force | Out-Null
 
 try {
   Write-Host "Downloading repository archive..." -ForegroundColor Cyan
-    
+  
   # Download repository as zip archive
   $ZipUrl = "$GitHubBaseUrl/$RepoOwner/$RepoName/archive/refs/heads/$Branch.zip"
   $ZipPath = Join-Path $TempDir "repo.zip"
-    
+  
   try {
-    Invoke-WebRequest -Uri $ZipUrl -Headers $Headers -OutFile $ZipPath -ErrorAction Stop
+    Invoke-WebRequest -Uri $ZipUrl -OutFile $ZipPath -ErrorAction Stop
   } catch {
-    Write-Error "Failed to download repository. Please verify your token has correct permissions and try again."
+    Write-Error "Failed to download repository from $ZipUrl. Check your internet connection and that the repository/branch exist and are public."
     exit 1
   }
     
@@ -70,19 +67,16 @@ try {
   }
     
   Write-Host "Running setup script..." -ForegroundColor Cyan
-  Write-Host ""
     
   # Execute the setup script
   & $SetupScript
     
-  Write-Host ""
   Write-Host "Installation complete!" -ForegroundColor Green
 } catch {
   Write-Error "Installation failed: $_"
   exit 1
 } finally {
   # Clean up temporary files
-  Write-Host ""
   Write-Host "Cleaning up temporary files..." -ForegroundColor Gray
     
   # Remove temporary directory
