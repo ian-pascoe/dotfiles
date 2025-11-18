@@ -1,23 +1,15 @@
-# Fix annoying PSReadline warning:
-# Source - https://stackoverflow.com/a
-# Posted by mklement0, modified by community. See post 'Timeline' for change history
-# Retrieved 2025-11-17, License - CC BY-SA 4.0
-(Add-Type -PassThru -Name ScreenReaderUtil -Namespace WinApiHelper -MemberDefinition @'
-  const int SPIF_SENDCHANGE = 0x0002;
-  const int SPI_SETSCREENREADER = 0x0047;
+function Test-Command {
+  param (
+    [Parameter(Mandatory = $true)]
+    [string]$Name
+  )
+  return Get-Command $Name -ErrorAction SilentlyContinue
+}
 
-  [DllImport("user32", SetLastError = true, CharSet = CharSet.Unicode)]
-  private static extern bool SystemParametersInfo(uint uiAction, uint uiParam, IntPtr pvParam, uint fWinIni);
-
-  public static void EnableScreenReader(bool enable)
-  {
-    var ok = SystemParametersInfo(SPI_SETSCREENREADER, enable ? 1u : 0u, IntPtr.Zero, SPIF_SENDCHANGE);
-    if (!ok)
-    {
-      throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error());
-    }
-  }
-'@)::EnableScreenReader($false)
+# Run screen reader fix if available
+if (Test-Command -Name "Fix-ScreenReader") {
+  Fix-ScreenReader
+}
 
 # Import Modules and External Profiles
 if (-not (Get-Module -ListAvailable -Name PSReadLine)) {
@@ -36,14 +28,6 @@ if (-not (Get-Module -ListAvailable -Name PowerShell-Yaml)) {
 Import-Module PowerShell-Yaml -ErrorAction SilentlyContinue
 
 Import-Module gsudoModule -ErrorAction SilentlyContinue
-
-function Test-Command {
-  param (
-    [Parameter(Mandatory = $true)]
-    [string]$Name
-  )
-  return Get-Command $Name -ErrorAction SilentlyContinue
-}
 
 if (-not (Test-Command -Name Refresh-EnvironmentVariables)) {
   Install-Script -Name Refresh-EnvironmentVariables -Force -Scope CurrentUser -ErrorAction SilentlyContinue

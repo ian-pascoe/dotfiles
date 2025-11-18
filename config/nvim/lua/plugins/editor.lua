@@ -181,4 +181,9 @@ return {
       return opts
     end,
   },
+  { -- Directory diffing plugin
+    "will133/vim-dirdiff",
+    cmd = "DirDiff",
+    opts = {},
+  },
 }
