@@ -53,7 +53,7 @@ foreach ($cert in $certs) {
   # build path
   $path = "{0}\{1}.{2}" -f $OutputDir,$name,$CertExtension
   if (Test-Path $path) {
-    Write-Host "Skipping existing cert file: $path"
+    Write-Log -Message "Skipping existing cert file: $path" -Level Debug
     continue 
   } # next if cert was already written
 
@@ -77,5 +77,5 @@ foreach ($cert in $certs) {
   Add-Content -Path $caBundlePath -Value $pemContent
 }
 
-Write-Host "`nProcessed $certCount certificates"
-Write-Host "CA bundle created at: $caBundlePath"
+Write-Log -Message "`nProcessed $certCount certificates" -Level Info
+Write-Log -Message "CA bundle created at: $caBundlePath" -Level Success

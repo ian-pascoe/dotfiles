@@ -69,4 +69,4 @@ $SPIF_SENDCHANGE = 0x02
 
 [Wallpaper]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $NEW_BACKGROUND, $SPIF_UPDATEINIFILE -bor $SPIF_SENDCHANGE) | Out-Null
 
-Write-Host "Set background to: $NEW_BACKGROUND"
+Write-Log -Message "Set background to: $NEW_BACKGROUND" -Level Success

@@ -24,7 +24,7 @@ if (-not (Test-Path $THEME_PATH -PathType Container)) {
   exit 1
 }
 
-Write-Host "Linking new theme: $THEME_NAME"
+Write-Log -Message "Linking new theme: $THEME_NAME" -Level Info
 New-Symlink -Target $THEME_PATH -Link $CURRENT_THEME_DIR -Force
 
 # bat
@@ -67,7 +67,7 @@ if (Test-Path $FlowLauncherTheme) {
   if ($task) {
     Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
     Start-ScheduledTask -TaskName $taskName
-    Write-Host "Restarted Flow Launcher" -ForegroundColor Cyan
+    Write-Log -Message "Restarted Flow Launcher" -Level Info
   }
 }
 
