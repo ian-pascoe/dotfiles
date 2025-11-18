@@ -27,11 +27,6 @@ param(
   [switch]$SkipTheme = $false
 )
 
-Install-Module -Name PSReadLine -Force -Scope CurrentUser
-Install-Module -Name PowerShell-Yaml -Force -Scope CurrentUser
-Install-Module -Name Terminal-Icons -Force -Scope CurrentUser
-Install-Script -Name Refresh-EnvironmentVariables -Force -Scope CurrentUser
-
 # source the powershell profile
 try {
   . "$PSScriptRoot/PowerShell/profile.ps1"
@@ -40,7 +35,7 @@ try {
 }
 
 # Validate required functions are available
-$requiredFunctions = @('Test-Command', 'Write-Log', 'Invoke-WithErrorHandling', 'Add-ToEnvironmentVariable', 'New-Symlink', 'Set-EnvironmentVariable')
+$requiredFunctions = @('Test-Command', 'Write-Log', 'Invoke-WithErrorHandling', 'Add-ToEnvironmentVariable', 'New-Symlink', 'Set-EnvironmentVariable', 'Update-Powershell', 'Get-WSLPath')
 foreach ($func in $requiredFunctions) {
   if (-not (Get-Command $func -ErrorAction SilentlyContinue)) {
     Write-Error "Required function '$func' not found in profile. Setup cannot continue."
@@ -53,24 +48,29 @@ if (-not $SkipWindows) {
 
   Update-Powershell
 
-  Invoke-WithErrorHandling -ErrorMessage "Failed to update winget packages" -ContinueOnError -ScriptBlock {
-    Write-Log -Message "Updating installed winget packages..." -Level Info
-    winget upgrade --all --silent --accept-source-agreements --accept-package-agreements
-  }
-
   # setup important env vars
   Write-Log -Message "Configuring environment variables..." -Level Info
   Set-EnvironmentVariable -Name HOME -Value "$env:USERPROFILE" -Persist
   Set-EnvironmentVariable -Name EDITOR -Value "nvim" -Persist
-  Add-ToEnvironmentVariable -Value "$env:HOME\.local\bin" -Name PATH -Prepend -Level User
-  Set-EnvironmentVariable -Name POWERSHELL_TELEMETRY_OPTOUT -Value "true" -Persist
+
+  # Pwsh
+  Set-EnvironmentVariable -Name POWERSHELL_TELEMETRY_OPTOUT -Value "1" -Persist
+  Add-ToEnvironmentVariable -Value "$env:HOME\Documents\PowerShell\Scripts" -Name Path -Level User
   Add-ToEnvironmentVariable -Value "$env:HOME\Documents\PowerShell\Modules" -Name PSModulePath -Level User
+
+  # Windows PowerShell (not pwsh)
+  Add-ToEnvironmentVariable -Value "$env:HOME\Documents\WindowsPowerShell\Scripts" -Name Path -Level User
+  Add-ToEnvironmentVariable -Value "$env:HOME\Documents\WindowsPowerShell\Modules" -Name PSModulePath -Level User
+
   Set-EnvironmentVariable -Name XDG_BIN_HOME -Value "$env:HOME\.local\bin" -Persist
+  Add-ToEnvironmentVariable -Value "$env:XDG_BIN_HOME" -Name Path -Prepend -Level User
+
   Set-EnvironmentVariable -Name XDG_CACHE_HOME -Value "$env:HOME\.cache" -Persist
   Set-EnvironmentVariable -Name XDG_CONFIG_HOME -Value "$env:HOME\.config" -Persist
   Set-EnvironmentVariable -Name XDG_DATA_HOME -Value "$env:HOME\.local\share" -Persist
   Set-EnvironmentVariable -Name XDG_DESKTOP_DIR -Value "$env:HOME\Desktop" -Persist
   Set-EnvironmentVariable -Name XDG_DOWNLOAD_DIR -Value "$env:HOME\Downloads" -Persist
+
   Set-EnvironmentVariable -Name THEMES_DIR -Value "$env:HOME\.themes" -Persist
 
   # link powershell profile/config
@@ -96,6 +96,9 @@ if (-not $SkipWindows) {
     }
   }
   
+  # Refresh environment before installs
+  Refresh-EnvironmentVariables
+
   # setup scoop
   if (-not (Test-Command -Name scoop)) {
     Write-Log -Message "Installing Scoop package manager..." -Level Info
@@ -103,7 +106,7 @@ if (-not $SkipWindows) {
       Set-EnvironmentVariable -Name SCOOP -Value $ScoopDir -Persist
       Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
       Invoke-Expression "& {$(Invoke-RestMethod -Uri https://get.scoop.sh)} -RunAsAdmin"
-      
+
       # Verify Scoop was installed
       if (-not (Test-Command -Name scoop)) {
         throw "Scoop installation completed but 'scoop' command not found"
@@ -123,10 +126,6 @@ if (-not $SkipWindows) {
     }
     scoop install git 7zip
     scoop import "$PSScriptRoot\..\config\scoop\scoopfile.json"
-  }
-  Invoke-WithErrorHandling -ErrorMessage "Failed to update/cleanup Scoop packages" -ContinueOnError -ScriptBlock {
-    scoop update -a
-    scoop cleanup -a
   }
 
   # Refresh environment after installs
@@ -217,9 +216,8 @@ if (-not $SkipWindows) {
   }
 
   Invoke-WithErrorHandling -ErrorMessage "Failed to set permissions on directories" -ContinueOnError -ScriptBlock {
-    Write-Log -Message "Setting ownership of SCOOP and HOME directories to current user. This will take a while..." -Level Info
+    Write-Log -Message "Setting ownership of SCOOP directories to current user. This will take a while..." -Level Info
     & icacls "$env:SCOOP" /setowner $env:USERNAME /T /C | Out-Null
-    & icacls "$env:HOME" /setowner $env:USERNAME /T /C | Out-Null
   }
   
   Write-Log -Message "Windows setup completed" -Level Success
@@ -239,14 +237,10 @@ if (-not $SkipWSL) {
   }
   
   Invoke-WithErrorHandling -ErrorMessage "Failed to install WSL" -ScriptBlock {
-    wsl --install --no-distribution --no-launch
+    wsl --install --no-distribution --no-launch --web-download
   }
 
   wsl --shutdown
-  Invoke-WithErrorHandling -ErrorMessage "Failed to update WSL" -ContinueOnError -ScriptBlock {
-    wsl --update
-  }
-  
   Invoke-WithErrorHandling -ErrorMessage "Failed to setup NixOS distribution" -ScriptBlock {
     $wslDistroList = (wsl -l -v) -replace '\x00', ''
     if (-not ($wslDistroList | Select-String -Pattern "\s*NixOS\s")) {
@@ -286,8 +280,8 @@ if (-not $SkipWSL) {
     }
   }
 
+  $allCertsPath = "$env:HOME\certificates"
   Invoke-WithErrorHandling -ErrorMessage "Failed to export certificates" -ScriptBlock {
-    $allCertsPath = "$env:XDG_CACHE_HOME\certificates"
     Write-Log -Message "Exporting certificates..." -Level Info
     
     $certScript = "$PSScriptRoot\..\bin\Get-AllCertificates.ps1"
@@ -307,8 +301,7 @@ if (-not $SkipWSL) {
     if (-not (Test-Path $wslSetupScript)) {
       throw "WSL setup script not found: $wslSetupScript"
     }
-    
-    $allCertsPath = "$env:XDG_CACHE_HOME\certificates"
+
     $wslSetupScriptPath = Get-WSLPath $wslSetupScript
     $wslWindowsHomePath = Get-WSLPath "$env:HOME"
     $wslDotfilesDir = Get-WSLPath "$DotfilesDir"
@@ -350,3 +343,5 @@ if (-not $SkipTheme) {
 }
 
 Write-Log -Message "Setup script completed successfully" -Level Success
+
+Write-Log -Message "Please restart your computer to ensure all changes take effect." -Level Info

@@ -40,12 +40,6 @@ try {
   } else {
     Write-Log -Message "Scheduled task $taskName is up to date" -Level Info
   }
-    
-  $task = Get-ScheduledTask -TaskName $taskName
-  if ($task.State -ne 'Running') {
-    Start-ScheduledTask -TaskName $taskName
-    Write-Log -Message "Started task: $taskName" -Level Info
-  }
 } catch {
   Write-Log -Message "Failed to setup VcXsrv: $_" -Level Error
   throw
