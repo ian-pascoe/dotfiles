@@ -1,3 +1,3 @@
 _: {
-  certs = import ./certs.nix;
+  genCerts = import ./gen-certs.nix;
 }

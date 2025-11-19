@@ -3,11 +3,18 @@
   customLib,
   ...
 }:
+let
+  rtxCerts = customLib.rtx.genCerts { inherit pkgs; };
+in
 {
   security = {
     pki.certificateFiles = [
       "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
     ]
-    ++ customLib.rtx.certs.pemFiles;
+    ++ rtxCerts.pemFiles;
+  };
+
+  _module.args = {
+    inherit rtxCerts;
   };
 }
