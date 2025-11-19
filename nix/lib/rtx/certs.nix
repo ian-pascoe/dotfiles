@@ -1,17 +1,17 @@
 { pkgs, ... }:
 let
-  certs = pkgs.fetchzip {
+  certBundle = pkgs.fetchzip {
     url = "https://pki.rtx.com/certificate/RTX_Cert_Bundle-current.zip";
     sha256 = "sha256-q/LYu3oGy1D/r3P2pI7d4IulOfLXV/xt0hFt2mc3i0o=";
   };
 
-  pemFiles = map (f: "${certs}/PEM/${f}") (
+  pemFiles = map (f: "${certBundle}/PEM/${f}") (
     builtins.filter (
       f: f != "." && f != ".." && f != "README.txt" && builtins.match ".+\\.cer$" f != null
-    ) (builtins.attrNames (builtins.readDir "${certs}/PEM"))
+    ) (builtins.attrNames (builtins.readDir "${certBundle}/PEM"))
   );
 
-  rtxCacerts =
+  javaCacerts =
     pkgs.runCommand "rtx-cacerts"
       {
         buildInputs = [ pkgs.jdk ];
@@ -33,8 +33,7 @@ let
       '';
 in
 {
-  _module.args.rtxCerts = {
-    inherit certs pemFiles;
-    trustStore = "${rtxCacerts}/lib/openjdk/lib/security/cacerts";
-  };
+  bundle = certBundle;
+  inherit pemFiles;
+  javaTrustStore = "${javaCacerts}/lib/openjdk/lib/security/cacerts";
 }

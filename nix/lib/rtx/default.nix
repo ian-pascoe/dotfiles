@@ -1,0 +1,3 @@
+{
+  certs = import ./certs.nix;
+}

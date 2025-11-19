@@ -1,6 +1,6 @@
 {
   pkgs,
-  rtxCerts,
+  customLib,
   ...
 }:
 {
@@ -8,6 +8,6 @@
     pki.certificateFiles = [
       "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
     ]
-    ++ rtxCerts.pemFiles;
+    ++ customLib.rtx.certs.pemFiles;
   };
 }
