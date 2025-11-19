@@ -183,7 +183,24 @@ if (Test-Command -Name "starship") {
 # zoxide
 if (Test-Command -Name "zoxide") {
   Invoke-Expression (& { (zoxide init powershell | Out-String) })
-  Set-Alias -Name cd -Value z -Option AllScope
+  
+  function zd {
+    if ($args.Count -eq 0) {
+      Set-Location $HOME
+    } elseif (Test-Path -Path $args[0] -PathType Container) {
+      Set-Location $args[0]
+    } else {
+      z @args
+      if ($LASTEXITCODE -eq 0 -or $?) {
+        Write-Host -NoNewline "`u{F17A9} "
+        Write-Host (Get-Location).Path
+      } else {
+        Write-Error "Error: Directory not found"
+      }
+    }
+  }
+  
+  Set-Alias -Name cd -Value zd -Option AllScope
 }
 
 # lsd
@@ -1179,11 +1196,11 @@ Set-PSReadLineOption -AddToHistoryHandler {
 }
 
 # Dotnet CLI Autocompletion
-$scriptblock = {
-  param($wordToComplete, $commandAst, $cursorPosition)
-  dotnet complete --position $cursorPosition $commandAst.ToString() |
-    ForEach-Object {
-      [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-    }
+$scriptblock = {('password', 'secret', 'token', 'apikey', 'connectionstring')
+  $hasSensitive = $sensitive | Where-Object { $line -match $_ }
+  return ($null -eq $hasSensitive)
+  ForEach-Object {
+    [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+  }
 }
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock $scriptblock

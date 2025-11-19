@@ -7,11 +7,13 @@
       "media-control"
       "opencode"
       "nextdns"
+      "wireguard-tools"
     ];
     casks = [
       "ghostty"
       "helium-browser"
       "google-chrome"
+      "bitwarden"
       "spotify"
       "karabiner-elements"
       "betterdisplay"
@@ -24,9 +26,7 @@
     ];
     greedyCasks = true;
     masApps = {
-      Bitwarden = 1352778147;
       Infuse = 1136220934;
-      WireGuard = 1451685025;
     };
     taps = builtins.attrNames config.nix-homebrew.taps;
     onActivation = {
