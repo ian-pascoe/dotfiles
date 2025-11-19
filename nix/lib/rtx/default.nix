@@ -1,5 +1,3 @@
 _: {
-  rtx = {
-    certs = import ./certs.nix;
-  };
+  certs = import ./certs.nix;
 }
