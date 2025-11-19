@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ self, lib, ... }:
 {
   # Find all default.nix files in a directory recursively
   # Returns a list of paths that can be used in imports
@@ -16,7 +16,7 @@
         in
         if type == "directory" then
           # Recursively search subdirectories
-          lib.findModules fullPath
+          self.findModules fullPath
         else if type == "regular" && name == "default.nix" then
           # Found a module file
           [ fullPath ]
