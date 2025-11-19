@@ -7,7 +7,6 @@
       "media-control"
       "opencode"
       "nextdns"
-      "wireguard-tools"
     ];
     casks = [
       "ghostty"
@@ -27,6 +26,7 @@
     greedyCasks = true;
     masApps = {
       Infuse = 1136220934;
+      WireGuard = 1451685025;
     };
     taps = builtins.attrNames config.nix-homebrew.taps;
     onActivation = {
