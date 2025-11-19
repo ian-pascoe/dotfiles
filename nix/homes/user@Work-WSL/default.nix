@@ -6,10 +6,10 @@
 }:
 {
   imports = lib.flatten [
-    (lib.findModules ../../modules/home/common)
-    (lib.findModules ../../modules/home/nixos)
-    (lib.findModules ../../modules/home/wsl)
-    (lib.findModules ../../modules/home/rtx)
+    (lib.module.findModules ../../modules/home/common)
+    (lib.module.findModules ../../modules/home/nixos)
+    (lib.module.findModules ../../modules/home/wsl)
+    (lib.module.findModules ../../modules/home/rtx)
   ];
 
   home = {

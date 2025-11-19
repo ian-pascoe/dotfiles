@@ -6,8 +6,8 @@
 }:
 {
   imports = lib.flatten [
-    (lib.findModules ../../modules/home/common)
-    (lib.findModules ../../modules/home/darwin)
+    (lib.module.findModules ../../modules/home/common)
+    (lib.module.findModules ../../modules/home/darwin)
   ];
 
   home = {

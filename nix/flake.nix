@@ -69,30 +69,23 @@
         if envUser != "" then envUser else "nixuser";
 
       # Custom library
-      lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = final; } // home-manager.lib);
+      lib = import ./lib { inherit inputs; };
 
       # Common variables
-      commonArgs = {
+      specialArgs = {
         inherit inputs username lib;
-      };
-
-      stableOverlay = final: prev: {
-        stable = import nixpkgs-stable {
-          inherit (final) system;
-          config.allowUnfree = true;
-        };
       };
 
       # Helper functions
       mkNixosSystem =
         modules:
-        nixpkgs.lib.nixosSystem {
+        lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = commonArgs;
+          inherit specialArgs;
           modules = modules ++ [
             {
               nixpkgs.overlays = [
-                stableOverlay
+                lib.mkStableOverlay
               ];
             }
           ];
@@ -100,13 +93,13 @@
 
       mkDarwinSystem =
         modules:
-        nix-darwin.lib.darwinSystem {
+        lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = commonArgs;
+          inherit specialArgs;
           modules = modules ++ [
             {
               nixpkgs.overlays = [
-                stableOverlay
+                lib.mkStableOverlay
               ];
             }
           ];
@@ -118,11 +111,11 @@
           useUserPackages = true;
           backupFileExtension = "backup";
         };
-        home-manager.extraSpecialArgs = commonArgs;
+        home-manager.extraSpecialArgs = specialArgs;
         home-manager.users.${username} = import config;
       };
 
-      mkHomebrewConfig = {
+      homebrewConfig = {
         nix-homebrew = {
           enable = true;
           enableRosetta = true;
@@ -156,7 +149,7 @@
           nur.modules.darwin.default
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
-          mkHomebrewConfig
+          homebrewConfig
           ./hosts/Personal-MacOS
           home-manager.darwinModules.home-manager
           {

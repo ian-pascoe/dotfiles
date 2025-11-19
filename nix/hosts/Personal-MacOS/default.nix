@@ -6,8 +6,8 @@
 }:
 {
   imports = lib.flatten [
-    (lib.findModules ../../modules/common)
-    (lib.findModules ../../modules/darwin)
+    (lib.module.findModules ../../modules/common)
+    (lib.module.findModules ../../modules/darwin)
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";

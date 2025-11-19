@@ -6,10 +6,10 @@
 }:
 {
   imports = lib.flatten [
-    (lib.findModules ../../modules/common)
-    (lib.findModules ../../modules/nixos)
-    (lib.findModules ../../modules/wsl)
-    (lib.findModules ../../modules/rtx)
+    (lib.module.findModules ../../modules/common)
+    (lib.module.findModules ../../modules/nixos)
+    (lib.module.findModules ../../modules/wsl)
+    (lib.module.findModules ../../modules/rtx)
   ];
 
   networking.hostName = "Work-WSL";
