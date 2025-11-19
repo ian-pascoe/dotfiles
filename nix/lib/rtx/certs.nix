@@ -33,7 +33,9 @@ let
       '';
 in
 {
-  bundle = certBundle;
-  inherit pemFiles;
-  javaTrustStore = "${javaCacerts}/lib/openjdk/lib/security/cacerts";
+  certs = {
+    bundle = certBundle;
+    inherit pemFiles;
+    javaTrustStore = "${javaCacerts}/lib/openjdk/lib/security/cacerts";
+  };
 }
