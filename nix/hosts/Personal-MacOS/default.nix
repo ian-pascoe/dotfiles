@@ -1,14 +1,13 @@
 {
   lib,
-  customLib,
   pkgs,
   username,
   ...
 }:
 {
   imports = lib.flatten [
-    (customLib.findModules ../../modules/common)
-    (customLib.findModules ../../modules/darwin)
+    (lib.findModules ../../modules/common)
+    (lib.findModules ../../modules/darwin)
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";

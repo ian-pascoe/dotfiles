@@ -1,16 +1,15 @@
 {
   lib,
-  customLib,
   pkgs,
   username,
   ...
 }:
 {
   imports = lib.flatten [
-    (customLib.findModules ../../modules/common)
-    (customLib.findModules ../../modules/nixos)
-    (customLib.findModules ../../modules/wsl)
-    (customLib.findModules ../../modules/rtx)
+    (lib.findModules ../../modules/common)
+    (lib.findModules ../../modules/nixos)
+    (lib.findModules ../../modules/wsl)
+    (lib.findModules ../../modules/rtx)
   ];
 
   networking.hostName = "Work-WSL";

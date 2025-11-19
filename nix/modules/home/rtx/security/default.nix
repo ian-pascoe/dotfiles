@@ -1,6 +1,6 @@
-{ pkgs, customLib, ... }:
+{ pkgs, lib, ... }:
 let
-  rtxCerts = customLib.rtx.genCerts { inherit pkgs; };
+  rtxCerts = lib.rtx.genCerts { inherit pkgs; };
 in
 {
   _module.args = {

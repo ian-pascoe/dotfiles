@@ -1,10 +1,10 @@
 {
   pkgs,
-  customLib,
+  lib,
   ...
 }:
 let
-  rtxCerts = customLib.rtx.genCerts { inherit pkgs; };
+  rtxCerts = lib.rtx.genCerts { inherit pkgs; };
 in
 {
   security = {

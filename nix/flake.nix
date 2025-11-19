@@ -69,13 +69,11 @@
         if envUser != "" then envUser else "nixuser";
 
       # Custom library
-      customLib = import ./lib {
-        lib = nixpkgs.lib // home-manager.lib;
-      };
+      lib = nixpkgs.lib.extend (self: super: import ./lib { lib = self; } // home-manager.lib);
 
       # Common variables
       commonArgs = {
-        inherit inputs username customLib;
+        inherit inputs username lib;
       };
 
       stableOverlay = final: prev: {

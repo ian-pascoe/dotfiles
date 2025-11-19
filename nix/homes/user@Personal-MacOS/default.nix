@@ -1,14 +1,13 @@
 {
   lib,
-  customLib,
   config,
   username,
   ...
 }:
 {
   imports = lib.flatten [
-    (customLib.findModules ../../modules/home/common)
-    (customLib.findModules ../../modules/home/darwin)
+    (lib.findModules ../../modules/home/common)
+    (lib.findModules ../../modules/home/darwin)
   ];
 
   home = {
