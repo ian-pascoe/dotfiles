@@ -1,5 +1,5 @@
 _: {
   rtx = {
-    inherit (import ./certs.nix) certs;
+    certs = import ./certs.nix;
   };
 }
