@@ -69,7 +69,7 @@
         if envUser != "" then envUser else "nixuser";
 
       # Custom library
-      lib = nixpkgs.lib.extend (self: super: import ./lib { lib = self; } // home-manager.lib);
+      lib = nixpkgs.lib.extend (final: prev: import ./lib { lib = final; } // home-manager.lib);
 
       # Common variables
       commonArgs = {
