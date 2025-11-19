@@ -4,16 +4,27 @@ local function smart_nav(dir)
   return function()
     local ss = require("smart-splits")
     if dir == "h" then
-      vim.schedule(ss.move_cursor_left)
+      return vim.schedule(ss.move_cursor_left)
     elseif dir == "j" then
-      vim.schedule(ss.move_cursor_down)
+      return vim.schedule(ss.move_cursor_down)
     elseif dir == "k" then
-      vim.schedule(ss.move_cursor_up)
+      return vim.schedule(ss.move_cursor_up)
     elseif dir == "l" then
-      vim.schedule(ss.move_cursor_right)
+      return vim.schedule(ss.move_cursor_right)
     else
-      vim.schedule(ss.move_cursor_previous)
+      return vim.schedule(ss.move_cursor_previous)
     end
+  end
+end
+
+---@module "snacks"
+---@class SnacksTerminal: snacks.terminal
+
+---@param dir "h"|"j"|"k"|"l"|nil the direction to navigate
+---@return fun(self: SnacksTerminal): string|nil function to navigate in the given direction
+local function term_nav(dir)
+  return function(self)
+    return self:is_floating() and "<c-" .. dir .. ">" or smart_nav(dir)()
   end
 end
 
@@ -38,10 +49,10 @@ return {
       terminal = {
         win = {
           keys = {
-            nav_h = { "<C-h>", smart_nav("h"), desc = "Go to Left Window", expr = true, mode = "t" },
-            nav_j = { "<C-j>", smart_nav("j"), desc = "Go to Lower Window", expr = true, mode = "t" },
-            nav_k = { "<C-k>", smart_nav("k"), desc = "Go to Upper Window", expr = true, mode = "t" },
-            nav_l = { "<C-l>", smart_nav("l"), desc = "Go to Right Window", expr = true, mode = "t" },
+            nav_h = { "<C-h>", term_nav("h"), desc = "Go to Left Window", expr = true, mode = "t" },
+            nav_j = { "<C-j>", term_nav("j"), desc = "Go to Lower Window", expr = true, mode = "t" },
+            nav_k = { "<C-k>", term_nav("k"), desc = "Go to Upper Window", expr = true, mode = "t" },
+            nav_l = { "<C-l>", term_nav("l"), desc = "Go to Right Window", expr = true, mode = "t" },
           },
         },
       },
