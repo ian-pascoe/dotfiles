@@ -29,7 +29,7 @@
         let
           inherit (pkgs) jdk;
           cacertsPath = "${jdk}/lib/openjdk/lib/security/cacerts";
-          pemArgs = builtins.concatStringsSep "\n" pemFiles;
+          pemArgs = builtins.concatStringsSep " " pemFiles;
         in
         pkgs.runCommand "rtx-cacerts" { } ''
           set -eu
