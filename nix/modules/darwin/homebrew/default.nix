@@ -11,6 +11,7 @@
     casks = [
       "ghostty"
       "helium-browser"
+      "google-chrome"
       "spotify"
       "karabiner-elements"
       "betterdisplay"

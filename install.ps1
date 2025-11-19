@@ -36,7 +36,7 @@ try {
     Write-Error "Failed to download repository from $ZipUrl. Check your internet connection and that the repository/branch exist and are public."
     exit 1
   }
-    
+      
   Write-Host "Extracting files..." -ForegroundColor Cyan
     
   # Extract the zip file
