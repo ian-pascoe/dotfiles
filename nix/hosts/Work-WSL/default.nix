@@ -1,19 +1,23 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ pkgs, username, ... }:
 {
-  imports = [
-    ../../modules/common
-    ../../modules/nixos
-    ../../modules/wsl
-    ../../modules/rtx
+  lib,
+  customLib,
+  pkgs,
+  username,
+  ...
+}:
+{
+  imports = lib.flatten [
+    (customLib.findModules ../../modules/common)
+    (customLib.findModules ../../modules/nixos)
+    (customLib.findModules ../../modules/wsl)
+    (customLib.findModules ../../modules/rtx)
   ];
 
   networking.hostName = "Work-WSL";
 
   wsl.enable = true;
-  wsl.defaultUser = username;
 
+  wsl.defaultUser = username;
   users.users = {
     "${username}" = {
       isNormalUser = true;

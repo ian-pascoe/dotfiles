@@ -62,16 +62,21 @@
       ...
     }@inputs:
     let
-      inherit (self) outputs;
-
       username =
         let
           envUser = builtins.getEnv "NIX_DEFAULT_USER";
         in
         if envUser != "" then envUser else "nixuser";
 
+      # Custom library
+      customLib = import ./lib {
+        inherit (nixpkgs) lib;
+      };
+
       # Common variables
-      commonArgs = { inherit inputs outputs username; };
+      commonArgs = {
+        inherit inputs username customLib;
+      };
 
       stableOverlay = final: prev: {
         stable = import nixpkgs-stable {

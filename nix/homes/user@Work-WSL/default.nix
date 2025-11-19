@@ -1,10 +1,16 @@
-{ config, username, ... }:
 {
-  imports = [
-    ../../modules/common/home
-    ../../modules/nixos/home
-    ../../modules/wsl/home
-    ../../modules/rtx/home
+  lib,
+  customLib,
+  config,
+  username,
+  ...
+}:
+{
+  imports = lib.flatten [
+    (customLib.findModules ../../modules/home/common)
+    (customLib.findModules ../../modules/home/nixos)
+    (customLib.findModules ../../modules/home/wsl)
+    (customLib.findModules ../../modules/home/rtx)
   ];
 
   home = {
