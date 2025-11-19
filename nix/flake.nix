@@ -70,7 +70,7 @@
 
       # Custom library
       customLib = import ./lib {
-        inherit (nixpkgs) lib;
+        lib = nixpkgs.lib // home-manager.lib;
       };
 
       # Common variables

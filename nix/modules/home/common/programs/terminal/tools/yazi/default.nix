@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../../util/home/dotfiles
-  ];
-
   programs.yazi = {
     enable = true;
     shellWrapperName = "y";

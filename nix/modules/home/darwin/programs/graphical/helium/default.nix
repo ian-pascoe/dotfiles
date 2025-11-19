@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../util/home/dotfiles
-  ];
-
   home.file = {
     ".local/bin/install-helium-widevine" = {
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/bin/install-helium-widevine";

@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../../util/home/dotfiles
-  ];
-
   programs.opencode = {
     enable = pkgs.stdenv.isLinux; # handled via homebrew on mac
     package = pkgs.nur.repos.falconprogrammer.opencode-sst; # fallback if main is broken

@@ -13,10 +13,6 @@ let
   };
 in
 {
-  imports = [
-    ../../../../../../util/home/dotfiles
-  ];
-
   programs.tmux = {
     enable = true;
   };

@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../util/home/dotfiles
-  ];
-
   home = {
     file = {
       ".themes" = {

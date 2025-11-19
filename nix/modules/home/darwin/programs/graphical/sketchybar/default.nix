@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../util/home/dotfiles
-  ];
-
   programs.sketchybar = {
     enable = true;
     configType = "lua";

@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  _module.args.commonLibs = with pkgs; [
+  _module.args.commonLibraries = with pkgs; [
     # List by default
     zlib
     zstd

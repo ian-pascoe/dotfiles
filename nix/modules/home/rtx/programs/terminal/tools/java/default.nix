@@ -1,9 +1,5 @@
 { rtxCerts, ... }:
 {
-  imports = [
-    ../../../../../../util/rtx/certs
-  ];
-
   programs.java = {
     enable = true;
   };

@@ -1,13 +1,13 @@
 {
   pkgs,
   lib,
-  commonLibs,
+  commonLibraries,
   ...
 }:
 let
   libs =
     with pkgs;
-    commonLibs
+    commonLibraries
     ++ [
       darwin.libiconv
       darwin.ICU
@@ -15,10 +15,6 @@ let
   devLibs = map (pkg: pkg.dev or pkg) libs;
 in
 {
-  imports = [
-    ../../util/libraries
-  ];
-
   environment.systemPackages = libs;
 
   environment.variables = {

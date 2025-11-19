@@ -6,14 +6,15 @@
 #>
 
 [CmdletBinding()]
-param()
+param(
+  [string]$Branch = "master"
+)
 
 $ErrorActionPreference = 'Stop'
 
 # Configuration
 $RepoOwner = "ian-pascoe"
 $RepoName = "dotfiles"
-$Branch = "master"
 $GitHubBaseUrl = "https://github.com"
 
 Write-Host "=== Dotfiles Installation ===" -ForegroundColor Cyan

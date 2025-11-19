@@ -4,10 +4,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../util/home/dotfiles
-  ];
-
   programs.aerospace = {
     enable = true;
     launchd.enable = true;

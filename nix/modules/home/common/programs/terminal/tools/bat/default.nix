@@ -4,10 +4,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../../util/home/dotfiles
-  ];
-
   programs.bat = {
     enable = true;
   };

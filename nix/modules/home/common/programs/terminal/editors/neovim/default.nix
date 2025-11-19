@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../../util/home/dotfiles
-  ];
-
   programs.neovim = {
     enable = true;
     extraPackages = with pkgs; [

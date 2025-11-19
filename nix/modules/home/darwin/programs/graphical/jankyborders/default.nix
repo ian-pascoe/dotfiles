@@ -5,26 +5,27 @@
   ...
 }:
 {
-  imports = [
-    ../../../../../util/home/dotfiles
-  ];
   services.jankyborders = {
     enable = true;
   };
+
   launchd.agents.jankyborders = {
     config = {
       EnvironmentVariables = {
-        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${pkgs.jankyborders}/bin";
+        PATH = "${pkgs.jankyborders}/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin";
       };
     };
   };
+
   xdg.configFile."borders/bordersrc" = {
     enable = false; # disable automatic generation of bordersrc
   };
+
   xdg.configFile.borders = {
     source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/borders";
     force = true;
   };
+
   home.shellAliases = {
     restart-borders = ''launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.jankyborders'';
   };
