@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   programs.home-manager.enable = true;
 
@@ -23,7 +24,7 @@
       XDG_BIN_HOME = "$HOME/.local/bin";
     };
 
-    sessionPath = [
+    sessionPath = lib.mkBefore [
       "$XDG_BIN_HOME"
     ];
   };
