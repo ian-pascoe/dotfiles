@@ -179,7 +179,7 @@ if (-not $SkipWindows) {
   # apps with more involved setup
   Write-Log -Message "Running application-specific setup scripts..." -Level Info
   
-  $setupScripts = @(
+  $otherSetupScripts = @(
     "Setup-AutoHotkey.ps1",
     "Setup-FlowLauncher.ps1",
     "Setup-GlazeWM.ps1",
@@ -189,7 +189,7 @@ if (-not $SkipWindows) {
     "Setup-Misc.ps1"
   )
   
-  foreach ($script in $setupScripts) {
+  foreach ($script in $otherSetupScripts) {
     $scriptPath = "$PSScriptRoot\PowerShell\Scripts\$script"
     Invoke-WithErrorHandling -ErrorMessage "Failed to run $script" -ScriptBlock {
       if (-not (Test-Path $scriptPath)) {
