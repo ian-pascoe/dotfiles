@@ -62,94 +62,26 @@
       ...
     }@inputs:
     let
-      username =
-        let
-          envUser = builtins.getEnv "NIX_DEFAULT_USER";
-        in
-        if envUser != "" then envUser else "nixuser";
-
       # Custom library
       lib = import ./lib { inherit inputs; };
-
-      # Common variables
-      specialArgs = {
-        inherit inputs username lib;
-      };
-
-      # Helper functions
-      mkNixosSystem =
-        modules:
-        lib.nixosSystem {
-          system = "x86_64-linux";
-          inherit specialArgs;
-          modules = modules ++ [
-            {
-              nixpkgs.overlays = [
-                lib.mkStableOverlay
-              ];
-            }
-          ];
-        };
-
-      mkDarwinSystem =
-        modules:
-        lib.darwinSystem {
-          system = "aarch64-darwin";
-          inherit specialArgs;
-          modules = modules ++ [
-            {
-              nixpkgs.overlays = [
-                lib.mkStableOverlay
-              ];
-            }
-          ];
-        };
-
-      mkHomeManagerConfig = config: {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          backupFileExtension = "backup";
-        };
-        home-manager.extraSpecialArgs = specialArgs;
-        home-manager.users.${username} = import config;
-      };
-
-      homebrewConfig = {
-        nix-homebrew = {
-          enable = true;
-          enableRosetta = true;
-          user = username;
-          autoMigrate = true;
-          taps = {
-            "homebrew/homebrew-core" = homebrew-core;
-            "homebrew/homebrew-cask" = homebrew-cask;
-          };
-          mutableTaps = false;
-        };
-      };
     in
     {
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild switch --flake .#Work-WSL'
       nixosConfigurations = {
-        Work-WSL = mkNixosSystem [
+        Work-WSL = lib.system.mkNixosSystem [
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
           ./hosts/Work-WSL
           home-manager.nixosModules.home-manager
-          (mkHomeManagerConfig ./homes/${"user@Work-WSL"})
+          (lib.system.mkHomeManagerConfig ./homes/${"user@Work-WSL"})
         ];
       };
 
-      # Darwin configuration entrypoint
-      # Available through 'darwin-rebuild switch --flake .#Personal-MacOS'
       darwinConfigurations = {
-        Personal-MacOS = mkDarwinSystem [
+        Personal-MacOS = lib.system.mkDarwinSystem [
           nur.modules.darwin.default
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
-          homebrewConfig
+          (lib.system.mkHomebrewConfig { })
           ./hosts/Personal-MacOS
           home-manager.darwinModules.home-manager
           {
@@ -157,7 +89,7 @@
               mac-app-util.homeManagerModules.default
             ];
           }
-          (mkHomeManagerConfig ./homes/${"user@Personal-MacOS"})
+          (lib.system.mkHomeManagerConfig ./homes/${"user@Personal-MacOS"})
         ];
       };
     };

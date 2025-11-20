@@ -1,7 +1,4 @@
-{ inputs, ... }:
-let
-  inherit (inputs.nixpkgs) lib;
-in
+{ lib, ... }:
 {
   # Find all default.nix files in a directory recursively
   # Returns a list of paths that can be used in imports

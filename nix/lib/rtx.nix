@@ -1,4 +1,5 @@
-{
+_: {
+  # Generate RTX certificate bundles in various formats.
   genCerts =
     { pkgs, ... }:
     let
