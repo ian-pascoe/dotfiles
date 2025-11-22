@@ -3,6 +3,10 @@
   "logo": {
     "type": "auto",
     "source": "nixos",
+    "color": {
+      "1": "blue",
+      "2": "green"
+    },
     "padding": {
       "top": 2,
       "right": 6,
@@ -101,7 +105,7 @@
       "type": "command",
       "key": "│ ├󰸌",
       "keyColor": "blue",
-      "text": "theme=$(basename `readlink ~/.config/theme`); echo -e \"$theme \\e[38m●\\e[37m●\\e[36m●\\e[35m●\\e[34m●\\e[33m●\\e[32m●\\e[31m●\""
+      "text": "theme=$(basename `readlink ~/.config/theme`); printf \"%s \\x1b[38;5;8m●\\x1b[38;5;7m●\\x1b[38;5;6m●\\x1b[38;5;5m●\\x1b[38;5;4m●\\x1b[38;5;3m●\\x1b[38;5;2m●\\x1b[38;5;1m●\\x1b[0m\" \"$theme\""
     },
     {
       "type": "terminalfont",

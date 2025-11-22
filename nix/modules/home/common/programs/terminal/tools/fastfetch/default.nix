@@ -14,4 +14,8 @@
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/fastfetch/config.jsonc";
     };
   };
+
+  programs.zsh.initContent = lib.mkAfter ''
+    fastfetch
+  '';
 }

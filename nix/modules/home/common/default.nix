@@ -27,6 +27,8 @@
     sessionPath = lib.mkBefore [
       "$XDG_BIN_HOME"
     ];
+
+    file.".hushlogin".text = "";
   };
 
   systemd.user.startServices = "sd-switch";
