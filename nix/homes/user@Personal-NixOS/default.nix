@@ -8,8 +8,6 @@
   imports = lib.flatten [
     (lib.module.findModules ../../modules/home/common)
     (lib.module.findModules ../../modules/home/nixos)
-    (lib.module.findModules ../../modules/home/wsl)
-    (lib.module.findModules ../../modules/home/rtx)
   ];
 
   home = {
@@ -17,7 +15,7 @@
     homeDirectory = "/home/${username}";
 
     shellAliases = {
-      nrs = "sudo -HE nixos-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles/nix#Work-WSL --impure";
+      nrs = "sudo -HE nixos-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles/nix#Personal-NixOS --impure";
     };
   };
 }

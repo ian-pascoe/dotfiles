@@ -74,6 +74,13 @@
           home-manager.nixosModules.home-manager
           (lib.system.mkHomeManagerConfig ./homes/${"user@Work-WSL"})
         ];
+        Personal-NixOS = lib.system.mkNixosSystem [
+          nixos-wsl.nixosModules.wsl
+          nur.modules.nixos.default
+          ./hosts/Personal-NixOS
+          home-manager.nixosModules.home-manager
+          (lib.system.mkHomeManagerConfig ./homes/${"user@Personal-NixOS"})
+        ];
       };
 
       darwinConfigurations = {

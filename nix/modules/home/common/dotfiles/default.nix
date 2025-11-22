@@ -21,12 +21,6 @@ in
           fi
         '';
       };
-      file = {
-        ".nix" = {
-          source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/nix";
-          force = true;
-        };
-      };
     };
 
   _module.args.dotfiles = {

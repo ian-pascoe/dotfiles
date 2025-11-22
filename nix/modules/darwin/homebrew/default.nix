@@ -22,6 +22,7 @@
       "nextcloud"
       "figma"
       "zoom"
+      "balenaetcher"
     ];
     greedyCasks = true;
     masApps = {

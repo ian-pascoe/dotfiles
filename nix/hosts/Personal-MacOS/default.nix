@@ -13,7 +13,7 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   system.primaryUser = "${username}";
-  users.users."${username}" = {
+  users.users.${username} = {
     name = "${username}";
     home = "/Users/${username}";
     shell = pkgs.zsh;
