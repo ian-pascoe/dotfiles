@@ -8,9 +8,8 @@
 
     # Development tools
     go
-    python313
-    rustc
-    cargo
+    python315
+    rustup
     lua5_4
     gcc
     gnumake

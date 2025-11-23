@@ -106,6 +106,10 @@ keybinds clear-defaults=true {
       CloseFocus
       SwitchToMode "normal"
     }
+    bind "X" {
+      CloseTab
+      SwitchToMode "normal"
+    }
     bind "z" {
       ToggleFocusFullscreen
       SwitchToMode "normal"
@@ -259,7 +263,7 @@ plugins {
   status-bar location="zellij:status-bar"
   strider location="zellij:strider"
   tab-bar location="zellij:tab-bar"
-  vim-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
+  vim-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/latest/download/vim-zellij-navigator.wasm"
   welcome-screen location="zellij:session-manager" {
     welcome_screen true
   }
