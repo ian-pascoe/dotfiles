@@ -9,7 +9,6 @@
     # Development tools
     go
     python315
-    rustup
     lua5_4
     gcc
     gnumake
