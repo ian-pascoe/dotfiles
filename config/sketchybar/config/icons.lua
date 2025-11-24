@@ -3,6 +3,7 @@ local M = {
   apple = "",
   home = "󰥓",
   settings = "󰒓",
+  theme = "",
   signout = "󰍃",
   lock = "󰌾",
   restart = "󰜉",

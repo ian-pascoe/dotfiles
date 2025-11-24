@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
   programs.obsidian = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 }

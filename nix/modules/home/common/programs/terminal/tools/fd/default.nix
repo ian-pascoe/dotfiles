@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
   programs.fd = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 }

@@ -12,6 +12,7 @@
   xdg.configFile = {
     "fastfetch/config.jsonc" = {
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/fastfetch/config.jsonc";
+      force = true;
     };
   };
 

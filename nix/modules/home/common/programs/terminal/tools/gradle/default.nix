@@ -34,15 +34,15 @@ let
       };
 
   proxySettings = lib.optionalAttrs hasProxy {
-    "systemProp.http.proxyHost" = proxyConfig.host;
-    "systemProp.http.proxyPort" = proxyConfig.port;
-    "systemProp.https.proxyHost" = proxyConfig.host;
-    "systemProp.https.proxyPort" = proxyConfig.port;
+    "systemProp.http.proxyHost" = lib.mkDefault proxyConfig.host;
+    "systemProp.http.proxyPort" = lib.mkDefault proxyConfig.port;
+    "systemProp.https.proxyHost" = lib.mkDefault proxyConfig.host;
+    "systemProp.https.proxyPort" = lib.mkDefault proxyConfig.port;
   };
 in
 {
   programs.gradle = {
-    enable = true;
+    enable = lib.mkDefault true;
     settings = proxySettings;
   };
 }

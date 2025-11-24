@@ -1,11 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.awscli = {
-    enable = true;
-    # Tests on this are prone to fail
-    package = pkgs.awscli2.overrideAttrs (old: {
-      doCheck = false;
-      doInstallCheck = false;
-    });
+    enable = lib.mkDefault true;
+    # unstable package updates and breaks too often
+    package = lib.mkDefault pkgs.stable.awscli2;
   };
 }

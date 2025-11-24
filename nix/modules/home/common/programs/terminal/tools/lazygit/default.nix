@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
   programs.lazygit = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 }

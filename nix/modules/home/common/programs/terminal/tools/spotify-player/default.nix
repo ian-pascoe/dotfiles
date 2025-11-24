@@ -1,11 +1,12 @@
 {
   config,
+  lib,
   dotfiles,
   ...
 }:
 {
   programs.spotify-player = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 
   xdg.configFile."spotify-player" = {

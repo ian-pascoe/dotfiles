@@ -6,13 +6,15 @@
 }:
 {
   programs.yazi = {
-    enable = true;
-    shellWrapperName = "y";
+    enable = lib.mkDefault true;
+    shellWrapperName = lib.mkDefault "y";
   };
 
-  xdg.configFile.yazi = {
-    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/yazi";
-    force = true;
+  xdg.configFile = {
+    yazi = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/yazi";
+      force = true;
+    };
   };
 
   home.activation = {

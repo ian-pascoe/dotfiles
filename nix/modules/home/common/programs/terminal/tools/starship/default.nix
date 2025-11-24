@@ -1,11 +1,12 @@
 {
   config,
+  lib,
   dotfiles,
   ...
 }:
 {
   programs.starship = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 
   xdg.configFile = {

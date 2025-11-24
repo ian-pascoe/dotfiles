@@ -1,6 +1,7 @@
+{ lib, ... }:
 {
   programs.ripgrep = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
   home.shellAliases = {
     grep = "rg";

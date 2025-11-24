@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
   programs.uv = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 }

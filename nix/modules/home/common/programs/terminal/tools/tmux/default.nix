@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   dotfiles,
   ...
 }:
@@ -14,7 +15,7 @@ let
 in
 {
   programs.tmux = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 
   xdg.configFile = {
@@ -24,6 +25,7 @@ in
     };
     "tmux/plugins/tpm" = {
       source = tmuxPluginManager;
+      force = true;
     };
   };
 }

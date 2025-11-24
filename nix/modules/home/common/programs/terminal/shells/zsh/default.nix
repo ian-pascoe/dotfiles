@@ -1,7 +1,8 @@
+{ lib, ... }:
 {
   programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    enable = lib.mkDefault true;
+    autosuggestion.enable = lib.mkDefault true;
+    syntaxHighlighting.enable = lib.mkDefault true;
   };
 }

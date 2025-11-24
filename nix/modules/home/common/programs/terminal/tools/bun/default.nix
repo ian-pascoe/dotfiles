@@ -1,6 +1,7 @@
+{ lib, ... }:
 {
   programs.bun = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 
   home.sessionPath = [

@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   services.nextcloud-client = {
-    enable = pkgs.stdenv.isLinux; # Mac install handled via homebrew
-    startInBackground = true;
-    package = pkgs.stable.nextcloud-client; # TODO: unstable is broken currently
+    enable = lib.mkDefault pkgs.stdenv.isLinux; # Mac install handled via homebrew
+    startInBackground = lib.mkDefault true;
+    package = lib.mkDefault pkgs.stable.nextcloud-client; # TODO: unstable is broken currently
   };
 }

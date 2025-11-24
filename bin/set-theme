@@ -44,9 +44,9 @@ if [ -d "$CURRENT_THEME_DIR/yazi/flavors" ]; then
   done
 fi
 
+set-bg 1
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.sketchybar   # restart sketchybar
+  sketchybar --reload
   launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.jankyborders # restart jankyborders
 fi
-
-set-bg 1

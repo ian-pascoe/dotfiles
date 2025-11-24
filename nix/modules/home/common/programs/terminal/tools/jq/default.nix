@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
   programs.jq = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 }

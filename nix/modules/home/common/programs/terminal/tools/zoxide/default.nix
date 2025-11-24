@@ -14,7 +14,7 @@ let
 in
 {
   programs = {
-    zoxide.enable = true;
+    zoxide.enable = lib.mkDefault true;
     bash.initExtra = zd;
     zsh.initContent = lib.mkOrder 1000 zd;
   };
