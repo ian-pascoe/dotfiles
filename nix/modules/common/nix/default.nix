@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   inputs,
@@ -26,28 +25,4 @@
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-      allowUnsupportedSystem = true;
-    };
-  };
-
-  environment = {
-    systemPackages = with pkgs; [
-      curl
-      wget
-      unzip
-      vim
-      pkg-config
-    ];
-  };
-
-  system = {
-    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-  };
-
-  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 }
