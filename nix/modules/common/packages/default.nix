@@ -8,6 +8,7 @@
       vim
       pkg-config
       age
+      cloudflared
     ];
   };
 

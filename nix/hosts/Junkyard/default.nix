@@ -32,19 +32,18 @@ in
 
   networking.firewall.enable = false;
 
-  environment.systemPackages = with pkgs; [
-    cloudflared
-  ];
+  # Uncomment once you have set up cloudflared tunnel
   services.cloudflared = {
     enable = true;
-    certificateFile = "${config.users.users.${primaryUser}.home}/.cloudflared/cert.pem"; # You must run `cloudflared login` first to generate this file
+    # Run: `cloudflared login` to generate this cert.pem file
+    certificateFile = "${config.users.users.${primaryUser}.home}/.cloudflared/cert.pem";
     tunnels = {
-      "ianpascoe_dev_server" = {
-        credentialsFile = "${
-          config.users.users.${primaryUser}.home
-        }/.cloudflared/892c7d7e-7cd3-4163-9683-bf5c09ec4c8c.json"; # You must run `cloudflared tunnel create <NAME>` to generate this file
+      junkyard-server = {
+        # Run: `cloudflared tunnel create --credentials-file="$HOME/.cloudflared/junkyard-server.json" junkyard-server`
+        credentialsFile = "${config.users.users.${primaryUser}.home}/.cloudflared/junkyard-server.json";
         default = "http_status:404";
         ingress = {
+          # Run: `cloudflared tunnel route dns junkyard-server junkyard-ssh.ianpascoe.dev`
           "junkyard-ssh.ianpascoe.dev" = "ssh://localhost:22";
         };
       };
