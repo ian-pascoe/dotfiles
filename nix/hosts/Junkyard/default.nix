@@ -30,7 +30,7 @@ in
     shell = pkgs.zsh;
   };
 
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # Uncomment once you have set up cloudflared tunnel
   services.cloudflared = {

@@ -11,6 +11,9 @@
 
   programs = {
     xwayland.enable = lib.mkDefault true;
-    hyprland.enable = lib.mkDefault true;
+    hyprland = {
+      enable = lib.mkDefault true;
+      xwayland.enable = lib.mkDefault true;
+    };
   };
 }
