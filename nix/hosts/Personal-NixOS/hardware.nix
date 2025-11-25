@@ -36,25 +36,22 @@
     extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   };
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/27f0ba12-7cdc-4daa-8e77-5320e1220bea";
-      fsType = "ext4";
-    };
-    "/boot" = {
-      device = "/dev/disk/by-uuid/1347-7610";
-      fsType = "vfat";
-      options = [
-        "fmask=0077"
-        "dmask=0077"
-      ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/8e43a5dd-3348-4c6f-8e7c-b074b22c218a";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/46BD-6C96";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   swapDevices = [
-    {
-      device = "/dev/disk/by-uuid/a4c36db6-ecf9-4c30-8146-0d1183df38c7";
-    }
+    { device = "/dev/disk/by-uuid/d2ee1d17-0cfe-40dc-8c3e-92034b628d62"; }
   ];
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
