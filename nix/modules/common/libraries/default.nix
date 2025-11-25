@@ -22,5 +22,6 @@
     icu
     readline
     ncurses
+    libffi
   ];
 }
