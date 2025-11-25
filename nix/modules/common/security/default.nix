@@ -5,7 +5,7 @@
 {
   security = {
     pki = {
-      installCACerts = pkgs.stdenv.isDarwin;
+      installCACerts = true;
       certificateFiles = [
         "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
       ];
