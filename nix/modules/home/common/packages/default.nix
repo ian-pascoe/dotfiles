@@ -8,7 +8,7 @@
 
     # Development tools
     go
-    python315
+    python314
     lua5_4
     gcc
     gnumake
