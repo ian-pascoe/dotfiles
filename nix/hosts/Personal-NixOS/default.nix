@@ -6,6 +6,7 @@
 }:
 {
   imports = lib.flatten [
+    ./hardware.nix
     (lib.module.findModules ../../modules/common)
     (lib.module.findModules ../../modules/nixos)
   ];
@@ -18,8 +19,26 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
+      "networkmanager"
       "docker"
     ];
     shell = pkgs.zsh;
   };
+
+  # Prevent automatic suspend and lid actions
+  services.logind.extraConfig = ''
+    IdleAction=ignore
+    IdleActionSec=0
+    HandleLidSwitch=ignore
+    HandleLidSwitchDocked=ignore
+    HandleHibernateKey=ignore
+    HandleSuspendKey=ignore
+  '';
+
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernation=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
+  '';
 }

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  services.dbus = {
+  security.rtkit = {
     enable = lib.mkDefault true;
   };
 }

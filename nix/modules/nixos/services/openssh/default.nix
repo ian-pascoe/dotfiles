@@ -1,6 +1,7 @@
 { lib, ... }:
 {
-  services.dbus = {
+  # Enable the OpenSSH daemon.
+  services.openssh = {
     enable = lib.mkDefault true;
   };
 }
