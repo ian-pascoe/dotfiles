@@ -55,7 +55,7 @@
   ];
 
   hardware = {
-    opengl.enable = true;
+    graphics.enable = true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
