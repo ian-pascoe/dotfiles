@@ -2,9 +2,6 @@
 {
   services.xserver = {
     enable = lib.mkDefault true;
-    displayManager.startx.enable = lib.mkDefault false;
-    videoDrivers = [ "modesetting" ];
-    xkb.layout = "us";
   };
 
   services.displayManager.gdm = {

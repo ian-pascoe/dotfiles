@@ -44,7 +44,9 @@ in
         default = "http_status:404";
         ingress = {
           # Run: `cloudflared tunnel route dns junkyard-server junkyard-ssh.ianpascoe.dev`
-          "junkyard-ssh.ianpascoe.dev" = "ssh://localhost:22";
+          "junkyard-ssh.ianpascoe.dev" = {
+            service = "ssh://localhost:22";
+          };
         };
       };
     };
