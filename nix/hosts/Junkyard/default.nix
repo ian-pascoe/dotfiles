@@ -33,37 +33,52 @@ in
   networking.firewall.enable = true;
 
   # Uncomment once you have set up cloudflared tunnel
-  services.cloudflared = {
-    enable = true;
-    # Run: `cloudflared login` to generate this cert.pem file
-    certificateFile = "${config.users.users.${primaryUser}.home}/.cloudflared/cert.pem";
-    tunnels = {
-      junkyard-server = {
-        # Run: `cloudflared tunnel create --credentials-file="$HOME/.cloudflared/junkyard-server.json" junkyard-server`
-        credentialsFile = "${config.users.users.${primaryUser}.home}/.cloudflared/junkyard-server.json";
-        default = "http_status:404";
-        ingress = {
-          # Run: `cloudflared tunnel route dns junkyard-server junkyard-ssh.ianpascoe.dev`
-          "junkyard-ssh.ianpascoe.dev" = {
-            service = "ssh://localhost:22";
+  services = {
+    cloudflared = {
+      enable = true;
+      # Run: `cloudflared login` to generate this cert.pem file
+      certificateFile = "${config.users.users.${primaryUser}.home}/.cloudflared/cert.pem";
+      tunnels = {
+        junkyard-server = {
+          # Run: `cloudflared tunnel create --credentials-file="$HOME/.cloudflared/junkyard-server.json" junkyard-server`
+          credentialsFile = "${config.users.users.${primaryUser}.home}/.cloudflared/junkyard-server.json";
+          default = "http_status:404";
+          ingress = {
+            # Run: `cloudflared tunnel route dns junkyard-server home-assistant.ianpascoe.dev`
+            "home-assistant.ianpascoe.dev" = {
+              service = "http://localhost:8123";
+            };
+            # Run: `cloudflared tunnel route dns junkyard-server junkyard-ssh.ianpascoe.dev`
+            "junkyard-ssh.ianpascoe.dev" = {
+              service = "ssh://localhost:22";
+            };
           };
         };
+      };
+    };
+
+    home-assistant = {
+      enable = true;
+      extraComponents = [
+        "default_config"
+      ];
+      config = null;
+      configWritable = true;
+    };
+
+    logind = {
+      settings.Login = {
+        IdleAction = "ignore";
+        IdleActionSec = 0;
+        HandleLidSwitch = "ignore";
+        HandleLidSwitchDocked = "ignore";
+        HandleHibernateKey = "ignore";
+        HandleSuspendKey = "ignore";
       };
     };
   };
 
   # Prevent automatic suspend and lid actions
-  services.logind = {
-    settings.Login = {
-      IdleAction = "ignore";
-      IdleActionSec = 0;
-      HandleLidSwitch = "ignore";
-      HandleLidSwitchDocked = "ignore";
-      HandleHibernateKey = "ignore";
-      HandleSuspendKey = "ignore";
-    };
-  };
-
   systemd.sleep.extraConfig = ''
     AllowSuspend=no
     AllowHibernation=no
