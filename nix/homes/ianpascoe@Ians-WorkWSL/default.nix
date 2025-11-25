@@ -17,7 +17,7 @@
     homeDirectory = "/home/${username}";
 
     shellAliases = {
-      nrs = "sudo -HE nixos-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles/nix#Work-WSL --impure";
+      nrs = "sudo -HE nixos-rebuild switch --flake ${config.home.homeDirectory}/.dotfiles/nix#Ians-WorkWSL --impure";
     };
   };
 }

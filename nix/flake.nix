@@ -78,17 +78,17 @@
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
           sops-nix.nixosModules.sops
-          ./hosts/Work-WSL
+          ./hosts/Ians-WorkWSL
           home-manager.nixosModules.home-manager
-          (lib.system.mkHomeManagerConfig ./homes/${"user@Work-WSL"})
+          (lib.system.mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Ians-WorkWSL"})
         ];
         Personal-NixOS = lib.system.mkNixosSystem [
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
           sops-nix.nixosModules.sops
-          ./hosts/Personal-NixOS
+          ./hosts/Junkyard
           home-manager.nixosModules.home-manager
-          (lib.system.mkHomeManagerConfig ./homes/${"user@Personal-NixOS"})
+          (lib.system.mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Junkyard"})
         ];
       };
 
@@ -98,15 +98,15 @@
           sops-nix.darwinModules.sops
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
-          (lib.system.mkHomebrewConfig { })
-          ./hosts/Personal-MacOS
+          (lib.system.mkHomebrewConfig "ianpascoe")
+          ./hosts/Ians-MacbookPro
           home-manager.darwinModules.home-manager
           {
             home-manager.sharedModules = [
               mac-app-util.homeManagerModules.default
             ];
           }
-          (lib.system.mkHomeManagerConfig ./homes/${"user@Personal-MacOS"})
+          (lib.system.mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Ians-MacbookPro"})
         ];
       };
     };

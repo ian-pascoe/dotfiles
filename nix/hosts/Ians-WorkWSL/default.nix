@@ -1,9 +1,11 @@
 {
   lib,
   pkgs,
-  username,
   ...
 }:
+let
+  primaryUser = "ianpascoe";
+in
 {
   imports = lib.flatten [
     (lib.module.findModules ../../modules/common)
@@ -18,11 +20,11 @@
 
   wsl.enable = true;
 
-  wsl.defaultUser = username;
-  users.users.${username} = {
+  wsl.defaultUser = primaryUser;
+  users.users.${primaryUser} = {
     isNormalUser = true;
-    name = "${username}";
-    home = "/home/${username}";
+    name = "${primaryUser}";
+    home = "/home/${primaryUser}";
     extraGroups = [
       "wheel"
       "docker"

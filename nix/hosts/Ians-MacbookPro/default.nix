@@ -1,9 +1,11 @@
 {
   lib,
   pkgs,
-  username,
   ...
 }:
+let
+  primaryUser = "ianpascoe";
+in
 {
   imports = lib.flatten [
     (lib.module.findModules ../../modules/common)
@@ -12,10 +14,12 @@
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  system.primaryUser = "${username}";
-  users.users.${username} = {
-    name = "${username}";
-    home = "/Users/${username}";
+  system = {
+    inherit primaryUser;
+  };
+  users.users.${primaryUser} = {
+    name = "${primaryUser}";
+    home = "/Users/${primaryUser}";
     shell = pkgs.zsh;
   };
 }

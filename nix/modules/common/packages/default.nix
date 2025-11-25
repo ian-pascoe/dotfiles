@@ -7,6 +7,7 @@
       unzip
       vim
       pkg-config
+      age
     ];
   };
 

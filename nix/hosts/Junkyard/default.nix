@@ -2,9 +2,11 @@
   config,
   lib,
   pkgs,
-  username,
   ...
 }:
+let
+  primaryUser = "ianpascoe";
+in
 {
   imports = lib.flatten [
     ./hardware.nix
@@ -12,14 +14,14 @@
     (lib.module.findModules ../../modules/nixos)
   ];
 
-  networking.hostName = "Personal-NixOS";
+  networking.hostName = "Junkyard";
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  users.users.${username} = {
+  users.users.${primaryUser} = {
     isNormalUser = true;
-    name = "${username}";
-    home = "/home/${username}";
+    name = "${primaryUser}";
+    home = "/home/${primaryUser}";
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -35,7 +37,18 @@
   ];
   services.cloudflared = {
     enable = true;
-    certificateFile = "${config.users.users.${username}.home}/.cloudflared/cert.pem"; # You must run `cloudflared login` first to generate this file
+    certificateFile = "${config.users.users.${primaryUser}.home}/.cloudflared/cert.pem"; # You must run `cloudflared login` first to generate this file
+    tunnels = {
+      "ianpascoe_dev_server" = {
+        credentialsFile = "${
+          config.users.users.${primaryUser}.home
+        }/.cloudflared/892c7d7e-7cd3-4163-9683-bf5c09ec4c8c.json"; # You must run `cloudflared tunnel create <NAME>` to generate this file
+        default = "http_status:404";
+        ingress = {
+          "junkyard-ssh.ianpascoe.dev" = "ssh://localhost:22";
+        };
+      };
+    };
   };
 
   # Prevent automatic suspend and lid actions

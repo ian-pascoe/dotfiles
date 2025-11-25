@@ -5,18 +5,11 @@
 }:
 let
   inherit (inputs) homebrew-core homebrew-cask;
-  username =
-    let
-      envUser = builtins.getEnv "NIX_DEFAULT_USER";
-    in
-    if envUser != "" then envUser else "nixuser";
   specialArgs = {
-    inherit inputs lib username;
+    inherit inputs lib;
   };
 in
 {
-  inherit username;
-
   mkNixosSystem =
     modules:
     lib.nixosSystem {
@@ -45,7 +38,7 @@ in
       ];
     };
 
-  mkHomeManagerConfig = config: {
+  mkHomeManagerConfig = username: config: {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
@@ -55,7 +48,7 @@ in
     home-manager.users.${username} = import config;
   };
 
-  mkHomebrewConfig = _: {
+  mkHomebrewConfig = username: {
     nix-homebrew = {
       enable = true;
       enableRosetta = true;
