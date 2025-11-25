@@ -2,10 +2,16 @@
 {
   services.xserver = {
     enable = lib.mkDefault true;
-    displayManager.startx.enable = lib.mkDefault false;
+    displayManager = {
+      startx.enable = lib.mkDefault false;
+      gdm = {
+        enable = lib.mkDefault true;
+        wayland.enable = lib.mkDefault true;
+      };
+    };
     videoDrivers = [ "modesetting" ];
     xkb.layout = "us";
   };
 
-  program.xwayland.enable = lib.mkDefault true;
+  programs.xwayland.enable = lib.mkDefault true;
 }
