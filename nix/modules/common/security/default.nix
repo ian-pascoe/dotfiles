@@ -12,5 +12,6 @@
 
   environment.variables = {
     NIX_SSL_CERT_FILE = builtins.getEnv "NIX_SSL_CERT_FILE";
+    SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
   };
 }
