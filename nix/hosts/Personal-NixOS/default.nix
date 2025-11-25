@@ -26,14 +26,16 @@
   };
 
   # Prevent automatic suspend and lid actions
-  services.logind.extraConfig = ''
-    IdleAction=ignore
-    IdleActionSec=0
-    HandleLidSwitch=ignore
-    HandleLidSwitchDocked=ignore
-    HandleHibernateKey=ignore
-    HandleSuspendKey=ignore
-  '';
+  services.logind = {
+    settings.Login = {
+      IdleAction = "ignore";
+      IdleActionSec = 0;
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchDocked = "ignore";
+      HandleHibernateKey = "ignore";
+      HandleSuspendKey = "ignore";
+    };
+  };
 
   systemd.sleep.extraConfig = ''
     AllowSuspend=no
