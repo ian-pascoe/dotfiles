@@ -5,7 +5,6 @@
 {
   security = {
     pki = {
-      enable = true;
       installCACerts = true;
       certificateFiles = [
         "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
