@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   username,
@@ -17,6 +18,8 @@
 
   users.users.${username} = {
     isNormalUser = true;
+    name = "${username}";
+    home = "/home/${username}";
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -32,6 +35,7 @@
   ];
   services.cloudflared = {
     enable = true;
+    certificateFile = "${config.users.users.${username}.home}/.cloudflared/cert.pem"; # You must run `cloudflared login` first to generate this file
   };
 
   # Prevent automatic suspend and lid actions

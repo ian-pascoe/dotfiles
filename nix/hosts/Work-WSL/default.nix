@@ -21,6 +21,8 @@
   wsl.defaultUser = username;
   users.users.${username} = {
     isNormalUser = true;
+    name = "${username}";
+    home = "/home/${username}";
     extraGroups = [
       "wheel"
       "docker"

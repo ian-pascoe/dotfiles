@@ -12,6 +12,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # SOPS Nix
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # WSL
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -52,6 +58,7 @@
       nixpkgs,
       nixpkgs-stable,
       nur,
+      sops-nix,
       nixos-wsl,
       home-manager,
       nix-darwin,
@@ -70,6 +77,7 @@
         Work-WSL = lib.system.mkNixosSystem [
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
+          sops-nix.nixosModules.sops
           ./hosts/Work-WSL
           home-manager.nixosModules.home-manager
           (lib.system.mkHomeManagerConfig ./homes/${"user@Work-WSL"})
@@ -86,6 +94,7 @@
       darwinConfigurations = {
         Personal-MacOS = lib.system.mkDarwinSystem [
           nur.modules.darwin.default
+          sops-nix.darwinModules.sops
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
           (lib.system.mkHomebrewConfig { })
