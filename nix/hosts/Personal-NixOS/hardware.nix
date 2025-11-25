@@ -33,7 +33,7 @@
       "kvm-intel"
       "wl"
     ];
-    boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   };
 
   fileSystems = {
