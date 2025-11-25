@@ -10,11 +10,15 @@ in
 {
   imports = lib.flatten [
     ./hardware.nix
+    ./home-assistant.nix
     (lib.module.findModules ../../modules/common)
     (lib.module.findModules ../../modules/nixos)
   ];
 
-  networking.hostName = "Junkyard";
+  networking = {
+    hostName = "Junkyard";
+    firewall.enable = true;
+  };
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
@@ -29,8 +33,6 @@ in
     ];
     shell = pkgs.zsh;
   };
-
-  networking.firewall.enable = true;
 
   # Uncomment once you have set up cloudflared tunnel
   services = {
@@ -55,15 +57,6 @@ in
           };
         };
       };
-    };
-
-    home-assistant = {
-      enable = true;
-      extraComponents = [
-        "default_config"
-      ];
-      config = null;
-      configWritable = true;
     };
 
     logind = {

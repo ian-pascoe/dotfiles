@@ -33,7 +33,9 @@
       "kvm-intel"
       "wl"
     ];
-    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+    extraModulePackages = [
+      config.boot.kernelPackages.broadcom_sta
+    ];
   };
 
   fileSystems."/" = {
@@ -55,7 +57,10 @@
   ];
 
   hardware = {
+    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
     graphics.enable = true;
+    bluetooth.enable = true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
