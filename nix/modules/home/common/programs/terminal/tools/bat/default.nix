@@ -10,6 +10,9 @@
   };
 
   xdg.configFile = {
+    "bat/config" = {
+      enable = false; # disable default config
+    };
     bat = {
       source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/bat";
       force = true;
