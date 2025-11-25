@@ -25,6 +25,15 @@
     shell = pkgs.zsh;
   };
 
+  networking.firewall.enable = false;
+
+  environment.systemPackages = with pkgs; [
+    cloudflared
+  ];
+  services.cloudflared = {
+    enable = true;
+  };
+
   # Prevent automatic suspend and lid actions
   services.logind = {
     settings.Login = {
