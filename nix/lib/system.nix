@@ -11,9 +11,9 @@ let
 in
 {
   mkNixosSystem =
-    modules:
+    system: modules:
     lib.nixosSystem {
-      system = "x86_64-linux";
+      inherit system;
       inherit specialArgs;
       modules = modules ++ [
         {
@@ -25,9 +25,9 @@ in
     };
 
   mkDarwinSystem =
-    modules:
+    system: modules:
     lib.darwinSystem {
-      system = "aarch64-darwin";
+      inherit system;
       inherit specialArgs;
       modules = modules ++ [
         {
@@ -44,7 +44,9 @@ in
       useUserPackages = true;
       backupFileExtension = "backup";
     };
-    home-manager.extraSpecialArgs = specialArgs;
+    home-manager.extraSpecialArgs = specialArgs // {
+      inherit username;
+    };
     home-manager.users.${username} = import config;
   };
 
