@@ -4,10 +4,13 @@
 }:
 {
   security = {
-    pki.installCACerts = true;
-    pki.certificateFiles = [
-      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-    ];
+    pki = {
+      enable = true;
+      installCACerts = true;
+      certificateFiles = [
+        "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+      ];
+    };
   };
 
   environment.variables = {
