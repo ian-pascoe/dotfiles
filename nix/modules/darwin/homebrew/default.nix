@@ -23,6 +23,7 @@
       "figma"
       "zoom"
       "balenaetcher"
+      "xquartz"
     ];
     greedyCasks = true;
     masApps = {
