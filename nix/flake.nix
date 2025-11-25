@@ -74,7 +74,7 @@
     in
     {
       nixosConfigurations = {
-        Work-WSL = lib.system.mkNixosSystem [
+        Ians-WorkWSL = lib.system.mkNixosSystem [
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
           sops-nix.nixosModules.sops
@@ -82,7 +82,7 @@
           home-manager.nixosModules.home-manager
           (lib.system.mkHomeManagerConfig "ianpascoe" ./homes/${"ianpascoe@Ians-WorkWSL"})
         ];
-        Personal-NixOS = lib.system.mkNixosSystem [
+        Junkyard = lib.system.mkNixosSystem [
           nixos-wsl.nixosModules.wsl
           nur.modules.nixos.default
           sops-nix.nixosModules.sops
@@ -93,7 +93,7 @@
       };
 
       darwinConfigurations = {
-        Personal-MacOS = lib.system.mkDarwinSystem [
+        Ians-MacbookPro = lib.system.mkDarwinSystem [
           nur.modules.darwin.default
           sops-nix.darwinModules.sops
           mac-app-util.darwinModules.default
