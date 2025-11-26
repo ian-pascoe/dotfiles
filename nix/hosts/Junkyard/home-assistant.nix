@@ -8,6 +8,7 @@
         grpclib
         grpcio
         sharkiq
+        ibeacon-ble
       ];
     extraComponents = [
       "default_config"
@@ -16,8 +17,12 @@
       "roku"
       "sharkiq"
       "nest"
+      "remote"
+      "denon"
+      "denonavr"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
+      spook
     ];
     config = {
       default_config = { };
