@@ -11,7 +11,7 @@
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta"
+    "broadcom-sta-6.30.223.271-59-6.17.9"
   ];
 
   boot = {
