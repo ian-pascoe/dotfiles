@@ -17,7 +17,7 @@
       let
         envCertFile = builtins.getEnv "NIX_SSL_CERT_FILE";
       in
-      if envCertFile != "" then envCertFile else "/etc/ssl/certs/ca-bundle.crt";
-    SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+      if envCertFile != "" then envCertFile else "/etc/ssl/certs/ca-certificates.crt";
+    SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
   };
 }
