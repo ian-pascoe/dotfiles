@@ -11,13 +11,13 @@
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-59-6.17.8"
+    "broadcom-sta"
   ];
 
   boot = {
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = lib.mkDefault true;
+      efi.canTouchEfiVariables = lib.mkDefault true;
     };
     initrd.availableKernelModules = [
       "xhci_pci"
@@ -38,29 +38,33 @@
     ];
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/8e43a5dd-3348-4c6f-8e7c-b074b22c218a";
-    fsType = "ext4";
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/8e43a5dd-3348-4c6f-8e7c-b074b22c218a";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/46BD-6C96";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
+    "/boot" = {
+      device = "/dev/disk/by-uuid/46BD-6C96";
+      fsType = "vfat";
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
+    };
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/d2ee1d17-0cfe-40dc-8c3e-92034b628d62"; }
+    {
+      device = "/dev/disk/by-uuid/d2ee1d17-0cfe-40dc-8c3e-92034b628d62";
+    }
   ];
 
   hardware = {
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
-    graphics.enable = true;
-    bluetooth.enable = true;
+    enableAllFirmware = lib.mkDefault true;
+    enableRedistributableFirmware = lib.mkDefault true;
+    graphics.enable = lib.mkDefault true;
+    bluetooth.enable = lib.mkDefault true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }

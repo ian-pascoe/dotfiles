@@ -20,6 +20,7 @@
       "remote"
       "denon"
       "denonavr"
+      "nmap_tracker"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
       spook
