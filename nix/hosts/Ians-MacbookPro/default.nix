@@ -12,6 +12,10 @@ in
     (lib.module.findModules ../../modules/darwin)
   ];
 
+  sops = {
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  };
+
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   system = {

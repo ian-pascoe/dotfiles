@@ -15,6 +15,20 @@ in
     (lib.module.findModules ../../modules/nixos)
   ];
 
+  sops = {
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets = {
+      "cloudflared/cert.pem" = {
+        sopsFile = ../../secrets/Junkyard/cloudflared.yaml;
+        format = "yaml";
+      };
+      "cloudflared/junkyard-server.json" = {
+        sopsFile = ../../secrets/Junkyard/cloudflared.yaml;
+        format = "yaml";
+      };
+    };
+  };
+
   networking = {
     hostName = "Junkyard";
     firewall.enable = true;
@@ -39,11 +53,10 @@ in
     cloudflared = {
       enable = true;
       # Run: `cloudflared login` to generate this cert.pem file
-      certificateFile = "${config.users.users.${primaryUser}.home}/.cloudflared/cert.pem";
+      certificateFile = config.sops.secrets."cloudflared/cert.pem".path;
       tunnels = {
         junkyard-server = {
-          # Run: `cloudflared tunnel create --credentials-file="$HOME/.cloudflared/junkyard-server.json" junkyard-server`
-          credentialsFile = "${config.users.users.${primaryUser}.home}/.cloudflared/junkyard-server.json";
+          credentialsFile = config.sops.secrets."cloudflared/junkyard-server.json".path;
           default = "http_status:404";
           ingress = {
             # Run: `cloudflared tunnel route dns junkyard-server home-assistant.ianpascoe.dev`
