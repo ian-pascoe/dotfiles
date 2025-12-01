@@ -46,6 +46,7 @@ in
       "denon"
       "denonavr"
       "nmap_tracker"
+      "mqtt"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
