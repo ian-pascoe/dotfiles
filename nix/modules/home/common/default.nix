@@ -1,5 +1,9 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 {
+  imports = [
+    inputs.sops-nix.homeManagerModules.sops
+  ];
+
   programs.home-manager.enable = true;
 
   xdg.enable = true;
