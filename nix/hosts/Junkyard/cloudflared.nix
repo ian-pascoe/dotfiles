@@ -31,7 +31,7 @@
           };
           # Run: `cloudflared tunnel route dns junkyard-server mqtt.ianpascoe.dev`
           "mqtt.ianpascoe.dev" = {
-            service = "tcp://localhost:8080";
+            service = "http://localhost:8080";
           };
         };
       };
