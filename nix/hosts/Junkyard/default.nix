@@ -9,6 +9,7 @@ in
 {
   imports = lib.flatten [
     ./hardware.nix
+    ./cloudflare-ddns.nix
     ./cloudflared.nix
     ./mosquitto.nix
     ./home-assistant.nix

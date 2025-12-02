@@ -2,7 +2,15 @@
 {
   sops = {
     secrets = {
-      "mosquitto/root_password" = {
+      "mosquitto/root-password" = {
+        sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
+        format = "yaml";
+      };
+      "mosquitto/cert" = {
+        sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
+        format = "yaml";
+      };
+      "mosquitto/key" = {
         sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
         format = "yaml";
       };
@@ -17,13 +25,16 @@
           acl = [
             "readwrite #"
           ];
-          passwordFile = config.sops.secrets."mosquitto/root_password".path;
+          passwordFile = config.sops.secrets."mosquitto/root-password".path;
         };
-        port = 8080;
+        port = 1883;
         settings = {
-          protocol = "websockets";
+          certfile = config.sops.secrets."mosquitto/cert".path;
+          keyfile = config.sops.secrets."mosquitto/key".path;
         };
       }
     ];
   };
+
+  networking.firewall.allowedTCPPorts = [ 1883 ];
 }

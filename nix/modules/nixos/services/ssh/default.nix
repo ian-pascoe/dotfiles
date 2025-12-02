@@ -9,4 +9,6 @@
       X11Forwarding = lib.mkDefault true;
     };
   };
+
+  networking.firewall.allowedTCPPorts = [ 22 ];
 }

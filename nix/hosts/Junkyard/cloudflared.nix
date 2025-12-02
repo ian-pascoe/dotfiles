@@ -25,14 +25,6 @@
           "home-assistant.ianpascoe.dev" = {
             service = "http://localhost:8123";
           };
-          # Run: `cloudflared tunnel route dns junkyard-server junkyard-ssh.ianpascoe.dev`
-          "junkyard-ssh.ianpascoe.dev" = {
-            service = "ssh://localhost:22";
-          };
-          # Run: `cloudflared tunnel route dns junkyard-server mqtt.ianpascoe.dev`
-          "mqtt.ianpascoe.dev" = {
-            service = "http://localhost:8080";
-          };
         };
       };
     };

@@ -1,13 +1,18 @@
 { pkgs, lib, ... }:
 {
-  virtualisation.podman = {
-    enable = lib.mkDefault true;
-    dockerCompat = lib.mkDefault true;
-    dockerSocket.enable = lib.mkDefault true;
-    defaultNetwork.settings.dns_enabled = lib.mkDefault true;
-    autoPrune = {
+  virtualisation = {
+    podman = {
       enable = lib.mkDefault true;
-      dates = lib.mkDefault "weekly";
+      dockerCompat = lib.mkDefault true;
+      dockerSocket.enable = lib.mkDefault true;
+      defaultNetwork.settings.dns_enabled = lib.mkDefault true;
+      autoPrune = {
+        enable = lib.mkDefault true;
+        dates = lib.mkDefault "weekly";
+      };
+    };
+    oci-containers = {
+      backend = lib.mkDefault "podman";
     };
   };
 
