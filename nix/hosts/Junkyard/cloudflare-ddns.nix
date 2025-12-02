@@ -14,7 +14,7 @@
         config.sops.secrets."cloudflare/env".path
       ];
       environment = {
-        PROXIED = "true";
+        PROXIED = "false";
         DOMAINS = "junkyard.ianpascoe.dev";
       };
       extraOptions = [
