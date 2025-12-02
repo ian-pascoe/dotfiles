@@ -7,19 +7,17 @@
         format = "yaml";
         owner = "mosquitto";
         group = "mosquitto";
+        reloadServices = [ "mosquitto.service" ];
       };
-      "mosquitto/cert" = {
-        sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
-        format = "yaml";
-        owner = "mosquitto";
-        group = "mosquitto";
-      };
-      "mosquitto/key" = {
-        sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
-        format = "yaml";
-        owner = "mosquitto";
-        group = "mosquitto";
-      };
+    };
+  };
+
+  security.acme.certs = {
+    "junkyard.ianpascoe.dev" = {
+      dnsProvider = "cloudflare";
+      environmentFile = config.sops.secrets."cloudflare/env".path;
+      group = "mosquitto";
+      reloadServices = [ "mosquitto.service" ];
     };
   };
 
@@ -35,8 +33,9 @@
         };
         port = 8883;
         settings = {
-          certfile = config.sops.secrets."mosquitto/cert".path;
-          keyfile = config.sops.secrets."mosquitto/key".path;
+          cafile = "/var/lib/acme/junkyard.ianpascoe.dev/chain.pem";
+          certfile = "/var/lib/acme/junkyard.ianpascoe.dev/cert.pem";
+          keyfile = "/var/lib/acme/junkyard.ianpascoe.dev/key.pem";
           require_certificate = false;
         };
       }
@@ -44,7 +43,6 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    1883
     8883
   ];
 }
