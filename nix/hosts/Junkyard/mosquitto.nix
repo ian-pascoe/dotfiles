@@ -21,7 +21,7 @@
         };
         port = "8080";
         settings = {
-          protocols = "websockets";
+          protocol = "websockets";
         };
       }
     ];
