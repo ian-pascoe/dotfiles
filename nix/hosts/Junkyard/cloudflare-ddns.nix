@@ -1,7 +1,7 @@
 { config, ... }:
 {
   sops.secrets = {
-    "cloudflare/api-token" = {
+    "cloudflare/env" = {
       sopsFile = ../../secrets/cloudflare.yaml;
       format = "yaml";
     };
@@ -10,8 +10,10 @@
   virtualisation.oci-containers = {
     containers.cloudflareddns = {
       image = "favonia/cloudflare-ddns:latest";
+      environmentFiles = [
+        config.sops.secrets."cloudflare/env".path
+      ];
       environment = {
-        CLOUDFLARE_API_TOKEN = "$(cat ${config.sops.secrets."cloudflare/api-token".path})";
         PROXIED = "true";
         DOMAINS = "junkyard.ianpascoe.dev";
       };
