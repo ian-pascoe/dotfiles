@@ -8,7 +8,7 @@
   };
 
   virtualisation.oci-containers = {
-    containers.cloudflare-ddns = {
+    containers.cloudflareddns = {
       image = "favonia/cloudflare-ddns:latest";
       environment = {
         CLOUDFLARE_API_TOKEN = "$(cat ${config.sops.secrets."cloudflare/api-token".path})";
