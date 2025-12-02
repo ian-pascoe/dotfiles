@@ -7,7 +7,7 @@
         format = "yaml";
         owner = "mosquitto";
         group = "mosquitto";
-        reloadServices = [ "mosquitto.service" ];
+        restartUnits = [ "mosquitto.service" ];
       };
     };
   };
