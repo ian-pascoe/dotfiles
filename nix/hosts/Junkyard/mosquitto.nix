@@ -5,14 +5,20 @@
       "mosquitto/root-password" = {
         sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
         format = "yaml";
+        owner = "mosquitto";
+        group = "mosquitto";
       };
       "mosquitto/cert" = {
         sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
         format = "yaml";
+        owner = "mosquitto";
+        group = "mosquitto";
       };
       "mosquitto/key" = {
         sopsFile = ../../secrets/Junkyard/mosquitto.yaml;
         format = "yaml";
+        owner = "mosquitto";
+        group = "mosquitto";
       };
     };
   };
