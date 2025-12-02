@@ -16,8 +16,8 @@
       environment = {
         PROXIED = "false";
         DOMAINS = "junkyard.ianpascoe.dev";
-        IPV6_PROVIDER = "none";
-        DETECTION_TIMOUT = "30s";
+        IP6_PROVIDER = "none";
+        DETECTION_TIMEOUT = "30s";
         UPDATE_TIMEOUT = "3m";
       };
       extraOptions = [
