@@ -116,6 +116,7 @@ in
     ];
     config = {
       default_config = { };
+      automation = "!include automations.yaml";
       http = {
         use_x_forwarded_for = true;
         trusted_proxies = [
