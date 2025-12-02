@@ -21,7 +21,7 @@ in
 
   security.acme = {
     acceptTerms = true;
-    email = "admin@ianpascoe.dev";
+    defaults.email = "admin@ianpascoe.dev";
   };
 
   networking = {
