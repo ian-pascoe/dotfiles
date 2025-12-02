@@ -34,6 +34,7 @@ in
         sharkiq
         ibeacon-ble
         bidict
+        gehomesdk
       ];
     extraComponents = [
       "default_config"
@@ -47,6 +48,7 @@ in
       "denonavr"
       "nmap_tracker"
       "mqtt"
+      "cync"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
