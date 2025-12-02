@@ -27,14 +27,18 @@
           ];
           passwordFile = config.sops.secrets."mosquitto/root-password".path;
         };
-        port = 1883;
+        port = 8883;
         settings = {
           certfile = config.sops.secrets."mosquitto/cert".path;
           keyfile = config.sops.secrets."mosquitto/key".path;
+          require_certificate = false;
         };
       }
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 1883 ];
+  networking.firewall.allowedTCPPorts = [
+    1883
+    8883
+  ];
 }
