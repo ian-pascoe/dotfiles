@@ -31,18 +31,12 @@
           ];
           passwordFile = config.sops.secrets."mosquitto/root-password".path;
         };
-        port = 8883;
-        settings = {
-          cafile = "/var/lib/acme/junkyard.ianpascoe.dev/chain.pem";
-          certfile = "/var/lib/acme/junkyard.ianpascoe.dev/cert.pem";
-          keyfile = "/var/lib/acme/junkyard.ianpascoe.dev/key.pem";
-          require_certificate = false;
-        };
+        port = 1883;
       }
     ];
   };
 
   networking.firewall.allowedTCPPorts = [
-    8883
+    1883
   ];
 }
