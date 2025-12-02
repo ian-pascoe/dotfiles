@@ -19,6 +19,10 @@
           ];
           passwordFile = config.sops.secrets."mosquitto/root_password".path;
         };
+        port = "8080";
+        settings = {
+          protocols = "websockets";
+        };
       }
     ];
   };
