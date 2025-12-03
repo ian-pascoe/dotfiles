@@ -153,6 +153,7 @@ in
       "default_config"
       "asuswrt"
       "caldav"
+      "cast"
       "cloudflare"
       "cync"
       "denon"
@@ -181,6 +182,7 @@ in
       "tuya"
       "webdav"
       "wyoming"
+      "youtube"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
