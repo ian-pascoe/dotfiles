@@ -115,15 +115,15 @@ in
       in
       with customPythonPackages;
       [
-        gtts
-        grpclib
-        grpcio
-        sharkiq
-        ibeacon-ble
         bidict
         gehomesdk
-        magicattr
+        grpcio
+        grpclib
+        gtts
         hatch-rest-api
+        ibeacon-ble
+        magicattr
+        sharkiq
       ];
     extraComponents = [
       "default_config"
