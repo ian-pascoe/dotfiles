@@ -110,6 +110,7 @@ in
       "cync"
       "tuya"
       "openweathermap"
+      "asuswrt"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
