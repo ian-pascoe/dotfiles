@@ -135,6 +135,7 @@ in
       "denonavr"
       "esphome"
       "google_generative_ai_conversation"
+      "ibeacon"
       "icloud"
       "met"
       "mqtt"
@@ -149,6 +150,7 @@ in
       "remote"
       "roku"
       "sharkiq"
+      "spotify"
       "tuya"
       "webdav"
     ];
