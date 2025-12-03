@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   hacs = pkgs.buildHomeAssistantComponent rec {
     owner = "hacs";
@@ -95,23 +100,7 @@ in
         gehomesdk
         magicattr
       ];
-    extraComponents = [
-      "default_config"
-      "met"
-      "esphome"
-      "roku"
-      "sharkiq"
-      "nest"
-      "remote"
-      "denon"
-      "denonavr"
-      "nmap_tracker"
-      "mqtt"
-      "cync"
-      "tuya"
-      "openweathermap"
-      "asuswrt"
-    ];
+    extraComponents = config.services.home-assistant.package.availableComponents;
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
       spook
