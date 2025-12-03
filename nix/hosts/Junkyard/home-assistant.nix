@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   lib,
   ...
 }:
@@ -86,6 +85,31 @@ in
 
               pythonImportsCheck = [ "magicattr" ];
             };
+            hatch-rest-api = pyPrev.buildPythonPackage rec {
+              pname = "hatch-rest-api";
+              version = "1.30.0";
+              pyproject = true;
+
+              disabled = pyPrev.pythonOlder "3.9";
+
+              src = pkgs.fetchFromGitHub {
+                owner = "dahlb";
+                repo = "hatch_rest_api";
+                rev = "v${version}";
+                hash = "sha256-9FJSlFpsfNbFJ5b/IPBAt6rBAAhtuXYrTw0qrPMiOf4=";
+              };
+
+              build-system = with pyPrev; [ setuptools ];
+
+              dependencies = with pyPrev; [
+                wheel
+                ruff
+                aiohttp
+                awsiotsdk
+              ];
+
+              pythonImportsCheck = [ "hatch_rest_api" ];
+            };
           }
         );
       in
@@ -99,8 +123,28 @@ in
         bidict
         gehomesdk
         magicattr
+        hatch-rest-api
       ];
-    extraComponents = config.services.home-assistant.package.availableComponents;
+    extraComponents = [
+      "default_config"
+      "met"
+      "esphome"
+      "roku"
+      "sharkiq"
+      "nest"
+      "remote"
+      "denon"
+      "denonavr"
+      "nmap_tracker"
+      "mqtt"
+      "cync"
+      "tuya"
+      "openweathermap"
+      "asuswrt"
+      "nextcloud"
+      "nextdns"
+      "ntfy"
+    ];
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
       spook
