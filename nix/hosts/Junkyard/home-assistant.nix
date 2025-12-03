@@ -109,6 +109,7 @@ in
       "mqtt"
       "cync"
       "tuya"
+      "openweathermap"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
