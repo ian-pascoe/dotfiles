@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   lib,
   ...
 }:
@@ -28,6 +29,17 @@ let
   };
 in
 {
+  sops = {
+    secrets = {
+      "home-assistant/google-assistant/service-account.json" = {
+        sopsFile = ../../secrets/Junkyard/home-assistant.yaml;
+        format = "yaml";
+        owner = "hass";
+        group = "hass";
+      };
+    };
+  };
+
   services.home-assistant = {
     enable = true;
     extraPackages =
@@ -171,6 +183,13 @@ in
           "127.0.0.1"
           "::1"
         ];
+      };
+      google_assistant = {
+        project_id = "pascoe-family";
+        service_account = "!include ${
+          config.sops.secrets."home-assistant/google-assistant/service-account.json".path
+        }";
+        report_state = true;
       };
     };
     configWritable = true;
