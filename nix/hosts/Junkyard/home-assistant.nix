@@ -202,7 +202,7 @@ in
         configure_url = "https://auth.ianpascoe.dev/realms/master/.well-known/openid-configuration";
         username_field = "preferred_username";
         scope = "openid profile email";
-        block_login = false;
+        block_login = true; # Block default login
         openid_text = "Login with Keycloak";
       };
       google_assistant = {
