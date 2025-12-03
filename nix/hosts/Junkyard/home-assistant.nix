@@ -134,6 +134,9 @@ in
       "denon"
       "denonavr"
       "esphome"
+      "google"
+      "google_assistant"
+      "google_assistant_sdk"
       "google_generative_ai_conversation"
       "ibeacon"
       "icloud"
@@ -153,6 +156,7 @@ in
       "spotify"
       "tuya"
       "webdav"
+      "wyoming"
     ];
     customComponents = with pkgs.home-assistant-custom-components; [
       hacs
