@@ -191,6 +191,10 @@ in
     config = {
       default_config = { };
       automation = "!include automations.yaml";
+      media_dirs = {
+        media = "media";
+        recording = "recording";
+      };
       http = {
         use_x_forwarded_for = true;
         trusted_proxies = [
