@@ -200,6 +200,7 @@ in
         homeassistant = {
           media_dirs = {
             media = "media";
+            recordings = "recordings";
           };
         };
         automation = "!include automations.yaml";
