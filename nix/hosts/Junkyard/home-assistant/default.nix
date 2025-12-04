@@ -14,19 +14,19 @@
   sops = {
     secrets = {
       "home-assistant/google-assistant/service-account.json" = {
-        sopsFile = ../../secrets/Junkyard/home-assistant.yaml;
+        sopsFile = ../../../secrets/Junkyard/home-assistant.yaml;
         format = "yaml";
         owner = "hass";
         group = "hass";
       };
       "home-assistant/openid/client-id" = {
-        sopsFile = ../../secrets/Junkyard/home-assistant.yaml;
+        sopsFile = ../../../secrets/Junkyard/home-assistant.yaml;
         format = "yaml";
         owner = "hass";
         group = "hass";
       };
       "home-assistant/openid/client-secret" = {
-        sopsFile = ../../secrets/Junkyard/home-assistant.yaml;
+        sopsFile = ../../../secrets/Junkyard/home-assistant.yaml;
         format = "yaml";
         owner = "hass";
         group = "hass";
@@ -87,7 +87,7 @@
         "ring"
         "roku"
         "sentry"
-        # "sharkiq" # Put this back once the package is updated
+        # "sharkiq" # TODO: Put this back once the package is updated
         "spotify"
         "tuya"
         "webdav"
