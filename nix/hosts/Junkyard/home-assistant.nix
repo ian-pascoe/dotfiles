@@ -196,7 +196,6 @@ in
       homeassistant = {
         media_dirs = {
           media = "media";
-          recording = "recording";
         };
       };
       automation = "!include automations.yaml";
