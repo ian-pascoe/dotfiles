@@ -12,7 +12,7 @@ in
     ./cloudflare-ddns.nix
     ./cloudflared.nix
     ./mosquitto.nix
-    ./home-assistant.nix
+    ./home-assistant
     (lib.module.findModules ../../modules/common)
     (lib.module.findModules ../../modules/nixos)
   ];
