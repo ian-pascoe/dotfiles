@@ -227,13 +227,23 @@ in
       configWritable = true;
     };
 
-    wyoming.faster-whisper = {
-      servers = {
+    wyoming = {
+      faster-whisper.servers = {
         "home-assistant" = {
           enable = true;
-          device = "auto";
-          model = "distil-small.en";
           uri = "tcp://0.0.0.0:10300";
+          device = "auto";
+          language = "en";
+          model = "tiny.en";
+        };
+      };
+
+      piper.servers = {
+        "home-assistant" = {
+          enable = true;
+          uri = "tcp://0.0.0.0:10301";
+          streaming = true;
+          voice = "en-us-ryan-low";
         };
       };
     };
@@ -243,6 +253,7 @@ in
     allowedTCPPorts = [
       8123
       10300
+      10301
     ];
     # Needed for homekit bridge
     allowedTCPPortRanges = [
