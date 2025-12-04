@@ -176,6 +176,7 @@ in
       "openai_conversation"
       "openweathermap"
       "remote"
+      "ring"
       "roku"
       "sharkiq"
       "spotify"
