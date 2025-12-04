@@ -55,6 +55,7 @@
         ];
       extraComponents = [
         "default_config"
+        "apple_tv"
         "asuswrt"
         "caldav"
         "cast"
