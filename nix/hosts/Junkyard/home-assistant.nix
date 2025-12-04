@@ -163,6 +163,8 @@ in
       "google_assistant"
       "google_assistant_sdk"
       "google_generative_ai_conversation"
+      "homekit"
+      "homekit_controller"
       "ibeacon"
       "icloud"
       "met"
