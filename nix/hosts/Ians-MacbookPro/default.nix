@@ -22,6 +22,7 @@ in
     inherit primaryUser;
   };
   users.users.${primaryUser} = {
+    uid = 501;
     name = "${primaryUser}";
     home = "/Users/${primaryUser}";
     shell = pkgs.zsh;
