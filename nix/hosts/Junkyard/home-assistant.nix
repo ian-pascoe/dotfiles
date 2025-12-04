@@ -246,7 +246,7 @@ in
           enable = true;
           uri = "tcp://0.0.0.0:10301";
           streaming = true;
-          voice = "en-us-ryan-low";
+          voice = "en-us-ryan-medium";
         };
       };
     };
