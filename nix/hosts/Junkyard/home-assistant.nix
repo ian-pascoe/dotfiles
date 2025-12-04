@@ -135,6 +135,39 @@ in
 
                 pythonImportsCheck = [ "hatch_rest_api" ];
               };
+              sharkiq = pyPrev.buildPythonPackage rec {
+                pname = "sharkiq";
+                version = "1.4.3";
+                pyproject = true;
+
+                src = pkgs.fetchFromGitHub {
+                  owner = "sharkiqlibs";
+                  repo = "sharkiq";
+                  tag = "v${version}";
+                  hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+                };
+
+                postPatch = ''
+                  substituteInPlace pyproject.toml \
+                    --replace-fail "setuptools-scm>=9.2.0" "setuptools-scm"
+                '';
+
+                build-system = with pyPrev; [
+                  setuptools
+                  setuptools-scm
+                ];
+
+                dependencies = with pyPrev; [
+                  aiohttp
+                  auth0-python
+                  requests
+                ];
+
+                # Module has no tests
+                doCheck = false;
+
+                pythonImportsCheck = [ "sharkiq" ];
+              };
             }
           );
         in
