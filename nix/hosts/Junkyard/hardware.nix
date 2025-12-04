@@ -63,7 +63,16 @@
     enableAllFirmware = lib.mkDefault true;
     enableRedistributableFirmware = lib.mkDefault true;
     graphics.enable = lib.mkDefault true;
-    bluetooth.enable = lib.mkDefault true;
+    bluetooth = {
+      enable = lib.mkDefault true;
+      powerOnBoot = lib.mkDefault true;
+      settings = {
+        General = {
+          Experimental = lib.mkDefault true;
+          KernelExperimental = lib.mkDefault true;
+        };
+      };
+    };
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
