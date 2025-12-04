@@ -182,7 +182,6 @@ in
           grpclib
           gtts
           hatch-rest-api
-          ibeacon-ble
           magicattr
           sharkiq
         ];
