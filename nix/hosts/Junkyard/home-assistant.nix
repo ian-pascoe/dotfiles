@@ -224,4 +224,17 @@ in
     };
     configWritable = true;
   };
+
+  networking.firewall = {
+    allowedTCPPorts = [ 8123 ];
+    # Needed for homekit bridge
+    allowedTCPPortRanges = [
+      {
+        from = 21063;
+        to = 21070;
+      }
+    ];
+    # Needed for homekit bridge
+    allowedUDPPorts = [ 5353 ];
+  };
 }
