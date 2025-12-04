@@ -58,9 +58,9 @@ in
       extraPackages =
         pythonPackages:
         let
-          # TODO: Remove this once newer package is available
           customPythonPackages = pythonPackages.overrideScope (
             pyFinal: pyPrev: {
+              # TODO: Remove this once newer package is available
               gehomesdk = pyPrev.buildPythonPackage rec {
                 pname = "gehomesdk";
                 version = "2025.11.5";
@@ -135,16 +135,19 @@ in
 
                 pythonImportsCheck = [ "hatch_rest_api" ];
               };
+              # TODO: Remove this once newer package is available
               sharkiq = pyPrev.buildPythonPackage rec {
                 pname = "sharkiq";
                 version = "1.4.3";
                 pyproject = true;
 
+                disabled = pyPrev.pythonOlder "3.9";
+
                 src = pkgs.fetchFromGitHub {
                   owner = "sharkiqlibs";
                   repo = "sharkiq";
                   tag = "v${version}";
-                  hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+                  hash = "sha256-SZAOV9a3hy3RDIQVA0pzquNS1OxzAsTd1veo2fqjaNU=";
                 };
 
                 postPatch = ''
