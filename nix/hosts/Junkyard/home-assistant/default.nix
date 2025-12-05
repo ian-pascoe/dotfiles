@@ -159,18 +159,33 @@
 
   networking.firewall = {
     allowedTCPPorts = [
-      8123
-      10300
-      10301
+      8123 # Web UI
+      10300 # Wyoming faster-whisper
+      10301 # Wyoming piper
+      5540 # Matter
+      8009 # Chromecast
+      6053 # Esphome
+      8266 # Esphome
     ];
-    # Needed for homekit bridge
     allowedTCPPortRanges = [
+      # Homekit bridge
       {
         from = 21063;
         to = 21070;
       }
     ];
-    # Needed for homekit bridge
-    allowedUDPPorts = [ 5353 ];
+    # Needed for device discovery
+    allowedUDPPorts = [
+      1900 # SSDP
+      5353 # mDNS
+      67 # DHCP
+      68 # DHCP
+      6666 # Tuya local API
+      6667 # Tuya local API secure
+      5540 # Matter
+      21063 # Matter over IP fabric
+      5683 # Thread/Coap
+      5684 # Thread/Coap
+    ];
   };
 }

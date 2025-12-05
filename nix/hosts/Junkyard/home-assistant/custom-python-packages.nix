@@ -83,16 +83,16 @@
           # TODO: Remove this once newer package is available
           sharkiq = pyPrev.buildPythonPackage rec {
             pname = "sharkiq";
-            version = "1.4.3";
+            version = "1.5.0";
             pyproject = true;
 
             disabled = pyPrev.pythonOlder "3.9";
 
             src = pkgs.fetchFromGitHub {
               owner = "sharkiqlibs";
-              repo = "sharkiq";
+              repo = pname;
               tag = "v${version}";
-              hash = "sha256-SZAOV9a3hy3RDIQVA0pzquNS1OxzAsTd1veo2fqjaNU=";
+              hash = "sha256-8BLPIvx4r5i0q5dPUdwB2KgPfGC6n14RFzWxJXpBD1Y=";
             };
 
             postPatch = ''
