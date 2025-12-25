@@ -55,15 +55,23 @@ layout {
     }
   }
   tab name="dev" split_direction="vertical" {
-    pane name="editor" {
-      command "yazi"
-      cwd "~"
+    pane size="70%" split_direction="horizontal" {
+      pane name="editor" size="80%" {
+        command "nvim"
+        args "."
+      }
+      pane name="cmd" size="20%" {
+        command "zsh"
+      }
+    }
+    pane name="opencode" size="30%" {
+      command "opencode"
     }
   }
-  tab name="term" split_direction="vertical" {
+  tab name="dotfiles" split_direction="vertical" {
     pane name="zsh" {
       command "zsh"
-      cwd "~"
+      cwd "~/.dotfiles"
     }
   }
 }
