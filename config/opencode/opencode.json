@@ -1,7 +1,13 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
-  "plugin": ["oh-my-opencode", "opencode-antigravity-auth@1.2.4"],
+  "plugin": [
+    "oh-my-opencode",
+    "opencode-antigravity-auth@latest",
+    "opencode-openai-codex-auth@latest",
+    "@tarquinen/opencode-dcp@latest",
+    "opencode-sessions@latest"
+  ],
   "provider": {
     "google": {
       "name": "Google",
