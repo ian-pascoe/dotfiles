@@ -6,7 +6,6 @@
       "mas"
       "media-control"
       "nextdns"
-      "opencode"
       "podman"
       "podman-compose"
     ];

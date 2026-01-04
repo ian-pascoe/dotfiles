@@ -23,5 +23,6 @@
     "multimodal-looker": {
       "model": "google/gemini-3-flash"
     }
-  }
+  },
+  "auto_update": true
 }

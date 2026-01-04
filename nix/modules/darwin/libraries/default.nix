@@ -18,6 +18,7 @@ in
   environment.systemPackages = libs;
 
   environment.variables = {
+    APPLE_SDK_PATH = "${pkgs.apple-sdk_26}";
     LIBRARY_PATH = lib.makeSearchPath "lib" libs;
     CPATH = lib.makeSearchPath "include" devLibs;
   };
