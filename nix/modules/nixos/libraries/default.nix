@@ -12,6 +12,7 @@ let
       attr
       acl
       systemd
+      util-linux
       libiconv
       icu
     ];

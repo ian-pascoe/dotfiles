@@ -11,7 +11,6 @@
     bzip2
     libxml2
     libsodium
-    util-linux
     xz
 
     # Required
