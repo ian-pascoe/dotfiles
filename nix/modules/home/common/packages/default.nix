@@ -10,7 +10,8 @@
     go
     python314
     lua5_4
-    gcc
+    clang
+    cctools
     gnumake
 
     # Nix LSP and formatting tools

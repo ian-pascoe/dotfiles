@@ -68,9 +68,25 @@ layout {
       command "opencode"
     }
   }
-  tab name="dotfiles" split_direction="vertical" {
-    pane name="zsh" {
+  tab name="blank" {
+    pane name="cmd" {
       command "zsh"
+    }
+  }
+  tab name="dotfiles" split_direction="vertical" {
+    pane size="70%" split_direction="horizontal" {
+      pane name="editor" size="80%" {
+        command "nvim"
+        args "."
+        cwd "~/.dotfiles"
+      }
+      pane name="cmd" size="20%" {
+        command "zsh"
+        cwd "~/.dotfiles"
+      }
+    }
+    pane name="opencode" size="30%" {
+      command "opencode"
       cwd "~/.dotfiles"
     }
   }
