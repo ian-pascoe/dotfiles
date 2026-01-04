@@ -5,8 +5,7 @@
     "oh-my-opencode@latest",
     "opencode-antigravity-auth@latest",
     "opencode-openai-codex-auth@latest",
-    "@tarquinen/opencode-dcp@latest",
-    "opencode-sessions@latest"
+    "@tarquinen/opencode-dcp@latest"
   ],
   "provider": {
     "google": {
