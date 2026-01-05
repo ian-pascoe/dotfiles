@@ -20,16 +20,16 @@ Cross-platform dotfiles for NixOS (WSL), nix-darwin (macOS), and Windows. Nix fl
 
 ## Where to Look
 
-| Task | Location | Notes |
-|------|----------|-------|
-| Add/modify host | `nix/hosts/{name}/` | Uses `lib.host.mkNixosSystem` or `mkDarwinSystem` |
-| Add home config | `nix/homes/{user}@{host}/` | Uses `lib.home.mkHomeManagerConfig` |
-| Add Nix module | `nix/modules/{common,nixos,darwin,home}/` | Auto-discovered via `lib.module.findModules` |
-| Add app config | `config/{app}/` | Home-manager symlinks these |
-| Add/edit theme | `themes/{name}/` | Run `set-theme {name}` after |
-| Neovim plugins | `config/nvim/lua/plugins/` | LazyVim modular pattern |
-| Sketchybar items | `config/sketchybar/items/` | Lua-based, OOP components |
-| Windows scripts | `Windows/PowerShell/Scripts/` | PowerShell with Unix aliases |
+| Task             | Location                                  | Notes                                             |
+| ---------------- | ----------------------------------------- | ------------------------------------------------- |
+| Add/modify host  | `nix/hosts/{name}/`                       | Uses `lib.host.mkNixosSystem` or `mkDarwinSystem` |
+| Add home config  | `nix/homes/{user}@{host}/`                | Uses `lib.home.mkHomeManagerConfig`               |
+| Add Nix module   | `nix/modules/{common,nixos,darwin,home}/` | Auto-discovered via `lib.module.findModules`      |
+| Add app config   | `config/{app}/`                           | Home-manager symlinks these                       |
+| Add/edit theme   | `themes/{name}/`                          | Run `set-theme {name}` after                      |
+| Neovim plugins   | `config/nvim/lua/plugins/`                | LazyVim modular pattern                           |
+| Sketchybar items | `config/sketchybar/items/`                | Lua-based, OOP components                         |
+| Windows scripts  | `Windows/PowerShell/Scripts/`             | PowerShell with Unix aliases                      |
 
 ## Commands
 
@@ -54,18 +54,21 @@ set-theme <theme-name>           # Updates ~/.config/theme symlink
 ## Conventions
 
 ### Nix
+
 - 2-space indent, nixpkgs style
 - `imports = [ ... ];` at top
 - Use custom lib wrappers: `lib.host.mkNixosSystem`, `lib.home.mkHomeManagerConfig`
 - Modules auto-discovered - just add to correct directory
 
 ### Lua
+
 - 2-space indent (StyLua enforced)
 - Single quotes for strings
 - `---@type` annotations for types
 - `require()` at top, `local` for scope
 
 ### PowerShell
+
 - PascalCase functions (e.g., `Update-PowerShell`)
 - Approved verbs only (Get-, Set-, New-, Remove-)
 - `-ErrorAction SilentlyContinue` for optional operations
@@ -79,11 +82,11 @@ set-theme <theme-name>           # Updates ~/.config/theme symlink
 
 ## Platform-Specific
 
-| Platform | Window Manager | Bar | Extra |
-|----------|---------------|-----|-------|
-| macOS | Aerospace | Sketchybar | Karabiner, Homebrew via nix-homebrew |
-| NixOS/WSL | - | - | Terminal-focused |
-| Windows | GlazeWM | YASB | PowerShell Unix parity layer |
+| Platform  | Window Manager | Bar        | Extra                                |
+| --------- | -------------- | ---------- | ------------------------------------ |
+| macOS     | Aerospace      | Sketchybar | Karabiner, Homebrew via nix-homebrew |
+| NixOS/WSL | -              | -          | Terminal-focused                     |
+| Windows   | GlazeWM        | YASB       | PowerShell Unix parity layer         |
 
 ~80% config shared via `modules/home/common`. Platform-specific in `modules/{darwin,nixos,home/{darwin,wsl}}`.
 
@@ -116,7 +119,10 @@ set-theme <theme-name>           # Updates ~/.config/theme symlink
 7. **Hand off** - Provide context for next session
 
 **CRITICAL RULES:**
+
 - Work is NOT complete until `git push` succeeds
 - NEVER stop before pushing - that leaves work stranded locally
 - NEVER say "ready to push when you are" - YOU must push
 - If push fails, resolve and retry until it succeeds
+
+Use 'bd' for task tracking
