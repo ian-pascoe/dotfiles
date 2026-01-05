@@ -22,6 +22,7 @@
       "hiddenbar"
       "karabiner-elements"
       "nextcloud"
+      "opencode-desktop"
       "pearcleaner"
       "podman-desktop"
       "spotify"
