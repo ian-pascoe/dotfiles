@@ -3,6 +3,7 @@
   homebrew = {
     enable = true;
     brews = [
+      "bd"
       "mas"
       "media-control"
       "nextdns"

@@ -4,7 +4,12 @@
   ...
 }:
 let
-  inherit (inputs) homebrew-core homebrew-cask rust-overlay;
+  inherit (inputs)
+    rust-overlay
+    homebrew-core
+    homebrew-cask
+    homebrew-beads
+    ;
   specialArgs = { inherit inputs lib; };
 in
 {
@@ -59,6 +64,7 @@ in
       taps = {
         "homebrew/homebrew-core" = homebrew-core;
         "homebrew/homebrew-cask" = homebrew-cask;
+        "steveyegge/homebrew-beads" = homebrew-beads;
       };
       mutableTaps = false;
     };

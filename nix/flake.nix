@@ -50,6 +50,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    homebrew-beads = {
+      url = "github:steveyegge/homebrew-beads";
+      flake = false;
+    };
 
     # Rust
     rust-overlay = {
@@ -70,9 +74,6 @@
       nix-darwin,
       mac-app-util,
       nix-homebrew,
-      homebrew-core,
-      homebrew-cask,
-      rust-overlay,
       ...
     }@inputs:
     let
