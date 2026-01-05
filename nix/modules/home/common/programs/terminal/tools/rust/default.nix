@@ -1,10 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    rustc
-    cargo
-    rust-analyzer
-    rustfmt
-    clippy
+    rust-bin.stable.latest.default
   ];
 }

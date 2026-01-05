@@ -50,6 +50,12 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    # Rust
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -66,6 +72,7 @@
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
+      rust-overlay,
       ...
     }@inputs:
     let

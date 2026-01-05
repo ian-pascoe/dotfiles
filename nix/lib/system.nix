@@ -4,10 +4,8 @@
   ...
 }:
 let
-  inherit (inputs) homebrew-core homebrew-cask;
-  specialArgs = {
-    inherit inputs lib;
-  };
+  inherit (inputs) homebrew-core homebrew-cask rust-overlay;
+  specialArgs = { inherit inputs lib; };
 in
 {
   mkNixosSystem =
@@ -19,6 +17,7 @@ in
         {
           nixpkgs.overlays = [
             lib.overlay.mkStableOverlay
+            rust-overlay.overlays.default
           ];
         }
       ];
@@ -33,6 +32,7 @@ in
         {
           nixpkgs.overlays = [
             lib.overlay.mkStableOverlay
+            rust-overlay.overlays.default
           ];
         }
       ];

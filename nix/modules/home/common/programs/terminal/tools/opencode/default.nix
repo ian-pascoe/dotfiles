@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   dotfiles,
@@ -6,7 +7,8 @@
 }:
 {
   programs.opencode = {
-    enable = lib.mkDefault true;
+    enable = lib.mkDefault pkgs.stdenv.isLinux; # handled via homebrew on mac
+    # package = lib.mkDefault pkgs.nur.repos.falconprogrammer.opencode-sst; # fallback if main is broken
   };
 
   home.file = {
