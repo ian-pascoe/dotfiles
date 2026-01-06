@@ -15,8 +15,4 @@
       force = true;
     };
   };
-
-  programs.zsh.initContent = lib.mkAfter ''
-    fastfetch
-  '';
 }
