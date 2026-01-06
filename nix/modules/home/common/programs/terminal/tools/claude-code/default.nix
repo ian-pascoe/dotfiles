@@ -12,7 +12,7 @@
 
   home.file = {
     ".claude" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/claude";
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/claude-code";
       force = true;
     };
   };
