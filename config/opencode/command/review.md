@@ -33,6 +33,10 @@ Write to `thoughts/reviews/{plan-name}-review.md`:
 ```markdown
 ## Validation Report: [Plan Name]
 
+### Beads Reference
+- Original Issue: `<beads-id>`
+- Follow-up Issues Created: `<beads-id>`, `<beads-id>` (if any)
+
 ### Implementation Status
 ✓ Phase 1: [Name] - Fully implemented
 ⚠️ Phase 2: [Name] - Partially implemented (see issues)
@@ -59,9 +63,18 @@ Write to `thoughts/reviews/{plan-name}-review.md`:
 - [Action items]
 ```
 
-### Step 4: Update Ticket
+### Step 4: Update Status & Create Follow-ups
 
-Set ticket frontmatter to `status: reviewed`
+1. If implementation is complete and verified:
+   - Close the beads issue: `bd close <id> --reason="Implementation complete and verified"`
+   - Set ticket frontmatter to `status: reviewed`
+
+2. If issues were found:
+   - Create follow-up beads issues: `bd create --title="Fix: [issue]" --type=bug`
+   - Link to original: `bd dep add <new-id> <original-id> --type=discovered-from`
+   - Document in review report
+
+3. Sync: `bd sync`
 
 ## Validation Checklist
 

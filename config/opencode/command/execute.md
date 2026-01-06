@@ -10,11 +10,15 @@ Implement an approved plan from `thoughts/plans/`. Follow phases sequentially, v
 
 1. **Read the plan completely** - Check for existing checkmarks (- [x]) to resume from
 2. **Read the ticket and all files mentioned** - Full context, no limit/offset
-3. **Create todos from plan phases** - Break down into atomic implementation steps
-4. **Implement each phase** - Adapt to reality while following plan intent
-5. **Verify each phase** - Run success criteria checks, fix issues before proceeding
-6. **Update the plan** - Mark completed items with checkboxes
-7. **Update ticket status** - Set frontmatter to `status: implemented`
+3. **Verify beads status**: If plan references a beads ID, ensure it's `in_progress`: `bd update <id> --status=in_progress`
+4. **Create todos from plan phases** - Break down into atomic implementation steps
+5. **Implement each phase** - Adapt to reality while following plan intent
+6. **Verify each phase** - Run success criteria checks, fix issues before proceeding
+7. **Update the plan** - Mark completed items with checkboxes
+8. **Update statuses**:
+   - Set ticket frontmatter to `status: implemented`
+   - If issues were discovered, create new beads issues: `bd create --title="..." --type=bug`
+   - Link discovered issues: `bd dep add <new-id> <original-id> --type=discovered-from`
 
 ## Execution Principles
 
@@ -22,6 +26,7 @@ Implement an approved plan from `thoughts/plans/`. Follow phases sequentially, v
 - **Adapt, don't abandon** - If reality differs slightly from plan, adapt. Only pause for major blockers.
 - **Use session context** - You know what you just did. Don't re-read files you just wrote.
 - **Ask only when blocked** - If you can make a reasonable decision, make it and document why.
+- **Track discovered work** - If you find bugs or improvements during execution, create beads issues for later.
 
 ## When Things Don't Match
 

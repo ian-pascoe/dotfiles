@@ -1,21 +1,36 @@
 ---
-description: Create an implementation plan from a ticket and research. Provide both the ticket and relevant research as arguments to this command. It is best to run this command in a new session.
+description: Research a ticket and create an implementation plan. Provide a ticket file or beads ID as the argument. It is best to run this command in a new session.
 ---
 
-# Create Implementation Plan
+# Research & Plan
 
-Create detailed implementation plans through interactive, iterative collaboration. Be skeptical, thorough, and verify everything against actual code.
+Research the codebase and create a detailed implementation plan from a ticket. This combines investigation and planning into a single workflow.
 
 ## Process
 
-### Step 1: Context Gathering
+### Step 1: Read & Claim
 
-1. **Read all mentioned files FULLY** - Ticket, research, related plans
-2. **Fire explore agents in parallel** to find relevant code, patterns, and structure
-3. **Fire librarian agents in parallel** if external libraries are involved
-4. **Wait for all agents, then read files they identified**
+1. **Read the ticket FULLY** (from `thoughts/tickets/` or via `bd show <id>`)
+2. **Claim the work**: `bd update <id> --status=in_progress`
+3. **Break down into research areas** - What do I need to find to plan this?
+4. **Identify external dependencies** - Any unfamiliar libraries or patterns?
 
-### Step 2: Present Understanding
+### Step 2: Research (parallel agents)
+
+**Phase 1 - Locate & Discover:**
+- Fire **explore** agents in parallel to find relevant code, patterns, structure
+- Fire **librarian** agents if external libraries are involved
+- Use **multimodal-looker** if ticket references diagrams, screenshots, or PDFs
+- Wait for all to complete
+
+**Phase 2 - Deep Analysis (if needed):**
+- Fire additional agents for areas needing deeper investigation
+- Consult **oracle** for architectural complexity or tradeoff analysis
+- **Stop when you have enough** - 2 iterations with no new info = done
+
+**Read all files identified by agents.**
+
+### Step 3: Present Understanding
 
 ```
 Based on ticket and codebase research:
@@ -23,6 +38,7 @@ Based on ticket and codebase research:
 I found:
 - [Implementation detail with file:line]
 - [Relevant pattern discovered]
+- [Constraint or complexity identified]
 
 Questions I couldn't answer from code:
 - [Technical question requiring judgment]
@@ -31,19 +47,13 @@ Questions I couldn't answer from code:
 
 Only ask questions you genuinely cannot answer through code investigation.
 
-### Step 3: Research & Design
+### Step 4: Design
 
 1. **If user corrects misunderstanding** - Verify with new research before proceeding
-2. **Fire additional explore/librarian agents** for deeper investigation as needed
-3. **Consult oracle** for complex architectural decisions or when multiple valid approaches exist
-4. **Present design options** with pros/cons
+2. **Consult oracle** for complex architectural decisions or when multiple valid approaches exist
+3. **Present design options** with pros/cons if multiple valid approaches exist
 
-**Agent selection:**
-- `explore` - Find code patterns, trace implementations
-- `librarian` - External docs, OSS examples, library best practices
-- `oracle` - Architecture decisions, tradeoff analysis, validate approach before committing to plan
-
-### Step 4: Plan Structure
+### Step 5: Plan Structure
 
 Get buy-in on structure before writing details:
 
@@ -55,7 +65,7 @@ Proposed plan:
 Does this phasing make sense?
 ```
 
-### Step 5: Write Plan
+### Step 6: Write Plan
 
 Write to `thoughts/plans/{descriptive_name}.md`:
 
@@ -65,8 +75,17 @@ Write to `thoughts/plans/{descriptive_name}.md`:
 ## Overview
 [Brief description]
 
-## Current State Analysis
-[What exists, constraints discovered]
+## Beads Reference
+- Issue: `<beads-id>`
+
+## Research Findings
+[Key discoveries from codebase investigation]
+- [Finding with file:line reference]
+- [Pattern to follow]
+- [Constraint discovered]
+
+## Current State
+[What exists now]
 
 ## Desired End State
 [Specification and verification method]
@@ -95,12 +114,22 @@ Write to `thoughts/plans/{descriptive_name}.md`:
 
 ## References
 - Ticket: `thoughts/tickets/...`
-- Research: `thoughts/research/...`
 ```
 
-### Step 6: Review & Iterate
+### Step 7: Review & Finalize
 
-Present draft location, iterate on feedback, then update ticket status to `planned`.
+Present draft location, iterate on feedback, then:
+1. Update ticket file frontmatter to `status: planned`
+2. Run `bd sync` to sync any changes
+
+## Agent Selection
+
+| Agent | When to Use |
+|-------|-------------|
+| `explore` | Find code patterns, trace implementations, locate files |
+| `librarian` | External docs, OSS examples, library best practices |
+| `oracle` | Architecture decisions, tradeoff analysis, validate complex approaches |
+| `multimodal-looker` | Analyze diagrams, mockups, screenshots, PDFs |
 
 ## Guidelines
 
@@ -109,7 +138,8 @@ Present draft location, iterate on feedback, then update ticket status to `plann
 - **No open questions in final plan** - Resolve everything first
 - **Separate automated vs manual verification** in success criteria
 - **Proceed when clear** - If user's answer resolves ambiguity, continue without asking permission
+- **Don't over-research** - Time is precious; stop when you have enough context
 
-**files**
+**ticket**
 
 $ARGUMENTS

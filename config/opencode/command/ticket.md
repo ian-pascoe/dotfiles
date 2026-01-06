@@ -1,10 +1,10 @@
 ---
-description: Creates a structured ticket for bugs, features, or technical debt based on user input. Extracts keywords and patterns for research phase.
+description: Creates a structured ticket as a beads issue for bugs, features, or technical debt based on user input.
 ---
 
 # Create Ticket
 
-Create comprehensive tickets that serve as the foundation for research and planning phases.
+Create comprehensive beads issues that serve as the foundation for the `/plan` command.
 
 ## Process
 
@@ -13,7 +13,7 @@ Create comprehensive tickets that serve as the foundation for research and plann
 1. **Determine ticket type**:
    - **bug**: Something broken, errors, unexpected behavior
    - **feature**: New functionality or enhancement
-   - **debt**: Refactoring, code cleanup, architecture improvements
+   - **task**: Refactoring, code cleanup, architecture improvements, general work
 
 2. **Extract initial keywords** - Component names, file patterns, error messages, technologies
 
@@ -25,7 +25,7 @@ Ask targeted questions based on ticket type:
 
 **Feature**: What problem does it solve? Who are users? Acceptance criteria? UI/UX requirements? Integration needs?
 
-**Debt**: What code needs improvement? What problems does it cause? Ideal state after cleanup?
+**Task**: What code needs improvement? What problems does it cause? Ideal state after cleanup?
 
 ### Step 3: Scope Exploration
 
@@ -35,22 +35,30 @@ Attempt to expand scope until user pushes back with "out of scope". Generate fol
 
 **Adjust intensity based on complexity**: Simple bugs need less exploration than large features.
 
-### Step 4: Create Ticket
+### Step 4: Create Beads Issue
 
-Write to `thoughts/tickets/{type}_{subject}.md`:
+Use `bd create` to create the issue:
+
+```bash
+bd create --title="[Descriptive Title]" --type=[bug|feature|task] --priority=[0-4]
+```
+
+Priority: 0=critical, 1=high, 2=medium, 3=low, 4=backlog
+
+Then create a detailed ticket file at `thoughts/tickets/{type}_{subject}.md` and reference the beads ID:
 
 ```markdown
 ---
-type: [bug|feature|debt]
-priority: [high|medium|low]
+beads_id: [beads-xxx]
+type: [bug|feature|task]
+priority: [0-4]
 created: [ISO date]
 status: open
-tags: [relevant-tags]
 keywords: [search terms for research]
 patterns: [code patterns to investigate]
 ---
 
-# [TYPE-XXX]: [Title]
+# [Title]
 
 ## Description
 [Clear description]
@@ -101,16 +109,16 @@ For complex tickets, consider consulting **oracle** to validate:
 - Success criteria are measurable
 - Scope is appropriately sized
 
-### Step 6: Update Status
+### Step 6: Sync
 
-Set frontmatter to `status: created`
+Run `bd sync` to ensure the issue is tracked.
 
 ## Guidelines
 
 - **Atomic tickets** - One concern per ticket
 - **Research-friendly** - Include specific keywords and patterns
 - **Testable** - Clear success criteria
-- If scope seems too broad, suggest breaking into multiple tickets
+- If scope seems too broad, suggest breaking into multiple tickets with `bd dep add` to link them
 
 **user_request**
 

@@ -4,52 +4,60 @@ description: Commits the local changes in atomic commits. This command is best r
 
 # Commit Changes
 
-You are tasked with creating git commits for the changes made during this session.
+Create git commits for the changes made during this session.
 
 ## Commit Types
 
-Use conventional commit prefixes to categorize changes:
+Use conventional commit prefixes:
 
-- **fix:** Bugs that are being fixed or adjustments to how things work
-- **feat:** Features that have been added
-- **chore:** Tidying things up, not making substantial changes to how things work
-- **refactor:** Changes that don't change the behavior, but do change the internal layout
-- **docs:** Purely documentation and thoughts updates
-- **ci:** Changes to how the CI system works
+- **feat:** New features or functionality
+- **fix:** Bug fixes or adjustments
+- **doc:** Documentation changes
+- **perf:** Performance improvements
+- **refactor:** Code restructuring, same behavior
+- **style:** Formatting, whitespace, no code change
+- **test:** Adding or updating tests
+- **build:** Build system or dependency changes
+- **ci:** CI/CD pipeline changes
+- **chore:** Miscellaneous (tidying up, maintenance)
 
-## Process:
+## Process
 
 1. **Think about what changed:**
-   - Review the conversation history and understand what was accomplished
-   - Review the `git status -s` to get an idea of what files changed
+   - Review conversation history and understand what was accomplished
+   - Review `git status -s` to see what files changed
    - Consider whether changes should be one commit or multiple logical commits
-   - Use `git diff` on specific files if you need more context. Only do this if you have no knowledge of the changes in that file.
+   - Use `git diff` on specific files only if you have no knowledge of changes in that file
 
 2. **Plan your commit(s):**
    - Identify which files belong together
-   - **Select the appropriate commit type** from the list above based on the nature of the changes
-   - Draft clear, descriptive commit messages using the format: `type: description`
-   - Use imperative mood in commit messages
-   - Focus on why the changes were made, not just what
+   - Select appropriate commit type from above
+   - Draft clear, descriptive commit messages: `type: description`
+   - Use imperative mood, focus on why not what
 
 3. **Present your plan OR just execute:**
-   - If changes are straightforward and grouping is obvious, proceed directly
-   - If ambiguous (multiple possible groupings, unclear commit boundaries), present plan first:
-     - List files for each commit with commit message
-     - Ask: "I plan to create [N] commit(s). Shall I proceed?"
+   - If straightforward and grouping is obvious, proceed directly
+   - If ambiguous, present plan first and ask: "I plan to create [N] commit(s). Shall I proceed?"
 
-4. **Execute upon confirmation:**
+4. **Execute:**
    - Use `git add` with specific files (never use `-A` or `.`)
    - Create commits with your planned messages
-   - Show the result with `git log --oneline -n [N]`
+   - Show result with `git log --oneline -n [N]`
+
+5. **Sync beads:**
+   - Run `bd sync` to commit any beads changes and sync with remote
+   - This ensures issue tracking stays in sync with code changes
 
 ## Release Notes
 
-Note: During release generation, commits with `chore:`, `docs:`, and `ci:` prefixes are automatically filtered out from the changelog to focus on user-facing changes. Other prefixes like `fix:` and `feat:` are included.
+Changelog groups: Features (`feat`), Bug Fixes (`fix`), Documentation (`doc`), Performance (`perf`), Refactoring (`refactor`), Styling (`style`), Testing (`test`), Build (`build`), CI/CD (`ci`), Miscellaneous (`chore`). Security issues are grouped separately if "security" appears in the commit body.
 
-## Remember:
+Release commits (`chore(release)`) are skipped.
+
+## Remember
+
 - You already have full context from this session - use it
 - Group related changes together
 - Keep commits focused and atomic
 - Trust your judgment - the user asked you to commit
-
+- Always `bd sync` at the end to keep beads in sync
