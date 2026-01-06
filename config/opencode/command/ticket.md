@@ -115,10 +115,17 @@ Run `bd sync` to ensure the issue is tracked.
 
 ## Guidelines
 
-- **Atomic tickets** - One concern per ticket
-- **Research-friendly** - Include specific keywords and patterns
-- **Testable** - Clear success criteria
-- If scope seems too broad, suggest breaking into multiple tickets with `bd dep add` to link them
+- **Atomic** - One concern per ticket
+- **Research-friendly** - Specific keywords and patterns
+- **Testable** - Measurable success criteria
+- **Split large scope** - Use `bd dep add` to link related tickets
+
+## Anti-Patterns
+
+- Vague titles ("Fix bug", "Improve X")
+- Missing reproduction steps for bugs
+- No success criteria
+- Scope creep without explicit decision
 
 **user_request**
 

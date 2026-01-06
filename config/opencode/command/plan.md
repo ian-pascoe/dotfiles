@@ -138,7 +138,18 @@ Present draft location, iterate on feedback, then:
 - **No open questions in final plan** - Resolve everything first
 - **Separate automated vs manual verification** in success criteria
 - **Proceed when clear** - If user's answer resolves ambiguity, continue without asking permission
-- **Don't over-research** - Time is precious; stop when you have enough context
+- **Don't over-research** - Stop when you have enough context
+
+## Complexity Signals
+
+**Split into multiple plans when:**
+- Changes span 3+ unrelated subsystems
+- Requires sequential PRs (migrations, breaking changes)
+- Total estimated phases > 6
+
+**Keep as single plan when:**
+- All changes serve one cohesive goal
+- Can be reviewed/tested as one unit
 
 **ticket**
 

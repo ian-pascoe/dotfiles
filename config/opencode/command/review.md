@@ -84,9 +84,19 @@ Write to `thoughts/reviews/{plan-name}-review.md`:
 - [ ] No regressions introduced
 - [ ] Error handling is robust
 
-**Agent usage:**
-- `explore` - Discovery and verification of file changes
-- `oracle` - Self-review of implementation quality for complex changes (architecture, security, performance)
+## Agent Usage
+
+- **explore** - Verify file changes match plan
+- **oracle** - Self-review for complex implementations (REQUIRED for: auth/security, data migrations, API contracts, performance-critical code)
+
+## Quality Checklist
+
+Before closing, verify:
+- [ ] No `as any`, `@ts-ignore`, or type suppressions added
+- [ ] Error handling: no empty catch blocks
+- [ ] Secrets: no hardcoded credentials, tokens, or keys
+- [ ] Tests: coverage for new functionality
+- [ ] Patterns: follows existing codebase conventions
 
 **review**
 

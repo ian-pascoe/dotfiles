@@ -22,11 +22,35 @@ Implement an approved plan from `thoughts/plans/`. Follow phases sequentially, v
 
 ## Execution Principles
 
-- **Bias toward action** - If the plan is clear, implement. Don't re-research what's already documented.
-- **Adapt, don't abandon** - If reality differs slightly from plan, adapt. Only pause for major blockers.
-- **Use session context** - You know what you just did. Don't re-read files you just wrote.
-- **Ask only when blocked** - If you can make a reasonable decision, make it and document why.
-- **Track discovered work** - If you find bugs or improvements during execution, create beads issues for later.
+- **Bias toward action** - Plan is clear → implement. Don't re-research documented decisions.
+- **Adapt, don't abandon** - Reality differs slightly → adapt. Only pause for major blockers.
+- **Use session context** - Don't re-read files you just wrote.
+- **Ask only when blocked** - Make reasonable decisions and document why.
+- **Track discovered work** - Create beads issues for bugs/improvements found during execution.
+- **Verify continuously** - Run `lsp_diagnostics` after each phase. Fix errors before proceeding.
+
+## Verification Protocol
+
+**After each phase:**
+1. `lsp_diagnostics` on changed files - fix all errors before next phase
+2. Run success criteria commands from plan
+3. Mark phase checkbox only after verification passes
+
+**For refactoring:**
+- Use `lsp_find_references` before renaming/moving
+- Use `lsp_rename` for safe cross-file renames
+- Verify with `lsp_diagnostics` after each refactor step
+
+## Failure Recovery
+
+**After 2+ consecutive failed fix attempts:**
+1. STOP further edits
+2. REVERT to last working state (`git checkout` or undo)
+3. Document what was attempted
+4. Consult **oracle** with full failure context
+5. If oracle cannot resolve → ask user before proceeding
+
+**Never:** Leave code broken, shotgun debug, delete failing tests to "pass"
 
 ## When Things Don't Match
 
