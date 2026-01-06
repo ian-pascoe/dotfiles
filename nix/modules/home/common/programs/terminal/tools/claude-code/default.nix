@@ -11,8 +11,20 @@
   };
 
   home.file = {
-    ".claude" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/claude-code";
+    ".claude/settings.json" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/claude-code/settings.json";
+      force = true;
+    };
+    ".claude/agents" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/claude-code/agents";
+      force = true;
+    };
+    ".claude/commands" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/claude-code/commands";
+      force = true;
+    };
+    ".claude/skills" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfiles.path}/config/claude-code/skills";
       force = true;
     };
   };

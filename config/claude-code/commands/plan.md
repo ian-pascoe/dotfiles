@@ -1,0 +1,156 @@
+---
+description: Research a ticket and create an implementation plan. Provide a ticket file or beads ID as the argument. It is best to run this command in a new session.
+---
+
+# Research & Plan
+
+Research the codebase and create a detailed implementation plan from a ticket. This combines investigation and planning into a single workflow.
+
+## Process
+
+### Step 1: Read & Claim
+
+1. **Read the ticket FULLY** (from `thoughts/tickets/` or via `bd show <id>`)
+2. **Claim the work**: `bd update <id> --status=in_progress`
+3. **Break down into research areas** - What do I need to find to plan this?
+4. **Identify external dependencies** - Any unfamiliar libraries or patterns?
+
+### Step 2: Research (parallel agents)
+
+**Phase 1 - Locate & Discover:**
+- Fire **Explore** agents in parallel to find relevant code, patterns, structure (Task tool with subagent_type=Explore)
+- Use **WebSearch/WebFetch** if external library documentation is needed
+- Use **Read** tool if ticket references diagrams, screenshots, or PDFs
+- Wait for all to complete
+
+**Phase 2 - Deep Analysis (if needed):**
+- Fire additional **Explore** agents for areas needing deeper investigation
+- Use **general-purpose** agent for complex architectural analysis
+- **Stop when you have enough** - 2 iterations with no new info = done
+
+**Read all files identified by agents.**
+
+### Step 3: Present Understanding
+
+```
+Based on ticket and codebase research:
+
+I found:
+- [Implementation detail with file:line]
+- [Relevant pattern discovered]
+- [Constraint or complexity identified]
+
+Questions I couldn't answer from code:
+- [Technical question requiring judgment]
+- [Business logic clarification]
+```
+
+Only ask questions you genuinely cannot answer through code investigation.
+
+### Step 4: Design
+
+1. **If user corrects misunderstanding** - Verify with new research before proceeding
+2. **Use general-purpose agent** for complex architectural analysis or when multiple valid approaches exist
+3. **Present design options** with pros/cons if multiple valid approaches exist
+
+### Step 5: Plan Structure
+
+Get buy-in on structure before writing details:
+
+```
+Proposed plan:
+1. [Phase name] - [what it accomplishes]
+2. [Phase name] - [what it accomplishes]
+
+Does this phasing make sense?
+```
+
+### Step 6: Write Plan
+
+Write to `thoughts/plans/{descriptive_name}.md`:
+
+```markdown
+# [Feature] Implementation Plan
+
+## Overview
+[Brief description]
+
+## Beads Reference
+- Issue: `<beads-id>`
+
+## Research Findings
+[Key discoveries from codebase investigation]
+- [Finding with file:line reference]
+- [Pattern to follow]
+- [Constraint discovered]
+
+## Current State
+[What exists now]
+
+## Desired End State
+[Specification and verification method]
+
+## What We're NOT Doing
+[Explicit out-of-scope items]
+
+## Phase 1: [Name]
+
+### Changes Required
+**File**: `path/to/file.ext`
+**Changes**: [Summary]
+
+### Success Criteria
+#### Automated:
+- [ ] `command` - description
+
+#### Manual:
+- [ ] [Verification step]
+
+## Phase 2: [Name]
+[Same structure...]
+
+## Testing Strategy
+[Unit, integration, manual steps]
+
+## References
+- Ticket: `thoughts/tickets/...`
+```
+
+### Step 7: Review & Finalize
+
+Present draft location, iterate on feedback, then:
+1. Update ticket file frontmatter to `status: planned`
+2. Run `bd sync` to sync any changes
+
+## Agent Selection
+
+| Agent/Tool | When to Use |
+|------------|-------------|
+| `Explore` | Find code patterns, trace implementations, locate files (Task tool) |
+| `WebSearch/WebFetch` | External docs, OSS examples, library best practices |
+| `general-purpose` | Complex multi-step research, architecture analysis (Task tool) |
+| `Read` | View diagrams, mockups, screenshots, PDFs (multimodal) |
+
+## Guidelines
+
+- **Be skeptical** - Verify with code, don't assume
+- **Be interactive** - Get buy-in at each step, but don't over-ask
+- **No open questions in final plan** - Resolve everything first
+- **Separate automated vs manual verification** in success criteria
+- **Proceed when clear** - If user's answer resolves ambiguity, continue without asking permission
+- **Don't over-research** - Stop when you have enough context
+
+## Complexity Signals
+
+**Split into multiple plans when:**
+- Changes span 3+ unrelated subsystems
+- Requires sequential PRs (migrations, breaking changes)
+- Total estimated phases > 6
+
+**Keep as single plan when:**
+- All changes serve one cohesive goal
+- Can be reviewed/tested as one unit
+
+**ticket**
+
+$ARGUMENTS
