@@ -16,6 +16,7 @@
       "balenaetcher"
       "betterdisplay"
       "bitwarden"
+      "claude-code"
       "figma"
       "ghostty"
       "google-chrome"

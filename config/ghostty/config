@@ -25,3 +25,4 @@ shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 # keybindings
 keybind = ctrl+insert=copy_to_clipboard
 keybind = shift+insert=paste_from_clipboard
+keybind = shift+enter=text:\x1b\r
