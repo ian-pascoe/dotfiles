@@ -2,15 +2,15 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      pkg-config
+      age
+      cloudflared
       curl
-      wget
+      pkg-config
+      sops
+      ssh-to-age
       unzip
       vim
-      age
-      ssh-to-age
-      sops
-      cloudflared
+      wget
     ];
   };
 
