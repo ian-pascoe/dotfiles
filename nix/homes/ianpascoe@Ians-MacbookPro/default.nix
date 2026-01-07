@@ -14,7 +14,7 @@
     inherit username;
     homeDirectory = "/Users/${username}";
     shellAliases = {
-      nds = "sudo -HE nix run nix-darwin/master#darwin-rebuild -- switch --flake ${config.home.homeDirectory}/.dotfiles/nix#Ians-MacbookPro --impure";
+      nds = "sudo -E nix run nix-darwin/master#darwin-rebuild -- switch --flake ${config.home.homeDirectory}/.dotfiles/nix#Ians-MacbookPro --impure";
     };
   };
 }
