@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 {
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -10,5 +10,5 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = if config.services.openssh.enable then [ 22 ] else [ ];
 }
