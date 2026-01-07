@@ -18,7 +18,6 @@
 
     # c
     clang
-    cctools
     gnumake
 
     # markdown
