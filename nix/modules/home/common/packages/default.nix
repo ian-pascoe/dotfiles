@@ -1,26 +1,40 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # Core utilities
+    # core utils
     coreutils
     lsof
     openssl
 
-    # Development tools
+    # golang
     go
+
+    # python
     python314
+
+    # lua
     lua5_4
+    stylua
+
+    # c
     clang
     cctools
     gnumake
 
-    # Nix LSP and formatting tools
+    # markdown
+    markdownlint-cli2
+
+    # toml
+    taplo
+
+    # nix
     nil
     nixfmt
     nixfmt-tree
     statix
 
-    # Some other fun ones
+    # other
+    mise
     pipes
   ];
 }
