@@ -55,17 +55,17 @@ layout {
     }
   }
   tab name="dev" split_direction="vertical" {
-    pane size="70%" split_direction="horizontal" {
-      pane name="editor" size="80%" {
+    pane size="60%" split_direction="horizontal" {
+      pane name="editor" size="70%" {
         command "nvim"
         args "."
       }
-      pane name="cmd" size="20%" {
+      pane name="cmd" size="30%" {
         command "zsh"
       }
     }
-    pane name="opencode" size="30%" {
-      command "opencode"
+    pane name="claude" size="40%" {
+      command "claude"
     }
   }
   tab name="blank" {
@@ -74,19 +74,19 @@ layout {
     }
   }
   tab name="dotfiles" split_direction="vertical" {
-    pane size="70%" split_direction="horizontal" {
-      pane name="editor" size="80%" {
+    pane size="60%" split_direction="horizontal" {
+      pane name="editor" size="70%" {
         command "nvim"
         args "."
         cwd "~/.dotfiles"
       }
-      pane name="cmd" size="20%" {
+      pane name="cmd" size="30%" {
         command "zsh"
         cwd "~/.dotfiles"
       }
     }
-    pane name="opencode" size="30%" {
-      command "opencode"
+    pane name="claude" size="40%" {
+      command "claude"
       cwd "~/.dotfiles"
     }
   }
