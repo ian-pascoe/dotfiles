@@ -6,6 +6,22 @@ description: Creates a structured ticket as a beads issue for bugs, features, or
 
 Create comprehensive beads issues that serve as the foundation for the `/plan` command.
 
+## TODO CREATION (MANDATORY)
+
+**IMMEDIATELY** create a todo list before any other action:
+
+```
+1. Analyze request and determine ticket type
+2. Ask clarifying questions
+3. Explore scope boundaries
+4. Create beads issue (bd create)
+5. Write detailed ticket file
+6. Validate and confirm with user
+7. Run bd sync
+```
+
+Use `todowrite` to create these items, then mark each `in_progress` as you work and `completed` when done.
+
 ## Process
 
 ### Step 1: Initial Analysis
@@ -105,6 +121,7 @@ patterns: [code patterns to investigate]
 Review completeness, validate logic, check scope is atomic and well-scoped.
 
 For complex tickets, consider consulting **oracle** to validate:
+
 - Requirements are complete and unambiguous
 - Success criteria are measurable
 - Scope is appropriately sized

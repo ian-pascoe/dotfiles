@@ -6,6 +6,22 @@ description: Research a ticket and create an implementation plan. Provide a tick
 
 Research the codebase and create a detailed implementation plan from a ticket. This combines investigation and planning into a single workflow.
 
+## TODO CREATION (MANDATORY)
+
+**IMMEDIATELY** create a todo list before any other action:
+
+```
+1. Read and claim ticket
+2. Research codebase (parallel agents)
+3. Present understanding to user
+4. Design approach
+5. Get buy-in on plan structure
+6. Write plan document
+7. Review and finalize
+```
+
+Use `todowrite` to create these items, then mark each `in_progress` as you work and `completed` when done.
+
 ## Process
 
 ### Step 1: Read & Claim
@@ -18,12 +34,14 @@ Research the codebase and create a detailed implementation plan from a ticket. T
 ### Step 2: Research (parallel agents)
 
 **Phase 1 - Locate & Discover:**
+
 - Fire **explore** agents in parallel to find relevant code, patterns, structure
 - Fire **librarian** agents if external libraries are involved
 - Use **multimodal-looker** if ticket references diagrams, screenshots, or PDFs
 - Wait for all to complete
 
 **Phase 2 - Deep Analysis (if needed):**
+
 - Fire additional agents for areas needing deeper investigation
 - Consult **oracle** for architectural complexity or tradeoff analysis
 - **Stop when you have enough** - 2 iterations with no new info = done
@@ -119,6 +137,7 @@ Write to `thoughts/plans/{descriptive_name}.md`:
 ### Step 7: Review & Finalize
 
 Present draft location, iterate on feedback, then:
+
 1. Update ticket file frontmatter to `status: planned`
 2. Run `bd sync` to sync any changes
 
@@ -143,11 +162,13 @@ Present draft location, iterate on feedback, then:
 ## Complexity Signals
 
 **Split into multiple plans when:**
+
 - Changes span 3+ unrelated subsystems
 - Requires sequential PRs (migrations, breaking changes)
 - Total estimated phases > 6
 
 **Keep as single plan when:**
+
 - All changes serve one cohesive goal
 - Can be reviewed/tested as one unit
 

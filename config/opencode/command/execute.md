@@ -6,12 +6,22 @@ description: Execute a specific implementation plan. Provide a plan file as the 
 
 Implement an approved plan from `thoughts/plans/`. Follow phases sequentially, verify each, update checkboxes as you go.
 
+## TODO CREATION (MANDATORY)
+
+**IMMEDIATELY after reading the plan**, create a todo list using `todowrite`:
+
+1. One todo per plan phase (e.g., "Phase 1: Setup database schema")
+2. Add verification todos after each phase (e.g., "Verify Phase 1: Run migrations")
+3. Add final todos: "Update plan checkboxes", "Update beads status", "Run bd sync"
+
+Mark each `in_progress` as you work, `completed` when done. **Never skip this step.**
+
 ## Core Workflow
 
 1. **Read the plan completely** - Check for existing checkmarks (- [x]) to resume from
 2. **Read the ticket and all files mentioned** - Full context, no limit/offset
 3. **Verify beads status**: If plan references a beads ID, ensure it's `in_progress`: `bd update <id> --status=in_progress`
-4. **Create todos from plan phases** - Break down into atomic implementation steps
+4. **Create todos from plan phases** - Break down into atomic implementation steps (see above)
 5. **Implement each phase** - Adapt to reality while following plan intent
 6. **Verify each phase** - Run success criteria checks, fix issues before proceeding
 7. **Update the plan** - Mark completed items with checkboxes
@@ -32,11 +42,13 @@ Implement an approved plan from `thoughts/plans/`. Follow phases sequentially, v
 ## Verification Protocol
 
 **After each phase:**
+
 1. `lsp_diagnostics` on changed files - fix all errors before next phase
 2. Run success criteria commands from plan
 3. Mark phase checkbox only after verification passes
 
 **For refactoring:**
+
 - Use `lsp_find_references` before renaming/moving
 - Use `lsp_rename` for safe cross-file renames
 - Verify with `lsp_diagnostics` after each refactor step
@@ -44,6 +56,7 @@ Implement an approved plan from `thoughts/plans/`. Follow phases sequentially, v
 ## Failure Recovery
 
 **After 2+ consecutive failed fix attempts:**
+
 1. STOP further edits
 2. REVERT to last working state (`git checkout` or undo)
 3. Document what was attempted

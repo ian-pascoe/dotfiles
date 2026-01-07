@@ -6,6 +6,19 @@ description: Commits the local changes in atomic commits. This command is best r
 
 Create git commits for the changes made during this session.
 
+## TODO CREATION (MANDATORY)
+
+**IMMEDIATELY** create a todo list before any other action:
+
+```
+1. Review session changes and git status
+2. Plan commit groupings
+3. Execute commits with proper messages
+4. Sync beads
+```
+
+Use `todowrite` to create these items, then mark each `in_progress` as you work and `completed` when done.
+
 ## Commit Types
 
 Use conventional commit prefixes:
