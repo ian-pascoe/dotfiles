@@ -1,13 +1,10 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/refs/heads/dev/assets/oh-my-opencode.schema.json",
   "auto_update": true,
   "google_auth": false,
   "disabled_hooks": ["todo-continuation-enforcer"],
   "claude_code": {
-    "plugins_override": {
-      "frontend-design@claude-plugins-official": false, // already included in oh-my-opencode
-      "context7@claude-plugins-official": false // already included in oh-my-opencode
-    }
+    "plugins": false
   },
   "agents": {
     "librarian": {
@@ -16,9 +13,6 @@
     "explore": {
       "model": "opencode/grok-code"
     },
-    "oracle": {
-      "model": "anthropic/claude-opus-4-5"
-    },
     "frontend-ui-ux-engineer": {
       "model": "google/antigravity-gemini-3-pro"
     },
@@ -26,6 +20,17 @@
       "model": "google/antigravity-gemini-3-flash"
     },
     "multimodal-looker": {
+      "model": "google/antigravity-gemini-3-flash"
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "artistry": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "writing": {
       "model": "google/antigravity-gemini-3-flash"
     }
   }
