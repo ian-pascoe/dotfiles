@@ -12,13 +12,13 @@
       "model": "opencode/glm-4.7-free"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "opencode/grok-code"
     },
     "oracle": {
       "model": "anthropic/claude-opus-4-5"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "document-writer": {
       "model": "google/antigravity-gemini-3-flash"
