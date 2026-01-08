@@ -11,6 +11,7 @@
 
     # python
     python314
+    black
 
     # javascript
     prettier
@@ -21,6 +22,7 @@
 
     # lua
     lua5_4
+    lua-language-server
     selene
     stylua
 

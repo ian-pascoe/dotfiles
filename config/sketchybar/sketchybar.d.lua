@@ -1,5 +1,4 @@
----@class util.sketchybar
-local M = {}
+---@meta
 
 ---@class Sketchybar.BarOptions
 ---@field color? integer Color of the bar (argb_hex, default: 0x44000000)
@@ -159,5 +158,3 @@ local M = {}
 ---@field set fun(name: string, options: Sketchybar.ItemOptions)
 ---@field set fun(name: "bar", options: Sketchybar.BarOptions)
 ---@field delay fun(seconds: number, callback: fun())
-
-return M

@@ -1,9 +1,6 @@
 -- Globals
 Util = require("util")
 
--- Load sketchybar types
-require("util.sketchybar")
-
 -- Setup theme and colors
 require("config.colors").setup()
 
