@@ -3,9 +3,11 @@
   "auto_update": true,
   "google_auth": false,
   "disabled_hooks": ["todo-continuation-enforcer"],
-  "ralph_loop": {
-    "enabled": true,
-    "max_iterations": 50
+  "claude_code": {
+    "plugins_override": {
+      "frontend-design@claude-plugins-official": false, // already included in oh-my-opencode
+      "context7@claude-plugins-official": false // already included in oh-my-opencode
+    }
   },
   "agents": {
     "librarian": {

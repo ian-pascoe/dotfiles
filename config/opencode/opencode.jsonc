@@ -3,10 +3,9 @@
   "theme": "system",
   "plugin": [
     "oh-my-opencode",
-    "opencode-beads@latest",
-    "opencode-antigravity-auth@latest",
-    "opencode-openai-codex-auth@latest",
-    "@tarquinen/opencode-dcp@latest"
+    "opencode-antigravity-auth",
+    "opencode-openai-codex-auth",
+    "@tarquinen/opencode-dcp"
   ],
   "model": "anthropic/claude-opus-4-5",
   "small_model": "opencode/glm-4.7-free",

@@ -41,4 +41,9 @@ in
       force = true;
     };
   };
+
+  home.shellAliases = {
+    zj = "zellij";
+    zjk = "zellij kill-all-sessions -y";
+  };
 }

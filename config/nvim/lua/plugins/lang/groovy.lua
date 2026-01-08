@@ -1,32 +1,32 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     opts = {
-      ensure_installed = { "groovy" },
+      ensure_installed = { 'groovy' },
     },
   },
   {
-    "mason-org/mason.nvim",
+    'mason-org/mason.nvim',
     opts = {
-      ensure_installed = { "npm-groovy-lint" },
+      ensure_installed = { 'npm-groovy-lint' },
     },
   },
   {
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     opts = function(_, opts)
       opts.servers = opts.servers or {}
 
       local classpath = vim.list_extend({
-        vim.fn.stdpath("data") .. "/mason/packages/groovy-language-server/build/libs/groovy-language-server-all.jar",
-      }, vim.fn.glob(os.getenv("HOME") .. "/.groovy/lib/*.jar", false, true))
+        vim.fn.stdpath('data') .. '/mason/packages/groovy-language-server/build/libs/groovy-language-server-all.jar',
+      }, vim.fn.glob(os.getenv('HOME') .. '/.groovy/lib/*.jar', false, true))
 
       ---@type lazyvim.lsp.Config
       opts.servers.groovyls = {
         cmd = {
-          "java",
-          "-cp",
-          table.concat(classpath, LazyVim.is_win() and ";" or ":"),
-          "net.prominic.groovyls.GroovyLanguageServer",
+          'java',
+          '-cp',
+          table.concat(classpath, LazyVim.is_win() and ';' or ':'),
+          'net.prominic.groovyls.GroovyLanguageServer',
         },
       }
 
@@ -40,16 +40,16 @@ return {
     end,
   },
   {
-    "nvimtools/none-ls.nvim",
-    ft = { "groovy" },
+    'nvimtools/none-ls.nvim',
+    ft = { 'groovy' },
     opts = function(_, opts)
-      local nls = require("null-ls")
+      local nls = require('null-ls')
       opts.sources = vim.list_extend(opts.sources or {}, {
         nls.builtins.formatting.npm_groovy_lint.with({
-          filetypes = { "groovy" },
+          filetypes = { 'groovy' },
         }),
         nls.builtins.diagnostics.npm_groovy_lint.with({
-          filetypes = { "groovy" },
+          filetypes = { 'groovy' },
         }),
       })
     end,

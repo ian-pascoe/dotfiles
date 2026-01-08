@@ -54,6 +54,10 @@
       url = "github:steveyegge/homebrew-beads";
       flake = false;
     };
+    homebrew-anomalyco = {
+      url = "github:anomalyco/homebrew-tap";
+      flake = false;
+    };
 
     # Rust
     rust-overlay = {

@@ -9,6 +9,7 @@ let
     homebrew-core
     homebrew-cask
     homebrew-beads
+    homebrew-anomalyco
     ;
   specialArgs = { inherit inputs lib; };
 in
@@ -65,6 +66,7 @@ in
         "homebrew/homebrew-core" = homebrew-core;
         "homebrew/homebrew-cask" = homebrew-cask;
         "steveyegge/homebrew-beads" = homebrew-beads;
+        "anomalyco/homebrew-tap" = homebrew-anomalyco;
       };
       mutableTaps = false;
     };

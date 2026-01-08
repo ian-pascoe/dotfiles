@@ -3,11 +3,11 @@
   homebrew = {
     enable = true;
     brews = [
-      "bd"
+      "steveyegge/beads/bd"
       "mas"
       "media-control"
       "nextdns"
-      "opencode"
+      "anomalyco/tap/opencode"
       "podman"
       "podman-compose"
     ];

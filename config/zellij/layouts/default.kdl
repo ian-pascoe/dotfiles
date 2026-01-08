@@ -64,8 +64,8 @@ layout {
         command "zsh"
       }
     }
-    pane name="claude" size="40%" {
-      command "claude"
+    pane name="agent" size="40%" {
+      command "opencode"
     }
   }
   tab name="blank" {
@@ -85,8 +85,8 @@ layout {
         cwd "~/.dotfiles"
       }
     }
-    pane name="claude" size="40%" {
-      command "claude"
+    pane name="agent" size="40%" {
+      command "opencode"
       cwd "~/.dotfiles"
     }
   }
