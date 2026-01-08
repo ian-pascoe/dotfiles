@@ -5,6 +5,7 @@
   "small_model": "opencode/glm-4.7-free",
   "plugin": [
     "oh-my-opencode@beta",
+    "opencode-beads@latest",
     "opencode-openai-codex-auth@latest",
     "opencode-antigravity-auth@latest"
   ],

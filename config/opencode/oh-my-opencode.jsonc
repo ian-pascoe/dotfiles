@@ -2,9 +2,16 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/refs/heads/dev/assets/oh-my-opencode.schema.json",
   "auto_update": true,
   "google_auth": false,
-  "disabled_hooks": ["todo-continuation-enforcer"],
+  "disabled_hooks": [
+    "todo-continuation-enforcer"
+  ],
   "claude_code": {
-    "plugins": false
+    "agents": false,
+    "commands": false,
+    "hooks": false,
+    "mcp": false,
+    "plugins": false,
+    "skills": false
   },
   "agents": {
     "librarian": {
