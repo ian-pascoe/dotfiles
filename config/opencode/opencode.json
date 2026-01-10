@@ -4,7 +4,7 @@
   "model": "anthropic/claude-opus-4-5",
   "small_model": "opencode/glm-4.7-free",
   "plugin": [
-    "opencode-anthropic-auth@0.0.7",
+    "opencode-anthropic-auth@0.0.8",
     "oh-my-opencode@2.14.0",
     "opencode-beads@0.3.2",
     "opencode-openai-codex-auth@4.3.1",

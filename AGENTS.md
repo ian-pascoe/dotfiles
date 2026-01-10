@@ -96,7 +96,6 @@ set-theme <theme-name>           # Updates ~/.config/theme symlink
 - RTX corp environments need PKI cert injection (see `nix/modules/home/rtx/`)
 - Windows bootstrap: `install.ps1` → `setup.ps1` → `setup-wsl.sh`
 - Theme symlink at `~/.config/theme` - apps read this dynamically
-- Broken/TODO: nextcloud-client, sharkiq package, custom-python cleanup
 
 ## Landing the Plane (Session Completion)
 

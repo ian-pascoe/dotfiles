@@ -19,18 +19,6 @@
         owner = "hass";
         group = "hass";
       };
-      "home-assistant/openid/client-id" = {
-        sopsFile = ../../../secrets/Junkyard/home-assistant.yaml;
-        format = "yaml";
-        owner = "hass";
-        group = "hass";
-      };
-      "home-assistant/openid/client-secret" = {
-        sopsFile = ../../../secrets/Junkyard/home-assistant.yaml;
-        format = "yaml";
-        owner = "hass";
-        group = "hass";
-      };
     };
   };
 
@@ -77,7 +65,6 @@
         "mqtt"
         "myq"
         "nest"
-        "nextcloud"
         "nextdns"
         "nmap_tracker"
         "ntfy"
@@ -114,15 +101,6 @@
             "127.0.0.1"
             "::1"
           ];
-        };
-        openid = {
-          client_id = "!include ${config.sops.secrets."home-assistant/openid/client-id".path}";
-          client_secret = "!include ${config.sops.secrets."home-assistant/openid/client-secret".path}";
-          configure_url = "https://auth.ianpascoe.dev/realms/master/.well-known/openid-configuration";
-          username_field = "preferred_username";
-          scope = "openid profile email";
-          block_login = false; # Block default login
-          openid_text = "Login with Keycloak";
         };
         google_assistant = {
           project_id = "pascoe-family";

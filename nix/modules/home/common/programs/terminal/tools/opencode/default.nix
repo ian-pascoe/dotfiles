@@ -28,6 +28,8 @@
     setupSuperpowers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       if [ ! -d ${config.xdg.configHome}/opencode/superpowers ]; then
         run ${pkgs.git}/bin/git clone https://github.com/obra/superpowers.git ${config.xdg.configHome}/opencode/superpowers
+      else
+        run ${pkgs.git}/bin/git -C ${config.xdg.configHome}/opencode/superpowers pull
       fi
       run ln -snf ${config.xdg.configHome}/opencode/superpowers/.opencode/plugin/superpowers.js ${config.xdg.configHome}/opencode/plugin/superpowers.js
     '';

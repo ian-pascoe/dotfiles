@@ -44,6 +44,8 @@ in
 
   home.shellAliases = {
     zj = "zellij";
+    zja = "zellij attach";
+    zjd = "zellij --layout=dev";
     zjk = "zellij kill-all-sessions -y";
   };
 }

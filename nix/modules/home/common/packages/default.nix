@@ -26,6 +26,10 @@
     selene
     stylua
 
+    # luau
+    luau
+    luau-lsp
+
     # c
     clang
     gnumake
