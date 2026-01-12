@@ -3,13 +3,18 @@
   homebrew = {
     enable = true;
     brews = [
-      "steveyegge/beads/bd"
+      "anomalyco/tap/opencode"
+      {
+        name = "cliproxyapi";
+        start_service = true;
+        restart_service = true;
+      }
       "mas"
       "media-control"
       "nextdns"
-      "anomalyco/tap/opencode"
       "podman"
       "podman-compose"
+      "steveyegge/beads/bd"
     ];
     casks = [
       "aldente"
