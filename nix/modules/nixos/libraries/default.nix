@@ -15,6 +15,7 @@ let
       util-linux
       libiconv
       icu
+      glibc
     ];
   devLibs = map (pkg: pkg.dev or pkg) libs;
 in

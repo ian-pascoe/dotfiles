@@ -6,30 +6,6 @@
     lsof
     openssl
 
-    # golang
-    go
-
-    # python
-    python314
-    black
-
-    # javascript
-    prettier
-    prettierd
-    eslint
-    eslint_d
-    biome
-
-    # lua
-    lua5_4
-    lua-language-server
-    selene
-    stylua
-
-    # luau
-    luau
-    luau-lsp
-
     # c
     clang
     gnumake
