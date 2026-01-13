@@ -105,7 +105,7 @@ Return: recommendation, implementation outline."
 **Plan implementation**: planner (→ explorer, librarian, architect)
 
 ```
-"Create plan for [what]. Detail: [level]. Save to: docs/plans/[name].md
+"Create plan for [what]. Detail: [level]. Save to: .agents/plans/[name].md (or .agents/specs/ for 'spec' detail level)
 
 <context>
 [Include <codebase>, <research>, and <design> from earlier agents]
@@ -275,6 +275,7 @@ When delegating tasks that match skill patterns, provide skill hints to subagent
 | Git operations (rebase, bisect) | Include: "Load `git-advanced-workflows` skill"      |
 | Frontend/UI work                | Include: "Load `frontend-design` skill"             |
 | LLM/prompt design               | Include: "Load `prompt-engineering-patterns` skill" |
+| Plans/specs creation            | Include: "Load `writing-plans` or `writing-specs` skill" |
 | OpenCode config files           | Include: "Load appropriate `writing-*` skill"       |
 
 **Example delegation with skill hint:**
@@ -355,7 +356,7 @@ When delegating tasks that match skill patterns, provide skill hints to subagent
 Check for escalations from agents:
 
 1. **In output**: Look for "Escalation Required" sections
-2. **In plans**: Check for `docs/plans/*/ESCALATION.md` files
+2. **In plans**: Check for `.agents/plans/*/ESCALATION.md` or `.agents/specs/*/ESCALATION.md` files
 3. **Handle appropriately**:
    - Design issues → delegate to architect
    - Research gaps → delegate to librarian

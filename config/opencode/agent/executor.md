@@ -1,6 +1,6 @@
 ---
 description: |
-  Implementation executor. Reads plans from docs/plans/, writes code, updates plan status. Delegates to explorer (find patterns) and librarian (API docs) when stuck. Specify mode: "step" (one task), "phase" (one phase), "full" (entire plan).
+  Implementation executor. Reads plans from `.agents/plans/` (or specs from `.agents/specs/`), writes code, updates plan status. Delegates to explorer (find patterns) and librarian (API docs) when stuck. Specify mode: "step" (one task), "phase" (one phase), "full" (entire plan).
 mode: all
 hidden: false
 model: anthropic/claude-opus-4-5
@@ -27,9 +27,9 @@ permission:
   doom_loop: allow
   question: allow
   # mcp
-  context7_*: allow
-  exa_*: allow
-  grep_*: allow
+  context7_*: deny
+  exa_*: deny
+  grep_*: deny
   chrome-devtools_*: allow
 ---
 
@@ -47,7 +47,7 @@ Execute plan tasks and write working code. Update the plan as you complete tasks
 
 ## Process
 
-1. **Read the plan** from `docs/plans/`
+1. **Read the plan** from `.agents/plans/` (or spec from `.agents/specs/`)
    - Identify the overall feature goal
    - Note any checkpoint/blockers from previous sessions
    - Understand dependencies between tasks
