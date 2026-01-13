@@ -28,6 +28,19 @@ Specifications are formal requirement documents that rigorously define WHAT a sy
 
 Specs are stored in `.agents/specs/` (not `.opencode/`) because they are project artifacts, not agent configuration.
 
+## Quick Reference
+
+| Section | Purpose | Key Elements |
+|---------|---------|--------------|
+| Metadata | Version tracking | Version, Status, Author, Dates |
+| Overview | Context & scope | Problem statement, In/Out of scope |
+| Requirements | What system does | FR-XXX (functional), NFR-XXX (non-functional) |
+| Interfaces | Contracts | API types, Data models, External deps |
+| Formal Conditions | Invariants | Pre-conditions, Post-conditions, Invariants |
+| Acceptance Criteria | Testable outcomes | Given/When/Then + Verification method |
+| Dependencies | Blockers & dependents | What we need, What needs us |
+| Risks | Potential issues | Likelihood × Impact → Mitigation |
+
 ## Spec Structure Template
 
 ```markdown

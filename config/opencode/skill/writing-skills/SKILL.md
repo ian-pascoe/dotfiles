@@ -52,6 +52,18 @@ description: Use when [specific triggering conditions and symptoms]
 - Third person (injected into system prompt)
 - NEVER summarize the skill's process
 
+## Quick Reference
+
+| Element | Requirement | Example |
+|---------|-------------|---------|
+| Name | lowercase, hyphenated, 1-64 chars | `condition-based-waiting` |
+| Description | "Use when..." + triggers only | "Use when tests flake due to timing" |
+| Overview | 1-2 sentences, core principle | What + Why |
+| When to Use | Symptoms + exclusions | Include "Don't use for" |
+| Quick Reference | Scannable table | Most-needed info at a glance |
+| Common Mistakes | Table format | Mistake \| Fix |
+| Validation Checklist | Checkboxes | Final quality gate |
+
 ## Document Structure
 
 ```markdown

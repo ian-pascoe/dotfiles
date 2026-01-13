@@ -1,6 +1,6 @@
 ---
 name: git-advanced-workflows
-description: Master advanced Git workflows including rebasing, cherry-picking, bisect, worktrees, and reflog to maintain clean history and recover from any situation. Use when managing complex Git histories, collaborating on feature branches, or troubleshooting repository issues.
+description: Use when cleaning up Git history, applying commits across branches, finding bug introductions, or recovering from mistakes. Covers rebase, cherry-pick, bisect, worktrees, and reflog.
 ---
 
 # Git Advanced Workflows
@@ -17,6 +17,21 @@ Master advanced Git techniques to maintain clean history, collaborate effectivel
 - Managing complex branch workflows
 - Preparing clean PRs for review
 - Synchronizing diverged branches
+
+## Quick Reference
+
+| Task | Command | Notes |
+|------|---------|-------|
+| Interactive rebase | `git rebase -i HEAD~N` | pick/reword/squash/fixup/drop |
+| Rebase onto main | `git rebase -i $(git merge-base HEAD main)` | Clean feature branch |
+| Cherry-pick | `git cherry-pick <hash>` | Apply specific commit |
+| Cherry-pick range | `git cherry-pick A..B` | Exclusive start |
+| Start bisect | `git bisect start && git bisect bad && git bisect good <tag>` | Binary bug search |
+| Automated bisect | `git bisect run ./test.sh` | Script returns 0=good |
+| Add worktree | `git worktree add ../path branch` | Parallel development |
+| View reflog | `git reflog` | 90-day safety net |
+| Safe force push | `git push --force-with-lease` | Never use --force |
+| Abort operation | `git rebase/merge/cherry-pick --abort` | Escape hatch |
 
 ## Core Concepts
 
@@ -363,14 +378,16 @@ git rebase -i main
 git reset --hard backup-branch
 ```
 
-## Common Pitfalls
+## Common Mistakes
 
-- **Rebasing Public Branches**: Causes history conflicts for collaborators
-- **Force Pushing Without Lease**: Can overwrite teammate's work
-- **Losing Work in Rebase**: Resolve conflicts carefully, test after rebase
-- **Forgetting Worktree Cleanup**: Orphaned worktrees consume disk space
-- **Not Backing Up Before Experiment**: Always create safety branch
-- **Bisect on Dirty Working Directory**: Commit or stash before bisecting
+| Mistake | Fix |
+|---------|-----|
+| Rebasing public branches | Only rebase local, unpushed commits |
+| Force pushing without lease | Always use `--force-with-lease` |
+| Losing work in rebase | Create backup branch before risky operations |
+| Forgetting worktree cleanup | Run `git worktree prune` regularly |
+| Not backing up before experiments | `git branch backup-branch` first |
+| Bisecting with dirty working directory | Commit or stash before bisecting |
 
 ## Recovery Commands
 
@@ -403,3 +420,12 @@ git branch recovered-branch abc123
 - **assets/git-workflow-checklist.md**: Pre-PR cleanup checklist
 - **assets/git-aliases.md**: Useful Git aliases for advanced workflows
 - **scripts/git-clean-branches.sh**: Clean up merged and stale branches
+
+## Validation Checklist
+
+- [ ] Using `--force-with-lease` instead of `--force`
+- [ ] Only rebasing local/unpushed commits
+- [ ] Created backup branch before risky operations
+- [ ] Tested changes after history rewrite
+- [ ] Cleaned up worktrees after use
+- [ ] Descriptive, atomic commit messages

@@ -27,6 +27,22 @@ Plans are step-by-step implementation guides that enable executor agents to comp
 
 Plan names should be kebab-case, matching the feature: `user-avatar-upload.md`, `auth-refresh-tokens.md`.
 
+## Quick Reference
+
+| Element | Format | Required |
+|---------|--------|----------|
+| Version Header | `**Version**: 1.0` + timestamp, agent, status | Yes |
+| Task ID | `X.Y` (phase.task) | Yes |
+| File Path | `**File**: \`path/to/file.ts\`` | Yes (code tasks) |
+| Done When | Checkbox list of criteria | Yes |
+| Phases | `### Phase N: Name` | Yes |
+| Checkpoint | Session, Completed, In Progress, Notes, Blockers | When stopping |
+
+| Version Bump | When |
+|--------------|------|
+| +0.1 | Task status, add/remove task, phase completion |
+| +1.0 | Major restructure |
+
 ## Version Header Format
 
 Every plan MUST include a version header:
