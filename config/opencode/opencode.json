@@ -3,12 +3,65 @@
   "theme": "system",
   "model": "anthropic/claude-opus-4-5",
   "small_model": "opencode/glm-4.7-free",
+  "default_agent": "orchestrator",
   "plugin": [
-    "opencode-anthropic-auth@0.0.8",
-    "oh-my-opencode@2.14.0",
-    "opencode-beads@0.3.2",
-    "opencode-antigravity-auth@1.2.8"
+    "opencode-beads@latest",
+    "opencode-anthropic-auth@latest",
+    "opencode-antigravity-auth@latest"
   ],
+  "agent": {
+    "build": { "disable": true },
+    "plan": { "disable": true },
+    "general": { "disable": true }
+  },
+  "permission": {
+    "bash": {
+      "bd *": "allow"
+    }
+  },
+  "tui": {
+    "scroll_acceleration": {
+      "enabled": true
+    }
+  },
+  "lsp": {
+    "nil": {
+      "command": ["nil", "--stdio"],
+      "extensions": [".nix"]
+    }
+  },
+  "formatter": {
+    "stylua": {
+      "command": [
+        "stylua",
+        "--search-parent-directories",
+        "--stdin-filepath",
+        "$FILE"
+      ],
+      "extensions": [".lua", ".luau"]
+    },
+    "markdownlint-cli2": {
+      "command": ["markdownlint-cli2", "--fix", "$FILE"],
+      "extensions": [".md", ".mdx"]
+    }
+  },
+  "mcp": {
+    "context7": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "exa": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp"
+    },
+    "grep": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.grep.app"
+    }
+  },
   "provider": {
     "google": {
       "name": "Google",
@@ -157,52 +210,6 @@
             "input": ["text", "image", "pdf"],
             "output": ["text"]
           }
-        }
-      }
-    },
-    "cliapiproxy": {
-      "api": "CLIProxyAPI",
-      "npm": "@ai-sdk/anthropic",
-      "options": {
-        "baseURL": "http://localhost:8317",
-        "apiKey": "sk-dummy"
-      },
-      "models": {
-        "claude-opus-4-5": {
-          "name": "Claude Opus 4.5 (Proxy)",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          },
-          "variants": {}
-        },
-        "claude-sonnet-4-5": {
-          "name": "Claude Sonnet 4.5 (Proxy)",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          },
-          "variants": {}
-        },
-        "claude-haiku-4-5": {
-          "name": "Claude Haiku 4.5 (Proxy)",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          },
-          "variants": {}
         }
       }
     }
