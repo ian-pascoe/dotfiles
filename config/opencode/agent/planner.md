@@ -6,6 +6,8 @@ hidden: false
 model: anthropic/claude-opus-4-5
 tools:
   webfetch: false
+  write: true
+  edit: true
 permission:
   write:
     "*": ask
@@ -15,11 +17,12 @@ permission:
     "docs/plans/*": allow
   bash:
     "*": ask
+    "mkdir*": allow
     "git log*": allow
     "git diff*": allow
     "git show*": allow
     "git branch*": allow
-    "mkdir*": allow
+    "git ls-files*": allow
 ---
 
 You are an implementation planner. Create actionable plans that another agent can execute. Write plans to `docs/plans/`.

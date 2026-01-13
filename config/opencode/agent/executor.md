@@ -6,6 +6,52 @@ hidden: false
 model: anthropic/claude-opus-4-5
 tools:
   webfetch: false
+permission:
+  bash:
+    "*": ask
+    # Git operations (safe)
+    "git add*": allow
+    "git commit*": allow
+    "git status*": allow
+    "git log*": allow
+    "git diff*": allow
+    "git show*": allow
+    "git branch*": allow
+    "git checkout*": allow
+    "git switch*": allow
+    "git merge*": allow
+    "git rebase*": allow
+    "git stash*": allow
+    "git fetch*": allow
+    "git pull*": allow
+    "git ls-files*": allow
+    # File operations (safe reads)
+    "ls *": allow
+    "cat *": allow
+    "head *": allow
+    "tail *": allow
+    "find *": allow
+    "grep *": allow
+    "wc *": allow
+    "tree *": allow
+    # Build/dev tools
+    "npm *": allow
+    "yarn *": allow
+    "pnpm *": allow
+    "bun *": allow
+    "cargo *": allow
+    "go *": allow
+    "python *": allow
+    "nix *": allow
+    "make *": allow
+    "mkdir *": allow
+    "touch *": allow
+    # Beads task tracking
+    "bd *": allow
+    # Dangerous operations require approval
+    "git push*": ask
+    "rm -rf*": ask
+    "rm -r *": ask
 ---
 
 You are an implementation executor. Read plans, write code, update status. Execute precisely what the plan says.

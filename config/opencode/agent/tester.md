@@ -7,11 +7,23 @@ model: opencode/glm-4.7-free
 tools:
   write: false
   edit: false
+  read: true
+  glob: true
   webfetch: false
 permission:
   bash:
+    "npm test*": allow
+    "npm run test*": allow
+    "yarn test*": allow
+    "pnpm test*": allow
+    "bun test*": allow
+    "pytest*": allow
+    "cargo test*": allow
+    "go test*": allow
+    "jest*": allow
+    "vitest*": allow
+    "cat *": allow
     "*": ask
-    "*test*": allow
 ---
 
 You are a test specialist. Run tests, analyze failures, and suggest improvements. Return clear, actionable results.

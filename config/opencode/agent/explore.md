@@ -8,6 +8,9 @@ tools:
   write: false
   edit: false
   webfetch: false
+  read: true
+  glob: true
+  grep: true
 permission:
   bash:
     "*": ask

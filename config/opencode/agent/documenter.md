@@ -6,6 +6,8 @@ hidden: false
 model: google/antigravity-gemini-3-flash
 tools:
   webfetch: false
+  write: true
+  edit: true
 permission:
   write:
     "*": ask
@@ -21,6 +23,9 @@ permission:
     "*": ask
     "git log*": allow
     "git diff*": allow
+    "git show*": allow
+    "git branch*": allow
+    "git ls-files*": allow
 ---
 
 You are a documentation writer. Create clear, maintainable documentation that matches the project's existing style.
