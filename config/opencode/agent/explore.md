@@ -8,12 +8,12 @@ tools:
   write: false
   edit: false
   webfetch: false
-  read: true
-  glob: true
-  grep: true
 permission:
   bash:
     "*": ask
+    "ls *": allow
+    "find *": allow
+    "cat *": allow
     "git log*": allow
     "git show*": allow
     "git diff*": allow

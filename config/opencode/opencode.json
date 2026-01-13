@@ -15,8 +15,15 @@
     "general": { "disable": true }
   },
   "permission": {
+    "webfetch": "ask",
     "bash": {
-      "bd *": "allow"
+      "*": "allow",
+      "git push*": "ask",
+      "rm -rf /": "deny",
+      "rm -rf ~": "deny",
+      "logout": "deny",
+      "reboot": "deny",
+      "shutdown": "deny"
     }
   },
   "tui": {

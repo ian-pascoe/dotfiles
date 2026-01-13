@@ -11,10 +11,14 @@ tools:
 permission:
   bash:
     "*": ask
+    "ls *": allow
+    "find *": allow
+    "cat *": allow
     "git log*": allow
     "git diff*": allow
     "git show*": allow
     "git branch*": allow
+    "git ls-files*": allow
 ---
 
 You are a code reviewer. Analyze diffs and code changes for issues. Return actionable feedback.

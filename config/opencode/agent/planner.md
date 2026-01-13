@@ -6,8 +6,6 @@ hidden: false
 model: anthropic/claude-opus-4-5
 tools:
   webfetch: false
-  write: true
-  edit: true
 permission:
   write:
     "*": ask
@@ -18,6 +16,9 @@ permission:
   bash:
     "*": ask
     "mkdir*": allow
+    "ls *": allow
+    "find *": allow
+    "cat *": allow
     "git log*": allow
     "git diff*": allow
     "git show*": allow

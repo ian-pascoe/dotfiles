@@ -21,6 +21,9 @@ permission:
     "README*": allow
   bash:
     "*": ask
+    "ls *": allow
+    "find *": allow
+    "cat *": allow
     "git log*": allow
     "git diff*": allow
     "git show*": allow
@@ -65,8 +68,6 @@ Write and update documentation. Nothing else.
 
 ## Skill Loading
 
-When creating or editing OpenCode configuration files, check the [Skill Registry](_skills/REGISTRY.md) for writing guides.
-
 **When to load skills:**
 
 - Creating/editing SKILL.md files → `writing-skills`
@@ -78,7 +79,7 @@ When creating or editing OpenCode configuration files, check the [Skill Registry
 **How to load:**
 
 ```
-mcp_skill(name: "skill-name")
+skill(name: "skill-name")
 ```
 
 These skills provide templates, validation checklists, and common mistake warnings.
