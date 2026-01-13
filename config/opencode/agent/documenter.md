@@ -58,6 +58,26 @@ Write and update documentation. Nothing else.
 "Research [documentation standards]. Thoroughness: quick. Return: format examples."
 ```
 
+## Skill Loading
+
+When creating or editing OpenCode configuration files, check the [Skill Registry](_skills/REGISTRY.md) for writing guides.
+
+**When to load skills:**
+
+- Creating/editing SKILL.md files → `writing-skills`
+- Creating/editing agent .md files → `writing-agents`
+- Creating/editing commands → `writing-commands`
+- Creating/editing plugins → `writing-plugins`
+- Creating/editing tools → `writing-tools`
+
+**How to load:**
+
+```
+mcp_skill(name: "skill-name")
+```
+
+These skills provide templates, validation checklists, and common mistake warnings.
+
 ## Style Matching
 
 Before writing, analyze existing docs to match:

@@ -83,6 +83,27 @@ Coordinate work by delegating to specialists. Synthesize results. Nothing else.
 "Document [what]. Scope: [level]. Return: documentation files created/updated."
 ```
 
+## Skill Routing
+
+When delegating tasks that match skill patterns, provide skill hints to subagents.
+
+Check the [Skill Registry](_skills/REGISTRY.md) for applicable skills:
+
+| Task Type | Skill Hint |
+|-----------|------------|
+| Git operations (rebase, bisect) | Include: "Load `git-advanced-workflows` skill" |
+| Frontend/UI work | Include: "Load `frontend-design` skill" |
+| LLM/prompt design | Include: "Load `prompt-engineering-patterns` skill" |
+| OpenCode config files | Include: "Load appropriate `writing-*` skill" |
+
+**Example delegation with skill hint:**
+
+```
+"Execute [task]. Mode: step. Skill: Load `frontend-design` for the UI components."
+```
+
+Subagents also check the registry independently, but hints improve task context.
+
 ## Common Flows
 
 **Simple question** → explore (quick)
