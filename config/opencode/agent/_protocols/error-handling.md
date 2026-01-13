@@ -1,3 +1,7 @@
+---
+disable: true # prevent loading as an agent, this is protocol, designed to be used by agents
+---
+
 # Error Handling Protocol
 
 Standard patterns for handling tool failures and recovering gracefully.
@@ -82,7 +86,7 @@ Proceeding with available results...
 
 ## Agent-Specific Notes
 
-### Explore
+### Explorer
 
 - Empty results are common - try naming variations before reporting
 - Use grep fallback if glob fails

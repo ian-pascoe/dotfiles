@@ -1,0 +1,121 @@
+---
+disable: true # prevent loading as an agent, this is protocol, designed to be used by agents
+---
+
+# Context Handling Protocol
+
+How to use provided context before delegating or starting work.
+
+## Context Block Format
+
+Orchestrator and other agents may provide context in this format:
+
+```xml
+<context>
+<codebase>
+- `path/file.ts:42` - [description]
+- Patterns: [how codebase does X]
+</codebase>
+
+<research>
+- [Best practice 1]
+- [API usage pattern]
+- Sources: [urls]
+</research>
+
+<design>
+- Approach: [chosen approach]
+- Key decisions: [...]
+</design>
+</context>
+```
+
+## Decision Flow
+
+Before delegating or starting work:
+
+1. **Check for context block** in your prompt
+2. **Identify gaps**: What's missing vs what's needed?
+3. **Use provided context directly** for covered areas
+4. **Delegate ONLY for gaps** - don't re-gather existing context
+
+## Context Type Reference
+
+| Block        | Contains                             | Skip Delegation To                    |
+| ------------ | ------------------------------------ | ------------------------------------- |
+| `<codebase>` | File paths, patterns, code structure | explorer (for covered files/patterns) |
+| `<research>` | Best practices, API usage, gotchas   | librarian (for covered topics)        |
+| `<design>`   | Approach, key decisions, trade-offs  | architect (build on existing design)  |
+| None         | -                                    | Delegate as needed                    |
+
+## Examples
+
+### Full Context Provided
+
+```
+Prompt: "Implement caching. Mode: step.
+
+<context>
+<codebase>
+- `src/services/api.ts:45` - existing fetch wrapper
+- Pattern: services use dependency injection
+</codebase>
+
+<research>
+- Use Redis for distributed caching
+- TTL: short for user data, long for static
+</research>
+
+<design>
+- Approach: Decorator pattern for caching layer
+</design>
+</context>"
+
+Action: Implement directly. All context provided.
+```
+
+### Partial Context
+
+```
+Prompt: "Add validation to UserService.
+
+<context>
+<codebase>
+- `src/services/user.ts:12` - UserService location
+</codebase>
+</context>"
+
+Action: Have file location, but missing validation patterns.
+        Delegate to librarian for validation best practices.
+```
+
+### No Context
+
+```
+Prompt: "Find all API endpoints."
+
+Action: No context provided.
+        Proceed with normal discovery/delegation.
+```
+
+## Agent-Specific Notes
+
+### For Executors
+
+- Context reduces need to delegate mid-implementation
+- If context doesn't match reality (file moved, API changed), delegate to refresh
+
+### For Architects
+
+- Check if prior `<design>` exists before starting fresh
+- Build on existing decisions rather than contradicting them
+
+### For Planners
+
+- Use `<codebase>` paths directly in task file references
+- Use `<design>` to structure plan phases
+
+### For Reviewers
+
+- Compare changes against `<codebase>` patterns for consistency
+- Validate against `<research>` best practices

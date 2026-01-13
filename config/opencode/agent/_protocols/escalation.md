@@ -1,3 +1,7 @@
+---
+disable: true # prevent loading as an agent, this is protocol, designed to be used by agents
+---
+
 # Escalation Protocol
 
 When to stop and ask for help instead of proceeding.
@@ -83,7 +87,7 @@ When an escalation is received:
 2. **Route appropriately**:
    - Design issues → architect
    - Research gaps → librarian
-   - Codebase questions → explore
+   - Codebase questions → explorer
    - True blockers → user
 3. **Resolve or forward**: Either provide the answer or surface to user
 4. **Document resolution**: Update the escalation file with decision

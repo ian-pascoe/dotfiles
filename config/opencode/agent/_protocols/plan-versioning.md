@@ -1,3 +1,7 @@
+---
+disable: true # prevent loading as an agent, this is protocol, designed to be used by agents
+---
+
 # Plan Versioning Protocol
 
 How to safely update plan files when multiple agents may access them.
