@@ -12,6 +12,7 @@
       "mas"
       "media-control"
       "nextdns"
+      "oven-sh/bun/bun"
       "podman"
       "podman-compose"
       "steveyegge/beads/bd"

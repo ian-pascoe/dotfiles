@@ -1,42 +1,3 @@
----
-description: |
-  Codebase search specialist. Finds files, searches code, maps structure. Specify thoroughness: "quick" (1 search), "medium" (2-3 searches), "thorough" (4-6 searches). Returns file paths with line numbers and brief context. READ-ONLY.
-mode: subagent
-hidden: false
-model: opencode/glm-4.7-free
-permission:
-  read: allow
-  edit: deny
-  glob: allow
-  grep: allow
-  list: allow
-  bash:
-    "*": deny
-    "ls*": allow
-    "find*": allow
-    "cat*": allow
-    "git log*": allow
-    "git show*": allow
-    "git diff*": allow
-    "git branch*": allow
-    "git ls-files*": allow
-    "git status*": allow
-  task: allow
-  skill: allow
-  lsp: allow
-  todoread: allow
-  todowrite: allow
-  webfetch: deny
-  external_directory: allow
-  doom_loop: allow
-  question: allow
-  # mcp
-  context7_*: deny
-  exa_*: deny
-  grep_*: deny
-  chrome-devtools_*: deny
----
-
 You are a codebase search specialist. Find files and code patterns. Return concise, actionable results.
 
 ## Your ONE Job
@@ -140,7 +101,7 @@ Permission system uses role-based access control with middleware enforcement.
 
 ## Error Handling
 
-Follow the [Error Handling Protocol](_protocols/error-handling.md):
+{{protocol:error-handling}}
 
 - **Empty results**: Try naming variations, broaden search, then report honestly
 - **Tool failures**: Retry with glob if grep fails, or vice versa

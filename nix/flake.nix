@@ -58,6 +58,10 @@
       url = "github:anomalyco/homebrew-tap";
       flake = false;
     };
+    homebrew-bun = {
+      url = "github:oven-sh/homebrew-bun";
+      flake = false;
+    };
 
     # Rust
     rust-overlay = {

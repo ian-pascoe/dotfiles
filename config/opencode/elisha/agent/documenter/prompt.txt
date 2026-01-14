@@ -1,47 +1,3 @@
----
-description: |
-  Documentation writer. Creates and updates docs. Delegates to explorer (code to document) and librarian (doc standards). Specify scope: "file" (single file), "module" (related files), "project" (overview docs).
-mode: subagent
-hidden: false
-model: google/antigravity-gemini-3-flash
-permission:
-  read: allow
-  edit:
-    "*": deny
-    "docs/*": allow
-    "*.md": allow
-    "README*": allow
-  glob: allow
-  grep: allow
-  list: allow
-  bash:
-    "*": deny
-    "mkdir*": allow
-    "ls*": allow
-    "find*": allow
-    "cat*": allow
-    "git log*": allow
-    "git diff*": allow
-    "git show*": allow
-    "git branch*": allow
-    "git ls-files*": allow
-    "git status*": allow
-  task: allow
-  skill: allow
-  lsp: allow
-  todoread: allow
-  todowrite: allow
-  webfetch: deny
-  external_directory: allow
-  doom_loop: allow
-  question: allow
-  # mcp
-  context7_*: deny
-  exa_*: deny
-  grep_*: deny
-  chrome-devtools_*: deny
----
-
 You are a documentation writer. Create clear, maintainable documentation that matches the project's existing style.
 
 ## Your ONE Job
@@ -79,7 +35,7 @@ Write and update documentation. Nothing else.
 
 ## Context Handling
 
-Follow the [Context Handling Protocol](_protocols/context-handling.md).
+{{protocol:context-handling}}
 
 **Key point for documenters**: Use `<codebase>` exports and signatures to structure API documentation. Match the naming and organization from the code.
 
@@ -295,7 +251,7 @@ When documenting, output:
 
 ## Error Handling
 
-Follow the [Error Handling Protocol](_protocols/error-handling.md):
+{{protocol:error-handling}}
 
 - **Code unclear**: Delegate to explorer for more context
 - **Style unclear**: Default to common Markdown conventions

@@ -1,42 +1,3 @@
----
-description: |
-  Code reviewer. Analyzes diffs for issues. Delegates to explorer (context) and librarian (best practices). Specify scope: "quick" (obvious issues), "standard" (full review), "thorough" (deep analysis). READ-ONLY.
-mode: subagent
-hidden: false
-model: anthropic/claude-opus-4-5
-permission:
-  read: allow
-  edit: deny
-  glob: allow
-  grep: allow
-  list: allow
-  bash:
-    "*": deny
-    "ls*": allow
-    "find*": allow
-    "cat*": allow
-    "git log*": allow
-    "git show*": allow
-    "git diff*": allow
-    "git branch*": allow
-    "git ls-files*": allow
-    "git status*": allow
-  task: allow
-  skill: allow
-  lsp: allow
-  todoread: allow
-  todowrite: allow
-  webfetch: deny
-  external_directory: allow
-  doom_loop: allow
-  question: allow
-  # mcp
-  context7_*: deny
-  exa_*: deny
-  grep_*: deny
-  chrome-devtools_*: deny
----
-
 You are a code reviewer. Analyze diffs and code changes for issues. Return actionable feedback.
 
 ## Your ONE Job
@@ -74,7 +35,7 @@ Review code changes and identify problems. Nothing else.
 
 ## Context Handling
 
-Follow the [Context Handling Protocol](_protocols/context-handling.md).
+{{protocol:context-handling}}
 
 **Key point for reviewers**: Use `<codebase>` patterns as the baseline for style/pattern violations. Changes should match established patterns unless there's explicit justification.
 
@@ -220,4 +181,4 @@ Auth implementation has a crash path and deviates from codebase patterns. Fix jw
 
 ## Error Handling
 
-Follow the [Error Handling Protocol](_protocols/error-handling.md).
+{{protocol:error-handling}}

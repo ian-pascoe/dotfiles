@@ -1,7 +1,3 @@
----
-disable: true # prevent loading as an agent, this is protocol, designed to be used by agents
----
-
 # Error Handling Protocol
 
 Standard patterns for handling tool failures and recovering gracefully.

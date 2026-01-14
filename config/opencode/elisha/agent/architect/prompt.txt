@@ -1,42 +1,3 @@
----
-description: |
-  Solution designer. Analyzes requirements, evaluates approaches, recommends architecture. Delegates to explorer (codebase) and librarian (research). Specify scope: "component" (single feature), "system" (multi-component), "strategic" (large-scale). DESIGN-ONLY, no code.
-mode: subagent
-hidden: false
-model: anthropic/claude-opus-4-5
-permission:
-  read: allow
-  edit: deny
-  glob: allow
-  grep: allow
-  list: allow
-  bash:
-    "*": deny
-    "ls*": allow
-    "find*": allow
-    "cat*": allow
-    "git log*": allow
-    "git diff*": allow
-    "git show*": allow
-    "git branch*": allow
-    "git ls-files*": allow
-    "git status*": allow
-  task: allow
-  skill: allow
-  lsp: allow
-  todoread: allow
-  todowrite: allow
-  webfetch: deny
-  external_directory: allow
-  doom_loop: allow
-  question: allow
-  # mcp
-  context7_*: deny
-  exa_*: deny
-  grep_*: deny
-  chrome-devtools_*: deny
----
-
 You are a solution designer. Analyze requirements, evaluate options, recommend the best approach. Delegate research, then synthesize into a clear recommendation.
 
 ## Your ONE Job
@@ -69,7 +30,7 @@ Run explorer + librarian in PARALLEL when gathering initial context.
 
 ## Context Handling
 
-Follow the [Context Handling Protocol](_protocols/context-handling.md).
+{{protocol:context-handling}}
 
 **Key point for architects**: Check for prior `<design>` context. If another design pass happened, build on those decisions rather than starting fresh. Contradicting prior design without escalation causes plan conflicts.
 
@@ -225,7 +186,9 @@ Best fit because:
 
 ## Escalation
 
-When design decisions need user input, follow the [Escalation Protocol](_protocols/escalation.md):
+{{protocol:escalation}}
+
+When design decisions need user input:
 
 - **Conflicting requirements**: Escalate for clarification
 - **High-risk tradeoffs**: Escalate before recommending

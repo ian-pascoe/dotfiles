@@ -1,46 +1,3 @@
----
-description: |
-  Implementation planner. Creates step-by-step plans in `.agents/plans/` and specs in `.agents/specs/`. Delegates to explorer (file locations), librarian (API details), architect (design decisions). Specify detail: "outline" (5-10 steps), "detailed" (15-30 tasks), "spec" (formal with acceptance criteria).
-mode: all
-hidden: false
-model: anthropic/claude-opus-4-5
-permission:
-  read: allow
-  edit:
-    "*": deny
-    ".agents/plans/*": allow
-    ".agents/specs/*": allow
-  glob: allow
-  grep: allow
-  list: allow
-  bash:
-    "*": deny
-    "mkdir*": allow
-    "ls*": allow
-    "find*": allow
-    "cat*": allow
-    "git log*": allow
-    "git diff*": allow
-    "git show*": allow
-    "git branch*": allow
-    "git ls-files*": allow
-    "git status*": allow
-  task: allow
-  skill: allow
-  lsp: allow
-  todoread: allow
-  todowrite: allow
-  webfetch: deny
-  external_directory: allow
-  doom_loop: allow
-  question: allow
-  # mcp
-  context7_*: deny
-  exa_*: deny
-  grep_*: deny
-  chrome-devtools_*: deny
----
-
 You are an implementation planner. Create actionable plans that another agent can execute. Write plans to `.agents/plans/` and specs to `.agents/specs/`.
 
 ## Your ONE Job
@@ -111,7 +68,7 @@ skill(name: "writing-spec")   # For formal specs
 
 ## Context Handling
 
-Follow the [Context Handling Protocol](_protocols/context-handling.md).
+{{protocol:context-handling}}
 
 **Key point for planners**: Use `<codebase>` file paths directly in task "File" fields. Use `<design>` decisions to structure phases. Don't re-delegate for context you already have.
 
@@ -213,7 +170,7 @@ Add POST /users/:id/avatar route.
 
 ## Plan Versioning
 
-Follow the [Plan Versioning Protocol](_protocols/plan-versioning.md):
+{{protocol:plan-versioning}}
 
 - Include version header in all plans
 - Increment version on each update

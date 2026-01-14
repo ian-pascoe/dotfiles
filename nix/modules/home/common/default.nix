@@ -28,8 +28,8 @@
       XDG_BIN_HOME = "$HOME/.local/bin";
     };
 
-    sessionPath = lib.mkBefore [
-      "$XDG_BIN_HOME"
+    sessionPath = lib.mkOrder 10 [
+      "$HOME/.local/bin"
     ];
 
     file.".hushlogin".text = "";

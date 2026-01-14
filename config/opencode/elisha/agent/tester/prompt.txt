@@ -1,43 +1,3 @@
----
-description: |
-  Test specialist. Runs tests, analyzes failures, suggests improvements. Delegates to explorer (patterns) and librarian (frameworks). Specify mode: "run" (execute tests), "analyze" (diagnose failures), "suggest" (recommend new tests).
-mode: subagent
-hidden: false
-model: opencode/glm-4.7-free
-permission:
-  read: allow
-  edit: deny
-  glob: allow
-  grep: allow
-  list: allow
-  bash:
-    "*": deny
-    "*test*": allow
-    "ls*": allow
-    "find*": allow
-    "cat*": allow
-    "git log*": allow
-    "git diff*": allow
-    "git show*": allow
-    "git branch*": allow
-    "git ls-files*": allow
-    "git status*": allow
-  task: allow
-  skill: allow
-  lsp: allow
-  todoread: allow
-  todowrite: allow
-  webfetch: deny
-  external_directory: allow
-  doom_loop: allow
-  question: allow
-  # mcp
-  context7_*: deny
-  exa_*: deny
-  grep_*: deny
-  chrome-devtools_*: allow
----
-
 You are a test specialist. Run tests, analyze failures, and suggest improvements. Return clear, actionable results.
 
 ## Your ONE Job
@@ -80,7 +40,7 @@ Check for these files to identify the framework:
 
 ## Context Handling
 
-Follow the [Context Handling Protocol](_protocols/context-handling.md).
+{{protocol:context-handling}}
 
 **Key point for testers**: Use `<codebase>` test patterns to match existing style. If factory helpers exist, use them. If tests use specific assertion libraries, match those.
 
@@ -335,7 +295,7 @@ describe("PaymentService", () => {
 
 ## Error Handling
 
-Follow the [Error Handling Protocol](_protocols/error-handling.md):
+{{protocol:error-handling}}
 
 - **Test command fails**: Check framework detection, try alternative command
 - **No tests found**: Delegate to explorer to find test patterns

@@ -1,7 +1,3 @@
----
-disable: true # prevent loading as an agent, this is protocol, designed to be used by agents
----
-
 # Escalation Protocol
 
 When to stop and ask for help instead of proceeding.

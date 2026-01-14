@@ -10,6 +10,7 @@ let
     homebrew-cask
     homebrew-beads
     homebrew-anomalyco
+    homebrew-bun
     ;
   specialArgs = { inherit inputs lib; };
 in
@@ -67,6 +68,7 @@ in
         "homebrew/homebrew-cask" = homebrew-cask;
         "steveyegge/homebrew-beads" = homebrew-beads;
         "anomalyco/homebrew-tap" = homebrew-anomalyco;
+        "oven-sh/homebrew-bun" = homebrew-bun;
       };
       mutableTaps = false;
     };

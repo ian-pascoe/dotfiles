@@ -1,12 +1,12 @@
 import type { AgentConfig, PermissionConfig } from "@opencode-ai/sdk/v2";
 import defu from "defu";
-import type { ElishaContext } from "../..";
+import type { ElishaConfigContext } from "../..";
 import { getAgentPermissions } from "../../permission";
-import { expandProtocols } from "../protocols";
+import { expandProtocols } from "../util/protocols";
 
 import PROMPT from "./prompt.txt";
 
-const getDefaults = (ctx: ElishaContext): AgentConfig =>
+const getDefaults = (ctx: ElishaConfigContext): AgentConfig =>
   ({
     mode: "all",
     hidden: false,
@@ -26,6 +26,8 @@ const getDefaults = (ctx: ElishaContext): AgentConfig =>
     prompt: expandProtocols(PROMPT),
   }) satisfies AgentConfig;
 
-export const setupExecutorAgentConfig = (ctx: ElishaContext): AgentConfig => {
+export const setupExecutorAgentConfig = (
+  ctx: ElishaConfigContext,
+): AgentConfig => {
   return defu(ctx.config.agent?.executor ?? {}, getDefaults(ctx));
 };

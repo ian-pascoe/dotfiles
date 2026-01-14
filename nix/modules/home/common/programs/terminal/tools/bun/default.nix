@@ -1,10 +1,10 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 {
   programs.bun = {
-    enable = lib.mkDefault true;
+    enable = lib.mkDefault pkgs.stdenv.isLinux; # handled by homebrew on darwin
   };
 
-  home.sessionPath = [
+  home.sessionPath = lib.mkBefore [
     "$HOME/.cache/.bun/bin"
   ];
 }
