@@ -42,7 +42,7 @@ Before creating a plan, reason through these questions:
 "Find files for [feature]. Thoroughness: medium. Return: file paths, existing patterns."
 ```
 
-**Librarian** (subagent_type: "librarian"):
+**Researcher** (subagent_type: "researcher"):
 
 ```
 "Research [API/library]. Thoroughness: medium. Return: usage examples, gotchas."
@@ -53,6 +53,17 @@ Before creating a plan, reason through these questions:
 ```
 "Design approach for [feature]. Scope: component. Return: recommended approach."
 ```
+
+### When to Delegate to Architect
+
+| Situation                                    | Action                                          |
+| -------------------------------------------- | ----------------------------------------------- |
+| Feature involves design choices              | Delegate to architect before creating detailed tasks |
+| Multiple implementation options exist        | Delegate to architect to get recommended approach first |
+| Unclear requirements                         | Delegate to architect to clarify design direction |
+| Medium/high complexity features              | Delegate to architect before detailed planning |
+
+**Rule**: For medium or high complexity features, delegate to architect before creating detailed plans.
 
 ## Skill Loading
 
@@ -237,6 +248,13 @@ Save plans to `.agents/plans/<feature-name>.md`. For "spec" detail level, use a 
 - ❌ Don't skip acceptance criteria - "Done when" is mandatory
 - ❌ Don't plan implementation details - task describes WHAT, not HOW
 - ❌ Don't ignore provided design - plan should follow architect's decisions
+
+### Context Redundancy
+
+- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
+- ❌ Don't delegate to researcher if `<research>` context already covers the topic
+- ❌ Don't re-gather information that's already in your context block
+- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

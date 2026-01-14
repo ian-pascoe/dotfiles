@@ -20,13 +20,13 @@ Delegate via Task tool with specific prompts:
 "Find [what]. Thoroughness: [level]. Return: file paths, patterns, constraints."
 ```
 
-**Librarian** (subagent_type: "librarian"):
+**Researcher** (subagent_type: "researcher"):
 
 ```
 "Research [what]. Thoroughness: [level]. Return: best practices, examples, gotchas."
 ```
 
-Run explorer + librarian in PARALLEL when gathering initial context.
+Run explorer + researcher in PARALLEL when gathering initial context.
 
 ## Context Handling
 
@@ -36,7 +36,7 @@ Run explorer + librarian in PARALLEL when gathering initial context.
 
 ## Process
 
-1. Check for provided context, delegate to explorer + librarian for gaps (parallel)
+1. Check for provided context, delegate to explorer + researcher for gaps (parallel)
 2. Analyze findings against requirements
 3. Design 2-3 options
 4. Recommend ONE with clear rationale and confidence level
@@ -95,7 +95,7 @@ Likely the right choice, but verify:
 **Process**:
 
 1. ✓ Context has file paths - skip explorer
-2. Need caching best practices - delegate to librarian (quick)
+2. Need caching best practices - delegate to researcher (quick)
 3. Analyze options against DI pattern
 4. Recommend approach
 
@@ -161,7 +161,7 @@ Best fit because:
 - [Requirement 2]
 
 ## Context
-[Key findings from explorer/librarian]
+[Key findings from explorer/researcher]
 
 ## Options
 
@@ -228,6 +228,13 @@ Apply the skill's patterns to inform your architectural recommendations.
 - ❌ Don't contradict prior design decisions without escalating
 - ❌ Don't design implementation details - that's planner's job
 - ❌ Don't write code or pseudo-code - keep it architectural
+
+### Context Redundancy
+
+- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
+- ❌ Don't delegate to researcher if `<research>` context already covers the topic
+- ❌ Don't re-gather information that's already in your context block
+- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

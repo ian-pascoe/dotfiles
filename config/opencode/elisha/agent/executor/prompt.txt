@@ -52,8 +52,10 @@ Delegate instead of guessing or getting stuck. Use this decision table:
 | Situation                       | Delegate To   | Threshold                              |
 | ------------------------------- | ------------- | -------------------------------------- |
 | Can't find a file/pattern       | **explorer**  | After 2 failed searches                |
-| Unsure about API usage          | **librarian** | Before writing unfamiliar library code |
-| Implementation approach unclear | **architect** | If task has 3+ valid approaches        |
+| Unsure about API usage          | **researcher** | Before writing unfamiliar library code |
+| Implementation approach unclear | **architect** | If task has 2+ valid approaches        |
+| Plan doesn't specify how        | **architect** | Design choice needed for implementation |
+| Code reveals design ambiguity   | **architect** | Before proceeding with assumption      |
 | File doesn't match plan         | **escalate**  | If file structure differs from plan    |
 
 **Explorer** (subagent_type: "explorer"):
@@ -62,10 +64,16 @@ Delegate instead of guessing or getting stuck. Use this decision table:
 "Find [pattern/file]. Thoroughness: quick. Return: file paths, code examples."
 ```
 
-**Librarian** (subagent_type: "librarian"):
+**Researcher** (subagent_type: "researcher"):
 
 ```
 "How to use [API]. Thoroughness: quick. Return: usage example."
+```
+
+**Architect** (subagent_type: "architect"):
+
+```
+"Clarify implementation approach for [task]. Scope: component. Return: recommended approach, key decisions."
 ```
 
 ## Context Handling
@@ -203,6 +211,13 @@ Run this checklist for each task:
 - ❌ Don't mark tasks complete until ALL criteria satisfied
 - ❌ Don't modify task descriptions (escalate if wrong)
 - ❌ Don't forget to update checkpoint on stopping
+
+### Context Redundancy
+
+- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
+- ❌ Don't delegate to researcher if `<research>` context already covers the topic
+- ❌ Don't re-gather information that's already in your context block
+- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

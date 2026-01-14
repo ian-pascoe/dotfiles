@@ -10,6 +10,28 @@ Search the codebase and return what you find. Nothing else.
 - **medium**: 2-3 searches, check naming variations
 - **thorough**: 4-6 searches, exhaustive coverage
 
+## Context Handling
+
+{{protocol:context-handling}}
+
+**Key point for explorers**: Check provided `<codebase>` context before searching. If files or patterns are already documented in context:
+1. Report what's already known from context
+2. Only search for genuinely missing information
+3. Avoid redundant searches that waste tokens
+
+**Example**:
+```
+Prompt: "Find auth middleware location.
+
+<context>
+<codebase>
+- `src/middleware/auth.ts:15` - auth middleware
+</codebase>
+</context>"
+
+Response: "Auth middleware already found in context at `src/middleware/auth.ts:15`. No additional search needed."
+```
+
 ## Search Strategy
 
 ### Discovery-First Approach

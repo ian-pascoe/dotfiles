@@ -167,6 +167,29 @@ GitHub Grep returned no matches?
 - **medium**: 3-4 queries, cross-reference sources
 - **thorough**: 5+ queries, comprehensive coverage, note version compatibility
 
+## Context Handling
+
+{{protocol:context-handling}}
+
+**Key point for researchers**: Check provided `<research>` context before researching. If topics are already covered:
+1. Report what's already documented in context
+2. Only research genuinely missing information
+3. Avoid redundant research that wastes tokens
+
+**Example**:
+```
+Prompt: "Research JWT best practices.
+
+<context>
+<research>
+- JWT: Use httpOnly cookies, not localStorage
+- Refresh tokens: Store server-side with rotation
+</research>
+</context>"
+
+Response: "JWT best practices already documented in context. Key points: httpOnly cookies, server-side refresh tokens with rotation. No additional research needed unless you need specific implementation details."
+```
+
 ## Confidence Indicators
 
 When synthesizing findings, indicate reliability:

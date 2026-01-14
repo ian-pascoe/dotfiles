@@ -1,7 +1,7 @@
 import type { AgentConfig, PermissionConfig } from "@opencode-ai/sdk/v2";
 import defu from "defu";
 import type { ElishaConfigContext } from "../..";
-import { getAgentPermissions } from "../../permission";
+import { getAgentPermissions, getGlobalPermissions } from "../../permission";
 import { expandProtocols } from "../util/protocols";
 
 import PROMPT from "./prompt.txt";
@@ -13,15 +13,19 @@ const getDefaults = (ctx: ElishaConfigContext): AgentConfig =>
     model: ctx.config.small_model,
     temperature: 0.2,
     color: "#fb923c",
-    permission: defu(getAgentPermissions("tester", ctx), {
-      edit: "deny",
-      webfetch: "deny",
-      "context7_*": "deny",
-      "grep_*": "deny",
-      "exa_*": "deny",
-    } satisfies PermissionConfig),
+    permission: defu(
+      getAgentPermissions("tester", ctx),
+      {
+        edit: "deny",
+        webfetch: "deny",
+        "context7_*": "deny",
+        "grep_*": "deny",
+        "exa_*": "deny",
+      } satisfies PermissionConfig,
+      getGlobalPermissions(ctx),
+    ),
     description:
-      'Test specialist. Runs tests, analyzes failures, suggests improvements. Delegates to explorer (patterns) and librarian (frameworks). Specify mode: "run" (execute tests), "analyze" (diagnose failures), "suggest" (recommend new tests).',
+      'Test specialist. Runs tests, analyzes failures, suggests improvements. Delegates to explorer (patterns) and researcher (frameworks). Specify mode: "run" (execute tests), "analyze" (diagnose failures), "suggest" (recommend new tests).',
     prompt: expandProtocols(PROMPT),
   }) satisfies AgentConfig;
 

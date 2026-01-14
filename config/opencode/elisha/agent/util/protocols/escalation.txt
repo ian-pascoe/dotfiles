@@ -82,7 +82,7 @@ When an escalation is received:
 1. **Assess severity**: Can another agent help, or does user need to decide?
 2. **Route appropriately**:
    - Design issues → architect
-   - Research gaps → librarian
+   - Research gaps → researcher
    - Codebase questions → explorer
    - True blockers → user
 3. **Resolve or forward**: Either provide the answer or surface to user

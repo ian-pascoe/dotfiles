@@ -40,7 +40,7 @@ Before delegating or starting work:
 | Block        | Contains                             | Skip Delegation To                    |
 | ------------ | ------------------------------------ | ------------------------------------- |
 | `<codebase>` | File paths, patterns, code structure | explorer (for covered files/patterns) |
-| `<research>` | Best practices, API usage, gotchas   | librarian (for covered topics)        |
+| `<research>` | Best practices, API usage, gotchas   | researcher (for covered topics)       |
 | `<design>`   | Approach, key decisions, trade-offs  | architect (build on existing design)  |
 | None         | -                                    | Delegate as needed                    |
 
@@ -82,7 +82,7 @@ Prompt: "Add validation to UserService.
 </context>"
 
 Action: Have file location, but missing validation patterns.
-        Delegate to librarian for validation best practices.
+        Delegate to researcher for validation best practices.
 ```
 
 ### No Context

@@ -32,11 +32,25 @@ Check for these files to identify the framework:
 "Find test patterns for [feature]. Thoroughness: quick. Return: existing test examples."
 ```
 
-**Librarian** (subagent_type: "librarian"):
+**Researcher** (subagent_type: "researcher"):
 
 ```
 "Research [testing pattern/framework]. Thoroughness: quick. Return: usage example."
 ```
+
+**Architect** (subagent_type: "architect"):
+
+```
+"Design test strategy for [feature]. Scope: component. Return: critical paths, integration points, edge cases to cover."
+```
+
+### When to Delegate to Architect
+
+| Situation                                    | Action                                          |
+| -------------------------------------------- | ----------------------------------------------- |
+| Designing test strategy for multi-component feature | Delegate to architect for critical paths       |
+| Understanding system boundaries for integration tests | Delegate to architect for integration points |
+| Suggesting tests for architectural concerns  | Delegate to architect for design validation    |
 
 ## Context Handling
 
@@ -285,6 +299,13 @@ describe("PaymentService", () => {
 - ❌ Don't suggest tests that duplicate existing coverage
 - ❌ Don't ignore test patterns in codebase (describe/it vs test())
 - ❌ Don't suggest mocks without showing implementation
+
+### Context Redundancy
+
+- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
+- ❌ Don't delegate to researcher if `<research>` context already covers the topic
+- ❌ Don't re-gather information that's already in your context block
+- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 
