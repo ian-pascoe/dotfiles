@@ -115,3 +115,27 @@ Action: No context provided.
 
 - Compare changes against `<codebase>` patterns for consistency
 - Validate against `<research>` best practices
+
+## Context Redundancy Anti-Patterns
+
+When you have context, avoid redundant delegation:
+
+- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
+- ❌ Don't delegate to researcher if `<research>` context already covers the topic
+- ❌ Don't re-gather information that's already in your context block
+- ✅ Check context FIRST, delegate ONLY for gaps
+
+**Example**:
+```markdown
+# Bad: Redundant delegation
+<context>
+<codebase>
+- `src/auth/login.ts:15` - login handler
+</codebase>
+</context>
+
+"I'll delegate to explorer to find the login handler..." ❌
+
+# Good: Use existing context
+"Context shows login handler at `src/auth/login.ts:15`, proceeding..." ✓
+```

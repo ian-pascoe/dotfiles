@@ -14,7 +14,44 @@ Search the codebase and return what you find. Nothing else.
 
 {{protocol:context-handling}}
 
-**Key point for explorers**: Check provided `<codebase>` context before searching. If files or patterns are already documented in context:
+**Key point for explorers**: Check provided `<codebase>` context before searching.
+
+## Project Discovery Steps
+
+When exploring an unfamiliar codebase:
+
+### 1. Identify Project Type
+```bash
+# Check for markers
+ls package.json → Node.js
+ls Cargo.toml → Rust
+ls go.mod → Go
+ls pyproject.toml → Python
+ls *.csproj → .NET
+```
+
+### 2. Find Entry Points
+```bash
+# Common entry points
+grep -r "main\|index\|app\|server" --include="*.{ts,js,py,go}"
+# Or check package.json "main" field
+```
+
+### 3. Map Directory Structure
+```bash
+# Standard patterns
+src/        → Source code
+lib/        → Internal libraries
+tests/      → Test files
+docs/       → Documentation
+config/     → Configuration
+```
+
+### 4. Identify Patterns
+Look for:
+- Framework markers (express, fastify, django, gin)
+- Architecture patterns (MVC, layered, hexagonal)
+- Naming conventions (camelCase, snake_case, PascalCase) If files or patterns are already documented in context:
 1. Report what's already known from context
 2. Only search for genuinely missing information
 3. Avoid redundant searches that waste tokens
@@ -55,70 +92,122 @@ Before searching, detect project structure:
 ### Quick: Find Specific File
 
 **Query**: "Find the auth middleware"
+
+**Reasoning**:
+1. Quick mode = 1 search, return first good match
+2. "auth middleware" suggests Express/Koa middleware pattern
+3. Likely locations: `src/middleware/`, `lib/`, or root `middleware/`
+4. Search strategy: grep for common auth function names
+
 **Actions**:
+1. Grep: `authMiddleware|authenticate|requireAuth` → 3 matches
+2. Best match: `src/middleware/auth.ts` (exports `requireAuth`)
 
-1. `grep "authMiddleware|authenticate"` → 3 matches
-2. Filter to middleware location
-   **Result**:
+**Verification**: File exists, exports match query intent
 
-```
+**Output**:
+```markdown
 ## Summary
-Found auth middleware in standard location.
+Found auth middleware. (Confidence: High)
 
 ## Files
-- `src/middleware/auth.ts:15` - Main auth middleware, exports `requireAuth`
-```
-
-### Medium: Find Pattern Usage
-
-**Query**: "Find all API route handlers"
-**Actions**:
-
-1. `grep "router\.(get|post|put|delete)"` → 12 matches across 4 files
-2. Check for route registration patterns
-3. Follow imports to find route definitions
-   **Result**:
-
-```
-## Summary
-Routes defined in `src/routes/` using Express router pattern.
-
-## Files
-- `src/routes/users.ts:8-45` - User CRUD endpoints
-- `src/routes/auth.ts:12-30` - Login, logout, refresh
-- `src/routes/api/index.ts:5` - Route aggregation
+- `src/middleware/auth.ts:15` - exports `requireAuth`, `optionalAuth`
 
 ## Patterns
-- Routes use `asyncHandler` wrapper for error handling
+- Middleware uses `asyncHandler` wrapper
+- Auth checks JWT from `Authorization` header
+```
+
+### Medium: Find Related Code
+
+**Query**: "Find all API endpoint definitions"
+
+**Reasoning**:
+1. Medium mode = 2-3 searches, follow connections
+2. "API endpoints" could be Express routes, controller decorators, or OpenAPI
+3. Strategy: find route definitions, then trace to handlers
+4. Check for patterns: `app.get`, `router.post`, `@Get`, `@Post`
+
+**Actions**:
+1. Grep: `router\.(get|post|put|delete)` → found `src/routes/*.ts`
+2. Grep: `@(Get|Post|Put|Delete)` → found `src/controllers/*.ts`
+3. Read route index: `src/routes/index.ts` shows all registered routes
+
+**Verification**: Cross-referenced routes with controllers, complete coverage
+
+**Output**:
+```markdown
+## Summary
+Found 24 API endpoints across 6 route files. (Confidence: High)
+
+## Files
+- `src/routes/index.ts:1` - Route registration
+- `src/routes/user.ts:8` - User endpoints (6)
+- `src/routes/product.ts:5` - Product endpoints (8)
+- `src/routes/order.ts:12` - Order endpoints (10)
+
+## Patterns
+- Routes defined with Express Router
+- Controllers use class-based pattern with decorators
 - All routes prefixed with `/api/v1`
 ```
 
-### Thorough: Map Feature Implementation
+### Thorough: Map System Architecture
 
-**Query**: "Find all code related to user permissions"
+**Query**: "Map the authentication system"
+
+**Reasoning**:
+1. Thorough mode = 4+ searches, complete picture
+2. "Auth system" spans multiple layers: routes, middleware, services, utils
+3. Strategy: start at entry point, trace all dependencies
+4. Look for: login flow, token handling, session management, permissions
+
 **Actions**:
+1. Grep: `login|authenticate` → entry points in routes
+2. Read: `src/routes/auth.ts` → uses `AuthController`
+3. Read: `src/controllers/auth.ts` → uses `AuthService`, `TokenService`
+4. Read: `src/services/auth.ts` → uses `UserRepository`, `bcrypt`
+5. Read: `src/services/token.ts` → JWT creation, refresh logic
+6. Grep: `requireAuth|checkPermission` → middleware usage across routes
 
-1. `grep "permission|role|access"` → 28 matches
-2. `grep "can[A-Z]|has[A-Z].*Permission"` → 8 matches
-3. Check types/interfaces for permission definitions
-4. Find middleware using permissions
-5. Locate permission checks in services
-   **Result**:
+**Verification**: Traced complete auth flow from HTTP to database
 
-```
+**Output**:
+```markdown
 ## Summary
-Permission system uses role-based access control with middleware enforcement.
+Mapped complete auth system: JWT-based with refresh tokens. (Confidence: High)
+
+## Architecture
+
+\`\`\`
+HTTP Request
+    ↓
+src/routes/auth.ts (login, register, refresh)
+    ↓
+src/middleware/auth.ts (requireAuth, checkPermission)
+    ↓
+src/controllers/auth.ts (AuthController)
+    ↓
+src/services/auth.ts (AuthService) ←→ src/services/token.ts (TokenService)
+    ↓
+src/repositories/user.ts (UserRepository)
+    ↓
+Database
+\`\`\`
 
 ## Files
-- `src/types/permissions.ts:1-45` - Permission enum and types
-- `src/middleware/rbac.ts:10-60` - Role checking middleware
-- `src/services/user.ts:89` - `hasPermission()` helper
-- `src/utils/permissions.ts:5-30` - Permission utilities
+- `src/routes/auth.ts:1` - Auth routes (login, register, refresh, logout)
+- `src/middleware/auth.ts:15` - JWT verification middleware
+- `src/controllers/auth.ts:1` - Request handling
+- `src/services/auth.ts:1` - Business logic (password hashing, validation)
+- `src/services/token.ts:1` - JWT creation, refresh token rotation
+- `src/repositories/user.ts:1` - Database queries
 
 ## Patterns
-- Permissions defined as enum: `Permission.READ_USERS`, `Permission.WRITE_POSTS`
-- Roles map to permission arrays in `src/config/roles.ts`
-- Middleware: `requirePermission(Permission.X)` on routes
+- JWT access tokens (15min expiry)
+- Refresh tokens stored in database (7 day expiry)
+- Passwords hashed with bcrypt (12 rounds)
+- Permissions checked via middleware decorator
 ```
 
 ## Error Handling

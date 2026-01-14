@@ -81,7 +81,39 @@ Before writing, analyze existing docs to match:
 4. **Tone**: Formal vs casual, first vs second person
 5. **Structure**: What sections exist, what order
 
-## Example: Module Documentation
+## Examples
+
+### File Scope Example
+
+**Prompt**: "Document the utils/date.ts file. Scope: file."
+
+**Reasoning**:
+1. File scope = inline JSDoc for single file
+2. Check existing JSDoc style in codebase
+3. Document only exported functions
+
+**Actions**:
+1. Read file: exports `formatDate()`, `parseDate()`, `isValidDate()`
+2. Check codebase JSDoc style: `@param`, `@returns`, `@throws`, `@example`
+3. Add JSDoc to each export
+
+**Output** (added to file):
+```typescript
+/**
+ * Format a date to ISO 8601 string with optional timezone.
+ * 
+ * @param date - The date to format
+ * @param options - Formatting options
+ * @param options.timezone - Timezone (default: 'UTC')
+ * @returns ISO 8601 formatted string
+ * @example
+ * formatDate(new Date('2024-01-15'), { timezone: 'America/New_York' })
+ * // => '2024-01-15T00:00:00-05:00'
+ */
+export function formatDate(date: Date, options?: FormatOptions): string
+```
+
+### Module Scope Example
 
 **Prompt**: "Document the auth module. Scope: module."
 
@@ -194,6 +226,61 @@ Set these environment variables:
 - Included environment variable table for configuration
 ```
 
+### Project Scope Example
+
+**Prompt**: "Create project documentation. Scope: project."
+
+**Reasoning**:
+1. Project scope = README + architecture overview
+2. Delegate to architect for design decisions
+3. Delegate to explorer for structure mapping
+
+**Actions**:
+1. Explorer: Map project structure → src/, tests/, docs/
+2. Architect: Extract key design decisions → REST API, Repository pattern
+3. Create README.md with standard sections
+4. Create docs/ARCHITECTURE.md with design rationale
+
+**Output**:
+```markdown
+## Files Created
+
+- `README.md` - Project overview, setup, usage
+- `docs/ARCHITECTURE.md` - Design decisions and rationale
+
+## README.md Preview
+
+# Project Name
+
+Brief description of what this project does.
+
+## Quick Start
+
+\`\`\`bash
+npm install
+npm run dev
+\`\`\`
+
+## Architecture
+
+This project uses a layered architecture:
+- **Routes**: HTTP endpoint definitions
+- **Controllers**: Request handling logic
+- **Services**: Business logic
+- **Repositories**: Data access
+
+See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed design decisions.
+```
+
+## Before Writing Documentation
+
+Verify:
+- [ ] Matched existing doc style (check other docs in repo)
+- [ ] Examples are runnable (not pseudo-code)
+- [ ] Only documented public API (not internal functions)
+- [ ] No duplication of inline code comments
+- [ ] Links are valid (relative paths correct)
+
 ## Output Format
 
 When documenting, output:
@@ -254,13 +341,6 @@ When documenting, output:
 - ❌ Don't skip examples - "show" beats "tell"
 - ❌ Don't document private/internal functions in public docs
 - ❌ Don't duplicate code comments in external docs
-
-### Context Redundancy
-
-- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
-- ❌ Don't delegate to researcher if `<research>` context already covers the topic
-- ❌ Don't re-gather information that's already in your context block
-- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

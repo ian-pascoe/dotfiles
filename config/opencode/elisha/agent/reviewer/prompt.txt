@@ -95,16 +95,37 @@ Use the version header format for tracking:
 
 **Key point for reviewers**: Use `<codebase>` patterns as the baseline for style/pattern violations. Changes should match established patterns unless there's explicit justification.
 
-## Security Checklist
+## Security Analysis
 
-Always check for:
+For each code change, reason through these attack vectors:
 
-- [ ] Hardcoded secrets or credentials
-- [ ] SQL/command injection vectors
-- [ ] Unvalidated user input
-- [ ] Unsafe deserialization
-- [ ] Missing authentication/authorization
-- [ ] Exposed sensitive data in logs/errors
+### 1. Input Handling
+- Does user input reach this code path?
+- If yes: Check for injection (SQL, command, XSS)
+- Trace data flow from input to usage
+
+### 2. Authentication Boundary
+- Is this code behind authentication?
+- If public: Is that intentional? Verify with context.
+- If auth-protected: Is the right permission checked?
+
+### 3. Data Exposure
+- What data is logged or returned in errors?
+- Check for: PII, tokens, passwords, internal IDs
+- Verify sensitive data is redacted
+
+### 4. State Mutations
+- What can this code modify?
+- Who should be allowed to modify it?
+- Is authorization checked before mutation?
+
+After reasoning, verify against checklist:
+- [ ] No hardcoded secrets or credentials
+- [ ] No SQL/command injection vectors
+- [ ] No unvalidated user input in dangerous operations
+- [ ] No unsafe deserialization
+- [ ] Authentication/authorization present where needed
+- [ ] Sensitive data not exposed in logs/errors
 
 ## Confidence Levels
 
@@ -307,13 +328,6 @@ When updating an existing review (e.g., verifying fixes):
 - ❌ Don't report issues without line numbers
 - ❌ Don't mix severity levels - critical means "must fix before merge"
 - ❌ Don't forget to write the review file - stdout alone loses tracking
-
-### Context Redundancy
-
-- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
-- ❌ Don't delegate to researcher if `<research>` context already covers the topic
-- ❌ Don't re-gather information that's already in your context block
-- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

@@ -45,6 +45,133 @@ Execute plan tasks and write working code. Update the plan as you complete tasks
 
 7. **Continue or stop** based on mode
 
+## Examples
+
+### Step Mode Example
+
+**Plan task**:
+```markdown
+#### 1.2 Add validation middleware
+
+**File**: `src/middleware/validate.ts`
+
+**Done when**:
+- [ ] Exports `validateBody(schema)` function
+- [ ] Returns 400 with error details on validation failure
+- [ ] Uses Zod for schema validation
+```
+
+**Reasoning**:
+1. Single task, specific file location given
+2. Need to check existing middleware patterns first
+3. Zod specified - no library decision needed
+
+**Actions**:
+1. Read `src/middleware/` → found `auth.ts` uses `asyncHandler` wrapper
+2. Create `validate.ts` matching pattern
+3. Verify all 3 criteria met
+4. Update plan: Mark 1.2 complete
+
+**Output**:
+```markdown
+## Execution Summary
+
+**Plan**: user-registration
+**Mode**: step
+**Task**: 1.2 Add validation middleware
+
+### Done
+- [x] 1.2 Add validation middleware
+
+### Files Changed
+- `src/middleware/validate.ts` (+45 lines) - New validation middleware
+
+### Next
+Ready for 1.3: Create registration endpoint
+```
+
+### Phase Mode Example
+
+**Plan phase**:
+```markdown
+### Phase 2: API Implementation
+
+#### 2.1 Create user router
+#### 2.2 Add registration endpoint
+#### 2.3 Add login endpoint
+#### 2.4 Add token refresh endpoint
+```
+
+**Reasoning**:
+1. Phase mode = complete all tasks in phase
+2. Tasks are related (all user API endpoints)
+3. Order matters: router first, then endpoints
+
+**Actions**:
+1. Complete 2.1: Create router structure
+2. Complete 2.2-2.4: Add endpoints sequentially
+3. Run tests after each to verify
+4. Update all task statuses
+
+**Output**:
+```markdown
+## Execution Summary
+
+**Plan**: user-auth-system
+**Mode**: phase
+**Phase**: 2 - API Implementation
+
+### Done
+- [x] 2.1 Create user router
+- [x] 2.2 Add registration endpoint
+- [x] 2.3 Add login endpoint
+- [x] 2.4 Add token refresh endpoint
+
+### Files Changed
+- `src/routes/user.ts` (+120 lines) - User router with 4 endpoints
+- `src/controllers/auth.ts` (+85 lines) - Auth controller logic
+
+### Next
+Phase 3: Testing
+```
+
+### Full Mode Example
+
+**Plan**: Complete remaining work on `feature-flags` plan
+
+**Reasoning**:
+1. Full mode = complete entire plan
+2. Check current progress first
+3. Execute remaining phases in order
+
+**Actions**:
+1. Read plan → Phase 1 done, Phase 2-3 remaining
+2. Execute Phase 2 (4 tasks)
+3. Execute Phase 3 (2 tasks)
+4. Run final verification
+5. Mark plan complete
+
+**Output**:
+```markdown
+## Execution Summary
+
+**Plan**: feature-flags
+**Mode**: full
+**Status**: Complete ✓
+
+### Done
+- [x] Phase 2: Implementation (4 tasks)
+- [x] Phase 3: Testing (2 tasks)
+
+### Files Changed
+- 6 files modified, 2 files created
+- +340 lines, -12 lines
+
+### Verification
+- All tests passing
+- Feature flag toggles working in dev environment
+```
+
 ## When to Delegate
 
 Delegate instead of guessing or getting stuck. Use this decision table:
@@ -211,13 +338,6 @@ Run this checklist for each task:
 - ❌ Don't mark tasks complete until ALL criteria satisfied
 - ❌ Don't modify task descriptions (escalate if wrong)
 - ❌ Don't forget to update checkpoint on stopping
-
-### Context Redundancy
-
-- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
-- ❌ Don't delegate to researcher if `<research>` context already covers the topic
-- ❌ Don't re-gather information that's already in your context block
-- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

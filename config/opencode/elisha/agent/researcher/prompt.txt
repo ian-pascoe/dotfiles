@@ -79,60 +79,132 @@ const schema = z.object({
 ### Medium: API Usage Patterns
 
 **Query**: "Best practices for React Query mutations with optimistic updates"
-**Actions**:
-1. Context7: `query-docs("tanstack-query", "optimistic updates mutation")` → docs
-2. Exa: "react query optimistic update example" → blog posts
-3. Grep GitHub: `useMutation.*onMutate.*optimistic` → real code
-**Result**:
-```
 
+**Reasoning**:
+1. Need official docs (primary) → Context7 for TanStack Query
+2. Need real patterns (secondary) → Exa for trusted blogs
+3. Need code examples (tertiary) → Grep GitHub for implementations
+4. Cross-reference all sources for confidence
+
+**Actions**:
+1. Context7: `resolve-library-id("@tanstack/react-query")` → found
+2. Context7: `get-library-docs` for "optimistic updates" → found onMutate pattern
+3. Exa: search "react query optimistic update best practices" → TkDodo blog (maintainer)
+4. Grep GitHub: `onMutate.*setQueryData` in TypeScript → 15 implementations
+
+**Synthesis**:
+- All 3 sources agree on pattern: snapshot → optimistic update → rollback on error
+- TkDodo blog adds: always invalidate on settle, not just success
+- GitHub shows common mistake: forgetting to cancel in-flight queries
+
+**Output**:
+```markdown
 ## Summary
 
-Optimistic updates require snapshot, rollback, and cache invalidation.
+Optimistic updates in React Query require three steps: snapshot current state, apply optimistic update, rollback on error. (Confidence: Verified)
 
-## Documentation
+## Pattern
 
-```typescript
-useMutation({
+\`\`\`typescript
+const mutation = useMutation({
   mutationFn: updateTodo,
   onMutate: async (newTodo) => {
-    await queryClient.cancelQueries(["todos"]);
-    const previous = queryClient.getQueryData(["todos"]);
-    queryClient.setQueryData(["todos"], (old) => [...old, newTodo]);
-    return { previous };
+    // 1. Cancel in-flight queries
+    await queryClient.cancelQueries({ queryKey: ['todos'] })
+    
+    // 2. Snapshot current state
+    const previous = queryClient.getQueryData(['todos'])
+    
+    // 3. Optimistic update
+    queryClient.setQueryData(['todos'], (old) => [...old, newTodo])
+    
+    // 4. Return context for rollback
+    return { previous }
   },
   onError: (err, newTodo, context) => {
-    queryClient.setQueryData(["todos"], context.previous);
+    // Rollback on error
+    queryClient.setQueryData(['todos'], context.previous)
   },
   onSettled: () => {
-    queryClient.invalidateQueries(["todos"]);
-  },
-});
-```
+    // Always invalidate to ensure consistency
+    queryClient.invalidateQueries({ queryKey: ['todos'] })
+  }
+})
+\`\`\`
 
-## Notes
+## Key Points
 
-- Always cancel in-flight queries before optimistic update
-- Return context from onMutate for rollback
-- Invalidate on settle, not just success
+- Always cancel in-flight queries before optimistic update (prevents race conditions)
+- Return snapshot from onMutate for rollback capability
+- Invalidate on settle (not just success) to handle edge cases
+- Consider showing loading state even with optimistic updates for slow networks
 
 ## Sources
 
-- TanStack Query docs
-- tkdodo.eu blog
-
+- TanStack Query docs (official) - Verified ✓
+- tkdodo.eu/blog (maintainer) - Verified ✓
+- 15 GitHub implementations reviewed - Recommended
 ```
 
-### Thorough: Framework Comparison
+### Thorough: Technology Evaluation
 
-**Query**: "Compare state management options for React: Zustand vs Jotai vs Redux Toolkit"
+**Query**: "Compare state management solutions for large React application"
+
+**Reasoning**:
+1. Multiple solutions to evaluate → need comprehensive research
+2. Need official docs for each option → Context7
+3. Need real-world experiences → Exa for case studies
+4. Need performance data → Exa for benchmarks
+5. Need adoption trends → GitHub for popularity
+
 **Actions**:
-1. Context7 × 3: Query docs for each library
-2. Exa: "zustand vs jotai vs redux 2024 comparison"
-3. Grep GitHub: Real usage patterns for each
-4. Cross-reference bundle sizes, API complexity
-**Result**:
-[Full comparison table with trade-offs, use cases, code examples]
+1. Context7: Get docs for Redux Toolkit, Zustand, Jotai, Recoil
+2. Exa: "redux vs zustand performance benchmark 2024"
+3. Exa: "large scale react state management case study"
+4. Grep GitHub: Compare star counts and recent activity
+5. Synthesize findings into comparison matrix
+
+**Output**:
+```markdown
+## Summary
+
+For large React applications, Redux Toolkit remains the most battle-tested choice, but Zustand offers simpler API with comparable performance. (Confidence: Recommended)
+
+## Comparison Matrix
+
+| Criteria | Redux Toolkit | Zustand | Jotai | Recoil |
+|----------|--------------|---------|-------|--------|
+| Bundle Size | 11kb | 1.5kb | 2kb | 14kb |
+| Learning Curve | Medium | Low | Low | Medium |
+| DevTools | Excellent | Good | Basic | Good |
+| TypeScript | Excellent | Excellent | Excellent | Good |
+| Large App Proven | ✅ Many | ✅ Growing | ⚠️ Few | ⚠️ Few |
+| Maintenance | Active | Active | Active | Slow |
+
+## Recommendations
+
+**Choose Redux Toolkit if**:
+- Team already knows Redux
+- Need time-travel debugging
+- Complex state with many reducers
+- Enterprise requirements (support, ecosystem)
+
+**Choose Zustand if**:
+- Starting fresh, want simplicity
+- Bundle size is critical
+- Team prefers hooks-first approach
+- Smaller team, less ceremony needed
+
+**Avoid Recoil**: Development has slowed, Meta's commitment unclear
+
+## Sources
+
+- Official docs (all libraries) - Verified ✓
+- Bundlephobia for sizes - Verified ✓  
+- "State of JS 2023" survey - Verified ✓
+- GitHub metrics (Jan 2024) - Verified ✓
+- 3 case studies reviewed - Recommended
+```
 
 ## Error Handling
 

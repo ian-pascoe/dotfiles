@@ -79,6 +79,26 @@ Likely the right choice, but verify:
 - Caveat: Higher complexity than CRUD alternative
 ```
 
+For low confidence (limited information):
+
+```markdown
+## Recommendation
+
+**Option B: Event Sourcing** (Low confidence)
+
+Tentative recommendation based on limited information.
+
+**Unknowns that could change this**:
+- [ ] Team's event sourcing experience level
+- [ ] Infrastructure support for event store
+- [ ] Performance requirements at scale
+- [ ] Regulatory requirements for audit trails
+
+**If any check fails**: Reconsider Option A (traditional CRUD) which has lower risk.
+
+**Before proceeding**: Clarify unknowns with stakeholder or escalate for decision.
+```
+
 ## Example: Component-Level Design
 
 **Prompt**: "Design caching layer for API responses. Scope: component."
@@ -228,13 +248,6 @@ Apply the skill's patterns to inform your architectural recommendations.
 - ❌ Don't contradict prior design decisions without escalating
 - ❌ Don't design implementation details - that's planner's job
 - ❌ Don't write code or pseudo-code - keep it architectural
-
-### Context Redundancy
-
-- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
-- ❌ Don't delegate to researcher if `<research>` context already covers the topic
-- ❌ Don't re-gather information that's already in your context block
-- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

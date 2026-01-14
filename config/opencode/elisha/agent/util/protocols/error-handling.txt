@@ -87,7 +87,7 @@ Proceeding with available results...
 - Empty results are common - try naming variations before reporting
 - Use grep fallback if glob fails
 
-### Librarian
+### Researcher
 
 - Context7 failures: fall back to Exa web search
 - GitHub Grep failures: try broader code pattern

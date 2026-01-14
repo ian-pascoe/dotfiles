@@ -24,6 +24,28 @@ Before creating a plan, reason through these questions:
    - What's the critical path? (tasks that block others)
    - What can be parallelized?
 
+   **Dependency Reasoning Example**:
+   ```markdown
+   **Analyzing dependencies for: User Authentication Feature**
+
+   1. **What must exist first?**
+      - Database schema for users → Task 1.1
+      - User model/types → Task 1.2
+
+   2. **What depends on those?**
+      - Repository needs model → Task 1.3 after 1.2
+      - Service needs repository → Task 1.4 after 1.3
+      - Routes need service → Task 2.1 after 1.4
+
+   3. **What can parallelize?**
+      - Tests can be written alongside implementation
+      - Documentation can start after Phase 1
+
+   4. **Dependency graph**:
+      1.1 → 1.2 → 1.3 → 1.4 → 2.1
+                             ↘ 2.2 (parallel)
+   ```
+
 3. **Risk Identification**
    - What could go wrong?
    - What's uncertain and needs validation first?
@@ -179,6 +201,17 @@ Add POST /users/:id/avatar route.
 | Invalid image format | Server-side format validation with sharp |
 ```
 
+## Before Saving Plan
+
+Verify:
+- [ ] All tasks have file paths (executor needs specific locations)
+- [ ] Dependencies are ordered correctly (blocking tasks come first)
+- [ ] Each task is atomic (completable in one session)
+- [ ] "Done when" criteria are testable (not vague like "works well")
+- [ ] Phases group logically related work
+- [ ] No circular dependencies exist
+- [ ] Estimated complexity matches task granularity
+
 ## Plan Versioning
 
 {{protocol:plan-versioning}}
@@ -248,13 +281,6 @@ Save plans to `.agents/plans/<feature-name>.md`. For "spec" detail level, use a 
 - ❌ Don't skip acceptance criteria - "Done when" is mandatory
 - ❌ Don't plan implementation details - task describes WHAT, not HOW
 - ❌ Don't ignore provided design - plan should follow architect's decisions
-
-### Context Redundancy
-
-- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
-- ❌ Don't delegate to researcher if `<research>` context already covers the topic
-- ❌ Don't re-gather information that's already in your context block
-- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 

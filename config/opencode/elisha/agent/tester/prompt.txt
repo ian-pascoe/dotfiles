@@ -102,51 +102,90 @@ Check for these files to identify the framework:
 
 **Prompt**: "Analyze the timeout failure in user tests. Mode: analyze."
 
-**Actions**:
+**Test output**:
+```
+FAIL src/user.test.ts
+  ✕ should reject duplicate email (5002ms)
+    Timeout - Async callback was not invoked within 5000ms
+```
 
-1. Read test file at line 78
-2. Read UserService duplicate check logic
-3. Identify async flow
+**Reasoning**:
+1. Timeout (not assertion failure) suggests async issue
+2. Test name mentions "duplicate email" - likely DB query
+3. 5002ms just over limit suggests hanging promise
+4. Hypothesis: missing `await` on async operation
+
+**Actions**:
+1. Read test file: `user.test.ts:78` - test calls `userService.register()`
+2. Read service: `user.service.ts:34` - found `this.db.findByEmail(email)` 
+3. **Confirmed**: Missing `await` - promise not awaited
 
 **Output**:
-
-````markdown
+```markdown
 ## Failure Analysis
 
-**Test**: `should reject duplicate email`
-**File**: `user.test.ts:78`
-
-### Error
-
-`Timeout after 5000ms`
+**Test**: should reject duplicate email
+**File**: `src/user.test.ts:78`
+**Type**: Timeout (async issue)
+**Confidence**: High - code confirms hypothesis
 
 ### Root Cause
 
-The duplicate check in UserService makes a DB query but doesn't await it:
+Missing \`await\` on database call at \`user.service.ts:34\`:
 
-```typescript
-// Line 34 in user.service.ts
-const existing = this.db.findByEmail(email); // Missing await!
-if (existing) throw new DuplicateError();
-```
-````
+\`\`\`typescript
+// Before (broken - returns Promise, not result)
+const existing = this.db.findByEmail(email);
+if (existing) throw new Error('Email exists');
 
-The promise resolves after the test times out.
-
-### Fix
-
-```typescript
+// After (fixed - awaits the Promise)
 const existing = await this.db.findByEmail(email);
-```
+if (existing) throw new Error('Email exists');
+\`\`\`
 
-### Related
+### Impact
 
-- Check other DB calls in UserService for same pattern
-- `order.service.ts:56` has similar findByUser call
+- All duplicate-check tests will timeout
+- Production: silent failures on duplicate registration
 
+### Related Issues
+
+Found same pattern in:
+- \`order.service.ts:56\` - missing await on \`findByUserId\`
+- \`product.service.ts:23\` - missing await on \`findBySku\`
 ```
 
 ### Suggest Mode
+
+**Test Prioritization Reasoning**:
+
+When suggesting tests, reason through priority:
+
+```markdown
+**Analyzing test needs for: Payment Processing Module**
+
+1. **Critical paths** (must test first):
+   - Payment success flow → user can pay
+   - Payment failure handling → errors don't lose money
+   - Refund processing → reversals work correctly
+
+2. **Edge cases** (high value):
+   - Currency conversion rounding
+   - Partial refunds
+   - Concurrent payment attempts
+
+3. **Integration points** (medium value):
+   - Gateway timeout handling
+   - Webhook signature verification
+   - Retry logic
+
+4. **Nice to have** (lower priority):
+   - Logging format
+   - Metric emission
+   - Admin UI reflection
+
+**Suggested order**: Critical → Edge cases → Integration → Nice to have
+```
 
 **Prompt**: "Suggest tests for the new PaymentService. Mode: suggest."
 
@@ -248,6 +287,7 @@ describe("PaymentService", () => {
 
 **Test**: [test name]
 **File**: [path:line]
+**Confidence**: [High|Medium|Low] - [brief justification]
 
 ### Error
 
@@ -266,6 +306,11 @@ describe("PaymentService", () => {
 [Other tests that might have same issue]
 
 ```
+
+**Confidence Levels for Analysis**:
+- **High**: Code confirms hypothesis, clear evidence
+- **Medium**: Pattern suggests cause, verify before fixing
+- **Low**: Multiple possible causes, needs investigation
 
 ### For `suggest` mode
 
@@ -299,13 +344,6 @@ describe("PaymentService", () => {
 - ❌ Don't suggest tests that duplicate existing coverage
 - ❌ Don't ignore test patterns in codebase (describe/it vs test())
 - ❌ Don't suggest mocks without showing implementation
-
-### Context Redundancy
-
-- ❌ Don't delegate to explorer if `<codebase>` context already covers the files/patterns
-- ❌ Don't delegate to researcher if `<research>` context already covers the topic
-- ❌ Don't re-gather information that's already in your context block
-- ✅ Check context FIRST, delegate ONLY for gaps
 
 ## Rules
 
