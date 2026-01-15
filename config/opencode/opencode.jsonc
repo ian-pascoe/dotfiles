@@ -7,7 +7,7 @@
     "opencode-antigravity-auth@latest"
   ],
   "model": "anthropic/claude-opus-4-5",
-  "small_model": "google/antigravity-gemini-3-flash",
+  "small_model": "opencode/glm-4.7-free",
   "default_agent": "orchestrator", // See ./agent
   "lsp": {
     // Local lua-ls development

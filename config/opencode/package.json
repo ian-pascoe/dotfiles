@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@opencode-ai/plugin": "1.1.21",
+    "@opencode-ai/sdk": "^1.1.21",
+    "defu": "^6.1.4"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.6"
+  }
+}
