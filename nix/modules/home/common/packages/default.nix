@@ -8,7 +8,6 @@
 
     # c
     clang
-    gnumake
 
     # markdown
     markdownlint-cli2
@@ -21,6 +20,11 @@
     nixfmt
     nixfmt-tree
     statix
+
+    # build systems
+    gnumake
+    cmake
+    ninja
 
     # other
     mise

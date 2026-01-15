@@ -1,14 +1,17 @@
-import { setupExplorerAgentConfig } from "./explorer";
-import { ElishaConfigContext } from "..";
+import type { PermissionConfig } from "@opencode-ai/sdk/v2";
 import defu from "defu";
-import { setupOrchestratorAgentConfig } from "./orchestrator";
+import type { ElishaConfigContext } from "..";
+import { getAgentPermissions, getGlobalPermissions } from "../permission";
 import { setupArchitectAgentConfig } from "./architect";
-import { setupTesterAgentConfig } from "./tester";
-import { setupResearcherAgentConfig } from "./researcher";
-import { setupReviewerAgentConfig } from "./reviewer";
+import { setupBrainstormerAgentConfig } from "./brainstormer";
 import { setupDocumenterAgentConfig } from "./documenter";
 import { setupExecutorAgentConfig } from "./executor";
+import { setupExplorerAgentConfig } from "./explorer";
+import { setupOrchestratorAgentConfig } from "./orchestrator";
 import { setupPlannerAgentConfig } from "./planner";
+import { setupResearcherAgentConfig } from "./researcher";
+import { setupReviewerAgentConfig } from "./reviewer";
+import { setupTesterAgentConfig } from "./tester";
 
 export const setupAgentConfig = (ctx: ElishaConfigContext) => {
   ctx.config.agent ??= {};
@@ -29,6 +32,7 @@ export const setupAgentConfig = (ctx: ElishaConfigContext) => {
 
   // Elisha agents
   ctx.config.agent.architect = setupArchitectAgentConfig(ctx);
+  ctx.config.agent.brainstormer = setupBrainstormerAgentConfig(ctx);
   ctx.config.agent.documenter = setupDocumenterAgentConfig(ctx);
   ctx.config.agent.executor = setupExecutorAgentConfig(ctx);
   ctx.config.agent.explorer = setupExplorerAgentConfig(ctx);

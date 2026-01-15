@@ -7,12 +7,23 @@
     "opencode-antigravity-auth@latest"
   ],
   "model": "anthropic/claude-opus-4-5",
-  "small_model": "opencode/glm-4.7-free",
+  "small_model": "google/antigravity-gemini-3-flash",
   "default_agent": "orchestrator", // See ./agent
   "lsp": {
+    // Local lua-ls development
+    "lua-ls": {
+      "command": [
+        "{env:HOME}/code/lua-language-server/bin/lua-language-server"
+      ],
+      "extensions": [".lua"]
+    },
+    // Use nil instead of nixd for Nix files
     "nil": {
       "command": ["nil", "--stdio"],
       "extensions": [".nix"]
+    },
+    "nixd": {
+      "disabled": true
     }
   },
   "formatter": {

@@ -5,9 +5,9 @@ import { McpConfig } from ".";
 export const defaults: McpConfig = {
   enabled: true,
   type: "remote",
-  url: "https://mcp.grep.app",
+  url: "https://mcp.grep.app?tools=web_search_exa,deep_search_exa",
 };
 
-export const setupGrepMcpConfig = (ctx: ElishaConfigContext): McpConfig => {
-  return defu(ctx.config.mcp?.grep ?? {}, defaults) as McpConfig;
+export const setupGrepAppMcpConfig = (ctx: ElishaConfigContext): McpConfig => {
+  return defu(ctx.config.mcp?.["grep-app"] ?? {}, defaults) as McpConfig;
 };

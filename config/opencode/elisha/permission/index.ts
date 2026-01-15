@@ -1,10 +1,14 @@
-import { PermissionConfig } from "@opencode-ai/sdk/v2";
-import { ElishaConfigContext } from "..";
+import type { PermissionConfig } from "@opencode-ai/sdk/v2";
 import defu from "defu";
+import type { ElishaConfigContext } from "..";
 
-const getDefaults = (ctx: ElishaConfigContext): PermissionConfig => {
+const getDefaultPermissions = (ctx: ElishaConfigContext): PermissionConfig => {
   const config: PermissionConfig = {
-    bash: "allow",
+    bash: {
+      "*": "allow",
+      "rm * /": "deny",
+      "rm * ~": "deny",
+    },
     codesearch: "ask", // Always ask before performing code searches
     doom_loop: "ask",
     edit: "allow",
@@ -14,7 +18,12 @@ const getDefaults = (ctx: ElishaConfigContext): PermissionConfig => {
     list: "allow",
     lsp: "allow",
     question: "allow",
-    read: "allow",
+    read: {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow",
+    },
     task: "allow",
     todoread: "allow",
     todowrite: "allow",
@@ -23,22 +32,19 @@ const getDefaults = (ctx: ElishaConfigContext): PermissionConfig => {
   };
 
   if (ctx.config.mcp?.context7?.enabled ?? true) {
-    config.codesearch = "deny"; // Use context7 instead
-    config["context7_*"] = "allow";
+    config["context7*"] = "ask";
   }
 
-  if (ctx.config.mcp?.grep?.enabled ?? true) {
-    config.codesearch = "deny"; // Use grep instead
-    config["grep_*"] = "allow";
+  if (ctx.config.mcp?.["grep-app"]?.enabled ?? true) {
+    config["grep-app*"] = "ask";
   }
 
   if (ctx.config.mcp?.exa?.enabled ?? true) {
-    config.websearch = "deny"; // Use exa instead
-    config["exa_*"] = "allow";
+    config["exa*"] = "ask";
   }
 
   if (ctx.config.mcp?.["chrome-devtools"]?.enabled ?? true) {
-    config["chrome-devtools_*"] = "allow";
+    config["chrome-devtools*"] = "deny";
   }
 
   return config;
@@ -47,19 +53,47 @@ const getDefaults = (ctx: ElishaConfigContext): PermissionConfig => {
 export const getGlobalPermissions = (
   ctx: ElishaConfigContext,
 ): PermissionConfig => {
-  return defu(ctx.config.permission ?? {}, getDefaults(ctx));
+  if (typeof ctx.config.permission !== "object") {
+    return ctx.config.permission ?? getDefaultPermissions(ctx);
+  }
+
+  return defu(ctx.config.permission, getDefaultPermissions(ctx));
 };
 
-export const getAgentPermissions = (
-  agent: string,
+export const cleanupPermissions = (
+  config: PermissionConfig,
   ctx: ElishaConfigContext,
 ): PermissionConfig => {
-  return defu(
-    ctx.config.agent?.[agent]?.permission ?? {},
-    getGlobalPermissions(ctx),
-  );
+  if (typeof config !== "object") {
+    return config;
+  }
+
+  const codesearchPermission = config.codesearch;
+  if (codesearchPermission) {
+    if (ctx.config.mcp?.context7?.enabled ?? true) {
+      const context7Permission = config["context7*"];
+      config["context7*"] = context7Permission ?? codesearchPermission;
+    }
+
+    if (ctx.config.mcp?.["grep-app"]?.enabled ?? true) {
+      const grepAppPermission = config["grep-app*"];
+      config.codesearch = "deny"; // Use grep instead
+      config["grep-app*"] = grepAppPermission ?? codesearchPermission;
+    }
+  }
+
+  const websearchPermission = config.websearch;
+  if (websearchPermission === "allow" || websearchPermission === "ask") {
+    if (ctx.config.mcp?.exa?.enabled ?? true) {
+      const exaPermission = config["exa*"];
+      config.websearch = "deny"; // Use exa instead
+      config["exa*"] = exaPermission ?? websearchPermission;
+    }
+  }
+
+  return config;
 };
 
 export const setupPermissionConfig = (ctx: ElishaConfigContext) => {
-  ctx.config.permission = getGlobalPermissions(ctx);
+  ctx.config.permission = cleanupPermissions(getGlobalPermissions(ctx), ctx);
 };

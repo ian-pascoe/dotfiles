@@ -7,12 +7,12 @@ import { expandProtocols } from "../util/protocols";
 import PROMPT from "./prompt.txt";
 
 const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
-  mode: "subagent",
+  mode: "all",
   hidden: false,
   model: ctx.config.model,
-  temperature: 0.3,
+  temperature: 1.2,
   permission: setupAgentPermissions(
-    "architect",
+    "brainstormer",
     {
       edit: "deny",
       webfetch: "deny",
@@ -23,12 +23,12 @@ const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
     ctx,
   ),
   description:
-    'Solution designer. Analyzes requirements, evaluates approaches, recommends architecture. Delegates to explorer (codebase) and researcher (research). Specify scope: "component" (single feature), "system" (multi-component), "strategic" (large-scale). DESIGN-ONLY, no code.',
+    'Creative ideation specialist. Generates diverse ideas, explores unconventional approaches, and brainstorms solutions. Specify mode: "divergent" (maximize variety), "convergent" (refine ideas), "wild" (no constraints). IDEATION-ONLY, no implementation.',
   prompt: expandProtocols(PROMPT),
 });
 
-export const setupArchitectAgentConfig = (
+export const setupBrainstormerAgentConfig = (
   ctx: ElishaConfigContext,
 ): AgentConfig => {
-  return defu(ctx.config.agent?.architect ?? {}, getDefaults(ctx));
+  return defu(ctx.config.agent?.brainstormer ?? {}, getDefaults(ctx));
 };
