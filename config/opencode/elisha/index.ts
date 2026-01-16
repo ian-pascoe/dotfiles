@@ -1,9 +1,9 @@
-import { Plugin } from "@opencode-ai/plugin";
-import { setupAgentConfig } from "./agent";
-import { setupMcpConfig } from "./mcp";
-import { ElishaConfigContext } from ".";
-import { setupPermissionConfig } from "./permission";
-import { setupSkillConfig } from "./skill";
+import type { Plugin } from '@opencode-ai/plugin';
+import type { ElishaConfigContext } from '.';
+import { setupAgentConfig } from './agent';
+import { setupMcpConfig } from './mcp';
+import { setupPermissionConfig } from './permission';
+import { setupSkillConfig } from './skill';
 
 export const ElishaPlugin: Plugin = async (ctx) => {
   return {
@@ -17,4 +17,4 @@ export const ElishaPlugin: Plugin = async (ctx) => {
   };
 };
 
-export type * from "./types";
+export type * from './types';

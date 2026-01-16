@@ -1,7 +1,7 @@
-import type { PermissionConfig } from "@opencode-ai/sdk/v2";
-import defu from "defu";
-import { cleanupPermissions, getGlobalPermissions } from ".";
-import type { ElishaConfigContext } from "..";
+import type { PermissionConfig } from '@opencode-ai/sdk/v2';
+import defu from 'defu';
+import type { ElishaConfigContext } from '..';
+import { cleanupPermissions, getGlobalPermissions } from '.';
 
 export const setupAgentPermissions = (
   name: string,

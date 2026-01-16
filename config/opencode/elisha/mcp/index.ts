@@ -1,16 +1,14 @@
-import { ElishaConfigContext } from "..";
-import { setupChromeDevtoolsMcpConfig } from "./chrome-devtools";
-import { setupContext7McpConfig } from "./context7";
-import { setupExaMcpConfig } from "./exa";
-import { setupGrepAppMcpConfig } from "./grep";
+import type { ElishaConfigContext } from '..';
+import { setupChromeDevtoolsMcpConfig } from './chrome-devtools';
+import { setupContext7McpConfig } from './context7';
+import { setupExaMcpConfig } from './exa';
+import { setupGrepAppMcpConfig } from './grep-app';
 
 export const setupMcpConfig = (ctx: ElishaConfigContext) => {
-  ctx.config.mcp ??= {};
-
-  ctx.config.mcp.context7 = setupContext7McpConfig(ctx);
-  ctx.config.mcp.exa = setupExaMcpConfig(ctx);
-  ctx.config.mcp["grep-app"] = setupGrepAppMcpConfig(ctx);
-  ctx.config.mcp["chrome-devtools"] = setupChromeDevtoolsMcpConfig(ctx);
+  setupContext7McpConfig(ctx);
+  setupExaMcpConfig(ctx);
+  setupGrepAppMcpConfig(ctx);
+  setupChromeDevtoolsMcpConfig(ctx);
 };
 
-export type * from "./types";
+export type * from './types';

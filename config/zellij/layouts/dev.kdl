@@ -17,6 +17,7 @@ layout {
     }
     pane name="agent" size="40%" {
       command "opencode"
+      args "--port 56781"
     }
   }
   tab name="blank" {
@@ -38,7 +39,9 @@ layout {
     }
     pane name="agent" size="40%" {
       command "opencode"
+      args "--port 56782"
       cwd "~/.dotfiles"
     }
   }
 }
+

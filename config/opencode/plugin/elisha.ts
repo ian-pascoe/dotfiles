@@ -1,1 +1,1 @@
-export { ElishaPlugin } from "../elisha";
+export { ElishaPlugin } from '../elisha';

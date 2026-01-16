@@ -1,27 +1,29 @@
-import type { AgentConfig } from "@opencode-ai/sdk/v2";
-import defu from "defu";
-import type { ElishaConfigContext } from "../..";
-import { setupAgentPermissions } from "../../permission/agent";
-import { expandProtocols } from "../util/protocols";
+import type { AgentConfig } from '@opencode-ai/sdk/v2';
+import defu from 'defu';
+import type { ElishaConfigContext } from '../..';
+import { setupAgentPermissions } from '../../permission/agent';
+import { expandProtocols } from '../util/protocols';
 
-import PROMPT from "./prompt.txt";
+import PROMPT from './prompt.txt';
+
+export const AGENT_DOCUMENTER_ID = 'documenter';
 
 const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
-  mode: "subagent",
+  mode: 'subagent',
   hidden: false,
   model: ctx.config.model,
   temperature: 0.2,
   permission: setupAgentPermissions(
-    "documenter",
+    AGENT_DOCUMENTER_ID,
     {
       edit: {
-        "**/*.md": "allow",
-        "README*": "allow",
+        '**/*.md': 'allow',
+        'README*': 'allow',
       },
-      webfetch: "deny",
-      websearch: "deny",
-      codesearch: "deny",
-      "chrome-devtools*": "deny",
+      webfetch: 'deny',
+      websearch: 'deny',
+      codesearch: 'deny',
+      'chrome-devtools*': 'deny',
     },
     ctx,
   ),
@@ -30,8 +32,10 @@ const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
   prompt: expandProtocols(PROMPT),
 });
 
-export const setupDocumenterAgentConfig = (
-  ctx: ElishaConfigContext,
-): AgentConfig => {
-  return defu(ctx.config.agent?.documenter ?? {}, getDefaults(ctx));
+export const setupDocumenterAgentConfig = (ctx: ElishaConfigContext) => {
+  ctx.config.agent ??= {};
+  ctx.config.agent[AGENT_DOCUMENTER_ID] = defu(
+    ctx.config.agent?.[AGENT_DOCUMENTER_ID] ?? {},
+    getDefaults(ctx),
+  );
 };

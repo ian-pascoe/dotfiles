@@ -1,27 +1,29 @@
-import type { AgentConfig } from "@opencode-ai/sdk/v2";
-import defu from "defu";
-import type { ElishaConfigContext } from "../..";
-import { setupAgentPermissions } from "../../permission/agent";
-import { expandProtocols } from "../util/protocols";
+import type { AgentConfig } from '@opencode-ai/sdk/v2';
+import defu from 'defu';
+import type { ElishaConfigContext } from '../..';
+import { setupAgentPermissions } from '../../permission/agent';
+import { expandProtocols } from '../util/protocols';
 
-import PROMPT from "./prompt.txt";
+import PROMPT from './prompt.txt';
+
+export const AGENT_PLANNER_ID = 'planner';
 
 const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
-  mode: "all",
+  mode: 'all',
   hidden: false,
   model: ctx.config.model,
   temperature: 0.2,
   permission: setupAgentPermissions(
-    "planner",
+    AGENT_PLANNER_ID,
     {
       edit: {
-        ".agents/plans/*.md": "allow",
-        ".agents/specs/*.md": "allow",
+        '.agents/plans/*.md': 'allow',
+        '.agents/specs/*.md': 'allow',
       },
-      webfetch: "deny",
-      websearch: "deny",
-      codesearch: "deny",
-      "chrome-devtools*": "deny",
+      webfetch: 'deny',
+      websearch: 'deny',
+      codesearch: 'deny',
+      'chrome-devtools*': 'deny',
     },
     ctx,
   ),
@@ -30,8 +32,10 @@ const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
   prompt: expandProtocols(PROMPT),
 });
 
-export const setupPlannerAgentConfig = (
-  ctx: ElishaConfigContext,
-): AgentConfig => {
-  return defu(ctx.config.agent?.planner ?? {}, getDefaults(ctx));
+export const setupPlannerAgentConfig = (ctx: ElishaConfigContext) => {
+  ctx.config.agent ??= {};
+  ctx.config.agent[AGENT_PLANNER_ID] = defu(
+    ctx.config.agent?.[AGENT_PLANNER_ID] ?? {},
+    getDefaults(ctx),
+  );
 };

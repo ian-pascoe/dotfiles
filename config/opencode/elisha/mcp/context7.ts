@@ -1,13 +1,22 @@
-import { ElishaConfigContext } from "..";
-import defu from "defu";
-import { McpConfig } from ".";
+import defu from 'defu';
+import type { ElishaConfigContext } from '..';
+import type { McpConfig } from '.';
+
+export const MCP_CONTEXT7_ID = 'context7';
 
 export const defaults: McpConfig = {
   enabled: true,
-  type: "remote",
-  url: "https://mcp.context7.com/mcp",
+  type: 'remote',
+  url: 'https://mcp.context7.com/mcp',
+  headers: process.env.CONTEXT7_API_KEY
+    ? { CONTEXT7_API_KEY: process.env.CONTEXT7_API_KEY }
+    : undefined,
 };
 
-export const setupContext7McpConfig = (ctx: ElishaConfigContext): McpConfig => {
-  return defu(ctx.config.mcp?.context7 ?? {}, defaults) as McpConfig;
+export const setupContext7McpConfig = (ctx: ElishaConfigContext) => {
+  ctx.config.mcp ??= {};
+  ctx.config.mcp[MCP_CONTEXT7_ID] = defu(
+    ctx.config.mcp?.[MCP_CONTEXT7_ID] ?? {},
+    defaults,
+  ) as McpConfig;
 };

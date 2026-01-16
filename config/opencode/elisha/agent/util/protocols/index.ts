@@ -1,13 +1,13 @@
-import CONTEXT_HANDLING from "./context-handling.txt";
-import ERROR_HANDLING from "./error-handling.txt";
-import ESCALATION from "./escalation.txt";
-import PLAN_VERSIONING from "./plan-versioning.txt";
+import CONTEXT_HANDLING from './context-handling.txt';
+import ERROR_HANDLING from './error-handling.txt';
+import ESCALATION from './escalation.txt';
+import PLAN_VERSIONING from './plan-versioning.txt';
 
 const PROTOCOLS: Record<string, string> = {
-  "context-handling": CONTEXT_HANDLING,
-  "error-handling": ERROR_HANDLING,
+  'context-handling': CONTEXT_HANDLING,
+  'error-handling': ERROR_HANDLING,
   escalation: ESCALATION,
-  "plan-versioning": PLAN_VERSIONING,
+  'plan-versioning': PLAN_VERSIONING,
 };
 
 /**

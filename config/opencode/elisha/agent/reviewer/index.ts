@@ -1,26 +1,28 @@
-import type { AgentConfig } from "@opencode-ai/sdk/v2";
-import defu from "defu";
-import type { ElishaConfigContext } from "../..";
-import { expandProtocols } from "../util/protocols";
-import { setupAgentPermissions } from "../../permission/agent";
+import type { AgentConfig } from '@opencode-ai/sdk/v2';
+import defu from 'defu';
+import type { ElishaConfigContext } from '../..';
+import { setupAgentPermissions } from '../../permission/agent';
+import { expandProtocols } from '../util/protocols';
 
-import PROMPT from "./prompt.txt";
+import PROMPT from './prompt.txt';
+
+export const AGENT_REVIEWER_ID = 'reviewer';
 
 const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
-  mode: "all",
+  mode: 'all',
   hidden: false,
   model: ctx.config.model,
   temperature: 0.2,
   permission: setupAgentPermissions(
-    "reviewer",
+    AGENT_REVIEWER_ID,
     {
       edit: {
-        ".agents/reviews/*.md": "allow",
+        '.agents/reviews/*.md': 'allow',
       },
-      webfetch: "deny",
-      websearch: "deny",
-      codesearch: "deny",
-      "chrome-devtools*": "deny",
+      webfetch: 'deny',
+      websearch: 'deny',
+      codesearch: 'deny',
+      'chrome-devtools*': 'deny',
     },
     ctx,
   ),
@@ -29,8 +31,10 @@ const getDefaults = (ctx: ElishaConfigContext): AgentConfig => ({
   prompt: expandProtocols(PROMPT),
 });
 
-export const setupReviewerAgentConfig = (
-  ctx: ElishaConfigContext,
-): AgentConfig => {
-  return defu(ctx.config.agent?.reviewer ?? {}, getDefaults(ctx));
+export const setupReviewerAgentConfig = (ctx: ElishaConfigContext) => {
+  ctx.config.agent ??= {};
+  ctx.config.agent[AGENT_REVIEWER_ID] = defu(
+    ctx.config.agent?.[AGENT_REVIEWER_ID] ?? {},
+    getDefaults(ctx),
+  );
 };

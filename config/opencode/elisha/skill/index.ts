@@ -1,3 +1,3 @@
-import { ElishaConfigContext } from "../types";
+import type { ElishaConfigContext } from '../types';
 
-export const setupSkillConfig = (ctx: ElishaConfigContext) => {};
+export const setupSkillConfig = (_ctx: ElishaConfigContext) => {};
