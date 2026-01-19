@@ -1,20 +1,10 @@
 import type { Plugin } from '@opencode-ai/plugin';
-import type { ElishaConfigContext } from '.';
-import { setupAgentConfig } from './agent';
-import { setupMcpConfig } from './mcp';
-import { setupPermissionConfig } from './permission';
-import { setupSkillConfig } from './skill';
+import { setupConfig } from './config';
+import { setupHooks } from './hooks';
 
 export const ElishaPlugin: Plugin = async (ctx) => {
   return {
-    config: async (config) => {
-      const configCtx: ElishaConfigContext = { ...ctx, config };
-      setupMcpConfig(configCtx);
-      setupAgentConfig(configCtx);
-      setupSkillConfig(configCtx);
-      setupPermissionConfig(configCtx);
-    },
+    config: setupConfig(ctx),
+    ...setupHooks(ctx),
   };
 };
-
-export type * from './types';

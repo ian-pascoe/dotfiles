@@ -2,32 +2,31 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
   "plugin": [
-    "opencode-beads@latest",
     "opencode-anthropic-auth@latest",
-    "opencode-antigravity-auth@latest",
+    "opencode-antigravity-auth@latest"
   ],
   "model": "anthropic/claude-opus-4-5",
   "small_model": "google/antigravity-gemini-3-flash",
-  "default_agent": "orchestrator", // See ./agent
+  "default_agent": "orchestrator",
   "lsp": {
     "biome": {
-      "command": ["biome", "lsp-proxy"],
+      "command": ["biome", "lsp-proxy"]
     },
     // Local lua-ls development
     "lua-ls": {
       "command": [
-        "{env:HOME}/code/lua-language-server/bin/lua-language-server",
+        "{env:HOME}/code/lua-language-server/bin/lua-language-server"
       ],
-      "extensions": [".lua"],
+      "extensions": [".lua"]
     },
     // Use nil instead of nixd for Nix files
     "nil": {
       "command": ["nil", "--stdio"],
-      "extensions": [".nix"],
+      "extensions": [".nix"]
     },
     "nixd": {
-      "disabled": true,
-    },
+      "disabled": true
+    }
   },
   "formatter": {
     "stylua": {
@@ -35,20 +34,20 @@
         "stylua",
         "--search-parent-directories",
         "--stdin-filepath",
-        "$FILE",
+        "$FILE"
       ],
-      "extensions": [".lua", ".luau"],
+      "extensions": [".lua", ".luau"]
     },
     "markdownlint-cli2": {
       "command": ["markdownlint-cli2", "--fix", "$FILE"],
-      "extensions": [".md", ".mdx"],
-    },
+      "extensions": [".md", ".mdx"]
+    }
   },
   "mcp": {
     "context7": {
       "type": "remote",
-      "url": "https://mcp.context7.com/mcp/oauth",
-    },
+      "url": "https://mcp.context7.com/mcp/oauth"
+    }
   },
   "provider": {
     "google": {
@@ -58,153 +57,153 @@
           "name": "Gemini 3 Pro (Antigravity)",
           "limit": {
             "context": 1048576,
-            "output": 65535,
+            "output": 65535
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
-              "thinkingLevel": "low",
+              "thinkingLevel": "low"
             },
             "high": {
-              "thinkingLevel": "high",
-            },
-          },
+              "thinkingLevel": "high"
+            }
+          }
         },
         "antigravity-gemini-3-flash": {
           "name": "Gemini 3 Flash (Antigravity)",
           "limit": {
             "context": 1048576,
-            "output": 65536,
+            "output": 65536
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "minimal": {
-              "thinkingLevel": "minimal",
+              "thinkingLevel": "minimal"
             },
             "low": {
-              "thinkingLevel": "low",
+              "thinkingLevel": "low"
             },
             "medium": {
-              "thinkingLevel": "medium",
+              "thinkingLevel": "medium"
             },
             "high": {
-              "thinkingLevel": "high",
-            },
-          },
+              "thinkingLevel": "high"
+            }
+          }
         },
         "antigravity-claude-sonnet-4-5": {
           "name": "Claude Sonnet 4.5 (no thinking) (Antigravity)",
           "limit": {
             "context": 200000,
-            "output": 64000,
+            "output": 64000
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "antigravity-claude-sonnet-4-5-thinking": {
           "name": "Claude Sonnet 4.5 Thinking (Antigravity)",
           "limit": {
             "context": 200000,
-            "output": 64000,
+            "output": 64000
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
               "thinkingConfig": {
-                "thinkingBudget": 8192,
-              },
+                "thinkingBudget": 8192
+              }
             },
             "max": {
               "thinkingConfig": {
-                "thinkingBudget": 32768,
-              },
-            },
-          },
+                "thinkingBudget": 32768
+              }
+            }
+          }
         },
         "antigravity-claude-opus-4-5-thinking": {
           "name": "Claude Opus 4.5 Thinking (Antigravity)",
           "limit": {
             "context": 200000,
-            "output": 64000,
+            "output": 64000
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "low": {
               "thinkingConfig": {
-                "thinkingBudget": 8192,
-              },
+                "thinkingBudget": 8192
+              }
             },
             "max": {
               "thinkingConfig": {
-                "thinkingBudget": 32768,
-              },
-            },
-          },
+                "thinkingBudget": 32768
+              }
+            }
+          }
         },
         "gemini-2.5-flash": {
           "name": "Gemini 2.5 Flash (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65536,
+            "output": 65536
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-2.5-pro": {
           "name": "Gemini 2.5 Pro (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65536,
+            "output": 65536
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-3-flash-preview": {
           "name": "Gemini 3 Flash Preview (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65536,
+            "output": 65536
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-3-pro-preview": {
           "name": "Gemini 3 Pro Preview (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65535,
+            "output": 65535
           },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
-        },
-      },
-    },
+            "output": ["text"]
+          }
+        }
+      }
+    }
   },
   "tui": {
     "scroll_acceleration": {
-      "enabled": true,
-    },
-  },
+      "enabled": true
+    }
+  }
 }

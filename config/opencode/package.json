@@ -1,7 +1,8 @@
 {
   "dependencies": {
-    "@opencode-ai/plugin": "1.1.23",
+    "@opencode-ai/plugin": "1.1.25",
     "@opencode-ai/sdk": "^1.1.21",
+    "dedent": "^1.7.1",
     "defu": "^6.1.4"
   },
   "devDependencies": {

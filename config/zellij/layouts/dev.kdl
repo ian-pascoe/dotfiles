@@ -17,30 +17,27 @@ layout {
     }
     pane name="agent" size="40%" {
       command "opencode"
-      args "--port 56781"
+      args "--port" "56781"
     }
   }
-  tab name="blank" {
+  tab name="home" cwd="~" {
     pane name="cmd" {
       command "zsh"
     }
   }
-  tab name="dotfiles" split_direction="vertical" {
+  tab name="dotfiles" split_direction="vertical" cwd="~/.dotfiles" {
     pane size="60%" split_direction="horizontal" {
       pane name="editor" size="70%" {
         command "nvim"
         args "."
-        cwd "~/.dotfiles"
       }
       pane name="cmd" size="30%" {
         command "zsh"
-        cwd "~/.dotfiles"
       }
     }
     pane name="agent" size="40%" {
       command "opencode"
-      args "--port 56782"
-      cwd "~/.dotfiles"
+      args "--port" "56782"
     }
   }
 }

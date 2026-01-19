@@ -12,7 +12,7 @@ import { setupResearcherAgentConfig } from './researcher';
 import { setupReviewerAgentConfig } from './reviewer';
 import { setupTesterAgentConfig } from './tester';
 
-const safeDisableAgent = (name: string, ctx: ElishaConfigContext) => {
+const disableAgent = (name: string, ctx: ElishaConfigContext) => {
   ctx.config.agent ??= {};
   ctx.config.agent[name] = defu(ctx.config.agent?.[name] ?? {}, {
     disable: true,
@@ -20,10 +20,10 @@ const safeDisableAgent = (name: string, ctx: ElishaConfigContext) => {
 };
 
 export const setupAgentConfig = (ctx: ElishaConfigContext) => {
-  safeDisableAgent('build', ctx);
-  safeDisableAgent('plan', ctx);
-  safeDisableAgent('explore', ctx);
-  safeDisableAgent('general', ctx);
+  disableAgent('build', ctx);
+  disableAgent('plan', ctx);
+  disableAgent('explore', ctx);
+  disableAgent('general', ctx);
 
   setupCompactionAgentConfig(ctx);
 

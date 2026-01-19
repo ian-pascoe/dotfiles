@@ -1,3 +1,7 @@
 /node_modules
 
 /antigravity-accounts.json
+.gitignore
+antigravity-accounts.json
+antigravity-signature-cache.json
+antigravity-logs/

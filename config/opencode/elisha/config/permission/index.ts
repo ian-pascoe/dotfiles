@@ -5,6 +5,7 @@ import { MCP_CHROME_DEVTOOLS_ID } from '../mcp/chrome-devtools';
 import { MCP_CONTEXT7_ID } from '../mcp/context7';
 import { MCP_EXA_ID } from '../mcp/exa';
 import { MCP_GREP_APP_ID } from '../mcp/grep-app';
+import { MCP_OPENMEMORY_ID } from '../mcp/openmemory';
 
 const getDefaultPermissions = (ctx: ElishaConfigContext): PermissionConfig => {
   const config: PermissionConfig = {
@@ -34,6 +35,10 @@ const getDefaultPermissions = (ctx: ElishaConfigContext): PermissionConfig => {
     webfetch: 'ask', // Always ask before fetching from the web
     websearch: 'ask', // Always ask before performing web searches
   };
+
+  if (ctx.config.mcp?.[MCP_OPENMEMORY_ID]?.enabled ?? true) {
+    config[`${MCP_OPENMEMORY_ID}*`] = 'allow';
+  }
 
   if (ctx.config.mcp?.[MCP_CHROME_DEVTOOLS_ID]?.enabled ?? true) {
     config[`${MCP_CHROME_DEVTOOLS_ID}*`] = 'deny';
