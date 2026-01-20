@@ -2,22 +2,35 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
   "plugin": [
-    "opencode-anthropic-auth@latest",
-    "opencode-antigravity-auth@latest"
+    "opencode-anthropic-auth",
+    "opencode-antigravity-auth",
+    "@spiritledsoftware/elisha"
+    // "@spiritledsoftware/elisha@file:../../code/elisha" // Local development version
   ],
+  "autoupdate": "notify",
   "model": "anthropic/claude-opus-4-5",
   "small_model": "google/antigravity-gemini-3-flash",
-  "default_agent": "orchestrator",
+  "agent": {
+    "designer": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "executor": {
+      "model": "google/antigravity-gemini-3-flash"
+    }
+  },
   "lsp": {
     "biome": {
-      "command": ["biome", "lsp-proxy"]
-    },
-    // Local lua-ls development
-    "lua-ls": {
-      "command": [
-        "{env:HOME}/code/lua-language-server/bin/lua-language-server"
-      ],
-      "extensions": [".lua"]
+      "command": ["biome", "lsp-proxy"],
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+        ".json",
+        ".css",
+        ".html",
+        ".md"
+      ]
     },
     // Use nil instead of nixd for Nix files
     "nil": {
@@ -29,6 +42,19 @@
     }
   },
   "formatter": {
+    "biome": {
+      "command": ["biome", "check", "--write", "$FILE"],
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",
+        ".json",
+        ".css",
+        ".html",
+        ".md"
+      ]
+    },
     "stylua": {
       "command": [
         "stylua",

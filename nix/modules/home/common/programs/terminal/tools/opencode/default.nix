@@ -24,6 +24,11 @@
         force = true;
       };
     };
-    shellAliases.oc = "opencode";
+    shellAliases = {
+      oc = "opencode";
+    };
+    sessionVariables = {
+      OPENCODE_EXPERIMENTAL = "1";
+    };
   };
 }
