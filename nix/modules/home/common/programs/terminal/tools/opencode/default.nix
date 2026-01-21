@@ -31,4 +31,24 @@
       OPENCODE_EXPERIMENTAL = "1";
     };
   };
+
+  launchd.agents.opencode-web = {
+    enable = lib.mkDefault true;
+    config = {
+      ProgramArguments = [
+        "${config.programs.zsh.package}/bin/zsh"
+        "-lic"
+        "opencode web"
+      ];
+    };
+  };
+
+  systemd.user.services.opencode-web = {
+    Unit = {
+      Description = "OpenCode Web Interface";
+    };
+    Service = {
+      ExecStart = "${config.programs.zsh.package}/bin/zsh -lic 'opencode web'";
+    };
+  };
 }
