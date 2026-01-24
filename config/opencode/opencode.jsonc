@@ -11,7 +11,7 @@
   "model": "anthropic/claude-opus-4-5",
   "small_model": "google/antigravity-gemini-3-flash",
   "agent": {
-    "designer": {
+    "Oholiab (designer)": {
       "model": "google/antigravity-gemini-3-pro"
     }
   },
@@ -19,14 +19,18 @@
     "biome": {
       "command": ["biome", "lsp-proxy"],
       "extensions": [
-        ".js",
-        ".jsx",
         ".ts",
         ".tsx",
+        ".mts",
+        ".cts",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".json",
+        ".jsonc",
         ".css",
-        ".html",
-        ".md"
+        ".html"
       ]
     },
     // Use nil instead of nixd for Nix files
@@ -39,19 +43,6 @@
     }
   },
   "formatter": {
-    "biome": {
-      "command": ["biome", "check", "--write", "$FILE"],
-      "extensions": [
-        ".js",
-        ".jsx",
-        ".ts",
-        ".tsx",
-        ".json",
-        ".css",
-        ".html",
-        ".md"
-      ]
-    },
     "stylua": {
       "command": [
         "stylua",
@@ -66,12 +57,7 @@
       "extensions": [".md", ".mdx"]
     }
   },
-  "mcp": {
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp/oauth"
-    }
-  },
+  "mcp": {},
   "provider": {
     "google": {
       "name": "Google",
@@ -232,5 +218,6 @@
   "server": {
     "hostname": "0.0.0.0",
     "port": 4096
-  }
+  },
+  "username": "Ian"
 }

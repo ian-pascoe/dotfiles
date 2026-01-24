@@ -26,6 +26,11 @@
     };
     shellAliases = {
       oc = "opencode";
+      restart-opencode-web =
+        if pkgs.stdenv.isLinux then
+          "systemctl --user restart org.nix-community.home.opencode-web.service"
+        else
+          ''launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.opencode-web'';
     };
     sessionVariables = {
       OPENCODE_EXPERIMENTAL = "1";
