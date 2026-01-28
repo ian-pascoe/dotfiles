@@ -1,6 +1,6 @@
 return {
   {
-    "folke/snacks.nvim",
+    'folke/snacks.nvim',
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
@@ -17,42 +17,42 @@ return {
     },
     keys = {
       {
-        "<leader>fd",
+        '<leader>fd',
         function()
-          require("snacks").picker.files({
+          require('snacks').picker.files({
             cwd = LazyVim.root(),
             hidden = true,
             follow = true,
-            cmd = "fd",
-            args = { "--type", "d" },
+            cmd = 'fd',
+            args = { '--type', 'd' },
             transform = function(entry)
               return vim.fn.isdirectory(entry.file) == 1
             end,
           })
         end,
-        desc = "Find directories",
+        desc = 'Find directories',
       },
       {
-        "<leader>fD",
+        '<leader>fD',
         function()
-          require("snacks").picker.files({
+          require('snacks').picker.files({
             cwd = vim.fn.getcwd(),
             hidden = true,
             follow = true,
-            cmd = "fd",
-            args = { "--type", "d" },
+            cmd = 'fd',
+            args = { '--type', 'd' },
             transform = function(entry)
               return vim.fn.isdirectory(entry.file) == 1
             end,
           })
         end,
-        desc = "Find directories (cwd)",
+        desc = 'Find directories (cwd)',
       },
     },
   },
   { -- better file explorer
-    "stevearc/oil.nvim",
-    dependencies = { "nvim-mini/mini.icons" },
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-mini/mini.icons' },
     lazy = false,
     ---@module "oil"
     ---@type oil.setupOpts
@@ -62,7 +62,7 @@ return {
         show_hidden = true,
         is_always_hidden = function(name)
           -- always hide .git directory
-          if name:match("^%.git$") then
+          if name:match('^%.git$') then
             return true
           end
           return false
@@ -71,83 +71,83 @@ return {
     },
     keys = {
       {
-        "-",
+        '-',
         function()
-          require("oil").open()
+          require('oil').open()
         end,
-        desc = "File Explorer",
+        desc = 'File Explorer',
       },
       {
-        "<leader>e",
+        '<leader>e',
         function()
-          require("oil").open(LazyVim.root())
+          require('oil').open(LazyVim.root())
         end,
-        desc = "Explorer oil (root dir)",
+        desc = 'Explorer oil (root dir)',
       },
       {
-        "<leader>E",
+        '<leader>E',
         function()
-          require("oil").open(vim.fn.getcwd())
+          require('oil').open(vim.fn.getcwd())
         end,
-        desc = "Explorer oil (cwd)",
+        desc = 'Explorer oil (cwd)',
       },
     },
   },
   { -- neogit
-    "NeogitOrg/neogit",
-    cmd = "Neogit",
+    'NeogitOrg/neogit',
+    cmd = 'Neogit',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim", -- diff integration
-      "folke/snacks.nvim", -- picker integration
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim', -- diff integration
+      'folke/snacks.nvim', -- picker integration
     },
     opts = {},
     keys = {
       {
-        "<leader>gg",
+        '<leader>gg',
         function()
-          require("neogit").open({ cwd = LazyVim.root.git() })
+          require('neogit').open({ cwd = LazyVim.root.git() })
         end,
-        desc = "Neogit",
+        desc = 'Neogit',
       },
       {
-        "<leader>gG",
+        '<leader>gG',
         function()
-          require("neogit").open({ cwd = vim.fn.getcwd() })
+          require('neogit').open({ cwd = vim.fn.getcwd() })
         end,
-        desc = "Neogit (cwd)",
+        desc = 'Neogit (cwd)',
       },
     },
   },
   { -- yazi
-    "mikavilpas/yazi.nvim",
-    cmd = "Yazi",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'mikavilpas/yazi.nvim',
+    cmd = 'Yazi',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     ---@module "yazi"
     ---@type YaziConfig
     opts = {
       open_for_directories = true,
     },
     keys = {
-      { "<leader>y", "<cmd>Yazi<cr>", desc = "yazi" },
-      { "<leader>Y", "<cmd>Yazi cwd<cr>", desc = "yazi (cwd)" },
+      { '<leader>y', '<cmd>Yazi<cr>', desc = 'yazi' },
+      { '<leader>Y', '<cmd>Yazi cwd<cr>', desc = 'yazi (cwd)' },
     },
   },
   {
-    "epwalsh/obsidian.nvim",
-    ft = { "markdown" },
+    'epwalsh/obsidian.nvim',
+    ft = { 'markdown' },
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      'nvim-lua/plenary.nvim',
     },
     opts = function(_, opts)
-      local vaults_path = vim.fn.finddir("vaults", os.getenv("HOME"))
-      if vaults_path == "" then
+      local vaults_path = vim.fn.finddir('vaults', os.getenv('HOME'))
+      if vaults_path == '' then
         return opts
       end
 
-      local personal_vault_name = "personal"
+      local personal_vault_name = 'personal'
       local personal_vault_path = vim.fn.finddir(personal_vault_name, vaults_path)
-      if personal_vault_path ~= "" then
+      if personal_vault_path ~= '' then
         opts.workspaces = vim.list_extend(opts.workspaces or {}, {
           {
             name = personal_vault_name,
@@ -156,9 +156,9 @@ return {
         })
       end
 
-      local family_vault_name = "family"
+      local family_vault_name = 'family'
       local family_vault_path = vim.fn.finddir(family_vault_name, vaults_path)
-      if family_vault_path ~= "" then
+      if family_vault_path ~= '' then
         opts.workspaces = vim.list_extend(opts.workspaces or {}, {
           {
             name = family_vault_name,
@@ -167,9 +167,9 @@ return {
         })
       end
 
-      local work_vault_name = "work"
+      local work_vault_name = 'work'
       local work_vault_path = vim.fn.finddir(work_vault_name, vaults_path)
-      if work_vault_path ~= "" then
+      if work_vault_path ~= '' then
         opts.workspaces = vim.list_extend(opts.workspaces or {}, {
           {
             name = work_vault_name,
@@ -182,8 +182,8 @@ return {
     end,
   },
   { -- Directory diffing plugin
-    "will133/vim-dirdiff",
-    cmd = "DirDiff",
+    'will133/vim-dirdiff',
+    cmd = 'DirDiff',
     opts = {},
   },
 }

@@ -1,15 +1,15 @@
 return {
   {
-    "mason-org/mason.nvim",
+    'mason-org/mason.nvim',
     opts = {
-      ensure_installed = { "kdlfmt" },
+      ensure_installed = { 'kdlfmt' },
     },
   },
   {
-    "stevearc/conform.nvim",
+    'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
-        kdl = { "kdlfmt" },
+        kdl = { 'kdlfmt' },
       },
     },
   },

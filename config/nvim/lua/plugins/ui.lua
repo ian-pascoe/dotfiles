@@ -1,6 +1,6 @@
 return {
   { -- custom dashboard header
-    "folke/snacks.nvim",
+    'folke/snacks.nvim',
     opts = {
       dashboard = {
         preset = {

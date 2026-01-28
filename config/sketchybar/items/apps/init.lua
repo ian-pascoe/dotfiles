@@ -9,19 +9,19 @@ local ghostty = require("items.apps.ghostty")
 local spotify = require("items.apps.spotify")
 
 M.group = Sbar.add("bracket", "apps.group", {
-	helium.button.name,
-	ghostty.button.name,
-	spotify.button.name,
+  helium.button.name,
+  ghostty.button.name,
+  spotify.button.name,
 }, {
-	position = "left",
+  position = "left",
 })
 
 M.spacer = Sbar.add("item", "apps.spacer", {
-	position = "left",
-	padding_left = settings.paddings.xs,
-	padding_right = settings.paddings.xs,
-	icon = { drawing = false },
-	label = { drawing = false },
+  position = "left",
+  padding_left = settings.paddings.xs,
+  padding_right = settings.paddings.xs,
+  icon = { drawing = false },
+  label = { drawing = false },
 })
 
 return M

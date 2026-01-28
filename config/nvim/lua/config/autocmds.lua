@@ -8,14 +8,14 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 local function augroup(name)
-  return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup('custom_' .. name, { clear = true })
 end
 
 -- Set filetype for Jenkinsfiles
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = augroup("jenkinsfile"),
-  pattern = "*.Jenkinsfile",
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = augroup('jenkinsfile'),
+  pattern = '*.Jenkinsfile',
   callback = function()
-    vim.bo.filetype = "groovy"
+    vim.bo.filetype = 'groovy'
   end,
 })

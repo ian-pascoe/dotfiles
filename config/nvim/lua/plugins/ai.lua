@@ -1,6 +1,6 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
+    'zbirenbaum/copilot.lua',
     optional = true,
     opts = {
       filetypes = {
@@ -13,12 +13,12 @@ return {
         hgcommit = true,
         svn = true,
         cvs = true,
-        ["."] = true,
+        ['.'] = true,
         -----------------------
-        ["*"] = true,
+        ['*'] = true,
         sh = function()
           -- disable for .env files
-          if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+          if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
             return false
           end
           return true

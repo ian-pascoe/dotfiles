@@ -1,6 +1,6 @@
 return {
   {
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     opts = {
       servers = {
         powershell_es = {},
@@ -14,18 +14,18 @@ return {
     },
   },
   {
-    "TheLeoP/powershell.nvim",
-    enabled = vim.fn.executable("pwsh") == 1,
-    ft = { "ps1", "psm1", "psd1", "pwsh" },
+    'TheLeoP/powershell.nvim',
+    enabled = vim.fn.executable('pwsh') == 1,
+    ft = { 'ps1', 'psm1', 'psd1', 'pwsh' },
     opts = {
-      bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+      bundle_path = vim.fn.stdpath('data') .. '/mason/packages/powershell-editor-services',
       init_options = {
         enableProfileLoading = false,
       },
       settings = {
         powershell = {
           codeFormatting = {
-            preset = "OTBS",
+            preset = 'OTBS',
           },
         },
       },

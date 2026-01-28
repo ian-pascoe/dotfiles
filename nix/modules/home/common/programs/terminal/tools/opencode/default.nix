@@ -28,7 +28,7 @@
       oc = "opencode";
       restart-opencode-web =
         if pkgs.stdenv.isLinux then
-          "systemctl --user restart org.nix-community.home.opencode-web.service"
+          "systemctl --user restart opencode-web.service"
         else
           ''launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.opencode-web'';
     };
@@ -40,11 +40,33 @@
   launchd.agents.opencode-web = {
     enable = lib.mkDefault true;
     config = {
+      Program = "/opt/homebrew/bin/opencode";
       ProgramArguments = [
-        "${config.programs.zsh.package}/bin/zsh"
-        "-lic"
-        "opencode web"
+        "web"
+        "--hostname=0.0.0.0"
+        "--port=4096"
       ];
+      EnvironmentVariables = {
+        PATH = builtins.concatStringsSep ":" [
+          "${config.home.homeDirectory}/.local/bin"
+          "${config.home.homeDirectory}/.nix-profile/bin"
+          "/opt/homebrew/bin"
+          "${config.home.path}/bin"
+          "/etc/profiles/per-user/${config.home.username}/bin"
+          "/run/current-system/sw/bin"
+          "/nix/var/nix/profiles/default/bin"
+          "/usr/local/sbin"
+          "/usr/local/bin"
+          "/usr/sbin"
+          "/usr/bin"
+          "/sbin"
+          "/bin"
+        ];
+        OPENCODE_EXPERIMENTAL = "1";
+      };
+      RunAtLoad = true;
+      WatchPaths = [ "${config.home.homeDirectory}/.config/opencode" ];
+      WorkingDirectory = config.home.homeDirectory;
     };
   };
 
@@ -53,7 +75,29 @@
       Description = "OpenCode Web Interface";
     };
     Service = {
-      ExecStart = "${config.programs.zsh.package}/bin/zsh -lic 'opencode web'";
+      ExecStart = "${pkgs.opencode}/bin/opencode web --hostname=0.0.0.0 --port=4096'";
+      Environment = ''
+        PATH=${
+          builtins.concatStringsSep ":" [
+            "${config.home.homeDirectory}/.local/bin"
+            "${config.home.homeDirectory}/.nix-profile/bin"
+            "${pkgs.opencode}/bin"
+            "${config.home.path}/bin"
+            "/etc/profiles/per-user/${config.home.username}/bin"
+            "/run/current-system/sw/bin"
+            "/nix/var/nix/profiles/default/bin"
+            "/usr/local/sbin"
+            "/usr/local/bin"
+            "/usr/sbin"
+            "/usr/bin"
+            "/sbin"
+            "/bin"
+          ]
+        }
+        OPENCODE_EXPERIMENTAL=1
+      '';
+      WorkingDirectory = config.home.homeDirectory;
+      Restart = "always";
     };
   };
 }

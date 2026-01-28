@@ -22,28 +22,28 @@ local M = {}
 M.theme = nil
 
 M.setup = function()
-	local get_theme_handle = io.popen("readlink ~/.config/theme | xargs basename")
-	M.theme = "rose-pine"
-	if get_theme_handle then
-		M.theme = get_theme_handle:read("*a"):gsub("\n", "")
-		get_theme_handle:close()
-	end
-	print("Using theme: " .. M.theme)
+  local get_theme_handle = io.popen("readlink ~/.config/theme | xargs basename")
+  M.theme = "rose-pine"
+  if get_theme_handle then
+    M.theme = get_theme_handle:read("*a"):gsub("\n", "")
+    get_theme_handle:close()
+  end
+  print("Using theme: " .. M.theme)
 
-	local colors
-	if M.theme == "nord" then
-		colors = themes.nord.toColors()
-	elseif M.theme == "catppuccin" then
-		colors = themes.catppuccin.toColors()
-	elseif M.theme == "tokyo-night" then
-		colors = themes.tokyonight.toColors()
-	else
-		colors = themes.rose_pine.toColors()
-	end
+  local colors
+  if M.theme == "nord" then
+    colors = themes.nord.toColors()
+  elseif M.theme == "catppuccin" then
+    colors = themes.catppuccin.toColors()
+  elseif M.theme == "tokyo-night" then
+    colors = themes.tokyonight.toColors()
+  else
+    colors = themes.rose_pine.toColors()
+  end
 
-	for k, v in pairs(colors) do
-		M[k] = v
-	end
+  for k, v in pairs(colors) do
+    M[k] = v
+  end
 end
 
 M.transparent = 0x00000000
@@ -52,10 +52,10 @@ M.black = 0xff000000
 
 ---@type fun(color: integer, alpha?: number): integer
 function M.with_alpha(color, alpha)
-	if alpha > 1.0 or alpha < 0.0 then
-		return color
-	end
-	return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
+  if alpha > 1.0 or alpha < 0.0 then
+    return color
+  end
+  return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
 end
 
 return M

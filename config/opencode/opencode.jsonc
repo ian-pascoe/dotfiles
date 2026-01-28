@@ -4,8 +4,8 @@
   "plugin": [
     "opencode-anthropic-auth",
     "opencode-antigravity-auth",
-    "@spiritledsoftware/elisha"
-    // "@spiritledsoftware/elisha@file:../../code/elisha" // Local development version
+    // "@spiritledsoftware/elisha"
+    "@spiritledsoftware/elisha@file:../../code/elisha" // Local development version
   ],
   "autoupdate": "notify",
   "model": "anthropic/claude-opus-4-5",
@@ -214,10 +214,6 @@
     "scroll_acceleration": {
       "enabled": true
     }
-  },
-  "server": {
-    "hostname": "0.0.0.0",
-    "port": 4096
   },
   "username": "Ian"
 }

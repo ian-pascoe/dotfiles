@@ -3,4 +3,4 @@
 -- Add any additional keymaps here
 
 -- Add keymap to search neovim config files
-vim.keymap.set("n", "<leader>sN", LazyVim.pick("files", { cwd = vim.fn.stdpath("config") }), { desc = "Neovim config" })
+vim.keymap.set('n', '<leader>sN', LazyVim.pick('files', { cwd = vim.fn.stdpath('config') }), { desc = 'Neovim config' })

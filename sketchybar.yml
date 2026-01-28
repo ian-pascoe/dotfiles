@@ -1,8 +1,0 @@
----
-base: lua53
-
-globals:
-  Sbar:
-    any: true
-  Util:
-    any: true
