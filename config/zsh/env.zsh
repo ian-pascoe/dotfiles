@@ -8,7 +8,17 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 
-## Global Bun packages
+## Node
+export PATH=$HOME/.npm-global/bin:$PATH
+
+# PNPM
+export PNPM_HOME="/Users/ianpascoe/.local/share/pnpm"
+case ":$PATH:" in
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+## Bun
 export PATH=$XDG_CACHE_HOME/.bun/bin:$PATH
 
 ## Local bin
