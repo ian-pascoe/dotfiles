@@ -64,6 +64,11 @@ if command -v zellij &>/dev/null; then
   alias zjka='zellij kill-all-sessions'
 fi
 
+# OpenClaw
+if command -v openclaw &>/dev/null; then
+  source <(openclaw completion --shell zsh)
+fi
+
 ## Zoxide
 if command -v zoxide &>/dev/null; then
   eval "$(zoxide init zsh)"
