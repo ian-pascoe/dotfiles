@@ -3,9 +3,9 @@
   "theme": "system",
   "plugin": [
     "opencode-anthropic-auth",
-    "opencode-antigravity-auth",
+    "opencode-antigravity-auth"
     // "@spiritledsoftware/elisha"
-    "@spiritledsoftware/elisha@file:../../code/elisha" // Local development version
+    // "@spiritledsoftware/elisha@file:../../code/elisha" // Local development version
   ],
   "autoupdate": "notify",
   "model": "anthropic/claude-opus-4-5",
