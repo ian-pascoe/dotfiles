@@ -64,6 +64,15 @@ if command -v zellij &>/dev/null; then
   alias zjka='zellij kill-all-sessions'
 fi
 
+if command -v brew &>/dev/null; then
+  brew() {
+    command brew "$@"
+    if [[ "$1" =~ ^(install|uninstall|remove|upgrade)$ ]]; then
+      command brew bundle dump --force --file=~/Brewfile
+    fi
+  }
+fi
+
 # OpenClaw
 if command -v openclaw &>/dev/null; then
   source <(openclaw completion --shell zsh)
