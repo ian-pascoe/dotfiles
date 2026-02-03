@@ -3,18 +3,20 @@
 ##============================
 
 ## History
-HISTSIZE=10000
-HISTFILESIZE="${HISTSIZE}"
-SAVEHIST="${HISTSIZE}"
+HISTCONTROL="ignoredups:erasedups"
+HISTSIZE="10000"
+HISTFILESIZE="$HISTSIZE"
+SAVEHIST="$HISTSIZE"
+HISTFILE="$HOME/.zsh_history"
+setopt appendhistory
 
 ## ZPlug
-export ZPLUG_HOME=$(brew --prefix zplug)
-if [ -d $ZPLUG_HOME ]; then
-  source $ZPLUG_HOME/init.zsh
+export ZPLUG_HOME="$(brew --prefix zplug)"
+if [ -d "${ZPLUG_HOME}" ]; then
+  source "${ZPLUG_HOME}/init.zsh"
 
   zplug "zsh-users/zsh-autosuggestions"
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
-  zplug "junegunn/fzf", use:"bin/fzf.zsh"
 
   if ! zplug check --verbose; then
     printf "Install? [y/N]: "
