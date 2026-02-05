@@ -1,6 +1,6 @@
 mouse_mode true
 scroll_buffer_size 10000
-copy_on_select false
+copy_on_select true
 session_serialization true
 serialize_pane_viewport true
 scrollback_lines_to_serialize 10000
