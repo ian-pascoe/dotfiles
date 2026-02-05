@@ -2,19 +2,13 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
   "plugin": [
-    "opencode-anthropic-auth",
-    "opencode-antigravity-auth"
-    // "@spiritledsoftware/elisha"
-    // "@spiritledsoftware/elisha@file:../../code/elisha" // Local development version
+    "opencode-anthropic-auth@latest",
+    "opencode-antigravity-auth@latest",
+    "oh-my-opencode@latest"
   ],
   "autoupdate": "notify",
   "model": "anthropic/claude-opus-4-5",
   "small_model": "google/antigravity-gemini-3-flash",
-  "agent": {
-    "Oholiab (designer)": {
-      "model": "google/antigravity-gemini-3-pro"
-    }
-  },
   "lsp": {
     "biome": {
       "command": ["biome", "lsp-proxy"],
@@ -33,7 +27,6 @@
         ".html"
       ]
     },
-    // Use nil instead of nixd for Nix files
     "nil": {
       "command": ["nil", "--stdio"],
       "extensions": [".nix"]
@@ -57,7 +50,6 @@
       "extensions": [".md", ".mdx"]
     }
   },
-  "mcp": {},
   "provider": {
     "google": {
       "name": "Google",
@@ -107,7 +99,7 @@
           }
         },
         "antigravity-claude-sonnet-4-5": {
-          "name": "Claude Sonnet 4.5 (no thinking) (Antigravity)",
+          "name": "Claude Sonnet 4.5 (Antigravity)",
           "limit": {
             "context": 200000,
             "output": 64000
@@ -161,50 +153,6 @@
                 "thinkingBudget": 32768
               }
             }
-          }
-        },
-        "gemini-2.5-flash": {
-          "name": "Gemini 2.5 Flash (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          }
-        },
-        "gemini-2.5-pro": {
-          "name": "Gemini 2.5 Pro (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          }
-        },
-        "gemini-3-flash-preview": {
-          "name": "Gemini 3 Flash Preview (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          }
-        },
-        "gemini-3-pro-preview": {
-          "name": "Gemini 3 Pro Preview (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
           }
         }
       }

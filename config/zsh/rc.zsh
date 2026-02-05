@@ -6,7 +6,6 @@
 HISTCONTROL="ignoredups:erasedups"
 HISTSIZE="10000"
 HISTFILESIZE="$HISTSIZE"
-SAVEHIST="$HISTSIZE"
 HISTFILE="$HOME/.zsh_history"
 setopt appendhistory
 
@@ -20,7 +19,7 @@ if [ -d "${ZPLUG_HOME}" ]; then
 
   if ! zplug check --verbose; then
     printf "Install? [y/N]: "
-    if read -q; then
+    if read -rq; then
       echo
       zplug install
     fi
@@ -77,7 +76,7 @@ fi
 
 # OpenClaw
 if command -v openclaw &>/dev/null; then
-  source <(openclaw completion --shell zsh)
+  source "$HOME/.openclaw/completions/openclaw.zsh"
 fi
 
 ## Zoxide

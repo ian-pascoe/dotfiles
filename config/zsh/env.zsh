@@ -20,5 +20,6 @@ esac
 
 ## Bun
 export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH"
+
 ## Local bin
 export PATH="$HOME/.local/bin:$PATH"
