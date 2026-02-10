@@ -3,12 +3,22 @@
   "theme": "system",
   "plugin": [
     "opencode-antigravity-auth@latest",
-    "opencode-openai-codex-multi-auth@latest",
-    "oh-my-opencode@latest"
+    "opencode-openai-codex-multi-auth@latest"
   ],
   "autoupdate": "notify",
   "model": "openai/gpt-5.3-codex",
   "small_model": "google/antigravity-gemini-3-flash",
+  "agent": {
+    "compaction": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "explore": {
+      "model": "opencode/glm-4.7-free"
+    },
+    "title": {
+      "model": "opencode/minimax-m2.1-free"
+    }
+  },
   "lsp": {
     "biome": {
       "command": ["biome", "lsp-proxy"],

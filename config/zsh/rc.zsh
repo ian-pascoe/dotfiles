@@ -65,6 +65,17 @@ if command -v zellij &>/dev/null; then
   alias zjka='zellij kill-all-sessions'
 fi
 
+# Secrets
+if [ -f "$HOME/.secrets.sh" ]; then
+  source "$HOME/.secrets.sh"
+fi
+
+# OpenClaw
+if command -v openclaw &>/dev/null; then
+  source "$HOME/.openclaw/completions/openclaw.zsh"
+fi
+
+# Brewfile
 if command -v brew &>/dev/null; then
   brew() {
     command brew "$@"
@@ -72,11 +83,6 @@ if command -v brew &>/dev/null; then
       command brew bundle dump --force --file=~/Brewfile
     fi
   }
-fi
-
-# OpenClaw
-if command -v openclaw &>/dev/null; then
-  source "$HOME/.openclaw/completions/openclaw.zsh"
 fi
 
 ## Zoxide
