@@ -1,3 +1,49 @@
+local function get_vaults()
+  local workspaces = {}
+
+  local vaults_path = vim.fn.finddir('vaults', os.getenv('HOME'))
+  if vaults_path == '' then
+    return workspaces
+  end
+
+  local personal_vault_name = 'personal'
+  local personal_vault_path = vim.fn.finddir(personal_vault_name, vaults_path)
+  if personal_vault_path ~= '' then
+    workspaces = vim.list_extend(workspaces, {
+      {
+        name = personal_vault_name,
+        path = personal_vault_path,
+      },
+    })
+  end
+
+  local family_vault_name = 'family'
+  local family_vault_path = vim.fn.finddir(family_vault_name, vaults_path)
+  if family_vault_path ~= '' then
+    workspaces = vim.list_extend(workspaces, {
+      {
+        name = family_vault_name,
+        path = family_vault_path,
+      },
+    })
+  end
+
+  local work_vault_name = 'work'
+  local work_vault_path = vim.fn.finddir(work_vault_name, vaults_path)
+  if work_vault_path ~= '' then
+    workspaces = vim.list_extend(workspaces, {
+      {
+        name = work_vault_name,
+        path = work_vault_path,
+      },
+    })
+  end
+
+  return workspaces
+end
+
+local vault_workspaces = get_vaults()
+
 return {
   {
     'folke/snacks.nvim',
@@ -135,50 +181,13 @@ return {
   },
   {
     'epwalsh/obsidian.nvim',
+    enabled = vault_workspaces ~= nil and #vault_workspaces > 0,
     ft = { 'markdown' },
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
     opts = function(_, opts)
-      local vaults_path = vim.fn.finddir('vaults', os.getenv('HOME'))
-      if vaults_path == '' then
-        return opts
-      end
-
-      local personal_vault_name = 'personal'
-      local personal_vault_path = vim.fn.finddir(personal_vault_name, vaults_path)
-      if personal_vault_path ~= '' then
-        opts.workspaces = vim.list_extend(opts.workspaces or {}, {
-          {
-            name = personal_vault_name,
-            path = personal_vault_path,
-          },
-        })
-      end
-
-      local family_vault_name = 'family'
-      local family_vault_path = vim.fn.finddir(family_vault_name, vaults_path)
-      if family_vault_path ~= '' then
-        opts.workspaces = vim.list_extend(opts.workspaces or {}, {
-          {
-            name = family_vault_name,
-            path = family_vault_path,
-          },
-        })
-      end
-
-      local work_vault_name = 'work'
-      local work_vault_path = vim.fn.finddir(work_vault_name, vaults_path)
-      if work_vault_path ~= '' then
-        opts.workspaces = vim.list_extend(opts.workspaces or {}, {
-          {
-            name = work_vault_name,
-            path = work_vault_path,
-          },
-        })
-      end
-
-      return opts
+      opts.workspaces = vault_workspaces
     end,
   },
   { -- Directory diffing plugin

@@ -1,6 +1,8 @@
 /node_modules
+/cache
 
 /antigravity-accounts.json
+/openai-codex-accounts.json
 .gitignore
 antigravity-accounts.json
 antigravity-signature-cache.json

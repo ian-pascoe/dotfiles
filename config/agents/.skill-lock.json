@@ -26,7 +26,25 @@
       "skillPath": "skills/agent-browser/SKILL.md",
       "skillFolderHash": "534183ba408692754ff5470166200d672209e96c",
       "installedAt": "2026-02-08T11:16:48.188Z",
-      "updatedAt": "2026-02-08T11:16:48.188Z"
+      "updatedAt": "2026-02-10T00:29:29.704Z"
+    },
+    "simplify": {
+      "source": "brianlovin/claude-config",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/brianlovin/claude-config.git",
+      "skillPath": "skills/simplify/SKILL.md",
+      "skillFolderHash": "83566973442dc05bcf5abbe83053e8a8e5f50b6b",
+      "installedAt": "2026-02-08T11:19:41.572Z",
+      "updatedAt": "2026-02-10T00:29:28.104Z"
+    },
+    "nano-banana-pro": {
+      "source": "intellectronica/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/intellectronica/agent-skills.git",
+      "skillPath": "skills/nano-banana-pro/SKILL.md",
+      "skillFolderHash": "eea680c3ebf9b8ae10ed99ea457f27af2bc05b19",
+      "installedAt": "2026-02-10T02:04:31.546Z",
+      "updatedAt": "2026-02-10T02:04:31.546Z"
     }
   },
   "dismissed": {
