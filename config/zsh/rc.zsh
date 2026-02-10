@@ -65,6 +65,11 @@ if command -v zellij &>/dev/null; then
   alias zjka='zellij kill-all-sessions'
 fi
 
+# Env
+if [ -f "$HOME/.env.sh" ]; then
+  source "$HOME/.env.sh"
+fi
+
 # Secrets
 if [ -f "$HOME/.secrets.sh" ]; then
   source "$HOME/.secrets.sh"
