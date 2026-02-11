@@ -48,5 +48,5 @@ set-bg 1
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sketchybar --reload
-  launchctl kickstart -k gui/"$(id -u)"/org.nix-community.home.jankyborders # restart jankyborders
+  brew services restart borders
 fi
