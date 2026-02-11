@@ -1,6 +1,0 @@
-{ lib, ... }:
-{
-  services.dbus = {
-    enable = lib.mkDefault true;
-  };
-}
