@@ -45,6 +45,15 @@
       "skillFolderHash": "eea680c3ebf9b8ae10ed99ea457f27af2bc05b19",
       "installedAt": "2026-02-10T02:04:31.546Z",
       "updatedAt": "2026-02-10T02:04:31.546Z"
+    },
+    "mcporter": {
+      "source": "steipete/clawdis",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/steipete/clawdis.git",
+      "skillPath": "skills/mcporter/SKILL.md",
+      "skillFolderHash": "8793f4ac0788600d66b40d4059b63cf4938febdb",
+      "installedAt": "2026-02-12T04:05:15.967Z",
+      "updatedAt": "2026-02-12T04:05:15.967Z"
     }
   },
   "dismissed": {

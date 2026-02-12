@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "linear": {
+      "baseUrl": "https://mcp.linear.app/mcp",
+      "auth": "oauth"
+    },
+    "context7": {
+      "baseUrl": "https://mcp.context7.com/mcp/oauth",
+      "auth": "oauth"
+    }
+  },
+  "imports": []
+}
