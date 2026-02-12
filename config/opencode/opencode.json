@@ -8,7 +8,7 @@
     "build": {
       "mode": "all",
       "model": "openai/gpt-5.3-codex",
-      "variant": "medium"
+      "variant": "high"
     },
     "compaction": {
       "model": "openai/gpt-5.1-codex-mini"
@@ -18,7 +18,7 @@
     },
     "general": {
       "model": "openai/gpt-5.3-codex",
-      "variant": "medium"
+      "variant": "low"
     },
     "plan": {
       "mode": "all",
