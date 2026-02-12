@@ -1,10 +1,12 @@
-/node_modules
-/cache
+node_modules/
 
-/antigravity-accounts.json
-/openai-codex-accounts.json
-.gitignore
+**/*.bak
+**/*.tmp
+
 antigravity-accounts.json
 antigravity-signature-cache.json
 antigravity-logs/
+
+multicodex-accounts.json
+.gitignore
 antigravity-accounts.json.*.tmp
