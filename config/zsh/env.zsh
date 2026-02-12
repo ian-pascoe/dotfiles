@@ -24,5 +24,8 @@ esac
 ## Bun
 export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH"
 
+## Cargo
+source "$HOME/.cargo/env"
+
 ## Local bin
 export PATH="$HOME/.local/bin:$PATH"
