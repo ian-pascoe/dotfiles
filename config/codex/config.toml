@@ -1,0 +1,9 @@
+model = "gpt-5.3-codex"
+[projects."/home/ianpascoe"]
+trust_level = "untrusted"
+
+[projects."/home/ianpascoe/code/crosspack"]
+trust_level = "trusted"
+
+[notice.model_migrations]
+"gpt-5.2-codex" = "gpt-5.3-codex"

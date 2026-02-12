@@ -8,7 +8,7 @@
       "skillPath": "skills/frontend-design/SKILL.md",
       "skillFolderHash": "928950704df8a8b885c03de5da626331e6f29cf8",
       "installedAt": "2026-02-08T11:13:18.904Z",
-      "updatedAt": "2026-02-08T11:13:18.904Z"
+      "updatedAt": "2026-02-12T17:27:34.065Z"
     },
     "find-skills": {
       "source": "vercel-labs/skills",
@@ -17,7 +17,7 @@
       "skillPath": "skills/find-skills/SKILL.md",
       "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
       "installedAt": "2026-02-08T11:13:22.543Z",
-      "updatedAt": "2026-02-08T11:13:22.543Z"
+      "updatedAt": "2026-02-12T17:33:03.312Z"
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser",
@@ -26,7 +26,7 @@
       "skillPath": "skills/agent-browser/SKILL.md",
       "skillFolderHash": "534183ba408692754ff5470166200d672209e96c",
       "installedAt": "2026-02-08T11:16:48.188Z",
-      "updatedAt": "2026-02-10T00:29:29.704Z"
+      "updatedAt": "2026-02-12T17:33:27.873Z"
     },
     "simplify": {
       "source": "brianlovin/claude-config",
@@ -35,7 +35,7 @@
       "skillPath": "skills/simplify/SKILL.md",
       "skillFolderHash": "83566973442dc05bcf5abbe83053e8a8e5f50b6b",
       "installedAt": "2026-02-08T11:19:41.572Z",
-      "updatedAt": "2026-02-10T00:29:28.104Z"
+      "updatedAt": "2026-02-12T17:26:12.386Z"
     },
     "nano-banana-pro": {
       "source": "intellectronica/agent-skills",
@@ -44,7 +44,7 @@
       "skillPath": "skills/nano-banana-pro/SKILL.md",
       "skillFolderHash": "eea680c3ebf9b8ae10ed99ea457f27af2bc05b19",
       "installedAt": "2026-02-10T02:04:31.546Z",
-      "updatedAt": "2026-02-10T02:04:31.546Z"
+      "updatedAt": "2026-02-12T17:26:51.677Z"
     },
     "mcporter": {
       "source": "steipete/clawdis",
@@ -53,7 +53,7 @@
       "skillPath": "skills/mcporter/SKILL.md",
       "skillFolderHash": "8793f4ac0788600d66b40d4059b63cf4938febdb",
       "installedAt": "2026-02-12T04:05:15.967Z",
-      "updatedAt": "2026-02-12T04:05:15.967Z"
+      "updatedAt": "2026-02-12T17:27:16.971Z"
     }
   },
   "dismissed": {
@@ -65,6 +65,7 @@
     "gemini-cli",
     "github-copilot",
     "kimi-cli",
-    "opencode"
+    "opencode",
+    "claude-code"
   ]
 }

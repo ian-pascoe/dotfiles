@@ -9,7 +9,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 ## OpenCode
-export OPENCODE_EXPERIMENTAL=true
+export OPENCODE_EXPERIMENTAL=false
 
 ## Node
 export PATH="$HOME/.npm-global/bin:$PATH"

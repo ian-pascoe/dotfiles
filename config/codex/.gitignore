@@ -1,0 +1,11 @@
+log/
+sessions/
+shell_snapshots/
+skills/.system
+tmp/
+
+auth.json
+.personality_migration
+history.jsonl
+models_cache.json
+version.json

@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "auto_update": true,
   "agents": {
     "hephaestus": {
       "model": "openai/gpt-5.3-codex",
@@ -10,10 +11,10 @@
       "variant": "xhigh"
     },
     "librarian": {
-      "model": "opencode/gpt-5.1-codex-mini"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "explore": {
-      "model": "openai/gpt-5.1-codex-mini"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "multimodal-looker": {
       "model": "google/antigravity-gemini-3-flash"
@@ -56,14 +57,15 @@
     },
     "unspecified-low": {
       "model": "openai/gpt-5.3-codex",
-      "variant": "medium"
+      "variant": "low"
     },
     "unspecified-high": {
       "model": "openai/gpt-5.3-codex",
-      "variant": "medium"
+      "variant": "high"
     },
     "writing": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-flash",
+      "variant": "high"
     }
   }
 }
