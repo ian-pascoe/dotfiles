@@ -1,16 +1,20 @@
 {
   "mcpServers": {
     "linear": {
+      "description": "Project management tool for software teams.",
       "baseUrl": "https://mcp.linear.app/mcp",
       "auth": "oauth"
     },
     "context7": {
+      "description": "Up-to-date code documentation for LLMs and AI code editors",
       "baseUrl": "https://mcp.context7.com/mcp"
     },
     "grep": {
+      "description": "Find code examples on GitHub",
       "baseUrl": "https://mcp.grep.app"
     },
     "chrome-devtools": {
+      "description": "Control and inspect a live Chrome browser.",
       "command": "bunx",
       "args": [
         "chrome-devtools-mcp@latest",
@@ -21,9 +25,11 @@
       }
     },
     "packrun": {
+      "description": "MCP-first npm registry. Security signals and package health for AI agents.",
       "baseUrl": "https://mcp.packrun.dev/mcp"
     },
     "deepwiki": {
+      "description": "DeepWiki provides up-to-date documentation you can talk to, for deepwiki. Think Deep Research for GitHub - powered by Devin.",
       "baseUrl": "https://mcp.deepwiki.com/mcp"
     }
   },

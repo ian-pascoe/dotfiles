@@ -54,6 +54,42 @@
       "skillFolderHash": "8793f4ac0788600d66b40d4059b63cf4938febdb",
       "installedAt": "2026-02-12T04:05:15.967Z",
       "updatedAt": "2026-02-12T17:27:16.971Z"
+    },
+    "prompt-engineering-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/wshobson/agents.git",
+      "skillPath": "plugins/llm-application-dev/skills/prompt-engineering-patterns/SKILL.md",
+      "skillFolderHash": "917219a41bf419588a14a4e9303ba93dcc41822b",
+      "installedAt": "2026-02-12T21:01:43.936Z",
+      "updatedAt": "2026-02-12T21:01:43.936Z"
+    },
+    "index-knowledge": {
+      "source": "tursodatabase/turso",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tursodatabase/turso.git",
+      "skillPath": ".claude/skills/index-knowledge/SKILL.md",
+      "skillFolderHash": "a9cab96d4be344078047688ed90d094c01674785",
+      "installedAt": "2026-02-12T21:17:04.731Z",
+      "updatedAt": "2026-02-12T21:17:04.731Z"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "skillFolderHash": "986c64ad9b8e196a4a737c01872c2eda790daba1",
+      "installedAt": "2026-02-12T21:23:55.756Z",
+      "updatedAt": "2026-02-12T21:23:55.756Z"
+    },
+    "architecture-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/wshobson/agents.git",
+      "skillPath": "plugins/backend-development/skills/architecture-patterns/SKILL.md",
+      "skillFolderHash": "f1065fb3a70a01b204c1343deb7f8c7e377a90cc",
+      "installedAt": "2026-02-12T21:34:07.529Z",
+      "updatedAt": "2026-02-12T21:34:07.529Z"
     }
   },
   "dismissed": {
@@ -66,6 +102,6 @@
     "github-copilot",
     "kimi-cli",
     "opencode",
-    "claude-code"
+    "openclaw"
   ]
 }
