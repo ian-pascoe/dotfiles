@@ -3,11 +3,16 @@
 ##============================
 
 ## History
-HISTCONTROL="ignoredups:erasedups"
-HISTSIZE="10000"
-HISTFILESIZE="$HISTSIZE"
+HISTSIZE=10000
+SAVEHIST=$HISTSIZE
 HISTFILE="$HOME/.zsh_history"
+
+# Persist history immediately and dedupe entries
 setopt appendhistory
+setopt inc_append_history
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
 
 ## ZPlug
 export ZPLUG_HOME="$(brew --prefix zplug)"

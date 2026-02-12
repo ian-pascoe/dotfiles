@@ -552,6 +552,15 @@ main() {
   link_with_backup "$DOTFILES_DIR/themes" "$HOME/.themes" required
   record_step_ok
 
+  log_info 'Setting up local bin files'
+  for bin_path in "$DOTFILES_DIR/bin/"*; do
+    if [[ -f "$bin_path" && -x "$bin_path" ]]; then
+      dst="$HOME/.local/bin/$(basename "$bin_path")"
+      link_with_backup "$bin_path" "$dst" optional
+    fi
+  done
+  record_step_ok
+
   setup_aerospace
 
   log_info 'Setting up Agents configuration...'
@@ -568,6 +577,7 @@ main() {
   setup_optional_command_link fastfetch "$DOTFILES_DIR/config/fastfetch" "$HOME/.config/fastfetch" 'Fastfetch'
   setup_optional_command_link ghostty "$DOTFILES_DIR/config/ghostty" "$HOME/.config/ghostty" 'Ghostty'
   setup_git_config
+  setup_optional_macos_link hs "$DOTFILES_DIR/config/hammerspoon" "$HOME/.hammerspoon" 'Hammerspoon'
   setup_optional_command_link k9s "$DOTFILES_DIR/config/k9s" "$HOME/.config/k9s" 'K9s'
 
   if is_macos; then
