@@ -49,12 +49,21 @@ fi
 if command -v lsd &>/dev/null; then
   alias ls='lsd'
 fi
+alias l='ls'
 alias ll='ls -l'
 alias lla='ls -lA'
+alias la='ls -A'
+alias lt='ls --tree'
+alias ltla='ls -lA --tree'
 
 ## Bat
 if command -v bat &>/dev/null; then
   alias cat='bat --style=plain --paging=never'
+fi
+
+## Cargo
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
 fi
 
 ## FZF

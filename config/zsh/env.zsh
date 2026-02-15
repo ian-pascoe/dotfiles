@@ -30,11 +30,6 @@ if [ -d "$XDG_CACHE_HOME/.bun/bin" ]; then
   export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH"
 fi
 
-## Cargo
-if [ -f "$HOME/.cargo/env" ]; then
-  source "$HOME/.cargo/env"
-fi
-
 ## Local bin
 if [ -d "$HOME/.local/bin" ]; then
   export PATH="$HOME/.local/bin:$PATH"
