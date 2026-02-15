@@ -12,20 +12,30 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export OPENCODE_EXPERIMENTAL=false
 
 ## Node
-export PATH="$HOME/.npm-global/bin:$PATH"
+if [ -d "$HOME/.npm-global/bin" ]; then
+  export PATH="$HOME/.npm-global/bin:$PATH"
+fi
 
 # PNPM
 export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-*":$PNPM_HOME:"*) ;;
-*) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+if [ -d "$PNPM_HOME" ]; then
+  case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
+fi
 
 ## Bun
-export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH"
+if [ -d "$XDG_CACHE_HOME/.bun/bin" ]; then
+  export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH"
+fi
 
 ## Cargo
-source "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
 
 ## Local bin
-export PATH="$HOME/.local/bin:$PATH"
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi

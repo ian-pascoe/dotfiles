@@ -117,6 +117,3 @@ if command -v starship &>/dev/null; then
   PROMPT_COMMAND="__sanitize_prompt${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
   eval "$(starship init zsh)"
 fi
-
-# OpenClaw Completion
-source "/home/ianpascoe/.openclaw/completions/openclaw.zsh"
