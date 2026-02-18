@@ -71,6 +71,12 @@ if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
 fi
 
+## JJ
+if command -v jj &>/dev/null; then
+  autoload -U compinit && compinit
+  source <(jj util completion zsh)
+fi
+
 ## Zellij
 if command -v zellij &>/dev/null; then
   alias zj='zellij'
