@@ -24,9 +24,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "534183ba408692754ff5470166200d672209e96c",
+      "skillFolderHash": "ce32ad3e89bb7289a6bea81b05c77609f2fff2f8",
       "installedAt": "2026-02-08T11:16:48.188Z",
-      "updatedAt": "2026-02-12T17:33:27.873Z"
+      "updatedAt": "2026-02-18T10:04:18.838Z"
     },
     "simplify": {
       "source": "brianlovin/claude-config",
@@ -101,7 +101,6 @@
     "gemini-cli",
     "github-copilot",
     "kimi-cli",
-    "opencode",
-    "openclaw"
+    "opencode"
   ]
 }

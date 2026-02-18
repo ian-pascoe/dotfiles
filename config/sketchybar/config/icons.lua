@@ -107,6 +107,7 @@ M.app_icons = {
   ["zoom.us"] = "",
   ["Safari"] = "",
   ["Discord"] = "",
+  ["Linear"] = "󰂶",
 }
 
 function M.map(app_name)
