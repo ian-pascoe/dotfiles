@@ -11,6 +11,11 @@ export XDG_CACHE_HOME="$HOME/.cache"
 ## OpenCode
 export OPENCODE_EXPERIMENTAL=false
 
+## Cargo
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
+
 ## Node
 if [ -d "$HOME/.npm-global/bin" ]; then
   export PATH="$HOME/.npm-global/bin:$PATH"

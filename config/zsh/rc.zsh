@@ -61,11 +61,6 @@ if command -v bat &>/dev/null; then
   alias cat='bat --style=plain --paging=never'
 fi
 
-## Cargo
-if [ -f "$HOME/.cargo/env" ]; then
-  source "$HOME/.cargo/env"
-fi
-
 ## FZF
 if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
