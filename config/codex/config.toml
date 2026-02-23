@@ -1,8 +1,14 @@
 model = "gpt-5.3-codex"
 [projects."/home/ianpascoe"]
-trust_level = "untrusted"
+trust_level = "trusted"
 
 [projects."/home/ianpascoe/code/crosspack"]
+trust_level = "trusted"
+
+[projects."/home/ianpascoe/.openclaw/workspace-daniel"]
+trust_level = "trusted"
+
+[projects."/home/ianpascoe/.openclaw"]
 trust_level = "trusted"
 
 [notice.model_migrations]

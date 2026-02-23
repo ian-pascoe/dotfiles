@@ -1,1 +1,1 @@
-../superpowers/.opencode/plugins/superpowers.js
+../../superpowers/.opencode/plugins/superpowers.js
