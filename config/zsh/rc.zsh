@@ -77,12 +77,21 @@ if command -v jj &>/dev/null; then
   source <(jj util completion zsh)
 fi
 
+# Yazi
+if command -v yazi &>/dev/null; then
+  alias y='yazi'
+fi
+
 ## Zellij
 if command -v zellij &>/dev/null; then
   alias zj='zellij'
-  alias zjd='zellij --layout dev'
-  alias zjk='zellij kill-sessions'
+  alias zjl='zellij list-sessions'
+  alias zja='zellij attach'
+  alias zjd='zellij delete-session'
+  alias zjda='zellij delete-all-sessions'
+  alias zjk='zellij kill-session'
   alias zjka='zellij kill-all-sessions'
+  alias zj-dev='zellij --layout dev'
 fi
 
 # Environment-Specific Env
