@@ -62,7 +62,7 @@
       "skillPath": "plugins/llm-application-dev/skills/prompt-engineering-patterns/SKILL.md",
       "skillFolderHash": "2c28aa58251d2b2b0e3aae067ce69e117ad10710",
       "installedAt": "2026-02-12T21:01:43.936Z",
-      "updatedAt": "2026-02-20T10:24:50.747Z"
+      "updatedAt": "2026-02-20T10:25:26.810Z"
     },
     "index-knowledge": {
       "source": "tursodatabase/turso",

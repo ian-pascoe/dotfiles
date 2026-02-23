@@ -124,6 +124,27 @@ local function toggleCaffeine()
   notify(not active and "Caffeine: ON" or "Caffeine: OFF")
 end
 
+local function setCaffeineEnabled(enabled, reason)
+  local active = hs.caffeinate.get("displayIdle")
+  if active == enabled then
+    return
+  end
+
+  hs.caffeinate.set("displayIdle", enabled)
+  if reason then
+    notify(enabled and ("Caffeine: ON (" .. reason .. ")") or ("Caffeine: OFF (" .. reason .. ")"))
+    return
+  end
+
+  notify(enabled and "Caffeine: ON" or "Caffeine: OFF")
+end
+
+local function syncCaffeineWithPower(showNotification)
+  local source = hs.battery.powerSource()
+  local onACPower = source == "AC Power"
+  setCaffeineEnabled(onACPower, showNotification and source or nil)
+end
+
 local function toggleMicMute()
   local input = hs.audiodevice.defaultInputDevice()
   if not input then
@@ -169,6 +190,12 @@ bind(hyper, "D", "Toggle dark mode", toggleDarkMode)
 bind(hyper, "/", "Show shortcut cheatsheet", showCheatsheet)
 bind(hyper, ".", "Toggle Hammerspoon console", hs.toggleConsole)
 bind(hyper, "O", "Open dotfiles folder", openDotfiles)
+
+local powerWatcher = hs.battery.watcher.new(function()
+  syncCaffeineWithPower(true)
+end)
+powerWatcher:start()
+syncCaffeineWithPower(false)
 
 log.i("config loaded")
 notify("Hammerspoon ready")
