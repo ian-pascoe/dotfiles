@@ -3,7 +3,6 @@
   "theme": "system",
   "plugin": ["opencode-antigravity-auth@latest"],
   "autoupdate": "notify",
-  "default_agent": "plan",
   "agent": {
     "build": {
       "mode": "all",
