@@ -15,8 +15,10 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 
 ## ZPlug
-export ZPLUG_HOME="$(brew --prefix zplug)"
-if [ -d "${ZPLUG_HOME}" ]; then
+if command -v brew &>/dev/null; then
+  export ZPLUG_HOME="$(brew --prefix zplug 2>/dev/null)"
+fi
+if [ -n "${ZPLUG_HOME:-}" ] && [ -d "${ZPLUG_HOME}" ]; then
   source "${ZPLUG_HOME}/init.zsh"
 
   zplug "zsh-users/zsh-autosuggestions"
@@ -39,10 +41,7 @@ fi
 
 ## Editor
 if command -v nvim &>/dev/null; then
-  export EDITOR='nvim'
   alias vim='nvim'
-else
-  export EDITOR='vim'
 fi
 
 ## LSD
@@ -89,16 +88,6 @@ if command -v zellij &>/dev/null; then
   alias zj-dev='zellij --layout dev'
 fi
 
-# Environment-Specific Env
-if [ -f "$HOME/.env.sh" ]; then
-  source "$HOME/.env.sh"
-fi
-
-# Secrets
-if [ -f "$HOME/.secrets.sh" ]; then
-  source "$HOME/.secrets.sh"
-fi
-
 # OpenClaw
 if command -v openclaw &>/dev/null; then
   source "$HOME/.openclaw/completions/openclaw.zsh"
@@ -131,8 +120,10 @@ fi
 
 ## Starship
 if command -v starship &>/dev/null; then
-  # clear stale readline state before rendering prompt (prevents artifacts in prompt after abnormal exits like SIGQUIT)
+  # Clear stale line state before each prompt render in zsh.
   __sanitize_prompt() { printf '\r\033[K'; }
-  PROMPT_COMMAND="__sanitize_prompt${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+  if (( ${precmd_functions[(Ie)__sanitize_prompt]} == 0 )); then
+    precmd_functions+=(__sanitize_prompt)
+  fi
   eval "$(starship init zsh)"
 fi

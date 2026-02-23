@@ -11,14 +11,19 @@ export XDG_CACHE_HOME="$HOME/.cache"
 ## OpenCode
 export OPENCODE_EXPERIMENTAL=false
 
-## Cargo
-if [ -f "$HOME/.cargo/env" ]; then
-  source "$HOME/.cargo/env"
+## Editor
+if command -v nvim &>/dev/null; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
 fi
 
 ## Node
 if [ -d "$HOME/.npm-global/bin" ]; then
-  export PATH="$HOME/.npm-global/bin:$PATH"
+  case ":$PATH:" in
+  *":$HOME/.npm-global/bin:"*) ;;
+  *) export PATH="$HOME/.npm-global/bin:$PATH" ;;
+  esac
 fi
 
 # PNPM
@@ -32,10 +37,16 @@ fi
 
 ## Bun
 if [ -d "$XDG_CACHE_HOME/.bun/bin" ]; then
-  export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH"
+  case ":$PATH:" in
+  *":$XDG_CACHE_HOME/.bun/bin:"*) ;;
+  *) export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH" ;;
+  esac
 fi
 
 ## Local bin
 if [ -d "$HOME/.local/bin" ]; then
-  export PATH="$HOME/.local/bin:$PATH"
+  case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) export PATH="$HOME/.local/bin:$PATH" ;;
+  esac
 fi
