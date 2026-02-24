@@ -18,6 +18,14 @@ else
   export EDITOR='vim'
 fi
 
+## Crosspack
+if [ -d "$HOME/.crosspack/bin" ]; then
+  case ":$PATH:" in
+  *":$HOME/.crosspack/bin:"*) ;;
+  *) export PATH="$HOME/.crosspack/bin:$PATH" ;;
+  esac
+fi
+
 ## Node
 if [ -d "$HOME/.npm-global/bin" ]; then
   case ":$PATH:" in
