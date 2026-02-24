@@ -269,7 +269,7 @@ agent-browser diff url https://staging.example.com https://prod.example.com --sc
 
 ## Timeouts and Slow Pages
 
-The default Playwright timeout is 60 seconds for local browsers. For slow websites or large pages, use explicit waits instead of relying on the default timeout:
+The default Playwright timeout is 25 seconds for local browsers. This can be overridden with the `AGENT_BROWSER_DEFAULT_TIMEOUT` environment variable (value in milliseconds). For slow websites or large pages, use explicit waits instead of relying on the default timeout:
 
 ```bash
 # Wait for network activity to settle (best for slow pages)

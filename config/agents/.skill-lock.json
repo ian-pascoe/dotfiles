@@ -24,9 +24,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "67900f6de513d3a02a1d8aa1d736855cc384f908",
+      "skillFolderHash": "058693a51cd0ec9cec262207e10175c764fb8fce",
       "installedAt": "2026-02-08T11:16:48.188Z",
-      "updatedAt": "2026-02-23T16:30:39.374Z"
+      "updatedAt": "2026-02-24T11:06:11.352Z"
     },
     "simplify": {
       "source": "brianlovin/claude-config",

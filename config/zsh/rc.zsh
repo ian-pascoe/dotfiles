@@ -99,6 +99,11 @@ if command -v openclaw &>/dev/null; then
   source "$HOME/.openclaw/completions/openclaw.zsh"
 fi
 
+# Crosspack
+if [ -f "$HOME/.crosspack/share/completions/crosspack.zsh" ]; then
+  . "$HOME/.crosspack/share/completions/crosspack.zsh"
+fi
+
 # Brewfile
 if command -v brew &>/dev/null; then
   brew() {
