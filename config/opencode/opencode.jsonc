@@ -12,9 +12,9 @@
       "model": "opencode/big-pickle"
     },
     "explore": {
-      "model": "openai/codex-mini-latest",
+      "model": "openai/gpt-5.1-codex-mini",
       "permission": {
-        "skill": "allow"
+        "skill": "allow" // denied by default
       }
     },
     "general": {
