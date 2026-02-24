@@ -7,12 +7,6 @@ HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE="$HOME/.zsh_history"
 
-_zsh_config_dir="${${(%):-%N}:A:h}"
-if [ -f "$_zsh_config_dir/path-order.zsh" ]; then
-  source "$_zsh_config_dir/path-order.zsh"
-fi
-unset _zsh_config_dir
-
 # Persist history immediately and dedupe entries
 setopt appendhistory
 setopt inc_append_history
@@ -99,11 +93,6 @@ if command -v openclaw &>/dev/null; then
   source "$HOME/.openclaw/completions/openclaw.zsh"
 fi
 
-# Crosspack
-if [ -f "$HOME/.crosspack/share/completions/crosspack.zsh" ]; then
-  . "$HOME/.crosspack/share/completions/crosspack.zsh"
-fi
-
 # Brewfile
 if command -v brew &>/dev/null; then
   brew() {
@@ -137,10 +126,4 @@ if command -v starship &>/dev/null; then
     precmd_functions+=(__sanitize_prompt)
   fi
   eval "$(starship init zsh)"
-fi
-
-# Re-assert preferred order after plugin/tool initialization mutates PATH.
-if typeset -f __enforce_path_priority >/dev/null; then
-  __enforce_path_priority
-  unset -f __enforce_path_priority
 fi

@@ -5,30 +5,30 @@
   "autoupdate": "notify",
   "agent": {
     "build": {
-      "mode": "all",
       "model": "openai/gpt-5.3-codex",
-      "variant": "medium"
+      "variant": "high"
     },
     "compaction": {
-      "model": "openai/gpt-5.1-codex-mini"
+      "model": "opencode/big-pickle"
     },
     "explore": {
-      "model": "openai/gpt-5.1-codex-mini"
+      "model": "openai/codex-mini-latest",
+      "permission": {
+        "skill": "allow"
+      }
     },
     "general": {
       "model": "openai/gpt-5.3-codex",
-      "variant": "low"
+      "variant": "medium"
     },
     "plan": {
-      "mode": "all",
       "model": "openai/gpt-5.3-codex",
       "variant": "xhigh",
       "permission": {
         "edit": {
           "*": "deny",
-          ".agents/plans/**": "allow",
           ".opencode/plans/**": "allow",
-          "docs/plans/**": "allow"
+          ".agents/plans/**": "allow"
         }
       }
     },
