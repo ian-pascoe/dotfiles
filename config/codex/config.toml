@@ -1,18 +1,17 @@
 model = "gpt-5.3-codex"
-[projects."/home/ianpascoe"]
+personality = "pragmatic"
+model_reasoning_effort = "xhigh"
+[projects."/Users/ianpascoe/.dotfiles"]
 trust_level = "trusted"
 
-[projects."/home/ianpascoe/code/crosspack"]
+[projects."/Users/ianpascoe/code/crosspack"]
 trust_level = "trusted"
 
-[projects."/home/ianpascoe/.openclaw/workspace-daniel"]
-trust_level = "trusted"
-
-[projects."/home/ianpascoe/.openclaw"]
-trust_level = "trusted"
-
-[projects."/home/ianpascoe/.dotfiles"]
+[projects."/Users/ianpascoe/code/crosspack/crosspack"]
 trust_level = "trusted"
 
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
+
+[features]
+multi_agent = true

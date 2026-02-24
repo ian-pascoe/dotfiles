@@ -2,6 +2,8 @@ log/
 sessions/
 shell_snapshots/
 skills/.system
+sqlite/
+vendor_imports/
 tmp/
 
 auth.json
