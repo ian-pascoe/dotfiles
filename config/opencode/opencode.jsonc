@@ -39,10 +39,10 @@
     },
     // Custom agents
     "quick": {
-      "model": "openai/gpt-5.3-codex",
-      "variant": "low",
       "mode": "subagent",
       "description": "Optimized for speed and efficiency, ideal for simple tasks that require fast responses.",
+      "model": "openai/gpt-5.3-codex",
+      "variant": "low",
       // Same as general
       "permission": {
         "todoread": "deny",
@@ -50,10 +50,10 @@
       }
     },
     "deep": {
-      "model": "openai/gpt-5.3-codex",
-      "variant": "xhigh",
       "mode": "subagent",
       "description": "Optimized for depth and thoroughness, ideal for complex tasks that require detailed analysis and comprehensive responses.",
+      "model": "openai/gpt-5.3-codex",
+      "variant": "xhigh",
       // Same as general
       "permission": {
         "todoread": "deny",
@@ -61,10 +61,10 @@
       }
     },
     "frontend": {
-      "model": "google/antigravity-gemini-3.1-pro",
-      "variant": "high",
       "mode": "all",
       "description": "Specialized in frontend development tasks, including HTML, CSS, and JavaScript. Provides expert-level assistance for building responsive and user-friendly interfaces.",
+      "model": "google/antigravity-gemini-3.1-pro",
+      "variant": "high",
       // Same as general
       "permission": {
         "todoread": "deny",

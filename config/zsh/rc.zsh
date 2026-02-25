@@ -88,12 +88,12 @@ if command -v zellij &>/dev/null; then
   alias zj-dev='zellij --layout dev'
 fi
 
-# OpenClaw
-if command -v openclaw &>/dev/null; then
+## OpenClaw
+if [ -f "$HOME/.openclaw/completions/openclaw.zsh" ]; then
   source "$HOME/.openclaw/completions/openclaw.zsh"
 fi
 
-# Brewfile
+## Brewfile
 if command -v brew &>/dev/null; then
   brew() {
     command brew "$@"

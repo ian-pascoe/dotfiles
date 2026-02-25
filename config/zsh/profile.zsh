@@ -16,14 +16,10 @@ fi
 
 ## Cargo
 if [ -f "$HOME/.cargo/env" ]; then
-  fi
-
-# Environment-Specific Env
-if [ -f "$HOME/.env.sh" ]; then
-  source "$HOME/.env.sh"
+  source "$HOME/.cargo/env"
 fi
 
-# Secrets
-if [ -f "$HOME/.secrets.sh" ]; then
-  source "$HOME/.secrets.sh"
+## Environment-Specific Env
+if [ -f "$HOME/.env" ]; then
+  source "$HOME/.env"
 fi

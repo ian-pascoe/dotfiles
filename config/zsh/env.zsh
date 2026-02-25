@@ -9,7 +9,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 ## OpenCode
-export OPENCODE_EXPERIMENTAL=false
+export OPENCODE_EXPERIMENTAL=true
 
 ## Editor
 if command -v nvim &>/dev/null; then
@@ -34,7 +34,7 @@ if [ -d "$HOME/.npm-global/bin" ]; then
   esac
 fi
 
-# PNPM
+## PNPM
 export PNPM_HOME="$HOME/.local/share/pnpm"
 if [ -d "$PNPM_HOME" ]; then
   case ":$PATH:" in
@@ -58,4 +58,3 @@ if [ -d "$HOME/.local/bin" ]; then
   *) export PATH="$HOME/.local/bin:$PATH" ;;
   esac
 fi
-. "$HOME/.cargo/env"
