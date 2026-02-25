@@ -23,7 +23,8 @@
         "edit": {
           "*": "deny",
           ".opencode/plans/**": "allow",
-          ".agents/plans/**": "allow"
+          ".agents/plans/**": "allow",
+          "**/AGENTS.md": "allow"
         }
       }
     },
