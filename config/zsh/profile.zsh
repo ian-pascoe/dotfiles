@@ -16,8 +16,7 @@ fi
 
 ## Cargo
 if [ -f "$HOME/.cargo/env" ]; then
-  source "$HOME/.cargo/env"
-fi
+  fi
 
 # Environment-Specific Env
 if [ -f "$HOME/.env.sh" ]; then

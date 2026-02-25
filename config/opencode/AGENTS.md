@@ -18,7 +18,7 @@
 
 ## Using Skills
 
-### Rules
+### The Rule
 
 - **EXTREMELY IMPORTANT:** If you think there is even a 0.1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
 - **IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.**
@@ -26,8 +26,7 @@
 
 ### Important Skills
 
-- `mcporter`: **ALWAYS CHECK FIRST**. Access to MCP (Model Context Protocol) servers using a clean CLI. There are several MCP servers available, you should always inspect these to discover available tools.
-- `simplify`: Load this skill after writing code to simplify and optimize it.
+- `mcporter`: Access to MCP (Model Context Protocol) servers using a clean CLI.
 
 ---
 
