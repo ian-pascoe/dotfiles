@@ -1,8 +1,8 @@
-# AGENTS.md - Global Instructions for Agents
+# AGENTS.md - Global Instructions
 
 ## Context Handling
 
-### Mandatory Note-Taking Protocol
+### Mandatory Note-Taking
 
 - Treat any user statement matching "always", "never", "from now on", "preference", "when X do Y", or correction of agent behavior as a standing instruction candidate.
 - If the instruction is expected to apply beyond the current single task, update `AGENTS.md` in the same session before sending the final response.
@@ -10,7 +10,7 @@
 - In the response where the note is recorded, include the exact file path (`AGENTS.md`) and what was added.
 - If uncertain whether an instruction is standing or one-off, default to recording it in `AGENTS.md`.
 
-### Completion Checklist (Before Final Response)
+### Completion Checklist
 
 - Confirm whether any new standing preference appeared during the conversation.
 - If yes, update `AGENTS.md` first, then respond.
@@ -20,13 +20,13 @@
 
 ### The Rule
 
-- **EXTREMELY IMPORTANT:** If you think there is even a 0.1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
+- **EXTREMELY IMPORTANT:** If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
 - **IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.**
 - **This is not negotiable. This is not optional.** You cannot rationalize your way out of this.
 
 ### Important Skills
 
-- `mcporter`: Access to MCP (Model Context Protocol) servers using a clean CLI.
+- `mcporter`: Access to MCP (Model Context Protocol) servers. You should **ALWAYS** check this for additional tools that may be relevant to your task.
 
 ---
 
