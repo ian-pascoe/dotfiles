@@ -26,7 +26,7 @@
       "skillPath": "skills/agent-browser/SKILL.md",
       "skillFolderHash": "88b7e785240d14ab80eb11abdd0cbd27b20055c6",
       "installedAt": "2026-02-08T11:16:48.188Z",
-      "updatedAt": "2026-02-26T09:51:50.481Z"
+      "updatedAt": "2026-02-25T23:32:00.268Z"
     },
     "simplify": {
       "source": "brianlovin/claude-config",

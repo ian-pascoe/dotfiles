@@ -6,8 +6,8 @@
   "permission": {
     "external_directory": {
       "*": "ask",
-      // Allow global opencode config
-      "~/.config/opencode/**": "allow"
+      "~/.config/opencode/**": "allow",
+      "/tmp/**": "allow"
     }
   },
   "agent": {

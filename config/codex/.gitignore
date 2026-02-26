@@ -6,6 +6,7 @@ sqlite/
 vendor_imports/
 tmp/
 
+*.sqlite*
 auth.json
 .personality_migration
 history.jsonl
