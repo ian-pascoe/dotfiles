@@ -11,7 +11,7 @@ fi
 
 ## Crosspack
 if [[ -x "$HOME/.crosspack/bin/crosspack" ]]; then
-  source <("$HOME/.crosspack/bin/crosspack" init-shell --shell zsh)
+  eval "$("$HOME/.crosspack/bin/crosspack" init-shell --shell zsh)"
 fi
 
 ## Cargo
