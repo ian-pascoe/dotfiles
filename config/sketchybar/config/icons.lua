@@ -108,6 +108,7 @@ M.app_icons = {
   ["Safari"] = "",
   ["Discord"] = "",
   ["Linear"] = "󰂶",
+  ["OpenCode"] = "O",
 }
 
 function M.map(app_name)

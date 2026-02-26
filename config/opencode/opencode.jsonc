@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
   "plugin": ["opencode-antigravity-auth@latest"],
   "autoupdate": "notify",
   "permission": {
@@ -236,11 +235,6 @@
           }
         }
       }
-    }
-  },
-  "tui": {
-    "scroll_acceleration": {
-      "enabled": true
     }
   },
   "username": "Ian"
