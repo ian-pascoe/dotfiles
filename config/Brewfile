@@ -1,3 +1,4 @@
+tap "anomaly/tap"
 tap "anomalyco/tap"
 tap "antoniorodr/memo"
 tap "felixkratz/formulae"
@@ -42,7 +43,7 @@ brew "sevenzip"
 brew "sops"
 brew "spotify_player"
 brew "starship"
-brew "syncthing"
+brew "syncthing", restart_service: :changed
 brew "tailscale"
 brew "uv"
 brew "yazi"
