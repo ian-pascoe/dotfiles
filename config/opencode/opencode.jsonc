@@ -30,15 +30,12 @@
     "explore": {
       "model": "openai/gpt-5.1-codex-mini",
       "permission": {
-        "skill": "allow" // denied by default
+        "skill": "allow" // Denied by default
       }
     },
     "general": {
       "model": "openai/gpt-5.3-codex",
-      "variant": "medium",
-      "permission": {
-        "*": "allow"
-      }
+      "variant": "medium"
     },
     // Custom agents
     "quick": {
@@ -47,7 +44,8 @@
       "model": "openai/gpt-5.3-codex",
       "variant": "low",
       "permission": {
-        "*": "allow"
+        "todoread": "deny",
+        "todowrite": "deny"
       }
     },
     "deep": {
@@ -56,17 +54,15 @@
       "model": "openai/gpt-5.3-codex",
       "variant": "xhigh",
       "permission": {
-        "*": "allow"
+        "todoread": "deny",
+        "todowrite": "deny"
       }
     },
     "frontend": {
       "mode": "all",
       "description": "Specialized in frontend development tasks, including HTML, CSS, and JavaScript. Provides expert-level assistance for building responsive and user-friendly interfaces.",
       "model": "google/antigravity-gemini-3.1-pro",
-      "variant": "high",
-      "permission": {
-        "*": "allow"
-      }
+      "variant": "high"
     },
     // Utility agents
     "summary": {
