@@ -5,11 +5,66 @@
   "permission": {
     "external_directory": {
       "*": "ask",
-      "~/.config/opencode/**": "allow",
-      "/tmp/**": "allow"
+      "/tmp/**": "allow",
+      "~/.config/opencode/**": "allow"
     }
   },
   "agent": {
+    // default opencode models with customizations
+    "build": {
+      "model": "openai/gpt-5.3-codex",
+      "variant": "xhigh"
+    },
+    "plan": {
+      "model": "openai/gpt-5.3-codex",
+      "variant": "xhigh",
+      "permission": {
+        "edit": {
+          "*": "deny",
+          "AGENTS.md": "allow",
+          "**/AGENTS.md": "allow",
+          ".opencode/plans/**": "allow"
+        }
+      }
+    },
+    "explore": {
+      "model": "openai/gpt-5-nano",
+      "permission": {
+        "skill": "allow" // denied by default in opencode
+      }
+    },
+    "general": {
+      "model": "openai/gpt-5.3-codex",
+      "variant": "medium"
+    },
+    // custom agents
+    "quick": {
+      "description": "Optimized for speed, this agent provides fast responses with a focus on efficiency. Ideal for simple tasks and quick interactions where response time is critical.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.3-codex",
+      "variant": "low",
+      "permission": {
+        "todoread": "deny",
+        "todowrite": "deny"
+      }
+    },
+    "deep": {
+      "description": "Designed for complex problem-solving, this agent takes more time to analyze and generate responses. It excels at handling intricate tasks that require deeper reasoning and understanding.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.3-codex",
+      "variant": "xhigh",
+      "permission": {
+        "todoread": "deny",
+        "todowrite": "deny"
+      }
+    },
+    "frontend-expert": {
+      "description": "Specialized in frontend development, this agent is trained to assist with tasks related to HTML, CSS, JavaScript, and popular frontend frameworks. It can provide code snippets, debug issues, and offer best practices for frontend development.",
+      "mode": "all",
+      "model": "google/antigravity-gemini-3.1-pro",
+      "variant": "high"
+    },
+    // utility agents
     "summary": {
       "model": "opencode/big-pickle"
     },
@@ -17,8 +72,7 @@
       "model": "opencode/big-pickle"
     },
     "compaction": {
-      "model": "openai/gpt-5.3-codex",
-      "variant": "low"
+      "model": "google/antigravity-gemini-3-flash"
     }
   },
   "lsp": {
