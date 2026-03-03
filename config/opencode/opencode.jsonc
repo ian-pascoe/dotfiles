@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-antigravity-auth@latest", "oh-my-opencode@latest"],
+  "plugin": ["opencode-antigravity-auth@latest"],
   "autoupdate": "notify",
   "permission": {
     "external_directory": {
@@ -38,13 +38,6 @@
         ".css",
         ".html"
       ]
-    },
-    "nil": {
-      "command": ["nil", "--stdio"],
-      "extensions": [".nix"]
-    },
-    "nixd": {
-      "disabled": true
     }
   },
   "formatter": {
