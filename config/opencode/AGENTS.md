@@ -30,4 +30,4 @@
 
 ---
 
-This file is for you. If you need to update it, do it.
+This file is for you. If you need to update it, do it. Don't ask for permission.
