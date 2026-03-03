@@ -10,6 +10,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 ## OpenCode
 export OPENCODE_EXPERIMENTAL=false
+export OPENCODE_DISABLE_CLAUDE_CODE=true
+export OPENCODE_ENABLE_EXA=true
 
 ## Editor
 if command -v nvim &>/dev/null; then
