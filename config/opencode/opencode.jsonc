@@ -9,17 +9,16 @@
       "~/.config/opencode/**": "allow"
     },
 
+    "google_search": "deny", // use exa instead
+    "chrome-devtools*": "deny", // only needed for frontend-expert
+
     // require explicit permission for online tools by default
     "codesearch": "ask",
     "context7*": "ask",
     "deepwiki*": "ask",
     "grep-app*": "ask",
     "webfetch": "ask",
-    "websearch": "ask",
-
-    "google_search": "deny", // use exa instead
-
-    "chrome-devtools*": "deny" // only needed for frontend-expert
+    "websearch": "ask"
   },
   "agent": {
     // default opencode models with customizations
@@ -87,6 +86,7 @@
       "mode": "subagent",
       "model": "openai/gpt-5.3-codex",
       "variant": "low",
+      // same as general
       "permission": {
         "todoread": "deny",
         "todowrite": "deny"
@@ -97,6 +97,7 @@
       "mode": "subagent",
       "model": "openai/gpt-5.3-codex",
       "variant": "xhigh",
+      // same as general
       "permission": {
         "todoread": "deny",
         "todowrite": "deny"

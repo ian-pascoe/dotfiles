@@ -20,9 +20,8 @@
 
 ### The Rule
 
-- **EXTREMELY IMPORTANT:** If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
-- **IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.**
-- **This is not negotiable. This is not optional.** You cannot rationalize your way out of this.
+- If you think there is even a 1% chance a skill might apply to what you are doing, you **ABSOLUTELY MUST** invoke the skill.
+- This is non-negotiable. You cannot rationalize your way out of this.
 
 ### Important Skills
 
@@ -30,4 +29,4 @@
 
 ---
 
-This file is for you. If you need to update it, do it. Don't ask for permission.
+This file is for you. If you need to update it, do it. Don't ask for permission to update this file.
