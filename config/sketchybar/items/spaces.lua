@@ -85,27 +85,25 @@ local function update_spaces()
   Sbar.exec("aerospace list-monitors --format '%{monitor-id}'", function(monitor_result)
     local mids = {}
     for mid in monitor_result:gmatch("[^\n]+") do
-      mid = Util.trim(mid)
-      if mid ~= "" then
-        table.insert(mids, mid)
+      local trimmed_mid = Util.trim(mid)
+      if trimmed_mid ~= "" then
+        table.insert(mids, trimmed_mid)
       end
     end
 
     for _, mid in ipairs(mids) do
-      mid = Util.trim(mid)
       local mnum = tonumber(mid) or 0
       M.spaces[mnum] = {}
       Sbar.exec("aerospace list-workspaces --monitor " .. mnum, function(workspace_result)
         local wids = {}
         for wid in workspace_result:gmatch("[^\n]+") do
-          wid = Util.trim(wid)
-          if wid ~= "" then
-            table.insert(wids, wid)
+          local trimmed_wid = Util.trim(wid)
+          if trimmed_wid ~= "" then
+            table.insert(wids, trimmed_wid)
           end
         end
 
         for widx, wid in ipairs(wids) do
-          wid = Util.trim(wid)
           local wnum = tonumber(wid) or 0
           local space = Sbar.add("item", "spaces.space." .. wnum, {
             position = "left",

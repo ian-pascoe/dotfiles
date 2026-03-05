@@ -109,6 +109,7 @@ M.app_icons = {
   ["Discord"] = "",
   ["Linear"] = "󰂶",
   ["OpenCode"] = "O",
+  ["Telegram"] = "",
 }
 
 function M.map(app_name)
