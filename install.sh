@@ -593,10 +593,6 @@ main() {
   setup_optional_command_link nvim "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim" 'Neovim'
   setup_optional_command_link npm "$DOTFILES_DIR/config/npmrc" "$HOME/.npmrc" 'npm'
   setup_optional_command_link opencode "$DOTFILES_DIR/config/opencode" "$HOME/.config/opencode" 'OpenCode'
-  setup_optional_macos_link sketchybar "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar" 'Sketchybar'
-  if is_macos && command_exists sketchybar; then
-    restart_brew_service_best_effort sketchybar
-  fi
   setup_optional_command_link spotify_player "$DOTFILES_DIR/config/spotify-player" "$HOME/.config/spotify-player" 'Spotify Player'
   setup_optional_command_link starship "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml" 'Starship'
   setup_optional_command_link tmux "$DOTFILES_DIR/config/tmux" "$HOME/.config/tmux" 'Tmux'

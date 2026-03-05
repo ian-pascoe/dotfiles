@@ -127,3 +127,6 @@ if command -v starship &>/dev/null; then
   fi
   eval "$(starship init zsh)"
 fi
+
+# OpenClaw Completion
+source "/home/ianpascoe/.openclaw/completions/openclaw.zsh"

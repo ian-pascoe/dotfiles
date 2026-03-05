@@ -1,6 +1,6 @@
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = ['exec-and-forget /bin/zsh -c "sketchybar --reload"']
+after-startup-command = []
 
 # Start AeroSpace at login
 # false, because handled by launchd
@@ -29,11 +29,7 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-exec-on-workspace-change = [
-  "/bin/zsh",
-  "-c",
-  "sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE",
-]
+exec-on-workspace-change = []
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
@@ -58,7 +54,7 @@ inner.horizontal = 5
 inner.vertical = 5
 outer.left = 5
 outer.bottom = 5
-outer.top = 35
+outer.top = 5
 outer.right = 5
 
 # 'main' binding mode declaration
@@ -142,68 +138,29 @@ alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-alt-shift-semicolon = [
-  'mode service',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=service"',
-]
-alt-shift-r = [
-  'mode resize',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=resize"',
-]
+alt-shift-semicolon = ['mode service']
+alt-shift-r = ['mode resize']
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-esc = [
-  'reload-config',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
-r = [
-  'flatten-workspace-tree',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-] # reset layout
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = [
   'layout floating tiling',
   'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
 ] # Toggle between floating and tiling layout
-backspace = [
-  'close-all-windows-but-current',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
+backspace = ['close-all-windows-but-current', 'mode main']
 
 
-alt-shift-h = [
-  'join-with left',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
-alt-shift-j = [
-  'join-with down',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
-alt-shift-k = [
-  'join-with up',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
-alt-shift-l = [
-  'join-with right',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
 
 down = 'volume down'
 up = 'volume up'
-shift-down = [
-  'volume set 0',
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
+shift-down = ['volume set 0', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
@@ -219,14 +176,8 @@ shift-j = 'resize height +10'
 shift-k = 'resize height -10'
 shift-l = 'resize width +10'
 
-enter = [
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
-esc = [
-  'mode main',
-  'exec-and-forget /bin/zsh -c "sketchybar --trigger aerospace_mode_change MODE=main"',
-]
+enter = ['mode main']
+esc = ['mode main']
 
 [workspace-to-monitor-force-assignment]
 1 = 1

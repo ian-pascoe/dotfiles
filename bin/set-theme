@@ -47,6 +47,5 @@ fi
 set-bg 1
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  sketchybar --reload
   brew services restart borders
 fi
