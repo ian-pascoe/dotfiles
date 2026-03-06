@@ -8,5 +8,4 @@ antigravity-signature-cache.json
 antigravity-logs/
 
 multicodex-accounts.json
-.gitignore
 antigravity-accounts.json.*.tmp
