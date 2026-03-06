@@ -1,9 +1,10 @@
 .stfolder/
-.stignore
-**/__pycache__/
+__pycache__/
+tmp/
+logs/
 
-**/.DS_Store
-**/*.log
-**/*.tmp
-**/*.backup
-**/*.bak
+.DS_Store
+*.log
+*.tmp
+*.backup
+*.bak

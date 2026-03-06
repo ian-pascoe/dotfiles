@@ -1,0 +1,9 @@
+node_modules/
+__pycache__/
+tmp/
+logs/
+
+*.tmp
+*.log
+*.sqlite*
+.DS_Store
