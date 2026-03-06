@@ -34,11 +34,6 @@ if [ -n "${ZPLUG_HOME:-}" ] && [ -d "${ZPLUG_HOME}" ]; then
   zplug load
 fi
 
-## Mise
-if command -v mise &>/dev/null; then
-  eval "$(mise activate zsh)"
-fi
-
 ## Editor
 if command -v nvim &>/dev/null; then
   alias vim='nvim'
@@ -116,6 +111,20 @@ if command -v zoxide &>/dev/null; then
     fi
   }
   alias cd='zd'
+fi
+
+## Apply Base Path Order
+if (( $+functions[_zsh_apply_base_path_order] )); then
+  _zsh_apply_base_path_order
+fi
+
+## Apply Mise Hook Env
+if (( $+functions[_zsh_mise_cmd] )); then
+  __zsh_mise_cmd="$(_zsh_mise_cmd)"
+  if [[ -n "$__zsh_mise_cmd" ]]; then
+    eval "$("$__zsh_mise_cmd" activate zsh)"
+  fi
+  unset __zsh_mise_cmd
 fi
 
 ## Starship

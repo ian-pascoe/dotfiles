@@ -23,3 +23,13 @@ fi
 if [ -f "$HOME/.env" ]; then
   source "$HOME/.env"
 fi
+
+## Apply Base Path Order
+if (( $+functions[_zsh_apply_base_path_order] )); then
+  _zsh_apply_base_path_order
+fi
+
+## Apply Mise Hook Env
+if [[ $- != *i* ]] && (( $+functions[_zsh_apply_mise_hook_env] )); then
+  _zsh_apply_mise_hook_env
+fi

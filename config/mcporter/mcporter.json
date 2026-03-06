@@ -1,7 +1,17 @@
 {
   "mcpServers": {
-    "linear": {
-      "description": "Project management tool for software teams.",
+    "linear-personal": {
+      "description": "Project management tool. Signed into \"Ian Pascoe\" Linear workspace.",
+      "baseUrl": "https://mcp.linear.app/mcp",
+      "auth": "oauth"
+    },
+    "linear-family": {
+      "description": "Project management tool. Signed into \"Pascoe Family\" Linear workspace.",
+      "baseUrl": "https://mcp.linear.app/mcp",
+      "auth": "oauth"
+    },
+    "linear-business": {
+      "description": "Project management tool. Signed into \"Spirit-Led Software Workspace\" Linear workspace.",
       "baseUrl": "https://mcp.linear.app/mcp",
       "auth": "oauth"
     },

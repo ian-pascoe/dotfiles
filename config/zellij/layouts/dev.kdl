@@ -17,12 +17,6 @@ layout {
     }
     pane name="agent" size="40%" {
       command "opencode"
-      args "--port=56781"
-    }
-  }
-  tab name="home" cwd="~" {
-    pane name="cmd" {
-      command "zsh"
     }
   }
   tab name="dotfiles" split_direction="vertical" cwd="~/.dotfiles" {
@@ -37,7 +31,6 @@ layout {
     }
     pane name="agent" size="40%" {
       command "opencode"
-      args "--port=56782"
     }
   }
 }

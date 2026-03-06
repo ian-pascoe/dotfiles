@@ -2,6 +2,68 @@
 ## .zshenv
 ##===================================
 
+## Deduplicate PATH
+typeset -gU path PATH
+
+## Helpers
+_zsh_prepend_path_existing() {
+  local dir
+  local -a dirs
+
+  for dir in "$@"; do
+    [[ -d "$dir" ]] || continue
+    path=(${path:#$dir})
+    dirs+=("$dir")
+  done
+
+  (( ${#dirs[@]} == 0 )) && return
+  path=("${dirs[@]}" "${path[@]}")
+}
+
+_zsh_mise_cmd() {
+  local candidate
+  local from_path
+
+  from_path="$(command -v mise 2>/dev/null || true)"
+  if [[ -n "$from_path" ]]; then
+    print -r -- "$from_path"
+    return
+  fi
+
+  for candidate in \
+    /opt/homebrew/bin/mise \
+    /home/linuxbrew/.linuxbrew/bin/mise \
+    "$HOME/.cargo/bin/mise"
+  do
+    [[ -x "$candidate" ]] && {
+      print -r -- "$candidate"
+      return
+    }
+  done
+}
+
+_zsh_apply_base_path_order() {
+  _zsh_prepend_path_existing \
+    "$HOME/.local/bin" \
+    "$XDG_CACHE_HOME/.bun/bin" \
+    "$HOME/.local/share/pnpm" \
+    "$HOME/.npm-global/bin" \
+    "$HOME/.cargo/bin" \
+    /opt/homebrew/bin \
+    /opt/homebrew/sbin \
+    /home/linuxbrew/.linuxbrew/bin \
+    /home/linuxbrew/.linuxbrew/sbin
+}
+
+_zsh_apply_mise_hook_env() {
+  local mise_cmd
+
+  mise_cmd="$(_zsh_mise_cmd)"
+  [[ -n "$mise_cmd" ]] || return
+
+  eval "$("$mise_cmd" hook-env -s zsh)"
+}
+
 ## XDG Directories
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -20,34 +82,12 @@ else
 fi
 
 ## Node
-if [ -d "$HOME/.npm-global/bin" ]; then
-  case ":$PATH:" in
-  *":$HOME/.npm-global/bin:"*) ;;
-  *) export PATH="$HOME/.npm-global/bin:$PATH" ;;
-  esac
-fi
-
-## PNPM
 export PNPM_HOME="$HOME/.local/share/pnpm"
-if [ -d "$PNPM_HOME" ]; then
-  case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-  esac
-fi
 
-## Bun
-if [ -d "$XDG_CACHE_HOME/.bun/bin" ]; then
-  case ":$PATH:" in
-  *":$XDG_CACHE_HOME/.bun/bin:"*) ;;
-  *) export PATH="$XDG_CACHE_HOME/.bun/bin:$PATH" ;;
-  esac
-fi
+## Apply Base Path Order
+_zsh_apply_base_path_order
 
-## Local bin
-if [ -d "$HOME/.local/bin" ]; then
-  case ":$PATH:" in
-  *":$HOME/.local/bin:"*) ;;
-  *) export PATH="$HOME/.local/bin:$PATH" ;;
-  esac
+## Apply Mise Hook Env
+if [[ $- != *i* ]]; then
+  _zsh_apply_mise_hook_env
 fi
