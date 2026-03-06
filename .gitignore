@@ -4,6 +4,7 @@ node_modules/
 __pycache__/
 tmp/
 logs/
+log/
 
 .DS_Store
 *.jsonl
