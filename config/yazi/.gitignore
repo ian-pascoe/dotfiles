@@ -1,3 +1,4 @@
-flavors
-plugins
+flavors/
+plugins/
+
 theme.toml

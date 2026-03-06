@@ -1,2 +1,3 @@
-/credentials.json
-/daemon
+daemon/
+
+credentials.json
