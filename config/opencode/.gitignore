@@ -1,11 +1,7 @@
 node_modules/
-
-**/*.bak
-**/*.tmp
+antigravity-logs/
 
 antigravity-accounts.json
 antigravity-signature-cache.json
-antigravity-logs/
 
-multicodex-accounts.json
 antigravity-accounts.json.*.tmp
