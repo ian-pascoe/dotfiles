@@ -1,3 +1,4 @@
+.stfolder/
 .worktrees/
 node_modules/
 __pycache__/
