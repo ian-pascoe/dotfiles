@@ -84,8 +84,13 @@ if command -v zellij &>/dev/null; then
 fi
 
 ## OpenClaw
-if [ -f "$HOME/.openclaw/completions/openclaw.zsh" ]; then
-  source "$HOME/.openclaw/completions/openclaw.zsh"
+# Have to use full paths with no env vars here
+# or else openclaw will constantly ask about adding
+# completions to the shell. So annoying!!
+if [ -f "/home/ianpascoe/.openclaw/completions/openclaw.zsh" ]; then
+  source "/home/ianpascoe/.openclaw/completions/openclaw.zsh"
+elif [ -f "/Users/ianpascoe/.openclaw/completions/openclaw.zsh" ]; then
+  source "/Users/ianpascoe/.openclaw/completions/openclaw.zsh"
 fi
 
 ## Brewfile
