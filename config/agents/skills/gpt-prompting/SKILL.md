@@ -1,16 +1,17 @@
 ---
-name: chatgpt-prompting
+name: gpt-prompting
 description: Prompt patterns, reusable system-prompt blocks, and a migration checklist for GPT-5.2 (GPT-5-class) models. Use when you need to (1) write/refine prompts for GPT-5.2 production agents, (2) clamp verbosity/output shape, (3) prevent scope drift (esp. frontend/UX and over-building), (4) handle ambiguity and reduce hallucinations, (5) improve tool grounding + structured extraction, or (6) migrate prompts from GPT-5/5.1/4.1/4o to GPT-5.2 with stable reasoning_effort.
 ---
 
-# ChatGPT Prompting (GPT-5.2)
+# GPT Prompting (GPT-5.2)
 
 Use this skill to turn vague “be helpful” prompting into **predictable, evaluable** behavior.
 
 If you need the source guides, see:
-- https://developers.openai.com/cookbook/examples/gpt-5/gpt-5-2_prompting_guide
-- https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide (agentic eagerness + tool preambles)
-- https://developers.openai.com/api/docs/guides/structured-outputs (schema enforcement)
+
+- <https://developers.openai.com/cookbook/examples/gpt-5/gpt-5-2_prompting_guide>
+- <https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide> (agentic eagerness + tool preambles)
+- <https://developers.openai.com/api/docs/guides/structured-outputs> (schema enforcement)
 
 For the block library + examples, read: [`references/guide.md`](./references/guide.md)
 

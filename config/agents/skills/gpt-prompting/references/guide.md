@@ -1,7 +1,7 @@
 # GPT-5.2 Prompting — block library + notes
 
 Source guide:
-https://developers.openai.com/cookbook/examples/gpt-5/gpt-5-2_prompting_guide
+<https://developers.openai.com/cookbook/examples/gpt-5/gpt-5-2_prompting_guide>
 
 Keep SKILL.md lean; use this file when you need more complete blocks/examples.
 
@@ -127,7 +127,8 @@ Suggested default mapping:
 ## Agentic eagerness calibration (tool-heavy agents)
 
 Source (first-party):
-- GPT-5 prompting guide: https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide
+
+- GPT-5 prompting guide: <https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide>
 
 ### Prompting for *less* eagerness (fewer tool calls, faster answers)
 
@@ -168,7 +169,8 @@ Use when you’re seeing: the agent asks too many questions / stops early.
 ## Tool preambles (human-visible progress without log spam)
 
 Source (first-party):
-- GPT-5 prompting guide: https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide
+
+- GPT-5 prompting guide: <https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide>
 
 ```text
 <tool_preambles>
@@ -182,7 +184,8 @@ Source (first-party):
 ## Structured Outputs (schemas; null instead of guessing)
 
 Source (first-party):
-- Structured outputs guide: https://developers.openai.com/api/docs/guides/structured-outputs
+
+- Structured outputs guide: <https://developers.openai.com/api/docs/guides/structured-outputs>
 
 Use when you need *machine-consumable* JSON. Prefer strict schemas over “please output JSON”.
 
@@ -199,11 +202,13 @@ Return JSON that conforms to the provided schema.
 ## Conversation state + tool calling (implementation note)
 
 Source (first-party):
-- Function calling guide: https://developers.openai.com/api/docs/guides/function-calling
-- Reasoning guide: https://developers.openai.com/api/docs/guides/reasoning
-- Conversation state guide: https://platform.openai.com/docs/guides/conversation-state?api-mode=responses
+
+- Function calling guide: <https://developers.openai.com/api/docs/guides/function-calling>
+- Reasoning guide: <https://developers.openai.com/api/docs/guides/reasoning>
+- Conversation state guide: <https://platform.openai.com/docs/guides/conversation-state?api-mode=responses>
 
 Key operational rule (Responses API + tool calls):
+
 - **Pass back reasoning/tool-call items** along with tool outputs when continuing a multi-step tool-calling flow, or you’ll degrade performance.
 
 ## Compaction (long-running workflows)
@@ -211,9 +216,11 @@ Key operational rule (Responses API + tool calls):
 For very long, tool-heavy sessions, compaction helps keep context usable.
 
 Source (first-party):
-- Responses API compaction + conversation state: https://platform.openai.com/docs/guides/conversation-state?api-mode=responses
+
+- Responses API compaction + conversation state: <https://platform.openai.com/docs/guides/conversation-state?api-mode=responses>
 
 Use compaction:
+
 - After milestones, not every turn.
 - Treat compacted items as opaque.
 - Keep prompts functionally identical after compaction to avoid behavior drift.

@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+# brew
+if command -v brew >/dev/null 2>&1; then
+  echo "Updating Homebrew and its packages..."
+  brew update
+  brew upgrade --greedy
+  brew cleanup
+  echo "Homebrew and its packages updated successfully!"
+fi
+
+# yazi
+if command -v ya >/dev/null 2>&1; then
+  echo "Updating Yazi packages..."
+  ya pkg upgrade
+  echo "Yazi packages updated successfully!"
+fi
+
+# node
+if ! command -v npm >/dev/null 2>&1; then
+  echo "Updating global npm modules..."
+  npm update -g
+  echo "Global npm modules updated successfully!"
+fi
+
+# pnpm
+if command -v pnpm >/dev/null 2>&1; then
+  echo "Updating global pnpm modules..."
+  pnpm -g update --latest
+  echo "Global pnpm modules updated successfully!"
+fi
+
+# bun
+if command -v bun >/dev/null 2>&1; then
+  echo "Updating global bun modules..."
+  bun -g update --latest
+  echo "Global bun modules updated successfully!"
+fi
+
+# skills.sh
+if command -v npx >/dev/null 2>&1; then
+  echo "Updating global skills..."
+  npx skills@latest update -g
+  echo "Global skills updated successfully!"
+elif command -v pnpx >/dev/null 2>&1; then
+  echo "Updating global skills..."
+  pnpx skills@latest update -g
+  echo "Global skills updated successfully!"
+elif command -v bunx >/dev/null 2>&1; then
+  echo "Updating global skills..."
+  bunx skills@latest update -g
+  echo "Global skills updated successfully!"
+fi
+
+# openclaw
+if command -v openclaw >/dev/null 2>&1; then
+  echo "Updating OpenClaw and its dependencies..."
+  openclaw update --yes
+  echo "OpenClaw and its dependencies updated successfully!"
+fi
+
+if [ -d "$HOME/.openclaw" ]; then
+  echo "Updating OpenClaw skills..."
+  (
+    cd "$HOME/.openclaw" || exit 1
+    bunx skills@latest update
+    for workspace in ./workspace*/; do
+      [ -d "$workspace" ] || continue
+      (
+        echo "Updating agent workspace: $workspace"
+        cd "$workspace" || exit 1
+        bunx skills@latest update
+      )
+    done
+  )
+  echo "OpenClaw skills updated successfully!"
+fi
+
+# dotfiles
+if [ -d "$HOME/.dotfiles" ]; then
+  echo "Updating dotfiles..."
+  (
+    cd "$HOME/.dotfiles" || exit 1
+    git pull -ftpr --autostash
+  )
+  echo "Dotfiles updated successfully!"
+fi
+
+# opencode
+if command -v systemctl >/dev/null 2>&1; then
+  echo "Restarting OpenCode server..."
+  systemctl --user restart opencode-server
+  echo "OpenCode server restarted successfully!"
+fi
+
+echo "All updates completed successfully!"
