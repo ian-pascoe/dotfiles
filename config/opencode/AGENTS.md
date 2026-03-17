@@ -16,16 +16,14 @@
 - If yes, update `AGENTS.md` first, then respond.
 - If no, avoid claiming that anything was "noted".
 
-## Using Skills
+### Standing Preferences
 
-### The Rule
+- Use Conventional Commit messages when creating commits.
 
-- If you think there is even a 1% chance a skill might apply to what you are doing, you **ABSOLUTELY MUST** invoke the skill.
-- This is non-negotiable. You cannot rationalize your way out of this.
+## Skills
 
-### Important Skills
-
-- `mcporter`: Access to MCP (Model Context Protocol) servers. You should **ALWAYS** check this for additional tools that may be relevant to your task.
+- **Always** consider whether any skills apply to the task at hand.
+- If multiple skills could apply, load the best one and start there. Progressively load more skills as needed.
 
 ---
 

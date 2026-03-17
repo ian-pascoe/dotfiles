@@ -20,4 +20,8 @@ if (($# > 0)) || [[ -z "${OPENCODE_SERVER_URL:-}" ]]; then
   exec "$real_opencode" "$@"
 fi
 
-exec "$real_opencode" attach "$OPENCODE_SERVER_URL" --password="$OPENCODE_SERVER_PASSWORD" --dir="$(pwd)"
+if [[ -z "${OPENCODE_SERVER_PASSWORD:-}" ]]; then
+  exec "$real_opencode" attach "$OPENCODE_SERVER_URL" --dir="$(pwd)"
+else
+  exec "$real_opencode" attach "$OPENCODE_SERVER_URL" --password="$OPENCODE_SERVER_PASSWORD" --dir="$(pwd)"
+fi
