@@ -12,7 +12,7 @@
     "google_search": "deny", // use exa instead
     "chrome-devtools*": "deny", // only needed for frontend-expert
 
-    // require explicit permission for online tools by default
+    // require permission for online tools by default
     "codesearch": "ask",
     "context7*": "ask",
     "deepwiki*": "ask",
