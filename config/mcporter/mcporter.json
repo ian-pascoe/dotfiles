@@ -1,19 +1,23 @@
 {
   "mcpServers": {
     "linear-personal": {
-      "description": "Project management tool. Signed into \"Ian Pascoe\" Linear workspace.",
+      "description": "Project management tool. Signed into the \"Ian Pascoe\" workspace.",
       "baseUrl": "https://mcp.linear.app/mcp",
       "auth": "oauth"
     },
     "linear-family": {
-      "description": "Project management tool. Signed into \"Pascoe Family\" Linear workspace.",
+      "description": "Project management tool. Signed into the \"Pascoe Family\" workspace.",
       "baseUrl": "https://mcp.linear.app/mcp",
       "auth": "oauth"
     },
     "linear-business": {
-      "description": "Project management tool. Signed into \"Spirit-Led Software Workspace\" Linear workspace.",
+      "description": "Project management tool. Signed into the \"Spirit-Led Software\" workspace.",
       "baseUrl": "https://mcp.linear.app/mcp",
       "auth": "oauth"
+    },
+    "exa": {
+      "description": "The best web search API for AI.",
+      "baseUrl": "https://mcp.exa.ai/mcp"
     },
     "context7": {
       "description": "Up-to-date code documentation for LLMs and AI code editors",
@@ -33,10 +37,6 @@
       "env": {
         "npm_config_loglevel": "error"
       }
-    },
-    "packrun": {
-      "description": "MCP-first npm registry. Security signals and package health for AI agents.",
-      "baseUrl": "https://mcp.packrun.dev/mcp"
     },
     "deepwiki": {
       "description": "DeepWiki provides up-to-date documentation you can talk to, for deepwiki. Think Deep Research for GitHub - powered by Devin.",
