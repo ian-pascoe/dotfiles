@@ -1,26 +1,34 @@
-import { type FSWatcher, readlinkSync, watch } from "node:fs";
+import { existsSync, type FSWatcher, readdirSync, readlinkSync, watch } from "node:fs";
 import { homedir } from "node:os";
-import { basename, join } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 
 /**
  * Follows the system theme: `set-theme` points `<configDir>/theme` at
  * `~/.themes/<name>`, and this applies the Pi theme of that name, at startup
- * and whenever the link changes. The shell's `pi` wrapper loads every
- * `~/.themes/<name>/pi.json` so each theme is available by name.
+ * and whenever the link changes. It loads every sibling of the linked theme
+ * that has a `pi.json`, so each theme is available by name.
  */
 export function followSystemTheme(configDir: string) {
+  const link = join(configDir, "theme");
+
+  /** The linked theme's directory, or undefined when there is no link. */
+  const linkedTheme = (): string | undefined => {
+    try {
+      return resolve(configDir, readlinkSync(link));
+    } catch {
+      return undefined;
+    }
+  };
+
   return (pi: ExtensionAPI) => {
     let watcher: FSWatcher | undefined;
     let debounce: NodeJS.Timeout | undefined;
 
     const apply = (ctx: ExtensionContext) => {
-      let themeName: string;
-      try {
-        themeName = basename(readlinkSync(join(configDir, "theme")));
-      } catch {
-        return;
-      }
+      const linked = linkedTheme();
+      if (!linked) return;
+      const themeName = basename(linked);
       // Passing the Theme, not its name, keeps the switch out of settings.json.
       const theme = ctx.ui.getTheme(themeName);
       const result = theme
@@ -40,7 +48,6 @@ export function followSystemTheme(configDir: string) {
     pi.on("session_start", (_event, ctx) => {
       if (!ctx.hasUI) return;
       stop();
-      apply(ctx);
       // The link is replaced rather than modified, so watch its directory.
       watcher = watch(configDir, (_eventType, filename) => {
         if (filename !== "theme") return;
@@ -49,6 +56,27 @@ export function followSystemTheme(configDir: string) {
         debounce = setTimeout(() => apply(ctx), 100);
       });
       watcher.on("error", stop);
+    });
+
+    // Fires after session_start, at startup and on reload.
+    pi.on("resources_discover", (_event, ctx) => {
+      const linked = linkedTheme();
+      if (!linked) return;
+      const themesDir = dirname(linked);
+      let themePaths: string[];
+      try {
+        themePaths = readdirSync(themesDir)
+          .map((name) => join(themesDir, name, "pi.json"))
+          .filter((path) => existsSync(path));
+      } catch {
+        return;
+      }
+      if (ctx.hasUI) {
+        // Pi registers these themes once this event's handlers return, then
+        // (on reload) re-applies the theme in settings.json; apply after both.
+        setTimeout(() => apply(ctx), 0);
+      }
+      return { themePaths };
     });
 
     pi.on("session_shutdown", stop);

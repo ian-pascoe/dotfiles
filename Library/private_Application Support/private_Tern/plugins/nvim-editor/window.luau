@@ -1,9 +1,13 @@
 -- Neovim as Tern's file editor. File opens from the Files sidebar, palette,
 -- file picker, links, drops and Finder go to a Neovim pane beside the focused
 -- one; the tab's Neovim (started here, listening on a socket) is reused.
+-- Files on a remote host open in a Neovim there: panes spawn on the session's
+-- host, but this half's tern.fs and tern.process act on this machine, so
+-- remote reuse types the open into the Neovim pane with cx:run instead.
 -- Tern keeps sidebar previews, `tern open` (so EDITOR='tern open --wait'
--- still works), Carly's opens, remote files, and images, archives, notebooks
--- and other binaries. `plugin.nvim-editor.toggle` switches routing off/on.
+-- still works), Carly's opens, files on a host other than the session's, and
+-- images, archives, notebooks and other binaries.
+-- `plugin.nvim-editor.toggle` switches routing off/on.
 
 local ROUTED_ORIGINS = { palette = true, files = true, drop = true, link = true, system = true }
 
@@ -42,16 +46,25 @@ local function routable(req, cx): boolean
 	if not enabled() or not ROUTED_ORIGINS[req.origin] or req.how == "preview" then
 		return false
 	end
+	-- New panes spawn on the session's host, so only its files can open there.
 	local host = cx.hosts:current()
-	if host.kind ~= "local" or req.host ~= host.name then
+	if req.host ~= host.name then
 		return false
 	end
 	local ext = string.match(req.path, "%.([%w]+)$")
 	if ext and TERN_KEEPS[string.lower(ext)] then
 		return false
 	end
+	if host.kind ~= "local" then
+		-- tern.fs can't see the remote host; a directory opens in Neovim's explorer.
+		return true
+	end
 	-- Directories go to Tern (fs.list only succeeds on one).
 	return not pcall(tern.fs.list, req.path)
+end
+
+local function is_remote(cx): boolean
+	return cx.hosts:current().kind ~= "local"
 end
 
 -- The tab's live Neovim from an earlier open, if any.
@@ -61,7 +74,9 @@ local function reusable(cx, tab: number?)
 		return nil
 	end
 	local pane = cx.session:pane(editor.pane)
-	if pane and pane.tab == tab and is_nvim(pane.program) and tern.fs.exists(editor.socket) then
+	-- A remote socket lives on the remote host, out of tern.fs's reach.
+	local socket_ok = is_remote(cx) or tern.fs.exists(editor.socket)
+	if pane and pane.tab == tab and is_nvim(pane.program) and socket_ok then
 		return editor
 	end
 	editors[tab :: number] = nil
@@ -109,6 +124,18 @@ local function remote_keys(req): string
 	return keys
 end
 
+-- The same open as remote_keys, as raw keystrokes for cx:run: Ctrl-\ Ctrl-N
+-- reaches Normal mode from any mode, then Ex commands run the open.
+local function typed_keys(req): string
+	local path = string.gsub(req.path, "'", "''")
+	local keys = "\28\14:call execute('edit " .. (if req.line then "+" .. req.line .. " " else "")
+	keys ..= "' . fnameescape('" .. path .. "'))\r"
+	if req.line and req.col then
+		keys ..= string.format(":call cursor(%d, %d)\r", req.line, req.col)
+	end
+	return keys
+end
+
 tern.route.open(function(req, cx)
 	if not routable(req, cx) then
 		return nil
@@ -120,6 +147,17 @@ tern.route.open(function(req, cx)
 	local editor = reusable(cx, tab)
 	if not editor then
 		launch(cx, req, focused, tab)
+		return { handled = true }
+	end
+
+	if is_remote(cx) then
+		-- tern.process.run would run here, not on the remote host, so type the
+		-- open into the Neovim pane; cx:run reaches remote hosts' panes.
+		if not pcall(cx.run, cx, editor.pane, typed_keys(req)) then
+			launch(cx, req, focused, tab)
+			return { handled = true }
+		end
+		cx.layout:focus(editor.pane)
 		return { handled = true }
 	end
 

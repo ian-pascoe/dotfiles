@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, rmSync, symlinkSync, unlinkSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { ExtensionAPI, ExtensionContext, Theme } from "@earendil-works/pi-coding-agent";
 import { afterEach, test, vi } from "vitest";
 import { followSystemTheme } from "./active-theme.js";
 
-type Handler = (event: unknown, ctx: ExtensionContext) => void;
+type Handler = (event: unknown, ctx: ExtensionContext) => unknown;
 
 let configDir: string | undefined;
 afterEach(() => {
@@ -21,11 +21,14 @@ function linkTheme(dir: string, name: string) {
   symlinkSync(join(dir, "themes", name), link);
 }
 
-test("applies the linked theme at startup and follows the link without saving it", async () => {
+test("loads the linked theme's siblings, applies it at startup and follows the link without saving it", async () => {
   configDir = mkdtempSync(join(tmpdir(), "active-theme-"));
   for (const name of ["kanagawa", "dracula"]) {
     mkdirSync(join(configDir, "themes", name), { recursive: true });
+    writeFileSync(join(configDir, "themes", name, "pi.json"), "{}");
   }
+  // A theme without a Pi variant is not offered to Pi.
+  mkdirSync(join(configDir, "themes", "no-pi"));
   linkTheme(configDir, "kanagawa");
 
   const handlers = new Map<string, Handler>();
@@ -50,7 +53,18 @@ test("applies the linked theme at startup and follows the link without saving it
 
   followSystemTheme(configDir)(recordingPi);
   handlers.get("session_start")?.({ type: "session_start" }, ctx);
-  assert.deepEqual(applied, [themes.get("kanagawa")]);
+  // Pi registers discovered themes after session_start, so nothing applies yet.
+  assert.deepEqual(applied, []);
+
+  const discovered = handlers.get("resources_discover")?.({ type: "resources_discover" }, ctx);
+  assert.deepEqual(discovered, {
+    themePaths: ["dracula", "kanagawa"].map((name) =>
+      join(configDir as string, "themes", name, "pi.json"),
+    ),
+  });
+  // Applied once pi has registered them, after the handler returns.
+  assert.deepEqual(applied, []);
+  await vi.waitFor(() => assert.deepEqual(applied, [themes.get("kanagawa")]), { timeout: 2000 });
 
   linkTheme(configDir, "dracula");
   await vi.waitFor(() => assert.deepEqual(applied.at(-1), themes.get("dracula")), {

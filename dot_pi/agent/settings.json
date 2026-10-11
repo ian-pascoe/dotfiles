@@ -10,7 +10,6 @@
   ],
   "defaultTools": ["+codemode", "+tool_search", "+grep", "+find", "+ls"],
   "defaultProjectTrust": "always",
-  "theme": "kanagawa",
   "tuiMode": "fullscreen",
   "quietStartup": "header",
   "fullscreenExitOutput": "resume-hint",

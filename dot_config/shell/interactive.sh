@@ -96,26 +96,6 @@ if command -v hunk &>/dev/null; then
   }
 fi
 
-## Pi
-if command -v pi &>/dev/null; then
-  pi() {
-    case "$1" in
-    auth | config | install | list | remove | uninstall | update | --no-extensions | -ne)
-      # Pi only recognizes subcommands when they are the first argument.
-      command pi "$@"
-      ;;
-    *)
-      # Load every theme so the active-theme extension can follow set-theme live.
-      local theme_args=() theme_file
-      for theme_file in "$HOME"/.themes/*/pi.json; do
-        [ -f "$theme_file" ] && theme_args+=(--theme "$theme_file")
-      done
-      command pi "${theme_args[@]}" "$@"
-      ;;
-    esac
-  }
-fi
-
 ## Completions
 if command -v omp &>/dev/null; then
   eval "$(omp completions "$_shell_name")"
