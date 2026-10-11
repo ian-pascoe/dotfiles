@@ -28,8 +28,15 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 ## Python Venv
+# Set the venv up directly instead of sourcing bin/activate: activate first runs
+# deactivate, which restores the PS1 and PATH it saved earlier, so re-sourcing
+# the shell files would drop the starship prompt and later PATH changes.
 if [ -f "$HOME/.venv/bin/activate" ]; then
-  source "$HOME/.venv/bin/activate"
+  export VIRTUAL_ENV="$HOME/.venv"
+  case ":$PATH:" in
+  *":$VIRTUAL_ENV/bin:"*) ;;
+  *) export PATH="$VIRTUAL_ENV/bin:$PATH" ;;
+  esac
 fi
 
 ## Mise
