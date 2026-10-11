@@ -81,6 +81,11 @@ if command -v hunk &>/dev/null; then
           one-dark) echo one-dark-pro ;;
           vesper) echo vesper ;;
           flexoki) echo github-dark-default ;;
+          cyberdream) echo github-dark-high-contrast ;;
+          carbonfox) echo github-dark-default ;;
+          vague) echo min-dark ;;
+          moonfly) echo vitesse-black ;;
+          monokai-pro) echo monokai ;;
           *) basename "$(readlink ~/.config/theme)" ;;
           esac
         )" \

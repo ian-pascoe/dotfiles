@@ -1,0 +1,37 @@
+:root {
+  /* Cyberdream palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 22, 24, 26;
+  --foreground: 255, 255, 255;
+  --card-background: 30, 33, 36;
+  --popup-background: 60, 64, 72;
+  --primary: 94, 161, 255;
+  --secondary: 94, 241, 255;
+  --tertiary: 94, 161, 255;
+  --accent: 189, 94, 255;
+  --muted-background: 123, 132, 150;
+  --info: 94, 161, 255;
+  --success: 94, 255, 108;
+  --warning: 241, 255, 94;
+  --destructive: 255, 110, 94;
+  --border: 60, 64, 72;
+  --text: 255, 255, 255;
+  --foam: 94, 241, 255;
+  --gold: 241, 255, 94;
+  --love: 255, 110, 94;
+  --overlay: 123, 132, 150;
+  --highlight: 60, 64, 72;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

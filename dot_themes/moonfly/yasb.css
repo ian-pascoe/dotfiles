@@ -1,0 +1,37 @@
+:root {
+  /* Moonfly palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 8, 8, 8;
+  --foreground: 189, 189, 189;
+  --card-background: 28, 28, 28;
+  --popup-background: 50, 52, 55;
+  --primary: 128, 160, 255;
+  --secondary: 54, 198, 146;
+  --tertiary: 128, 160, 255;
+  --accent: 207, 135, 232;
+  --muted-background: 128, 128, 128;
+  --info: 128, 160, 255;
+  --success: 140, 200, 95;
+  --warning: 227, 199, 138;
+  --destructive: 255, 93, 93;
+  --border: 68, 68, 68;
+  --text: 189, 189, 189;
+  --foam: 121, 218, 200;
+  --gold: 227, 199, 138;
+  --love: 255, 93, 93;
+  --overlay: 128, 128, 128;
+  --highlight: 50, 52, 55;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

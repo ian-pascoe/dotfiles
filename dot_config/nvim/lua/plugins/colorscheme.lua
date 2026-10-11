@@ -127,6 +127,47 @@ local theme_specs = {
     name = 'flexoki',
     colorscheme = 'flexoki-dark',
   },
+  cyberdream = {
+    repo = 'scottmckendry/cyberdream.nvim',
+    name = 'cyberdream',
+    colorscheme = 'cyberdream',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  carbonfox = {
+    repo = 'EdenEast/nightfox.nvim',
+    name = 'nightfox',
+    colorscheme = 'carbonfox',
+    opts = {
+      options = { transparent = vim.g.transparent_enabled },
+    },
+  },
+  vague = {
+    repo = 'vague2k/vague.nvim',
+    name = 'vague',
+    colorscheme = 'vague',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  moonfly = {
+    repo = 'bluz71/vim-moonfly-colors',
+    name = 'moonfly',
+    colorscheme = 'moonfly',
+    config = function()
+      vim.g.moonflyTransparent = vim.g.transparent_enabled
+    end,
+  },
+  ['monokai-pro'] = {
+    repo = 'loctvl842/monokai-pro.nvim',
+    name = 'monokai-pro',
+    colorscheme = 'monokai-pro',
+    opts = {
+      filter = 'pro',
+      transparent_background = vim.g.transparent_enabled,
+    },
+  },
 }
 
 local function spec_for(name)

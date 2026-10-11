@@ -1,0 +1,37 @@
+:root {
+  /* Carbonfox palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 22, 22, 22;
+  --foreground: 242, 244, 248;
+  --card-background: 37, 37, 37;
+  --popup-background: 53, 53, 53;
+  --primary: 120, 169, 255;
+  --secondary: 51, 177, 255;
+  --tertiary: 120, 169, 255;
+  --accent: 190, 149, 255;
+  --muted-background: 110, 111, 112;
+  --info: 120, 169, 255;
+  --success: 37, 190, 106;
+  --warning: 8, 189, 186;
+  --destructive: 238, 83, 150;
+  --border: 83, 83, 83;
+  --text: 242, 244, 248;
+  --foam: 51, 177, 255;
+  --gold: 8, 189, 186;
+  --love: 238, 83, 150;
+  --overlay: 110, 111, 112;
+  --highlight: 53, 53, 53;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

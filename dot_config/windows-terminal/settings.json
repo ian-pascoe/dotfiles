@@ -331,6 +331,121 @@
       "selectionBackground": "#282726",
       "white": "#878580",
       "yellow": "#D0A215"
+    },
+    {
+      "background": "#16181A",
+      "black": "#16181A",
+      "blue": "#5EA1FF",
+      "brightBlack": "#3C4048",
+      "brightBlue": "#5EA1FF",
+      "brightCyan": "#5EF1FF",
+      "brightGreen": "#5EFF6C",
+      "brightPurple": "#BD5EFF",
+      "brightRed": "#FF6E5E",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#F1FF5E",
+      "cursorColor": "#FFFFFF",
+      "cyan": "#5EF1FF",
+      "foreground": "#FFFFFF",
+      "green": "#5EFF6C",
+      "name": "cyberdream",
+      "purple": "#BD5EFF",
+      "red": "#FF6E5E",
+      "selectionBackground": "#3C4048",
+      "white": "#FFFFFF",
+      "yellow": "#F1FF5E"
+    },
+    {
+      "background": "#161616",
+      "black": "#282828",
+      "blue": "#78A9FF",
+      "brightBlack": "#484848",
+      "brightBlue": "#8CB6FF",
+      "brightCyan": "#52BDFF",
+      "brightGreen": "#46C880",
+      "brightPurple": "#C8A5FF",
+      "brightRed": "#F16DA6",
+      "brightWhite": "#E4E4E5",
+      "brightYellow": "#2DC7C4",
+      "cursorColor": "#F2F4F8",
+      "cyan": "#33B1FF",
+      "foreground": "#F2F4F8",
+      "green": "#25BE6A",
+      "name": "carbonfox",
+      "purple": "#BE95FF",
+      "red": "#EE5396",
+      "selectionBackground": "#2A2A2A",
+      "white": "#DFDFE0",
+      "yellow": "#08BDBA"
+    },
+    {
+      "background": "#141415",
+      "black": "#252530",
+      "blue": "#6E94B2",
+      "brightBlack": "#606079",
+      "brightBlue": "#8BA9C1",
+      "brightCyan": "#BEBEDA",
+      "brightGreen": "#99B782",
+      "brightPurple": "#C9B1CA",
+      "brightRed": "#E08398",
+      "brightWhite": "#D7D7D7",
+      "brightYellow": "#F5CB96",
+      "cursorColor": "#CDCDCD",
+      "cyan": "#AEAED1",
+      "foreground": "#CDCDCD",
+      "green": "#7FA563",
+      "name": "vague",
+      "purple": "#BB9DBD",
+      "red": "#D8647E",
+      "selectionBackground": "#252530",
+      "white": "#CDCDCD",
+      "yellow": "#F3BE7C"
+    },
+    {
+      "background": "#080808",
+      "black": "#323437",
+      "blue": "#80A0FF",
+      "brightBlack": "#949494",
+      "brightBlue": "#74B2FF",
+      "brightCyan": "#85DC85",
+      "brightGreen": "#36C692",
+      "brightPurple": "#AE81FF",
+      "brightRed": "#FF5189",
+      "brightWhite": "#E4E4E4",
+      "brightYellow": "#C6C684",
+      "cursorColor": "#9E9E9E",
+      "cyan": "#79DAC8",
+      "foreground": "#BDBDBD",
+      "green": "#8CC85F",
+      "name": "moonfly",
+      "purple": "#CF87E8",
+      "red": "#FF5454",
+      "selectionBackground": "#B2CEEE",
+      "white": "#C6C6C6",
+      "yellow": "#E3C78A"
+    },
+    {
+      "background": "#2D2A2E",
+      "black": "#2D2A2E",
+      "blue": "#FC9867",
+      "brightBlack": "#727072",
+      "brightBlue": "#FC9867",
+      "brightCyan": "#78DCE8",
+      "brightGreen": "#A9DC76",
+      "brightPurple": "#AB9DF2",
+      "brightRed": "#FF6188",
+      "brightWhite": "#FCFCFA",
+      "brightYellow": "#FFD866",
+      "cursorColor": "#C1C0C0",
+      "cyan": "#78DCE8",
+      "foreground": "#FCFCFA",
+      "green": "#A9DC76",
+      "name": "monokai-pro",
+      "purple": "#AB9DF2",
+      "red": "#FF6188",
+      "selectionBackground": "#5B595C",
+      "white": "#FCFCFA",
+      "yellow": "#FFD866"
     }
   ],
   "showTabsInTitlebar": true,
@@ -569,6 +684,106 @@
       "tabRow": {
         "background": "#1C1B1AFF",
         "unfocusedBackground": "#0A0A0AFF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "cyberdream",
+      "tab": {
+        "background": "#16181AFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#1E2124FF",
+        "unfocusedBackground": "#101113FF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "carbonfox",
+      "tab": {
+        "background": "#161616FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#252525FF",
+        "unfocusedBackground": "#0C0C0CFF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "vague",
+      "tab": {
+        "background": "#141415FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#1C1C24FF",
+        "unfocusedBackground": "#0E0E0FFF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "moonfly",
+      "tab": {
+        "background": "#080808FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#1C1C1CFF",
+        "unfocusedBackground": "#000000FF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "monokai-pro",
+      "tab": {
+        "background": "#2D2A2EFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#403E41FF",
+        "unfocusedBackground": "#221F22FF"
       },
       "window": {
         "applicationTheme": "dark",
