@@ -100,10 +100,12 @@ if command -v pi &>/dev/null; then
       command pi "$@"
       ;;
     *)
-      command pi \
-        --theme "$HOME/.config/theme/pi.json" \
-        --active-theme "$(basename "$(readlink "$HOME/.config/theme")")" \
-        "$@"
+      # Load every theme so the active-theme extension can follow set-theme live.
+      local theme_args=() theme_file
+      for theme_file in "$HOME"/.themes/*/pi.json; do
+        [ -f "$theme_file" ] && theme_args+=(--theme "$theme_file")
+      done
+      command pi "${theme_args[@]}" "$@"
       ;;
     esac
   }
