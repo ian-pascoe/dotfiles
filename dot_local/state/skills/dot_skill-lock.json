@@ -335,9 +335,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/nicobailon/visual-explainer.git",
       "skillPath": "plugins/visual-explainer/SKILL.md",
-      "skillFolderHash": "23bfd6f1c3a975c948cd9d7a6614ea6e04e455cf",
+      "skillFolderHash": "779d855713c068e5d14530965c65871a211b0b1e",
       "installedAt": "2026-08-17T09:50:57.504Z",
-      "updatedAt": "2026-10-10T10:31:49.829Z"
+      "updatedAt": "2026-10-11T10:14:53.630Z"
     },
     "show-me": {
       "source": "humanlayer/skills",
@@ -353,9 +353,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/cursor/plugins.git",
       "skillPath": "pstack/skills/unslop/SKILL.md",
-      "skillFolderHash": "d5baa969e71c4ddb563412b0ec170fa3b05b6d6e",
+      "skillFolderHash": "d6a803c02b716b6562412c9bf749b36968986c3c",
       "installedAt": "2026-08-21T17:53:33.036Z",
-      "updatedAt": "2026-09-23T10:26:57.624Z"
+      "updatedAt": "2026-10-11T10:14:54.925Z"
     },
     "deslop": {
       "source": "cursor/plugins",
