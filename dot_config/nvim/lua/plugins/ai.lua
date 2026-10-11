@@ -29,6 +29,8 @@ return {
       require('sidekick').setup(opts)
       if vim.env.HERDR_ENV == '1' and vim.fn.executable('herdr') == 1 then
         require('sidekick.cli.session').register('herdr', require('config.sidekick_herdr'))
+      elseif vim.env.TERN_PANE and not vim.env.TMUX and vim.fn.executable('tern') == 1 then
+        require('sidekick.cli.session').register('tern', require('config.sidekick_tern'))
       end
     end,
   },

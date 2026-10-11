@@ -2,6 +2,7 @@ README.md
 AGENTS.md
 CLAUDE.md
 .claude/mcp-servers.json
+Library/Application Support/Tern/settings.managed.json
 docs/**
 CONTEXT-MAP.md
 **/CONTEXT.md
@@ -50,6 +51,7 @@ tests/**
 {{ if ne .chezmoi.os "darwin" }}
 Brewfile
 Library/LaunchAgents/net.syncthing.syncthing.plist
+Library/Application Support/Tern
 .hammerspoon
 .config/aerospace
 .config/borders

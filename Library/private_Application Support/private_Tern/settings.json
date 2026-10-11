@@ -1,0 +1,83 @@
+{
+  "theme_light": "dark",
+  "agent_command": "pi",
+  "pane_headers": "Split",
+  "file_tree": {
+    "open": true,
+    "width": 180
+  },
+  "agents": {
+    "auto_acp": true,
+    "custom": [
+      {
+        "id": "pi",
+        "name": "Pi",
+        "command": "pi",
+        "args": [
+          "--mode",
+          "json"
+        ],
+        "env": {}
+      }
+    ],
+    "own_tools": [
+      "pi"
+    ]
+  },
+  "keybinds": {
+    "alt+r": "reload_config",
+    "ctrl+a>,": "rename_tab",
+    "ctrl+a>1": "goto_tab:1",
+    "ctrl+a>2": "goto_tab:2",
+    "ctrl+a>3": "goto_tab:3",
+    "ctrl+a>4": "goto_tab:4",
+    "ctrl+a>5": "goto_tab:5",
+    "ctrl+a>6": "goto_tab:6",
+    "ctrl+a>7": "goto_tab:7",
+    "ctrl+a>8": "goto_tab:8",
+    "ctrl+a>9": "goto_tab:9",
+    "ctrl+a>[": "open_scrollback",
+    "ctrl+a>alt+g": "plugin.herdr.goto",
+    "ctrl+a>ctrl+c": "new_session",
+    "ctrl+a>d": "quit",
+    "ctrl+a>f": "files",
+    "ctrl+a>g": "plugin.herdr.lazygit",
+    "ctrl+a>h": "focus_pane:left",
+    "ctrl+a>j": "focus_pane:down",
+    "ctrl+a>k": "focus_pane:up",
+    "ctrl+a>l": "focus_pane:right",
+    "ctrl+a>minus": "split_down",
+    "ctrl+a>n": "next_tab",
+    "ctrl+a>p": "previous_tab",
+    "ctrl+a>s": "switch_session",
+    "ctrl+a>shift+1": "plugin.herdr.goto_session_1",
+    "ctrl+a>shift+2": "plugin.herdr.goto_session_2",
+    "ctrl+a>shift+3": "plugin.herdr.goto_session_3",
+    "ctrl+a>shift+4": "plugin.herdr.goto_session_4",
+    "ctrl+a>shift+5": "plugin.herdr.goto_session_5",
+    "ctrl+a>shift+6": "plugin.herdr.goto_session_6",
+    "ctrl+a>shift+7": "plugin.herdr.goto_session_7",
+    "ctrl+a>shift+8": "plugin.herdr.goto_session_8",
+    "ctrl+a>shift+9": "plugin.herdr.goto_session_9",
+    "ctrl+a>shift+f": "open_file",
+    "ctrl+a>shift+h": "resize_split:left",
+    "ctrl+a>shift+j": "resize_split:down",
+    "ctrl+a>shift+k": "resize_split:up",
+    "ctrl+a>shift+l": "resize_split:right",
+    "ctrl+a>shift+n": "plugin.herdr.next_session",
+    "ctrl+a>shift+p": "plugin.herdr.previous_session",
+    "ctrl+a>shift+r": "rename_session",
+    "ctrl+a>shift+s": "preferences",
+    "ctrl+a>shift+x": "close_tab",
+    "ctrl+a>t": "new_tab",
+    "ctrl+a>x": "close_pane",
+    "ctrl+a>z": "zoom",
+    "ctrl+a>|": "split_right",
+    "ctrl+h": "plugin.herdr.navigate_left",
+    "ctrl+j": "plugin.herdr.navigate_down",
+    "ctrl+k": "plugin.herdr.navigate_up",
+    "ctrl+l": "plugin.herdr.navigate_right"
+  },
+  "keymap": "tmux",
+  "keymap_prefix": "ctrl+a"
+}

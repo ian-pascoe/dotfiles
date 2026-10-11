@@ -1,0 +1,6 @@
+schema = 1
+id = "herdr"
+name = "herdr compat"
+version = "0.1.0"
+description = "herdr actions Tern lacks natively: vim-aware Ctrl+hjkl, workspace stepping, goto picker and a lazygit popup. Keys live in settings.json keybinds."
+window = "window.luau"

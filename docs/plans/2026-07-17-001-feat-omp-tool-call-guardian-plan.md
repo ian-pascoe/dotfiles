@@ -9,6 +9,7 @@ artifact_readiness: implementation-ready
 product_contract_source: ce-brainstorm
 execution: code
 ---
+
 <!-- markdownlint-disable MD013 MD025 MD036 -->
 
 # OMP Tool-Call Guardian - Plan
@@ -309,10 +310,10 @@ flowchart TB
 
 #### Coverage decision matrix
 
-| Mode | Attested native read shape | Failed/stale attestation or ambiguous call | Custom, MCP, or unknown call | Operator-maintained rules |
-| --- | --- | --- | --- | --- |
-| `all` (default) | Review | Review | Review | Not supported |
-| `exclude-known-reads` | Bypass | Review | Review | Not supported |
+| Mode                  | Attested native read shape | Failed/stale attestation or ambiguous call | Custom, MCP, or unknown call | Operator-maintained rules |
+| --------------------- | -------------------------- | ------------------------------------------ | ---------------------------- | ------------------------- |
+| `all` (default)       | Review                     | Review                                     | Review                       | Not supported             |
+| `exclude-known-reads` | Bypass                     | Review                                     | Review                       | Not supported             |
 
 #### Output Structure
 
@@ -489,17 +490,17 @@ The one-level OMP loader discovers only `tool-call-guardian/index.ts`; helper, t
 
 ## Verification Contract
 
-| Gate | Applicability | Proof | Done signal |
-| --- | --- | --- | --- |
-| Policy tests | U1 | Focused `private_dot_omp/private_agent/extensions/tool-call-guardian/policy.test.ts` run | Default review, attestation-gated exclusion, transform comparison, projection privacy, and verdict semantics pass deterministically. |
-| Reviewer tests | U2 | Focused `private_dot_omp/private_agent/extensions/tool-call-guardian/review.test.ts` run | Transport, credential, schema, cancellation, concurrency, late settlement, and total-deadline failures deny. |
-| Hook integration tests | U3 | Focused `private_dot_omp/private_agent/extensions/tool-call-guardian/index.test.ts` run | Out-of-order lifecycle, native ordering, sole/final-handler characterization, and zero-executor-on-denial scenarios pass. |
-| Guardian test project | U1-U3 | `private_dot_omp/private_agent/vitest.config.ts` project | Existing adaptive-thinking tests and all Guardian tests pass together. |
-| Type safety and static quality | U1-U4 | Existing OMP-agent TypeScript, formatter, and linter surfaces | Extension, tests, corpus, and evaluation harness pass without unrelated churn. |
-| Live model qualification | U4 | Focused package evaluation entrypoint | Two fresh-process runs over one frozen manifest produce zero catastrophe allows, workflow completion, no leaks, correct reasons, matching transport identity, and no accepted review after five seconds. |
-| Chezmoi deployment | U5 | Targeted rendered diff/apply plus digest manifest | Exactly one Guardian entrypoint and config match the qualified source; rollback baseline is recorded. |
-| Runtime arming | U5 | Fresh primary and fresh child status/flag attestations | Artifact/model/mode identity, inventory state, and sole/final-handler preconditions match; any load error or absence is NO-GO. |
-| Runtime smoke | U5 | Primary/subagent × default/opt-in matrix with disposable fixtures | Review, attested bypass, allow, deny, timeout, restart, no-cache, and harmless catastrophe sentinel outcomes match the Product Contract. |
+| Gate                           | Applicability | Proof                                                                                    | Done signal                                                                                                                                                                                              |
+| ------------------------------ | ------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Policy tests                   | U1            | Focused `private_dot_omp/private_agent/extensions/tool-call-guardian/policy.test.ts` run | Default review, attestation-gated exclusion, transform comparison, projection privacy, and verdict semantics pass deterministically.                                                                     |
+| Reviewer tests                 | U2            | Focused `private_dot_omp/private_agent/extensions/tool-call-guardian/review.test.ts` run | Transport, credential, schema, cancellation, concurrency, late settlement, and total-deadline failures deny.                                                                                             |
+| Hook integration tests         | U3            | Focused `private_dot_omp/private_agent/extensions/tool-call-guardian/index.test.ts` run  | Out-of-order lifecycle, native ordering, sole/final-handler characterization, and zero-executor-on-denial scenarios pass.                                                                                |
+| Guardian test project          | U1-U3         | `private_dot_omp/private_agent/vitest.config.ts` project                                 | Existing adaptive-thinking tests and all Guardian tests pass together.                                                                                                                                   |
+| Type safety and static quality | U1-U4         | Existing OMP-agent TypeScript, formatter, and linter surfaces                            | Extension, tests, corpus, and evaluation harness pass without unrelated churn.                                                                                                                           |
+| Live model qualification       | U4            | Focused package evaluation entrypoint                                                    | Two fresh-process runs over one frozen manifest produce zero catastrophe allows, workflow completion, no leaks, correct reasons, matching transport identity, and no accepted review after five seconds. |
+| Chezmoi deployment             | U5            | Targeted rendered diff/apply plus digest manifest                                        | Exactly one Guardian entrypoint and config match the qualified source; rollback baseline is recorded.                                                                                                    |
+| Runtime arming                 | U5            | Fresh primary and fresh child status/flag attestations                                   | Artifact/model/mode identity, inventory state, and sole/final-handler preconditions match; any load error or absence is NO-GO.                                                                           |
+| Runtime smoke                  | U5            | Primary/subagent × default/opt-in matrix with disposable fixtures                        | Review, attested bypass, allow, deny, timeout, restart, no-cache, and harmless catastrophe sentinel outcomes match the Product Contract.                                                                 |
 
 The root `vitest.config.ts` currently references `./dot_omp/agent`, which is not a source-tree path; focused verification must use `private_dot_omp/private_agent/vitest.config.ts` unless that mapping is separately corrected.
 

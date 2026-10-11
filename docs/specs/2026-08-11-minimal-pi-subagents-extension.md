@@ -7,6 +7,7 @@ date: 2026-08-11
 topic: minimal-pi-subagents
 execution: code
 ---
+
 <!-- markdownlint-disable MD013 MD025 -->
 
 # Minimal Pi Subagents Extension
@@ -182,9 +183,7 @@ interface AgentDetail extends AgentSummary {
   usage?: TurnResult["usage"];
 }
 
-type StatusResult =
-  | { parent_id: string; agents: AgentSummary[] }
-  | { agent: AgentDetail };
+type StatusResult = { parent_id: string; agents: AgentSummary[] } | { agent: AgentDetail };
 
 interface CancelResult {
   agent_id: string;
@@ -254,15 +253,15 @@ type TurnStatus = "running" | "completed" | "failed" | "cancelled" | "interrupte
 
 ### Defaults
 
-| Field | Default |
-| --- | --- |
-| `agent_id` | Generated peer-unique friendly segment |
-| `session_context` | `inherit` |
-| `project_context` | `inherit` |
-| `model` | Caller's effective model, snapshotted at spawn |
-| `thinking_level` | Caller's effective thinking level, snapshotted at spawn |
-| `tools` | Caller's effective delegable ordinary tools |
-| `delegation` | `none` |
+| Field             | Default                                                 |
+| ----------------- | ------------------------------------------------------- |
+| `agent_id`        | Generated peer-unique friendly segment                  |
+| `session_context` | `inherit`                                               |
+| `project_context` | `inherit`                                               |
+| `model`           | Caller's effective model, snapshotted at spawn          |
+| `thinking_level`  | Caller's effective thinking level, snapshotted at spawn |
+| `tools`           | Caller's effective delegable ordinary tools             |
+| `delegation`      | `none`                                                  |
 
 There is no working-directory parameter. Every descendant uses the root session's project directory.
 
@@ -361,13 +360,13 @@ The optional `minimalSubagents.modelRoles` object is read from global and truste
 
 Coordinator tools are injected separately from ordinary tools, including when `tools` is `none`. Every child receives `agent_message`, `subagent_wait`, and `subagent_status`. Root and authorized fanout children below the depth cap additionally receive `subagent`, `subagent_cancel`, and `subagent_delete`. Every observation and lifecycle operation remains direct-child-authorized inside the coordinator.
 
-| Selection | Ordinary tools |
-| --- | --- |
-| Omitted | Caller's effective delegable ordinary tools |
-| `none` | None |
-| `read` | `read`, `grep`, `find`, `ls` |
-| `modify` | `read`, `grep`, `find`, `ls`, `bash`, `edit`, `write` |
-| `string[]` | Exact named tools |
+| Selection  | Ordinary tools                                        |
+| ---------- | ----------------------------------------------------- |
+| Omitted    | Caller's effective delegable ordinary tools           |
+| `none`     | None                                                  |
+| `read`     | `read`, `grep`, `find`, `ls`                          |
+| `modify`   | `read`, `grep`, `find`, `ls`, `bash`, `edit`, `write` |
+| `string[]` | Exact named tools                                     |
 
 Rules:
 
@@ -887,17 +886,17 @@ Existing `pi-subagents` runs, missions, artifacts, schedules, and agent profiles
 
 ## Verification Contract
 
-| Gate | Command or proof | Done signal |
-| --- | --- | --- |
-| Focused tests | `cd dot_pi/agent && npx vitest run extensions/minimal-subagents` | All coordinator, context, model, tool, registry, messaging, recovery, and fork scenarios pass. |
-| Type safety | `cd dot_pi/agent && npm run typecheck` | Exit 0 with no diagnostics. |
-| Formatting | `cd dot_pi/agent && npm run format:check` | Exit 0 for extension and tests. |
-| Lint | `cd dot_pi/agent && npm run lint` | Exit 0 for extension and tests. |
-| Migration diff | Inspect `dot_pi/agent/settings.json` and deployed chezmoi diff | Old `pi-subagents` package/config is removed and the local entrypoint is the only replacement. |
-| Fresh root smoke | Start a new Pi session after targeted chezmoi apply | Exactly six replacement tools are available; one inherited child completes and returns automatically. |
-| Parallel/nested smoke | Spawn parallel children and at least one grandchild | Canonical IDs, status tree, messaging, and completion work without a coordinator queue. |
-| Persistence smoke | Exit during/after child work, then resume the owning root | Sessions restore, interrupted work is not retried, and successful output is not duplicated. |
-| Fork smoke | Fork a root with idle and formerly active descendants | All child session paths differ between roots and both roots resume independently. |
+| Gate                  | Command or proof                                                 | Done signal                                                                                           |
+| --------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Focused tests         | `cd dot_pi/agent && npx vitest run extensions/minimal-subagents` | All coordinator, context, model, tool, registry, messaging, recovery, and fork scenarios pass.        |
+| Type safety           | `cd dot_pi/agent && npm run typecheck`                           | Exit 0 with no diagnostics.                                                                           |
+| Formatting            | `cd dot_pi/agent && npm run format:check`                        | Exit 0 for extension and tests.                                                                       |
+| Lint                  | `cd dot_pi/agent && npm run lint`                                | Exit 0 for extension and tests.                                                                       |
+| Migration diff        | Inspect `dot_pi/agent/settings.json` and deployed chezmoi diff   | Old `pi-subagents` package/config is removed and the local entrypoint is the only replacement.        |
+| Fresh root smoke      | Start a new Pi session after targeted chezmoi apply              | Exactly six replacement tools are available; one inherited child completes and returns automatically. |
+| Parallel/nested smoke | Spawn parallel children and at least one grandchild              | Canonical IDs, status tree, messaging, and completion work without a coordinator queue.               |
+| Persistence smoke     | Exit during/after child work, then resume the owning root        | Sessions restore, interrupted work is not retried, and successful output is not duplicated.           |
+| Fork smoke            | Fork a root with idle and formerly active descendants            | All child session paths differ between roots and both roots resume independently.                     |
 
 ## Definition of Done
 

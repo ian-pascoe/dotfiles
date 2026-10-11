@@ -15,15 +15,15 @@ copyrighted translation with a quotation-percentage restriction is included.
 The source archives are not committed; only selected passages are stored in
 `extensions/bible-verses/bible-verses.ts`.
 
-| Mark | Translation and edition | Readings | Verses | Rights | Source |
-| --- | --- | ---: | ---: | --- | --- |
-| WEB | World English Bible, updated 66-book protocanon | 77 | 121 | [Public domain](https://ebible.org/engwebp/copyright.htm) | [USFX](https://ebible.org/Scriptures/engwebp_usfx.zip) |
-| BSB | Berean Standard Bible, eBible source dated 2026-08-08 | 84 | 125 | [Public domain](https://ebible.org/engbsb/copyright.htm) | [USFX](https://ebible.org/Scriptures/engbsb_usfx.zip) |
-| ASV | American Standard Version, 1901 | 50 | 74 | [Public domain](https://ebible.org/asv/copyright.htm) | [USFX](https://ebible.org/Scriptures/eng-asv_usfx.zip) |
-| DARBY | Darby Translation, 1884 | 14 | 23 | [Public domain](https://ebible.org/engDBY/copyright.htm) | [USFX](https://ebible.org/Scriptures/engDBY_usfx.zip) |
-| YLT | Young's Literal Translation, 1898 | 1 | 1 | [Public domain](https://ebible.org/engylt/copyright.htm) | [USFX](https://ebible.org/Scriptures/engylt_usfx.zip) |
-| DRA | Douay-Rheims American Edition, 1899 | 6 | 8 | [Public domain](https://ebible.org/engDRA/copyright.htm) | [USFX](https://ebible.org/Scriptures/engDRA_usfx.zip) |
-| OEB | Open English Bible, US spelling, eBible source dated 2026-08-08 | 59 | 101 | [CC0/public domain](https://openenglishbible.org/) | [USFX](https://ebible.org/Scriptures/engoebus_usfx.zip) |
+| Mark  | Translation and edition                                         | Readings | Verses | Rights                                                    | Source                                                  |
+| ----- | --------------------------------------------------------------- | -------: | -----: | --------------------------------------------------------- | ------------------------------------------------------- |
+| WEB   | World English Bible, updated 66-book protocanon                 |       77 |    121 | [Public domain](https://ebible.org/engwebp/copyright.htm) | [USFX](https://ebible.org/Scriptures/engwebp_usfx.zip)  |
+| BSB   | Berean Standard Bible, eBible source dated 2026-08-08           |       84 |    125 | [Public domain](https://ebible.org/engbsb/copyright.htm)  | [USFX](https://ebible.org/Scriptures/engbsb_usfx.zip)   |
+| ASV   | American Standard Version, 1901                                 |       50 |     74 | [Public domain](https://ebible.org/asv/copyright.htm)     | [USFX](https://ebible.org/Scriptures/eng-asv_usfx.zip)  |
+| DARBY | Darby Translation, 1884                                         |       14 |     23 | [Public domain](https://ebible.org/engDBY/copyright.htm)  | [USFX](https://ebible.org/Scriptures/engDBY_usfx.zip)   |
+| YLT   | Young's Literal Translation, 1898                               |        1 |      1 | [Public domain](https://ebible.org/engylt/copyright.htm)  | [USFX](https://ebible.org/Scriptures/engylt_usfx.zip)   |
+| DRA   | Douay-Rheims American Edition, 1899                             |        6 |      8 | [Public domain](https://ebible.org/engDRA/copyright.htm)  | [USFX](https://ebible.org/Scriptures/engDRA_usfx.zip)   |
+| OEB   | Open English Bible, US spelling, eBible source dated 2026-08-08 |       59 |    101 | [CC0/public domain](https://openenglishbible.org/)        | [USFX](https://ebible.org/Scriptures/engoebus_usfx.zip) |
 
 The full names, notices, source URLs, and downloaded archive checksums are kept
 in `extensions/bible-verses/bible-translations.ts`. The displayed abbreviation

@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "da1e67257f54376a0a582543e307eb0b33468fc2",
+      "skillFolderHash": "fbcbff0d9089aaf550488371029cb1398ebd43f3",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-10-08T14:39:39.454Z"
+      "updatedAt": "2026-10-09T13:37:32.642Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -271,9 +271,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/wizard/SKILL.md",
-      "skillFolderHash": "47010ebd1f26c8263016f14cdba835355d278b9a",
+      "skillFolderHash": "e396d3ba97c723a78ffd350fb14a3c409137b306",
       "installedAt": "2026-08-05T10:46:49.752Z",
-      "updatedAt": "2026-10-07T14:59:48.412Z"
+      "updatedAt": "2026-10-09T13:37:34.111Z"
     },
     "writing-for-agents": {
       "source": "mattpocock/skills",
@@ -335,9 +335,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/nicobailon/visual-explainer.git",
       "skillPath": "plugins/visual-explainer/SKILL.md",
-      "skillFolderHash": "d9ecbb514dc1c96a4d24dc272f2a7eea1351e7d8",
+      "skillFolderHash": "23bfd6f1c3a975c948cd9d7a6614ea6e04e455cf",
       "installedAt": "2026-08-17T09:50:57.504Z",
-      "updatedAt": "2026-10-07T14:59:51.798Z"
+      "updatedAt": "2026-10-10T10:31:49.829Z"
     },
     "show-me": {
       "source": "humanlayer/skills",

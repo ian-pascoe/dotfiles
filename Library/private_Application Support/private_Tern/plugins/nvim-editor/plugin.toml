@@ -1,0 +1,6 @@
+schema = 1
+id = "nvim-editor"
+name = "Neovim editor"
+version = "0.1.0"
+description = "Opens text files in Neovim instead of Tern's editor, reusing the tab's Neovim pane."
+window = "window.luau"

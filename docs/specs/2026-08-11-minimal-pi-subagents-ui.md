@@ -7,6 +7,7 @@ date: 2026-08-11
 topic: minimal-pi-subagents-ui
 execution: code
 ---
+
 <!-- markdownlint-disable MD013 MD025 MD036 -->
 
 # Minimal Pi Subagents UI
@@ -61,17 +62,17 @@ Use one visual grammar everywhere:
 
 ### State Symbols
 
-| State | Symbol | Theme role | Required word |
-| --- | --- | --- | --- |
-| Running | `◉` | `accent` | `running` |
-| Waiting | `◌` | `accent` | `waiting` |
-| Completed/success | `✓` | `success` | `completed`, `delivered`, or the successful action |
-| Failed | `×` | `error` | `failed` |
-| Cancelled | `■` | `warning` | `cancelled` |
-| Interrupted | `!` | `warning` | `interrupted` |
-| Unavailable | `!` | `warning` | `unavailable` |
-| Message | `→` | `accent` | `delivered` or `message` |
-| Idle with no result | `○` | `dim` | `idle` |
+| State               | Symbol | Theme role | Required word                                      |
+| ------------------- | ------ | ---------- | -------------------------------------------------- |
+| Running             | `◉`    | `accent`   | `running`                                          |
+| Waiting             | `◌`    | `accent`   | `waiting`                                          |
+| Completed/success   | `✓`    | `success`  | `completed`, `delivered`, or the successful action |
+| Failed              | `×`    | `error`    | `failed`                                           |
+| Cancelled           | `■`    | `warning`  | `cancelled`                                        |
+| Interrupted         | `!`    | `warning`  | `interrupted`                                      |
+| Unavailable         | `!`    | `warning`  | `unavailable`                                      |
+| Message             | `→`    | `accent`   | `delivered` or `message`                           |
+| Idle with no result | `○`    | `dim`      | `idle`                                             |
 
 Symbols and colors reinforce explicit words; they never replace them. Use Pi theme roles through `theme.fg()` and native emphasis methods. Do not embed fixed ANSI color codes.
 
@@ -677,18 +678,18 @@ Keep reusable formatting functions independent of the coordinator. Keep Pi TUI i
 
 ## Verification Contract
 
-| Gate | Command or proof | Done signal |
-| --- | --- | --- |
-| Focused tests | `cd dot_pi/agent && npx vitest run extensions/minimal-subagents` | Existing coordinator tests and all new rendering/UI tests pass. |
-| Type safety | `cd dot_pi/agent && npm run typecheck` | Exit 0 with Pi 0.84.1 renderer and component types. |
-| Lint | `cd dot_pi/agent && npm run lint` | Exit 0. |
-| Formatting | `cd dot_pi/agent && npm run format:check` | Exit 0. |
-| Baseline regression | Run the baseline extension suite | Six-tool behavior, persistence, delivery, fork, and restoration tests remain green. |
-| TUI tool smoke | Run spawn, message, wait, status, cancel, and delete in a real Pi TUI; toggle native expansion | Every tool has the specified collapsed and expanded presentation. |
-| Widget smoke | Spawn parallel children and a grandchild | Hierarchy, footer, elapsed updates, recent rows, overflow, and cooldown match this specification. |
-| Message smoke | Deliver explicit and automatic messages to root | Distinct compact/expanded renderers appear and durable evidence remains exactly once. |
-| Process-exit smoke | Run a print-mode spawn/wait under a finite shell timeout | Final output appears and Pi exits itself before the timeout. |
-| Width/theme smoke | Resize the TUI and switch themes while the widget is visible | Lines remain within width and semantic styling updates correctly. |
+| Gate                | Command or proof                                                                               | Done signal                                                                                       |
+| ------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Focused tests       | `cd dot_pi/agent && npx vitest run extensions/minimal-subagents`                               | Existing coordinator tests and all new rendering/UI tests pass.                                   |
+| Type safety         | `cd dot_pi/agent && npm run typecheck`                                                         | Exit 0 with Pi 0.84.1 renderer and component types.                                               |
+| Lint                | `cd dot_pi/agent && npm run lint`                                                              | Exit 0.                                                                                           |
+| Formatting          | `cd dot_pi/agent && npm run format:check`                                                      | Exit 0.                                                                                           |
+| Baseline regression | Run the baseline extension suite                                                               | Six-tool behavior, persistence, delivery, fork, and restoration tests remain green.               |
+| TUI tool smoke      | Run spawn, message, wait, status, cancel, and delete in a real Pi TUI; toggle native expansion | Every tool has the specified collapsed and expanded presentation.                                 |
+| Widget smoke        | Spawn parallel children and a grandchild                                                       | Hierarchy, footer, elapsed updates, recent rows, overflow, and cooldown match this specification. |
+| Message smoke       | Deliver explicit and automatic messages to root                                                | Distinct compact/expanded renderers appear and durable evidence remains exactly once.             |
+| Process-exit smoke  | Run a print-mode spawn/wait under a finite shell timeout                                       | Final output appears and Pi exits itself before the timeout.                                      |
+| Width/theme smoke   | Resize the TUI and switch themes while the widget is visible                                   | Lines remain within width and semantic styling updates correctly.                                 |
 
 ## Definition of Done
 

@@ -1,0 +1,6 @@
+schema = 1
+id = "annotate"
+name = "Annotate"
+version = "0.1.0"
+description = "herdr-annotate for Tern: comment on copied terminal text and copy the annotations as Markdown context. Keys live in settings.json keybinds."
+window = "window.luau"

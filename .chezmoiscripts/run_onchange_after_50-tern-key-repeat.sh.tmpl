@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Tern leaves macOS press-and-hold on, so held keys show the accent picker
+# instead of repeating (Ghostty turns it off itself). Takes effect on relaunch.
+set -eu
+defaults write so.stencil.tern ApplePressAndHoldEnabled -bool false
+{{ end -}}

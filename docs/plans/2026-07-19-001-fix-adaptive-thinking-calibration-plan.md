@@ -8,6 +8,7 @@ artifact_readiness: implementation-ready
 product_contract_source: session-history-audit
 execution: code
 ---
+
 <!-- markdownlint-disable MD013 MD025 MD036 -->
 
 # Adaptive Thinking Result Calibration - Plan
@@ -33,7 +34,7 @@ execution: code
 
 ## Why this matters
 
-The current extension is broadly effective: among 320 calls in sessions that started on or after 2026-07-16, 308 of 310 successful calls changed the effective level, all 320 calls carried a nonblank reason, and sampled transitions tracked real phase or evidence changes. The remaining calibration gap is concentrated around verification: 59 down-then-up pairs occurred across 22 sessions, 46 began with verification-oriented de-escalation, and 38 reversed within ten minutes. The policy currently describes low effort partly as “rerunning a known test” and asks for adjustment before a substantive tool call, even though the selected effort affects the *next model inference*—especially interpretation of the tool result—not the external command itself.
+The current extension is broadly effective: among 320 calls in sessions that started on or after 2026-07-16, 308 of 310 successful calls changed the effective level, all 320 calls carried a nonblank reason, and sampled transitions tracked real phase or evidence changes. The remaining calibration gap is concentrated around verification: 59 down-then-up pairs occurred across 22 sessions, 46 began with verification-oriented de-escalation, and 38 reversed within ten minutes. The policy currently describes low effort partly as “rerunning a known test” and asks for adjustment before a substantive tool call, even though the selected effort affects the _next model inference_—especially interpretation of the tool result—not the external command itself.
 
 This plan keeps the model-led checkpoint architecture and reason breadcrumbs. It narrows the guidance so agents retain adequate effort through uncertain verification, immediately reassess when failed proof invalidates a de-escalation, and recognize explicit concurrency/state-machine assignments before implementation.
 
@@ -76,12 +77,12 @@ Repository conventions:
 
 ## Commands you will need
 
-| Purpose | Command | Expected on success |
-| --- | --- | --- |
-| Focused tests | `cd private_dot_omp/private_agent && npx vitest run extensions/adaptive-thinking.test.ts` | exit 0; all focused tests pass |
-| Typecheck | `cd private_dot_omp/private_agent && npx tsc --noEmit` | exit 0; no diagnostics |
-| Deploy | `chezmoi apply /home/ianpascoe/.omp/agent/extensions/adaptive-thinking.ts` | exit 0; no error output |
-| Live smoke | `omp -p --mode=json --no-session --no-skills --no-rules --thinking=medium --auto-approve "Before any other substantive action, calibrate effort for designing cancellation-safe lease renewal with abort races and guarded finalization. Use set_thinking_level with a concise reason, then reply DONE only."` | exit 0; JSON contains one successful adaptive call to `high` or `xhigh`, a nonblank reason, and final `DONE` |
+| Purpose       | Command                                                                                                                                                                                                                                                                                                        | Expected on success                                                                                          |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Focused tests | `cd private_dot_omp/private_agent && npx vitest run extensions/adaptive-thinking.test.ts`                                                                                                                                                                                                                      | exit 0; all focused tests pass                                                                               |
+| Typecheck     | `cd private_dot_omp/private_agent && npx tsc --noEmit`                                                                                                                                                                                                                                                         | exit 0; no diagnostics                                                                                       |
+| Deploy        | `chezmoi apply /home/ianpascoe/.omp/agent/extensions/adaptive-thinking.ts`                                                                                                                                                                                                                                     | exit 0; no error output                                                                                      |
+| Live smoke    | `omp -p --mode=json --no-session --no-skills --no-rules --thinking=medium --auto-approve "Before any other substantive action, calibrate effort for designing cancellation-safe lease renewal with abort races and guarded finalization. Use set_thinking_level with a concise reason, then reply DONE only."` | exit 0; JSON contains one successful adaptive call to `high` or `xhigh`, a nonblank reason, and final `DONE` |
 
 ## Scope
 
@@ -131,7 +132,7 @@ Update `LEVEL_GUIDANCE` and `steeringGuidance` in `adaptive-thinking.ts`. Keep o
 Required final semantics:
 
 - `low` covers predictable result interpretation and known-path mechanical work with negligible diagnostic uncertainty. Do not cite “rerunning a known test” as sufficient by itself.
-- The objective states that the selected level governs the *next model call*. Choose it for the reasoning needed to interpret the expected tool result or make the next decision; do not choose it merely from command/edit mechanics.
+- The objective states that the selected level governs the _next model call_. Choose it for the reasoning needed to interpret the expected tool result or make the next decision; do not choose it merely from command/edit mechanics.
 - Initial calibration explicitly treats lease/cancellation/abort races, guarded finalization, process termination, and similar state-machine coordination as concurrency risk before implementation.
 - De-escalation into low verification is allowed only when the remaining check is known and available and unresolved contract/type/security uncertainty is absent.
 - Do not lower solely to invoke a verifier if a plausible failure would require returning immediately to the current diagnostic level. Retaining the current level across a short repair/verify loop is stability, not a failure to adapt.
