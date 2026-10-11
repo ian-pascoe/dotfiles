@@ -3,6 +3,8 @@
   "keymap_prefix": "ctrl+a",
   "copy_on_select": false,
   "pane_headers": "Split",
+  "theme_dark": "current",
+  "theme_light": "current",
   "keybinds": {
     "alt+r": "reload_config",
     "ctrl+a>shift+s": "preferences",

@@ -276,6 +276,7 @@ agent_panel_sort = "spaces"
 copy_on_select = false
 
 # Background notification popup delivery
+status_indicators = "symbols"
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show in-app toasts
@@ -284,6 +285,7 @@ copy_on_select = false
 # delivery = "off"
 # delay_seconds = 1
 
+delivery = "system"
 [ui.toast.herdr]
 # position = "bottom-right"
 

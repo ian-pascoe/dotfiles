@@ -129,15 +129,19 @@ local theme_specs = {
   },
 }
 
-local active_theme = theme_specs[theme] and theme or 'rose-pine'
-local active_spec = theme_specs[active_theme]
+local function spec_for(name)
+  return theme_specs[name] or theme_specs['rose-pine']
+end
 
-for theme_name, spec in pairs(theme_specs) do
+local active_spec = spec_for(theme)
+
+-- Every theme is installed; only the active one loads at startup. lazy.nvim
+-- loads the others when `:colorscheme` asks for them.
+for _, spec in pairs(theme_specs) do
   table.insert(M, {
     spec.repo,
     name = spec.name,
-    enabled = theme_name == active_theme,
-    lazy = false,
+    lazy = spec ~= active_spec,
     priority = 1000,
     opts = spec.opts,
     config = spec.config,
@@ -148,5 +152,28 @@ table.insert(M, {
   'LazyVim/LazyVim',
   opts = { colorscheme = active_spec.colorscheme },
 })
+
+-- Follow `set-theme` live: it swaps the `theme` link, so watch its directory
+-- and reapply the colorscheme when the link changes. Util outlives spec
+-- reloads, so the guard keeps one watcher per Neovim.
+local function apply_theme()
+  local ok, err = pcall(vim.cmd.colorscheme, spec_for(Util.get_theme()).colorscheme)
+  if not ok then
+    vim.notify('Could not switch colorscheme: ' .. err, vim.log.levels.WARN)
+  end
+end
+
+if not Util.theme_watcher then
+  local watcher, timer = vim.uv.new_fs_event(), vim.uv.new_timer()
+  if watcher and timer then
+    Util.theme_watcher = watcher
+    watcher:start(Util.theme_dir(), {}, function(err, filename)
+      if not err and filename == 'theme' then
+        -- `ln -snf` reports more than one event; apply once they settle.
+        timer:start(100, 0, vim.schedule_wrap(apply_theme))
+      end
+    end)
+  end
+end
 
 return M
