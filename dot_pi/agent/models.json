@@ -7,10 +7,25 @@
         "cf-access-token": "!cloudflared access token -app=https://proxy.ianpascoe.dev"
       },
       "modelOverrides": {
-        "claude-fable-5-1": { "contextWindow": 256000 },
-        "claude-opus-5-5": { "contextWindow": 256000 },
-        "claude-sonnet-5-5": { "contextWindow": 256000 },
-        "claude-haiku-5-5": { "contextWindow": 256000 }
+        "claude-fable-5-1": {
+          "contextWindow": 256000
+        },
+        "claude-opus-5-5": {
+          "contextWindow": 256000
+        },
+        "claude-sonnet-5-5": {
+          "contextWindow": 256000
+        },
+        "claude-haiku-5-5": {
+          "contextWindow": 256000
+        }
+      }
+    },
+    "opencode-go": {
+      "baseUrl": "https://proxy.ianpascoe.dev/v1",
+      "apiKey": "sk-dummy",
+      "headers": {
+        "cf-access-token": "!cloudflared access token -app=https://proxy.ianpascoe.dev"
       }
     }
   }

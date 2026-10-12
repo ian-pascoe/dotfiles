@@ -233,9 +233,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/remotion-dev/skills.git",
       "skillPath": "skills/remotion-best-practices/SKILL.md",
-      "skillFolderHash": "4d1a20d00014fbe45ef5a797a85e6dd99404ae8a",
+      "skillFolderHash": "52ebfc32e4e362cf41769499f31684391e883838",
       "installedAt": "2026-07-21T10:41:08.762Z",
-      "updatedAt": "2026-10-07T14:59:50.402Z"
+      "updatedAt": "2026-10-12T09:22:55.041Z"
     },
     "herdr": {
       "source": "herdrdev/herdr",
@@ -335,9 +335,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/nicobailon/visual-explainer.git",
       "skillPath": "plugins/visual-explainer/SKILL.md",
-      "skillFolderHash": "779d855713c068e5d14530965c65871a211b0b1e",
+      "skillFolderHash": "9134300117cb90d912aadcf66f6c453731e3b15d",
       "installedAt": "2026-08-17T09:50:57.504Z",
-      "updatedAt": "2026-10-11T10:14:53.630Z"
+      "updatedAt": "2026-10-12T09:22:56.075Z"
     },
     "show-me": {
       "source": "humanlayer/skills",
@@ -353,9 +353,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/cursor/plugins.git",
       "skillPath": "pstack/skills/unslop/SKILL.md",
-      "skillFolderHash": "d6a803c02b716b6562412c9bf749b36968986c3c",
+      "skillFolderHash": "4e572dd70e5557f490e3991c52ea58f0dcee8936",
       "installedAt": "2026-08-21T17:53:33.036Z",
-      "updatedAt": "2026-10-11T10:14:54.925Z"
+      "updatedAt": "2026-10-12T09:22:56.970Z"
     },
     "deslop": {
       "source": "cursor/plugins",
