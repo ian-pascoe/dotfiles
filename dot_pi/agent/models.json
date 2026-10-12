@@ -22,7 +22,7 @@
       }
     },
     "opencode-go": {
-      "baseUrl": "https://proxy.ianpascoe.dev/v1",
+      "baseUrl": "https://proxy.ianpascoe.dev",
       "apiKey": "sk-dummy",
       "headers": {
         "cf-access-token": "!cloudflared access token -app=https://proxy.ianpascoe.dev"
