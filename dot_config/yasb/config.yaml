@@ -57,7 +57,7 @@ widgets:
   home:
     type: "yasb.home.HomeWidget"
     options:
-      label: "<span>\udb82\udd53</span>"
+      label: "<span>\U000F0953</span>"
       menu_list:
         - { title: "User Home", path: "~" }
         - { title: "Downloads", path: "~\\Downloads" }
@@ -126,8 +126,8 @@ widgets:
   glazewm_tiling_direction:
     type: "glazewm.tiling_direction.GlazewmTilingDirectionWidget"
     options:
-      horizontal_label: "\udb81\udce1"
-      vertical_label: "\udb81\udce2"
+      horizontal_label: "\U000F04E1"
+      vertical_label: "\U000F04E2"
       btn_shadow:
         enabled: true
         color: "black"
@@ -147,8 +147,8 @@ widgets:
   media:
     type: "yasb.media.MediaWidget"
     options:
-      label: "<span>\udb80\udf87</span> {title}"
-      label_alt: "<span>\udb80\udf87</span> {title}"
+      label: "<span>\U000F0387</span> {title}"
+      label_alt: "<span>\U000F0387</span> {title}"
       hide_empty: true
       callbacks:
         on_left: "toggle_media_menu"
@@ -288,7 +288,7 @@ widgets:
         high: 95
         full: 100
       status_icons:
-        icon_charging: "\udb80\udc84"
+        icon_charging: "\U000F0084"
         icon_critical: "\uf244"
         icon_low: "\uf243"
         icon_medium: "\uf242"
@@ -314,11 +314,11 @@ widgets:
       ethernet_icon: "\ueba9"
       get_exact_wifi_strength: true # Optional. Will require location access permission if true.
       wifi_icons:
-        - "\udb82\udd2e" # Icon for 0% strength
-        - "\udb82\udd1f" # Icon for 1-24% strength
-        - "\udb82\udd22" # Icon for 25-49% strength
-        - "\udb82\udd25" # Icon for 50-74% strength
-        - "\udb82\udd28" # Icon for 75-100% strength
+        - "\U000F092E" # Icon for 0% strength
+        - "\U000F091F" # Icon for 1-24% strength
+        - "\U000F0922" # Icon for 25-49% strength
+        - "\U000F0925" # Icon for 50-74% strength
+        - "\U000F0928" # Icon for 75-100% strength
       label_shadow:
         enabled: true
         color: "black"
@@ -356,8 +356,8 @@ widgets:
       label: "<span>{icon}</span>{level}"
       label_alt: "<span>{icon}</span>{level}%"
       icons:
-        normal: "\udb80\udf6c"
-        muted: "\udb80\udf6d"
+        normal: "\U000F036C"
+        muted: "\U000F036D"
       callbacks:
         on_left: "toggle_mute"
         on_middle: "toggle_label"
@@ -366,8 +366,8 @@ widgets:
     type: "yasb.systray.SystrayWidget"
     options:
       class_name: "systray"
-      label_collapsed: "\udb80\udd40"
-      label_expanded: "\udb80\udd41"
+      label_collapsed: "\U000F0140"
+      label_expanded: "\U000F0141"
       label_position: "right" # Can be "left" or "right"
       icon_size: 14 # Can be any integer between 8 and 64
       pin_click_modifier: "alt" # Can be "ctrl", "alt" or "shift"

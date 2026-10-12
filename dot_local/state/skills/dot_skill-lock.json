@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "fbcbff0d9089aaf550488371029cb1398ebd43f3",
+      "skillFolderHash": "9b3180f319bce2acfa18bdc12af5a9c4fbe966b5",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-10-09T13:37:32.642Z"
+      "updatedAt": "2026-10-12T12:35:11.903Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",

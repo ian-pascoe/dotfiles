@@ -1,0 +1,13 @@
+#!/bin/sh
+# Manage only the keys in settings.managed.json; the rest of settings.json is
+# Pi state (lastChangelogVersion, and the model and thinking level Pi saves
+# when you switch). settings.defaults.json fills in that state where missing.
+set -eu
+
+dir="$CHEZMOI_SOURCE_DIR/dot_pi/agent"
+input=$(cat)
+[ -n "$input" ] || input='{}'
+printf '%s\n' "$input" |
+  jq --slurpfile defaults "$dir/settings.defaults.json" \
+    --slurpfile managed "$dir/settings.managed.json" \
+    '$defaults[0] + . + $managed[0]'

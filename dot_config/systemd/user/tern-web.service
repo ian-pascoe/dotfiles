@@ -1,0 +1,28 @@
+[Unit]
+Description=Tern web client
+# Tailscale Serve publishes it as svc:tern (https://tern.tail7ff085.ts.net),
+# which proxies to the loopback listener below, except /manifest.webmanifest:
+#   tailscale serve --service=svc:tern --https=443 http://127.0.0.1:8377
+#   tailscale serve --service=svc:tern --https=443 \
+#     --set-path=/manifest.webmanifest ~/.config/tern/web-manifest.json
+After=network-online.target tern-remote.service
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=exec
+# The browser loads the page through Tailscale Serve, so its WebSocket carries
+# the svc:tern origin, which tern rejects unless allowed. The sign-in token
+# lives in ~/.config/tern/web-token.
+ExecStart=%h/.local/share/tern/build/tern web serve --listen 127.0.0.1:8377 --allow-origin https://tern.tail7ff085.ts.net
+# Installed (Home Screen) apps open the manifest's start_url, which loses the
+# token; this writes a manifest that carries it. A failure leaves the web
+# client usable from the token address, so it does not stop the service.
+ExecStartPost=-%h/.local/bin/tern-web-manifest 127.0.0.1:8377
+Restart=on-failure
+RestartSec=5
+# Bad arguments (exit status 2) do not fix themselves by restarting.
+RestartPreventExitStatus=2
+
+[Install]
+WantedBy=default.target

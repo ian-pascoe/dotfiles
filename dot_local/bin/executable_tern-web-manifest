@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""Write Tern's web app manifest with the sign-in token in its start_url.
+
+Tern's web client reads its token only from the page address (?token=...), and
+its manifest starts installed apps at "./", so an app added to the iOS Home
+Screen opens without one. Tailscale Serve answers /manifest.webmanifest from
+the file this writes, so the installed app opens at ./?token=... instead.
+
+usage: tern-web-manifest [ADDR:PORT]    (default 127.0.0.1:8377)
+"""
+
+import json
+import os
+import sys
+import time
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+listen = sys.argv[1] if len(sys.argv) > 1 else "127.0.0.1:8377"
+config = Path(
+    os.environ.get("TERN_CONFIG_DIR")
+    or Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config") / "tern"
+)
+token = (config / "web-token").read_text().strip()
+out = config / "web-manifest.json"
+
+# Run right after the server starts, so give it time to listen.
+deadline = time.monotonic() + 15
+while True:
+    try:
+        url = f"http://{listen}/manifest.webmanifest"
+        with urllib.request.urlopen(url, timeout=2) as response:
+            manifest = json.load(response)
+        break
+    except (OSError, ValueError) as err:
+        if time.monotonic() > deadline:
+            sys.exit(
+                f"tern-web-manifest: cannot read Tern's manifest at {listen}: {err}"
+            )
+        time.sleep(0.2)
+
+start_url = manifest.get("start_url", "./")
+# Without an id, the app's identity is its start_url, which now holds the token.
+manifest.setdefault("id", start_url)
+start = urllib.parse.urlsplit(start_url)
+query = [(k, v) for k, v in urllib.parse.parse_qsl(start.query) if k != "token"]
+query.append(("token", token))
+manifest["start_url"] = urllib.parse.urlunsplit(
+    start._replace(query=urllib.parse.urlencode(query))
+)
+
+# The file holds the token: create it readable only by its owner.
+tmp = out.with_name(out.name + ".tmp")
+fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+with os.fdopen(fd, "w") as f:
+    json.dump(manifest, f, indent="\t")
+    f.write("\n")
+os.replace(tmp, out)

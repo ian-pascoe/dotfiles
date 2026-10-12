@@ -1,6 +1,6 @@
 -- herdr compat: the herdr actions Tern has no built-in for, as palette
 -- commands `plugin.herdr.<id>`. settings.json `keybinds` gives them herdr's
--- keys (managed by chezmoi's modify_settings.json); nothing is bound here
+-- keys (managed by chezmoi's modify_settings.json.tmpl); nothing is bound here
 -- because preset chords win over plugin binds.
 
 -- Vim-aware pane navigation (herdr's scripts/navigate.sh). A Vim in the

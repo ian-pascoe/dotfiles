@@ -1,7 +1,4 @@
 {
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-5-5",
-  "defaultThinkingLevel": "high",
   "enabledModels": [
     "anthropic/claude-fable-5-1",
     "anthropic/claude-opus-5-5",
@@ -849,6 +846,5 @@
         "rootMarkers": ["build.zig"]
       }
     }
-  },
-  "lastChangelogVersion": "1.1.0"
+  }
 }

@@ -3,12 +3,14 @@
   "keymap_prefix": "ctrl+a",
   "copy_on_select": false,
   "pane_headers": "Split",
+  "tabs": "Vertical",
   "theme_dark": "current",
   "theme_light": "current",
   "keybinds": {
     "alt+r": "reload_config",
     "ctrl+a>shift+s": "preferences",
     "ctrl+a>d": "quit",
+    "ctrl+a>b": "toggle_sidebar",
 
     "ctrl+a>s": "switch_session",
     "ctrl+a>alt+g": "plugin.herdr.goto",

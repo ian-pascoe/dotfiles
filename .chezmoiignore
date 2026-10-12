@@ -3,6 +3,8 @@ AGENTS.md
 CLAUDE.md
 .claude/mcp-servers.json
 Library/Application Support/Tern/settings.managed.json
+.pi/agent/settings.managed.json
+.pi/agent/settings.defaults.json
 docs/**
 CONTEXT-MAP.md
 **/CONTEXT.md
