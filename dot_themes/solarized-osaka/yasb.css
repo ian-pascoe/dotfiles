@@ -1,0 +1,37 @@
+:root {
+  /* Solarized Osaka palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 0, 20, 25;
+  --foreground: 131, 147, 149;
+  --card-background: 0, 44, 56;
+  --popup-background: 6, 53, 64;
+  --primary: 38, 139, 211;
+  --secondary: 41, 162, 152;
+  --tertiary: 38, 139, 211;
+  --accent: 109, 113, 196;
+  --muted-background: 87, 109, 116;
+  --info: 38, 139, 211;
+  --success: 132, 153, 0;
+  --warning: 178, 133, 0;
+  --destructive: 219, 48, 45;
+  --border: 6, 53, 64;
+  --text: 131, 147, 149;
+  --foam: 42, 237, 221;
+  --gold: 178, 133, 0;
+  --love: 219, 48, 45;
+  --overlay: 87, 109, 116;
+  --highlight: 6, 53, 64;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

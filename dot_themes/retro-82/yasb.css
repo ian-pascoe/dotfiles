@@ -1,0 +1,37 @@
+:root {
+  /* Retro 82 palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 5, 24, 46;
+  --foreground: 246, 220, 172;
+  --card-background: 10, 37, 64;
+  --popup-background: 19, 78, 90;
+  --primary: 250, 169, 104;
+  --secondary: 99, 198, 190;
+  --tertiary: 63, 143, 138;
+  --accent: 90, 166, 161;
+  --muted-background: 95, 143, 150;
+  --info: 63, 143, 138;
+  --success: 25, 167, 168;
+  --warning: 233, 123, 60;
+  --destructive: 248, 85, 37;
+  --border: 19, 78, 90;
+  --text: 246, 220, 172;
+  --foam: 140, 191, 184;
+  --gold: 250, 169, 104;
+  --love: 248, 85, 37;
+  --overlay: 95, 143, 150;
+  --highlight: 19, 78, 90;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

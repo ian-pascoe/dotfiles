@@ -103,6 +103,21 @@ if command -v hunk &>/dev/null; then
           duskfox) echo rose-pine-moon ;;
           terafox) echo poimandres ;;
           ristretto) echo monokai ;;
+          gruvbox-material) echo gruvbox-dark-medium ;;
+          sonokai) echo monokai ;;
+          nordic) echo nord ;;
+          solarized-osaka) echo solarized-dark ;;
+          tokyodark) echo tokyo-night ;;
+          jellybeans) echo gruvbox-dark-hard ;;
+          bluloco) echo github-dark-dimmed ;;
+          embark) echo dracula ;;
+          no-clown-fiesta) echo vesper ;;
+          kanagawa-paper) echo kanagawa-dragon ;;
+          boo) echo red ;;
+          retro-82) echo night-owl ;;
+          ethereal) echo tokyo-night ;;
+          hackerman) echo vitesse-black ;;
+          lumon) echo github-dark-dimmed ;;
           *) basename "$(readlink ~/.config/theme)" ;;
           esac
         )" \
@@ -122,20 +137,41 @@ if command -v hermes &>/dev/null; then
   eval "$(hermes completion "$_shell_name")"
 fi
 
-# set-theme takes one argument: a theme name from list-themes.
+# set-theme and set-theme-all take a theme name from list-themes; set-theme-all
+# also takes -n/--dry-run before it, and random-theme-all takes only that.
 if command -v set-theme &>/dev/null; then
   if [ "$_shell_name" = zsh ]; then
+    # _arguments runs $(list-themes) itself when completing.
+    # shellcheck disable=SC2016
     _set_theme() {
-      # shellcheck disable=SC2046 # zsh: one word per theme name
-      ((CURRENT == 2)) && compadd -- $(list-themes)
+      _arguments '1:theme:($(list-themes))'
+    }
+    # shellcheck disable=SC2016
+    _set_theme_all() {
+      _arguments '(-n --dry-run)'{-n,--dry-run}'[check each machine without changing it]' \
+        '1:theme:($(list-themes))'
+    }
+    _random_theme_all() {
+      _arguments '(-n --dry-run)'{-n,--dry-run}'[check each machine without changing it]'
     }
     compdef _set_theme set-theme
+    compdef _set_theme_all set-theme-all
+    compdef _random_theme_all random-theme-all
   else
     _set_theme() {
-      ((COMP_CWORD == 1)) || return
-      mapfile -t COMPREPLY < <(compgen -W "$(list-themes)" -- "${COMP_WORDS[COMP_CWORD]}")
+      local cur=${COMP_WORDS[COMP_CWORD]} i
+      # Complete only the first argument after any options.
+      for ((i = 1; i < COMP_CWORD; i++)); do
+        [[ ${COMP_WORDS[i]} == -* ]] || return
+      done
+      if [[ $cur == -* && ${COMP_WORDS[0]} == set-theme-all ]]; then
+        mapfile -t COMPREPLY < <(compgen -W '-n --dry-run' -- "$cur")
+      else
+        mapfile -t COMPREPLY < <(compgen -W "$(list-themes)" -- "$cur")
+      fi
     }
-    complete -F _set_theme set-theme
+    complete -F _set_theme set-theme set-theme-all
+    complete -W '-n --dry-run' random-theme-all
   fi
 fi
 

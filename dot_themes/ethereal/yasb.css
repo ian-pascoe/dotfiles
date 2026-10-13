@@ -1,0 +1,37 @@
+:root {
+  /* Ethereal palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 6, 11, 30;
+  --foreground: 255, 206, 173;
+  --card-background: 19, 26, 58;
+  --popup-background: 37, 46, 86;
+  --primary: 125, 130, 217;
+  --secondary: 146, 165, 147;
+  --tertiary: 125, 130, 217;
+  --accent: 200, 157, 193;
+  --muted-background: 109, 125, 182;
+  --info: 125, 130, 217;
+  --success: 146, 165, 147;
+  --warning: 233, 187, 79;
+  --destructive: 237, 91, 90;
+  --border: 37, 46, 86;
+  --text: 255, 206, 173;
+  --foam: 125, 130, 217;
+  --gold: 233, 187, 79;
+  --love: 237, 91, 90;
+  --overlay: 109, 125, 182;
+  --highlight: 37, 46, 86;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,37 @@
+:root {
+  /* Hackerman palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 11, 12, 22;
+  --foreground: 221, 247, 255;
+  --card-background: 21, 24, 40;
+  --popup-background: 31, 37, 58;
+  --primary: 130, 251, 156;
+  --secondary: 79, 232, 143;
+  --tertiary: 130, 251, 156;
+  --accent: 134, 167, 223;
+  --muted-background: 106, 110, 149;
+  --info: 130, 251, 156;
+  --success: 79, 232, 143;
+  --warning: 80, 247, 212;
+  --destructive: 80, 248, 114;
+  --border: 45, 52, 80;
+  --text: 221, 247, 255;
+  --foam: 130, 251, 156;
+  --gold: 80, 247, 212;
+  --love: 80, 248, 114;
+  --overlay: 106, 110, 149;
+  --highlight: 31, 37, 58;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,100 @@
+k9s:
+  body:
+    fgColor: "#839395"
+    bgColor: default
+    logoColor: "#268bd3"
+  prompt:
+    fgColor: "#839395"
+    bgColor: default
+    suggestColor: "#268bd3"
+  help:
+    fgColor: "#839395"
+    bgColor: default
+    sectionColor: "#849900"
+    keyColor: "#268bd3"
+    numKeyColor: "#db302d"
+  frame:
+    title:
+      fgColor: "#2aeddd"
+      bgColor: default
+      highlightColor: "#6d71c4"
+      counterColor: "#b28500"
+      filterColor: "#849900"
+    border:
+      fgColor: "#268bd3"
+      focusColor: "#29a298"
+    menu:
+      fgColor: "#839395"
+      keyColor: "#268bd3"
+      numKeyColor: "#db302d"
+    crumbs:
+      fgColor: "#001419"
+      bgColor: default
+      activeColor: "#b28500"
+    status:
+      newColor: "#268bd3"
+      modifyColor: "#2aeddd"
+      addColor: "#849900"
+      pendingColor: "#b28500"
+      errorColor: "#db302d"
+      highlightColor: "#2aeddd"
+      killColor: "#6d71c4"
+      completedColor: "#576d74"
+  info:
+    fgColor: "#b28500"
+    sectionColor: "#839395"
+  views:
+    table:
+      fgColor: "#839395"
+      bgColor: default
+      cursorFgColor: "#839395"
+      cursorBgColor: "#063540"
+      markColor: "#849900"
+      header:
+        fgColor: "#b28500"
+        bgColor: default
+        sorterColor: "#2aeddd"
+    xray:
+      fgColor: "#839395"
+      bgColor: default
+      cursorColor: "#063540"
+      cursorTextColor: "#839395"
+      graphicColor: "#6d71c4"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#849900"
+        - "#db302d"
+      defaultChartColors:
+        - "#849900"
+        - "#db302d"
+      resourceColors:
+        cpu:
+          - "#268bd3"
+          - "#2aeddd"
+        mem:
+          - "#849900"
+          - "#b28500"
+    yaml:
+      keyColor: "#268bd3"
+      valueColor: "#839395"
+      colonColor: "#576d74"
+    logs:
+      fgColor: "#839395"
+      bgColor: default
+      indicator:
+        fgColor: "#2aeddd"
+        bgColor: default
+        toggleOnColor: "#849900"
+        toggleOffColor: "#576d74"
+  dialog:
+    fgColor: "#b28500"
+    bgColor: default
+    buttonFgColor: "#001419"
+    buttonBgColor: default
+    buttonFocusFgColor: "#001419"
+    buttonFocusBgColor: "#6d71c4"
+    labelFgColor: "#b28500"
+    fieldFgColor: "#839395"

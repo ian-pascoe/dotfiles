@@ -1,0 +1,37 @@
+:root {
+  /* Sonokai palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 44, 46, 52;
+  --foreground: 226, 226, 227;
+  --card-background: 51, 53, 63;
+  --popup-background: 89, 95, 111;
+  --primary: 231, 198, 100;
+  --secondary: 118, 204, 224;
+  --tertiary: 118, 204, 224;
+  --accent: 179, 157, 243;
+  --muted-background: 127, 132, 144;
+  --info: 118, 204, 224;
+  --success: 158, 208, 114;
+  --warning: 231, 198, 100;
+  --destructive: 252, 93, 124;
+  --border: 89, 95, 111;
+  --text: 226, 226, 227;
+  --foam: 118, 204, 224;
+  --gold: 231, 198, 100;
+  --love: 252, 93, 124;
+  --overlay: 127, 132, 144;
+  --highlight: 89, 95, 111;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

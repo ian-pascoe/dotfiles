@@ -1,0 +1,37 @@
+:root {
+  /* Jellybeans palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 21, 21, 21;
+  --foreground: 232, 232, 211;
+  --card-background: 28, 28, 28;
+  --popup-background: 64, 64, 64;
+  --primary: 143, 191, 220;
+  --secondary: 102, 135, 153;
+  --tertiary: 143, 191, 220;
+  --accent: 198, 182, 238;
+  --muted-background: 136, 136, 136;
+  --info: 143, 191, 220;
+  --success: 153, 173, 106;
+  --warning: 250, 208, 122;
+  --destructive: 215, 69, 69;
+  --border: 64, 64, 64;
+  --text: 232, 232, 211;
+  --foam: 129, 151, 191;
+  --gold: 250, 208, 122;
+  --love: 215, 69, 69;
+  --overlay: 136, 136, 136;
+  --highlight: 64, 64, 64;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

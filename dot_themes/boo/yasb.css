@@ -1,0 +1,37 @@
+:root {
+  /* Boo palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 18, 16, 16;
+  --foreground: 247, 239, 240;
+  --card-background: 32, 28, 28;
+  --popup-background: 57, 20, 24;
+  --primary: 225, 87, 116;
+  --secondary: 252, 162, 174;
+  --tertiary: 225, 87, 116;
+  --accent: 163, 123, 167;
+  --muted-background: 121, 103, 105;
+  --info: 185, 106, 118;
+  --success: 209, 146, 153;
+  --warning: 223, 184, 188;
+  --destructive: 254, 105, 125;
+  --border: 71, 50, 52;
+  --text: 247, 239, 240;
+  --foam: 233, 191, 196;
+  --gold: 223, 184, 188;
+  --love: 254, 105, 125;
+  --overlay: 121, 103, 105;
+  --highlight: 57, 20, 24;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

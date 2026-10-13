@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+# Sets the theme here and on every other machine of mine on the tailnet: peers
+# owned by my Tailscale user or tagged (my servers), running Linux or macOS.
+# Other users' shared devices are left alone. Machines that are offline, refuse
+# SSH or fail are reported and skipped; only a failure here fails the run.
+# With -n/--dry-run, it checks each machine without changing anything.
+
+set -uo pipefail
+
+usage() {
+  echo "Usage: $(basename "$0") [-n|--dry-run] <theme-name>"
+}
+
+dry_run=false
+case "${1:-}" in
+-n | --dry-run)
+  dry_run=true
+  shift
+  ;;
+esac
+if [[ $# -ne 1 ]]; then
+  usage >&2
+  exit 1
+fi
+theme=$1
+
+if [[ ! -d "$HOME/.themes/$theme" ]]; then
+  echo "Theme '$theme' does not exist in ~/.themes" >&2
+  exit 1
+fi
+
+# Runs on each machine with the theme as $1. A login shell puts set-theme and
+# its tools (bat, mise shims) on PATH.
+# shellcheck disable=SC2016 # expanded by the shell that runs it
+if $dry_run; then
+  remote_script='
+    command -v set-theme >/dev/null || { echo "set-theme is not installed"; exit 1; }
+    [ -d "$HOME/.themes/$1" ] || { echo "theme $1 is not deployed"; exit 1; }
+    echo "ready; current theme: $(basename "$(readlink "$HOME/.config/theme")")"
+  '
+else
+  remote_script='set-theme "$1"'
+fi
+
+ssh_opts=(
+  -o BatchMode=yes
+  -o ConnectTimeout=5
+  -o ForwardAgent=no
+  -o ForwardX11=no
+  -o LogLevel=ERROR
+  -o VisualHostKey=no
+)
+
+done_hosts=()
+skipped_hosts=()
+failed_hosts=()
+
+indent() { sed 's/^/  /'; }
+
+# Prints its arguments comma-separated, or "none".
+list() {
+  if [[ $# -eq 0 ]]; then
+    echo none
+    return
+  fi
+  printf '%s' "$1"
+  shift
+  printf ', %s' "$@"
+  echo
+}
+
+echo "== this machine ($(hostname -s))"
+if bash -s -- "$theme" <<<"$remote_script" 2>&1 | indent; then
+  done_hosts+=("$(hostname -s)")
+  local_ok=true
+else
+  failed_hosts+=("$(hostname -s)")
+  local_ok=false
+fi
+
+if ! command -v tailscale &>/dev/null || ! command -v jq &>/dev/null; then
+  echo "tailscale or jq is missing; set the theme on this machine only." >&2
+  peers=''
+elif ! status=$(tailscale status --json 2>/dev/null); then
+  echo "Tailscale is not running; set the theme on this machine only." >&2
+  peers=''
+else
+  peers=$(jq -r '
+    .Self.UserID as $me
+    | (.Peer // {})[]
+    | select(.UserID == $me or ((.Tags // []) | length > 0))
+    | [(.DNSName | rtrimstr(".")), (if .Online then "online" else "offline" end), .OS]
+    | @tsv' <<<"$status")
+fi
+
+while IFS=$'\t' read -r host state os <&3; do
+  [[ -n $host ]] || continue
+  name=${host%%.*}
+  if [[ $os != linux && $os != macOS ]]; then
+    skipped_hosts+=("$name ($os)")
+    continue
+  fi
+  if [[ $state != online ]]; then
+    skipped_hosts+=("$name (offline)")
+    continue
+  fi
+
+  echo "== $name"
+  timeout 120 ssh "${ssh_opts[@]}" "$host" bash -l -s -- "$theme" <<<"$remote_script" 2>&1 | indent
+  case $? in
+  0) done_hosts+=("$name") ;;
+  255) skipped_hosts+=("$name (no SSH access)") ;;
+  124) failed_hosts+=("$name (timed out)") ;;
+  *) failed_hosts+=("$name") ;;
+  esac
+done 3<<<"$peers"
+
+echo
+if $dry_run; then
+  echo "Ready to set $theme on: $(list "${done_hosts[@]}")"
+else
+  echo "Set $theme on: $(list "${done_hosts[@]}")"
+fi
+if [[ ${#skipped_hosts[@]} -gt 0 ]]; then
+  echo "Skipped: $(list "${skipped_hosts[@]}")"
+fi
+if [[ ${#failed_hosts[@]} -gt 0 ]]; then
+  echo "Failed: $(list "${failed_hosts[@]}")"
+fi
+
+$local_ok

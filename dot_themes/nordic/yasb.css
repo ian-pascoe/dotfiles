@@ -1,0 +1,37 @@
+:root {
+  /* Nordic palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 36, 41, 51;
+  --foreground: 192, 200, 216;
+  --card-background: 46, 52, 64;
+  --popup-background: 59, 66, 82;
+  --primary: 136, 192, 208;
+  --secondary: 129, 161, 193;
+  --tertiary: 136, 192, 208;
+  --accent: 180, 142, 173;
+  --muted-background: 96, 114, 138;
+  --info: 136, 192, 208;
+  --success: 163, 190, 140;
+  --warning: 235, 203, 139;
+  --destructive: 197, 114, 122;
+  --border: 76, 86, 106;
+  --text: 192, 200, 216;
+  --foam: 143, 188, 187;
+  --gold: 235, 203, 139;
+  --love: 197, 114, 122;
+  --overlay: 96, 114, 138;
+  --highlight: 59, 66, 82;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

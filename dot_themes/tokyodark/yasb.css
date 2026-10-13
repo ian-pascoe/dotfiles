@@ -1,0 +1,37 @@
+:root {
+  /* TokyoDark palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 17, 18, 29;
+  --foreground: 160, 168, 205;
+  --card-background: 26, 27, 42;
+  --popup-background: 53, 57, 69;
+  --primary: 113, 153, 238;
+  --secondary: 56, 168, 157;
+  --tertiary: 113, 153, 238;
+  --accent: 164, 133, 221;
+  --muted-background: 110, 115, 143;
+  --info: 113, 153, 238;
+  --success: 149, 197, 97;
+  --warning: 215, 166, 95;
+  --destructive: 238, 109, 133;
+  --border: 53, 57, 69;
+  --text: 160, 168, 205;
+  --foam: 56, 168, 157;
+  --gold: 215, 166, 95;
+  --love: 238, 109, 133;
+  --overlay: 110, 115, 143;
+  --highlight: 53, 57, 69;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

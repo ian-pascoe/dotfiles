@@ -1,0 +1,37 @@
+:root {
+  /* No Clown Fiesta palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 21, 21, 21;
+  --foreground: 225, 225, 225;
+  --card-background: 32, 32, 32;
+  --popup-background: 55, 55, 55;
+  --primary: 186, 215, 255;
+  --secondary: 136, 175, 162;
+  --tertiary: 186, 215, 255;
+  --accent: 170, 116, 159;
+  --muted-background: 114, 114, 114;
+  --info: 186, 215, 255;
+  --success: 144, 169, 89;
+  --warning: 244, 191, 117;
+  --destructive: 180, 105, 88;
+  --border: 55, 55, 55;
+  --text: 225, 225, 225;
+  --foam: 186, 215, 255;
+  --gold: 244, 191, 117;
+  --love: 180, 105, 88;
+  --overlay: 114, 114, 114;
+  --highlight: 55, 55, 55;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

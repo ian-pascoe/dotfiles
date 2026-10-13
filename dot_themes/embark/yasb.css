@@ -1,0 +1,37 @@
+:root {
+  /* Embark palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 30, 28, 49;
+  --foreground: 203, 227, 231;
+  --card-background: 47, 42, 71;
+  --popup-background: 62, 56, 89;
+  --primary: 145, 221, 255;
+  --secondary: 99, 242, 241;
+  --tertiary: 120, 168, 255;
+  --accent: 212, 191, 255;
+  --muted-background: 138, 136, 157;
+  --info: 145, 221, 255;
+  --success: 161, 239, 211;
+  --warning: 255, 230, 179;
+  --destructive: 240, 46, 110;
+  --border: 88, 82, 115;
+  --text: 203, 227, 231;
+  --foam: 171, 248, 247;
+  --gold: 255, 230, 179;
+  --love: 244, 143, 177;
+  --overlay: 88, 82, 115;
+  --highlight: 62, 56, 89;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

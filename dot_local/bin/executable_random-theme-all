@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Sets a random dark theme on every machine; see set-theme-all. Themes with a
+# light.mode marker are never picked. Options such as -n/--dry-run pass
+# through to set-theme-all.
+
+theme=$(
+  list-themes | while read -r name; do
+    [[ -f "$HOME/.themes/$name/light.mode" ]] || echo "$name"
+  done | shuf -n 1
+)
+if [[ -z $theme ]]; then
+  echo "No dark themes found in ~/.themes" >&2
+  exit 1
+fi
+
+exec set-theme-all "$@" "$theme"

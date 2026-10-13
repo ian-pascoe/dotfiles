@@ -297,6 +297,138 @@ local theme_specs = {
       vim.g.nightflyTransparent = vim.g.transparent_enabled
     end,
   },
+  ['gruvbox-material'] = {
+    repo = 'sainnhe/gruvbox-material',
+    name = 'gruvbox-material',
+    colorscheme = 'gruvbox-material',
+    config = function()
+      vim.g.gruvbox_material_background = 'medium'
+      vim.g.gruvbox_material_foreground = 'material'
+      vim.g.gruvbox_material_transparent_background = vim.g.transparent_enabled and 1 or 0
+    end,
+  },
+  sonokai = {
+    repo = 'sainnhe/sonokai',
+    name = 'sonokai',
+    colorscheme = 'sonokai',
+    config = function()
+      vim.g.sonokai_style = 'default'
+      vim.g.sonokai_transparent_background = vim.g.transparent_enabled and 1 or 0
+    end,
+  },
+  nordic = {
+    repo = 'AlexvZyl/nordic.nvim',
+    name = 'nordic',
+    colorscheme = 'nordic',
+    opts = {
+      transparent = {
+        bg = vim.g.transparent_enabled,
+        float = vim.g.transparent_enabled,
+      },
+    },
+  },
+  ['solarized-osaka'] = {
+    repo = 'craftzdog/solarized-osaka.nvim',
+    name = 'solarized-osaka.nvim',
+    colorscheme = 'solarized-osaka',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  tokyodark = {
+    repo = 'tiagovla/tokyodark.nvim',
+    name = 'tokyodark.nvim',
+    colorscheme = 'tokyodark',
+    opts = {
+      transparent_background = vim.g.transparent_enabled,
+    },
+  },
+  jellybeans = {
+    repo = 'WTFox/jellybeans.nvim',
+    name = 'jellybeans',
+    colorscheme = 'jellybeans',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  bluloco = {
+    repo = 'uloco/bluloco.nvim',
+    name = 'bluloco.nvim',
+    colorscheme = 'bluloco-dark',
+    dependencies = { 'rktjmp/lush.nvim' },
+    opts = {
+      style = 'dark',
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  embark = {
+    repo = 'embark-theme/vim',
+    name = 'embark',
+    colorscheme = 'embark',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['no-clown-fiesta'] = {
+    repo = 'aktersnurra/no-clown-fiesta.nvim',
+    name = 'no-clown-fiesta.nvim',
+    colorscheme = 'no-clown-fiesta',
+    config = function()
+      require('no-clown-fiesta').setup({
+        theme = 'dark',
+        transparent = vim.g.transparent_enabled,
+      })
+    end,
+  },
+  ['kanagawa-paper'] = {
+    repo = 'thesimonho/kanagawa-paper.nvim',
+    name = 'kanagawa-paper.nvim',
+    colorscheme = 'kanagawa-paper-ink',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  boo = {
+    repo = 'rockerBOO/boo-colorscheme-nvim',
+    name = 'boo-colorscheme-nvim',
+    colorscheme = 'crimson_moonlight',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['retro-82'] = {
+    repo = 'OldJobobo/retro-82.nvim',
+    name = 'retro-82.nvim',
+    colorscheme = 'retro-82',
+    config = function()
+      require('retro82').setup({
+        transparent = vim.g.transparent_enabled,
+      })
+    end,
+  },
+  ethereal = {
+    repo = 'bjarneo/ethereal.nvim',
+    name = 'ethereal.nvim',
+    colorscheme = 'ethereal',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  hackerman = {
+    repo = 'bjarneo/hackerman.nvim',
+    name = 'hackerman.nvim',
+    colorscheme = 'hackerman',
+    dependencies = { 'bjarneo/aether.nvim' },
+    -- hackerman.nvim only ships colors/hackerman.lua, which calls aether's
+    -- loader, so transparency is set on aether.
+    config = function()
+      require('aether').setup({ transparent = vim.g.transparent_enabled })
+    end,
+  },
+  lumon = {
+    repo = 'omacom/lumon.nvim',
+    name = 'lumon',
+    colorscheme = 'lumon',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
 }
 
 -- Variants share another theme's plugin and options and differ only in the
@@ -336,6 +468,7 @@ for _, spec in pairs(theme_specs) do
       lazy = spec ~= active_spec,
       priority = 1000,
       build = spec.build,
+      dependencies = spec.dependencies,
       opts = spec.opts,
       config = spec.config,
     }
