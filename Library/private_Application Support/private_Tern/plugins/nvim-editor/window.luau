@@ -15,6 +15,8 @@
 -- and the file opens in the Neovim instead (gitsigns' ]h/[h walk its hunks),
 -- on remote hosts too.
 -- `plugin.nvim-editor.toggle` switches routing off/on.
+-- Open scrollback in editor (prefix+[) shows the block's scrollback in a
+-- Neovim that takes the block's place until it quits.
 
 local ROUTED_ORIGINS = { palette = true, files = true, drop = true, link = true, system = true }
 
@@ -411,6 +413,96 @@ tern.on("focus", function(ev, cx)
 		cx.layout:focus(editor.pane)
 	end
 	open_local(cx, req, cx.session:focused(), info.tab)
+end)
+
+-- Scrollback in Neovim. Tern's built-in hands a temp file to the system's
+-- text editor; this captures it with `tern capture` on the block's host
+-- (remote ones too) and runs Neovim in a block split from it, then parks the
+-- block so Neovim fills its place. When Neovim quits, its block sets a title,
+-- and the handler deals the parked block back into Neovim's place. Events can
+-- reach another VM than the override's, so the state lives in tern.kv.
+
+-- A window pane id carries its host in the bits above 2^44 (local ones have
+-- none); `tern capture` on that host knows the block by the rest.
+local function host_pane_id(pane: number): string
+	return string.format("%.0f", pane % 2 ^ 44)
+end
+
+local function scrollback_key(pane: number): string
+	return "scrollback:" .. string.format("%.0f", pane)
+end
+
+-- $1: block id on this host; $2: title that says Neovim quit; $3: the
+-- block's title while Neovim runs. Trailing blank rows are dropped; the block
+-- then waits for the plugin to close it.
+local SCROLLBACK = [[
+printf '\033]2;%s\007' "$3"
+f=$(mktemp "${TMPDIR:-/tmp}/tern-scrollback.XXXXXX")
+tern capture "$1" --scrollback 2>&1 | awk 'NF { for (; n > 0; n--) print ""; print; next } { n++ }' > "$f"
+nvim -R + -- "$f"
+rm -f "$f"
+printf '\033]2;%s\007' "$2"
+exec sleep 600
+]]
+
+tern.override("open_scrollback", function(cx)
+	local focused = cx.session:focused()
+	local info = focused and cx.session:pane(focused)
+	if not info or (info.kind ~= "terminal" and info.kind ~= "agent") then
+		return false
+	end
+	local pane = focused :: number
+	local marker = string.format("tern-scrollback-%06x", math.random(0, 0xffffff))
+	local command = "sh -c " .. quote(SCROLLBACK) .. " scrollback " .. host_pane_id(pane) .. " " .. marker
+		.. " " .. quote("scrollback: " .. info.title)
+	local editor = cx.layout:split(pane, "down", { command = command, cwd = info.cwd })
+	if not editor then
+		return false
+	end
+	tern.kv.set(scrollback_key(editor), { pane = pane, marker = marker })
+	cx.layout:park(pane)
+	return true
+end)
+
+-- Puts the parked block back where its Neovim was (unpark deals it beside the
+-- focused block, then a swap moves it into place) and closes the Neovim.
+local function restore(cx, editor: number, pane: number)
+	local info = cx.session:pane(pane)
+	if not info then
+		return
+	end
+	if info.parked then
+		cx.layout:unpark(pane, { focus = false })
+	end
+	if cx.session:pane(editor) then
+		cx.layout:move(pane, editor, "swap", { focus = false })
+		cx.layout:close(editor)
+	end
+	cx.layout:focus(pane)
+end
+
+tern.on("title", function(ev, cx)
+	local editor = ev and tonumber(ev.pane)
+	local job = editor and tern.kv.get(scrollback_key(editor))
+	if type(job) ~= "table" or ev.title ~= job.marker then
+		return
+	end
+	tern.kv.set(scrollback_key(editor :: number), nil)
+	restore(cx, editor :: number, job.pane)
+end)
+
+-- The Neovim block closed some other way: bring the parked block back.
+tern.on("pane_closed", function(ev, cx)
+	local editor = ev and tonumber(ev.pane)
+	local job = editor and tern.kv.get(scrollback_key(editor))
+	if type(job) ~= "table" then
+		return
+	end
+	tern.kv.set(scrollback_key(editor :: number), nil)
+	local info = cx.session:pane(job.pane)
+	if info and info.parked then
+		cx.layout:unpark(job.pane)
+	end
 end)
 
 tern.command({

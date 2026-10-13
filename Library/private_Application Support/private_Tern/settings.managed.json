@@ -29,6 +29,9 @@
     "ctrl+a>shift+7": "plugin.herdr.goto_session_7",
     "ctrl+a>shift+8": "plugin.herdr.goto_session_8",
     "ctrl+a>shift+9": "plugin.herdr.goto_session_9",
+    "ctrl+a>shift+g": "plugin.worktrees.new",
+    "ctrl+a>shift+w": "plugin.worktrees.open",
+    "ctrl+a>alt+w": "plugin.worktrees.remove",
 
     "ctrl+a>t": "new_tab",
     "ctrl+a>,": "rename_tab",

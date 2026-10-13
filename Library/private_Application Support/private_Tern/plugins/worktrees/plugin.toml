@@ -1,0 +1,6 @@
+schema = 1
+id = "worktrees"
+name = "Worktrees"
+version = "0.1.0"
+description = "herdr-style git worktree workspaces: create, open and remove worktrees of the focused block's repo, each in its own session, on local and remote hosts."
+window = "window.luau"
