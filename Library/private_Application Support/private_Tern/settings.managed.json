@@ -8,6 +8,8 @@
   "theme_light": "current",
   "keybinds": {
     "alt+r": "reload_config",
+    "ctrl+insert": "edit.copy",
+    "shift+insert": "edit.paste",
     "ctrl+a>shift+s": "preferences",
     "ctrl+a>d": "quit",
     "ctrl+a>b": "toggle_sidebar",

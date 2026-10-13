@@ -1,12 +1,17 @@
 -- Neovim as Tern's file editor. File opens from the Files sidebar, palette,
 -- file picker, links, drops and Finder go to a Neovim pane beside the focused
--- one; the tab's Neovim (started here, listening on a socket) is reused.
+-- one; a Neovim already running in the tab is reused, whether this plugin
+-- started it or it was started by hand (found by asking each local Neovim's
+-- server socket for its $TERN_PANE).
 -- Files on a remote host open in a Neovim there: panes spawn on the session's
 -- host, but this half's tern.fs and tern.process act on this machine, so
 -- remote reuse types the open into the Neovim pane with cx:run instead.
 -- Tern keeps sidebar previews, `tern open` (so EDITOR='tern open --wait'
 -- still works), Carly's opens, files on a host other than the session's, and
 -- images, archives, notebooks and other binaries.
+-- The Files sidebar's Changes tab opens file blocks without asking routes, so
+-- a new file block that no route.open announced is taken for one: it closes
+-- and the file's changes open in the Neovim, in Diffview when installed.
 -- `plugin.nvim-editor.toggle` switches routing off/on.
 
 local ROUTED_ORIGINS = { palette = true, files = true, drop = true, link = true, system = true }
@@ -23,7 +28,7 @@ do
 	TERN_KEEPS[ext] = true
 end
 
--- Tab id -> the Neovim this plugin started there.
+-- Tab id -> the Neovim last used there.
 local editors: { [number]: { pane: number, socket: string } } = {}
 
 local function enabled(): boolean
@@ -36,6 +41,16 @@ end
 
 local function dirname(path: string): string
 	return string.match(path, "^(.*)/[^/]*$") or "/"
+end
+
+-- Lua for Neovim that shows the file's git changes: the file, then Diffview
+-- on it in a new tabpage (lazy.nvim may not have loaded Diffview yet).
+local function diff_lua(path: string): string
+	return "local p = " .. string.format("%q", path) .. "; local e = vim.fn.fnameescape; "
+		.. "vim.cmd('edit ' .. e(p)); "
+		.. "pcall(function() require('lazy').load({ plugins = { 'diffview.nvim' } }) end); "
+		.. "if vim.fn.exists(':DiffviewOpen') == 2 then "
+		.. "vim.cmd('DiffviewOpen -C' .. e(vim.fn.fnamemodify(p, ':h')) .. ' -- ' .. e(p)) end"
 end
 
 local function is_nvim(program: string?): boolean
@@ -74,9 +89,16 @@ local function reusable(cx, tab: number?)
 		return nil
 	end
 	local pane = cx.session:pane(editor.pane)
-	-- A remote socket lives on the remote host, out of tern.fs's reach.
-	local socket_ok = is_remote(cx) or tern.fs.exists(editor.socket)
-	if pane and pane.tab == tab and is_nvim(pane.program) and socket_ok then
+	local alive
+	if is_remote(cx) then
+		-- A remote socket lives on the remote host, out of tern.fs's reach.
+		alive = pane ~= nil and is_nvim(pane.program)
+	else
+		-- Neovim removes its socket on exit; a hand-started one runs under a
+		-- shell, so the pane's program need not be nvim.
+		alive = tern.fs.exists(editor.socket)
+	end
+	if pane and pane.tab == tab and alive then
 		return editor
 	end
 	editors[tab :: number] = nil
@@ -96,10 +118,10 @@ local function launch(cx, req, focused: number?, tab: number?)
 	if cwd == "" or string.sub(req.path, 1, #cwd + 1) ~= cwd .. "/" then
 		cwd = dirname(req.path)
 	end
-	local spec = {
-		command = "nvim --listen " .. quote(socket) .. " " .. jump .. "-- " .. quote(req.path),
-		cwd = cwd,
-	}
+	local args = if req.diff
+		then "-c " .. quote("lua " .. diff_lua(req.path))
+		else jump .. "-- " .. quote(req.path)
+	local spec = { command = "nvim --listen " .. quote(socket) .. " " .. args, cwd = cwd }
 
 	local opened
 	if req.how == "tab" or not focused then
@@ -115,6 +137,9 @@ end
 
 -- Neovim key notation for opening the file in the running editor.
 local function remote_keys(req): string
+	if req.diff then
+		return "<C-\\><C-N><Cmd>lua " .. string.gsub(diff_lua(req.path), "<", "<lt>") .. "<CR>"
+	end
 	local path = string.gsub(string.gsub(req.path, "<", "<lt>"), "'", "''")
 	local keys = "<C-\\><C-N><Cmd>call execute('edit " .. (if req.line then "+" .. req.line .. " " else "")
 	keys ..= "' . fnameescape('" .. path .. "'))<CR>"
@@ -136,7 +161,103 @@ local function typed_keys(req): string
 	return keys
 end
 
+-- nvim lives on the login shell's PATH (mise), not Tern's.
+local function login_shell(): string
+	return tern.getenv("SHELL") or "/bin/zsh"
+end
+
+-- Prints "<TERN_PANE>\t<socket>" for every live local Neovim: default sockets
+-- (stdpath('run')/nvim.PID.0) and the ones this plugin starts with --listen.
+local SCAN = [[
+setopt null_glob 2>/dev/null
+for s in "${TMPDIR%/}/nvim.$USER"/*/nvim.*.0 /tmp/tern-nvim-*.sock; do
+	[ -S "$s" ] || continue
+	p=$(nvim --server "$s" --remote-expr '$TERN_PANE' 2>/dev/null) || continue
+	[ -n "$p" ] && printf '%s\t%s\n' "$p" "$s"
+done
+exit 0
+]]
+
+-- Finds a running Neovim in `tab`, preferring the focused pane's.
+local function discover(tab: number?, focused: number?, cb: (editor: any, cx: any) -> ())
+	tern.process.run({ login_shell(), "-lc", SCAN }, { timeout_ms = 5000 }, function(result, cx)
+		if not cx then
+			return
+		end
+		local found = nil
+		if tab and result.status == 0 then
+			for id, socket in string.gmatch(result.stdout, "(%d+)\t([^\n]+)") do
+				local pane = tonumber(id)
+				local info = pane and cx.session:pane(pane)
+				if info and info.tab == tab and (not found or pane == focused) then
+					found = { pane = pane, socket = socket }
+				end
+			end
+		end
+		if found then
+			editors[tab :: number] = found
+		end
+		cb(found, cx)
+	end)
+end
+
+-- Opens the file in a local Neovim over its socket; on failure calls on_fail.
+local function send(editor, req, on_fail: (cx: any) -> ())
+	tern.process.run(
+		{ login_shell(), "-lc", 'exec nvim --server "$1" --remote-send "$2"', "nvim", editor.socket, remote_keys(req) },
+		{ timeout_ms = 5000 },
+		function(result, cx)
+			if not cx then
+				return
+			end
+			if result.status == 0 then
+				cx.layout:focus(editor.pane)
+			else
+				on_fail(cx)
+			end
+		end
+	)
+end
+
+-- Reuses a hand-started Neovim in the tab, else starts one.
+local function discover_or_launch(req, focused: number?, tab: number?)
+	discover(tab, focused, function(editor, cx)
+		if not editor then
+			launch(cx, req, cx.session:focused(), tab)
+			return
+		end
+		send(editor, req, function(cx2)
+			editors[tab :: number] = nil
+			launch(cx2, req, cx2.session:focused(), tab)
+		end)
+	end)
+end
+
+-- Opens req in the tab's local Neovim: the remembered one, else one found
+-- running there, else a new one.
+local function open_local(cx, req, focused: number?, tab: number?)
+	local editor = reusable(cx, tab)
+	if not editor then
+		if req.how == "tab" then
+			launch(cx, req, focused, tab)
+		else
+			discover_or_launch(req, focused, tab)
+		end
+		return
+	end
+	-- A stale socket (Neovim crashed): look for another before starting one.
+	send(editor, req, function()
+		editors[tab :: number] = nil
+		discover_or_launch(req, focused, tab)
+	end)
+end
+
+-- Path -> os.time() of its last route.open, routed or not, to tell the
+-- Changes tab's file blocks (which skip routes) from every other open.
+local announced: { [string]: number } = {}
+
 tern.route.open(function(req, cx)
+	announced[req.path] = os.time()
 	if not routable(req, cx) then
 		return nil
 	end
@@ -144,40 +265,79 @@ tern.route.open(function(req, cx)
 	local info = focused and cx.session:pane(focused)
 	local tab = info and info.tab
 
+	if not is_remote(cx) then
+		open_local(cx, req, focused, tab)
+		return { handled = true }
+	end
+
 	local editor = reusable(cx, tab)
 	if not editor then
 		launch(cx, req, focused, tab)
 		return { handled = true }
 	end
-
-	if is_remote(cx) then
-		-- tern.process.run would run here, not on the remote host, so type the
-		-- open into the Neovim pane; cx:run reaches remote hosts' panes.
-		if not pcall(cx.run, cx, editor.pane, typed_keys(req)) then
-			launch(cx, req, focused, tab)
-			return { handled = true }
-		end
+	-- tern.process.run would run here, not on the remote host, so type the
+	-- open into the Neovim pane; cx:run reaches remote hosts' panes.
+	if pcall(cx.run, cx, editor.pane, typed_keys(req)) then
 		cx.layout:focus(editor.pane)
-		return { handled = true }
+	else
+		launch(cx, req, focused, tab)
+	end
+	return { handled = true }
+end)
+
+-- Newest pane id when the plugin started watching; older blocks are left alone.
+local watermark: number? = nil
+
+local function newest_pane(cx): number
+	local newest = 0
+	for _, p in cx.session:panes() do
+		newest = math.max(newest, p.pane)
+	end
+	return newest
+end
+
+tern.on("window_start", function(cx)
+	watermark = newest_pane(cx)
+end)
+
+-- A Changes-tab open shows up as a new, focused file block.
+tern.on("focus", function(ev, cx)
+	local id = ev and ev.pane
+	if not id then
+		return
+	end
+	if not watermark then
+		-- Reloaded without window_start: only blocks opened from now on.
+		watermark = newest_pane(cx)
+		return
+	end
+	if id <= (watermark :: number) then
+		return
+	end
+	watermark = id
+
+	local info = cx.session:pane(id)
+	if not enabled() or is_remote(cx) or not info or info.kind ~= "file" or not info.path then
+		return
+	end
+	local path = info.path :: string
+	local when = announced[path]
+	if when and os.time() - when <= 2 then
+		return -- a route.open that Tern kept (preview, `tern open`, images, ...)
+	end
+	local ext = string.match(path, "%.([%w]+)$")
+	if (ext and TERN_KEEPS[string.lower(ext)]) or pcall(tern.fs.list, path) then
+		return
+	end
+	local read = cx.session:read(id, { lines = 1 })
+	if type(read) == "table" and read.dirty then
+		return
 	end
 
-	-- nvim lives on the login shell's PATH (mise), not Tern's.
-	local shell = tern.getenv("SHELL") or "/bin/zsh"
-	tern.process.run(
-		{ shell, "-lc", 'exec nvim --server "$1" --remote-send "$2"', "nvim", editor.socket, remote_keys(req) },
-		{ timeout_ms = 5000 },
-		function(result, cx2)
-			if not cx2 then
-				return
-			end
-			if result.status == 0 then
-				cx2.layout:focus(editor.pane)
-			else
-				launch(cx2, req, cx2.session:focused(), tab)
-			end
-		end
-	)
-	return { handled = true }
+	cx.layout:close(id)
+	local focused = cx.session:focused()
+	local req = { path = path, how = "beside", diff = true }
+	open_local(cx, req, focused, info.tab)
 end)
 
 tern.command({
