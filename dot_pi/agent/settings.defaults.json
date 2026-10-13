@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/earendil-works/pi/refs/heads/main/packages/coding-agent/schemas/settings.schema.json",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high"
