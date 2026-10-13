@@ -210,6 +210,17 @@ return {
       },
     },
   },
+  { -- diffview: q closes it from the diff or the file panel
+    'sindrets/diffview.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose' },
+    opts = {
+      keymaps = {
+        view = { { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' } } },
+        file_panel = { { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' } } },
+        file_history_panel = { { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' } } },
+      },
+    },
+  },
   { -- yazi
     'mikavilpas/yazi.nvim',
     cmd = 'Yazi',
