@@ -1,0 +1,37 @@
+:root {
+  /* Modus Operandi palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 255, 255, 255;
+  --foreground: 0, 0, 0;
+  --card-background: 240, 240, 240;
+  --popup-background: 243, 243, 243;
+  --primary: 0, 49, 169;
+  --secondary: 0, 94, 139;
+  --tertiary: 0, 49, 169;
+  --accent: 83, 26, 182;
+  --muted-background: 89, 89, 89;
+  --info: 0, 49, 169;
+  --success: 0, 104, 0;
+  --warning: 111, 85, 0;
+  --destructive: 166, 0, 0;
+  --border: 159, 159, 159;
+  --text: 0, 0, 0;
+  --foam: 0, 95, 95;
+  --gold: 111, 85, 0;
+  --love: 166, 0, 0;
+  --overlay: 89, 89, 89;
+  --highlight: 218, 229, 236;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

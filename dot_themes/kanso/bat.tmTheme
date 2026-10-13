@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Kanso</string>
+    <key>semanticClass</key>
+    <string>theme.dark.kanso</string>
+    <key>uuid</key>
+    <string>5b1f0c6e-7a43-5d0a-9b52-3e8c1d7a4f20</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#090E13</string>
+          <key>foreground</key><string>#C5C9C7</string>
+          <key>caret</key><string>#C5C9C7</string>
+          <key>lineHighlight</key><string>#1C1E25</string>
+          <key>selection</key><string>#393B44aa</string>
+          <key>gutterForeground</key><string>#717C7C</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#717C7C</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#8A9A7B</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric, constant.language, variable.other.constant</string><key>settings</key><dict><key>foreground</key><string>#A292A3</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage.type, storage.modifier, entity.name.tag</string><key>settings</key><dict><key>foreground</key><string>#938AA9</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#7FB4CA</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, support.type, entity.name.class</string><key>settings</key><dict><key>foreground</key><string>#7AA89F</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>variable.parameter, meta.function.parameters</string><key>settings</key><dict><key>foreground</key><string>#909398</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator, punctuation, meta.delimiter</string><key>settings</key><dict><key>foreground</key><string>#909398</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, markup.bold</string><key>settings</key><dict><key>foreground</key><string>#B6927B</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#938AA9</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted.diff</string><key>settings</key><dict><key>foreground</key><string>#87A987</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted.diff</string><key>settings</key><dict><key>foreground</key><string>#E46876</string></dict></dict>
+      <dict><key>scope</key><string>invalid</string><key>settings</key><dict><key>foreground</key><string>#E46876</string><key>fontStyle</key><string>underline</string></dict></dict>
+    </array>
+  </dict>
+</plist>

@@ -1,0 +1,37 @@
+:root {
+  /* Terafox palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 21, 37, 40;
+  --foreground: 230, 234, 234;
+  --card-background: 29, 51, 55;
+  --popup-background: 37, 65, 71;
+  --primary: 90, 147, 170;
+  --secondary: 161, 205, 216;
+  --tertiary: 90, 147, 170;
+  --accent: 173, 92, 124;
+  --muted-background: 109, 127, 139;
+  --info: 90, 147, 170;
+  --success: 122, 164, 161;
+  --warning: 253, 164, 127;
+  --destructive: 232, 92, 81;
+  --border: 88, 123, 123;
+  --text: 230, 234, 234;
+  --foam: 161, 205, 216;
+  --gold: 253, 164, 127;
+  --love: 232, 92, 81;
+  --overlay: 109, 127, 139;
+  --highlight: 37, 65, 71;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

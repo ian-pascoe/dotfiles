@@ -1,0 +1,37 @@
+:root {
+  /* Melange palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 41, 37, 34;
+  --foreground: 236, 225, 215;
+  --card-background: 52, 48, 44;
+  --popup-background: 64, 58, 54;
+  --primary: 163, 169, 206;
+  --secondary: 137, 179, 182;
+  --tertiary: 163, 169, 206;
+  --accent: 207, 155, 194;
+  --muted-background: 134, 116, 98;
+  --info: 163, 169, 206;
+  --success: 133, 182, 149;
+  --warning: 235, 192, 109;
+  --destructive: 212, 119, 102;
+  --border: 134, 116, 98;
+  --text: 236, 225, 215;
+  --foam: 137, 179, 182;
+  --gold: 235, 192, 109;
+  --love: 212, 119, 102;
+  --overlay: 134, 116, 98;
+  --highlight: 64, 58, 54;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

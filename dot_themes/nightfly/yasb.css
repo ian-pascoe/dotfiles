@@ -1,0 +1,37 @@
+:root {
+  /* Nightfly palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 1, 22, 39;
+  --foreground: 189, 193, 198;
+  --card-background: 9, 34, 54;
+  --popup-background: 29, 59, 83;
+  --primary: 130, 170, 255;
+  --secondary: 33, 199, 168;
+  --tertiary: 130, 170, 255;
+  --accent: 199, 146, 234;
+  --muted-background: 124, 143, 143;
+  --info: 130, 170, 255;
+  --success: 161, 205, 94;
+  --warning: 227, 209, 138;
+  --destructive: 252, 81, 78;
+  --border: 51, 78, 101;
+  --text: 189, 193, 198;
+  --foam: 127, 219, 202;
+  --gold: 227, 209, 138;
+  --love: 252, 81, 78;
+  --overlay: 124, 143, 143;
+  --highlight: 29, 59, 83;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

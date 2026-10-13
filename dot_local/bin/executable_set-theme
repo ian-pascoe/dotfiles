@@ -2,6 +2,8 @@
 # Switches the current theme: points ~/.config/theme at ~/.themes/<name>, then
 # tells running apps to reload. Every app's theme link goes through
 # ~/.config/theme and is managed by chezmoi, so nothing else is relinked here.
+# Themes with a light.mode file are light; on macOS the system appearance
+# follows, and Ghostty's light/dark theme pairs follow the system.
 # Tern and Neovim watch the link themselves; k9s, yazi and pi/omp pick the
 # theme up on their next start.
 
@@ -24,6 +26,16 @@ fi
 
 echo "Linking new theme: $THEME_NAME"
 ln -snf "$THEME_PATH" "$CURRENT_THEME_DIR"
+
+# Set the appearance before apps reload so they pick up the new mode.
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ -f "$THEME_PATH/light.mode" ]]; then
+    dark_mode=false
+  else
+    dark_mode=true
+  fi
+  osascript -e "tell application \"System Events\" to tell appearance preferences to set dark mode to $dark_mode"
+fi
 
 # bat reads themes from its cache
 bat cache --build >/dev/null

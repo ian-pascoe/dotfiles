@@ -1,0 +1,37 @@
+:root {
+  /* Kanagawa Dragon palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 24, 22, 22;
+  --foreground: 197, 201, 197;
+  --card-background: 40, 39, 39;
+  --popup-background: 45, 79, 103;
+  --primary: 139, 164, 176;
+  --secondary: 142, 164, 162;
+  --tertiary: 148, 159, 181;
+  --accent: 162, 146, 163;
+  --muted-background: 115, 124, 115;
+  --info: 148, 159, 181;
+  --success: 135, 169, 135;
+  --warning: 196, 178, 138;
+  --destructive: 196, 116, 110;
+  --border: 98, 94, 90;
+  --text: 197, 201, 197;
+  --foam: 148, 159, 181;
+  --gold: 196, 178, 138;
+  --love: 196, 116, 110;
+  --overlay: 115, 124, 115;
+  --highlight: 45, 79, 103;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

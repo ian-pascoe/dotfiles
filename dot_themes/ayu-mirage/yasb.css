@@ -1,0 +1,37 @@
+:root {
+  /* Ayu Mirage palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 31, 36, 48;
+  --foreground: 204, 202, 194;
+  --card-background: 28, 33, 43;
+  --popup-background: 39, 67, 100;
+  --primary: 255, 204, 102;
+  --secondary: 115, 208, 255;
+  --tertiary: 255, 204, 102;
+  --accent: 223, 191, 255;
+  --muted-background: 112, 122, 140;
+  --info: 255, 204, 102;
+  --success: 135, 217, 108;
+  --warning: 255, 209, 115;
+  --destructive: 242, 135, 121;
+  --border: 68, 74, 85;
+  --text: 204, 202, 194;
+  --foam: 149, 230, 203;
+  --gold: 255, 209, 115;
+  --love: 242, 135, 121;
+  --overlay: 112, 122, 140;
+  --highlight: 39, 67, 100;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

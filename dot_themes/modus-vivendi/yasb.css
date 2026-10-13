@@ -1,0 +1,37 @@
+:root {
+  /* Modus Vivendi palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 0, 0, 0;
+  --foreground: 255, 255, 255;
+  --card-background: 30, 30, 30;
+  --popup-background: 48, 48, 48;
+  --primary: 47, 175, 255;
+  --secondary: 0, 211, 208;
+  --tertiary: 47, 175, 255;
+  --accent: 182, 160, 255;
+  --muted-background: 152, 152, 152;
+  --info: 47, 175, 255;
+  --success: 68, 188, 68;
+  --warning: 208, 188, 0;
+  --destructive: 255, 95, 89;
+  --border: 100, 100, 100;
+  --text: 255, 255, 255;
+  --foam: 106, 228, 185;
+  --gold: 208, 188, 0;
+  --love: 255, 95, 89;
+  --overlay: 152, 152, 152;
+  --highlight: 47, 56, 73;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,37 @@
+:root {
+  /* Duskfox palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 35, 33, 54;
+  --foreground: 224, 222, 244;
+  --card-background: 45, 42, 69;
+  --popup-background: 55, 51, 84;
+  --primary: 86, 159, 186;
+  --secondary: 156, 207, 216;
+  --tertiary: 86, 159, 186;
+  --accent: 196, 167, 231;
+  --muted-background: 129, 124, 156;
+  --info: 86, 159, 186;
+  --success: 163, 190, 140;
+  --warning: 246, 193, 119;
+  --destructive: 235, 111, 146;
+  --border: 110, 106, 134;
+  --text: 224, 222, 244;
+  --foam: 156, 207, 216;
+  --gold: 246, 193, 119;
+  --love: 235, 111, 146;
+  --overlay: 129, 124, 156;
+  --highlight: 55, 51, 84;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Modus Vivendi</string>
+    <key>semanticClass</key>
+    <string>theme.dark.modus-vivendi</string>
+    <key>uuid</key>
+    <string>b0bc1ac7-f46c-59af-ae76-d89d196a3ba3</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#000000</string>
+          <key>foreground</key><string>#ffffff</string>
+          <key>caret</key><string>#ffffff</string>
+          <key>lineHighlight</key><string>#2f3849</string>
+          <key>selection</key><string>#7030af</string>
+          <key>findHighlight</key><string>#7a6100</string>
+          <key>gutterForeground</key><string>#989898</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#989898</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#79a8ff</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric</string><key>settings</key><dict><key>foreground</key><string>#82b0ec</string></dict></dict>
+      <dict><key>scope</key><string>constant.language, support.constant, variable.other.constant</string><key>settings</key><dict><key>foreground</key><string>#6ae4b9</string></dict></dict>
+      <dict><key>scope</key><string>constant.character, constant.other</string><key>settings</key><dict><key>foreground</key><string>#ffffff</string></dict></dict>
+      <dict><key>scope</key><string>constant.character.escape, constant.character.escaped</string><key>settings</key><dict><key>foreground</key><string>#d2b580</string></dict></dict>
+      <dict><key>scope</key><string>string.regexp</string><key>settings</key><dict><key>foreground</key><string>#00c06f</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage</string><key>settings</key><dict><key>foreground</key><string>#b6a0ff</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>storage.type, storage.modifier</string><key>settings</key><dict><key>foreground</key><string>#b6a0ff</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator, punctuation, meta.delimiter</string><key>settings</key><dict><key>foreground</key><string>#ffffff</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#feacd0</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, support.type, support.class</string><key>settings</key><dict><key>foreground</key><string>#6ae4b9</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.class, entity.other.inherited-class</string><key>settings</key><dict><key>foreground</key><string>#b6a0ff</string></dict></dict>
+      <dict><key>scope</key><string>variable, variable.parameter, meta.function.parameters, support.other.variable</string><key>settings</key><dict><key>foreground</key><string>#00d3d0</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.tag, entity.other.attribute-name</string><key>settings</key><dict><key>foreground</key><string>#00d3d0</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.filename</string><key>settings</key><dict><key>foreground</key><string>#2fafff</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, markup.bold</string><key>settings</key><dict><key>foreground</key><string>#fec43f</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#b6a0ff</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted, markup.inserted.diff</string><key>settings</key><dict><key>foreground</key><string>#44bc44</string><key>background</key><string>#00381f</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted, markup.deleted.diff</string><key>settings</key><dict><key>foreground</key><string>#ff5f59</string><key>background</key><string>#4f1119</string></dict></dict>
+      <dict><key>scope</key><string>markup.changed</string><key>settings</key><dict><key>foreground</key><string>#d0bc00</string><key>background</key><string>#363300</string></dict></dict>
+      <dict><key>scope</key><string>meta.diff, meta.diff.header</string><key>settings</key><dict><key>foreground</key><string>#feacd0</string></dict></dict>
+      <dict><key>scope</key><string>invalid, invalid.deprecated</string><key>settings</key><dict><key>foreground</key><string>#ff5f59</string><key>fontStyle</key><string>underline</string></dict></dict>
+      <dict><key>scope</key><string>message.error</string><key>settings</key><dict><key>foreground</key><string>#ff5f59</string><key>fontStyle</key><string>bold</string></dict></dict>
+    </array>
+  </dict>
+</plist>

@@ -1,0 +1,37 @@
+:root {
+  /* Kanso Zen palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 9, 14, 19;
+  --foreground: 197, 201, 199;
+  --card-background: 28, 30, 37;
+  --popup-background: 34, 38, 45;
+  --primary: 127, 180, 202;
+  --secondary: 122, 168, 159;
+  --tertiary: 127, 180, 202;
+  --accent: 147, 138, 169;
+  --muted-background: 113, 124, 124;
+  --info: 127, 180, 202;
+  --success: 135, 169, 135;
+  --warning: 230, 195, 132;
+  --destructive: 228, 104, 118;
+  --border: 57, 59, 68;
+  --text: 197, 201, 199;
+  --foam: 142, 164, 162;
+  --gold: 230, 195, 132;
+  --love: 228, 104, 118;
+  --overlay: 113, 124, 124;
+  --highlight: 34, 38, 45;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

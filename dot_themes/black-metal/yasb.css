@@ -1,0 +1,37 @@
+:root {
+  /* Black Metal (Immortal) palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 0, 0, 0;
+  --foreground: 193, 193, 193;
+  --card-background: 27, 22, 31;
+  --popup-background: 34, 34, 34;
+  --primary: 119, 153, 187;
+  --secondary: 85, 102, 119;
+  --tertiary: 119, 153, 187;
+  --accent: 153, 153, 153;
+  --muted-background: 136, 136, 136;
+  --info: 119, 153, 187;
+  --success: 119, 153, 187;
+  --warning: 170, 170, 170;
+  --destructive: 95, 135, 135;
+  --border: 80, 80, 80;
+  --text: 193, 193, 193;
+  --foam: 119, 153, 187;
+  --gold: 170, 170, 170;
+  --love: 95, 135, 135;
+  --overlay: 136, 136, 136;
+  --highlight: 34, 34, 34;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

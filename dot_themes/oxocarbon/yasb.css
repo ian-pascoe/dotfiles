@@ -1,0 +1,37 @@
+:root {
+  /* Oxocarbon palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 22, 22, 22;
+  --foreground: 242, 244, 248;
+  --card-background: 38, 38, 38;
+  --popup-background: 57, 57, 57;
+  --primary: 120, 169, 255;
+  --secondary: 8, 189, 186;
+  --tertiary: 120, 169, 255;
+  --accent: 190, 149, 255;
+  --muted-background: 111, 111, 111;
+  --info: 120, 169, 255;
+  --success: 66, 190, 101;
+  --warning: 255, 233, 123;
+  --destructive: 238, 83, 150;
+  --border: 82, 82, 82;
+  --text: 242, 244, 248;
+  --foam: 61, 219, 217;
+  --gold: 255, 233, 123;
+  --love: 238, 83, 150;
+  --overlay: 111, 111, 111;
+  --highlight: 57, 57, 57;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

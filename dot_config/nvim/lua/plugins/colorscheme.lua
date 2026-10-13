@@ -168,7 +168,150 @@ local theme_specs = {
       transparent_background = vim.g.transparent_enabled,
     },
   },
+  poimandres = {
+    repo = 'olivercederborg/poimandres.nvim',
+    name = 'poimandres.nvim',
+    colorscheme = 'poimandres',
+    config = function()
+      require('poimandres').setup({
+        disable_background = vim.g.transparent_enabled,
+        disable_float_background = vim.g.transparent_enabled,
+      })
+    end,
+  },
+  oxocarbon = {
+    repo = 'nyoom-engineering/oxocarbon.nvim',
+    name = 'oxocarbon',
+    colorscheme = 'oxocarbon',
+    -- Its rockspec makes lazy.nvim build it with luarocks, but the compiled Lua
+    -- is already in the repo.
+    build = false,
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  melange = {
+    repo = 'savq/melange-nvim',
+    name = 'melange',
+    colorscheme = 'melange',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['matte-black'] = {
+    repo = 'tahayvr/matteblack.nvim',
+    name = 'matteblack.nvim',
+    colorscheme = 'matteblack',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['osaka-jade'] = {
+    repo = 'ribru17/bamboo.nvim',
+    name = 'bamboo',
+    colorscheme = 'bamboo',
+    config = function()
+      require('bamboo').setup({
+        style = 'vulgaris',
+        transparent = vim.g.transparent_enabled,
+      })
+    end,
+  },
+  eldritch = {
+    repo = 'eldritch-theme/eldritch.nvim',
+    name = 'eldritch',
+    colorscheme = 'eldritch',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+      styles = {
+        sidebars = vim.g.transparent_enabled and 'transparent' or 'normal',
+        floats = vim.g.transparent_enabled and 'transparent' or 'normal',
+      },
+    },
+  },
+  ['black-metal'] = {
+    repo = 'metalelf0/black-metal-theme-neovim',
+    name = 'black-metal',
+    colorscheme = 'immortal',
+    opts = {
+      theme = 'immortal',
+      variant = 'dark',
+      transparent = vim.g.transparent_enabled,
+    },
+    config = function(_, opts)
+      require('black-metal').setup(opts)
+    end,
+  },
+  ['ayu-mirage'] = {
+    repo = 'Shatur/neovim-ayu',
+    name = 'neovim-ayu',
+    colorscheme = 'ayu-mirage',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['modus-operandi'] = {
+    repo = 'miikanissi/modus-themes.nvim',
+    name = 'modus-themes.nvim',
+    colorscheme = 'modus_operandi',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  ['zenbones-light'] = {
+    repo = 'zenbones-theme/zenbones.nvim',
+    name = 'zenbones.nvim',
+    colorscheme = 'zenbones',
+    config = function()
+      -- The precompiled colorscheme runs without lush.nvim. It has no
+      -- transparency option; transparent.nvim clears the backgrounds.
+      vim.g.zenbones_compat = 1
+    end,
+  },
+  miasma = {
+    repo = 'xero/miasma.nvim',
+    name = 'miasma.nvim',
+    colorscheme = 'miasma',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  iceberg = {
+    repo = 'cocopon/iceberg.vim',
+    name = 'iceberg',
+    colorscheme = 'iceberg',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  mellow = {
+    repo = 'mellow-theme/mellow.nvim',
+    name = 'mellow',
+    colorscheme = 'mellow',
+    config = function()
+      vim.g.mellow_transparent = vim.g.transparent_enabled
+    end,
+  },
+  kanso = {
+    repo = 'webhooked/kanso.nvim',
+    name = 'kanso.nvim',
+    colorscheme = 'kanso-zen',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+      background = { dark = 'zen', light = 'pearl' },
+    },
+  },
+  nightfly = {
+    repo = 'bluz71/vim-nightfly-colors',
+    name = 'nightfly',
+    colorscheme = 'nightfly',
+    config = function()
+      vim.g.nightflyTransparent = vim.g.transparent_enabled
+    end,
+  },
 }
+
+-- Variants share another theme's plugin and options and differ only in the
+-- colorscheme, so their plugin options cannot conflict.
+for name, variant in pairs({
+  duskfox = { 'carbonfox', 'duskfox' },
+  terafox = { 'carbonfox', 'terafox' },
+  ['kanagawa-dragon'] = { 'kanagawa', 'kanagawa-dragon' },
+  ristretto = { 'monokai-pro', 'monokai-pro-ristretto' },
+  ['ayu-light'] = { 'ayu-mirage', 'ayu-light' },
+  ['modus-vivendi'] = { 'modus-operandi', 'modus_vivendi' },
+}) do
+  local base, colorscheme = unpack(variant)
+  theme_specs[name] = vim.tbl_extend('force', theme_specs[base], { colorscheme = colorscheme })
+end
 
 local function spec_for(name)
   return theme_specs[name] or theme_specs['rose-pine']
@@ -176,17 +319,30 @@ end
 
 local active_spec = spec_for(theme)
 
+-- Light themes carry a light.mode marker. Many colorschemes pick their
+-- variant from 'background', so set it before any of them load.
+vim.o.background = Util.get_background()
+
 -- Every theme is installed; only the active one loads at startup. lazy.nvim
--- loads the others when `:colorscheme` asks for them.
+-- loads the others when `:colorscheme` asks for them. Variants of one plugin
+-- (carbonfox, duskfox, ...) share a single plugin spec; the active theme's
+-- options win.
+local plugins = {}
 for _, spec in pairs(theme_specs) do
-  table.insert(M, {
-    spec.repo,
-    name = spec.name,
-    lazy = spec ~= active_spec,
-    priority = 1000,
-    opts = spec.opts,
-    config = spec.config,
-  })
+  if not plugins[spec.repo] or spec == active_spec then
+    plugins[spec.repo] = {
+      spec.repo,
+      name = spec.name,
+      lazy = spec ~= active_spec,
+      priority = 1000,
+      build = spec.build,
+      opts = spec.opts,
+      config = spec.config,
+    }
+  end
+end
+for _, plugin in pairs(plugins) do
+  table.insert(M, plugin)
 end
 
 table.insert(M, {
@@ -198,6 +354,10 @@ table.insert(M, {
 -- and reapply the colorscheme when the link changes. Util outlives spec
 -- reloads, so the guard keeps one watcher per Neovim.
 local function apply_theme()
+  local background = Util.get_background()
+  if vim.o.background ~= background then
+    vim.o.background = background
+  end
   local ok, err = pcall(vim.cmd.colorscheme, spec_for(Util.get_theme()).colorscheme)
   if not ok then
     vim.notify('Could not switch colorscheme: ' .. err, vim.log.levels.WARN)

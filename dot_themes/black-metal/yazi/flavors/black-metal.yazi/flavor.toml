@@ -1,0 +1,92 @@
+# Black Metal (Immortal) local Yazi flavor
+
+[mgr]
+cwd = { fg = "#7799bb" }
+find_keyword = { fg = "#aaaaaa", bold = true, italic = true }
+find_position = { fg = "#999999", bg = "reset", bold = true, italic = true }
+marker_copied = { fg = "#7799bb", bg = "#7799bb" }
+marker_cut = { fg = "#5f8787", bg = "#5f8787" }
+marker_marked = { fg = "#556677", bg = "#556677" }
+marker_selected = { fg = "#aaaaaa", bg = "#aaaaaa" }
+count_copied = { fg = "#000000", bg = "#7799bb" }
+count_cut = { fg = "#000000", bg = "#5f8787" }
+count_selected = { fg = "#000000", bg = "#aaaaaa" }
+border_symbol = "│"
+border_style = { fg = "#505050" }
+
+[tabs]
+active = { fg = "#000000", bg = "#7799bb", bold = true }
+inactive = { fg = "#7799bb", bg = "#1b161f" }
+
+[mode]
+normal_main = { fg = "#000000", bg = "#7799bb", bold = true }
+normal_alt = { fg = "#7799bb", bg = "#1b161f" }
+select_main = { fg = "#000000", bg = "#7799bb", bold = true }
+select_alt = { fg = "#7799bb", bg = "#1b161f" }
+unset_main = { fg = "#000000", bg = "#999999", bold = true }
+unset_alt = { fg = "#999999", bg = "#1b161f" }
+
+[status]
+perm_sep = { fg = "#505050" }
+perm_type = { fg = "#7799bb" }
+perm_read = { fg = "#7799bb" }
+perm_write = { fg = "#aaaaaa" }
+perm_exec = { fg = "#5f8787" }
+progress_label = { fg = "#c1c1c1", bold = true }
+progress_normal = { fg = "#7799bb", bg = "#222222" }
+progress_error = { fg = "#aaaaaa", bg = "#5f8787" }
+
+[pick]
+border = { fg = "#7799bb" }
+active = { fg = "#999999", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#7799bb" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[cmp]
+border = { fg = "#7799bb" }
+
+[tasks]
+border = { fg = "#7799bb" }
+title = {}
+hovered = { fg = "#999999", bold = true }
+
+[which]
+border = { fg = "#7799bb" }
+cand = { fg = "#556677" }
+rest = { fg = "#888888" }
+desc = { fg = "#999999" }
+separator = "  "
+separator_style = { fg = "#505050" }
+
+[help]
+on = { fg = "#556677" }
+run = { fg = "#999999" }
+hovered = { reversed = true, bold = true }
+footer = { fg = "#000000", bg = "#c1c1c1" }
+
+[spot]
+border = { fg = "#7799bb" }
+title = { fg = "#7799bb" }
+tbl_col = { fg = "#556677" }
+tbl_cell = { fg = "#999999", bg = "#222222" }
+
+[notify]
+title_info = { fg = "#7799bb" }
+title_warn = { fg = "#aaaaaa" }
+title_error = { fg = "#5f8787" }
+
+[filetype]
+rules = [
+  { mime = "**/image/*", fg = "#7799bb" },
+  { mime = "**/{audio,video}/*", fg = "#aaaaaa" },
+  { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#999999" },
+  { mime = "**/application/{pdf,doc,rtf}", fg = "#7799bb" },
+  { mime = "vfs/{absent,stale}", fg = "#888888" },
+  { url = "*", fg = "#c1c1c1" },
+  { url = "*/", fg = "#7799bb" },
+]

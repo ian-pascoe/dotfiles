@@ -86,6 +86,23 @@ if command -v hunk &>/dev/null; then
           vague) echo min-dark ;;
           moonfly) echo vitesse-black ;;
           monokai-pro) echo monokai ;;
+          oxocarbon) echo github-dark-default ;;
+          melange) echo vitesse-dark ;;
+          matte-black) echo vitesse-black ;;
+          osaka-jade) echo everforest-dark ;;
+          eldritch) echo synthwave-84 ;;
+          black-metal) echo vitesse-black ;;
+          modus-operandi) echo github-light-high-contrast ;;
+          modus-vivendi) echo github-dark-high-contrast ;;
+          zenbones-light) echo github-light ;;
+          miasma) echo gruvbox-dark-soft ;;
+          iceberg) echo github-dark-dimmed ;;
+          mellow) echo vitesse-black ;;
+          kanso) echo kanagawa-dragon ;;
+          nightfly) echo material-theme-ocean ;;
+          duskfox) echo rose-pine-moon ;;
+          terafox) echo poimandres ;;
+          ristretto) echo monokai ;;
           *) basename "$(readlink ~/.config/theme)" ;;
           esac
         )" \
@@ -103,6 +120,23 @@ fi
 
 if command -v hermes &>/dev/null; then
   eval "$(hermes completion "$_shell_name")"
+fi
+
+# set-theme takes one argument: a theme name from list-themes.
+if command -v set-theme &>/dev/null; then
+  if [ "$_shell_name" = zsh ]; then
+    _set_theme() {
+      # shellcheck disable=SC2046 # zsh: one word per theme name
+      ((CURRENT == 2)) && compadd -- $(list-themes)
+    }
+    compdef _set_theme set-theme
+  else
+    _set_theme() {
+      ((COMP_CWORD == 1)) || return
+      mapfile -t COMPREPLY < <(compgen -W "$(list-themes)" -- "${COMP_WORDS[COMP_CWORD]}")
+    }
+    complete -F _set_theme set-theme
+  fi
 fi
 
 ## FZF

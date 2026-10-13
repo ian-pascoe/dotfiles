@@ -1,0 +1,37 @@
+:root {
+  /* Monokai Pro Ristretto palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 44, 37, 37;
+  --foreground: 255, 241, 243;
+  --card-background: 64, 56, 56;
+  --popup-background: 91, 83, 83;
+  --primary: 249, 204, 108;
+  --secondary: 133, 218, 204;
+  --tertiary: 133, 218, 204;
+  --accent: 168, 169, 235;
+  --muted-background: 114, 105, 106;
+  --info: 133, 218, 204;
+  --success: 173, 218, 120;
+  --warning: 249, 204, 108;
+  --destructive: 253, 104, 131;
+  --border: 91, 83, 83;
+  --text: 255, 241, 243;
+  --foam: 133, 218, 204;
+  --gold: 249, 204, 108;
+  --love: 253, 104, 131;
+  --overlay: 114, 105, 106;
+  --highlight: 91, 83, 83;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -9,6 +9,12 @@
 #>
 param(
   [Parameter(Mandatory = $true)]
+  [ArgumentCompleter({
+      param($commandName, $parameterName, $wordToComplete)
+      if (-not $env:THEMES_DIR) { return }
+      Get-ChildItem -Path $env:THEMES_DIR -Directory -Filter "$wordToComplete*" |
+        ForEach-Object { $_.Name }
+    })]
   [string]$ThemeName
 )
 

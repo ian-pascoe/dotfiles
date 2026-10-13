@@ -1,0 +1,37 @@
+:root {
+  /* Osaka Jade palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 17, 28, 24;
+  --foreground: 193, 196, 151;
+  --card-background: 35, 55, 43;
+  --popup-background: 50, 71, 59;
+  --primary: 80, 148, 117;
+  --secondary: 45, 213, 183;
+  --tertiary: 80, 148, 117;
+  --accent: 210, 104, 156;
+  --muted-background: 83, 104, 91;
+  --info: 80, 148, 117;
+  --success: 84, 158, 106;
+  --warning: 229, 199, 54;
+  --destructive: 255, 83, 69;
+  --border: 50, 71, 59;
+  --text: 193, 196, 151;
+  --foam: 140, 211, 203;
+  --gold: 229, 199, 54;
+  --love: 255, 83, 69;
+  --overlay: 83, 104, 91;
+  --highlight: 50, 71, 59;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

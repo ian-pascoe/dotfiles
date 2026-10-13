@@ -21,4 +21,10 @@ function M.get_theme()
   return theme
 end
 
+-- 'light' when the current theme has a light.mode marker, else 'dark'.
+function M.get_background()
+  local marker = vim.fs.joinpath(M.theme_dir(), 'theme', 'light.mode')
+  return vim.uv.fs_stat(marker) and 'light' or 'dark'
+end
+
 return M

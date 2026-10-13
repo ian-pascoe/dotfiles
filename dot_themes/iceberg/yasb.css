@@ -1,0 +1,37 @@
+:root {
+  /* Iceberg palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 22, 24, 33;
+  --foreground: 198, 200, 209;
+  --card-background: 30, 33, 50;
+  --popup-background: 39, 44, 66;
+  --primary: 132, 160, 198;
+  --secondary: 149, 196, 206;
+  --tertiary: 132, 160, 198;
+  --accent: 160, 147, 199;
+  --muted-background: 107, 112, 137;
+  --info: 132, 160, 198;
+  --success: 180, 190, 130;
+  --warning: 233, 177, 137;
+  --destructive: 226, 120, 120;
+  --border: 68, 75, 113;
+  --text: 198, 200, 209;
+  --foam: 137, 184, 194;
+  --gold: 233, 177, 137;
+  --love: 226, 120, 120;
+  --overlay: 107, 112, 137;
+  --highlight: 39, 44, 66;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,37 @@
+:root {
+  /* Ayu Light palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 248, 249, 250;
+  --foreground: 92, 97, 102;
+  --card-background: 231, 234, 237;
+  --popup-background: 211, 225, 245;
+  --primary: 220, 110, 30;
+  --secondary: 44, 127, 186;
+  --tertiary: 220, 110, 30;
+  --accent: 133, 89, 176;
+  --muted-background: 138, 145, 153;
+  --info: 220, 110, 30;
+  --success: 96, 124, 14;
+  --warning: 173, 116, 31;
+  --destructive: 217, 74, 74;
+  --border: 204, 207, 211;
+  --text: 92, 97, 102;
+  --foam: 60, 134, 109;
+  --gold: 173, 116, 31;
+  --love: 217, 74, 74;
+  --overlay: 138, 145, 153;
+  --highlight: 211, 225, 245;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}
