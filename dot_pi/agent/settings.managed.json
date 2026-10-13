@@ -62,6 +62,7 @@
       ]
     }
   ],
+  "themes": ["~/.themes", "!tern.json"],
   "guardian": {
     "enabled": false,
     "classifierModel": "typesafe/jev-latest",

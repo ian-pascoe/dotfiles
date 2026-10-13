@@ -1,13 +1,13 @@
-import { existsSync, type FSWatcher, readdirSync, readlinkSync, watch } from "node:fs";
+import { type FSWatcher, readlinkSync, watch } from "node:fs";
 import { homedir } from "node:os";
-import { basename, dirname, join, resolve } from "node:path";
+import { basename, join, resolve } from "node:path";
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 
 /**
  * Follows the system theme: `set-theme` points `<configDir>/theme` at
  * `~/.themes/<name>`, and this applies the Pi theme of that name, at startup
- * and whenever the link changes. It loads every sibling of the linked theme
- * that has a `pi.json`, so each theme is available by name.
+ * and whenever the link changes. Pi loads the themes themselves: the `themes`
+ * setting points at `~/.themes`, so each theme's `pi.json` is available by name.
  */
 export function followSystemTheme(configDir: string) {
   const link = join(configDir, "theme");
@@ -60,23 +60,10 @@ export function followSystemTheme(configDir: string) {
 
     // Fires after session_start, at startup and on reload.
     pi.on("resources_discover", (_event, ctx) => {
-      const linked = linkedTheme();
-      if (!linked) return;
-      const themesDir = dirname(linked);
-      let themePaths: string[];
-      try {
-        themePaths = readdirSync(themesDir)
-          .map((name) => join(themesDir, name, "pi.json"))
-          .filter((path) => existsSync(path));
-      } catch {
-        return;
-      }
-      if (ctx.hasUI) {
-        // Pi registers these themes once this event's handlers return, then
-        // (on reload) re-applies the theme in settings.json; apply after both.
-        setTimeout(() => apply(ctx), 0);
-      }
-      return { themePaths };
+      if (!ctx.hasUI) return;
+      // Pi registers themes once this event's handlers return, then (on
+      // reload) re-applies the theme in settings.json; apply after both.
+      setTimeout(() => apply(ctx), 0);
     });
 
     pi.on("session_shutdown", stop);
