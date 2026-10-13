@@ -1,0 +1,18 @@
+{{- /*
+  Tern's settings.json with the keys of tern/settings.managed.json replaced at
+  the top level (keybinds as a whole). The rest is state Tern writes from its
+  Settings page. Go templates can't keep key order, so when nothing managed
+  changed, the file is returned untouched instead of re-sorted.
+*/ -}}
+{{- $current := .chezmoi.stdin | trim -}}
+{{- $settings := dict -}}
+{{- if $current }}{{ $settings = fromJson $current }}{{ end -}}
+{{- $before := toJson $settings -}}
+{{- range $key, $value := include "tern/settings.managed.json" | fromJson -}}
+{{-   $_ := set $settings $key $value -}}
+{{- end -}}
+{{- if eq $before (toJson $settings) -}}
+{{-   .chezmoi.stdin -}}
+{{- else -}}
+{{-   toPrettyJson $settings -}}
+{{- end -}}

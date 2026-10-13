@@ -16,6 +16,9 @@
 - TypeScript tooling is a pnpm workspace. Verify package-local changes with that
   package's scripts; verify shared tooling and cross-package changes from the
   root.
+- Edit Tern config in `tern/`. Each OS's Tern config directory in the source
+  state holds only stubs that include it; add a stub to every OS tree when
+  adding a file (`tern/os-trees.test.ts` checks).
 - Installed skill changes are complete only when `dot_agents/skills/` and the
   provenance lockfile at `dot_local/state/skills/dot_skill-lock.json` agree.
 

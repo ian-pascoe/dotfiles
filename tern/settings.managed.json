@@ -1,7 +1,6 @@
 {
   "keymap": "tmux",
   "keymap_prefix": "ctrl+a",
-  "copy_on_select": false,
   "pane_headers": "Split",
   "tabs": "Vertical",
   "theme_dark": "current",

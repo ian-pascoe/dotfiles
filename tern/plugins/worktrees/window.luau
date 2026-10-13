@@ -11,22 +11,53 @@
 -- of this plugin than the command that started the job (and timers stall
 -- while nothing redraws), so a job's state lives in tern.kv and `finish`
 -- resumes it from that state alone.
+-- Windows has no login shell, so the same scripts run in Git for Windows'
+-- sh; remote hosts are always POSIX (Tern's remote runs on sh).
+
+local WINDOWS = tern.runtime.os == "windows"
 
 local function quote(s: string): string
 	return "'" .. string.gsub(s, "'", "'\\''") .. "'"
 end
 
 local function trim(s: string): string
-	return (string.match(s, "^%s*(.-)%s*$"))
+	return string.match(s, "^%s*(.-)%s*$") or s
 end
 
 local function basename(path: string): string
-	return string.match(path, "([^/]+)/*$") or path
+	return string.match(path, "([^/\\]+)[/\\]*$") or path
 end
 
 -- git and the user's PATH (mise, Homebrew) come from the login shell.
 local function login_shell(): string
-	return tern.getenv("SHELL") or "/bin/zsh"
+	return tern.getenv("SHELL") or (if tern.runtime.os == "macos" then "/bin/zsh" else "/bin/sh")
+end
+
+-- Git for Windows' sh, found beside git (<root>/mingw64/libexec/git-core):
+-- bin/sh.exe puts its coreutils on PATH, usr/bin/sh.exe needs them added.
+type Shell = { argv: { string }, prefix: string }
+
+local git_sh: Shell? = nil
+
+local function with_git_sh(cx, cb: (sh: Shell?, cx: any) -> ())
+	if git_sh then
+		cb(git_sh, cx)
+		return
+	end
+	local ok = pcall(function()
+		tern.process.run({ "git", "--exec-path" }, { timeout_ms = 5000 }, function(result, cx2)
+			local root = string.match(trim(result.stdout), "^(.+)[/\\][^/\\]+[/\\]libexec[/\\]git%-core$")
+			if root and tern.fs.exists(root .. "/bin/sh.exe") then
+				git_sh = { argv = { root .. "/bin/sh.exe", "-c" }, prefix = "" }
+			elseif root and tern.fs.exists(root .. "/usr/bin/sh.exe") then
+				git_sh = { argv = { root .. "/usr/bin/sh.exe", "-c" }, prefix = "PATH=/usr/bin:$PATH\n" }
+			end
+			cb(git_sh, cx2)
+		end)
+	end)
+	if not ok then
+		cb(nil, cx)
+	end
 end
 
 local function is_local(cx): boolean
@@ -79,7 +110,8 @@ elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
 else
 	git worktree add -b "$branch" "$dest" >/dev/null || exit 1
 fi
-printf 'session %s\npath %s\n' "$name/$branch" "$dest"
+# git prints the path the way this OS writes it (C:/... in Git for Windows).
+printf 'session %s\npath %s\n' "$name/$branch" "$(git -C "$dest" rev-parse --show-toplevel)"
 ]]
 
 -- $1: worktree path; $2: nonempty to force (discarding its changes).
@@ -101,15 +133,29 @@ local finish: (cx: any, job: any, status: number, output: string) -> ()
 -- through tern.kv in another VM.
 local function run_git(cx, script: string, cwd: string, args: { string }, job)
 	if is_local(cx) then
-		local argv = { login_shell(), "-lc", SCRIPTS[script], "tern-worktree" }
-		for _, arg in args do
-			table.insert(argv, arg)
-		end
-		tern.process.run(argv, { cwd = cwd, timeout_ms = 30000 }, function(result, cx2)
-			if cx2 then
-				finish(cx2, job, result.status, result.stdout .. result.stderr)
+		local function go(shell: Shell?, cx1)
+			if not shell then
+				cx1:toast("error", "Worktrees: Git for Windows' sh not found", "Install Git for Windows")
+				return
 			end
-		end)
+			local argv = table.clone(shell.argv)
+			table.insert(argv, shell.prefix .. SCRIPTS[script])
+			table.insert(argv, "tern-worktree")
+			for _, arg in args do
+				table.insert(argv, arg)
+			end
+			tern.process.run(argv, { cwd = cwd, timeout_ms = 30000 }, function(result, cx2)
+				if cx2 then
+					local output = string.gsub(result.stdout .. result.stderr, "\r", "")
+					finish(cx2, job, result.status, output)
+				end
+			end)
+		end
+		if WINDOWS then
+			with_git_sh(cx, go)
+		else
+			go({ argv = { login_shell(), "-lc" }, prefix = "" }, cx)
+		end
 		return
 	end
 
@@ -230,7 +276,9 @@ local function open_session(cx, name: string, path: string)
 end
 
 local function short_path(path: string): string
-	local home = string.match(path, "^/Users/[^/]+") or string.match(path, "^/home/[^/]+")
+	local home = string.match(path, "^/Users/[^/]+")
+		or string.match(path, "^/home/[^/]+")
+		or string.match(path, "^%a:[/\\]Users[/\\][^/\\]+")
 	if home then
 		return "~" .. string.sub(path, #home + 1)
 	end

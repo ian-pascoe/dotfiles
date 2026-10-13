@@ -103,7 +103,7 @@ tern.command({
 			session_of[tab.id] = tab.session
 		end
 
-		local home = tern.getenv("HOME") or ""
+		local home = tern.getenv("HOME") or tern.getenv("USERPROFILE") or ""
 		local items = {}
 		for _, pane in ipairs(cx.session:panes()) do
 			if pane.kind == "terminal" or pane.kind == "agent" then

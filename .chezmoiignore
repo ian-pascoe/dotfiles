@@ -2,7 +2,7 @@ README.md
 AGENTS.md
 CLAUDE.md
 .claude/mcp-servers.json
-Library/Application Support/Tern/settings.managed.json
+tern/**
 .pi/agent/settings.managed.json
 .pi/agent/settings.defaults.json
 docs/**
@@ -63,11 +63,13 @@ Library/Application Support/Tern
 # Non-Linux Ignores
 {{ if ne .chezmoi.os "linux" }}
 .config/systemd
+.config/tern
 .config/tigervnc
 {{ end }}
 
 # Non-Windows Ignores
 {{ if ne .chezmoi.os "windows" }}
+AppData
 Documents/PowerShell
 .wslconfig
 .config/autohotkey

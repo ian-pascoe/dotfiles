@@ -17,6 +17,8 @@
 -- `plugin.nvim-editor.toggle` switches routing off/on.
 -- Open scrollback in editor (prefix+[) shows the block's scrollback in a
 -- Neovim that takes the block's place until it quits.
+-- On Windows this machine's Neovims listen on named pipes and local panes run
+-- PowerShell; remote hosts are always POSIX (Tern's remote runs on sh).
 
 local ROUTED_ORIGINS = { palette = true, files = true, drop = true, link = true, system = true }
 
@@ -39,16 +41,57 @@ local function enabled(): boolean
 	return tern.kv.get("enabled") ~= false
 end
 
+local WINDOWS = tern.runtime.os == "windows"
+
 local function quote(s: string): string
 	return "'" .. string.gsub(s, "'", "'\\''") .. "'"
 end
 
+local function psquote(s: string): string
+	return "'" .. string.gsub(s, "'", "''") .. "'"
+end
+
+-- PowerShell takes a script as base64 UTF-16LE, which needs no quoting in
+-- whichever shell (PowerShell or cmd) Tern runs a pane command with.
+local function encoded(script: string): string
+	local units = {}
+	for _, c in utf8.codes(script) do
+		if c >= 0x10000 then
+			c -= 0x10000
+			local hi, lo = 0xD800 + c // 0x400, 0xDC00 + c % 0x400
+			table.insert(units, string.char(hi % 256, hi // 256, lo % 256, lo // 256))
+		else
+			table.insert(units, string.char(c % 256, c // 256))
+		end
+	end
+	return tern.base64.encode(table.concat(units))
+end
+
+local function powershell_argv(script: string): { string }
+	return { "powershell", "-NoProfile", "-NonInteractive", "-EncodedCommand", encoded(script) }
+end
+
+local function powershell_command(script: string): string
+	return "powershell -NoProfile -EncodedCommand " .. encoded(script)
+end
+
+local SEP = if WINDOWS then "[/\\]" else "/"
+
 local function dirname(path: string): string
-	return string.match(path, "^(.*)/[^/]*$") or "/"
+	return string.match(path, "^(.*)" .. SEP .. "[^/\\]*$") or "/"
+end
+
+-- Whether path is inside directory dir.
+local function inside(path: string, dir: string): boolean
+	local sep = string.sub(path, #dir + 1, #dir + 1)
+	return dir ~= "" and string.sub(path, 1, #dir) == dir and string.match(sep, SEP) ~= nil
 end
 
 local function is_nvim(program: string?): boolean
-	return program ~= nil and string.match(string.lower(program), "n?vim$") ~= nil
+	if program == nil then
+		return false
+	end
+	return string.match(string.gsub(string.lower(program), "%.exe$", ""), "n?vim$") ~= nil
 end
 
 local function routable(req, cx): boolean
@@ -76,6 +119,11 @@ local function is_remote(cx): boolean
 	return cx.hosts:current().kind ~= "local"
 end
 
+-- Whether new panes spawn on this machine, running Windows.
+local function windows_panes(cx): boolean
+	return WINDOWS and not is_remote(cx)
+end
+
 -- The tab's live Neovim from an earlier open, if any.
 local function reusable(cx, tab: number?)
 	local editor = tab and editors[tab]
@@ -87,6 +135,9 @@ local function reusable(cx, tab: number?)
 	if is_remote(cx) then
 		-- A remote socket lives on the remote host, out of tern.fs's reach.
 		alive = pane ~= nil and is_nvim(pane.program)
+	elseif WINDOWS then
+		-- tern.fs can't see named pipes; a dead one fails the send instead.
+		alive = pane ~= nil
 	else
 		-- Neovim removes its socket on exit; a hand-started one runs under a
 		-- shell, so the pane's program need not be nvim.
@@ -100,20 +151,32 @@ local function reusable(cx, tab: number?)
 end
 
 local function launch(cx, req, focused: number?, tab: number?)
-	local socket = string.format("/tmp/tern-nvim-%x%04x.sock", os.time(), math.random(0, 0xffff))
-	local jump = ""
+	local name = string.format("tern-nvim-%x%04x", os.time(), math.random(0, 0xffff))
+	local windows = windows_panes(cx)
+	local socket = if windows then "\\\\.\\pipe\\" .. name else "/tmp/" .. name .. ".sock"
+	local args = { "--listen", socket }
 	if req.line and req.col then
-		jump = quote(string.format("+call cursor(%d, %d)", req.line, req.col)) .. " "
+		table.insert(args, string.format("+call cursor(%d, %d)", req.line, req.col))
 	elseif req.line then
-		jump = quote("+" .. req.line) .. " "
+		table.insert(args, "+" .. req.line)
 	end
+	if not windows then
+		-- Windows paths never start with "-" (and PowerShell 5 drops "--").
+		table.insert(args, "--")
+	end
+	table.insert(args, req.path)
+	local command = "nvim"
+	for _, arg in args do
+		command ..= " " .. (if windows then psquote(arg) elseif arg == "--" then arg else quote(arg))
+	end
+
 	local pane = focused and cx.session:pane(focused)
-	local cwd = pane and pane.cwd ~= "" and pane.cwd or ""
-	if cwd == "" or string.sub(req.path, 1, #cwd + 1) ~= cwd .. "/" then
+	local cwd = pane and pane.cwd or ""
+	if not inside(req.path, cwd) then
 		cwd = dirname(req.path)
 	end
 	local spec = {
-		command = "nvim --listen " .. quote(socket) .. " " .. jump .. "-- " .. quote(req.path),
+		command = if windows then powershell_command(command) else command,
 		cwd = cwd,
 	}
 
@@ -153,18 +216,22 @@ local function typed_keys(req): string
 end
 
 -- nvim lives on the login shell's PATH (mise), not Tern's. A login shell
--- takes ~250 ms, so one finds nvim and its socket directory, then nvim runs
--- directly; the login shell stays the fallback.
+-- takes ~250 ms, so one finds nvim and where its default sockets go, then
+-- nvim runs directly; the login shell stays the fallback. Windows has no
+-- login shell: nvim is on PATH, and its sockets are named pipes.
 local function login_shell(): string
-	return tern.getenv("SHELL") or "/bin/zsh"
+	return tern.getenv("SHELL") or (if tern.runtime.os == "macos" then "/bin/zsh" else "/bin/sh")
 end
 
+-- Neovim's default socket is $XDG_RUNTIME_DIR/nvim.PID.0, or without that
+-- variable (macOS) $TMPDIR/nvim.$USER/<random>/nvim.PID.0.
 local RESOLVE = [[
 bin=$(mise which nvim 2>/dev/null || command -v nvim) || exit 1
-printf '%s\n%s\n' "$bin" "${TMPDIR%/}/nvim.$USER"
+tmp=${TMPDIR:-/tmp}
+printf '%s\n%s\n%s\n' "$bin" "$XDG_RUNTIME_DIR" "${tmp%/}/nvim.${USER:-$(id -un)}"
 ]]
 
-local nvim: { bin: string, run: string }? = nil
+local nvim: { bin: string, run: string, tmp: string }? = nil
 local resolve_tried = false
 
 -- Runs cb once nvim's path is known (or known to be unknown).
@@ -174,16 +241,26 @@ local function with_nvim(cb: () -> ())
 		return
 	end
 	resolve_tried = true
-	tern.process.run({ login_shell(), "-lc", RESOLVE }, { timeout_ms = 5000 }, function(result)
-		local bin, run = string.match(result.stdout, "^([^\n]+)\n([^\n]+)")
-		nvim = if result.status == 0 and bin and run then { bin = bin, run = run } else nil
+	local argv = if WINDOWS then { "where.exe", "nvim" } else { login_shell(), "-lc", RESOLVE }
+	tern.process.run(argv, { timeout_ms = 5000 }, function(result)
+		local out = string.gsub(result.stdout, "\r", "")
+		local bin, run, tmp
+		if WINDOWS then
+			bin, run, tmp = string.match(out, "^([^\n]+)"), "", ""
+		else
+			bin, run, tmp = string.match(out, "^([^\n]+)\n([^\n]*)\n([^\n]+)")
+		end
+		nvim = if result.status == 0 and bin and run and tmp then { bin = bin, run = run, tmp = tmp } else nil
 		cb()
 	end)
 end
 
 -- argv running nvim with args.
 local function nvim_argv(args: { string }): { string }
-	local argv = if nvim then { nvim.bin } else { login_shell(), "-lc", 'exec nvim "$@"', "nvim" }
+	local argv = if nvim
+		then { nvim.bin }
+		elseif WINDOWS then { "nvim" }
+		else { login_shell(), "-lc", 'exec nvim "$@"', "nvim" }
 	for _, arg in args do
 		table.insert(argv, arg)
 	end
@@ -192,12 +269,17 @@ end
 
 -- Prints "<TERN_PANE>\t<socket>" for every live local Neovim: default sockets
 -- (stdpath('run')/nvim.PID.0) and the ones this plugin starts with --listen.
--- $1 is nvim, $2 the socket directory (default: Neovim's on macOS).
+-- $1 is nvim; $2 and $3 RESOLVE's directories (default: this shell's).
 local SCAN = [[
 setopt null_glob 2>/dev/null
 nvim=$1
-dir=${2:-${TMPDIR%/}/nvim.$USER}
-for s in "$dir"/*/nvim.*.0 /tmp/tern-nvim-*.sock; do
+if [ $# -ge 3 ]; then
+	run=$2 tmp=$3
+else
+	run=$XDG_RUNTIME_DIR tmp=${TMPDIR:-/tmp}
+	tmp=${tmp%/}/nvim.${USER:-$(id -un)}
+fi
+for s in "${run:-/nonexistent}"/nvim.*.0 "$tmp"/*/nvim.*.0 /tmp/tern-nvim-*.sock; do
 	[ -S "$s" ] || continue
 	p=$("$nvim" --server "$s" --remote-expr '$TERN_PANE' 2>/dev/null) || continue
 	[ -n "$p" ] && printf '%s\t%s\n' "$p" "$s"
@@ -205,19 +287,37 @@ done
 exit 0
 ]]
 
+-- The same on Windows, where Neovim's sockets are named pipes (nvim.PID.0 by
+-- default); $nvim is set above it.
+local SCAN_WINDOWS = [[
+try { $pipes = [IO.Directory]::GetFiles('\\.\pipe\') } catch { $pipes = @() }
+foreach ($s in $pipes) {
+	if ([IO.Path]::GetFileName($s) -notmatch '^(nvim\.\d+\.0|tern-nvim-[0-9a-f]+)$') { continue }
+	$p = & $nvim --server $s --remote-expr '$TERN_PANE' 2>$null
+	if ($LASTEXITCODE -eq 0 -and "$p" -match '^\d+$') { [Console]::Out.Write("$p`t$s`n") }
+}
+exit 0
+]]
+
 -- Finds a running Neovim in `tab`, preferring the focused pane's.
 local function discover(tab: number?, focused: number?, cb: (editor: any, cx: any) -> ())
 	with_nvim(function()
-		local argv = if nvim
-			then { "/bin/sh", "-c", SCAN, "scan", nvim.bin, nvim.run }
-			else { login_shell(), "-lc", SCAN, "scan", "nvim", "" }
+		local argv
+		if WINDOWS then
+			argv = powershell_argv("$nvim = " .. psquote(if nvim then nvim.bin else "nvim") .. "\n" .. SCAN_WINDOWS)
+		elseif nvim then
+			argv = { "/bin/sh", "-c", SCAN, "scan", nvim.bin, nvim.run, nvim.tmp }
+		else
+			argv = { login_shell(), "-lc", SCAN, "scan", "nvim" }
+		end
 		tern.process.run(argv, { timeout_ms = 5000 }, function(result, cx)
 			if not cx then
 				return
 			end
 			local found = nil
 			if tab and result.status == 0 then
-				for id, socket in string.gmatch(result.stdout, "(%d+)\t([^\n]+)") do
+				local out = string.gsub(result.stdout, "\r", "")
+				for id, socket in string.gmatch(out, "(%d+)\t([^\n]+)") do
 					local pane = tonumber(id)
 					local info = pane and cx.session:pane(pane)
 					if info and info.tab == tab and (not found or pane == focused) then
@@ -445,6 +545,24 @@ printf '\033]2;%s\007' "$2"
 exec sleep 600
 ]]
 
+-- The same in PowerShell, for panes on this machine running Windows; $id,
+-- $marker and $title are set above it. The console title reaches Tern as
+-- OSC 2 through ConPTY.
+local SCROLLBACK_WINDOWS = [=[
+[Console]::Title = $title
+[Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
+$f = [IO.Path]::GetTempFileName()
+$lines = @(tern capture $id --scrollback 2>&1 | ForEach-Object { "$_" })
+$n = $lines.Count
+while ($n -gt 0 -and $lines[$n - 1].Trim() -eq '') { $n-- }
+$keep = if ($n -gt 0) { $lines[0..($n - 1)] } else { @() }
+[IO.File]::WriteAllLines($f, [string[]]$keep, [Text.UTF8Encoding]::new($false))
+nvim -R + $f
+Remove-Item -LiteralPath $f -ErrorAction SilentlyContinue
+[Console]::Title = $marker
+Start-Sleep -Seconds 600
+]=]
+
 tern.override("open_scrollback", function(cx)
 	local focused = cx.session:focused()
 	local info = focused and cx.session:pane(focused)
@@ -453,8 +571,16 @@ tern.override("open_scrollback", function(cx)
 	end
 	local pane = focused :: number
 	local marker = string.format("tern-scrollback-%06x", math.random(0, 0xffffff))
-	local command = "sh -c " .. quote(SCROLLBACK) .. " scrollback " .. host_pane_id(pane) .. " " .. marker
-		.. " " .. quote("scrollback: " .. info.title)
+	local title = "scrollback: " .. info.title
+	local command
+	if windows_panes(cx) then
+		command = powershell_command(
+			string.format("$id = %s\n$marker = %s\n$title = %s\n", host_pane_id(pane), psquote(marker), psquote(title))
+				.. SCROLLBACK_WINDOWS
+		)
+	else
+		command = "sh -c " .. quote(SCROLLBACK) .. " scrollback " .. host_pane_id(pane) .. " " .. marker .. " " .. quote(title)
+	end
 	local editor = cx.layout:split(pane, "down", { command = command, cwd = info.cwd })
 	if not editor then
 		return false

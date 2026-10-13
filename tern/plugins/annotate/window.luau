@@ -1,6 +1,6 @@
 -- Annotate: a port of herdr-annotate. Plugins can't read the terminal
--- selection, so capture annotates the clipboard: copy text (⌘C), then run
--- `plugin.annotate.capture`. Annotations live in this plugin's kv store and
+-- selection, so capture annotates the clipboard: copy text (⌘C, or
+-- ctrl+insert), then run `plugin.annotate.capture`. Annotations live in this plugin's kv store and
 -- are copied as the same Markdown herdr-annotate writes.
 
 local ACTIVE = "annotations" -- oldest first
@@ -27,6 +27,31 @@ end
 local function new_id(): string
 	return string.format("%x%04x", os.time(), math.random(0, 0xffff))
 end
+
+-- Tern can write the clipboard but not read it, so capture runs the OS's
+-- paste tool. Linux: wl-paste on Wayland, else xclip or xsel.
+local LINUX_PASTE = [[
+if [ -n "$WAYLAND_DISPLAY" ] && command -v wl-paste >/dev/null 2>&1; then exec wl-paste --no-newline; fi
+if command -v xclip >/dev/null 2>&1; then exec xclip -selection clipboard -out; fi
+if command -v xsel >/dev/null 2>&1; then exec xsel --clipboard --output; fi
+echo 'install wl-clipboard, xclip or xsel' >&2
+exit 127
+]]
+
+local PASTE = {
+	macos = { "pbpaste" },
+	linux = { "/bin/sh", "-c", LINUX_PASTE },
+	-- UTF-8 without a BOM; -Raw keeps the text's own line breaks.
+	windows = {
+		"powershell",
+		"-NoProfile",
+		"-NonInteractive",
+		"-Command",
+		"[Console]::OutputEncoding = [Text.UTF8Encoding]::new($false); Get-Clipboard -Raw",
+	},
+}
+
+local COPY_HINT = if tern.runtime.os == "macos" then "Copy terminal text first (⌘C)" else "Copy terminal text first"
 
 local function count(n: number): string
 	return n .. (if n == 1 then " annotation" else " annotations")
@@ -160,13 +185,26 @@ tern.command({
 	group = "annotate",
 	run = function(cx)
 		local context = context_of(cx)
-		tern.process.run({ "pbpaste" }, { timeout_ms = 2000 }):next(function(result, err, cx2)
+		local argv = PASTE[tern.runtime.os]
+		if not argv then
+			cx:toast("error", "Annotate can't read the clipboard on " .. tern.runtime.os)
+			return
+		end
+		tern.process.run(argv, { timeout_ms = 3000 }):next(function(result, err, cx2)
 			if not cx2 then
 				return
 			end
+			if result and result.status == 127 then
+				cx2:toast("error", "Annotate can't read the clipboard", sanitize(result.stderr))
+				return
+			end
 			local text = result and result.status == 0 and sanitize(result.stdout) or ""
+			if tern.runtime.os == "windows" then
+				-- PowerShell ends its output with a line break of its own.
+				text = string.gsub(text, "\n$", "")
+			end
 			if err or not string.find(text, "%S") then
-				cx2:toast("info", "Nothing to annotate", "Copy terminal text first (⌘C)")
+				cx2:toast("info", "Nothing to annotate", COPY_HINT)
 				return
 			end
 			cx2:prompt({ placeholder = "Comment on “" .. oneline(text, 60) .. "”", action = "save" })
