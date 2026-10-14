@@ -1,2 +1,33 @@
 #!/usr/bin/env bash
-find "$HOME/.themes" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;
+# Lists theme families, one per line. On a terminal each family also shows its
+# variants as ☾ (dark) and ☀ (light) palette strips (see theme-palette), with
+# * on the family of the current theme; piped output stays bare family names
+# for scripts and completion.
+if [[ ! -t 1 ]]; then
+  theme-resolve --families
+  exit
+fi
+
+rows=$(theme-resolve --list)
+width=$(awk -F'\t' '{ if (length($1) > w) w = length($1) } END { print w }' <<<"$rows")
+current=$(theme-resolve --family-of "$(basename "$(readlink "$HOME/.config/theme")")" 2>/dev/null)
+
+# Rows come sorted by family, dark variant first; print a line when the family changes.
+family=
+flush() {
+  [[ -n $family ]] || return 0
+  local marker=' '
+  [[ $family == "$current" ]] && marker='*'
+  printf '%s %-*s %s\n' "$marker" "$width" "$family" "$line"
+}
+while IFS=$'\t' read -r fam mode variant; do
+  if [[ $fam != "$family" ]]; then
+    flush
+    family=$fam
+    line=
+  fi
+  symbol='☾'
+  [[ $mode == light ]] && symbol='☀'
+  line+=" $symbol $(theme-palette "$variant" 2>/dev/null)"
+done <<<"$rows"
+flush

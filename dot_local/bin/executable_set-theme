@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
-# Switches the current theme: points ~/.config/theme at ~/.themes/<name>, then
-# tells running apps to reload. Every app's theme link goes through
-# ~/.config/theme and is managed by chezmoi, so nothing else is relinked here.
-# Themes with a light.mode file are light; on macOS the system appearance
-# follows, and Ghostty's light/dark theme pairs follow the system.
+# Switches the current theme: resolves a theme family or variant name (see
+# theme-resolve), points ~/.config/theme at ~/.themes/<variant>, then tells
+# running apps to reload. Every app's theme link goes through ~/.config/theme
+# and is managed by chezmoi, so nothing else is relinked here.
+#   set-theme <family|variant> [light|dark]
+# A family name uses the saved mode unless a mode is given. The mode is saved
+# when one is given or a variant name is used; a family with no variant in the
+# wanted mode falls back to its only variant and keeps the saved mode. On macOS
+# the system appearance follows the variant used: light with a light.mode file.
 # Tern and Neovim watch the link themselves; k9s, yazi and pi/omp pick the
 # theme up on their next start.
 
 if [ -z "$1" ]; then
-  echo "Usage: $0 <theme-name>"
+  echo "Usage: $0 <family|variant> [light|dark]"
   exit 1
 fi
 
@@ -16,20 +20,36 @@ THEMES_DIR="$HOME/.themes"
 CURRENT_THEME_DIR="$HOME/.config/theme"
 
 THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
-THEME_PATH="$THEMES_DIR/$THEME_NAME"
+MODE="${2:-}"
 
-# Check if the theme entered exists
-if [[ ! -d "$THEME_PATH" ]]; then
-  echo "Theme '$THEME_NAME' does not exist in $THEMES_DIR"
-  exit 1
+SAVED_MODE=$(theme-resolve --mode)
+WANTED_MODE="${MODE:-$SAVED_MODE}"
+
+# Errors for unknown names and modes come from theme-resolve.
+THEME_VARIANT=$(theme-resolve "$THEME_NAME" "$WANTED_MODE") || exit 1
+THEME_PATH="$THEMES_DIR/$THEME_VARIANT"
+VARIANT_MODE=$(theme-resolve --mode-of "$THEME_VARIANT")
+
+if ! theme-resolve --is-family "$THEME_NAME"; then
+  # A variant name decides the mode itself.
+  if [[ -n $MODE && $MODE != "$VARIANT_MODE" ]]; then
+    echo "$THEME_VARIANT is a $VARIANT_MODE variant; ignoring mode $MODE" >&2
+  fi
+  NEW_MODE=$VARIANT_MODE
+elif [[ $VARIANT_MODE == "$WANTED_MODE" ]]; then
+  NEW_MODE=$WANTED_MODE
+else
+  echo "$THEME_NAME has no $WANTED_MODE variant; using $THEME_VARIANT and keeping mode $SAVED_MODE"
+  NEW_MODE=$SAVED_MODE
 fi
+[[ $NEW_MODE != "$SAVED_MODE" ]] && theme-resolve --save-mode "$NEW_MODE"
 
-echo "Linking new theme: $THEME_NAME"
+echo "Linking new theme: $THEME_VARIANT"
 ln -snf "$THEME_PATH" "$CURRENT_THEME_DIR"
 
 # Set the appearance before apps reload so they pick up the new mode.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [[ -f "$THEME_PATH/light.mode" ]]; then
+  if [[ $VARIANT_MODE == light ]]; then
     dark_mode=false
   else
     dark_mode=true

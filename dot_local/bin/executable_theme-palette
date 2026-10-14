@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Prints a theme variant's colors as truecolor swatches drawn on its background,
+# read from the inline colors of its ghostty.conf: the one file every variant
+# has with a full terminal palette.
+#   theme-palette <name>         one line: foreground sample and the six hues
+#   theme-palette --full <name>  normal (0-7) and bright (8-15) palette rows
+
+full=false
+if [[ $1 == --full ]]; then
+  full=true
+  shift
+fi
+
+if [[ -z $1 ]]; then
+  echo "Usage: $0 [--full] <theme-name>" >&2
+  exit 1
+fi
+
+conf="$HOME/.themes/$1/ghostty.conf"
+if [[ ! -f $conf ]]; then
+  echo "Theme '$1' has no $conf" >&2
+  exit 1
+fi
+
+# Prints "background foreground palette0 ... palette15" from a Ghostty config.
+read_colors() {
+  awk -F= '
+    { gsub(/[ \t#]/, "") }
+    $1 == "background" { bg = $2 }
+    $1 == "foreground" { fg = $2 }
+    $1 == "palette" { p[$2] = $3 }
+    END {
+      printf "%s %s", bg, fg
+      for (i = 0; i < 16; i++) printf " %s", p[i]
+      print ""
+    }' "$1"
+}
+
+# Sets $rgb to the r;g;b of a truecolor escape for rrggbb, without a subshell.
+rgb() {
+  local h=${1:-000000}
+  printf -v rgb '%d;%d;%d' "0x${h:0:2}" "0x${h:2:2}" "0x${h:4:2}"
+}
+
+# Draws "fg on bg, then blocks for the given palette indexes" from read_colors output.
+strip() {
+  local colors lead=$2 i
+  read -ra colors <<<"$1"
+  shift 2
+  local rgb
+  rgb "${colors[0]}"
+  printf '\e[48;2;%sm' "$rgb"
+  rgb "${colors[1]}"
+  printf '\e[38;2;%sm%s' "$rgb" "$lead"
+  for i in "$@"; do
+    rgb "${colors[i + 2]}"
+    printf '\e[38;2;%sm██' "$rgb"
+  done
+  printf ' \e[0m'
+}
+
+palette=$(read_colors "$conf")
+if $full; then
+  strip "$palette" ' Aa ' 0 1 2 3 4 5 6 7
+  echo
+  strip "$palette" '    ' 8 9 10 11 12 13 14 15
+  echo
+else
+  strip "$palette" ' Aa ' 1 2 3 4 5 6
+  echo
+fi

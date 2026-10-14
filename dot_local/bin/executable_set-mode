@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Prints or changes the mode (light or dark) saved for this machine. With no
+# argument it prints the saved mode. Otherwise it saves the mode and switches
+# the current theme family to its variant for that mode (see set-theme). A
+# family with no variant for the mode keeps its current variant, and so does
+# the system appearance: the theme decides it.
+#   set-mode [light|dark|toggle]
+
+saved=$(theme-resolve --mode)
+
+case ${1:-} in
+'')
+  echo "$saved"
+  exit
+  ;;
+light | dark) mode=$1 ;;
+toggle)
+  if [[ $saved == light ]]; then mode=dark; else mode=light; fi
+  ;;
+*)
+  echo "Usage: $0 [light|dark|toggle]"
+  exit 1
+  ;;
+esac
+
+theme-resolve --save-mode "$mode" || exit 1
+echo "Mode: $mode"
+
+current=$(basename "$(readlink "$HOME/.config/theme")")
+if ! family=$(theme-resolve --family-of "$current" 2>/dev/null); then
+  echo "No current theme to switch"
+  exit
+fi
+
+variant=$(theme-resolve "$family" "$mode") || exit 1
+if [[ $(theme-resolve --mode-of "$variant") != "$mode" ]]; then
+  echo "$family has no $mode variant; staying on $current"
+elif [[ $variant != "$current" ]]; then
+  # The family name always resolves to that variant, whatever else is named alike.
+  set-theme "$family" "$mode"
+fi

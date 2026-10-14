@@ -338,22 +338,29 @@ local function toggleMicMute()
   notify(not muted and "Mic: Muted" or "Mic: Live")
 end
 
+-- `set-mode toggle` flips the saved mode, switches the theme family's variant
+-- and sets the system appearance (see set-theme). A login shell supplies the
+-- tools set-theme needs; ~/.local/bin is added in case it is not on its PATH.
 local function toggleDarkMode()
-  local ok, _, result = hs.osascript.applescript([[
-    tell application "System Events"
-      tell appearance preferences
-        set dark mode to not dark mode
-        return dark mode
-      end tell
-    end tell
-  ]])
-
-  if not ok then
-    notify("Dark mode toggle failed")
+  if keepAlive.modeTask and keepAlive.modeTask:isRunning() then
     return
   end
 
-  notify(result and "Appearance: Dark" or "Appearance: Light")
+  local script = [[
+    export PATH="$HOME/.local/bin:$PATH"
+    set-mode toggle >/dev/null 2>&1 || exit 1
+    echo "$(set-mode) $(get-theme)"
+  ]]
+  keepAlive.modeTask = hs.task.new("/bin/zsh", function(exitCode, stdout)
+    local mode, theme = (stdout or ""):match("^(%S+)%s+(%S+)")
+    if exitCode ~= 0 or not mode then
+      notify("Mode toggle failed")
+      return
+    end
+
+    notify(string.format("Mode: %s (%s)", (mode:gsub("^%l", string.upper)), theme))
+  end, { "-lc", script })
+  keepAlive.modeTask:start()
 end
 
 local dotfilesDir = home .. "/.local/share/chezmoi"
@@ -367,7 +374,7 @@ bind(hyper, "A", "App launcher", showAppChooser)
 bind(hyper, "V", "Clipboard history", showClipboardChooser)
 bind(hyper, "C", "Cycle caffeine: auto / on / off", cycleCaffeine)
 bind(hyper, "M", "Toggle microphone mute", toggleMicMute)
-bind(hyper, "D", "Toggle dark mode", toggleDarkMode)
+bind(hyper, "D", "Toggle light/dark mode and theme", toggleDarkMode)
 bind(hyper, "/", "Show shortcut cheatsheet", showCheatsheet)
 bind(hyper, ".", "Toggle Hammerspoon console", hs.toggleConsole)
 bind(hyper, "O", "Open dotfiles folder", openDotfiles)

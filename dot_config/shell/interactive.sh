@@ -137,40 +137,53 @@ if command -v hermes &>/dev/null; then
   eval "$(hermes completion "$_shell_name")"
 fi
 
-# set-theme and set-theme-all take a theme name from list-themes; set-theme-all
-# also takes -n/--dry-run before it, and random-theme-all takes only that.
+# set-theme and set-theme-all take a theme family from list-themes, then a mode;
+# set-theme-all also takes -n/--dry-run before them, random-theme-all takes only
+# that, and set-mode takes a mode or toggle.
 if command -v set-theme &>/dev/null; then
   if [ "$_shell_name" = zsh ]; then
     # _arguments runs $(list-themes) itself when completing.
     # shellcheck disable=SC2016
     _set_theme() {
-      _arguments '1:theme:($(list-themes))'
+      _arguments '1:family:($(list-themes))' '2:mode:(light dark)'
     }
     # shellcheck disable=SC2016
     _set_theme_all() {
       _arguments '(-n --dry-run)'{-n,--dry-run}'[check each machine without changing it]' \
-        '1:theme:($(list-themes))'
+        '1:family:($(list-themes))' '2:mode:(light dark)'
     }
     _random_theme_all() {
       _arguments '(-n --dry-run)'{-n,--dry-run}'[check each machine without changing it]'
     }
+    _set_mode() {
+      _arguments '1:mode:(light dark toggle)'
+    }
     compdef _set_theme set-theme
     compdef _set_theme_all set-theme-all
     compdef _random_theme_all random-theme-all
+    compdef _set_mode set-mode
   else
     _set_theme() {
-      local cur=${COMP_WORDS[COMP_CWORD]} i
-      # Complete only the first argument after any options.
-      for ((i = 1; i < COMP_CWORD; i++)); do
-        [[ ${COMP_WORDS[i]} == -* ]] || return
-      done
+      local cur=${COMP_WORDS[COMP_CWORD]} i position=0
       if [[ $cur == -* && ${COMP_WORDS[0]} == set-theme-all ]]; then
         mapfile -t COMPREPLY < <(compgen -W '-n --dry-run' -- "$cur")
-      else
-        mapfile -t COMPREPLY < <(compgen -W "$(list-themes)" -- "$cur")
+        return
       fi
+      # Complete the family, then the mode, counting only words after any options.
+      for ((i = 1; i < COMP_CWORD; i++)); do
+        [[ ${COMP_WORDS[i]} == -* ]] || ((position++))
+      done
+      case $position in
+      0) mapfile -t COMPREPLY < <(compgen -W "$(list-themes)" -- "$cur") ;;
+      1) mapfile -t COMPREPLY < <(compgen -W 'light dark' -- "$cur") ;;
+      esac
+    }
+    _set_mode() {
+      [[ $COMP_CWORD -eq 1 ]] || return
+      mapfile -t COMPREPLY < <(compgen -W 'light dark toggle' -- "${COMP_WORDS[COMP_CWORD]}")
     }
     complete -F _set_theme set-theme set-theme-all
+    complete -F _set_mode set-mode
     complete -W '-n --dry-run' random-theme-all
   fi
 fi

@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+# Sets a random theme family in the saved mode (list-themes prints families when piped).
 set-theme "$(list-themes | shuf -n 1)"

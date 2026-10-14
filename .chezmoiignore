@@ -9,6 +9,8 @@ docs/**
 CONTEXT-MAP.md
 **/CONTEXT.md
 **/docs/adr/**
+# Theming context docs; anything deployed into ~/.themes would list as a theme
+.themes/docs
 
 # JS/TS
 **/node_modules/**

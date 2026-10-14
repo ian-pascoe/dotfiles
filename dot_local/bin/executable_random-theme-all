@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Sets a random theme on every machine; see set-theme-all. Options such as
-# -n/--dry-run pass through to set-theme-all.
+# Sets a random theme family on every machine, in this machine's saved mode;
+# see set-theme-all. Options such as -n/--dry-run pass through to it.
 
 theme=$(list-themes | shuf -n 1)
 if [[ -z $theme ]]; then

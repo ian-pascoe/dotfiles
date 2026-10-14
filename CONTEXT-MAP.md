@@ -12,6 +12,10 @@ Read the domain context relevant to the source area being changed.
   - Scope: OpenCode settings, prompts, commands, and plugins under
     `dot_config/opencode/`.
   - Context: `dot_config/opencode/CONTEXT.md`
+- **Theming**
+  - Scope: Theme folders under `dot_themes/`, the `set-theme` family of scripts
+    in `dot_local/bin/`, and the per-app wiring to `~/.config/theme`.
+  - Context: `dot_themes/CONTEXT.md`
 
 For changes spanning contexts, read every affected context. Cross-context architectural
 decisions live in `docs/adr/`.

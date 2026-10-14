@@ -28,6 +28,10 @@ creates these files lazily when terminology or decisions are resolved.
   - Source: `dot_config/opencode/`
   - Glossary: `dot_config/opencode/CONTEXT.md`
   - ADRs: `dot_config/opencode/docs/adr/`
+- **Theming**
+  - Source: `dot_themes/`, theme scripts in `dot_local/bin/`
+  - Glossary: `dot_themes/CONTEXT.md`
+  - ADRs: `dot_themes/docs/adr/`
 
 Read every affected context for cross-context changes.
 

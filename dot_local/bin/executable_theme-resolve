@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+# Maps theme names to theme variant folders under ~/.themes, and answers the
+# questions the theme scripts ask about families and modes, so that logic lives
+# here only. A theme variant is a folder; its family is the name in its `family`
+# file (a folder without one is a family of its own, named after the folder);
+# it is light when it has a light.mode file. The mode is saved per machine in
+# ${XDG_STATE_HOME:-~/.local/state}/theme/mode (light or dark, default dark).
+#   theme-resolve <name> [light|dark]  prints the variant folder for a family or
+#                                      variant name. A family name wins over a
+#                                      folder name, and picks the variant for
+#                                      the mode (default: the saved mode), or
+#                                      its only variant when it has none for
+#                                      that mode. A folder name resolves to
+#                                      itself. Unknown names exit 1.
+#   theme-resolve --is-family <name>   exit 0 if name is a family name
+#   theme-resolve --family-of <variant>  the variant's family
+#   theme-resolve --mode-of <variant>    light or dark, from light.mode
+#   theme-resolve --families           family names, sorted
+#   theme-resolve --list               "family<TAB>mode<TAB>variant" lines,
+#                                      sorted by family, dark first
+#   theme-resolve --mode               the saved mode
+#   theme-resolve --save-mode <mode>   saves the mode
+
+themes_dir="$HOME/.themes"
+mode_file="${XDG_STATE_HOME:-$HOME/.local/state}/theme/mode"
+tab=$'\t'
+
+variants=() families=() modes=()
+
+# Fills the parallel arrays variants, families and modes from ~/.themes.
+scan() {
+  local dir name family
+  for dir in "$themes_dir"/*/; do
+    [[ -d $dir ]] || continue
+    name=$(basename "$dir")
+    family=
+    [[ -f $dir/family ]] && read -r family <"$dir/family"
+    variants+=("$name")
+    families+=("${family:-$name}")
+    if [[ -e $dir/light.mode ]]; then modes+=(light); else modes+=(dark); fi
+  done
+}
+
+valid_mode() { [[ $1 == light || $1 == dark ]]; }
+
+saved_mode() {
+  local mode=
+  [[ -f $mode_file ]] && read -r mode <"$mode_file"
+  if valid_mode "$mode"; then echo "$mode"; else echo dark; fi
+}
+
+# Sets $index to the position of a variant folder in the scanned arrays.
+find_variant() {
+  for index in "${!variants[@]}"; do
+    [[ ${variants[index]} == "$1" ]] && return
+  done
+  echo "Unknown theme variant '$1' in $themes_dir" >&2
+  return 1
+}
+
+resolve() {
+  local name=$1 mode=$2 i first=
+  for i in "${!variants[@]}"; do
+    [[ ${families[i]} == "$name" ]] || continue
+    if [[ ${modes[i]} == "$mode" ]]; then
+      echo "${variants[i]}"
+      return
+    fi
+    first=${first:-${variants[i]}}
+  done
+  if [[ -n $first ]]; then
+    echo "$first"
+    return
+  fi
+  for i in "${!variants[@]}"; do
+    if [[ ${variants[i]} == "$name" ]]; then
+      echo "$name"
+      return
+    fi
+  done
+  echo "Unknown theme '$name': not a family or variant in $themes_dir" >&2
+  return 1
+}
+
+case ${1:-} in
+--is-family)
+  scan
+  for family in "${families[@]}"; do
+    [[ $family == "${2:-}" ]] && exit 0
+  done
+  exit 1
+  ;;
+--family-of)
+  scan
+  find_variant "${2:-}" || exit 1
+  echo "${families[index]}"
+  ;;
+--mode-of)
+  scan
+  find_variant "${2:-}" || exit 1
+  echo "${modes[index]}"
+  ;;
+--families)
+  scan
+  [[ ${#families[@]} -gt 0 ]] && printf '%s\n' "${families[@]}" | LC_ALL=C sort -u
+  ;;
+--list)
+  scan
+  for i in "${!variants[@]}"; do
+    printf '%s\t%s\t%s\n' "${families[i]}" "${modes[i]}" "${variants[i]}"
+  done | LC_ALL=C sort -t "$tab" -k1,1 -k2,2 -k3,3
+  ;;
+--mode) saved_mode ;;
+--save-mode)
+  if ! valid_mode "${2:-}"; then
+    echo "Mode must be light or dark" >&2
+    exit 1
+  fi
+  mkdir -p "$(dirname "$mode_file")" && echo "$2" >"$mode_file"
+  ;;
+'' | -*)
+  echo "Usage: $(basename "$0") <name> [light|dark] | --is-family <name> | --family-of <variant>" >&2
+  echo "       $(basename "$0") --mode-of <variant> | --families | --list | --mode | --save-mode <mode>" >&2
+  exit 1
+  ;;
+*)
+  mode=${2:-$(saved_mode)}
+  if ! valid_mode "$mode"; then
+    echo "Mode must be light or dark, not '$mode'" >&2
+    exit 1
+  fi
+  scan
+  resolve "$1" "$mode"
+  ;;
+esac

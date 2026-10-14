@@ -1,2 +1,19 @@
 #!/usr/bin/env bash
-basename "$(readlink "$HOME/.config/theme")"
+# Prints the current theme variant's folder name. On a terminal it prints
+# `family · variant · mode` instead (the variant's own mode, plus the saved mode
+# when that differs, as for a dark-only family in light mode), followed by its
+# full palette (see theme-palette). Piped output stays the bare variant name.
+theme=$(basename "$(readlink "$HOME/.config/theme")")
+if [[ ! -t 1 ]]; then
+  echo "$theme"
+  exit 0
+fi
+
+family=$(theme-resolve --family-of "$theme" 2>/dev/null) || family=$theme
+mode=$(theme-resolve --mode-of "$theme" 2>/dev/null)
+saved=$(theme-resolve --mode)
+line="$family · $theme · ${mode:-unknown}"
+[[ -n $mode && $mode != "$saved" ]] && line+=" (saved: $saved)"
+echo "$line"
+theme-palette --full "$theme"
+exit 0

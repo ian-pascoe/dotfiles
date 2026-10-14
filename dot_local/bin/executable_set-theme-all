@@ -3,12 +3,15 @@
 # owned by my Tailscale user or tagged (my servers), running Linux or macOS.
 # Other users' shared devices are left alone. Machines that are offline, refuse
 # SSH or fail are reported and skipped; only a failure here fails the run.
+# The mode (light or dark) goes along, defaulting to this machine's saved mode
+# for a family and to the variant's own mode for a variant name; each machine
+# applies set-theme's rules, so a family without that mode falls back there.
 # With -n/--dry-run, it checks each machine without changing anything.
 
 set -uo pipefail
 
 usage() {
-  echo "Usage: $(basename "$0") [-n|--dry-run] <theme-name>"
+  echo "Usage: $(basename "$0") [-n|--dry-run] <family|variant> [light|dark]"
 }
 
 dry_run=false
@@ -18,28 +21,34 @@ case "${1:-}" in
   shift
   ;;
 esac
-if [[ $# -ne 1 ]]; then
+if [[ $# -lt 1 || $# -gt 2 ]]; then
   usage >&2
   exit 1
 fi
 theme=$1
+mode=${2:-}
 
-if [[ ! -d "$HOME/.themes/$theme" ]]; then
-  echo "Theme '$theme' does not exist in ~/.themes" >&2
-  exit 1
+# theme-resolve reports unknown names and modes.
+resolved=$(theme-resolve "$theme" "${mode:-$(theme-resolve --mode)}") || exit 1
+if [[ -z $mode ]]; then
+  if theme-resolve --is-family "$theme"; then
+    mode=$(theme-resolve --mode)
+  else
+    mode=$(theme-resolve --mode-of "$resolved")
+  fi
 fi
 
-# Runs on each machine with the theme as $1. A login shell puts set-theme and
-# its tools (bat, mise shims) on PATH.
+# Runs on each machine with the theme as $1 and the mode as $2. A login shell
+# puts set-theme and its tools (bat, mise shims) on PATH.
 # shellcheck disable=SC2016 # expanded by the shell that runs it
 if $dry_run; then
   remote_script='
     command -v set-theme >/dev/null || { echo "set-theme is not installed"; exit 1; }
-    [ -d "$HOME/.themes/$1" ] || { echo "theme $1 is not deployed"; exit 1; }
-    echo "ready; current theme: $(basename "$(readlink "$HOME/.config/theme")")"
+    variant=$(theme-resolve "$1" "$2" 2>&1) || { echo "theme $1 is not deployed"; exit 1; }
+    echo "ready; would use $variant; current theme: $(basename "$(readlink "$HOME/.config/theme")")"
   '
 else
-  remote_script='set-theme "$1"'
+  remote_script='set-theme "$1" "$2"'
 fi
 
 ssh_opts=(
@@ -70,7 +79,7 @@ list() {
 }
 
 echo "== this machine ($(hostname -s))"
-if bash -s -- "$theme" <<<"$remote_script" 2>&1 | indent; then
+if bash -s -- "$theme" "$mode" <<<"$remote_script" 2>&1 | indent; then
   done_hosts+=("$(hostname -s)")
   local_ok=true
 else
@@ -106,7 +115,7 @@ while IFS=$'\t' read -r host state os <&3; do
   fi
 
   echo "== $name"
-  timeout 120 ssh "${ssh_opts[@]}" "$host" bash -l -s -- "$theme" <<<"$remote_script" 2>&1 | indent
+  timeout 120 ssh "${ssh_opts[@]}" "$host" bash -l -s -- "$theme" "$mode" <<<"$remote_script" 2>&1 | indent
   case $? in
   0) done_hosts+=("$name") ;;
   255) skipped_hosts+=("$name (no SSH access)") ;;
@@ -117,9 +126,9 @@ done 3<<<"$peers"
 
 echo
 if $dry_run; then
-  echo "Ready to set $theme on: $(list "${done_hosts[@]}")"
+  echo "Ready to set $theme ($mode) on: $(list "${done_hosts[@]}")"
 else
-  echo "Set $theme on: $(list "${done_hosts[@]}")"
+  echo "Set $theme ($mode) on: $(list "${done_hosts[@]}")"
 fi
 if [[ ${#skipped_hosts[@]} -gt 0 ]]; then
   echo "Skipped: $(list "${skipped_hosts[@]}")"
