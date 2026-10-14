@@ -1,3 +1,38 @@
+-- Same Cloudflare Access-protected LLM proxy that pi uses (~/.pi/agent/models.json).
+local proxy_url = 'https://ai.ianpascoe.dev'
+
+-- `cloudflared access token` takes ~400ms and minuet's transforms run
+-- synchronously, so cache the JWT until shortly before it expires.
+local cf_token = { value = nil, exp = 0 }
+
+local function jwt_exp(token)
+  local payload = token:match('^[^.]+%.([^.]+)%.')
+  if not payload then
+    return 0
+  end
+  payload = payload:gsub('-', '+'):gsub('_', '/')
+  payload = payload .. string.rep('=', (4 - #payload % 4) % 4)
+  local ok, claims = pcall(function()
+    return vim.json.decode(vim.base64.decode(payload))
+  end)
+  return ok and tonumber(claims.exp) or 0
+end
+
+local function cf_access_token()
+  if cf_token.value and os.time() < cf_token.exp - 60 then
+    return cf_token.value
+  end
+  local result = vim.system({ 'cloudflared', 'access', 'token', '-app=' .. proxy_url }, { text = true }):wait()
+  local token = vim.trim(result.stdout or '')
+  if result.code ~= 0 or token == '' then
+    vim.notify_once('minuet: `cloudflared access token` failed; run `cloudflared access login ' .. proxy_url .. '`', vim.log.levels.WARN)
+    return ''
+  end
+  local exp = jwt_exp(token)
+  cf_token = { value = token, exp = exp > 0 and exp or os.time() + 300 }
+  return token
+end
+
 return {
   {
     'folke/sidekick.nvim',
@@ -44,33 +79,20 @@ return {
       debounce = 600, -- Increase to reduce costs and avoid rate limits
       provider_options = {
         openai_compatible = {
+          -- The proxy injects the real key; minuet only needs a non-empty value.
           api_key = function()
-            local key = vim.env.OPENCODE_API_KEY
-            if key and key ~= '' then
-              return key
-            end
-            for _, path in ipairs({
-              vim.fn.expand('~/.pi/agent/auth.json'),
-              vim.fn.expand('~/.local/share/opencode/auth.json'),
-            }) do
-              local ok, auth = pcall(function()
-                return vim.json.decode(table.concat(vim.fn.readfile(path), '\n'))
-              end)
-              key = ok and auth['opencode-go'] and auth['opencode-go'].key
-              if key and key ~= '' then
-                return key
-              end
-            end
-            return ''
+            return 'sk-dummy'
           end,
-          end_point = 'https://opencode.ai/zen/go/v1/chat/completions',
-          model = 'hy3',
-          name = 'opencode-go',
+          end_point = proxy_url .. '/chat/completions',
+          -- Benchmarked against the proxy's models (2026-10): best speed/accuracy
+          -- trade-off. Runner-up: 'hy4-preview' (more accurate, ~2x slower).
+          model = 'gemini-3-flash',
+          name = 'proxy',
           stream = false,
           transform = {
             function(args)
               args.headers['User-Agent'] = 'minuet-ai.nvim'
-              args.headers['x-opencode-session'] = 'minuet-' .. tostring(vim.uv.os_getpid())
+              args.headers['cf-access-token'] = cf_access_token()
               return args
             end,
           },

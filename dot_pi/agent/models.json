@@ -2,10 +2,11 @@
   "$schema": "https://raw.githubusercontent.com/earendil-works/pi/refs/heads/main/packages/coding-agent/schemas/models.schema.json",
   "providers": {
     "anthropic": {
-      "baseUrl": "https://proxy.ianpascoe.dev",
+      "name": "Anthropic (Proxy)",
+      "baseUrl": "https://api.ai.ianpascoe.dev",
       "apiKey": "sk-dummy",
       "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://proxy.ianpascoe.dev"
+        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
       },
       "modelOverrides": {
         "claude-fable-5-1": {
@@ -23,11 +24,67 @@
       }
     },
     "opencode-go": {
-      "baseUrl": "https://proxy.ianpascoe.dev",
+      "name": "OpenCode Go (Proxy)",
+      "baseUrl": "https://api.ai.ianpascoe.dev",
       "apiKey": "sk-dummy",
       "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://proxy.ianpascoe.dev"
+        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
       }
+    },
+    "xai": {
+      "name": "SpaceX AI (Proxy)",
+      "baseUrl": "https://api.ai.ianpascoe.dev/v1",
+      "apiKey": "sk-dummy",
+      "headers": {
+        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
+      }
+    },
+    "antigravity": {
+      "name": "Antigravity (proxy)",
+      "api": "google-generative-ai",
+      "baseUrl": "https://api.ai.ianpascoe.dev/v1beta",
+      "apiKey": "sk-dummy",
+      "headers": {
+        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
+      },
+      "models": [
+        {
+          "id": "gemini-3-flash",
+          "name": "Gemini 3 Flash",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 65536,
+          "thinkingLevelMap": { "off": null, "xhigh": null, "max": null }
+        },
+        {
+          "id": "gemini-3.1-flash-lite",
+          "name": "Gemini 3.1 Flash Lite",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 65536,
+          "thinkingLevelMap": { "off": null, "xhigh": null, "max": null }
+        },
+        {
+          "id": "gemini-3.5-flash-lite",
+          "name": "Gemini 3.5 Flash Lite",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 65536,
+          "thinkingLevelMap": { "off": null, "xhigh": null, "max": null }
+        },
+        {
+          "id": "gemini-3.8-flash-high",
+          "name": "Gemini 3.8 Flash",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 65536,
+          "thinkingLevelMap": { "off": null, "minimal": null, "xhigh": null, "max": null }
+        }
+      ]
     }
   }
 }
