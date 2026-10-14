@@ -6,15 +6,14 @@
       "args": [
         "dlx",
         "@playwright/mcp@latest",
-        "--extension",
-        "--output-dir",
-        "/home/ianpascoe/.cache/playwright-mcp"
+        "--output-dir=${HOME}/.cache/playwright-mcp",
+        "--extension"
       ],
       "env": {
-        "PLAYWRIGHT_MCP_EXECUTABLE_PATH": "${DEFAULT_BROWSER_EXECUTABLE_PATH}",
-        "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "${PLAYWRIGHT_MCP_EXTENSION_TOKEN}",
         "DISPLAY": ":1",
-        "XDG_SESSION_TYPE": "x11"
+        "XDG_SESSION_TYPE": "x11",
+        "PLAYWRIGHT_MCP_EXECUTABLE_PATH": "${DEFAULT_BROWSER_EXECUTABLE_PATH}",
+        "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "${PLAYWRIGHT_MCP_EXTENSION_TOKEN}"
       },
       "exposure": "deferred"
     },
