@@ -1,0 +1,39 @@
+# Rose Pine Dawn palette, hand-mapped from the dark variant's roles.
+user: "#b4637a" # love
+group: "#ea9d34" # gold
+permission:
+  read: "#56949f" # foam
+  write: "#907aa9" # iris
+  exec: "#d7827e" # rose
+  exec-sticky: "#ea9d34" # gold
+  no-access: "#9893a5" # muted
+  octal: "#797593" # subtle
+  acl: "#286983" # pine
+  context: "#797593" # subtle
+date:
+  hour-old: "#575279" # text
+  day-old: "#56949f" # foam
+  older: "#797593" # subtle
+size:
+  none: "#9893a5" # muted
+  small: "#286983" # pine
+  medium: "#56949f" # foam
+  large: "#907aa9" # iris
+inode:
+  valid: "#56949f" # foam
+  invalid: "#9893a5" # muted
+links:
+  valid: "#575279" # text
+  invalid: "#9893a5" # muted
+tree-edge: "#cecacd" # highlight high
+git-status:
+  default: "#9893a5" # muted
+  unmodified: "#797593" # subtle
+  ignored: "#9893a5" # muted
+  new-in-index: "#56949f" # foam
+  new-in-workdir: "#56949f" # foam
+  typechange: "#ea9d34" # gold
+  deleted: "#b4637a" # love
+  renamed: "#286983" # pine
+  modified: "#d7827e" # rose
+  conflicted: "#b4637a" # love

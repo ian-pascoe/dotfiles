@@ -149,6 +149,29 @@
       "yellow": "#F6C177"
     },
     {
+      "background": "#FAF4ED",
+      "black": "#F2E9E1",
+      "blue": "#286983",
+      "brightBlack": "#9893A5",
+      "brightBlue": "#286983",
+      "brightCyan": "#D7827E",
+      "brightGreen": "#56949F",
+      "brightPurple": "#907AA9",
+      "brightRed": "#B4637A",
+      "brightWhite": "#575279",
+      "brightYellow": "#EA9D34",
+      "cursorColor": "#575279",
+      "cyan": "#D7827E",
+      "foreground": "#575279",
+      "green": "#56949F",
+      "name": "rose-pine-dawn",
+      "purple": "#907AA9",
+      "red": "#B4637A",
+      "selectionBackground": "#DFDAD9",
+      "white": "#575279",
+      "yellow": "#EA9D34"
+    },
+    {
       "background": "#1A1B26",
       "black": "#15161E",
       "blue": "#7AA2F7",
@@ -1398,6 +1421,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "rose-pine-dawn",
+      "tab": {
+        "background": "#FAF4EDFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#F2E9E1FF",
+        "unfocusedBackground": "#DFDAD9FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

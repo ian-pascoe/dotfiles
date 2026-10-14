@@ -1,0 +1,45 @@
+:root {
+  /* Rose Pine Dawn base colors */
+  --base: 250, 244, 237;
+  --surface: 255, 250, 243;
+  --overlay: 242, 233, 225;
+  --muted: 152, 147, 165;
+  --subtle: 121, 117, 147;
+  --text: 87, 82, 121;
+  --love: 180, 99, 122;
+  --gold: 234, 157, 52;
+  --rose: 215, 130, 126;
+  --pine: 40, 105, 131;
+  --foam: 86, 148, 159;
+  --iris: 144, 122, 169;
+  --highlight-low: 244, 237, 232;
+  --highlight-med: 223, 218, 217;
+  --highlight-high: 206, 202, 205;
+
+  /* Semantic color mappings */
+  --background: var(--base);
+  --foreground: var(--text);
+  --card-background: var(--surface);
+  --card-foreground: var(--text);
+  --popup-background: var(--overlay);
+  --popup-foreground: var(--text);
+  --primary: var(--rose);
+  --primary-foreground: var(--base);
+  --secondary: var(--foam);
+  --secondary-foreground: var(--base);
+  --tertiary: var(--pine);
+  --tertiary-foreground: var(--base);
+  --accent: var(--iris);
+  --accent-foreground: var(--base);
+  --muted-background: var(--muted);
+  --muted-foreground: var(--base);
+  --info: var(--foam);
+  --info-foreground: var(--base);
+  --success: var(--pine);
+  --success-foreground: var(--base);
+  --warning: var(--gold);
+  --warning-foreground: var(--base);
+  --destructive: var(--love);
+  --destructive-foreground: var(--base);
+  --border: var(--highlight-med);
+}
