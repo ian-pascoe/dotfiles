@@ -18,8 +18,6 @@ window_rules:
         window_class:
           regex: Chrome_WidgetWin_1|MozillaDialogClass
       - window_process:
-          equals: Flow.Launcher
-      - window_process:
           equals: keyviz
 window_behavior:
   state_defaults:

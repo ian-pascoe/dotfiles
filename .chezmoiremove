@@ -1,0 +1,9 @@
+# Targets that were removed from the source state and should be deleted from
+# every machine on `chezmoi apply`. Entries can be dropped once every machine
+# has applied them.
+
+# Flow Launcher (removed in 3e57779)
+.config/flow-launcher
+.config/autohotkey/flow_launcher.ahk
+.themes/*/flow-launcher.xaml
+Documents/PowerShell/Scripts/Setup-FlowLauncher.ps1
