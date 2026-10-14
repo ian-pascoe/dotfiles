@@ -180,19 +180,19 @@ if has_cmd pi; then
   )
 fi
 #########################################################################
-# OMP
-if has_cmd omp; then
-  echo "Updating OMP packages..."
-  omp update
-  omp update -l
-  echo "OMP packages updated successfully!"
-fi
-#########################################################################
 # Hermes
 if has_cmd hermes; then
   echo "Updating Hermes agent..."
   hermes update --yes
   echo "Hermes agent updated successfully!"
+fi
+#########################################################################
+# CUA Driver
+if has_cmd cua-driver; then
+  echo "Updating CUA Driver..."
+  cua-driver update --apply
+  cua-driver skills update
+  echo "CUA Driver updated successfully!"
 fi
 #########################################################################
 # Skills
