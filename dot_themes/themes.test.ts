@@ -72,6 +72,20 @@ const windowsTerminal = JSON.parse(read(source, "dot_config/windows-terminal/set
   themes: { name: string }[];
 };
 
+// Oh My Pi loads tern.json as its `current` theme (dot_omp/private_agent/themes)
+// and rejects a theme missing any of these; thinkingMax and
+// assistantMessageText are optional.
+const ompColorTokens = `accent border borderAccent borderMuted success error warning muted dim text
+  thinkingText selectedBg userMessageBg customMessageBg toolPendingBg toolSuccessBg toolErrorBg
+  statusLineBg userMessageText customMessageText customMessageLabel toolTitle toolOutput mdHeading
+  mdLink mdLinkUrl mdCode mdCodeBlock mdCodeBlockBorder mdQuote mdQuoteBorder mdHr mdListBullet
+  toolDiffAdded toolDiffRemoved toolDiffContext syntaxComment syntaxKeyword syntaxFunction
+  syntaxVariable syntaxString syntaxNumber syntaxType syntaxOperator syntaxPunctuation thinkingOff
+  thinkingMinimal thinkingLow thinkingMedium thinkingHigh thinkingXhigh bashMode pythonMode
+  statusLineSep statusLineModel statusLinePath statusLineGitClean statusLineGitDirty
+  statusLineContext statusLineSpend statusLineStaged statusLineDirty statusLineUntracked
+  statusLineOutput statusLineCost statusLineSubagents`.split(/\s+/);
+
 test("there are theme variants", () => {
   expect(variants.length).toBeGreaterThan(0);
 });
@@ -117,6 +131,25 @@ describe.each(variants)("%s", (variant) => {
     const pi = JSON.parse(read(dir, "pi.json")) as { name?: string; appearance?: string };
     expect(pi.name).toBe(variant);
     expect(pi.appearance === "light").toBe(isLight(variant));
+  });
+
+  test("tern.json is a complete Oh My Pi theme", () => {
+    const tern = JSON.parse(read(dir, "tern.json")) as {
+      name?: string;
+      vars?: Record<string, string | number>;
+      colors: Record<string, string | number>;
+    };
+    expect(typeof tern.name).toBe("string");
+    expect(ompColorTokens.filter((token) => !(token in tern.colors))).toEqual([]);
+    // A string color is a hex value, "" (terminal default) or a var name.
+    const unresolved = Object.entries(tern.colors).filter(
+      ([, value]) =>
+        typeof value === "string" &&
+        value !== "" &&
+        !/^#[0-9a-f]{6}$/i.test(value) &&
+        !(value in (tern.vars ?? {})),
+    );
+    expect(unresolved).toEqual([]);
   });
 });
 

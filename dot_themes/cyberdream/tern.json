@@ -77,7 +77,22 @@
     "thinkingHigh": "bgHighlight",
     "thinkingXhigh": "bgHighlight",
     "thinkingMax": "bgHighlight",
-    "bashMode": "green"
+    "bashMode": "green",
+    "statusLineBg": "bgHighlight",
+    "statusLineSep": "dim",
+    "statusLineModel": "purple",
+    "statusLinePath": "cyan",
+    "statusLineGitClean": "green",
+    "statusLineGitDirty": "pink",
+    "statusLineContext": "grey",
+    "statusLineSpend": "cyan",
+    "statusLineStaged": "green",
+    "statusLineDirty": "pink",
+    "statusLineUntracked": "cyan",
+    "statusLineOutput": "blue",
+    "statusLineCost": "blue",
+    "statusLineSubagents": "cyan",
+    "pythonMode": "pink"
   },
   "export": {
     "pageBg": "#212325",

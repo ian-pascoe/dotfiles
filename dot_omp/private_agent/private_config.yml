@@ -2,9 +2,11 @@ symbolPreset: nerd
 composer:
   shape: band
   tokenRate: true
+# `current` is themes/current.json, linked to the active theme's tern.json;
+# both slots use it so set-theme alone decides the colors.
 theme:
-  dark: dark-catppuccin
-  light: light-catppuccin
+  dark: current
+  light: current
 setupVersion: 2
 modelRoles:
   default: anthropic/claude-opus-5-5:high

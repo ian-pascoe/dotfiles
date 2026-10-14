@@ -68,7 +68,22 @@
     "thinkingMedium": "#7dcfff",
     "thinkingHigh": "#bb9af7",
     "thinkingXhigh": "#f7768e",
-    "bashMode": "#9ece6a"
+    "bashMode": "#9ece6a",
+    "statusLineBg": "bgSelect",
+    "statusLineSep": "borderMuted",
+    "statusLineModel": "#bb9af7",
+    "statusLinePath": "accent",
+    "statusLineGitClean": "green",
+    "statusLineGitDirty": "yellow",
+    "statusLineContext": "muted",
+    "statusLineSpend": "accent2",
+    "statusLineStaged": "green",
+    "statusLineDirty": "yellow",
+    "statusLineUntracked": "accent",
+    "statusLineOutput": "#bb9af7",
+    "statusLineCost": "#bb9af7",
+    "statusLineSubagents": "accent",
+    "pythonMode": "yellow"
   },
   "export": {
     "pageBg": "#0c0e14",
