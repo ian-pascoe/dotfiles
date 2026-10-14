@@ -440,6 +440,7 @@ for name, variant in pairs({
   ristretto = { 'monokai-pro', 'monokai-pro-ristretto' },
   ['ayu-light'] = { 'ayu-mirage', 'ayu-light' },
   ['modus-vivendi'] = { 'modus-operandi', 'modus_vivendi' },
+  ['catppuccin-latte'] = { 'catppuccin', 'catppuccin-latte' },
 }) do
   local base, colorscheme = unpack(variant)
   theme_specs[name] = vim.tbl_extend('force', theme_specs[base], { colorscheme = colorscheme })
