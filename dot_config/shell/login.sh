@@ -54,6 +54,11 @@ if [ -f "$HOME/.env" ]; then
   source "$HOME/.env"
 fi
 
+## Egress Proxy (opt in via EGRESS_PROXY_HTTP in ~/.env)
+if [ -f "$HOME/.config/shell/egress-proxy.sh" ]; then
+  source "$HOME/.config/shell/egress-proxy.sh"
+fi
+
 ## SSH terminal fallback
 if [ -n "${SSH_CONNECTION:-}" ] && [ "${TERM:-}" = "xterm-ghostty" ]; then
   if ! infocmp xterm-ghostty >/dev/null 2>&1; then
