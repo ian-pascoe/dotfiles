@@ -1,0 +1,25 @@
+# Hand-derived from the folke/tokyonight.nvim "day" palette.
+user: "#b15c00"
+group: "#b15c00"
+permission:
+  read: "#587539"
+  write: "#8c6c3e"
+  exec: "#c64343"
+  exec-sticky: "#9854f1"
+  no-access: "#848cb5"
+date:
+  hour-old: "#587539"
+  day-old: "#2e7de9"
+  older: "#848cb5"
+size:
+  none: "#848cb5"
+  small: "#587539"
+  medium: "#8c6c3e"
+  large: "#c64343"
+inode:
+  valid: "#9854f1"
+  invalid: "#848cb5"
+links:
+  valid: "#9854f1"
+  invalid: "#848cb5"
+tree-edge: "#a8aecb"

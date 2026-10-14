@@ -195,6 +195,29 @@
       "yellow": "#E0AF68"
     },
     {
+      "background": "#E1E2E7",
+      "black": "#E9E9ED",
+      "blue": "#2E7DE9",
+      "brightBlack": "#A1A6C5",
+      "brightBlue": "#2E7DE9",
+      "brightCyan": "#007197",
+      "brightGreen": "#587539",
+      "brightPurple": "#9854F1",
+      "brightRed": "#F52A65",
+      "brightWhite": "#3760BF",
+      "brightYellow": "#8C6C3E",
+      "cursorColor": "#3760BF",
+      "cyan": "#007197",
+      "foreground": "#3760BF",
+      "green": "#587539",
+      "name": "tokyo-night-day",
+      "purple": "#9854F1",
+      "red": "#F52A65",
+      "selectionBackground": "#99A7DF",
+      "white": "#6172B0",
+      "yellow": "#8C6C3E"
+    },
+    {
       "background": "#282828",
       "black": "#3C3836",
       "blue": "#83A598",
@@ -1461,6 +1484,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "tokyo-night-day",
+      "tab": {
+        "background": "#E1E2E7FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#D0D5E3FF",
+        "unfocusedBackground": "#D0D5E3FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

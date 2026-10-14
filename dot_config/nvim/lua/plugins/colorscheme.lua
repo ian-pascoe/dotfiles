@@ -442,6 +442,7 @@ for name, variant in pairs({
   ['modus-vivendi'] = { 'modus-operandi', 'modus_vivendi' },
   ['catppuccin-latte'] = { 'catppuccin', 'catppuccin-latte' },
   ['rose-pine-dawn'] = { 'rose-pine', 'rose-pine-dawn' },
+  ['tokyo-night-day'] = { 'tokyo-night', 'tokyonight-day' },
 }) do
   local base, colorscheme = unpack(variant)
   theme_specs[name] = vim.tbl_extend('force', theme_specs[base], { colorscheme = colorscheme })

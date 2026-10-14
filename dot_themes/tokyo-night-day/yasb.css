@@ -1,0 +1,43 @@
+:root {
+  /* Tokyo Night Day base colors (hand-derived from folke/tokyonight.nvim "day" palette) */
+  --background: 225, 226, 231;
+  --surface: 208, 213, 227;
+  --surface-bright: 196, 200, 218;
+  --foreground: 55, 96, 191;
+  --muted: 97, 114, 176;
+  --border: 64, 148, 163;
+  --blue: 46, 125, 233;
+  --cyan: 0, 113, 151;
+  --sky-blue: 24, 128, 146;
+  --green: 88, 117, 57;
+  --orange: 177, 92, 0;
+  --yellow: 140, 108, 62;
+  --pink: 210, 0, 101;
+  --purple: 152, 84, 241;
+  --red: 198, 67, 67;
+  --teal: 17, 140, 116;
+
+  /* Semantic color mappings */
+  --card-background: var(--surface);
+  --card-foreground: var(--foreground);
+  --popup-background: var(--surface-bright);
+  --popup-foreground: var(--foreground);
+  --primary: var(--blue);
+  --primary-foreground: var(--background);
+  --secondary: var(--cyan);
+  --secondary-foreground: var(--background);
+  --tertiary: var(--purple);
+  --tertiary-foreground: var(--background);
+  --accent: var(--pink);
+  --accent-foreground: var(--background);
+  --muted-background: var(--muted);
+  --muted-foreground: var(--background);
+  --info: var(--sky-blue);
+  --info-foreground: var(--background);
+  --success: var(--green);
+  --success-foreground: var(--background);
+  --warning: var(--yellow);
+  --warning-foreground: var(--background);
+  --destructive: var(--red);
+  --destructive-foreground: var(--background);
+}
