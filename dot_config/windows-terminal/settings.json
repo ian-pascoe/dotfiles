@@ -379,6 +379,29 @@
       "yellow": "#B58900"
     },
     {
+      "background": "#FDF6E3",
+      "black": "#073642",
+      "blue": "#268BD2",
+      "brightBlack": "#002B36",
+      "brightBlue": "#839496",
+      "brightCyan": "#93A1A1",
+      "brightGreen": "#586E75",
+      "brightPurple": "#6C71C4",
+      "brightRed": "#CB4B16",
+      "brightWhite": "#FDF6E3",
+      "brightYellow": "#657B83",
+      "cursorColor": "#657B83",
+      "cyan": "#2AA198",
+      "foreground": "#657B83",
+      "green": "#859900",
+      "name": "solarized-light",
+      "purple": "#D33682",
+      "red": "#DC322F",
+      "selectionBackground": "#EEE8D5",
+      "white": "#BBB5A2",
+      "yellow": "#B58900"
+    },
+    {
       "background": "#282C34",
       "black": "#21252B",
       "blue": "#61AFEF",
@@ -1693,6 +1716,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "solarized-light",
+      "tab": {
+        "background": "#FDF6E3FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#EEE8D5FF",
+        "unfocusedBackground": "#E6DFCAFF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

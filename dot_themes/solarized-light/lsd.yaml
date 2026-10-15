@@ -1,0 +1,39 @@
+# Hand-derived from the altercation/solarized "light" palette.
+user: "#268bd2"
+group: "#2aa198"
+permission:
+  read: "#859900"
+  write: "#b58900"
+  exec: "#dc322f"
+  exec-sticky: "#6c71c4"
+  no-access: "#839496"
+  octal: "#2aa198"
+  acl: "#2aa198"
+  context: "#268bd2"
+date:
+  hour-old: "#2aa198"
+  day-old: "#268bd2"
+  older: "#839496"
+size:
+  none: "#839496"
+  small: "#859900"
+  medium: "#b58900"
+  large: "#cb4b16"
+inode:
+  valid: "#6c71c4"
+  invalid: "#839496"
+links:
+  valid: "#2aa198"
+  invalid: "#839496"
+tree-edge: "#93a1a1"
+git-status:
+  default: "#657b83"
+  unmodified: "#839496"
+  ignored: "#839496"
+  new-in-index: "#859900"
+  new-in-workdir: "#859900"
+  typechange: "#b58900"
+  deleted: "#dc322f"
+  renamed: "#268bd2"
+  modified: "#cb4b16"
+  conflicted: "#dc322f"
