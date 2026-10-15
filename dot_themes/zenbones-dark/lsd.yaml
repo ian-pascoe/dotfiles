@@ -1,0 +1,39 @@
+# Hand-derived from the zenbones-theme/zenbones.nvim "zenbones" dark palette (values read from the compiled colorscheme with background=dark).
+user: "#6099C0"
+group: "#66A5AD"
+permission:
+  read: "#819B69"
+  write: "#B77E64"
+  exec: "#DE6E7C"
+  exec-sticky: "#B279A7"
+  no-access: "#837771"
+  octal: "#66A5AD"
+  acl: "#66A5AD"
+  context: "#6099C0"
+date:
+  hour-old: "#819B69"
+  day-old: "#6099C0"
+  older: "#837771"
+size:
+  none: "#837771"
+  small: "#819B69"
+  medium: "#B77E64"
+  large: "#D68C67"
+inode:
+  valid: "#B279A7"
+  invalid: "#837771"
+links:
+  valid: "#66A5AD"
+  invalid: "#837771"
+tree-edge: "#685F5A"
+git-status:
+  default: "#B4BDC3"
+  unmodified: "#837771"
+  ignored: "#837771"
+  new-in-index: "#819B69"
+  new-in-workdir: "#819B69"
+  typechange: "#B77E64"
+  deleted: "#DE6E7C"
+  renamed: "#6099C0"
+  modified: "#B77E64"
+  conflicted: "#DE6E7C"

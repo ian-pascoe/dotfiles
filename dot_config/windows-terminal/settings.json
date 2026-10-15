@@ -1023,6 +1023,29 @@
       "yellow": "#944927"
     },
     {
+      "background": "#1C1917",
+      "black": "#1C1917",
+      "blue": "#6099C0",
+      "brightBlack": "#4D4540",
+      "brightBlue": "#61ABDA",
+      "brightCyan": "#65B8C1",
+      "brightGreen": "#8BAE68",
+      "brightPurple": "#CF86C1",
+      "brightRed": "#E8838F",
+      "brightWhite": "#888F94",
+      "brightYellow": "#D68C67",
+      "cursorColor": "#C4CACF",
+      "cyan": "#66A5AD",
+      "foreground": "#B4BDC3",
+      "green": "#819B69",
+      "name": "zenbones-dark",
+      "purple": "#B279A7",
+      "red": "#DE6E7C",
+      "selectionBackground": "#3D4042",
+      "white": "#B4BDC3",
+      "yellow": "#B77E64"
+    },
+    {
       "background": "#222222",
       "black": "#000000",
       "blue": "#78824B",
@@ -2552,6 +2575,26 @@
       },
       "window": {
         "applicationTheme": "light",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "zenbones-dark",
+      "tab": {
+        "background": "#1C1917FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#25211FFF",
+        "unfocusedBackground": "#302B29FF"
+      },
+      "window": {
+        "applicationTheme": "dark",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

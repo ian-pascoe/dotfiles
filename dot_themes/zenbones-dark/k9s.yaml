@@ -1,0 +1,101 @@
+# Hand-derived from the zenbones-theme/zenbones.nvim "zenbones" dark palette (values read from the compiled colorscheme with background=dark).
+k9s:
+  body:
+    fgColor: "#B4BDC3"
+    bgColor: default
+    logoColor: "#6099C0"
+  prompt:
+    fgColor: "#B4BDC3"
+    bgColor: default
+    suggestColor: "#6099C0"
+  help:
+    fgColor: "#B4BDC3"
+    bgColor: default
+    sectionColor: "#819B69"
+    keyColor: "#6099C0"
+    numKeyColor: "#DE6E7C"
+  frame:
+    title:
+      fgColor: "#66A5AD"
+      bgColor: default
+      highlightColor: "#B279A7"
+      counterColor: "#B77E64"
+      filterColor: "#819B69"
+    border:
+      fgColor: "#6099C0"
+      focusColor: "#65B8C1"
+    menu:
+      fgColor: "#B4BDC3"
+      keyColor: "#6099C0"
+      numKeyColor: "#DE6E7C"
+    crumbs:
+      fgColor: "#1C1917"
+      bgColor: default
+      activeColor: "#B77E64"
+    status:
+      newColor: "#6099C0"
+      modifyColor: "#66A5AD"
+      addColor: "#819B69"
+      pendingColor: "#B77E64"
+      errorColor: "#DE6E7C"
+      highlightColor: "#66A5AD"
+      killColor: "#B279A7"
+      completedColor: "#837771"
+  info:
+    fgColor: "#B77E64"
+    sectionColor: "#B4BDC3"
+  views:
+    table:
+      fgColor: "#B4BDC3"
+      bgColor: default
+      cursorFgColor: "#B4BDC3"
+      cursorBgColor: "#3D4042"
+      markColor: "#819B69"
+      header:
+        fgColor: "#B77E64"
+        bgColor: default
+        sorterColor: "#66A5AD"
+    xray:
+      fgColor: "#B4BDC3"
+      bgColor: default
+      cursorColor: "#3D4042"
+      cursorTextColor: "#B4BDC3"
+      graphicColor: "#B279A7"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#819B69"
+        - "#DE6E7C"
+      defaultChartColors:
+        - "#819B69"
+        - "#DE6E7C"
+      resourceColors:
+        cpu:
+          - "#6099C0"
+          - "#66A5AD"
+        mem:
+          - "#819B69"
+          - "#B77E64"
+    yaml:
+      keyColor: "#6099C0"
+      valueColor: "#B4BDC3"
+      colonColor: "#837771"
+    logs:
+      fgColor: "#B4BDC3"
+      bgColor: default
+      indicator:
+        fgColor: "#66A5AD"
+        bgColor: default
+        toggleOnColor: "#819B69"
+        toggleOffColor: "#837771"
+  dialog:
+    fgColor: "#B77E64"
+    bgColor: default
+    buttonFgColor: "#B4BDC3"
+    buttonBgColor: default
+    buttonFocusFgColor: "#1C1917"
+    buttonFocusBgColor: "#B279A7"
+    labelFgColor: "#B77E64"
+    fieldFgColor: "#B4BDC3"

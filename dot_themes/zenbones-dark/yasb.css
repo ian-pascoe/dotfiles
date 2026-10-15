@@ -1,0 +1,37 @@
+:root {
+  /* Zenbones Dark palette (hand-derived from zenbones-theme/zenbones.nvim); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 28, 25, 23;
+  --foreground: 180, 189, 195;
+  --card-background: 37, 33, 31;
+  --popup-background: 48, 43, 41;
+  --primary: 96, 153, 192;
+  --secondary: 101, 184, 193;
+  --tertiary: 96, 153, 192;
+  --accent: 178, 121, 167;
+  --muted-background: 131, 119, 113;
+  --info: 96, 153, 192;
+  --success: 129, 155, 105;
+  --warning: 183, 126, 100;
+  --destructive: 222, 110, 124;
+  --border: 77, 69, 64;
+  --text: 180, 189, 195;
+  --foam: 102, 165, 173;
+  --gold: 183, 126, 100;
+  --love: 222, 110, 124;
+  --overlay: 131, 119, 113;
+  --highlight: 61, 64, 66;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}
