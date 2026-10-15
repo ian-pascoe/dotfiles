@@ -1,0 +1,39 @@
+# Hand-derived from the ellisonleao/gruvbox.nvim "light" (medium contrast) palette.
+user: "#076678"
+group: "#427b58"
+permission:
+  read: "#79740e"
+  write: "#b57614"
+  exec: "#9d0006"
+  exec-sticky: "#8f3f71"
+  no-access: "#7c6f64"
+  octal: "#427b58"
+  acl: "#427b58"
+  context: "#076678"
+date:
+  hour-old: "#427b58"
+  day-old: "#076678"
+  older: "#7c6f64"
+size:
+  none: "#7c6f64"
+  small: "#79740e"
+  medium: "#b57614"
+  large: "#af3a03"
+inode:
+  valid: "#8f3f71"
+  invalid: "#7c6f64"
+links:
+  valid: "#427b58"
+  invalid: "#7c6f64"
+tree-edge: "#bdae93"
+git-status:
+  default: "#3c3836"
+  unmodified: "#7c6f64"
+  ignored: "#7c6f64"
+  new-in-index: "#79740e"
+  new-in-workdir: "#79740e"
+  typechange: "#b57614"
+  deleted: "#9d0006"
+  renamed: "#076678"
+  modified: "#af3a03"
+  conflicted: "#9d0006"

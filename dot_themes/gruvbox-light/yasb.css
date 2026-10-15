@@ -1,0 +1,37 @@
+:root {
+  /* Gruvbox Light palette (hand-derived from ellisonleao/gruvbox.nvim "light"); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 251, 241, 199;
+  --foreground: 60, 56, 54;
+  --card-background: 235, 219, 178;
+  --popup-background: 213, 196, 161;
+  --primary: 7, 102, 120;
+  --secondary: 66, 123, 88;
+  --tertiary: 66, 123, 88;
+  --accent: 143, 63, 113;
+  --muted-background: 124, 111, 100;
+  --info: 66, 123, 88;
+  --success: 121, 116, 14;
+  --warning: 181, 118, 20;
+  --destructive: 157, 0, 6;
+  --border: 189, 174, 147;
+  --text: 60, 56, 54;
+  --foam: 66, 123, 88;
+  --gold: 181, 118, 20;
+  --love: 157, 0, 6;
+  --overlay: 124, 111, 100;
+  --highlight: 213, 196, 161;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}
