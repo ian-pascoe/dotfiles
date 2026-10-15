@@ -1,0 +1,39 @@
+# Hand-derived from the loctvl842/monokai-pro.nvim "light" palette.
+user: "#cc7a0a"
+group: "#1c8ca8"
+permission:
+  read: "#269d69"
+  write: "#cc7a0a"
+  exec: "#e14775"
+  exec-sticky: "#7058be"
+  no-access: "#918c8e"
+  octal: "#1c8ca8"
+  acl: "#1c8ca8"
+  context: "#1c8ca8"
+date:
+  hour-old: "#269d69"
+  day-old: "#1c8ca8"
+  older: "#918c8e"
+size:
+  none: "#918c8e"
+  small: "#269d69"
+  medium: "#cc7a0a"
+  large: "#e16032"
+inode:
+  valid: "#7058be"
+  invalid: "#918c8e"
+links:
+  valid: "#1c8ca8"
+  invalid: "#918c8e"
+tree-edge: "#bfb9ba"
+git-status:
+  default: "#29242a"
+  unmodified: "#918c8e"
+  ignored: "#918c8e"
+  new-in-index: "#269d69"
+  new-in-workdir: "#269d69"
+  typechange: "#cc7a0a"
+  deleted: "#e14775"
+  renamed: "#1c8ca8"
+  modified: "#cc7a0a"
+  conflicted: "#e14775"

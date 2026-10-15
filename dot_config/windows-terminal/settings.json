@@ -655,6 +655,29 @@
       "yellow": "#FFD866"
     },
     {
+      "background": "#FAF4F2",
+      "black": "#FAF4F2",
+      "blue": "#E16032",
+      "brightBlack": "#A59FA0",
+      "brightBlue": "#E16032",
+      "brightCyan": "#1C8CA8",
+      "brightGreen": "#269D69",
+      "brightPurple": "#7058BE",
+      "brightRed": "#E14775",
+      "brightWhite": "#29242A",
+      "brightYellow": "#CC7A0A",
+      "cursorColor": "#706B6E",
+      "cyan": "#1C8CA8",
+      "foreground": "#29242A",
+      "green": "#269D69",
+      "name": "monokai-pro-light",
+      "purple": "#7058BE",
+      "red": "#E14775",
+      "selectionBackground": "#BFB9BA",
+      "white": "#29242A",
+      "yellow": "#CC7A0A"
+    },
+    {
       "background": "#1B1E28",
       "black": "#171922",
       "blue": "#89DDFF",
@@ -2117,6 +2140,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "monokai-pro-light",
+      "tab": {
+        "background": "#FAF4F2FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#EDE7E5FF",
+        "unfocusedBackground": "#F4EEECFF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

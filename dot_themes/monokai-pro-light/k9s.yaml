@@ -1,0 +1,101 @@
+# Hand-derived from the loctvl842/monokai-pro.nvim "light" palette.
+k9s:
+  body:
+    fgColor: "#29242a"
+    bgColor: default
+    logoColor: "#cc7a0a"
+  prompt:
+    fgColor: "#29242a"
+    bgColor: default
+    suggestColor: "#cc7a0a"
+  help:
+    fgColor: "#29242a"
+    bgColor: default
+    sectionColor: "#269d69"
+    keyColor: "#1c8ca8"
+    numKeyColor: "#e14775"
+  frame:
+    title:
+      fgColor: "#1c8ca8"
+      bgColor: default
+      highlightColor: "#7058be"
+      counterColor: "#cc7a0a"
+      filterColor: "#269d69"
+    border:
+      fgColor: "#cc7a0a"
+      focusColor: "#1c8ca8"
+    menu:
+      fgColor: "#29242a"
+      keyColor: "#1c8ca8"
+      numKeyColor: "#e14775"
+    crumbs:
+      fgColor: "#faf4f2"
+      bgColor: default
+      activeColor: "#cc7a0a"
+    status:
+      newColor: "#1c8ca8"
+      modifyColor: "#1c8ca8"
+      addColor: "#269d69"
+      pendingColor: "#cc7a0a"
+      errorColor: "#e14775"
+      highlightColor: "#1c8ca8"
+      killColor: "#7058be"
+      completedColor: "#918c8e"
+  info:
+    fgColor: "#cc7a0a"
+    sectionColor: "#29242a"
+  views:
+    table:
+      fgColor: "#29242a"
+      bgColor: default
+      cursorFgColor: "#29242a"
+      cursorBgColor: "#bfb9ba"
+      markColor: "#269d69"
+      header:
+        fgColor: "#cc7a0a"
+        bgColor: default
+        sorterColor: "#1c8ca8"
+    xray:
+      fgColor: "#29242a"
+      bgColor: default
+      cursorColor: "#bfb9ba"
+      cursorTextColor: "#29242a"
+      graphicColor: "#7058be"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#269d69"
+        - "#e14775"
+      defaultChartColors:
+        - "#269d69"
+        - "#e14775"
+      resourceColors:
+        cpu:
+          - "#1c8ca8"
+          - "#1c8ca8"
+        mem:
+          - "#269d69"
+          - "#cc7a0a"
+    yaml:
+      keyColor: "#1c8ca8"
+      valueColor: "#29242a"
+      colonColor: "#918c8e"
+    logs:
+      fgColor: "#29242a"
+      bgColor: default
+      indicator:
+        fgColor: "#1c8ca8"
+        bgColor: default
+        toggleOnColor: "#269d69"
+        toggleOffColor: "#918c8e"
+  dialog:
+    fgColor: "#cc7a0a"
+    bgColor: default
+    buttonFgColor: "#faf4f2"
+    buttonBgColor: default
+    buttonFocusFgColor: "#faf4f2"
+    buttonFocusBgColor: "#7058be"
+    labelFgColor: "#cc7a0a"
+    fieldFgColor: "#29242a"
