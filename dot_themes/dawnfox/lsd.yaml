@@ -1,0 +1,39 @@
+# Hand-derived from the EdenEast/nightfox.nvim "dawnfox" palette (lua/nightfox/palette/dawnfox.lua).
+user: "#286983"
+group: "#56949f"
+permission:
+  read: "#618774"
+  write: "#ea9d34"
+  exec: "#b4637a"
+  exec-sticky: "#907aa9"
+  no-access: "#797593"
+  octal: "#56949f"
+  acl: "#56949f"
+  context: "#286983"
+date:
+  hour-old: "#618774"
+  day-old: "#286983"
+  older: "#797593"
+size:
+  none: "#797593"
+  small: "#618774"
+  medium: "#ea9d34"
+  large: "#d7827e"
+inode:
+  valid: "#907aa9"
+  invalid: "#797593"
+links:
+  valid: "#56949f"
+  invalid: "#797593"
+tree-edge: "#a8a3b3"
+git-status:
+  default: "#575279"
+  unmodified: "#797593"
+  ignored: "#797593"
+  new-in-index: "#618774"
+  new-in-workdir: "#618774"
+  typechange: "#ea9d34"
+  deleted: "#b4637a"
+  renamed: "#286983"
+  modified: "#ea9d34"
+  conflicted: "#b4637a"

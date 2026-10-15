@@ -1161,6 +1161,29 @@
       "yellow": "#F6C177"
     },
     {
+      "background": "#FAF4ED",
+      "black": "#575279",
+      "blue": "#286983",
+      "brightBlack": "#5F5695",
+      "brightBlue": "#2D81A3",
+      "brightCyan": "#5CA7B4",
+      "brightGreen": "#629F81",
+      "brightPurple": "#9A80B9",
+      "brightRed": "#C26D85",
+      "brightWhite": "#E6EBF3",
+      "brightYellow": "#EEA846",
+      "cursorColor": "#575279",
+      "cyan": "#56949F",
+      "foreground": "#575279",
+      "green": "#618774",
+      "name": "dawnfox",
+      "purple": "#907AA9",
+      "red": "#B4637A",
+      "selectionBackground": "#D0D8D8",
+      "white": "#B2B6BD",
+      "yellow": "#EA9D34"
+    },
+    {
       "background": "#152528",
       "black": "#2F3239",
       "blue": "#5A93AA",
@@ -2580,6 +2603,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "dawnfox",
+      "tab": {
+        "background": "#FAF4EDFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#EBE0DFFF",
+        "unfocusedBackground": "#DFD6D3FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,
