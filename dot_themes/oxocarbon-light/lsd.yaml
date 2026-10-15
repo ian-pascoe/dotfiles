@@ -1,0 +1,39 @@
+# Hand-derived from the nyoom-engineering/oxocarbon.nvim light palette, darkened for contrast on white.
+user: "#0f62fe"
+group: "#005d5d"
+permission:
+  read: "#198038"
+  write: "#8e6a00"
+  exec: "#d02670"
+  exec-sticky: "#8a3ffc"
+  no-access: "#6f6f6f"
+  octal: "#005d5d"
+  acl: "#005d5d"
+  context: "#0f62fe"
+date:
+  hour-old: "#198038"
+  day-old: "#0f62fe"
+  older: "#6f6f6f"
+size:
+  none: "#6f6f6f"
+  small: "#198038"
+  medium: "#8e6a00"
+  large: "#9f1853"
+inode:
+  valid: "#8a3ffc"
+  invalid: "#6f6f6f"
+links:
+  valid: "#005d5d"
+  invalid: "#6f6f6f"
+tree-edge: "#c6c6c6"
+git-status:
+  default: "#161616"
+  unmodified: "#6f6f6f"
+  ignored: "#6f6f6f"
+  new-in-index: "#198038"
+  new-in-workdir: "#198038"
+  typechange: "#8e6a00"
+  deleted: "#d02670"
+  renamed: "#0f62fe"
+  modified: "#8e6a00"
+  conflicted: "#d02670"

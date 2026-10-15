@@ -724,6 +724,29 @@
       "yellow": "#FFE97B"
     },
     {
+      "background": "#FFFFFF",
+      "black": "#F2F2F2",
+      "blue": "#0072C3",
+      "brightBlack": "#8D8D8D",
+      "brightBlue": "#0072C3",
+      "brightCyan": "#005D5D",
+      "brightGreen": "#198038",
+      "brightPurple": "#9F1853",
+      "brightRed": "#D02670",
+      "brightWhite": "#161616",
+      "brightYellow": "#8E6A00",
+      "cursorColor": "#161616",
+      "cyan": "#005D5D",
+      "foreground": "#161616",
+      "green": "#198038",
+      "name": "oxocarbon-light",
+      "purple": "#9F1853",
+      "red": "#D02670",
+      "selectionBackground": "#D0D0D0",
+      "white": "#525252",
+      "yellow": "#8E6A00"
+    },
+    {
       "background": "#292522",
       "black": "#34302C",
       "blue": "#7F91B2",
@@ -2246,6 +2269,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "oxocarbon-light",
+      "tab": {
+        "background": "#FFFFFFFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#F2F2F2FF",
+        "unfocusedBackground": "#E0E0E0FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

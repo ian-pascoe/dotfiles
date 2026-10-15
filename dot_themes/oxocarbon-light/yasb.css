@@ -1,0 +1,37 @@
+:root {
+  /* Oxocarbon Light palette, hand-derived from the nyoom-engineering/oxocarbon.nvim light palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 255, 255, 255;
+  --foreground: 22, 22, 22;
+  --card-background: 242, 242, 242;
+  --popup-background: 224, 224, 224;
+  --primary: 15, 98, 254;
+  --secondary: 0, 125, 121;
+  --tertiary: 15, 98, 254;
+  --accent: 138, 63, 252;
+  --muted-background: 111, 111, 111;
+  --info: 15, 98, 254;
+  --success: 25, 128, 56;
+  --warning: 142, 106, 0;
+  --destructive: 208, 38, 112;
+  --border: 198, 198, 198;
+  --text: 22, 22, 22;
+  --foam: 0, 93, 93;
+  --gold: 142, 106, 0;
+  --love: 208, 38, 112;
+  --overlay: 111, 111, 111;
+  --highlight: 224, 224, 224;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

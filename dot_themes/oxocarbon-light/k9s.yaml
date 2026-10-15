@@ -1,0 +1,101 @@
+# Hand-derived from the nyoom-engineering/oxocarbon.nvim light palette, darkened for contrast on white.
+k9s:
+  body:
+    fgColor: "#161616"
+    bgColor: default
+    logoColor: "#0f62fe"
+  prompt:
+    fgColor: "#161616"
+    bgColor: default
+    suggestColor: "#0f62fe"
+  help:
+    fgColor: "#161616"
+    bgColor: default
+    sectionColor: "#198038"
+    keyColor: "#0f62fe"
+    numKeyColor: "#d02670"
+  frame:
+    title:
+      fgColor: "#005d5d"
+      bgColor: default
+      highlightColor: "#8a3ffc"
+      counterColor: "#8e6a00"
+      filterColor: "#198038"
+    border:
+      fgColor: "#0f62fe"
+      focusColor: "#007d79"
+    menu:
+      fgColor: "#161616"
+      keyColor: "#0f62fe"
+      numKeyColor: "#d02670"
+    crumbs:
+      fgColor: "#ffffff"
+      bgColor: default
+      activeColor: "#8e6a00"
+    status:
+      newColor: "#0f62fe"
+      modifyColor: "#005d5d"
+      addColor: "#198038"
+      pendingColor: "#8e6a00"
+      errorColor: "#d02670"
+      highlightColor: "#005d5d"
+      killColor: "#8a3ffc"
+      completedColor: "#6f6f6f"
+  info:
+    fgColor: "#8e6a00"
+    sectionColor: "#161616"
+  views:
+    table:
+      fgColor: "#161616"
+      bgColor: default
+      cursorFgColor: "#161616"
+      cursorBgColor: "#e0e0e0"
+      markColor: "#198038"
+      header:
+        fgColor: "#8e6a00"
+        bgColor: default
+        sorterColor: "#005d5d"
+    xray:
+      fgColor: "#161616"
+      bgColor: default
+      cursorColor: "#e0e0e0"
+      cursorTextColor: "#161616"
+      graphicColor: "#8a3ffc"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#198038"
+        - "#d02670"
+      defaultChartColors:
+        - "#198038"
+        - "#d02670"
+      resourceColors:
+        cpu:
+          - "#0f62fe"
+          - "#005d5d"
+        mem:
+          - "#198038"
+          - "#8e6a00"
+    yaml:
+      keyColor: "#0f62fe"
+      valueColor: "#161616"
+      colonColor: "#6f6f6f"
+    logs:
+      fgColor: "#161616"
+      bgColor: default
+      indicator:
+        fgColor: "#005d5d"
+        bgColor: default
+        toggleOnColor: "#198038"
+        toggleOffColor: "#6f6f6f"
+  dialog:
+    fgColor: "#8e6a00"
+    bgColor: default
+    buttonFgColor: "#ffffff"
+    buttonBgColor: default
+    buttonFocusFgColor: "#ffffff"
+    buttonFocusBgColor: "#8a3ffc"
+    labelFgColor: "#8e6a00"
+    fieldFgColor: "#161616"
