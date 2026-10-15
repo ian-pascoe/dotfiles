@@ -1,0 +1,39 @@
+# Hand-derived from the kepano/flexoki "light" palette.
+user: "#205ea6"
+group: "#24837b"
+permission:
+  read: "#66800b"
+  write: "#ad8301"
+  exec: "#af3029"
+  exec-sticky: "#5e409d"
+  no-access: "#6f6e69"
+  octal: "#24837b"
+  acl: "#24837b"
+  context: "#205ea6"
+date:
+  hour-old: "#24837b"
+  day-old: "#205ea6"
+  older: "#6f6e69"
+size:
+  none: "#6f6e69"
+  small: "#66800b"
+  medium: "#ad8301"
+  large: "#bc5215"
+inode:
+  valid: "#5e409d"
+  invalid: "#6f6e69"
+links:
+  valid: "#24837b"
+  invalid: "#6f6e69"
+tree-edge: "#b7b5ac"
+git-status:
+  default: "#100f0f"
+  unmodified: "#6f6e69"
+  ignored: "#6f6e69"
+  new-in-index: "#66800b"
+  new-in-workdir: "#66800b"
+  typechange: "#ad8301"
+  deleted: "#af3029"
+  renamed: "#205ea6"
+  modified: "#bc5215"
+  conflicted: "#af3029"

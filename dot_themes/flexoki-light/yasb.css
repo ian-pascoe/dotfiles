@@ -1,0 +1,37 @@
+:root {
+  /* Flexoki Light palette (hand-derived from the kepano/flexoki "light" palette); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 255, 252, 240;
+  --foreground: 16, 15, 15;
+  --card-background: 242, 240, 229;
+  --popup-background: 230, 228, 217;
+  --primary: 32, 94, 166;
+  --secondary: 36, 131, 123;
+  --tertiary: 36, 131, 123;
+  --accent: 94, 64, 157;
+  --muted-background: 111, 110, 105;
+  --info: 36, 131, 123;
+  --success: 102, 128, 11;
+  --warning: 173, 131, 1;
+  --destructive: 175, 48, 41;
+  --border: 183, 181, 172;
+  --text: 16, 15, 15;
+  --foam: 36, 131, 123;
+  --gold: 173, 131, 1;
+  --love: 175, 48, 41;
+  --overlay: 111, 110, 105;
+  --highlight: 230, 228, 217;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}
