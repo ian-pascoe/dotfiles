@@ -1,0 +1,37 @@
+:root {
+  /* Everforest Light palette (hand-derived from sainnhe/everforest "light"); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 253, 246, 227;
+  --foreground: 92, 106, 114;
+  --card-background: 244, 240, 217;
+  --popup-background: 230, 226, 204;
+  --primary: 58, 148, 197;
+  --secondary: 53, 167, 124;
+  --tertiary: 53, 167, 124;
+  --accent: 223, 105, 186;
+  --muted-background: 130, 145, 129;
+  --info: 53, 167, 124;
+  --success: 141, 161, 1;
+  --warning: 223, 160, 0;
+  --destructive: 248, 85, 82;
+  --border: 189, 195, 175;
+  --text: 92, 106, 114;
+  --foam: 53, 167, 124;
+  --gold: 223, 160, 0;
+  --love: 248, 85, 82;
+  --overlay: 130, 145, 129;
+  --highlight: 230, 226, 204;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

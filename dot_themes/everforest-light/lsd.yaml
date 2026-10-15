@@ -1,0 +1,39 @@
+# Hand-derived from the sainnhe/everforest "light" (medium background) palette.
+user: "#3a94c5"
+group: "#35a77c"
+permission:
+  read: "#8da101"
+  write: "#dfa000"
+  exec: "#f85552"
+  exec-sticky: "#df69ba"
+  no-access: "#829181"
+  octal: "#35a77c"
+  acl: "#35a77c"
+  context: "#3a94c5"
+date:
+  hour-old: "#35a77c"
+  day-old: "#3a94c5"
+  older: "#829181"
+size:
+  none: "#829181"
+  small: "#8da101"
+  medium: "#dfa000"
+  large: "#f57d26"
+inode:
+  valid: "#df69ba"
+  invalid: "#829181"
+links:
+  valid: "#35a77c"
+  invalid: "#829181"
+tree-edge: "#bdc3af"
+git-status:
+  default: "#5c6a72"
+  unmodified: "#829181"
+  ignored: "#829181"
+  new-in-index: "#8da101"
+  new-in-workdir: "#8da101"
+  typechange: "#dfa000"
+  deleted: "#f85552"
+  renamed: "#3a94c5"
+  modified: "#f57d26"
+  conflicted: "#f85552"

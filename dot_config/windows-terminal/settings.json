@@ -310,6 +310,29 @@
       "yellow": "#DBBC7F"
     },
     {
+      "background": "#FDF6E3",
+      "black": "#7A8478",
+      "blue": "#7FBBB3",
+      "brightBlack": "#A6B0A0",
+      "brightBlue": "#3A94C5",
+      "brightCyan": "#35A77C",
+      "brightGreen": "#8DA101",
+      "brightPurple": "#DF69BA",
+      "brightRed": "#F85552",
+      "brightWhite": "#FFFBEF",
+      "brightYellow": "#DFA000",
+      "cursorColor": "#F57D26",
+      "cyan": "#83C092",
+      "foreground": "#5C6A72",
+      "green": "#9AB373",
+      "name": "everforest-light",
+      "purple": "#D699B6",
+      "red": "#E67E80",
+      "selectionBackground": "#EAEDC8",
+      "white": "#B2AF9F",
+      "yellow": "#C1A266"
+    },
+    {
       "background": "#282A36",
       "black": "#44475A",
       "blue": "#8BE9FD",
@@ -1610,6 +1633,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "everforest-light",
+      "tab": {
+        "background": "#FDF6E3FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#EFEBD4FF",
+        "unfocusedBackground": "#EFEBD4FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,
