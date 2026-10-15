@@ -94,9 +94,9 @@ local theme_specs = {
     name = 'solarized',
     colorscheme = 'solarized',
     opts = {},
+    -- Picks its light or dark palette from 'background' when applied.
     config = function(_, opts)
       vim.o.termguicolors = true
-      vim.o.background = 'dark'
       require('solarized').setup(opts)
     end,
   },
@@ -108,6 +108,14 @@ local theme_specs = {
       require('onedark').setup({
         style = 'dark',
         transparent = vim.g.transparent_enabled,
+      })
+      -- onedark switches itself to its light style when 'background' is light
+      -- but never back, so pick the style each time it is applied.
+      vim.api.nvim_create_autocmd('ColorSchemePre', {
+        pattern = 'onedark',
+        callback = function()
+          require('onedark').set_options('style', vim.o.background == 'light' and 'light' or 'dark')
+        end,
       })
       require('onedark').load()
     end,
@@ -371,11 +379,17 @@ local theme_specs = {
     repo = 'aktersnurra/no-clown-fiesta.nvim',
     name = 'no-clown-fiesta.nvim',
     colorscheme = 'no-clown-fiesta',
+    -- Its no-clown-fiesta-light colorscheme resets every other option, so pick
+    -- the theme from 'background' each time it is applied instead.
     config = function()
-      require('no-clown-fiesta').setup({
-        theme = 'dark',
-        transparent = vim.g.transparent_enabled,
-      })
+      local function setup()
+        require('no-clown-fiesta').setup({
+          theme = vim.o.background == 'light' and 'light' or 'dark',
+          transparent = vim.g.transparent_enabled,
+        })
+      end
+      setup()
+      vim.api.nvim_create_autocmd('ColorSchemePre', { pattern = 'no-clown-fiesta', callback = setup })
     end,
   },
   ['kanagawa-paper'] = {
@@ -443,6 +457,25 @@ for name, variant in pairs({
   ['catppuccin-latte'] = { 'catppuccin', 'catppuccin-latte' },
   ['rose-pine-dawn'] = { 'rose-pine', 'rose-pine-dawn' },
   ['tokyo-night-day'] = { 'tokyo-night', 'tokyonight-day' },
+  -- These follow 'background', which light.mode sets, so the variant keeps its
+  -- sibling's colorscheme name.
+  ['gruvbox-light'] = { 'gruvbox', 'gruvbox' },
+  ['gruvbox-material-light'] = { 'gruvbox-material', 'gruvbox-material' },
+  ['everforest-light'] = { 'everforest', 'everforest' },
+  ['solarized-light'] = { 'solarized', 'solarized' },
+  ['iceberg-light'] = { 'iceberg', 'iceberg' },
+  ['melange-light'] = { 'melange', 'melange' },
+  ['oxocarbon-light'] = { 'oxocarbon', 'oxocarbon' },
+  ['one-light'] = { 'one-dark', 'onedark' },
+  ['zenbones-dark'] = { 'zenbones-light', 'zenbones' },
+  ['flexoki-light'] = { 'flexoki', 'flexoki-light' },
+  ['kanagawa-lotus'] = { 'kanagawa', 'kanagawa-lotus' },
+  ['kanso-pearl'] = { 'kanso', 'kanso-pearl' },
+  ['bluloco-light'] = { 'bluloco', 'bluloco-light' },
+  ['monokai-pro-light'] = { 'monokai-pro', 'monokai-pro-light' },
+  dawnfox = { 'carbonfox', 'dawnfox' },
+  ['no-clown-fiesta-light'] = { 'no-clown-fiesta', 'no-clown-fiesta' },
+  ['cyberdream-light'] = { 'cyberdream', 'cyberdream-light' },
 }) do
   local base, colorscheme = unpack(variant)
   theme_specs[name] = vim.tbl_extend('force', theme_specs[base], { colorscheme = colorscheme })

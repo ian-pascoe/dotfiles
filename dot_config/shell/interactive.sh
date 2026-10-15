@@ -118,6 +118,16 @@ if command -v hunk &>/dev/null; then
           ethereal) echo tokyo-night ;;
           hackerman) echo vitesse-black ;;
           lumon) echo github-dark-dimmed ;;
+          tokyo-night-day) echo github-light-default ;;
+          gruvbox-light | gruvbox-material-light) echo gruvbox-light-medium ;;
+          kanso-pearl) echo kanagawa-lotus ;;
+          melange-light) echo vitesse-light ;;
+          dawnfox) echo rose-pine-dawn ;;
+          cyberdream-light) echo github-light-high-contrast ;;
+          flexoki-light | oxocarbon-light) echo github-light-default ;;
+          iceberg-light | bluloco-light) echo github-light ;;
+          monokai-pro-light | no-clown-fiesta-light) echo min-light ;;
+          zenbones-dark) echo min-dark ;;
           *) basename "$(readlink ~/.config/theme)" ;;
           esac
         )" \
