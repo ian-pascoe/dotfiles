@@ -1,0 +1,101 @@
+# Hand-derived from the uloco/bluloco.nvim "light" palette.
+k9s:
+  body:
+    fgColor: "#373a41"
+    bgColor: default
+    logoColor: "#275fe4"
+  prompt:
+    fgColor: "#373a41"
+    bgColor: default
+    suggestColor: "#275fe4"
+  help:
+    fgColor: "#373a41"
+    bgColor: default
+    sectionColor: "#23974a"
+    keyColor: "#275fe4"
+    numKeyColor: "#d52753"
+  frame:
+    title:
+      fgColor: "#047485"
+      bgColor: default
+      highlightColor: "#823ff1"
+      counterColor: "#9c7f1c"
+      filterColor: "#23974a"
+    border:
+      fgColor: "#275fe4"
+      focusColor: "#0098dd"
+    menu:
+      fgColor: "#373a41"
+      keyColor: "#275fe4"
+      numKeyColor: "#d52753"
+    crumbs:
+      fgColor: "#f9f9f9"
+      bgColor: default
+      activeColor: "#9c7f1c"
+    status:
+      newColor: "#275fe4"
+      modifyColor: "#047485"
+      addColor: "#23974a"
+      pendingColor: "#9c7f1c"
+      errorColor: "#d52753"
+      highlightColor: "#047485"
+      killColor: "#823ff1"
+      completedColor: "#676a77"
+  info:
+    fgColor: "#9c7f1c"
+    sectionColor: "#373a41"
+  views:
+    table:
+      fgColor: "#373a41"
+      bgColor: default
+      cursorFgColor: "#373a41"
+      cursorBgColor: "#d2ecff"
+      markColor: "#23974a"
+      header:
+        fgColor: "#9c7f1c"
+        bgColor: default
+        sorterColor: "#047485"
+    xray:
+      fgColor: "#373a41"
+      bgColor: default
+      cursorColor: "#d2ecff"
+      cursorTextColor: "#373a41"
+      graphicColor: "#823ff1"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#23974a"
+        - "#d52753"
+      defaultChartColors:
+        - "#23974a"
+        - "#d52753"
+      resourceColors:
+        cpu:
+          - "#275fe4"
+          - "#047485"
+        mem:
+          - "#23974a"
+          - "#9c7f1c"
+    yaml:
+      keyColor: "#275fe4"
+      valueColor: "#373a41"
+      colonColor: "#676a77"
+    logs:
+      fgColor: "#373a41"
+      bgColor: default
+      indicator:
+        fgColor: "#047485"
+        bgColor: default
+        toggleOnColor: "#23974a"
+        toggleOffColor: "#676a77"
+  dialog:
+    fgColor: "#9c7f1c"
+    bgColor: default
+    buttonFgColor: "#f9f9f9"
+    buttonBgColor: default
+    buttonFocusFgColor: "#f9f9f9"
+    buttonFocusBgColor: "#823ff1"
+    labelFgColor: "#9c7f1c"
+    fieldFgColor: "#373a41"

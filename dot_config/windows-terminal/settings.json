@@ -1368,6 +1368,29 @@
       "yellow": "#FF936A"
     },
     {
+      "background": "#F9F9F9",
+      "black": "#373A41",
+      "blue": "#275FE4",
+      "brightBlack": "#676A77",
+      "brightBlue": "#0099E1",
+      "brightCyan": "#6D93BB",
+      "brightGreen": "#3CBC66",
+      "brightPurple": "#CE33C0",
+      "brightRed": "#FF6480",
+      "brightWhite": "#D3D3D3",
+      "brightYellow": "#C5A332",
+      "cursorColor": "#F32759",
+      "cyan": "#27618D",
+      "foreground": "#373A41",
+      "green": "#23974A",
+      "name": "bluloco-light",
+      "purple": "#823FF1",
+      "red": "#D52753",
+      "selectionBackground": "#DAF0FF",
+      "white": "#BABBC2",
+      "yellow": "#DF631C"
+    },
+    {
       "background": "#1E1C31",
       "black": "#1E1C31",
       "blue": "#91DDFF",
@@ -2691,6 +2714,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "bluloco-light",
+      "tab": {
+        "background": "#F9F9F9FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#ECEDEEFF",
+        "unfocusedBackground": "#F1F1F1FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

@@ -1,0 +1,37 @@
+:root {
+  /* Bluloco Light palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 249, 249, 249;
+  --foreground: 55, 58, 65;
+  --card-background: 236, 237, 238;
+  --popup-background: 228, 229, 231;
+  --primary: 39, 95, 228;
+  --secondary: 0, 152, 221;
+  --tertiary: 39, 95, 228;
+  --accent: 130, 63, 241;
+  --muted-background: 103, 106, 119;
+  --info: 39, 95, 228;
+  --success: 35, 151, 74;
+  --warning: 156, 127, 28;
+  --destructive: 213, 39, 83;
+  --border: 211, 211, 211;
+  --text: 55, 58, 65;
+  --foam: 4, 116, 133;
+  --gold: 156, 127, 28;
+  --love: 213, 39, 83;
+  --overlay: 103, 106, 119;
+  --highlight: 210, 236, 255;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

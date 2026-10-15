@@ -1,0 +1,39 @@
+# Hand-derived from the uloco/bluloco.nvim "light" palette.
+user: "#275fe4"
+group: "#047485"
+permission:
+  read: "#23974a"
+  write: "#9c7f1c"
+  exec: "#d52753"
+  exec-sticky: "#823ff1"
+  no-access: "#676a77"
+  octal: "#047485"
+  acl: "#047485"
+  context: "#275fe4"
+date:
+  hour-old: "#23974a"
+  day-old: "#275fe4"
+  older: "#676a77"
+size:
+  none: "#676a77"
+  small: "#23974a"
+  medium: "#9c7f1c"
+  large: "#df631c"
+inode:
+  valid: "#823ff1"
+  invalid: "#676a77"
+links:
+  valid: "#047485"
+  invalid: "#676a77"
+tree-edge: "#d3d3d3"
+git-status:
+  default: "#373a41"
+  unmodified: "#676a77"
+  ignored: "#676a77"
+  new-in-index: "#23974a"
+  new-in-workdir: "#23974a"
+  typechange: "#9c7f1c"
+  deleted: "#d52753"
+  renamed: "#275fe4"
+  modified: "#9c7f1c"
+  conflicted: "#d52753"
