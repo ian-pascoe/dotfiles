@@ -448,6 +448,29 @@
       "yellow": "#E5C07B"
     },
     {
+      "background": "#FAFAFA",
+      "black": "#383A42",
+      "blue": "#4078F2",
+      "brightBlack": "#818387",
+      "brightBlue": "#4078F2",
+      "brightCyan": "#0184BC",
+      "brightGreen": "#50A14F",
+      "brightPurple": "#A626A4",
+      "brightRed": "#E45649",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#C18401",
+      "cursorColor": "#0184BC",
+      "cyan": "#0184BC",
+      "foreground": "#383A42",
+      "green": "#50A14F",
+      "name": "one-light",
+      "purple": "#A626A4",
+      "red": "#E45649",
+      "selectionBackground": "#DCDCDC",
+      "white": "#BABABA",
+      "yellow": "#C18401"
+    },
+    {
       "background": "#101010",
       "black": "#1C1C1C",
       "blue": "#99C0FF",
@@ -1914,6 +1937,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "one-light",
+      "tab": {
+        "background": "#FAFAFAFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#F0F0F0FF",
+        "unfocusedBackground": "#F5F5F5FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

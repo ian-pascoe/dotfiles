@@ -1,0 +1,39 @@
+# Hand-derived from the navarasu/onedark.nvim "light" palette.
+user: "#4078f2"
+group: "#0184bc"
+permission:
+  read: "#50a14f"
+  write: "#986801"
+  exec: "#e45649"
+  exec-sticky: "#a626a4"
+  no-access: "#818387"
+  octal: "#0184bc"
+  acl: "#0184bc"
+  context: "#4078f2"
+date:
+  hour-old: "#0184bc"
+  day-old: "#4078f2"
+  older: "#818387"
+size:
+  none: "#818387"
+  small: "#50a14f"
+  medium: "#986801"
+  large: "#c18401"
+inode:
+  valid: "#a626a4"
+  invalid: "#818387"
+links:
+  valid: "#0184bc"
+  invalid: "#818387"
+tree-edge: "#a0a1a7"
+git-status:
+  default: "#383a42"
+  unmodified: "#818387"
+  ignored: "#818387"
+  new-in-index: "#50a14f"
+  new-in-workdir: "#50a14f"
+  typechange: "#986801"
+  deleted: "#e45649"
+  renamed: "#4078f2"
+  modified: "#c18401"
+  conflicted: "#e45649"
