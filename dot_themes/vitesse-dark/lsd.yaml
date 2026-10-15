@@ -1,0 +1,39 @@
+# Hand-derived from the antfu/vscode-theme-vitesse (themes/vitesse-dark.json) and the qshan-li/neovim-theme-vitesse "dark" palette.
+user: "#4D9375"
+group: "#5EAAB5"
+permission:
+  read: "#4D9375"
+  write: "#E6CC77"
+  exec: "#CB7676"
+  exec-sticky: "#D9739F"
+  no-access: "#858480"
+  octal: "#5EAAB5"
+  acl: "#5EAAB5"
+  context: "#4D9375"
+date:
+  hour-old: "#4D9375"
+  day-old: "#4D9375"
+  older: "#858480"
+size:
+  none: "#858480"
+  small: "#4D9375"
+  medium: "#E6CC77"
+  large: "#D4976C"
+inode:
+  valid: "#D9739F"
+  invalid: "#858480"
+links:
+  valid: "#5EAAB5"
+  invalid: "#858480"
+tree-edge: "#666666"
+git-status:
+  default: "#DBD7CA"
+  unmodified: "#858480"
+  ignored: "#858480"
+  new-in-index: "#4D9375"
+  new-in-workdir: "#4D9375"
+  typechange: "#E6CC77"
+  deleted: "#CB7676"
+  renamed: "#4D9375"
+  modified: "#E6CC77"
+  conflicted: "#CB7676"

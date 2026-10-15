@@ -36,9 +36,9 @@ k9s:
   dialog:
     fgColor: *foreground
     bgColor: default
-    buttonFgColor: *foreground
+    buttonFgColor: *background
     buttonBgColor: *magenta
-    buttonFocusFgColor: *yellow
+    buttonFocusFgColor: *background
     buttonFocusBgColor: *blue
     labelFgColor: *orange
     fieldFgColor: *foreground

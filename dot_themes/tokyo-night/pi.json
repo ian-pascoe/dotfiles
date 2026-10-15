@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "tokyo-night",
+  "appearance": "dark",
   "vars": {
     "accent": "#7aa2f7",
     "accent2": "#7dcfff",

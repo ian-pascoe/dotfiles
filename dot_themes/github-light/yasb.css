@@ -1,0 +1,37 @@
+:root {
+  /* GitHub Light palette (hand-derived from the GitHub "Light Default" palette (projekt0n/github-nvim-theme github_light_default / primer/github-vscode-theme light_default)); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 255, 255, 255;
+  --foreground: 31, 35, 40;
+  --card-background: 246, 248, 250;
+  --popup-background: 221, 244, 255;
+  --primary: 9, 105, 218;
+  --secondary: 27, 124, 131;
+  --tertiary: 9, 105, 218;
+  --accent: 130, 80, 223;
+  --muted-background: 89, 99, 110;
+  --info: 9, 105, 218;
+  --success: 26, 127, 55;
+  --warning: 154, 103, 0;
+  --destructive: 207, 34, 46;
+  --border: 208, 215, 222;
+  --text: 31, 35, 40;
+  --foam: 27, 124, 131;
+  --gold: 154, 103, 0;
+  --love: 207, 34, 46;
+  --overlay: 89, 99, 110;
+  --highlight: 221, 244, 255;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,101 @@
+# Hand-derived from Everblush/nvim palette and Ghostty's bundled "Everblush" theme.
+k9s:
+  body:
+    fgColor: "#DADADA"
+    bgColor: default
+    logoColor: "#6CBFBF"
+  prompt:
+    fgColor: "#DADADA"
+    bgColor: default
+    suggestColor: "#6CBFBF"
+  help:
+    fgColor: "#DADADA"
+    bgColor: default
+    sectionColor: "#8CCF7E"
+    keyColor: "#6CBFBF"
+    numKeyColor: "#E57474"
+  frame:
+    title:
+      fgColor: "#67CBE7"
+      bgColor: default
+      highlightColor: "#C47FD5"
+      counterColor: "#E5C76B"
+      filterColor: "#8CCF7E"
+    border:
+      fgColor: "#6CBFBF"
+      focusColor: "#67B0E8"
+    menu:
+      fgColor: "#DADADA"
+      keyColor: "#6CBFBF"
+      numKeyColor: "#E57474"
+    crumbs:
+      fgColor: "#141B1E"
+      bgColor: default
+      activeColor: "#E5C76B"
+    status:
+      newColor: "#6CBFBF"
+      modifyColor: "#67CBE7"
+      addColor: "#8CCF7E"
+      pendingColor: "#E5C76B"
+      errorColor: "#E57474"
+      highlightColor: "#67CBE7"
+      killColor: "#C47FD5"
+      completedColor: "#7C8587"
+  info:
+    fgColor: "#E5C76B"
+    sectionColor: "#DADADA"
+  views:
+    table:
+      fgColor: "#DADADA"
+      bgColor: default
+      cursorFgColor: "#DADADA"
+      cursorBgColor: "#2D3437"
+      markColor: "#8CCF7E"
+      header:
+        fgColor: "#E5C76B"
+        bgColor: default
+        sorterColor: "#67CBE7"
+    xray:
+      fgColor: "#DADADA"
+      bgColor: default
+      cursorColor: "#2D3437"
+      cursorTextColor: "#DADADA"
+      graphicColor: "#C47FD5"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#8CCF7E"
+        - "#E57474"
+      defaultChartColors:
+        - "#8CCF7E"
+        - "#E57474"
+      resourceColors:
+        cpu:
+          - "#6CBFBF"
+          - "#67CBE7"
+        mem:
+          - "#8CCF7E"
+          - "#E5C76B"
+    yaml:
+      keyColor: "#6CBFBF"
+      valueColor: "#DADADA"
+      colonColor: "#7C8587"
+    logs:
+      fgColor: "#DADADA"
+      bgColor: default
+      indicator:
+        fgColor: "#67CBE7"
+        bgColor: default
+        toggleOnColor: "#8CCF7E"
+        toggleOffColor: "#7C8587"
+  dialog:
+    fgColor: "#E5C76B"
+    bgColor: default
+    buttonFgColor: "#DADADA"
+    buttonBgColor: default
+    buttonFocusFgColor: "#141B1E"
+    buttonFocusBgColor: "#C47FD5"
+    labelFgColor: "#E5C76B"
+    fieldFgColor: "#DADADA"

@@ -150,9 +150,22 @@ zoxide = "latest"
 "npm:@firecrawl/anydoc" = "latest"
 "npm:@googleworkspace/cli" = "latest"
 "npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
+"npm:@playwright/mcp" = "latest"
 "npm:agent-browser" = "latest"
 "npm:hunkdiff" = "latest"
 "npm:impeccable" = "latest"
+
+# Language servers and formatters launched directly by Pi LSP and Pi Formatter.
+"npm:bash-language-server" = "latest"
+"npm:dockerfile-language-server-nodejs" = "latest"
+"npm:intelephense" = "latest"
+"npm:oxfmt" = "latest"
+"npm:oxlint" = "latest"
+"npm:oxlint-tsgolint" = "latest"
+"npm:sql-language-server" = "latest"
+"npm:typescript" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+"npm:yaml-language-server" = "latest"
 
 "pipx:browser-use" = "latest"
 "pipx:camoufox" = "latest"

@@ -1,0 +1,101 @@
+# Hand-derived from the EdenEast/nightfox.nvim "nordfox" palette (lua/nightfox/palette/nordfox.lua).
+k9s:
+  body:
+    fgColor: "#cdcecf"
+    bgColor: default
+    logoColor: "#81a1c1"
+  prompt:
+    fgColor: "#cdcecf"
+    bgColor: default
+    suggestColor: "#81a1c1"
+  help:
+    fgColor: "#cdcecf"
+    bgColor: default
+    sectionColor: "#a3be8c"
+    keyColor: "#81a1c1"
+    numKeyColor: "#bf616a"
+  frame:
+    title:
+      fgColor: "#88c0d0"
+      bgColor: default
+      highlightColor: "#b48ead"
+      counterColor: "#ebcb8b"
+      filterColor: "#a3be8c"
+    border:
+      fgColor: "#81a1c1"
+      focusColor: "#88c0d0"
+    menu:
+      fgColor: "#cdcecf"
+      keyColor: "#81a1c1"
+      numKeyColor: "#bf616a"
+    crumbs:
+      fgColor: "#2e3440"
+      bgColor: default
+      activeColor: "#ebcb8b"
+    status:
+      newColor: "#81a1c1"
+      modifyColor: "#88c0d0"
+      addColor: "#a3be8c"
+      pendingColor: "#ebcb8b"
+      errorColor: "#bf616a"
+      highlightColor: "#88c0d0"
+      killColor: "#b48ead"
+      completedColor: "#aaacb0"
+  info:
+    fgColor: "#ebcb8b"
+    sectionColor: "#cdcecf"
+  views:
+    table:
+      fgColor: "#cdcecf"
+      bgColor: default
+      cursorFgColor: "#cdcecf"
+      cursorBgColor: "#444c5e"
+      markColor: "#a3be8c"
+      header:
+        fgColor: "#ebcb8b"
+        bgColor: default
+        sorterColor: "#88c0d0"
+    xray:
+      fgColor: "#cdcecf"
+      bgColor: default
+      cursorColor: "#444c5e"
+      cursorTextColor: "#cdcecf"
+      graphicColor: "#b48ead"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#a3be8c"
+        - "#bf616a"
+      defaultChartColors:
+        - "#a3be8c"
+        - "#bf616a"
+      resourceColors:
+        cpu:
+          - "#81a1c1"
+          - "#88c0d0"
+        mem:
+          - "#a3be8c"
+          - "#ebcb8b"
+    yaml:
+      keyColor: "#81a1c1"
+      valueColor: "#cdcecf"
+      colonColor: "#aaacb0"
+    logs:
+      fgColor: "#cdcecf"
+      bgColor: default
+      indicator:
+        fgColor: "#88c0d0"
+        bgColor: default
+        toggleOnColor: "#a3be8c"
+        toggleOffColor: "#aaacb0"
+  dialog:
+    fgColor: "#ebcb8b"
+    bgColor: default
+    buttonFgColor: "#2e3440"
+    buttonBgColor: "#aaacb0"
+    buttonFocusFgColor: "#2e3440"
+    buttonFocusBgColor: "#b48ead"
+    labelFgColor: "#ebcb8b"
+    fieldFgColor: "#cdcecf"

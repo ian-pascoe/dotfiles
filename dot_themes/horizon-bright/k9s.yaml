@@ -1,0 +1,101 @@
+# Hand-derived from the jolaleye "Horizon Bright" VS Code theme and akinsho/horizon.nvim palette-light.lua.
+k9s:
+  body:
+    fgColor: "#16161D"
+    bgColor: default
+    logoColor: "#E73665"
+  prompt:
+    fgColor: "#16161D"
+    bgColor: default
+    suggestColor: "#E73665"
+  help:
+    fgColor: "#16161D"
+    bgColor: default
+    sectionColor: "#0B946A"
+    keyColor: "#E73665"
+    numKeyColor: "#DA103F"
+  frame:
+    title:
+      fgColor: "#1D8991"
+      bgColor: default
+      highlightColor: "#8A31B9"
+      counterColor: "#AF5427"
+      filterColor: "#0B946A"
+    border:
+      fgColor: "#E73665"
+      focusColor: "#1D8991"
+    menu:
+      fgColor: "#16161D"
+      keyColor: "#E73665"
+      numKeyColor: "#DA103F"
+    crumbs:
+      fgColor: "#FDF0ED"
+      bgColor: default
+      activeColor: "#AF5427"
+    status:
+      newColor: "#E73665"
+      modifyColor: "#1D8991"
+      addColor: "#0B946A"
+      pendingColor: "#AF5427"
+      errorColor: "#DA103F"
+      highlightColor: "#1D8991"
+      killColor: "#8A31B9"
+      completedColor: "#6F686A"
+  info:
+    fgColor: "#AF5427"
+    sectionColor: "#16161D"
+  views:
+    table:
+      fgColor: "#16161D"
+      bgColor: default
+      cursorFgColor: "#16161D"
+      cursorBgColor: "#F9CEC3"
+      markColor: "#0B946A"
+      header:
+        fgColor: "#AF5427"
+        bgColor: default
+        sorterColor: "#1D8991"
+    xray:
+      fgColor: "#16161D"
+      bgColor: default
+      cursorColor: "#F9CEC3"
+      cursorTextColor: "#16161D"
+      graphicColor: "#8A31B9"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#0B946A"
+        - "#DA103F"
+      defaultChartColors:
+        - "#0B946A"
+        - "#DA103F"
+      resourceColors:
+        cpu:
+          - "#E73665"
+          - "#1D8991"
+        mem:
+          - "#0B946A"
+          - "#AF5427"
+    yaml:
+      keyColor: "#E73665"
+      valueColor: "#16161D"
+      colonColor: "#6F686A"
+    logs:
+      fgColor: "#16161D"
+      bgColor: default
+      indicator:
+        fgColor: "#1D8991"
+        bgColor: default
+        toggleOnColor: "#0B946A"
+        toggleOffColor: "#6F686A"
+  dialog:
+    fgColor: "#AF5427"
+    bgColor: default
+    buttonFgColor: "#16161D"
+    buttonBgColor: default
+    buttonFocusFgColor: "#FDF0ED"
+    buttonFocusBgColor: "#8A31B9"
+    labelFgColor: "#AF5427"
+    fieldFgColor: "#16161D"

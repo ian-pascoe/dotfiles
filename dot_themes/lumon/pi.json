@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "lumon",
+  "appearance": "dark",
   "vars": {
     "accent": "#8bc9eb",
     "accent2": "#b4e4f6",

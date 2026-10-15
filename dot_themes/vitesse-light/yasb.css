@@ -1,0 +1,37 @@
+:root {
+  /* Vitesse Light palette (hand-derived from antfu/vscode-theme-vitesse (themes/vitesse-light.json) and the qshan-li/neovim-theme-vitesse "light" palette); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 255, 255, 255;
+  --foreground: 57, 58, 52;
+  --card-background: 247, 247, 247;
+  --popup-background: 240, 240, 240;
+  --primary: 30, 117, 79;
+  --secondary: 41, 147, 163;
+  --tertiary: 30, 117, 79;
+  --accent: 161, 56, 101;
+  --muted-background: 116, 117, 113;
+  --info: 30, 117, 79;
+  --success: 30, 117, 79;
+  --warning: 153, 132, 24;
+  --destructive: 171, 89, 89;
+  --border: 231, 231, 231;
+  --text: 57, 58, 52;
+  --foam: 41, 147, 163;
+  --gold: 153, 132, 24;
+  --love: 171, 89, 89;
+  --overlay: 116, 117, 113;
+  --highlight: 234, 234, 234;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

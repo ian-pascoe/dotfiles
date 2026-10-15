@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "mellow",
+  "appearance": "dark",
   "vars": {
     "accent": "#aca1cf",
     "accent2": "#90b99f",

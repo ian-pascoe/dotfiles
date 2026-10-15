@@ -1,0 +1,101 @@
+# Hand-derived from the lunacookies/vim-colors-xcode xcodelight colorscheme (templates/_xcodelight_colors.colortemplate) and Ghostty's bundled "Xcode Light" theme.
+k9s:
+  body:
+    fgColor: "#262626"
+    bgColor: default
+    logoColor: "#0F68A0"
+  prompt:
+    fgColor: "#262626"
+    bgColor: default
+    suggestColor: "#0F68A0"
+  help:
+    fgColor: "#262626"
+    bgColor: default
+    sectionColor: "#2D8504"
+    keyColor: "#0F68A0"
+    numKeyColor: "#D12F1B"
+  frame:
+    title:
+      fgColor: "#3E8087"
+      bgColor: default
+      highlightColor: "#804FB8"
+      counterColor: "#78492A"
+      filterColor: "#2D8504"
+    border:
+      fgColor: "#0F68A0"
+      focusColor: "#156ADF"
+    menu:
+      fgColor: "#262626"
+      keyColor: "#0F68A0"
+      numKeyColor: "#D12F1B"
+    crumbs:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      activeColor: "#78492A"
+    status:
+      newColor: "#0F68A0"
+      modifyColor: "#3E8087"
+      addColor: "#2D8504"
+      pendingColor: "#78492A"
+      errorColor: "#D12F1B"
+      highlightColor: "#3E8087"
+      killColor: "#804FB8"
+      completedColor: "#5C6873"
+  info:
+    fgColor: "#78492A"
+    sectionColor: "#262626"
+  views:
+    table:
+      fgColor: "#262626"
+      bgColor: default
+      cursorFgColor: "#262626"
+      cursorBgColor: "#B4D8FD"
+      markColor: "#2D8504"
+      header:
+        fgColor: "#78492A"
+        bgColor: default
+        sorterColor: "#3E8087"
+    xray:
+      fgColor: "#262626"
+      bgColor: default
+      cursorColor: "#B4D8FD"
+      cursorTextColor: "#262626"
+      graphicColor: "#804FB8"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#2D8504"
+        - "#D12F1B"
+      defaultChartColors:
+        - "#2D8504"
+        - "#D12F1B"
+      resourceColors:
+        cpu:
+          - "#0F68A0"
+          - "#3E8087"
+        mem:
+          - "#2D8504"
+          - "#78492A"
+    yaml:
+      keyColor: "#0F68A0"
+      valueColor: "#262626"
+      colonColor: "#5C6873"
+    logs:
+      fgColor: "#262626"
+      bgColor: default
+      indicator:
+        fgColor: "#3E8087"
+        bgColor: default
+        toggleOnColor: "#2D8504"
+        toggleOffColor: "#5C6873"
+  dialog:
+    fgColor: "#78492A"
+    bgColor: default
+    buttonFgColor: "#262626"
+    buttonBgColor: default
+    buttonFocusFgColor: "#FFFFFF"
+    buttonFocusBgColor: "#804FB8"
+    labelFgColor: "#78492A"
+    fieldFgColor: "#262626"

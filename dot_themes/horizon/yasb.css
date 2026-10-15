@@ -1,0 +1,37 @@
+:root {
+  /* Horizon palette (hand-derived from the jolaleye "Horizon" VS Code theme and akinsho/horizon.nvim palette-dark.lua); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 28, 30, 38;
+  --foreground: 213, 216, 218;
+  --card-background: 35, 37, 48;
+  --popup-background: 46, 48, 62;
+  --primary: 233, 86, 120;
+  --secondary: 37, 176, 188;
+  --tertiary: 233, 86, 120;
+  --accent: 184, 119, 219;
+  --muted-background: 108, 111, 147;
+  --info: 233, 86, 120;
+  --success: 41, 211, 152;
+  --warning: 250, 183, 149;
+  --destructive: 233, 86, 120;
+  --border: 46, 48, 62;
+  --text: 213, 216, 218;
+  --foam: 89, 225, 227;
+  --gold: 250, 183, 149;
+  --love: 233, 86, 120;
+  --overlay: 108, 111, 147;
+  --highlight: 46, 48, 62;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

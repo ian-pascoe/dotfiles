@@ -1,0 +1,39 @@
+# Hand-derived from robb0wen/synthwave-vscode "SynthWave 84" theme JSON.
+user: "#FF7EDB"
+group: "#03EDF9"
+permission:
+  read: "#72F1B8"
+  write: "#FEDE5D"
+  exec: "#FE4450"
+  exec-sticky: "#B180D7"
+  no-access: "#848BBD"
+  octal: "#03EDF9"
+  acl: "#03EDF9"
+  context: "#FF7EDB"
+date:
+  hour-old: "#72F1B8"
+  day-old: "#FF7EDB"
+  older: "#848BBD"
+size:
+  none: "#848BBD"
+  small: "#72F1B8"
+  medium: "#FEDE5D"
+  large: "#FF8B39"
+inode:
+  valid: "#B180D7"
+  invalid: "#848BBD"
+links:
+  valid: "#03EDF9"
+  invalid: "#848BBD"
+tree-edge: "#614D85"
+git-status:
+  default: "#FFFFFF"
+  unmodified: "#848BBD"
+  ignored: "#848BBD"
+  new-in-index: "#72F1B8"
+  new-in-workdir: "#72F1B8"
+  typechange: "#FEDE5D"
+  deleted: "#FE4450"
+  renamed: "#FF7EDB"
+  modified: "#FEDE5D"
+  conflicted: "#FE4450"

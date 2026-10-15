@@ -1,0 +1,39 @@
+# Hand-derived from the GitHub "Light Default" palette (projekt0n/github-nvim-theme github_light_default / primer/github-vscode-theme light_default).
+user: "#0969da"
+group: "#1b7c83"
+permission:
+  read: "#1a7f37"
+  write: "#9a6700"
+  exec: "#cf222e"
+  exec-sticky: "#8250df"
+  no-access: "#59636e"
+  octal: "#1b7c83"
+  acl: "#1b7c83"
+  context: "#0969da"
+date:
+  hour-old: "#1a7f37"
+  day-old: "#0969da"
+  older: "#59636e"
+size:
+  none: "#59636e"
+  small: "#1a7f37"
+  medium: "#9a6700"
+  large: "#bc4c00"
+inode:
+  valid: "#8250df"
+  invalid: "#59636e"
+links:
+  valid: "#1b7c83"
+  invalid: "#59636e"
+tree-edge: "#d0d7de"
+git-status:
+  default: "#1f2328"
+  unmodified: "#59636e"
+  ignored: "#59636e"
+  new-in-index: "#1a7f37"
+  new-in-workdir: "#1a7f37"
+  typechange: "#9a6700"
+  deleted: "#cf222e"
+  renamed: "#0969da"
+  modified: "#9a6700"
+  conflicted: "#cf222e"

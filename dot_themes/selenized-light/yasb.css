@@ -1,0 +1,37 @@
+:root {
+  /* Selenized Light palette (hand-mapped from Jan Warchol's Selenized (jan-warchol/selenized, calind/selenized.nvim palette)); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 251, 243, 219;
+  --foreground: 83, 103, 109;
+  --card-background: 236, 227, 204;
+  --popup-background: 213, 205, 182;
+  --primary: 0, 114, 212;
+  --secondary: 0, 156, 143;
+  --tertiary: 0, 114, 212;
+  --accent: 135, 98, 198;
+  --muted-background: 111, 127, 130;
+  --info: 0, 114, 212;
+  --success: 72, 145, 0;
+  --warning: 173, 137, 0;
+  --destructive: 210, 33, 45;
+  --border: 213, 205, 182;
+  --text: 83, 103, 109;
+  --foam: 0, 156, 143;
+  --gold: 173, 137, 0;
+  --love: 210, 33, 45;
+  --overlay: 111, 127, 130;
+  --highlight: 213, 205, 182;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

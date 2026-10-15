@@ -1,0 +1,39 @@
+# Hand-derived from the ribru17/bamboo.nvim "light" palette (lua/bamboo/palette.lua).
+user: "#27850B"
+group: "#188A9E"
+permission:
+  read: "#27850B"
+  write: "#A77B00"
+  exec: "#C72A3C"
+  exec-sticky: "#8A4ADF"
+  no-access: "#6D726B"
+  octal: "#188A9E"
+  acl: "#188A9E"
+  context: "#27850B"
+date:
+  hour-old: "#27850B"
+  day-old: "#27850B"
+  older: "#6D726B"
+size:
+  none: "#6D726B"
+  small: "#27850B"
+  medium: "#A77B00"
+  large: "#DF5926"
+inode:
+  valid: "#8A4ADF"
+  invalid: "#6D726B"
+links:
+  valid: "#188A9E"
+  invalid: "#6D726B"
+tree-edge: "#838781"
+git-status:
+  default: "#3A4238"
+  unmodified: "#6D726B"
+  ignored: "#6D726B"
+  new-in-index: "#27850B"
+  new-in-workdir: "#27850B"
+  typechange: "#A77B00"
+  deleted: "#C72A3C"
+  renamed: "#27850B"
+  modified: "#A77B00"
+  conflicted: "#C72A3C"

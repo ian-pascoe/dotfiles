@@ -1,0 +1,39 @@
+# Hand-derived from the jolaleye "Horizon" VS Code theme and akinsho/horizon.nvim palette-dark.lua.
+user: "#E95678"
+group: "#59E1E3"
+permission:
+  read: "#29D398"
+  write: "#FAB795"
+  exec: "#E95678"
+  exec-sticky: "#B877DB"
+  no-access: "#6C6F93"
+  octal: "#59E1E3"
+  acl: "#59E1E3"
+  context: "#E95678"
+date:
+  hour-old: "#29D398"
+  day-old: "#E95678"
+  older: "#6C6F93"
+size:
+  none: "#6C6F93"
+  small: "#29D398"
+  medium: "#FAB795"
+  large: "#F09483"
+inode:
+  valid: "#B877DB"
+  invalid: "#6C6F93"
+links:
+  valid: "#59E1E3"
+  invalid: "#6C6F93"
+tree-edge: "#4B4E68"
+git-status:
+  default: "#D5D8DA"
+  unmodified: "#6C6F93"
+  ignored: "#6C6F93"
+  new-in-index: "#29D398"
+  new-in-workdir: "#29D398"
+  typechange: "#FAB795"
+  deleted: "#E95678"
+  renamed: "#E95678"
+  modified: "#FAB795"
+  conflicted: "#E95678"

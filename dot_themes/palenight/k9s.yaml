@@ -1,0 +1,101 @@
+# Hand-mapped from Material Theme "Palenight" palette from marko-cerovac/material.nvim "palenight" style (92f7366).
+k9s:
+  body:
+    fgColor: "#A6ACCD"
+    bgColor: default
+    logoColor: "#82AAFF"
+  prompt:
+    fgColor: "#A6ACCD"
+    bgColor: default
+    suggestColor: "#82AAFF"
+  help:
+    fgColor: "#A6ACCD"
+    bgColor: default
+    sectionColor: "#C3E88D"
+    keyColor: "#82AAFF"
+    numKeyColor: "#FF5370"
+  frame:
+    title:
+      fgColor: "#89DDFF"
+      bgColor: default
+      highlightColor: "#C792EA"
+      counterColor: "#FFCB6B"
+      filterColor: "#C3E88D"
+    border:
+      fgColor: "#82AAFF"
+      focusColor: "#80CBC4"
+    menu:
+      fgColor: "#A6ACCD"
+      keyColor: "#82AAFF"
+      numKeyColor: "#FF5370"
+    crumbs:
+      fgColor: "#292D3E"
+      bgColor: default
+      activeColor: "#FFCB6B"
+    status:
+      newColor: "#82AAFF"
+      modifyColor: "#89DDFF"
+      addColor: "#C3E88D"
+      pendingColor: "#FFCB6B"
+      errorColor: "#FF5370"
+      highlightColor: "#89DDFF"
+      killColor: "#C792EA"
+      completedColor: "#717CB4"
+  info:
+    fgColor: "#FFCB6B"
+    sectionColor: "#A6ACCD"
+  views:
+    table:
+      fgColor: "#A6ACCD"
+      bgColor: default
+      cursorFgColor: "#A6ACCD"
+      cursorBgColor: "#444267"
+      markColor: "#C3E88D"
+      header:
+        fgColor: "#FFCB6B"
+        bgColor: default
+        sorterColor: "#89DDFF"
+    xray:
+      fgColor: "#A6ACCD"
+      bgColor: default
+      cursorColor: "#444267"
+      cursorTextColor: "#A6ACCD"
+      graphicColor: "#C792EA"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#C3E88D"
+        - "#FF5370"
+      defaultChartColors:
+        - "#C3E88D"
+        - "#FF5370"
+      resourceColors:
+        cpu:
+          - "#82AAFF"
+          - "#89DDFF"
+        mem:
+          - "#C3E88D"
+          - "#FFCB6B"
+    yaml:
+      keyColor: "#82AAFF"
+      valueColor: "#A6ACCD"
+      colonColor: "#717CB4"
+    logs:
+      fgColor: "#A6ACCD"
+      bgColor: default
+      indicator:
+        fgColor: "#89DDFF"
+        bgColor: default
+        toggleOnColor: "#C3E88D"
+        toggleOffColor: "#717CB4"
+  dialog:
+    fgColor: "#FFCB6B"
+    bgColor: default
+    buttonFgColor: "#A6ACCD"
+    buttonBgColor: default
+    buttonFocusFgColor: "#292D3E"
+    buttonFocusBgColor: "#C792EA"
+    labelFgColor: "#FFCB6B"
+    fieldFgColor: "#A6ACCD"

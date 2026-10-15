@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "retro-82",
+  "appearance": "dark",
   "vars": {
     "accent": "#faa968",
     "accent2": "#63c6be",

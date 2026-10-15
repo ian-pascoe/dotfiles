@@ -1,0 +1,37 @@
+:root {
+  /* Bamboo Light palette (hand-derived from ribru17/bamboo.nvim "light" palette (lua/bamboo/palette.lua)); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 250, 250, 224;
+  --foreground: 58, 66, 56;
+  --card-background: 234, 234, 208;
+  --popup-background: 228, 228, 204;
+  --primary: 39, 133, 11;
+  --secondary: 24, 138, 158;
+  --tertiary: 39, 133, 11;
+  --accent: 138, 74, 223;
+  --muted-background: 109, 114, 107;
+  --info: 39, 133, 11;
+  --success: 39, 133, 11;
+  --warning: 167, 123, 0;
+  --destructive: 199, 42, 60;
+  --border: 218, 218, 194;
+  --text: 58, 66, 56;
+  --foam: 24, 138, 158;
+  --gold: 167, 123, 0;
+  --love: 199, 42, 60;
+  --overlay: 109, 114, 107;
+  --highlight: 218, 218, 194;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

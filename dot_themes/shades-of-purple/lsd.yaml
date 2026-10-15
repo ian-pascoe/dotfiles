@@ -1,0 +1,39 @@
+# Hand-derived from Ahmad Awais's Shades of Purple palette from ahmadawais/shades-of-purple-vscode and necrogoru/shades-of-purple.nvim, on the Ghostty "Shades Of Purple" background.
+user: "#FAD000"
+group: "#9EFFFF"
+permission:
+  read: "#A5FF90"
+  write: "#FAD000"
+  exec: "#EC3A37"
+  exec-sticky: "#B362FF"
+  no-access: "#A599E9"
+  octal: "#9EFFFF"
+  acl: "#9EFFFF"
+  context: "#FAD000"
+date:
+  hour-old: "#A5FF90"
+  day-old: "#FAD000"
+  older: "#A599E9"
+size:
+  none: "#A599E9"
+  small: "#A5FF90"
+  medium: "#FAD000"
+  large: "#FF9D00"
+inode:
+  valid: "#B362FF"
+  invalid: "#A599E9"
+links:
+  valid: "#9EFFFF"
+  invalid: "#A599E9"
+tree-edge: "#6B6B9F"
+git-status:
+  default: "#FFFFFF"
+  unmodified: "#A599E9"
+  ignored: "#A599E9"
+  new-in-index: "#A5FF90"
+  new-in-workdir: "#A5FF90"
+  typechange: "#FAD000"
+  deleted: "#EC3A37"
+  renamed: "#FAD000"
+  modified: "#FAD000"
+  conflicted: "#EC3A37"

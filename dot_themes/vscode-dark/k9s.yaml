@@ -1,0 +1,101 @@
+# Hand-derived from the VS Code "Dark Modern" theme (microsoft/vscode extensions/theme-defaults/themes/dark_modern.json + dark_plus syntax).
+k9s:
+  body:
+    fgColor: "#cccccc"
+    bgColor: default
+    logoColor: "#3794ff"
+  prompt:
+    fgColor: "#cccccc"
+    bgColor: default
+    suggestColor: "#3794ff"
+  help:
+    fgColor: "#cccccc"
+    bgColor: default
+    sectionColor: "#2ea043"
+    keyColor: "#3794ff"
+    numKeyColor: "#f14c4c"
+  frame:
+    title:
+      fgColor: "#4ec9b0"
+      bgColor: default
+      highlightColor: "#c586c0"
+      counterColor: "#cca700"
+      filterColor: "#2ea043"
+    border:
+      fgColor: "#3794ff"
+      focusColor: "#4ec9b0"
+    menu:
+      fgColor: "#cccccc"
+      keyColor: "#3794ff"
+      numKeyColor: "#f14c4c"
+    crumbs:
+      fgColor: "#1f1f1f"
+      bgColor: default
+      activeColor: "#cca700"
+    status:
+      newColor: "#3794ff"
+      modifyColor: "#4ec9b0"
+      addColor: "#2ea043"
+      pendingColor: "#cca700"
+      errorColor: "#f14c4c"
+      highlightColor: "#4ec9b0"
+      killColor: "#c586c0"
+      completedColor: "#9d9d9d"
+  info:
+    fgColor: "#cca700"
+    sectionColor: "#cccccc"
+  views:
+    table:
+      fgColor: "#cccccc"
+      bgColor: default
+      cursorFgColor: "#cccccc"
+      cursorBgColor: "#37373d"
+      markColor: "#2ea043"
+      header:
+        fgColor: "#cca700"
+        bgColor: default
+        sorterColor: "#4ec9b0"
+    xray:
+      fgColor: "#cccccc"
+      bgColor: default
+      cursorColor: "#37373d"
+      cursorTextColor: "#cccccc"
+      graphicColor: "#c586c0"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#2ea043"
+        - "#f14c4c"
+      defaultChartColors:
+        - "#2ea043"
+        - "#f14c4c"
+      resourceColors:
+        cpu:
+          - "#3794ff"
+          - "#4ec9b0"
+        mem:
+          - "#2ea043"
+          - "#cca700"
+    yaml:
+      keyColor: "#3794ff"
+      valueColor: "#cccccc"
+      colonColor: "#9d9d9d"
+    logs:
+      fgColor: "#cccccc"
+      bgColor: default
+      indicator:
+        fgColor: "#4ec9b0"
+        bgColor: default
+        toggleOnColor: "#2ea043"
+        toggleOffColor: "#9d9d9d"
+  dialog:
+    fgColor: "#cca700"
+    bgColor: default
+    buttonFgColor: "#1f1f1f"
+    buttonBgColor: "#9d9d9d"
+    buttonFocusFgColor: "#1f1f1f"
+    buttonFocusBgColor: "#c586c0"
+    labelFgColor: "#cca700"
+    fieldFgColor: "#cccccc"

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-derived from antfu/vscode-theme-vitesse (themes/vitesse-dark.json) and the qshan-li/neovim-theme-vitesse "dark" palette. -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Vitesse Dark</string>
+    <key>semanticClass</key>
+    <string>theme.dark.vitesse-dark</string>
+    <key>uuid</key>
+    <string>8827c498-a6a2-5dca-8fe4-5bc946152986</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#121212</string>
+          <key>foreground</key><string>#DBD7CA</string>
+          <key>caret</key><string>#DBD7CA</string>
+          <key>lineHighlight</key><string>#181818</string>
+          <key>selection</key><string>#272727</string>
+          <key>gutterForeground</key><string>#666666</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#687668</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#C98A7D</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric, keyword.other.unit</string><key>settings</key><dict><key>foreground</key><string>#4C9A91</string></dict></dict>
+      <dict><key>scope</key><string>constant.language, support.constant, variable.other.constant, constant.character.escape</string><key>settings</key><dict><key>foreground</key><string>#C99076</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage.type, storage.modifier, keyword.control</string><key>settings</key><dict><key>foreground</key><string>#4D9375</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function, meta.function-call</string><key>settings</key><dict><key>foreground</key><string>#80A665</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, support.type, entity.name.class, support.class</string><key>settings</key><dict><key>foreground</key><string>#5DA994</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.tag, punctuation.definition.tag</string><key>settings</key><dict><key>foreground</key><string>#4D9375</string></dict></dict>
+      <dict><key>scope</key><string>entity.other.attribute-name, support.type.property-name, meta.object-literal.key, variable.other.property</string><key>settings</key><dict><key>foreground</key><string>#E6CC77</string></dict></dict>
+      <dict><key>scope</key><string>variable, variable.other.readwrite</string><key>settings</key><dict><key>foreground</key><string>#BD976A</string></dict></dict>
+      <dict><key>scope</key><string>variable.parameter, meta.function.parameters</string><key>settings</key><dict><key>foreground</key><string>#DBD7CA</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.namespace, entity.name.module</string><key>settings</key><dict><key>foreground</key><string>#D9739F</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator</string><key>settings</key><dict><key>foreground</key><string>#666666</string></dict></dict>
+      <dict><key>scope</key><string>punctuation, meta.delimiter</string><key>settings</key><dict><key>foreground</key><string>#666666</string></dict></dict>
+      <dict><key>scope</key><string>string.regexp</string><key>settings</key><dict><key>foreground</key><string>#D4976C</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, markup.heading entity.name</string><key>settings</key><dict><key>foreground</key><string>#4D9375</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.bold</string><key>settings</key><dict><key>foreground</key><string>#DBD7CA</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#DBD7CA</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.raw, markup.inline.raw</string><key>settings</key><dict><key>foreground</key><string>#4D9375</string></dict></dict>
+      <dict><key>scope</key><string>markup.underline.link, string.other.link</string><key>settings</key><dict><key>foreground</key><string>#5EAAB5</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted, markup.inserted.diff</string><key>settings</key><dict><key>foreground</key><string>#4D9375</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted, markup.deleted.diff</string><key>settings</key><dict><key>foreground</key><string>#CB7676</string></dict></dict>
+      <dict><key>scope</key><string>markup.changed, markup.changed.diff</string><key>settings</key><dict><key>foreground</key><string>#E6CC77</string></dict></dict>
+      <dict><key>scope</key><string>invalid</string><key>settings</key><dict><key>foreground</key><string>#CB7676</string><key>fontStyle</key><string>underline</string></dict></dict>
+    </array>
+  </dict>
+</plist>

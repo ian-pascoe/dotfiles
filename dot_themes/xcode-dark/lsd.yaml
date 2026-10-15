@@ -1,0 +1,39 @@
+# Hand-derived from the lunacookies/vim-colors-xcode xcodedark colorscheme (templates/_xcodedark_colors.colortemplate) and Ghostty's bundled "Xcode Dark" theme.
+user: "#4EB0CC"
+group: "#78C2B3"
+permission:
+  read: "#84B360"
+  write: "#D9C97C"
+  exec: "#FF8170"
+  exec-sticky: "#B281EB"
+  no-access: "#7F8C98"
+  octal: "#78C2B3"
+  acl: "#78C2B3"
+  context: "#4EB0CC"
+date:
+  hour-old: "#84B360"
+  day-old: "#4EB0CC"
+  older: "#7F8C98"
+size:
+  none: "#7F8C98"
+  small: "#84B360"
+  medium: "#D9C97C"
+  large: "#FFA14F"
+inode:
+  valid: "#B281EB"
+  invalid: "#7F8C98"
+links:
+  valid: "#78C2B3"
+  invalid: "#7F8C98"
+tree-edge: "#53606E"
+git-status:
+  default: "#DFDFE0"
+  unmodified: "#7F8C98"
+  ignored: "#7F8C98"
+  new-in-index: "#84B360"
+  new-in-workdir: "#84B360"
+  typechange: "#D9C97C"
+  deleted: "#FF8170"
+  renamed: "#4EB0CC"
+  modified: "#D9C97C"
+  conflicted: "#FF8170"

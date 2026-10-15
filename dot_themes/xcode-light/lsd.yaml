@@ -1,0 +1,39 @@
+# Hand-derived from the lunacookies/vim-colors-xcode xcodelight colorscheme (templates/_xcodelight_colors.colortemplate) and Ghostty's bundled "Xcode Light" theme.
+user: "#0F68A0"
+group: "#3E8087"
+permission:
+  read: "#2D8504"
+  write: "#78492A"
+  exec: "#D12F1B"
+  exec-sticky: "#804FB8"
+  no-access: "#5C6873"
+  octal: "#3E8087"
+  acl: "#3E8087"
+  context: "#0F68A0"
+date:
+  hour-old: "#2D8504"
+  day-old: "#0F68A0"
+  older: "#5C6873"
+size:
+  none: "#5C6873"
+  small: "#2D8504"
+  medium: "#78492A"
+  large: "#78492A"
+inode:
+  valid: "#804FB8"
+  invalid: "#5C6873"
+links:
+  valid: "#3E8087"
+  invalid: "#5C6873"
+tree-edge: "#8A99A6"
+git-status:
+  default: "#262626"
+  unmodified: "#5C6873"
+  ignored: "#5C6873"
+  new-in-index: "#2D8504"
+  new-in-workdir: "#2D8504"
+  typechange: "#78492A"
+  deleted: "#D12F1B"
+  renamed: "#0F68A0"
+  modified: "#78492A"
+  conflicted: "#D12F1B"

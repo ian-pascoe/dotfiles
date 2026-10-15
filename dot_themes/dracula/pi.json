@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "dracula",
+  "appearance": "dark",
   "vars": {
     "accent": "#bd93f9",
     "accent2": "#8be9fd",

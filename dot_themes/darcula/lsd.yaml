@@ -1,0 +1,39 @@
+# Hand-derived from the JetBrains Darcula editor scheme colors (as used by xiantang/darcula-dark.nvim's colors/themes/darcula.json) and Ghostty's bundled "JetBrains Darcula" theme.
+user: "#6897BB"
+group: "#6FAFBD"
+permission:
+  read: "#6A8759"
+  write: "#FFC66D"
+  exec: "#FF6B68"
+  exec-sticky: "#9876AA"
+  no-access: "#808080"
+  octal: "#6FAFBD"
+  acl: "#6FAFBD"
+  context: "#6897BB"
+date:
+  hour-old: "#6A8759"
+  day-old: "#6897BB"
+  older: "#808080"
+size:
+  none: "#808080"
+  small: "#6A8759"
+  medium: "#FFC66D"
+  large: "#CC7832"
+inode:
+  valid: "#9876AA"
+  invalid: "#808080"
+links:
+  valid: "#6FAFBD"
+  invalid: "#808080"
+tree-edge: "#606366"
+git-status:
+  default: "#ADADAD"
+  unmodified: "#808080"
+  ignored: "#808080"
+  new-in-index: "#6A8759"
+  new-in-workdir: "#6A8759"
+  typechange: "#FFC66D"
+  deleted: "#FF6B68"
+  renamed: "#6897BB"
+  modified: "#FFC66D"
+  conflicted: "#FF6B68"

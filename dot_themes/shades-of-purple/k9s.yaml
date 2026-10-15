@@ -1,0 +1,101 @@
+# Hand-derived from Ahmad Awais's Shades of Purple palette from ahmadawais/shades-of-purple-vscode and necrogoru/shades-of-purple.nvim, on the Ghostty "Shades Of Purple" background.
+k9s:
+  body:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    logoColor: "#FAD000"
+  prompt:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    suggestColor: "#FAD000"
+  help:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    sectionColor: "#A5FF90"
+    keyColor: "#FAD000"
+    numKeyColor: "#EC3A37"
+  frame:
+    title:
+      fgColor: "#9EFFFF"
+      bgColor: default
+      highlightColor: "#B362FF"
+      counterColor: "#FAD000"
+      filterColor: "#A5FF90"
+    border:
+      fgColor: "#FAD000"
+      focusColor: "#B362FF"
+    menu:
+      fgColor: "#FFFFFF"
+      keyColor: "#FAD000"
+      numKeyColor: "#EC3A37"
+    crumbs:
+      fgColor: "#1E1D40"
+      bgColor: default
+      activeColor: "#FAD000"
+    status:
+      newColor: "#FAD000"
+      modifyColor: "#9EFFFF"
+      addColor: "#A5FF90"
+      pendingColor: "#FAD000"
+      errorColor: "#EC3A37"
+      highlightColor: "#9EFFFF"
+      killColor: "#B362FF"
+      completedColor: "#A599E9"
+  info:
+    fgColor: "#FAD000"
+    sectionColor: "#FFFFFF"
+  views:
+    table:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      cursorFgColor: "#FFFFFF"
+      cursorBgColor: "#4D4570"
+      markColor: "#A5FF90"
+      header:
+        fgColor: "#FAD000"
+        bgColor: default
+        sorterColor: "#9EFFFF"
+    xray:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      cursorColor: "#4D4570"
+      cursorTextColor: "#FFFFFF"
+      graphicColor: "#B362FF"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#A5FF90"
+        - "#EC3A37"
+      defaultChartColors:
+        - "#A5FF90"
+        - "#EC3A37"
+      resourceColors:
+        cpu:
+          - "#FAD000"
+          - "#9EFFFF"
+        mem:
+          - "#A5FF90"
+          - "#FAD000"
+    yaml:
+      keyColor: "#FAD000"
+      valueColor: "#FFFFFF"
+      colonColor: "#A599E9"
+    logs:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      indicator:
+        fgColor: "#9EFFFF"
+        bgColor: default
+        toggleOnColor: "#A5FF90"
+        toggleOffColor: "#A599E9"
+  dialog:
+    fgColor: "#FAD000"
+    bgColor: default
+    buttonFgColor: "#FFFFFF"
+    buttonBgColor: default
+    buttonFocusFgColor: "#1E1D40"
+    buttonFocusBgColor: "#B362FF"
+    labelFgColor: "#FAD000"
+    fieldFgColor: "#FFFFFF"

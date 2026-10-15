@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-mapped from phha/zenburn.nvim palette (f5ee12b); terminal colors from Ghostty's bundled "Zenburn" theme. -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Zenburn</string>
+    <key>semanticClass</key>
+    <string>theme.dark.zenburn</string>
+    <key>uuid</key>
+    <string>4270f790-2abf-5130-9fb5-e3a97358cbf7</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#3F3F3F</string>
+          <key>foreground</key><string>#DCDCCC</string>
+          <key>caret</key><string>#73635A</string>
+          <key>lineHighlight</key><string>#484848</string>
+          <key>selection</key><string>#233323</string>
+          <key>gutterForeground</key><string>#6F6F6F</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#7F9F7F</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#CC9393</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric</string><key>settings</key><dict><key>foreground</key><string>#8CD0D3</string></dict></dict>
+      <dict><key>scope</key><string>constant.language, constant.character, variable.other.constant</string><key>settings</key><dict><key>foreground</key><string>#DCA3A3</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage.type, storage.modifier</string><key>settings</key><dict><key>foreground</key><string>#F0DFAF</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.tag, markup.deleted</string><key>settings</key><dict><key>foreground</key><string>#E89393</string></dict></dict>
+      <dict><key>scope</key><string>entity.other.attribute-name</string><key>settings</key><dict><key>foreground</key><string>#DFDFBF</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#EFEF8F</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, support.type, support.class, entity.name.class</string><key>settings</key><dict><key>foreground</key><string>#DFDFBF</string></dict></dict>
+      <dict><key>scope</key><string>variable.parameter, meta.function.parameters</string><key>settings</key><dict><key>foreground</key><string>#EFDCBC</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator</string><key>settings</key><dict><key>foreground</key><string>#F0EFD0</string></dict></dict>
+      <dict><key>scope</key><string>punctuation, meta.delimiter</string><key>settings</key><dict><key>foreground</key><string>#8F8F8F</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, markup.bold</string><key>settings</key><dict><key>foreground</key><string>#94BFF3</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#DC8CC3</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted.diff</string><key>settings</key><dict><key>foreground</key><string>#7F9F7F</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted.diff</string><key>settings</key><dict><key>foreground</key><string>#CC9393</string></dict></dict>
+      <dict><key>scope</key><string>invalid</string><key>settings</key><dict><key>foreground</key><string>#CC9393</string><key>fontStyle</key><string>underline</string></dict></dict>
+    </array>
+  </dict>
+</plist>

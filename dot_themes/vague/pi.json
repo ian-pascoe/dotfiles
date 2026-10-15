@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "vague",
+  "appearance": "dark",
   "vars": {
     "accent": "#7e98e8",
     "accent2": "#b4d4cf",

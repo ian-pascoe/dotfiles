@@ -128,6 +128,30 @@ if command -v hunk &>/dev/null; then
           iceberg-light | bluloco-light) echo github-light ;;
           monokai-pro-light | no-clown-fiesta-light) echo min-light ;;
           zenbones-dark) echo min-dark ;;
+          github-dark) echo github-dark-default ;;
+          github-light) echo github-light-default ;;
+          vscode-dark) echo dark-plus ;;
+          vscode-light) echo light-plus ;;
+          xcode-dark) echo github-dark-default ;;
+          xcode-light) echo github-light-default ;;
+          darcula) echo ayu-dark ;;
+          cobalt2) echo night-owl ;;
+          shades-of-purple) echo material-theme-palenight ;;
+          light-owl) echo night-owl-light ;;
+          everblush) echo everforest-dark ;;
+          material-ocean) echo material-theme-ocean ;;
+          material-lighter) echo material-theme-lighter ;;
+          palenight) echo material-theme-palenight ;;
+          alabaster) echo min-light ;;
+          alabaster-dark) echo min-dark ;;
+          selenized-dark) echo solarized-dark ;;
+          selenized-light) echo solarized-light ;;
+          nightfox) echo github-dark-dimmed ;;
+          dayfox) echo solarized-light ;;
+          nordfox) echo nord ;;
+          bamboo) echo everforest-dark ;;
+          bamboo-light) echo everforest-light ;;
+          zenburn) echo gruvbox-dark-soft ;;
           *) basename "$(readlink ~/.config/theme)" ;;
           esac
         )" \

@@ -1,0 +1,37 @@
+:root {
+  /* SynthWave '84 palette (hand-derived from robb0wen/synthwave-vscode "SynthWave 84" theme JSON); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 38, 35, 53;
+  --foreground: 255, 255, 255;
+  --card-background: 42, 33, 57;
+  --popup-background: 52, 41, 79;
+  --primary: 255, 126, 219;
+  --secondary: 54, 249, 246;
+  --tertiary: 255, 126, 219;
+  --accent: 177, 128, 215;
+  --muted-background: 132, 139, 189;
+  --info: 255, 126, 219;
+  --success: 114, 241, 184;
+  --warning: 254, 222, 93;
+  --destructive: 254, 68, 80;
+  --border: 73, 84, 149;
+  --text: 255, 255, 255;
+  --foam: 3, 237, 249;
+  --gold: 254, 222, 93;
+  --love: 254, 68, 80;
+  --overlay: 132, 139, 189;
+  --highlight: 65, 62, 78;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "flexoki",
+  "appearance": "dark",
   "vars": {
     "accent": "#4385be",
     "accent2": "#3aa99f",

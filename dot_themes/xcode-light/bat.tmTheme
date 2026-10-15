@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-derived from the lunacookies/vim-colors-xcode xcodelight colorscheme (templates/_xcodelight_colors.colortemplate) and Ghostty's bundled "Xcode Light" theme. -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Xcode Light</string>
+    <key>semanticClass</key>
+    <string>theme.light.xcode-light</string>
+    <key>uuid</key>
+    <string>ff705bf0-6ed6-4ebe-b55e-319f73c4cbe3</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#FFFFFF</string>
+          <key>foreground</key><string>#262626</string>
+          <key>caret</key><string>#262626</string>
+          <key>lineHighlight</key><string>#ECF5FF</string>
+          <key>selection</key><string>#B4D8FD</string>
+          <key>gutterForeground</key><string>#8A99A6</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#8A99A6</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#D12F1B</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric</string><key>settings</key><dict><key>foreground</key><string>#272AD8</string></dict></dict>
+      <dict><key>scope</key><string>constant.language, variable.other.constant</string><key>settings</key><dict><key>foreground</key><string>#3E8087</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage.type, storage.modifier, entity.name.tag</string><key>settings</key><dict><key>foreground</key><string>#AD3DA4</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#0F68A0</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, support.type, entity.name.class</string><key>settings</key><dict><key>foreground</key><string>#23575C</string></dict></dict>
+      <dict><key>scope</key><string>variable.parameter, meta.function.parameters</string><key>settings</key><dict><key>foreground</key><string>#3D4750</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator, punctuation, meta.delimiter</string><key>settings</key><dict><key>foreground</key><string>#5C6873</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, markup.bold</string><key>settings</key><dict><key>foreground</key><string>#0F68A0</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#3D4750</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted.diff</string><key>settings</key><dict><key>foreground</key><string>#2D8504</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted.diff</string><key>settings</key><dict><key>foreground</key><string>#D12F1B</string></dict></dict>
+      <dict><key>scope</key><string>invalid</string><key>settings</key><dict><key>foreground</key><string>#D12F1B</string><key>fontStyle</key><string>underline</string></dict></dict>
+    </array>
+  </dict>
+</plist>

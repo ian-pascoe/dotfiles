@@ -1,0 +1,101 @@
+# Hand-derived from sdras/night-owl-vscode-theme "Night Owl" (editor colors and token colors), with Ghostty's bundled "Night Owl" ANSI palette.
+k9s:
+  body:
+    fgColor: "#D6DEEB"
+    bgColor: default
+    logoColor: "#82AAFF"
+  prompt:
+    fgColor: "#D6DEEB"
+    bgColor: default
+    suggestColor: "#82AAFF"
+  help:
+    fgColor: "#D6DEEB"
+    bgColor: default
+    sectionColor: "#ADDB67"
+    keyColor: "#82AAFF"
+    numKeyColor: "#EF5350"
+  frame:
+    title:
+      fgColor: "#21C7A8"
+      bgColor: default
+      highlightColor: "#C792EA"
+      counterColor: "#ECC48D"
+      filterColor: "#ADDB67"
+    border:
+      fgColor: "#82AAFF"
+      focusColor: "#7FDBCA"
+    menu:
+      fgColor: "#D6DEEB"
+      keyColor: "#82AAFF"
+      numKeyColor: "#EF5350"
+    crumbs:
+      fgColor: "#011627"
+      bgColor: default
+      activeColor: "#ECC48D"
+    status:
+      newColor: "#82AAFF"
+      modifyColor: "#21C7A8"
+      addColor: "#ADDB67"
+      pendingColor: "#ECC48D"
+      errorColor: "#EF5350"
+      highlightColor: "#21C7A8"
+      killColor: "#C792EA"
+      completedColor: "#5F7E97"
+  info:
+    fgColor: "#ECC48D"
+    sectionColor: "#D6DEEB"
+  views:
+    table:
+      fgColor: "#D6DEEB"
+      bgColor: default
+      cursorFgColor: "#D6DEEB"
+      cursorBgColor: "#1D3B53"
+      markColor: "#ADDB67"
+      header:
+        fgColor: "#ECC48D"
+        bgColor: default
+        sorterColor: "#21C7A8"
+    xray:
+      fgColor: "#D6DEEB"
+      bgColor: default
+      cursorColor: "#1D3B53"
+      cursorTextColor: "#D6DEEB"
+      graphicColor: "#C792EA"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#ADDB67"
+        - "#EF5350"
+      defaultChartColors:
+        - "#ADDB67"
+        - "#EF5350"
+      resourceColors:
+        cpu:
+          - "#82AAFF"
+          - "#21C7A8"
+        mem:
+          - "#ADDB67"
+          - "#ECC48D"
+    yaml:
+      keyColor: "#82AAFF"
+      valueColor: "#D6DEEB"
+      colonColor: "#5F7E97"
+    logs:
+      fgColor: "#D6DEEB"
+      bgColor: default
+      indicator:
+        fgColor: "#21C7A8"
+        bgColor: default
+        toggleOnColor: "#ADDB67"
+        toggleOffColor: "#5F7E97"
+  dialog:
+    fgColor: "#ECC48D"
+    bgColor: default
+    buttonFgColor: "#D6DEEB"
+    buttonBgColor: default
+    buttonFocusFgColor: "#011627"
+    buttonFocusBgColor: "#C792EA"
+    labelFgColor: "#ECC48D"
+    fieldFgColor: "#D6DEEB"

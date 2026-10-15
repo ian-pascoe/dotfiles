@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "eldritch",
+  "appearance": "dark",
   "vars": {
     "accent": "#a48cf2",
     "accent2": "#04d1f9",

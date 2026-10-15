@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-derived from sdras/night-owl-vscode-theme "Night Owl" (editor colors and token colors), with Ghostty's bundled "Night Owl" ANSI palette. -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Night Owl</string>
+    <key>semanticClass</key>
+    <string>theme.dark.night-owl</string>
+    <key>uuid</key>
+    <string>7a1e4c02-93b5-5d18-8f6a-2c4d90b7e315</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#011627</string>
+          <key>foreground</key><string>#D6DEEB</string>
+          <key>caret</key><string>#D6DEEB</string>
+          <key>lineHighlight</key><string>#0B253A</string>
+          <key>selection</key><string>#1D3B53</string>
+          <key>gutterForeground</key><string>#4B6479</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#637777</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#ECC48D</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric</string><key>settings</key><dict><key>foreground</key><string>#F78C6C</string></dict></dict>
+      <dict><key>scope</key><string>constant.language, constant.character, constant.other, variable.other.constant</string><key>settings</key><dict><key>foreground</key><string>#F78C6C</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage.type, storage.modifier</string><key>settings</key><dict><key>foreground</key><string>#C792EA</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator</string><key>settings</key><dict><key>foreground</key><string>#7FDBCA</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#82AAFF</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, entity.name.class, support.type, support.class, entity.other.inherited-class</string><key>settings</key><dict><key>foreground</key><string>#FFCB8B</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.tag, punctuation.definition.tag</string><key>settings</key><dict><key>foreground</key><string>#CAECE6</string></dict></dict>
+      <dict><key>scope</key><string>entity.other.attribute-name</string><key>settings</key><dict><key>foreground</key><string>#C5E478</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>variable, variable.parameter</string><key>settings</key><dict><key>foreground</key><string>#D6DEEB</string></dict></dict>
+      <dict><key>scope</key><string>variable.language</string><key>settings</key><dict><key>foreground</key><string>#7FDBCA</string></dict></dict>
+      <dict><key>scope</key><string>support.type.property-name, meta.property-name</string><key>settings</key><dict><key>foreground</key><string>#7FDBCA</string></dict></dict>
+      <dict><key>scope</key><string>punctuation, meta.delimiter, meta.brace</string><key>settings</key><dict><key>foreground</key><string>#7E97AC</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, entity.name.section</string><key>settings</key><dict><key>foreground</key><string>#82AAFF</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.bold</string><key>settings</key><dict><key>foreground</key><string>#82AAFF</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#C792EA</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.underline.link</string><key>settings</key><dict><key>foreground</key><string>#21C7A8</string></dict></dict>
+      <dict><key>scope</key><string>markup.inline.raw, markup.raw</string><key>settings</key><dict><key>foreground</key><string>#7FDBCA</string></dict></dict>
+      <dict><key>scope</key><string>markup.quote</string><key>settings</key><dict><key>foreground</key><string>#5F7E97</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted.diff, meta.diff.header.to-file</string><key>settings</key><dict><key>foreground</key><string>#ADDB67</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted.diff, meta.diff.header.from-file</string><key>settings</key><dict><key>foreground</key><string>#EF5350</string></dict></dict>
+      <dict><key>scope</key><string>markup.changed.diff</string><key>settings</key><dict><key>foreground</key><string>#ECC48D</string></dict></dict>
+      <dict><key>scope</key><string>invalid</string><key>settings</key><dict><key>foreground</key><string>#EF5350</string><key>fontStyle</key><string>underline</string></dict></dict>
+    </array>
+  </dict>
+</plist>

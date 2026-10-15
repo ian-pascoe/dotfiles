@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "osaka-jade",
+  "appearance": "dark",
   "vars": {
     "accent": "#509475",
     "accent2": "#2DD5B7",

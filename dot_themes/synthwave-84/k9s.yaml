@@ -1,0 +1,101 @@
+# Hand-derived from robb0wen/synthwave-vscode "SynthWave 84" theme JSON.
+k9s:
+  body:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    logoColor: "#FF7EDB"
+  prompt:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    suggestColor: "#FF7EDB"
+  help:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    sectionColor: "#72F1B8"
+    keyColor: "#FF7EDB"
+    numKeyColor: "#FE4450"
+  frame:
+    title:
+      fgColor: "#03EDF9"
+      bgColor: default
+      highlightColor: "#B180D7"
+      counterColor: "#FEDE5D"
+      filterColor: "#72F1B8"
+    border:
+      fgColor: "#FF7EDB"
+      focusColor: "#36F9F6"
+    menu:
+      fgColor: "#FFFFFF"
+      keyColor: "#FF7EDB"
+      numKeyColor: "#FE4450"
+    crumbs:
+      fgColor: "#262335"
+      bgColor: default
+      activeColor: "#FEDE5D"
+    status:
+      newColor: "#FF7EDB"
+      modifyColor: "#03EDF9"
+      addColor: "#72F1B8"
+      pendingColor: "#FEDE5D"
+      errorColor: "#FE4450"
+      highlightColor: "#03EDF9"
+      killColor: "#B180D7"
+      completedColor: "#848BBD"
+  info:
+    fgColor: "#FEDE5D"
+    sectionColor: "#FFFFFF"
+  views:
+    table:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      cursorFgColor: "#FFFFFF"
+      cursorBgColor: "#413E4E"
+      markColor: "#72F1B8"
+      header:
+        fgColor: "#FEDE5D"
+        bgColor: default
+        sorterColor: "#03EDF9"
+    xray:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      cursorColor: "#413E4E"
+      cursorTextColor: "#FFFFFF"
+      graphicColor: "#B180D7"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#72F1B8"
+        - "#FE4450"
+      defaultChartColors:
+        - "#72F1B8"
+        - "#FE4450"
+      resourceColors:
+        cpu:
+          - "#FF7EDB"
+          - "#03EDF9"
+        mem:
+          - "#72F1B8"
+          - "#FEDE5D"
+    yaml:
+      keyColor: "#FF7EDB"
+      valueColor: "#FFFFFF"
+      colonColor: "#848BBD"
+    logs:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      indicator:
+        fgColor: "#03EDF9"
+        bgColor: default
+        toggleOnColor: "#72F1B8"
+        toggleOffColor: "#848BBD"
+  dialog:
+    fgColor: "#FEDE5D"
+    bgColor: default
+    buttonFgColor: "#FFFFFF"
+    buttonBgColor: default
+    buttonFocusFgColor: "#262335"
+    buttonFocusBgColor: "#B180D7"
+    labelFgColor: "#FEDE5D"
+    fieldFgColor: "#FFFFFF"

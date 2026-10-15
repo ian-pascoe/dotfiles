@@ -6,8 +6,12 @@
   "scripts": {
     "format": "oxfmt",
     "format:check": "oxfmt --check",
+    "check-nvim": "bash dot_themes/tools/check-nvim.sh",
+    "hunk-themes": "bash dot_themes/tools/hunk-themes.sh",
+    "prepare": "git config core.hooksPath .githooks",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "new-variant": "node dot_themes/tools/new-variant.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit && turbo typecheck"
   },

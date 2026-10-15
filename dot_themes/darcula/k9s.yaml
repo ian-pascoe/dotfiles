@@ -1,0 +1,101 @@
+# Hand-derived from the JetBrains Darcula editor scheme colors (as used by xiantang/darcula-dark.nvim's colors/themes/darcula.json) and Ghostty's bundled "JetBrains Darcula" theme.
+k9s:
+  body:
+    fgColor: "#ADADAD"
+    bgColor: default
+    logoColor: "#6897BB"
+  prompt:
+    fgColor: "#ADADAD"
+    bgColor: default
+    suggestColor: "#6897BB"
+  help:
+    fgColor: "#ADADAD"
+    bgColor: default
+    sectionColor: "#6A8759"
+    keyColor: "#6897BB"
+    numKeyColor: "#FF6B68"
+  frame:
+    title:
+      fgColor: "#6FAFBD"
+      bgColor: default
+      highlightColor: "#9876AA"
+      counterColor: "#FFC66D"
+      filterColor: "#6A8759"
+    border:
+      fgColor: "#6897BB"
+      focusColor: "#6FAFBD"
+    menu:
+      fgColor: "#ADADAD"
+      keyColor: "#6897BB"
+      numKeyColor: "#FF6B68"
+    crumbs:
+      fgColor: "#202020"
+      bgColor: default
+      activeColor: "#FFC66D"
+    status:
+      newColor: "#6897BB"
+      modifyColor: "#6FAFBD"
+      addColor: "#6A8759"
+      pendingColor: "#FFC66D"
+      errorColor: "#FF6B68"
+      highlightColor: "#6FAFBD"
+      killColor: "#9876AA"
+      completedColor: "#808080"
+  info:
+    fgColor: "#FFC66D"
+    sectionColor: "#ADADAD"
+  views:
+    table:
+      fgColor: "#ADADAD"
+      bgColor: default
+      cursorFgColor: "#ADADAD"
+      cursorBgColor: "#214283"
+      markColor: "#6A8759"
+      header:
+        fgColor: "#FFC66D"
+        bgColor: default
+        sorterColor: "#6FAFBD"
+    xray:
+      fgColor: "#ADADAD"
+      bgColor: default
+      cursorColor: "#214283"
+      cursorTextColor: "#ADADAD"
+      graphicColor: "#9876AA"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#6A8759"
+        - "#FF6B68"
+      defaultChartColors:
+        - "#6A8759"
+        - "#FF6B68"
+      resourceColors:
+        cpu:
+          - "#6897BB"
+          - "#6FAFBD"
+        mem:
+          - "#6A8759"
+          - "#FFC66D"
+    yaml:
+      keyColor: "#6897BB"
+      valueColor: "#ADADAD"
+      colonColor: "#808080"
+    logs:
+      fgColor: "#ADADAD"
+      bgColor: default
+      indicator:
+        fgColor: "#6FAFBD"
+        bgColor: default
+        toggleOnColor: "#6A8759"
+        toggleOffColor: "#808080"
+  dialog:
+    fgColor: "#FFC66D"
+    bgColor: default
+    buttonFgColor: "#ADADAD"
+    buttonBgColor: default
+    buttonFocusFgColor: "#202020"
+    buttonFocusBgColor: "#9876AA"
+    labelFgColor: "#FFC66D"
+    fieldFgColor: "#ADADAD"

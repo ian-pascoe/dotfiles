@@ -1,0 +1,39 @@
+# Hand-derived from the EdenEast/nightfox.nvim "nordfox" palette (lua/nightfox/palette/nordfox.lua).
+user: "#81a1c1"
+group: "#88c0d0"
+permission:
+  read: "#a3be8c"
+  write: "#ebcb8b"
+  exec: "#bf616a"
+  exec-sticky: "#b48ead"
+  no-access: "#aaacb0"
+  octal: "#88c0d0"
+  acl: "#88c0d0"
+  context: "#81a1c1"
+date:
+  hour-old: "#a3be8c"
+  day-old: "#81a1c1"
+  older: "#aaacb0"
+size:
+  none: "#aaacb0"
+  small: "#a3be8c"
+  medium: "#ebcb8b"
+  large: "#c9826b"
+inode:
+  valid: "#b48ead"
+  invalid: "#aaacb0"
+links:
+  valid: "#88c0d0"
+  invalid: "#aaacb0"
+tree-edge: "#7e8188"
+git-status:
+  default: "#cdcecf"
+  unmodified: "#aaacb0"
+  ignored: "#aaacb0"
+  new-in-index: "#a3be8c"
+  new-in-workdir: "#a3be8c"
+  typechange: "#ebcb8b"
+  deleted: "#bf616a"
+  renamed: "#81a1c1"
+  modified: "#ebcb8b"
+  conflicted: "#bf616a"

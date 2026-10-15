@@ -443,6 +443,178 @@ local theme_specs = {
       transparent = vim.g.transparent_enabled,
     },
   },
+  github = {
+    repo = 'projekt0n/github-nvim-theme',
+    name = 'github-nvim-theme',
+    colorscheme = 'github_dark_default',
+    config = function()
+      require('github-theme').setup({
+        options = { transparent = vim.g.transparent_enabled },
+      })
+    end,
+  },
+  vscode = {
+    repo = 'Mofiqul/vscode.nvim',
+    name = 'vscode.nvim',
+    colorscheme = 'vscode',
+    -- Picks its dark or light style from 'background' when applied.
+    config = function()
+      require('vscode').setup({
+        transparent = vim.g.transparent_enabled,
+      })
+    end,
+  },
+  ['xcode-dark'] = {
+    repo = 'lunacookies/vim-colors-xcode',
+    name = 'vim-colors-xcode',
+    colorscheme = 'xcodedark',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  darcula = {
+    repo = 'xiantang/darcula-dark.nvim',
+    name = 'darcula-dark.nvim',
+    colorscheme = 'darcula-dark',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  horizon = {
+    repo = 'akinsho/horizon.nvim',
+    name = 'horizon.nvim',
+    colorscheme = 'horizon',
+    -- No transparency option; transparent.nvim clears the backgrounds. It picks
+    -- its dark or light palette from 'background', which light.mode sets, but
+    -- palette-light.lua lacks the syntax colors the highlights read and
+    -- crashes, so fill them in from the Horizon Bright VS Code theme.
+    config = function()
+      local palette = require('horizon.palette-light').palette
+      palette.syntax = vim.tbl_extend('keep', palette.syntax, {
+        apricot = '#DC3318',
+        cranberry = '#DA103F',
+        gray = '#333333',
+        lavender = '#8A31B9',
+        rosebud = '#F6661E',
+        tacao = '#F77D26',
+        turquoise = '#1D8991',
+      })
+      require('horizon').setup()
+    end,
+  },
+  cobalt2 = {
+    repo = 'lalitmee/cobalt2.nvim',
+    name = 'cobalt2.nvim',
+    colorscheme = 'cobalt2',
+    -- colorbuddy's v1.0.0 requires the colorscheme's Lua module; later commits
+    -- dropped that, which leaves cobalt2.nvim's own colors/cobalt2.vim empty.
+    dependencies = { { 'tjdevries/colorbuddy.nvim', tag = 'v1.0.0' } },
+    -- No transparency option; transparent.nvim clears the backgrounds. The
+    -- colors/ file is empty, so apply it through colorbuddy, again on every
+    -- :colorscheme (the Lua modules are cached and highlights are not cleared).
+    config = function()
+      local function apply()
+        vim.cmd.highlight('clear')
+        for module in pairs(package.loaded) do
+          if module:match('^cobalt2') then
+            package.loaded[module] = nil
+          end
+        end
+        require('colorbuddy').colorscheme('cobalt2')
+      end
+      apply()
+      vim.api.nvim_create_autocmd('ColorSchemePre', { pattern = 'cobalt2', callback = apply })
+    end,
+  },
+  ['shades-of-purple'] = {
+    repo = 'necrogoru/shades-of-purple.nvim',
+    name = 'shades-of-purple.nvim',
+    colorscheme = 'shades-of-purple',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['night-owl'] = {
+    repo = 'oxfist/night-owl.nvim',
+    name = 'night-owl.nvim',
+    colorscheme = 'night-owl',
+    opts = {
+      transparent_background = vim.g.transparent_enabled,
+    },
+  },
+  ['light-owl'] = {
+    -- The only Neovim port of Light Owl (Night Owl Light); oxfist/night-owl.nvim
+    -- is dark only. It sets 'background' to light itself.
+    repo = 'macguirerintoul/night_owl_light.vim',
+    name = 'night_owl_light.vim',
+    colorscheme = 'night_owl_light',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['synthwave-84'] = {
+    -- A maintained fork of LunarVim/synthwave84.nvim; its retrowave theme uses
+    -- SynthWave '84's palette (bg #262335).
+    repo = 'maxmx03/fluoromachine.nvim',
+    name = 'fluoromachine.nvim',
+    colorscheme = 'fluoromachine',
+    opts = {
+      theme = 'retrowave',
+      glow = true,
+      transparent = vim.g.transparent_enabled,
+    },
+  },
+  everblush = {
+    repo = 'Everblush/nvim',
+    name = 'everblush',
+    colorscheme = 'everblush',
+    opts = {
+      transparent_background = vim.g.transparent_enabled,
+    },
+  },
+  ['material-ocean'] = {
+    repo = 'marko-cerovac/material.nvim',
+    name = 'material.nvim',
+    colorscheme = 'material',
+    -- material-lighter and palenight share this spec (see nvim-aliases.lua), and
+    -- the plugin picks its palette from vim.g.material_style when the colorscheme
+    -- loads, so choose the style from the active theme each time it is applied.
+    config = function()
+      local styles = {
+        ['material-lighter'] = 'lighter',
+        palenight = 'palenight',
+      }
+      local function setup()
+        vim.g.material_style = styles[Util.get_theme()] or 'deep ocean'
+        require('material').setup({
+          disable = { background = vim.g.transparent_enabled },
+        })
+      end
+      setup()
+      vim.api.nvim_create_autocmd('ColorSchemePre', { pattern = 'material', callback = setup })
+    end,
+  },
+  zenburn = {
+    repo = 'phha/zenburn.nvim',
+    name = 'zenburn.nvim',
+    colorscheme = 'zenburn',
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  alabaster = {
+    repo = 'dchinmay2/alabaster.nvim',
+    name = 'alabaster.nvim',
+    colorscheme = 'alabaster',
+    -- Picks its light or dark palette from 'background' when applied.
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['selenized-dark'] = {
+    repo = 'calind/selenized.nvim',
+    name = 'selenized.nvim',
+    colorscheme = 'selenized',
+    -- Picks its light or dark palette from 'background' when applied.
+    -- No transparency option; transparent.nvim clears the backgrounds.
+  },
+  ['vitesse-dark'] = {
+    repo = 'qshan-li/neovim-theme-vitesse',
+    name = 'vitesse.nvim',
+    colorscheme = 'vitesse-dark',
+    opts = {
+      transparent = vim.g.transparent_enabled,
+    },
+  },
 }
 
 -- Variants share another theme's plugin and options and differ only in the
@@ -476,6 +648,32 @@ for name, variant in pairs({
   dawnfox = { 'carbonfox', 'dawnfox' },
   ['no-clown-fiesta-light'] = { 'no-clown-fiesta', 'no-clown-fiesta' },
   ['cyberdream-light'] = { 'cyberdream', 'cyberdream-light' },
+  ['github-dark'] = { 'github', 'github_dark_default' },
+  ['github-light'] = { 'github', 'github_light_default' },
+  -- These follow 'background', which light.mode sets, so the variant keeps its
+  -- sibling's colorscheme name.
+  ['vscode-dark'] = { 'vscode', 'vscode' },
+  ['vscode-light'] = { 'vscode', 'vscode' },
+  -- xcodelight is its own colorscheme, so it does not depend on 'background'.
+  ['xcode-light'] = { 'xcode-dark', 'xcodelight' },
+  -- Follows 'background', which light.mode sets, so it keeps its sibling's colorscheme name.
+  ['horizon-bright'] = { 'horizon', 'horizon' },
+  -- The material.nvim style comes from the theme name (see the material-ocean
+  -- spec), and the plugin sets 'background' itself, so the colorscheme is shared.
+  ['material-lighter'] = { 'material-ocean', 'material' },
+  palenight = { 'material-ocean', 'material' },
+  -- Follows 'background', which light.mode sets (alabaster is the light variant and the spec); dark has no light.mode.
+  ['alabaster-dark'] = { 'alabaster', 'alabaster' },
+  -- Follows 'background', which light.mode sets.
+  ['selenized-light'] = { 'selenized-dark', 'selenized' },
+  nightfox = { 'carbonfox', 'nightfox' },
+  -- dayfox is nightfox.nvim's light colorscheme; it does not depend on 'background'.
+  dayfox = { 'carbonfox', 'dayfox' },
+  nordfox = { 'carbonfox', 'nordfox' },
+  ['ayu-dark'] = { 'ayu-mirage', 'ayu-dark' },
+  bamboo = { 'osaka-jade', 'bamboo' },
+  ['bamboo-light'] = { 'osaka-jade', 'bamboo-light' },
+  ['vitesse-light'] = { 'vitesse-dark', 'vitesse-light' },
 }) do
   local base, colorscheme = unpack(variant)
   theme_specs[name] = vim.tbl_extend('force', theme_specs[base], { colorscheme = colorscheme })

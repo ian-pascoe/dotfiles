@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-derived from the VS Code "Dark Modern" theme (microsoft/vscode extensions/theme-defaults/themes/dark_modern.json + dark_plus syntax); no upstream bat port exists. -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>VS Code Dark Modern</string>
+    <key>semanticClass</key>
+    <string>theme.dark.vscode-dark</string>
+    <key>uuid</key>
+    <string>b33c51bc-1f74-51d1-9872-27b0a4f92a0b</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#1F1F1F</string>
+          <key>foreground</key><string>#CCCCCC</string>
+          <key>caret</key><string>#FFFFFF</string>
+          <key>lineHighlight</key><string>#2A2D2E</string>
+          <key>selection</key><string>#264F78</string>
+          <key>gutterForeground</key><string>#6E7681</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#6A9955</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#CE9178</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric</string><key>settings</key><dict><key>foreground</key><string>#B5CEA8</string></dict></dict>
+      <dict><key>scope</key><string>constant.language, variable.other.constant, support.constant</string><key>settings</key><dict><key>foreground</key><string>#4FC1FF</string></dict></dict>
+      <dict><key>scope</key><string>constant.character.escape, string.regexp</string><key>settings</key><dict><key>foreground</key><string>#569CD6</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage.type, storage.modifier</string><key>settings</key><dict><key>foreground</key><string>#569CD6</string></dict></dict>
+      <dict><key>scope</key><string>keyword.control</string><key>settings</key><dict><key>foreground</key><string>#C586C0</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator</string><key>settings</key><dict><key>foreground</key><string>#D4D4D4</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.tag</string><key>settings</key><dict><key>foreground</key><string>#569CD6</string></dict></dict>
+      <dict><key>scope</key><string>entity.other.attribute-name</string><key>settings</key><dict><key>foreground</key><string>#DCDCAA</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#DCDCAA</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, support.type, support.class, entity.name.class</string><key>settings</key><dict><key>foreground</key><string>#4EC9B0</string></dict></dict>
+      <dict><key>scope</key><string>variable, variable.other</string><key>settings</key><dict><key>foreground</key><string>#CCCCCC</string></dict></dict>
+      <dict><key>scope</key><string>variable.parameter, meta.function.parameters</string><key>settings</key><dict><key>foreground</key><string>#9CDCFE</string></dict></dict>
+      <dict><key>scope</key><string>punctuation, meta.delimiter</string><key>settings</key><dict><key>foreground</key><string>#CCCCCC</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, markup.bold</string><key>settings</key><dict><key>foreground</key><string>#569CD6</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#CCCCCC</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted, markup.inserted.diff</string><key>settings</key><dict><key>foreground</key><string>#2EA043</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted, markup.deleted.diff</string><key>settings</key><dict><key>foreground</key><string>#F14C4C</string></dict></dict>
+      <dict><key>scope</key><string>markup.changed</string><key>settings</key><dict><key>foreground</key><string>#CCA700</string></dict></dict>
+      <dict><key>scope</key><string>invalid</string><key>settings</key><dict><key>foreground</key><string>#F14C4C</string><key>fontStyle</key><string>underline</string></dict></dict>
+    </array>
+  </dict>
+</plist>

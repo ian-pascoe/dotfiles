@@ -93,7 +93,7 @@ k9s:
     fgColor: "#f1fc79"
     bgColor: default
     buttonFgColor: "#212337"
-    buttonBgColor: default
+    buttonBgColor: "#7081d0"
     buttonFocusFgColor: "#212337"
     buttonFocusBgColor: "#f265b5"
     labelFgColor: "#f1fc79"

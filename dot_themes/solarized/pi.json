@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "solarized",
+  "appearance": "dark",
   "vars": {
     "accent": "#268bd2",
     "accent2": "#2aa198",

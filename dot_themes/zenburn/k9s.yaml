@@ -1,0 +1,101 @@
+# Hand-mapped from phha/zenburn.nvim palette (f5ee12b); terminal colors from Ghostty's bundled "Zenburn" theme.
+k9s:
+  body:
+    fgColor: "#DCDCCC"
+    bgColor: default
+    logoColor: "#94BFF3"
+  prompt:
+    fgColor: "#DCDCCC"
+    bgColor: default
+    suggestColor: "#94BFF3"
+  help:
+    fgColor: "#DCDCCC"
+    bgColor: default
+    sectionColor: "#7F9F7F"
+    keyColor: "#94BFF3"
+    numKeyColor: "#CC9393"
+  frame:
+    title:
+      fgColor: "#8CD0D3"
+      bgColor: default
+      highlightColor: "#DC8CC3"
+      counterColor: "#F0DFAF"
+      filterColor: "#7F9F7F"
+    border:
+      fgColor: "#94BFF3"
+      focusColor: "#93E0E3"
+    menu:
+      fgColor: "#DCDCCC"
+      keyColor: "#94BFF3"
+      numKeyColor: "#CC9393"
+    crumbs:
+      fgColor: "#3F3F3F"
+      bgColor: default
+      activeColor: "#F0DFAF"
+    status:
+      newColor: "#94BFF3"
+      modifyColor: "#8CD0D3"
+      addColor: "#7F9F7F"
+      pendingColor: "#F0DFAF"
+      errorColor: "#CC9393"
+      highlightColor: "#8CD0D3"
+      killColor: "#DC8CC3"
+      completedColor: "#8F8F8F"
+  info:
+    fgColor: "#F0DFAF"
+    sectionColor: "#DCDCCC"
+  views:
+    table:
+      fgColor: "#DCDCCC"
+      bgColor: default
+      cursorFgColor: "#DCDCCC"
+      cursorBgColor: "#233323"
+      markColor: "#7F9F7F"
+      header:
+        fgColor: "#F0DFAF"
+        bgColor: default
+        sorterColor: "#8CD0D3"
+    xray:
+      fgColor: "#DCDCCC"
+      bgColor: default
+      cursorColor: "#233323"
+      cursorTextColor: "#DCDCCC"
+      graphicColor: "#DC8CC3"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#7F9F7F"
+        - "#CC9393"
+      defaultChartColors:
+        - "#7F9F7F"
+        - "#CC9393"
+      resourceColors:
+        cpu:
+          - "#94BFF3"
+          - "#8CD0D3"
+        mem:
+          - "#7F9F7F"
+          - "#F0DFAF"
+    yaml:
+      keyColor: "#94BFF3"
+      valueColor: "#DCDCCC"
+      colonColor: "#8F8F8F"
+    logs:
+      fgColor: "#DCDCCC"
+      bgColor: default
+      indicator:
+        fgColor: "#8CD0D3"
+        bgColor: default
+        toggleOnColor: "#7F9F7F"
+        toggleOffColor: "#8F8F8F"
+  dialog:
+    fgColor: "#F0DFAF"
+    bgColor: default
+    buttonFgColor: "#DCDCCC"
+    buttonBgColor: default
+    buttonFocusFgColor: "#3F3F3F"
+    buttonFocusBgColor: "#DC8CC3"
+    labelFgColor: "#F0DFAF"
+    fieldFgColor: "#DCDCCC"

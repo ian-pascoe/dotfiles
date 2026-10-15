@@ -1,0 +1,37 @@
+:root {
+  /* Alabaster palette (hand-mapped from tonsky/sublime-scheme-alabaster via dchinmay2/alabaster.nvim light palette); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 247, 247, 247;
+  --foreground: 0, 0, 0;
+  --card-background: 231, 231, 231;
+  --popup-background: 216, 216, 216;
+  --primary: 50, 92, 192;
+  --secondary: 0, 122, 204;
+  --tertiary: 50, 92, 192;
+  --accent: 122, 62, 157;
+  --muted-background: 119, 119, 119;
+  --info: 50, 92, 192;
+  --success: 68, 140, 39;
+  --warning: 188, 117, 0;
+  --destructive: 170, 55, 49;
+  --border: 201, 201, 201;
+  --text: 0, 0, 0;
+  --foam: 0, 131, 178;
+  --gold: 188, 117, 0;
+  --love: 170, 55, 49;
+  --overlay: 119, 119, 119;
+  --highlight: 191, 219, 254;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,37 @@
+:root {
+  /* VS Code Dark Modern palette (hand-derived from the VS Code "Dark Modern" theme (microsoft/vscode extensions/theme-defaults/themes/dark_modern.json + dark_plus syntax)); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 31, 31, 31;
+  --foreground: 204, 204, 204;
+  --card-background: 42, 45, 46;
+  --popup-background: 55, 55, 61;
+  --primary: 55, 148, 255;
+  --secondary: 78, 201, 176;
+  --tertiary: 55, 148, 255;
+  --accent: 197, 134, 192;
+  --muted-background: 157, 157, 157;
+  --info: 55, 148, 255;
+  --success: 46, 160, 67;
+  --warning: 204, 167, 0;
+  --destructive: 241, 76, 76;
+  --border: 60, 60, 60;
+  --text: 204, 204, 204;
+  --foam: 78, 201, 176;
+  --gold: 204, 167, 0;
+  --love: 241, 76, 76;
+  --overlay: 157, 157, 157;
+  --highlight: 55, 55, 61;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

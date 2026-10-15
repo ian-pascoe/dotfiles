@@ -1,0 +1,39 @@
+# Hand-derived from Wes Bos's Cobalt2 palette from wesbos/cobalt2 and lalitmee/cobalt2.nvim, on the Ghostty "Cobalt2" background.
+user: "#FFC600"
+group: "#9EFFFF"
+permission:
+  read: "#3AD900"
+  write: "#FFC600"
+  exec: "#F40E17"
+  exec-sticky: "#FB94FF"
+  no-access: "#8FBFDC"
+  octal: "#9EFFFF"
+  acl: "#9EFFFF"
+  context: "#FFC600"
+date:
+  hour-old: "#3AD900"
+  day-old: "#FFC600"
+  older: "#8FBFDC"
+size:
+  none: "#8FBFDC"
+  small: "#3AD900"
+  medium: "#FFC600"
+  large: "#FF9D00"
+inode:
+  valid: "#FB94FF"
+  invalid: "#8FBFDC"
+links:
+  valid: "#9EFFFF"
+  invalid: "#8FBFDC"
+tree-edge: "#668799"
+git-status:
+  default: "#FFFFFF"
+  unmodified: "#8FBFDC"
+  ignored: "#8FBFDC"
+  new-in-index: "#3AD900"
+  new-in-workdir: "#3AD900"
+  typechange: "#FFC600"
+  deleted: "#F40E17"
+  renamed: "#FFC600"
+  modified: "#FFC600"
+  conflicted: "#F40E17"

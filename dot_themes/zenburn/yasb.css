@@ -1,0 +1,37 @@
+:root {
+  /* Zenburn palette (hand-mapped from phha/zenburn.nvim palette (f5ee12b); terminal colors from Ghostty's bundled "Zenburn" theme.); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 63, 63, 63;
+  --foreground: 220, 220, 204;
+  --card-background: 72, 72, 72;
+  --popup-background: 79, 79, 79;
+  --primary: 148, 191, 243;
+  --secondary: 147, 224, 227;
+  --tertiary: 148, 191, 243;
+  --accent: 220, 140, 195;
+  --muted-background: 143, 143, 143;
+  --info: 148, 191, 243;
+  --success: 127, 159, 127;
+  --warning: 240, 223, 175;
+  --destructive: 204, 147, 147;
+  --border: 79, 79, 79;
+  --text: 220, 220, 204;
+  --foam: 140, 208, 211;
+  --gold: 240, 223, 175;
+  --love: 204, 147, 147;
+  --overlay: 143, 143, 143;
+  --highlight: 35, 51, 35;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

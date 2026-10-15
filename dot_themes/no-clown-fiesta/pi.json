@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "no-clown-fiesta",
+  "appearance": "dark",
   "vars": {
     "accent": "#BAD7FF",
     "accent2": "#88afa2",

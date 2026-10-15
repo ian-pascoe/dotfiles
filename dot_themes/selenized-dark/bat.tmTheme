@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-mapped from Jan Warchol's Selenized (jan-warchol/selenized, calind/selenized.nvim palette) -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Selenized Dark</string>
+    <key>semanticClass</key>
+    <string>theme.dark.selenized-dark</string>
+    <key>uuid</key>
+    <string>7f1c5a52-6d0e-5b57-a1c3-2d6f9a3c0a03</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key><string>#103c48</string>
+          <key>foreground</key><string>#adbcbc</string>
+          <key>caret</key><string>#adbcbc</string>
+          <key>lineHighlight</key><string>#174956</string>
+          <key>selection</key><string>#325b66</string>
+          <key>gutterForeground</key><string>#4f6f78</string>
+        </dict>
+      </dict>
+      <dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#72898f</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>string, punctuation.definition.string</string><key>settings</key><dict><key>foreground</key><string>#41c7b9</string></dict></dict>
+      <dict><key>scope</key><string>constant.numeric, constant.language, variable.other.constant</string><key>settings</key><dict><key>foreground</key><string>#41c7b9</string></dict></dict>
+      <dict><key>scope</key><string>keyword, storage.type, storage.modifier, entity.name.tag</string><key>settings</key><dict><key>foreground</key><string>#ebc13d</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#58a3ff</string></dict></dict>
+      <dict><key>scope</key><string>entity.name.type, support.type, entity.name.class</string><key>settings</key><dict><key>foreground</key><string>#75b938</string></dict></dict>
+      <dict><key>scope</key><string>variable.parameter, meta.function.parameters</string><key>settings</key><dict><key>foreground</key><string>#cad8d9</string></dict></dict>
+      <dict><key>scope</key><string>keyword.operator, punctuation, meta.delimiter</string><key>settings</key><dict><key>foreground</key><string>#ebc13d</string></dict></dict>
+      <dict><key>scope</key><string>markup.heading, markup.bold</string><key>settings</key><dict><key>foreground</key><string>#fd9456</string><key>fontStyle</key><string>bold</string></dict></dict>
+      <dict><key>scope</key><string>markup.italic</string><key>settings</key><dict><key>foreground</key><string>#cad8d9</string><key>fontStyle</key><string>italic</string></dict></dict>
+      <dict><key>scope</key><string>markup.inserted.diff</string><key>settings</key><dict><key>foreground</key><string>#75b938</string></dict></dict>
+      <dict><key>scope</key><string>markup.deleted.diff</string><key>settings</key><dict><key>foreground</key><string>#fa5750</string></dict></dict>
+      <dict><key>scope</key><string>invalid</string><key>settings</key><dict><key>foreground</key><string>#fa5750</string><key>fontStyle</key><string>underline</string></dict></dict>
+    </array>
+  </dict>
+</plist>

@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "everforest",
+  "appearance": "dark",
   "vars": {
     "accent": "#7fbbb3",
     "accent2": "#83c092",

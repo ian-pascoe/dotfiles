@@ -1,0 +1,92 @@
+# Bamboo local Yazi flavor
+
+[mgr]
+cwd = { fg = "#8FB573" }
+find_keyword = { fg = "#DBB651", bold = true, italic = true }
+find_position = { fg = "#AAAAFF", bg = "reset", bold = true, italic = true }
+marker_copied = { fg = "#8FB573", bg = "#8FB573" }
+marker_cut = { fg = "#E75A7C", bg = "#E75A7C" }
+marker_marked = { fg = "#70C2BE", bg = "#70C2BE" }
+marker_selected = { fg = "#DBB651", bg = "#DBB651" }
+count_copied = { fg = "#252623", bg = "#8FB573" }
+count_cut = { fg = "#252623", bg = "#E75A7C" }
+count_selected = { fg = "#252623", bg = "#DBB651" }
+border_symbol = "│"
+border_style = { fg = "#50534F" }
+
+[tabs]
+active = { fg = "#252623", bg = "#8FB573", bold = true }
+inactive = { fg = "#8FB573", bg = "#2F312C" }
+
+[mode]
+normal_main = { fg = "#252623", bg = "#8FB573", bold = true }
+normal_alt = { fg = "#8FB573", bg = "#2F312C" }
+select_main = { fg = "#252623", bg = "#8FB573", bold = true }
+select_alt = { fg = "#8FB573", bg = "#2F312C" }
+unset_main = { fg = "#252623", bg = "#AAAAFF", bold = true }
+unset_alt = { fg = "#AAAAFF", bg = "#2F312C" }
+
+[status]
+perm_sep = { fg = "#50534F" }
+perm_type = { fg = "#8FB573" }
+perm_read = { fg = "#8FB573" }
+perm_write = { fg = "#DBB651" }
+perm_exec = { fg = "#E75A7C" }
+progress_label = { fg = "#F1E9D2", bold = true }
+progress_normal = { fg = "#8FB573", bg = "#3A3D37" }
+progress_error = { fg = "#252623", bg = "#E75A7C" }
+
+[pick]
+border = { fg = "#8FB573" }
+active = { fg = "#AAAAFF", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#8FB573" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[cmp]
+border = { fg = "#8FB573" }
+
+[tasks]
+border = { fg = "#8FB573" }
+title = {}
+hovered = { fg = "#AAAAFF", bold = true }
+
+[which]
+border = { fg = "#8FB573" }
+cand = { fg = "#70C2BE" }
+rest = { fg = "#838781" }
+desc = { fg = "#AAAAFF" }
+separator = "  "
+separator_style = { fg = "#50534F" }
+
+[help]
+on = { fg = "#70C2BE" }
+run = { fg = "#AAAAFF" }
+hovered = { reversed = true, bold = true }
+footer = { fg = "#252623", bg = "#F1E9D2" }
+
+[spot]
+border = { fg = "#8FB573" }
+title = { fg = "#8FB573" }
+tbl_col = { fg = "#70C2BE" }
+tbl_cell = { fg = "#AAAAFF", bg = "#3A3D37" }
+
+[notify]
+title_info = { fg = "#8FB573" }
+title_warn = { fg = "#DBB651" }
+title_error = { fg = "#E75A7C" }
+
+[filetype]
+rules = [
+  { mime = "**/image/*", fg = "#70C2BE" },
+  { mime = "**/{audio,video}/*", fg = "#DBB651" },
+  { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#AAAAFF" },
+  { mime = "**/application/{pdf,doc,rtf}", fg = "#8FB573" },
+  { mime = "vfs/{absent,stale}", fg = "#838781" },
+  { url = "*", fg = "#F1E9D2" },
+  { url = "*/", fg = "#8FB573" },
+]

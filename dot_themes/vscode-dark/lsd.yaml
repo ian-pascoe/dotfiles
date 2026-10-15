@@ -1,0 +1,39 @@
+# Hand-derived from the VS Code "Dark Modern" theme (microsoft/vscode extensions/theme-defaults/themes/dark_modern.json + dark_plus syntax).
+user: "#3794ff"
+group: "#4ec9b0"
+permission:
+  read: "#2ea043"
+  write: "#cca700"
+  exec: "#f14c4c"
+  exec-sticky: "#c586c0"
+  no-access: "#9d9d9d"
+  octal: "#4ec9b0"
+  acl: "#4ec9b0"
+  context: "#3794ff"
+date:
+  hour-old: "#2ea043"
+  day-old: "#3794ff"
+  older: "#9d9d9d"
+size:
+  none: "#9d9d9d"
+  small: "#2ea043"
+  medium: "#cca700"
+  large: "#ce9178"
+inode:
+  valid: "#c586c0"
+  invalid: "#9d9d9d"
+links:
+  valid: "#4ec9b0"
+  invalid: "#9d9d9d"
+tree-edge: "#3c3c3c"
+git-status:
+  default: "#cccccc"
+  unmodified: "#9d9d9d"
+  ignored: "#9d9d9d"
+  new-in-index: "#2ea043"
+  new-in-workdir: "#2ea043"
+  typechange: "#cca700"
+  deleted: "#f14c4c"
+  renamed: "#3794ff"
+  modified: "#cca700"
+  conflicted: "#f14c4c"

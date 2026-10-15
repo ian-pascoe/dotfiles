@@ -1,0 +1,92 @@
+# VS Code Light Modern local Yazi flavor
+
+[mgr]
+cwd = { fg = "#005fb8" }
+find_keyword = { fg = "#bf8803", bold = true, italic = true }
+find_position = { fg = "#af00db", bg = "reset", bold = true, italic = true }
+marker_copied = { fg = "#107c10", bg = "#107c10" }
+marker_cut = { fg = "#cd3131", bg = "#cd3131" }
+marker_marked = { fg = "#267f99", bg = "#267f99" }
+marker_selected = { fg = "#bf8803", bg = "#bf8803" }
+count_copied = { fg = "#ffffff", bg = "#107c10" }
+count_cut = { fg = "#ffffff", bg = "#cd3131" }
+count_selected = { fg = "#ffffff", bg = "#bf8803" }
+border_symbol = "│"
+border_style = { fg = "#cecece" }
+
+[tabs]
+active = { fg = "#ffffff", bg = "#005fb8", bold = true }
+inactive = { fg = "#005fb8", bg = "#f3f3f3" }
+
+[mode]
+normal_main = { fg = "#ffffff", bg = "#005fb8", bold = true }
+normal_alt = { fg = "#005fb8", bg = "#f3f3f3" }
+select_main = { fg = "#ffffff", bg = "#107c10", bold = true }
+select_alt = { fg = "#107c10", bg = "#f3f3f3" }
+unset_main = { fg = "#ffffff", bg = "#af00db", bold = true }
+unset_alt = { fg = "#af00db", bg = "#f3f3f3" }
+
+[status]
+perm_sep = { fg = "#cecece" }
+perm_type = { fg = "#005fb8" }
+perm_read = { fg = "#107c10" }
+perm_write = { fg = "#bf8803" }
+perm_exec = { fg = "#cd3131" }
+progress_label = { fg = "#3b3b3b", bold = true }
+progress_normal = { fg = "#107c10", bg = "#e8e8e8" }
+progress_error = { fg = "#bf8803", bg = "#cd3131" }
+
+[pick]
+border = { fg = "#005fb8" }
+active = { fg = "#af00db", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#005fb8" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[cmp]
+border = { fg = "#005fb8" }
+
+[tasks]
+border = { fg = "#005fb8" }
+title = {}
+hovered = { fg = "#af00db", bold = true }
+
+[which]
+border = { fg = "#005fb8" }
+cand = { fg = "#267f99" }
+rest = { fg = "#616161" }
+desc = { fg = "#af00db" }
+separator = "  "
+separator_style = { fg = "#cecece" }
+
+[help]
+on = { fg = "#267f99" }
+run = { fg = "#af00db" }
+hovered = { reversed = true, bold = true }
+footer = { fg = "#ffffff", bg = "#3b3b3b" }
+
+[spot]
+border = { fg = "#005fb8" }
+title = { fg = "#005fb8" }
+tbl_col = { fg = "#267f99" }
+tbl_cell = { fg = "#af00db", bg = "#e8e8e8" }
+
+[notify]
+title_info = { fg = "#107c10" }
+title_warn = { fg = "#bf8803" }
+title_error = { fg = "#cd3131" }
+
+[filetype]
+rules = [
+  { mime = "**/image/*", fg = "#267f99" },
+  { mime = "**/{audio,video}/*", fg = "#bf8803" },
+  { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#af00db" },
+  { mime = "**/application/{pdf,doc,rtf}", fg = "#107c10" },
+  { mime = "vfs/{absent,stale}", fg = "#616161" },
+  { url = "*", fg = "#3b3b3b" },
+  { url = "*/", fg = "#005fb8" },
+]

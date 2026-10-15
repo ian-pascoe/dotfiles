@@ -1,0 +1,39 @@
+# Hand-derived from the VS Code "Light Modern" theme (microsoft/vscode extensions/theme-defaults/themes/light_modern.json + light_plus syntax).
+user: "#005fb8"
+group: "#267f99"
+permission:
+  read: "#107c10"
+  write: "#bf8803"
+  exec: "#cd3131"
+  exec-sticky: "#af00db"
+  no-access: "#616161"
+  octal: "#267f99"
+  acl: "#267f99"
+  context: "#005fb8"
+date:
+  hour-old: "#107c10"
+  day-old: "#005fb8"
+  older: "#616161"
+size:
+  none: "#616161"
+  small: "#107c10"
+  medium: "#bf8803"
+  large: "#a31515"
+inode:
+  valid: "#af00db"
+  invalid: "#616161"
+links:
+  valid: "#267f99"
+  invalid: "#616161"
+tree-edge: "#cecece"
+git-status:
+  default: "#3b3b3b"
+  unmodified: "#616161"
+  ignored: "#616161"
+  new-in-index: "#107c10"
+  new-in-workdir: "#107c10"
+  typechange: "#bf8803"
+  deleted: "#cd3131"
+  renamed: "#005fb8"
+  modified: "#bf8803"
+  conflicted: "#cd3131"

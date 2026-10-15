@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "kanagawa-dragon",
+  "appearance": "dark",
   "vars": {
     "accent": "#8ba4b0",
     "accent2": "#8ea4a2",

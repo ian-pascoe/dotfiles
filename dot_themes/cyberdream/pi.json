@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "cyberdream",
+  "appearance": "dark",
   "vars": {
     "bg": "#16181a",
     "bgAlt": "#1e2124",

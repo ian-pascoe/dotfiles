@@ -1,0 +1,39 @@
+# Hand-derived from Everblush/nvim palette and Ghostty's bundled "Everblush" theme.
+user: "#6CBFBF"
+group: "#67CBE7"
+permission:
+  read: "#8CCF7E"
+  write: "#E5C76B"
+  exec: "#E57474"
+  exec-sticky: "#C47FD5"
+  no-access: "#7C8587"
+  octal: "#67CBE7"
+  acl: "#67CBE7"
+  context: "#6CBFBF"
+date:
+  hour-old: "#8CCF7E"
+  day-old: "#6CBFBF"
+  older: "#7C8587"
+size:
+  none: "#7C8587"
+  small: "#8CCF7E"
+  medium: "#E5C76B"
+  large: "#F4D67A"
+inode:
+  valid: "#C47FD5"
+  invalid: "#7C8587"
+links:
+  valid: "#67CBE7"
+  invalid: "#7C8587"
+tree-edge: "#5A6264"
+git-status:
+  default: "#DADADA"
+  unmodified: "#7C8587"
+  ignored: "#7C8587"
+  new-in-index: "#8CCF7E"
+  new-in-workdir: "#8CCF7E"
+  typechange: "#E5C76B"
+  deleted: "#E57474"
+  renamed: "#6CBFBF"
+  modified: "#E5C76B"
+  conflicted: "#E57474"

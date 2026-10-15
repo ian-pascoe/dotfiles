@@ -1,0 +1,39 @@
+# Hand-derived from the antfu/vscode-theme-vitesse (themes/vitesse-light.json) and the qshan-li/neovim-theme-vitesse "light" palette.
+user: "#1E754F"
+group: "#2993A3"
+permission:
+  read: "#1E754F"
+  write: "#998418"
+  exec: "#AB5959"
+  exec-sticky: "#A13865"
+  no-access: "#747571"
+  octal: "#2993A3"
+  acl: "#2993A3"
+  context: "#1E754F"
+date:
+  hour-old: "#1E754F"
+  day-old: "#1E754F"
+  older: "#747571"
+size:
+  none: "#747571"
+  small: "#1E754F"
+  medium: "#998418"
+  large: "#A65E2B"
+inode:
+  valid: "#A13865"
+  invalid: "#747571"
+links:
+  valid: "#2993A3"
+  invalid: "#747571"
+tree-edge: "#999999"
+git-status:
+  default: "#393A34"
+  unmodified: "#747571"
+  ignored: "#747571"
+  new-in-index: "#1E754F"
+  new-in-workdir: "#1E754F"
+  typechange: "#998418"
+  deleted: "#AB5959"
+  renamed: "#1E754F"
+  modified: "#998418"
+  conflicted: "#AB5959"

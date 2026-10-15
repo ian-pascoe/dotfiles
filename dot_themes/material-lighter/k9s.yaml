@@ -1,0 +1,101 @@
+# Hand-mapped from Material Theme "Lighter" palette from marko-cerovac/material.nvim "lighter" style (92f7366); green, yellow and cyan taken from its high_visibility lighter variant for contrast on #FAFAFA. Terminal: hand-mapped (Ghostty's bundled "Material" is a different #EAEAEA light theme).
+k9s:
+  body:
+    fgColor: "#546E7A"
+    bgColor: default
+    logoColor: "#6182B8"
+  prompt:
+    fgColor: "#546E7A"
+    bgColor: default
+    suggestColor: "#6182B8"
+  help:
+    fgColor: "#546E7A"
+    bgColor: default
+    sectionColor: "#5E8526"
+    keyColor: "#6182B8"
+    numKeyColor: "#E53935"
+  frame:
+    title:
+      fgColor: "#067A82"
+      bgColor: default
+      highlightColor: "#7C4DFF"
+      counterColor: "#C37101"
+      filterColor: "#5E8526"
+    border:
+      fgColor: "#6182B8"
+      focusColor: "#39ADB5"
+    menu:
+      fgColor: "#546E7A"
+      keyColor: "#6182B8"
+      numKeyColor: "#E53935"
+    crumbs:
+      fgColor: "#FAFAFA"
+      bgColor: default
+      activeColor: "#C37101"
+    status:
+      newColor: "#6182B8"
+      modifyColor: "#067A82"
+      addColor: "#5E8526"
+      pendingColor: "#C37101"
+      errorColor: "#E53935"
+      highlightColor: "#067A82"
+      killColor: "#7C4DFF"
+      completedColor: "#78909C"
+  info:
+    fgColor: "#C37101"
+    sectionColor: "#546E7A"
+  views:
+    table:
+      fgColor: "#546E7A"
+      bgColor: default
+      cursorFgColor: "#546E7A"
+      cursorBgColor: "#DCEEED"
+      markColor: "#5E8526"
+      header:
+        fgColor: "#C37101"
+        bgColor: default
+        sorterColor: "#067A82"
+    xray:
+      fgColor: "#546E7A"
+      bgColor: default
+      cursorColor: "#DCEEED"
+      cursorTextColor: "#546E7A"
+      graphicColor: "#7C4DFF"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#5E8526"
+        - "#E53935"
+      defaultChartColors:
+        - "#5E8526"
+        - "#E53935"
+      resourceColors:
+        cpu:
+          - "#6182B8"
+          - "#067A82"
+        mem:
+          - "#5E8526"
+          - "#C37101"
+    yaml:
+      keyColor: "#6182B8"
+      valueColor: "#546E7A"
+      colonColor: "#78909C"
+    logs:
+      fgColor: "#546E7A"
+      bgColor: default
+      indicator:
+        fgColor: "#067A82"
+        bgColor: default
+        toggleOnColor: "#5E8526"
+        toggleOffColor: "#78909C"
+  dialog:
+    fgColor: "#C37101"
+    bgColor: default
+    buttonFgColor: "#546E7A"
+    buttonBgColor: default
+    buttonFocusFgColor: "#FAFAFA"
+    buttonFocusBgColor: "#7C4DFF"
+    labelFgColor: "#C37101"
+    fieldFgColor: "#546E7A"

@@ -1,0 +1,37 @@
+:root {
+  /* Darcula palette (hand-derived from the JetBrains Darcula editor scheme colors (as used by xiantang/darcula-dark.nvim's colors/themes/darcula.json) and Ghostty's bundled "JetBrains Darcula" theme); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 32, 32, 32;
+  --foreground: 173, 173, 173;
+  --card-background: 43, 43, 43;
+  --popup-background: 60, 63, 65;
+  --primary: 104, 151, 187;
+  --secondary: 111, 175, 189;
+  --tertiary: 104, 151, 187;
+  --accent: 152, 118, 170;
+  --muted-background: 128, 128, 128;
+  --info: 104, 151, 187;
+  --success: 106, 135, 89;
+  --warning: 255, 198, 109;
+  --destructive: 255, 107, 104;
+  --border: 75, 78, 79;
+  --text: 173, 173, 173;
+  --foam: 111, 175, 189;
+  --gold: 255, 198, 109;
+  --love: 255, 107, 104;
+  --overlay: 128, 128, 128;
+  --highlight: 33, 66, 131;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

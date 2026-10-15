@@ -1,0 +1,101 @@
+# Hand-mapped from Material Theme "Ocean" (VS Code, equinusocio.vsc-material-theme) palette as ported by marko-cerovac/material.nvim "deep ocean" (92f7366); terminal colors from Ghostty's bundled "Material Ocean" theme.
+k9s:
+  body:
+    fgColor: "#8F93A2"
+    bgColor: default
+    logoColor: "#82AAFF"
+  prompt:
+    fgColor: "#8F93A2"
+    bgColor: default
+    suggestColor: "#82AAFF"
+  help:
+    fgColor: "#8F93A2"
+    bgColor: default
+    sectionColor: "#C3E88D"
+    keyColor: "#82AAFF"
+    numKeyColor: "#FF5370"
+  frame:
+    title:
+      fgColor: "#89DDFF"
+      bgColor: default
+      highlightColor: "#C792EA"
+      counterColor: "#FFCB6B"
+      filterColor: "#C3E88D"
+    border:
+      fgColor: "#82AAFF"
+      focusColor: "#84FFFF"
+    menu:
+      fgColor: "#8F93A2"
+      keyColor: "#82AAFF"
+      numKeyColor: "#FF5370"
+    crumbs:
+      fgColor: "#0F111A"
+      bgColor: default
+      activeColor: "#FFCB6B"
+    status:
+      newColor: "#82AAFF"
+      modifyColor: "#89DDFF"
+      addColor: "#C3E88D"
+      pendingColor: "#FFCB6B"
+      errorColor: "#FF5370"
+      highlightColor: "#89DDFF"
+      killColor: "#C792EA"
+      completedColor: "#717CB4"
+  info:
+    fgColor: "#FFCB6B"
+    sectionColor: "#8F93A2"
+  views:
+    table:
+      fgColor: "#8F93A2"
+      bgColor: default
+      cursorFgColor: "#8F93A2"
+      cursorBgColor: "#1F2233"
+      markColor: "#C3E88D"
+      header:
+        fgColor: "#FFCB6B"
+        bgColor: default
+        sorterColor: "#89DDFF"
+    xray:
+      fgColor: "#8F93A2"
+      bgColor: default
+      cursorColor: "#1F2233"
+      cursorTextColor: "#8F93A2"
+      graphicColor: "#C792EA"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#C3E88D"
+        - "#FF5370"
+      defaultChartColors:
+        - "#C3E88D"
+        - "#FF5370"
+      resourceColors:
+        cpu:
+          - "#82AAFF"
+          - "#89DDFF"
+        mem:
+          - "#C3E88D"
+          - "#FFCB6B"
+    yaml:
+      keyColor: "#82AAFF"
+      valueColor: "#8F93A2"
+      colonColor: "#717CB4"
+    logs:
+      fgColor: "#8F93A2"
+      bgColor: default
+      indicator:
+        fgColor: "#89DDFF"
+        bgColor: default
+        toggleOnColor: "#C3E88D"
+        toggleOffColor: "#717CB4"
+  dialog:
+    fgColor: "#FFCB6B"
+    bgColor: default
+    buttonFgColor: "#8F93A2"
+    buttonBgColor: default
+    buttonFocusFgColor: "#0F111A"
+    buttonFocusBgColor: "#C792EA"
+    labelFgColor: "#FFCB6B"
+    fieldFgColor: "#8F93A2"

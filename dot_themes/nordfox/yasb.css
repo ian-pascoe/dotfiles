@@ -1,0 +1,37 @@
+:root {
+  /* Nordfox palette (hand-derived from EdenEast/nightfox.nvim); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 250, 244, 237;
+  --foreground: 87, 82, 121;
+  --card-background: 235, 224, 223;
+  --popup-background: 235, 223, 228;
+  --primary: 40, 105, 131;
+  --secondary: 86, 148, 159;
+  --tertiary: 40, 105, 131;
+  --accent: 144, 122, 169;
+  --muted-background: 121, 117, 147;
+  --info: 40, 105, 131;
+  --success: 97, 135, 116;
+  --warning: 234, 157, 52;
+  --destructive: 180, 99, 122;
+  --border: 168, 163, 179;
+  --text: 87, 82, 121;
+  --foam: 86, 148, 159;
+  --gold: 234, 157, 52;
+  --love: 180, 99, 122;
+  --overlay: 121, 117, 147;
+  --highlight: 235, 223, 228;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

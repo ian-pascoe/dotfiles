@@ -1,0 +1,101 @@
+# Hand-derived from the ribru17/bamboo.nvim "light" palette (lua/bamboo/palette.lua).
+k9s:
+  body:
+    fgColor: "#3A4238"
+    bgColor: default
+    logoColor: "#27850B"
+  prompt:
+    fgColor: "#3A4238"
+    bgColor: default
+    suggestColor: "#27850B"
+  help:
+    fgColor: "#3A4238"
+    bgColor: default
+    sectionColor: "#27850B"
+    keyColor: "#27850B"
+    numKeyColor: "#C72A3C"
+  frame:
+    title:
+      fgColor: "#188A9E"
+      bgColor: default
+      highlightColor: "#8A4ADF"
+      counterColor: "#A77B00"
+      filterColor: "#27850B"
+    border:
+      fgColor: "#27850B"
+      focusColor: "#188A9E"
+    menu:
+      fgColor: "#3A4238"
+      keyColor: "#27850B"
+      numKeyColor: "#C72A3C"
+    crumbs:
+      fgColor: "#FAFAE0"
+      bgColor: default
+      activeColor: "#A77B00"
+    status:
+      newColor: "#27850B"
+      modifyColor: "#188A9E"
+      addColor: "#27850B"
+      pendingColor: "#A77B00"
+      errorColor: "#C72A3C"
+      highlightColor: "#188A9E"
+      killColor: "#8A4ADF"
+      completedColor: "#6D726B"
+  info:
+    fgColor: "#A77B00"
+    sectionColor: "#3A4238"
+  views:
+    table:
+      fgColor: "#3A4238"
+      bgColor: default
+      cursorFgColor: "#3A4238"
+      cursorBgColor: "#DADAC2"
+      markColor: "#27850B"
+      header:
+        fgColor: "#A77B00"
+        bgColor: default
+        sorterColor: "#188A9E"
+    xray:
+      fgColor: "#3A4238"
+      bgColor: default
+      cursorColor: "#DADAC2"
+      cursorTextColor: "#3A4238"
+      graphicColor: "#8A4ADF"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#27850B"
+        - "#C72A3C"
+      defaultChartColors:
+        - "#27850B"
+        - "#C72A3C"
+      resourceColors:
+        cpu:
+          - "#27850B"
+          - "#188A9E"
+        mem:
+          - "#27850B"
+          - "#A77B00"
+    yaml:
+      keyColor: "#27850B"
+      valueColor: "#3A4238"
+      colonColor: "#6D726B"
+    logs:
+      fgColor: "#3A4238"
+      bgColor: default
+      indicator:
+        fgColor: "#188A9E"
+        bgColor: default
+        toggleOnColor: "#27850B"
+        toggleOffColor: "#6D726B"
+  dialog:
+    fgColor: "#A77B00"
+    bgColor: default
+    buttonFgColor: "#3A4238"
+    buttonBgColor: default
+    buttonFocusFgColor: "#FAFAE0"
+    buttonFocusBgColor: "#8A4ADF"
+    labelFgColor: "#A77B00"
+    fieldFgColor: "#3A4238"

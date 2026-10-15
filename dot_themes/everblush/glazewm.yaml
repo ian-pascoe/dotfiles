@@ -1,0 +1,7 @@
+window_effects:
+  focused_window:
+    border:
+      color: "#6CBFBF"
+  other_windows:
+    border:
+      color: "#464E50"

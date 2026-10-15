@@ -19,6 +19,8 @@
 - Edit Tern config in `tern/`. Each OS's Tern config directory in the source
   state holds only stubs that include it; add a stub to every OS tree when
   adding a file (`tern/os-trees.test.ts` checks).
+- Theme variants: adding one or changing what a variant touches →
+  `dot_themes/docs/adding-a-variant.md`.
 - Installed skill changes are complete only when `dot_agents/skills/` and the
   provenance lockfile at `dot_local/state/skills/dot_skill-lock.json` agree.
 

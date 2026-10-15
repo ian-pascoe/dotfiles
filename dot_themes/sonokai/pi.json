@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "sonokai",
+  "appearance": "dark",
   "vars": {
     "accent": "#e7c664",
     "accent2": "#76cce0",

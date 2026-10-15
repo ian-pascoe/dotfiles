@@ -1,0 +1,37 @@
+:root {
+  /* Shades of Purple palette (hand-derived from Ahmad Awais's Shades of Purple palette from ahmadawais/shades-of-purple-vscode and necrogoru/shades-of-purple.nvim, on the Ghostty "Shades Of Purple" background); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 30, 29, 64;
+  --foreground: 255, 255, 255;
+  --card-background: 45, 43, 85;
+  --popup-background: 58, 55, 104;
+  --primary: 250, 208, 0;
+  --secondary: 179, 98, 255;
+  --tertiary: 250, 208, 0;
+  --accent: 179, 98, 255;
+  --muted-background: 165, 153, 233;
+  --info: 250, 208, 0;
+  --success: 165, 255, 144;
+  --warning: 250, 208, 0;
+  --destructive: 236, 58, 55;
+  --border: 58, 56, 104;
+  --text: 255, 255, 255;
+  --foam: 158, 255, 255;
+  --gold: 250, 208, 0;
+  --love: 236, 58, 55;
+  --overlay: 165, 153, 233;
+  --highlight: 77, 69, 112;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

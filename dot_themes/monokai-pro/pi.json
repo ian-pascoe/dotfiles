@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "monokai-pro",
+  "appearance": "dark",
   "vars": {
     "accent": "#ffd866",
     "accent2": "#78dce8",

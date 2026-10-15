@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "ayu-mirage",
+  "appearance": "dark",
   "vars": {
     "accent": "#ffcc66",
     "accent2": "#73d0ff",

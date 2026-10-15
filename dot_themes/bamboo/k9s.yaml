@@ -1,0 +1,101 @@
+# Hand-derived from the ribru17/bamboo.nvim "vulgaris" palette (lua/bamboo/palette.lua).
+k9s:
+  body:
+    fgColor: "#F1E9D2"
+    bgColor: default
+    logoColor: "#8FB573"
+  prompt:
+    fgColor: "#F1E9D2"
+    bgColor: default
+    suggestColor: "#8FB573"
+  help:
+    fgColor: "#F1E9D2"
+    bgColor: default
+    sectionColor: "#8FB573"
+    keyColor: "#8FB573"
+    numKeyColor: "#E75A7C"
+  frame:
+    title:
+      fgColor: "#70C2BE"
+      bgColor: default
+      highlightColor: "#AAAAFF"
+      counterColor: "#DBB651"
+      filterColor: "#8FB573"
+    border:
+      fgColor: "#8FB573"
+      focusColor: "#70C2BE"
+    menu:
+      fgColor: "#F1E9D2"
+      keyColor: "#8FB573"
+      numKeyColor: "#E75A7C"
+    crumbs:
+      fgColor: "#252623"
+      bgColor: default
+      activeColor: "#DBB651"
+    status:
+      newColor: "#8FB573"
+      modifyColor: "#70C2BE"
+      addColor: "#8FB573"
+      pendingColor: "#DBB651"
+      errorColor: "#E75A7C"
+      highlightColor: "#70C2BE"
+      killColor: "#AAAAFF"
+      completedColor: "#838781"
+  info:
+    fgColor: "#DBB651"
+    sectionColor: "#F1E9D2"
+  views:
+    table:
+      fgColor: "#F1E9D2"
+      bgColor: default
+      cursorFgColor: "#F1E9D2"
+      cursorBgColor: "#3A3D37"
+      markColor: "#8FB573"
+      header:
+        fgColor: "#DBB651"
+        bgColor: default
+        sorterColor: "#70C2BE"
+    xray:
+      fgColor: "#F1E9D2"
+      bgColor: default
+      cursorColor: "#3A3D37"
+      cursorTextColor: "#F1E9D2"
+      graphicColor: "#AAAAFF"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#8FB573"
+        - "#E75A7C"
+      defaultChartColors:
+        - "#8FB573"
+        - "#E75A7C"
+      resourceColors:
+        cpu:
+          - "#8FB573"
+          - "#70C2BE"
+        mem:
+          - "#8FB573"
+          - "#DBB651"
+    yaml:
+      keyColor: "#8FB573"
+      valueColor: "#F1E9D2"
+      colonColor: "#838781"
+    logs:
+      fgColor: "#F1E9D2"
+      bgColor: default
+      indicator:
+        fgColor: "#70C2BE"
+        bgColor: default
+        toggleOnColor: "#8FB573"
+        toggleOffColor: "#838781"
+  dialog:
+    fgColor: "#DBB651"
+    bgColor: default
+    buttonFgColor: "#F1E9D2"
+    buttonBgColor: default
+    buttonFocusFgColor: "#252623"
+    buttonFocusBgColor: "#AAAAFF"
+    labelFgColor: "#DBB651"
+    fieldFgColor: "#F1E9D2"

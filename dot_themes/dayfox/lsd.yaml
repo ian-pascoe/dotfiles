@@ -1,0 +1,39 @@
+# Hand-derived from the EdenEast/nightfox.nvim "dayfox" palette (lua/nightfox/palette/dayfox.lua).
+user: "#2848a9"
+group: "#287980"
+permission:
+  read: "#396847"
+  write: "#ac5402"
+  exec: "#a5222f"
+  exec-sticky: "#6e33ce"
+  no-access: "#66577b"
+  octal: "#287980"
+  acl: "#287980"
+  context: "#2848a9"
+date:
+  hour-old: "#396847"
+  day-old: "#2848a9"
+  older: "#66577b"
+size:
+  none: "#66577b"
+  small: "#396847"
+  medium: "#ac5402"
+  large: "#955f61"
+inode:
+  valid: "#6e33ce"
+  invalid: "#66577b"
+links:
+  valid: "#287980"
+  invalid: "#66577b"
+tree-edge: "#aab0ad"
+git-status:
+  default: "#3d2b5a"
+  unmodified: "#66577b"
+  ignored: "#66577b"
+  new-in-index: "#396847"
+  new-in-workdir: "#396847"
+  typechange: "#ac5402"
+  deleted: "#a5222f"
+  renamed: "#2848a9"
+  modified: "#ac5402"
+  conflicted: "#a5222f"

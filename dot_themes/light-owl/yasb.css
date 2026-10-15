@@ -1,0 +1,37 @@
+:root {
+  /* Light Owl palette (hand-derived from sdras/night-owl-vscode-theme "Night Owl Light" (editor colors and token colors), with Ghostty's bundled "Light Owl" ANSI palette); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 251, 251, 251;
+  --foreground: 64, 63, 83;
+  --card-background: 240, 240, 240;
+  --popup-background: 230, 230, 230;
+  --primary: 72, 118, 214;
+  --secondary: 12, 150, 155;
+  --tertiary: 72, 118, 214;
+  --accent: 153, 76, 195;
+  --muted-background: 105, 112, 152;
+  --info: 72, 118, 214;
+  --success: 8, 145, 106;
+  --warning: 169, 124, 0;
+  --destructive: 222, 61, 59;
+  --border: 217, 217, 217;
+  --text: 64, 63, 83;
+  --foam: 42, 162, 152;
+  --gold: 169, 124, 0;
+  --love: 222, 61, 59;
+  --overlay: 105, 112, 152;
+  --highlight: 224, 224, 224;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

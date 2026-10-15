@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "kanagawa",
+  "appearance": "dark",
   "vars": {
     "accent": "#7e9cd8",
     "accent2": "#7aa89f",

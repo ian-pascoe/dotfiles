@@ -1,0 +1,101 @@
+# Hand-derived from the antfu/vscode-theme-vitesse (themes/vitesse-dark.json) and the qshan-li/neovim-theme-vitesse "dark" palette.
+k9s:
+  body:
+    fgColor: "#DBD7CA"
+    bgColor: default
+    logoColor: "#4D9375"
+  prompt:
+    fgColor: "#DBD7CA"
+    bgColor: default
+    suggestColor: "#4D9375"
+  help:
+    fgColor: "#DBD7CA"
+    bgColor: default
+    sectionColor: "#4D9375"
+    keyColor: "#4D9375"
+    numKeyColor: "#CB7676"
+  frame:
+    title:
+      fgColor: "#5EAAB5"
+      bgColor: default
+      highlightColor: "#D9739F"
+      counterColor: "#E6CC77"
+      filterColor: "#4D9375"
+    border:
+      fgColor: "#4D9375"
+      focusColor: "#5EAAB5"
+    menu:
+      fgColor: "#DBD7CA"
+      keyColor: "#4D9375"
+      numKeyColor: "#CB7676"
+    crumbs:
+      fgColor: "#121212"
+      bgColor: default
+      activeColor: "#E6CC77"
+    status:
+      newColor: "#4D9375"
+      modifyColor: "#5EAAB5"
+      addColor: "#4D9375"
+      pendingColor: "#E6CC77"
+      errorColor: "#CB7676"
+      highlightColor: "#5EAAB5"
+      killColor: "#D9739F"
+      completedColor: "#858480"
+  info:
+    fgColor: "#E6CC77"
+    sectionColor: "#DBD7CA"
+  views:
+    table:
+      fgColor: "#DBD7CA"
+      bgColor: default
+      cursorFgColor: "#DBD7CA"
+      cursorBgColor: "#272727"
+      markColor: "#4D9375"
+      header:
+        fgColor: "#E6CC77"
+        bgColor: default
+        sorterColor: "#5EAAB5"
+    xray:
+      fgColor: "#DBD7CA"
+      bgColor: default
+      cursorColor: "#272727"
+      cursorTextColor: "#DBD7CA"
+      graphicColor: "#D9739F"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#4D9375"
+        - "#CB7676"
+      defaultChartColors:
+        - "#4D9375"
+        - "#CB7676"
+      resourceColors:
+        cpu:
+          - "#4D9375"
+          - "#5EAAB5"
+        mem:
+          - "#4D9375"
+          - "#E6CC77"
+    yaml:
+      keyColor: "#4D9375"
+      valueColor: "#DBD7CA"
+      colonColor: "#858480"
+    logs:
+      fgColor: "#DBD7CA"
+      bgColor: default
+      indicator:
+        fgColor: "#5EAAB5"
+        bgColor: default
+        toggleOnColor: "#4D9375"
+        toggleOffColor: "#858480"
+  dialog:
+    fgColor: "#E6CC77"
+    bgColor: default
+    buttonFgColor: "#DBD7CA"
+    buttonBgColor: default
+    buttonFocusFgColor: "#121212"
+    buttonFocusBgColor: "#D9739F"
+    labelFgColor: "#E6CC77"
+    fieldFgColor: "#DBD7CA"

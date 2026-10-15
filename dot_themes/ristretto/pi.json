@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "ristretto",
+  "appearance": "dark",
   "vars": {
     "accent": "#f9cc6c",
     "accent2": "#85dacc",

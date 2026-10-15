@@ -1,0 +1,37 @@
+:root {
+  /* VS Code Light Modern palette (hand-derived from the VS Code "Light Modern" theme (microsoft/vscode extensions/theme-defaults/themes/light_modern.json + light_plus syntax)); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 255, 255, 255;
+  --foreground: 59, 59, 59;
+  --card-background: 243, 243, 243;
+  --popup-background: 232, 232, 232;
+  --primary: 0, 95, 184;
+  --secondary: 38, 127, 153;
+  --tertiary: 0, 95, 184;
+  --accent: 175, 0, 219;
+  --muted-background: 97, 97, 97;
+  --info: 0, 95, 184;
+  --success: 16, 124, 16;
+  --warning: 191, 136, 3;
+  --destructive: 205, 49, 49;
+  --border: 206, 206, 206;
+  --text: 59, 59, 59;
+  --foam: 38, 127, 153;
+  --gold: 191, 136, 3;
+  --love: 205, 49, 49;
+  --overlay: 97, 97, 97;
+  --highlight: 232, 232, 232;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

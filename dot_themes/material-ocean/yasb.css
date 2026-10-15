@@ -1,0 +1,37 @@
+:root {
+  /* Material Ocean palette (hand-mapped from Material Theme "Ocean" (VS Code, equinusocio.vsc-material-theme) palette as ported by marko-cerovac/material.nvim "deep ocean" (92f7366); terminal colors from Ghostty's bundled "Material Ocean" theme.); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 15, 17, 26;
+  --foreground: 143, 147, 162;
+  --card-background: 26, 28, 37;
+  --popup-background: 35, 38, 55;
+  --primary: 130, 170, 255;
+  --secondary: 132, 255, 255;
+  --tertiary: 130, 170, 255;
+  --accent: 199, 146, 234;
+  --muted-background: 113, 124, 180;
+  --info: 130, 170, 255;
+  --success: 195, 232, 141;
+  --warning: 255, 203, 107;
+  --destructive: 255, 83, 112;
+  --border: 35, 38, 55;
+  --text: 143, 147, 162;
+  --foam: 137, 221, 255;
+  --gold: 255, 203, 107;
+  --love: 255, 83, 112;
+  --overlay: 113, 124, 180;
+  --highlight: 31, 34, 51;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

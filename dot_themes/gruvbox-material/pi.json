@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "gruvbox-material",
+  "appearance": "dark",
   "vars": {
     "accent": "#7daea3",
     "accent2": "#89b482",

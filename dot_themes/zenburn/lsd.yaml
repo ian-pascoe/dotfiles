@@ -1,0 +1,39 @@
+# Hand-mapped from phha/zenburn.nvim palette (f5ee12b); terminal colors from Ghostty's bundled "Zenburn" theme.
+user: "#94BFF3"
+group: "#8CD0D3"
+permission:
+  read: "#7F9F7F"
+  write: "#F0DFAF"
+  exec: "#CC9393"
+  exec-sticky: "#DC8CC3"
+  no-access: "#8F8F8F"
+  octal: "#8CD0D3"
+  acl: "#8CD0D3"
+  context: "#94BFF3"
+date:
+  hour-old: "#7F9F7F"
+  day-old: "#94BFF3"
+  older: "#8F8F8F"
+size:
+  none: "#8F8F8F"
+  small: "#7F9F7F"
+  medium: "#F0DFAF"
+  large: "#DFAF8F"
+inode:
+  valid: "#DC8CC3"
+  invalid: "#8F8F8F"
+links:
+  valid: "#8CD0D3"
+  invalid: "#8F8F8F"
+tree-edge: "#6F6F6F"
+git-status:
+  default: "#DCDCCC"
+  unmodified: "#8F8F8F"
+  ignored: "#8F8F8F"
+  new-in-index: "#7F9F7F"
+  new-in-workdir: "#7F9F7F"
+  typechange: "#F0DFAF"
+  deleted: "#CC9393"
+  renamed: "#94BFF3"
+  modified: "#F0DFAF"
+  conflicted: "#CC9393"

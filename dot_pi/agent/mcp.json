@@ -2,13 +2,8 @@
   "mcpServers": {
     "browser-use": {
       "enabled": true,
-      "command": "pnpm",
-      "args": [
-        "dlx",
-        "@playwright/mcp@latest",
-        "--output-dir=${HOME}/.cache/playwright-mcp",
-        "--extension"
-      ],
+      "command": "playwright-mcp",
+      "args": ["--output-dir=${HOME}/.cache/playwright-mcp", "--extension"],
       "env": {
         "DISPLAY": ":1",
         "XDG_SESSION_TYPE": "x11",

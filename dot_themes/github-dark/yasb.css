@@ -1,0 +1,37 @@
+:root {
+  /* GitHub Dark palette (hand-derived from the GitHub "Dark Default" palette (projekt0n/github-nvim-theme github_dark_default / primer/github-vscode-theme dark_default)); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 13, 17, 23;
+  --foreground: 230, 237, 243;
+  --card-background: 22, 27, 34;
+  --popup-background: 31, 49, 80;
+  --primary: 88, 166, 255;
+  --secondary: 57, 197, 207;
+  --tertiary: 88, 166, 255;
+  --accent: 188, 140, 255;
+  --muted-background: 139, 148, 158;
+  --info: 88, 166, 255;
+  --success: 63, 185, 80;
+  --warning: 210, 153, 34;
+  --destructive: 248, 81, 73;
+  --border: 48, 54, 61;
+  --text: 230, 237, 243;
+  --foam: 57, 197, 207;
+  --gold: 210, 153, 34;
+  --love: 248, 81, 73;
+  --overlay: 139, 148, 158;
+  --highlight: 31, 49, 80;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

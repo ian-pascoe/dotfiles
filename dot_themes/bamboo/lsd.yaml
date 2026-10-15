@@ -1,0 +1,39 @@
+# Hand-derived from the ribru17/bamboo.nvim "vulgaris" palette (lua/bamboo/palette.lua).
+user: "#8FB573"
+group: "#70C2BE"
+permission:
+  read: "#8FB573"
+  write: "#DBB651"
+  exec: "#E75A7C"
+  exec-sticky: "#AAAAFF"
+  no-access: "#838781"
+  octal: "#70C2BE"
+  acl: "#70C2BE"
+  context: "#8FB573"
+date:
+  hour-old: "#8FB573"
+  day-old: "#8FB573"
+  older: "#838781"
+size:
+  none: "#838781"
+  small: "#8FB573"
+  medium: "#DBB651"
+  large: "#FF9966"
+inode:
+  valid: "#AAAAFF"
+  invalid: "#838781"
+links:
+  valid: "#70C2BE"
+  invalid: "#838781"
+tree-edge: "#5B5E5A"
+git-status:
+  default: "#F1E9D2"
+  unmodified: "#838781"
+  ignored: "#838781"
+  new-in-index: "#8FB573"
+  new-in-workdir: "#8FB573"
+  typechange: "#DBB651"
+  deleted: "#E75A7C"
+  renamed: "#8FB573"
+  modified: "#DBB651"
+  conflicted: "#E75A7C"

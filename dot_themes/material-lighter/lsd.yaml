@@ -1,0 +1,39 @@
+# Hand-mapped from Material Theme "Lighter" palette from marko-cerovac/material.nvim "lighter" style (92f7366); green, yellow and cyan taken from its high_visibility lighter variant for contrast on #FAFAFA. Terminal: hand-mapped (Ghostty's bundled "Material" is a different #EAEAEA light theme).
+user: "#6182B8"
+group: "#067A82"
+permission:
+  read: "#5E8526"
+  write: "#C37101"
+  exec: "#E53935"
+  exec-sticky: "#7C4DFF"
+  no-access: "#78909C"
+  octal: "#067A82"
+  acl: "#067A82"
+  context: "#6182B8"
+date:
+  hour-old: "#5E8526"
+  day-old: "#6182B8"
+  older: "#78909C"
+size:
+  none: "#78909C"
+  small: "#5E8526"
+  medium: "#C37101"
+  large: "#F76D47"
+inode:
+  valid: "#7C4DFF"
+  invalid: "#78909C"
+links:
+  valid: "#067A82"
+  invalid: "#78909C"
+tree-edge: "#90A4AE"
+git-status:
+  default: "#546E7A"
+  unmodified: "#78909C"
+  ignored: "#78909C"
+  new-in-index: "#5E8526"
+  new-in-workdir: "#5E8526"
+  typechange: "#C37101"
+  deleted: "#E53935"
+  renamed: "#6182B8"
+  modified: "#C37101"
+  conflicted: "#E53935"

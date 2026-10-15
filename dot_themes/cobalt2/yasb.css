@@ -1,0 +1,37 @@
+:root {
+  /* Cobalt2 palette (hand-derived from Wes Bos's Cobalt2 palette from wesbos/cobalt2 and lalitmee/cobalt2.nvim, on the Ghostty "Cobalt2" background); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 19, 39, 56;
+  --foreground: 255, 255, 255;
+  --card-background: 25, 53, 73;
+  --popup-background: 31, 70, 98;
+  --primary: 255, 198, 0;
+  --secondary: 158, 255, 255;
+  --tertiary: 255, 198, 0;
+  --accent: 251, 148, 255;
+  --muted-background: 143, 191, 220;
+  --info: 255, 198, 0;
+  --success: 58, 217, 0;
+  --warning: 255, 198, 0;
+  --destructive: 244, 14, 23;
+  --border: 31, 70, 98;
+  --text: 255, 255, 255;
+  --foam: 158, 255, 255;
+  --gold: 255, 198, 0;
+  --love: 244, 14, 23;
+  --overlay: 143, 191, 220;
+  --highlight: 31, 70, 98;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

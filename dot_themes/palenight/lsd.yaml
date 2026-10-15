@@ -1,0 +1,39 @@
+# Hand-mapped from Material Theme "Palenight" palette from marko-cerovac/material.nvim "palenight" style (92f7366).
+user: "#82AAFF"
+group: "#89DDFF"
+permission:
+  read: "#C3E88D"
+  write: "#FFCB6B"
+  exec: "#FF5370"
+  exec-sticky: "#C792EA"
+  no-access: "#717CB4"
+  octal: "#89DDFF"
+  acl: "#89DDFF"
+  context: "#82AAFF"
+date:
+  hour-old: "#C3E88D"
+  day-old: "#82AAFF"
+  older: "#717CB4"
+size:
+  none: "#717CB4"
+  small: "#C3E88D"
+  medium: "#FFCB6B"
+  large: "#F78C6C"
+inode:
+  valid: "#C792EA"
+  invalid: "#717CB4"
+links:
+  valid: "#89DDFF"
+  invalid: "#717CB4"
+tree-edge: "#515772"
+git-status:
+  default: "#A6ACCD"
+  unmodified: "#717CB4"
+  ignored: "#717CB4"
+  new-in-index: "#C3E88D"
+  new-in-workdir: "#C3E88D"
+  typechange: "#FFCB6B"
+  deleted: "#FF5370"
+  renamed: "#82AAFF"
+  modified: "#FFCB6B"
+  conflicted: "#FF5370"

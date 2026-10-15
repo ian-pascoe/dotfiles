@@ -1,0 +1,37 @@
+:root {
+  /* Xcode Dark palette (hand-derived from the lunacookies/vim-colors-xcode xcodedark colorscheme (templates/_xcodedark_colors.colortemplate) and Ghostty's bundled "Xcode Dark" theme); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 41, 42, 48;
+  --foreground: 223, 223, 224;
+  --card-background: 47, 48, 55;
+  --popup-background: 57, 59, 68;
+  --primary: 78, 176, 204;
+  --secondary: 107, 223, 255;
+  --tertiary: 78, 176, 204;
+  --accent: 178, 129, 235;
+  --muted-background: 127, 140, 152;
+  --info: 78, 176, 204;
+  --success: 132, 179, 96;
+  --warning: 217, 201, 124;
+  --destructive: 255, 129, 112;
+  --border: 65, 68, 83;
+  --text: 223, 223, 224;
+  --foam: 120, 194, 179;
+  --gold: 217, 201, 124;
+  --love: 255, 129, 112;
+  --overlay: 127, 140, 152;
+  --highlight: 65, 68, 83;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

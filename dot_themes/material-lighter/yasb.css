@@ -1,0 +1,37 @@
+:root {
+  /* Material Lighter palette (hand-mapped from Material Theme "Lighter" palette from marko-cerovac/material.nvim "lighter" style (92f7366); green, yellow and cyan taken from its high_visibility lighter variant for contrast on #FAFAFA. Terminal: hand-mapped (Ghostty's bundled "Material" is a different #EAEAEA light theme).); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 250, 250, 250;
+  --foreground: 84, 110, 122;
+  --card-background: 238, 238, 238;
+  --popup-background: 231, 231, 232;
+  --primary: 97, 130, 184;
+  --secondary: 57, 173, 181;
+  --tertiary: 97, 130, 184;
+  --accent: 124, 77, 255;
+  --muted-background: 120, 144, 156;
+  --info: 97, 130, 184;
+  --success: 94, 133, 38;
+  --warning: 195, 113, 1;
+  --destructive: 229, 57, 53;
+  --border: 211, 225, 232;
+  --text: 84, 110, 122;
+  --foam: 6, 122, 130;
+  --gold: 195, 113, 1;
+  --love: 229, 57, 53;
+  --overlay: 120, 144, 156;
+  --highlight: 220, 238, 237;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

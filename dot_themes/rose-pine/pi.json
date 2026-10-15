@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "rose-pine",
+  "appearance": "dark",
   "vars": {
     "accent": "#c4a7e7",
     "accent2": "#9ccfd8",

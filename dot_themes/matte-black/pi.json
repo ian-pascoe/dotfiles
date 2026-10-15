@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "matte-black",
+  "appearance": "dark",
   "vars": {
     "accent": "#e68e0d",
     "accent2": "#ffc107",

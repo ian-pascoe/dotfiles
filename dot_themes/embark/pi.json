@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "embark",
+  "appearance": "dark",
   "vars": {
     "accent": "#91ddff",
     "accent2": "#63f2f1",

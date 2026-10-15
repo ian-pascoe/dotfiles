@@ -1,6 +1,7 @@
 {
   "$schema": "https://pi.dev/schemas/theme.schema.json",
   "name": "vesper",
+  "appearance": "dark",
   "vars": {
     "accent": "#99c0ff",
     "accent2": "#99ffe4",

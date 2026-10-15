@@ -1,0 +1,39 @@
+# Hand-derived from sdras/night-owl-vscode-theme "Night Owl" (editor colors and token colors), with Ghostty's bundled "Night Owl" ANSI palette.
+user: "#82AAFF"
+group: "#21C7A8"
+permission:
+  read: "#ADDB67"
+  write: "#ECC48D"
+  exec: "#EF5350"
+  exec-sticky: "#C792EA"
+  no-access: "#5F7E97"
+  octal: "#21C7A8"
+  acl: "#21C7A8"
+  context: "#82AAFF"
+date:
+  hour-old: "#ADDB67"
+  day-old: "#82AAFF"
+  older: "#5F7E97"
+size:
+  none: "#5F7E97"
+  small: "#ADDB67"
+  medium: "#ECC48D"
+  large: "#F78C6C"
+inode:
+  valid: "#C792EA"
+  invalid: "#5F7E97"
+links:
+  valid: "#21C7A8"
+  invalid: "#5F7E97"
+tree-edge: "#4B6479"
+git-status:
+  default: "#D6DEEB"
+  unmodified: "#5F7E97"
+  ignored: "#5F7E97"
+  new-in-index: "#ADDB67"
+  new-in-workdir: "#ADDB67"
+  typechange: "#ECC48D"
+  deleted: "#EF5350"
+  renamed: "#82AAFF"
+  modified: "#ECC48D"
+  conflicted: "#EF5350"

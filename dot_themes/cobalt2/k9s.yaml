@@ -1,0 +1,101 @@
+# Hand-derived from Wes Bos's Cobalt2 palette from wesbos/cobalt2 and lalitmee/cobalt2.nvim, on the Ghostty "Cobalt2" background.
+k9s:
+  body:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    logoColor: "#FFC600"
+  prompt:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    suggestColor: "#FFC600"
+  help:
+    fgColor: "#FFFFFF"
+    bgColor: default
+    sectionColor: "#3AD900"
+    keyColor: "#FFC600"
+    numKeyColor: "#F40E17"
+  frame:
+    title:
+      fgColor: "#9EFFFF"
+      bgColor: default
+      highlightColor: "#FB94FF"
+      counterColor: "#FFC600"
+      filterColor: "#3AD900"
+    border:
+      fgColor: "#FFC600"
+      focusColor: "#9EFFFF"
+    menu:
+      fgColor: "#FFFFFF"
+      keyColor: "#FFC600"
+      numKeyColor: "#F40E17"
+    crumbs:
+      fgColor: "#132738"
+      bgColor: default
+      activeColor: "#FFC600"
+    status:
+      newColor: "#FFC600"
+      modifyColor: "#9EFFFF"
+      addColor: "#3AD900"
+      pendingColor: "#FFC600"
+      errorColor: "#F40E17"
+      highlightColor: "#9EFFFF"
+      killColor: "#FB94FF"
+      completedColor: "#8FBFDC"
+  info:
+    fgColor: "#FFC600"
+    sectionColor: "#FFFFFF"
+  views:
+    table:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      cursorFgColor: "#FFFFFF"
+      cursorBgColor: "#1F4662"
+      markColor: "#3AD900"
+      header:
+        fgColor: "#FFC600"
+        bgColor: default
+        sorterColor: "#9EFFFF"
+    xray:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      cursorColor: "#1F4662"
+      cursorTextColor: "#FFFFFF"
+      graphicColor: "#FB94FF"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#3AD900"
+        - "#F40E17"
+      defaultChartColors:
+        - "#3AD900"
+        - "#F40E17"
+      resourceColors:
+        cpu:
+          - "#FFC600"
+          - "#9EFFFF"
+        mem:
+          - "#3AD900"
+          - "#FFC600"
+    yaml:
+      keyColor: "#FFC600"
+      valueColor: "#FFFFFF"
+      colonColor: "#8FBFDC"
+    logs:
+      fgColor: "#FFFFFF"
+      bgColor: default
+      indicator:
+        fgColor: "#9EFFFF"
+        bgColor: default
+        toggleOnColor: "#3AD900"
+        toggleOffColor: "#8FBFDC"
+  dialog:
+    fgColor: "#FFC600"
+    bgColor: default
+    buttonFgColor: "#FFFFFF"
+    buttonBgColor: default
+    buttonFocusFgColor: "#132738"
+    buttonFocusBgColor: "#FB94FF"
+    labelFgColor: "#FFC600"
+    fieldFgColor: "#FFFFFF"

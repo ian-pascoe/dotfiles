@@ -1,0 +1,37 @@
+:root {
+  /* Palenight palette (hand-mapped from Material Theme "Palenight" palette from marko-cerovac/material.nvim "palenight" style (92f7366).); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 41, 45, 62;
+  --foreground: 166, 172, 205;
+  --card-background: 32, 35, 49;
+  --popup-background: 65, 72, 99;
+  --primary: 130, 170, 255;
+  --secondary: 128, 203, 196;
+  --tertiary: 130, 170, 255;
+  --accent: 199, 146, 234;
+  --muted-background: 113, 124, 180;
+  --info: 130, 170, 255;
+  --success: 195, 232, 141;
+  --warning: 255, 203, 107;
+  --destructive: 255, 83, 112;
+  --border: 54, 67, 103;
+  --text: 166, 172, 205;
+  --foam: 137, 221, 255;
+  --gold: 255, 203, 107;
+  --love: 255, 83, 112;
+  --overlay: 113, 124, 180;
+  --highlight: 68, 66, 103;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}
