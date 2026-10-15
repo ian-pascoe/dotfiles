@@ -1,34 +1,18 @@
 import path from "node:path";
 import type { ExtensionAPI, ExtensionContext, Theme } from "@earendil-works/pi-coding-agent";
 
-const TITLE_COLORS = [
-  "accent",
-  "accent",
-  "syntaxFunction",
-  "syntaxFunction",
-  "mdCode",
-  "borderAccent",
-] as const;
+const TITLE_COLOR = "accent";
 
 const TITLE_LINES = [
-  "               |",
-  "           \\       /",
-  "             .---.",
-  "        '-.  |   |  .-'",
-  "          ___|   |___",
-  "     -=  [           ]  =-",
-  "         `---.   .---'",
-  "      __||__ |   | __||__",
-  "      '-..-' |   | '-..-'",
-  "        ||   |   |   ||",
-  "        ||_.-|   |-,_||",
-  '      .-"`   `"`\'`   `"-.',
-  "    .'                   '.",
-].map((line) => line.padEnd(32));
-
-function titleLine(theme: Theme, text: string, row: number) {
-  return theme.fg(TITLE_COLORS[row % TITLE_COLORS.length]!, text);
-}
+  " █████╗          ██╗          ██████╗",
+  "██╔══██╗       ██████╗       ██╔═══██╗",
+  "███████║       ╚═██╔═╝       ██║   ██║",
+  "██╔══██║         ██║         ╚██╗ ██╔╝",
+  "██║  ██║         ██║         ███╔╝╚███╗",
+  "╚═╝  ╚═╝         ╚═╝         ╚══╝  ╚══╝",
+  "",
+  "    THE BEGINNING  ·  AND THE END",
+].map((line) => line.padEnd(39));
 
 function center(text: string, width: number) {
   const length = text.length;
@@ -41,7 +25,7 @@ function projectName() {
 }
 
 function renderHeader(theme: Theme, width: number, _phase: number, subtitleText: string) {
-  const lines = TITLE_LINES.map((line, row) => titleLine(theme, center(line, width), row));
+  const lines = TITLE_LINES.map((line) => theme.fg(TITLE_COLOR, center(line, width)));
   const subtitle = center(subtitleText, width);
 
   return ["", ...lines, theme.bold(theme.fg("muted", subtitle)), ""];

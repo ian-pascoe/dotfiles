@@ -6,8 +6,8 @@ local log = hs.logger.new("init", "info")
 -- collected once init.lua finishes, which silently stops them. Keep them here.
 keepAlive = {}
 
-local function notify(message)
-  hs.alert.show(message, 1.2)
+local function notify(message, seconds)
+  hs.alert.show(message, seconds or 1.2)
 end
 
 local function bind(mods, key, description, fn)
@@ -338,30 +338,391 @@ local function toggleMicMute()
   notify(not muted and "Mic: Muted" or "Mic: Live")
 end
 
--- `set-mode toggle` flips the saved mode, switches the theme family's variant
--- and sets the system appearance (see set-theme). A login shell supplies the
--- tools set-theme needs; ~/.local/bin is added in case it is not on its PATH.
-local function toggleDarkMode()
-  if keepAlive.modeTask and keepAlive.modeTask:isRunning() then
+-- Runs a script that uses the theme tools, with args as "$@", and calls back
+-- with (exitCode, stdout, stderr). A login shell supplies the tools set-theme
+-- needs; ~/.local/bin is added in case it is not on its PATH.
+local function runThemeScript(script, args, callback)
+  local taskArgs = { "-lc", 'export PATH="$HOME/.local/bin:$PATH"\n' .. script, "zsh" }
+  for _, arg in ipairs(args or {}) do
+    table.insert(taskArgs, arg)
+  end
+  local task = hs.task.new("/bin/zsh", callback, taskArgs)
+  task:start()
+  return task
+end
+
+-- Theme menu: the menubar icon shows the current theme's colors; its menu lists
+-- every theme family with its dark and light palette strips (like
+-- list-themes), the light/dark mode (like set-mode), a random pick (like
+-- random-theme), and a switch that sends theme picks to every machine
+-- (set-theme-all, random-theme-all).
+local themesDir = home .. "/.themes"
+local currentThemeLink = home .. "/.config/theme"
+local themeAllMachinesKey = "theme.allMachines"
+
+-- families: { name, dark = variant, light = variant } in theme-resolve order;
+-- familyOf and modeOf are keyed by variant; mode is the saved mode.
+local themes = { families = {}, familyOf = {}, modeOf = {} }
+local paletteCache = {}
+local familyImageCache = {}
+
+local function currentVariant()
+  local target = hs.fs.pathToAbsolute(currentThemeLink)
+  return target and target:match("([^/]+)$")
+end
+
+-- Reads background, foreground and palette 0-15 from a variant's ghostty.conf,
+-- the one file every variant has with a full terminal palette (as theme-palette).
+local function readPalette(variant)
+  if paletteCache[variant] ~= nil then
+    return paletteCache[variant] or nil
+  end
+
+  local colors = { palette = {} }
+  local file = io.open(themesDir .. "/" .. variant .. "/ghostty.conf")
+  if file then
+    for line in file:lines() do
+      local key, value = (line:gsub("[%s#]", "")):match("^([^=]+)=(.+)$")
+      if key == "background" or key == "foreground" then
+        colors[key] = { hex = "#" .. value }
+      elseif key == "palette" then
+        local index, hex = value:match("^(%d+)=(%x+)$")
+        if index then
+          colors.palette[tonumber(index)] = { hex = "#" .. hex }
+        end
+      end
+    end
+    file:close()
+  end
+
+  if not (colors.background and colors.foreground) then
+    colors = false
+  end
+  paletteCache[variant] = colors
+  return colors or nil
+end
+
+local function canvasImage(width, height, elements)
+  local scale = 2 -- draw at 2x so images stay sharp on Retina displays
+  local canvas = hs.canvas.new({ x = 0, y = 0, w = width * scale, h = height * scale })
+  canvas:transformation(hs.canvas.matrix.scale(scale))
+  canvas:appendElements(elements)
+  local image = canvas:imageFromCanvas()
+  canvas:delete()
+  return image:size({ w = width, h = height }, true)
+end
+
+-- A palette strip as list-themes draws it: "Aa" in the foreground, then the six
+-- hues (palette 1-6), on the background.
+local stripWidth, stripHeight, stripGap = 62, 14, 6
+
+local function stripElements(colors, x)
+  local elements = {
+    {
+      type = "rectangle",
+      action = "fill",
+      frame = { x = x, y = 0, w = stripWidth, h = stripHeight },
+      roundedRectRadii = { xRadius = 3, yRadius = 3 },
+      fillColor = colors.background,
+    },
+    {
+      type = "text",
+      text = "Aa",
+      textFont = "Menlo-Bold",
+      textSize = 9,
+      textColor = colors.foreground,
+      frame = { x = x + 3, y = 1, w = 16, h = 12 },
+    },
+  }
+  for i = 1, 6 do
+    table.insert(elements, {
+      type = "rectangle",
+      action = "fill",
+      frame = { x = x + 18 + (i - 1) * 7, y = 3, w = 6, h = 8 },
+      roundedRectRadii = { xRadius = 1, yRadius = 1 },
+      fillColor = colors.palette[i] or colors.foreground,
+    })
+  end
+  return elements
+end
+
+-- The dark strip, then the light one, in fixed slots so family names line up;
+-- a family without a variant for a mode leaves that slot empty.
+local function familyImage(family)
+  local key = (family.dark or "") .. "|" .. (family.light or "")
+  if familyImageCache[key] == nil then
+    local elements = {}
+    for slot, variant in ipairs({ family.dark or false, family.light or false }) do
+      local colors = variant and readPalette(variant)
+      if colors then
+        for _, element in ipairs(stripElements(colors, (slot - 1) * (stripWidth + stripGap))) do
+          table.insert(elements, element)
+        end
+      end
+    end
+    familyImageCache[key] = #elements > 0 and canvasImage(stripWidth * 2 + stripGap, stripHeight, elements) or false
+  end
+  return familyImageCache[key] or nil
+end
+
+-- Menubar icon: the current theme's six hues on its background, outlined in
+-- its foreground so it shows on a menubar of the same color.
+local function themeIcon(variant)
+  local colors = variant and readPalette(variant)
+  if not colors then
+    return nil
+  end
+
+  local border = hs.drawing.color.asRGB(colors.foreground)
+  border.alpha = 0.6
+  local elements = {
+    {
+      type = "rectangle",
+      action = "strokeAndFill",
+      frame = { x = 0.5, y = 2.5, w = 19, h = 13 },
+      roundedRectRadii = { xRadius = 3, yRadius = 3 },
+      fillColor = colors.background,
+      strokeColor = border,
+      strokeWidth = 1,
+    },
+  }
+  for i = 1, 6 do
+    local column, row = (i - 1) % 3, (i - 1) // 3
+    table.insert(elements, {
+      type = "circle",
+      action = "fill",
+      center = { x = 5 + column * 5, y = 6.5 + row * 5 },
+      radius = 2,
+      fillColor = colors.palette[i] or colors.foreground,
+    })
+  end
+  return canvasImage(20, 18, elements)
+end
+
+keepAlive.themeMenu = hs.menubar.new()
+
+local function updateThemeIcon()
+  local menu = keepAlive.themeMenu
+  if not menu then
+    return
+  end
+
+  local variant = currentVariant()
+  local icon = themeIcon(variant)
+  if icon then
+    menu:setIcon(icon, false)
+  else
+    menu:setTitle("◐")
+  end
+  menu:setTooltip("Theme: " .. (variant or "none"))
+end
+
+-- Loads the saved mode, families and variants from theme-resolve, which owns
+-- that logic.
+local function refreshThemes()
+  if keepAlive.themeListTask and keepAlive.themeListTask:isRunning() then
+    return
+  end
+
+  local script = "theme-resolve --mode && theme-resolve --list"
+  keepAlive.themeListTask = runThemeScript(script, nil, function(exitCode, stdout, stderr)
+    if exitCode ~= 0 then
+      log.w(script .. " failed: " .. (stderr or ""))
+      return
+    end
+
+    local loaded = { families = {}, familyOf = {}, modeOf = {}, mode = (stdout or ""):match("^(%a+)\n") }
+    local byName = {}
+    for name, mode, variant in (stdout or ""):gmatch("([^\t\n]+)\t([^\t\n]+)\t([^\t\n]+)") do
+      local family = byName[name]
+      if not family then
+        family = { name = name }
+        byName[name] = family
+        table.insert(loaded.families, family)
+      end
+      family[mode] = variant
+      loaded.familyOf[variant] = name
+      loaded.modeOf[variant] = mode
+    end
+    themes = loaded
+    updateThemeIcon()
+  end)
+end
+
+local function themeBusy()
+  return (keepAlive.themeTask and keepAlive.themeTask:isRunning())
+    or (keepAlive.modeTask and keepAlive.modeTask:isRunning())
+end
+
+-- `family · variant · mode` as get-theme prints it, with the saved mode when
+-- that differs (a dark-only family in light mode).
+local function describeCurrentTheme()
+  local variant = currentVariant()
+  if not variant then
+    return "No theme set"
+  end
+  local mode = themes.modeOf[variant]
+  local line = string.format("%s · %s · %s", themes.familyOf[variant] or variant, variant, mode or "?")
+  if mode and themes.mode and mode ~= themes.mode then
+    line = line .. " (saved: " .. themes.mode .. ")"
+  end
+  return line
+end
+
+-- `set-mode <light|dark|toggle>` saves the mode, switches the theme family's
+-- variant and sets the system appearance (see set-theme). Mode stays per
+-- machine, so this ignores "Apply to all machines".
+local function setMode(mode)
+  if themeBusy() then
     return
   end
 
   local script = [[
-    export PATH="$HOME/.local/bin:$PATH"
-    set-mode toggle >/dev/null 2>&1 || exit 1
+    set-mode "$1" >/dev/null 2>&1 || exit 1
     echo "$(set-mode) $(get-theme)"
   ]]
-  keepAlive.modeTask = hs.task.new("/bin/zsh", function(exitCode, stdout)
-    local mode, theme = (stdout or ""):match("^(%S+)%s+(%S+)")
-    if exitCode ~= 0 or not mode then
-      notify("Mode toggle failed")
+  keepAlive.modeTask = runThemeScript(script, { mode }, function(exitCode, stdout)
+    updateThemeIcon()
+    refreshThemes()
+    local saved, theme = (stdout or ""):match("^(%S+)%s+(%S+)")
+    if exitCode ~= 0 or not saved then
+      notify("Mode change failed")
       return
     end
 
-    notify(string.format("Mode: %s (%s)", (mode:gsub("^%l", string.upper)), theme))
-  end, { "-lc", script })
-  keepAlive.modeTask:start()
+    notify(string.format("Mode: %s (%s)", (saved:gsub("^%l", string.upper)), theme))
+  end)
 end
+
+local function toggleDarkMode()
+  setMode("toggle")
+end
+
+-- Sets a family, or a random one when family is nil, here or on every machine.
+-- set-theme-all prints a summary of which machines took it after a blank line.
+local function applyTheme(family)
+  if themeBusy() then
+    notify("A theme change is already running")
+    return
+  end
+
+  local allMachines = hs.settings.get(themeAllMachinesKey) == true
+  local script
+  if family then
+    script = allMachines and 'set-theme-all "$1"' or 'set-theme "$1"'
+  else
+    script = allMachines and "random-theme-all" or "random-theme"
+  end
+  if allMachines then
+    notify(string.format("Setting %s on all machines…", family or "a random theme"))
+  end
+
+  keepAlive.themeTask = runThemeScript(script, { family }, function(exitCode, stdout, stderr)
+    updateThemeIcon()
+    refreshThemes()
+    if allMachines then
+      local summary = (stdout or ""):match(".*\n\n(.-)%s*$")
+      notify(summary or "Theme change failed", 4)
+    elseif exitCode == 0 then
+      notify("Theme: " .. describeCurrentTheme())
+    else
+      notify("Theme change failed")
+    end
+    if exitCode ~= 0 then
+      log.w(string.format("%s failed: %s%s", script, stdout or "", stderr or ""))
+    end
+  end)
+end
+
+local function buildThemeMenu()
+  local busy = themeBusy()
+  local allMachines = hs.settings.get(themeAllMachinesKey) == true
+  local current = themes.familyOf[currentVariant() or ""]
+
+  local items = {
+    { title = busy and "Applying theme…" or describeCurrentTheme(), disabled = true },
+    { title = "-" },
+    {
+      title = "Dark mode",
+      checked = themes.mode == "dark",
+      disabled = busy,
+      fn = function()
+        setMode("dark")
+      end,
+    },
+    {
+      title = "Light mode",
+      checked = themes.mode == "light",
+      disabled = busy,
+      fn = function()
+        setMode("light")
+      end,
+    },
+    { title = "-" },
+    {
+      title = "Random theme",
+      disabled = busy,
+      fn = function()
+        applyTheme(nil)
+      end,
+    },
+    {
+      title = "Apply to all machines",
+      checked = allMachines,
+      fn = function()
+        hs.settings.set(themeAllMachinesKey, not allMachines)
+      end,
+    },
+    { title = "-" },
+  }
+  if #themes.families == 0 then
+    table.insert(items, { title = "Loading themes…", disabled = true })
+    refreshThemes()
+  end
+  for _, family in ipairs(themes.families) do
+    table.insert(items, {
+      title = family.name,
+      image = familyImage(family),
+      checked = family.name == current,
+      disabled = busy,
+      fn = function()
+        applyTheme(family.name)
+      end,
+    })
+  end
+  return items
+end
+
+if keepAlive.themeMenu then
+  keepAlive.themeMenu:setMenu(buildThemeMenu)
+end
+
+-- Follow theme changes made anywhere (set-theme links ~/.config/theme), and
+-- reload the families and palettes when ~/.themes changes (chezmoi apply).
+local themesChanged = hs.timer.delayed.new(1, function()
+  paletteCache = {}
+  familyImageCache = {}
+  refreshThemes()
+end)
+
+keepAlive.themeWatcher = hs.pathwatcher
+  .new(home .. "/.config", function(paths)
+    for _, path in ipairs(paths) do
+      if path == currentThemeLink then
+        updateThemeIcon()
+        return
+      end
+    end
+  end)
+  :start()
+keepAlive.themesDirWatcher = hs.pathwatcher
+  .new(themesDir, function()
+    themesChanged:start()
+  end)
+  :start()
+
+updateThemeIcon()
+refreshThemes()
 
 local dotfilesDir = home .. "/.local/share/chezmoi"
 
