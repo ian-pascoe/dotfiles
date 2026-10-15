@@ -1,0 +1,101 @@
+# Hand-derived from the aktersnurra/no-clown-fiesta.nvim "light" palette (lua/no-clown-fiesta/palettes.lua).
+k9s:
+  body:
+    fgColor: "#151515"
+    bgColor: default
+    logoColor: "#57788d"
+  prompt:
+    fgColor: "#151515"
+    bgColor: default
+    suggestColor: "#57788d"
+  help:
+    fgColor: "#151515"
+    bgColor: default
+    sectionColor: "#677940"
+    keyColor: "#57788d"
+    numKeyColor: "#874e42"
+  frame:
+    title:
+      fgColor: "#677940"
+      bgColor: default
+      highlightColor: "#aa749f"
+      counterColor: "#b89058"
+      filterColor: "#677940"
+    border:
+      fgColor: "#57788d"
+      focusColor: "#677940"
+    menu:
+      fgColor: "#151515"
+      keyColor: "#57788d"
+      numKeyColor: "#874e42"
+    crumbs:
+      fgColor: "#151515"
+      bgColor: default
+      activeColor: "#b89058"
+    status:
+      newColor: "#57788d"
+      modifyColor: "#677940"
+      addColor: "#677940"
+      pendingColor: "#b89058"
+      errorColor: "#874e42"
+      highlightColor: "#677940"
+      killColor: "#aa749f"
+      completedColor: "#6a6a6a"
+  info:
+    fgColor: "#b89058"
+    sectionColor: "#151515"
+  views:
+    table:
+      fgColor: "#151515"
+      bgColor: default
+      cursorFgColor: "#151515"
+      cursorBgColor: "#aaaaaa"
+      markColor: "#677940"
+      header:
+        fgColor: "#b89058"
+        bgColor: default
+        sorterColor: "#677940"
+    xray:
+      fgColor: "#151515"
+      bgColor: default
+      cursorColor: "#aaaaaa"
+      cursorTextColor: "#151515"
+      graphicColor: "#aa749f"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#677940"
+        - "#874e42"
+      defaultChartColors:
+        - "#677940"
+        - "#874e42"
+      resourceColors:
+        cpu:
+          - "#57788d"
+          - "#677940"
+        mem:
+          - "#677940"
+          - "#b89058"
+    yaml:
+      keyColor: "#57788d"
+      valueColor: "#151515"
+      colonColor: "#6a6a6a"
+    logs:
+      fgColor: "#151515"
+      bgColor: default
+      indicator:
+        fgColor: "#677940"
+        bgColor: default
+        toggleOnColor: "#677940"
+        toggleOffColor: "#6a6a6a"
+  dialog:
+    fgColor: "#b89058"
+    bgColor: default
+    buttonFgColor: "#151515"
+    buttonBgColor: default
+    buttonFocusFgColor: "#151515"
+    buttonFocusBgColor: "#aa749f"
+    labelFgColor: "#b89058"
+    fieldFgColor: "#151515"

@@ -1506,6 +1506,29 @@
       "yellow": "#F4BF75"
     },
     {
+      "background": "#E1E1E1",
+      "black": "#D6D6D6",
+      "blue": "#8BA1BF",
+      "brightBlack": "#2B2B2B",
+      "brightBlue": "#93A2AB",
+      "brightCyan": "#99AB93",
+      "brightGreen": "#677940",
+      "brightPurple": "#AA759F",
+      "brightRed": "#637786",
+      "brightWhite": "#373737",
+      "brightYellow": "#B89058",
+      "cursorColor": "#151515",
+      "cyan": "#3E5F66",
+      "foreground": "#151515",
+      "green": "#677940",
+      "name": "no-clown-fiesta-light",
+      "purple": "#AA759F",
+      "red": "#874E42",
+      "selectionBackground": "#C6D5DE",
+      "white": "#151515",
+      "yellow": "#B89058"
+    },
+    {
       "background": "#1F1F28",
       "black": "#393836",
       "blue": "#435965",
@@ -2903,6 +2926,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "no-clown-fiesta-light",
+      "tab": {
+        "background": "#E1E1E1FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#CFCFCFFF",
+        "unfocusedBackground": "#D6D6D6FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

@@ -1,0 +1,37 @@
+:root {
+  /* No Clown Fiesta Light palette (hand-derived from aktersnurra/no-clown-fiesta.nvim); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 225, 225, 225;
+  --foreground: 21, 21, 21;
+  --card-background: 207, 207, 207;
+  --popup-background: 170, 170, 170;
+  --primary: 87, 120, 141;
+  --secondary: 62, 95, 102;
+  --tertiary: 87, 120, 141;
+  --accent: 170, 116, 159;
+  --muted-background: 106, 106, 106;
+  --info: 87, 120, 141;
+  --success: 103, 121, 64;
+  --warning: 184, 144, 88;
+  --destructive: 135, 78, 66;
+  --border: 170, 170, 170;
+  --text: 21, 21, 21;
+  --foam: 87, 120, 141;
+  --gold: 184, 144, 88;
+  --love: 135, 78, 66;
+  --overlay: 106, 106, 106;
+  --highlight: 170, 170, 170;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--foreground);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--foreground);
+  --accent-foreground: var(--foreground);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--foreground);
+  --success-foreground: var(--foreground);
+  --warning-foreground: var(--foreground);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

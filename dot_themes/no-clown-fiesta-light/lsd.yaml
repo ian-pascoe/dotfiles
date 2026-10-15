@@ -1,0 +1,39 @@
+# Hand-derived from the aktersnurra/no-clown-fiesta.nvim "light" palette (lua/no-clown-fiesta/palettes.lua).
+user: "#57788d"
+group: "#677940"
+permission:
+  read: "#677940"
+  write: "#b89058"
+  exec: "#874e42"
+  exec-sticky: "#aa749f"
+  no-access: "#6a6a6a"
+  octal: "#677940"
+  acl: "#677940"
+  context: "#57788d"
+date:
+  hour-old: "#677940"
+  day-old: "#57788d"
+  older: "#6a6a6a"
+size:
+  none: "#6a6a6a"
+  small: "#677940"
+  medium: "#b89058"
+  large: "#b89058"
+inode:
+  valid: "#aa749f"
+  invalid: "#6a6a6a"
+links:
+  valid: "#677940"
+  invalid: "#6a6a6a"
+tree-edge: "#aaaaaa"
+git-status:
+  default: "#151515"
+  unmodified: "#6a6a6a"
+  ignored: "#6a6a6a"
+  new-in-index: "#677940"
+  new-in-workdir: "#677940"
+  typechange: "#b89058"
+  deleted: "#874e42"
+  renamed: "#57788d"
+  modified: "#b89058"
+  conflicted: "#874e42"
