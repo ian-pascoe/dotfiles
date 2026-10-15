@@ -60,7 +60,7 @@ Shape the page to the content. These are starting points, not templates: merge, 
 | Matrix, audit, many rows of data | `<table>` with status chips |
 | Rates, shares, metrics, trends | Waffle, bars, sparklines in SVG; Chart.js only for many interactive series |
 | Depth that carries data: embeddings, spatial layouts, geometry | three.js → `references/diagrams.md` |
-| A process that changes over time | Stepper or scene player → `references/diagrams.md` |
+| A process that changes over time | Stepper or scene player; a state machine replays one event per step → `references/diagrams.md` |
 | A setting the reader should feel: TTL, rollout %, a policy | Live figure → `references/diagrams.md` |
 | Slide deck | `references/slides.md` + `templates/slide-deck.html` |
 

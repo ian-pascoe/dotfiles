@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 # Sets a random theme family on every machine, in this machine's saved mode;
-# see set-theme-all. Options such as -n/--dry-run pass through to it.
+# see set-theme-all. On a terminal it previews the roll and asks to apply or
+# reroll first (see roll-theme). Options such as -n/--dry-run pass through to
+# set-theme-all.
 
-theme=$(list-themes | shuf -n 1)
-if [[ -z $theme ]]; then
-  echo "No themes found in ~/.themes" >&2
-  exit 1
-fi
-
+theme=$(roll-theme) || exit 1
 exec set-theme-all "$@" "$theme"

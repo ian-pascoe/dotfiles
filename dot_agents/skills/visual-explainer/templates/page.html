@@ -76,6 +76,7 @@
   .ve-n text { fill: var(--text); text-anchor: middle; dominant-baseline: central; font-weight: 600; }
   .ve-n .sub { fill: var(--text-dim); font: 500 14px var(--font-mono); }
   .ve-n .gl { fill: none; stroke: var(--text-dim); stroke-width: 1.5; stroke-linejoin: round; }
+  .ve-n .ve-kind { fill: var(--text-dim); font: 600 14px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
   .ve-n.is-key .gl { stroke: var(--accent); }
   .ve-e { fill: none; stroke: var(--text-dim); stroke-width: 1.75; marker-end: url(#ve-ah); }
   .ve-e.is-hot { stroke: var(--accent); stroke-width: 2.75; filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 55%, transparent)); }
@@ -108,7 +109,19 @@
   .ve-steps g[data-s]:not(.on) text, .ve-steps text[data-s]:not(.on) { opacity: 0; }
   .ve-steps path[pathLength][data-s] { stroke-dasharray: 1; stroke-dashoffset: 1; }
   .ve-steps path[pathLength][data-s].on { stroke-dashoffset: 0; }
-  .ve-steps .ve-n.now .sh { stroke: var(--accent); }
+  .ve-steps .ve-n.now > .sh { stroke: var(--accent); }
+  /* replay: the edges that fired light until the full picture, and each token runs its path once, after --d; edges and nodes still show the step without tokens */
+  .ve-steps:not(.is-full) .ve-e.now { stroke: var(--accent); stroke-width: 2.75; }
+  .ve-tok { fill: var(--accent); visibility: hidden; }
+  .ve-steps:not(.is-still) .ve-tok.now { visibility: visible; animation: ve-run var(--dur, 900ms) ease-in-out var(--d, 0ms) both; }
+  @keyframes ve-run { from { offset-distance: 0%; opacity: 0; } 10%, 75% { opacity: 1; } to { offset-distance: 100%; opacity: 0; } }
+  /* a part that comes and goes (a queued job, a busy slot): shown only on the steps its data-s lists, arriving after --d */
+  .ve-steps .ve-at { transition: opacity var(--med) var(--ease); }
+  .ve-steps .ve-at:not(.now) { opacity: 0; }
+  .ve-steps .ve-at.now { transition-delay: var(--d, 0ms); }
+  /* a changing value: one text per step at one spot; the latest step's shows, swapped without a crossfade */
+  .ve-steps .ve-vals text { transition: none; }
+  .ve-vals text.on:has(~ text.on) { opacity: 0; }
   .ve-player { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: var(--s-2) var(--s-3); margin-top: var(--s-4); }
   .ve-cap { grid-column: 1 / -1; list-style: none; padding: 0; min-height: 3.2em; }
   .ve-cap li::before { content: attr(data-n); font: 600 var(--t-label) var(--font-mono); color: var(--accent); margin-right: var(--s-3); font-variant-numeric: tabular-nums; }
@@ -158,7 +171,7 @@
   .js-motion main > * { transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease); }
   .js-motion main > :not(.in) { opacity: 0; transform: translateY(1rem); }
   .js-motion main > :not(.in) .ve-bars rect { transform: scaleX(0); }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } .ve-tok { display: none; } }
 
   @media print {
     /* Print uses the light foregrounds on white, every step fully drawn, and no effects. */
@@ -170,7 +183,9 @@
     .js-motion main > * { opacity: 1 !important; transform: none !important; }
     .js-motion .ve-bars rect { transform: none !important; }
     .ve-steps [data-s]:not(.on), .ve-steps g[data-s]:not(.on) text, .ve-steps text[data-s]:not(.on) { opacity: 1; }
+    .ve-steps .ve-at:not(.now) { opacity: 0; }
     .ve-steps path[pathLength][data-s] { stroke-dashoffset: 0; }
+    .ve-tok, .ve-vals text:not(:last-child) { display: none; }
   }
 </style>
 </head>
@@ -209,6 +224,13 @@
         <path class="ve-e is-async" data-s="5" data-ref="redis pg" d="M450 130H610"/>
         <text class="ve-el" data-s="5" data-ref="redis pg" x="530" y="121">set key</text>
 
+        <!-- Replay tokens: one per step, on the same path as that step's edge. The miss runs down and back under Postgres. -->
+        <circle class="ve-tok" data-s="1" r="5" style="offset-path: path('M170 105H300')"/>
+        <circle class="ve-tok" data-s="2" r="5" style="offset-path: path('M450 80H610')"/>
+        <circle class="ve-tok" data-s="3" r="5" style="offset-path: path('M610 105H450')"/>
+        <circle class="ve-tok" data-s="4" r="5" style="offset-path: path('M355 150V250H395V150')"/>
+        <circle class="ve-tok" data-s="5" r="5" style="offset-path: path('M450 130H610')"/>
+
         <!-- One hit route and one miss route; spawn intervals give the real 94:6 split. -->
         <path data-flow="hit" data-every="420" d="M95 105H375V80H695V105H375"/>
         <path data-flow="miss" data-every="7000" d="M95 105H355V270H395V130H695"/>
@@ -216,7 +238,7 @@
 
         <g class="ve-n" data-s="1" data-ref="client" transform="translate(20 60)"><rect class="sh" width="150" height="90" rx="6"/><path class="gl" transform="translate(12 12)" d="M0 1h16v12H0zM0 4.5h16"/><text x="75" y="45">Client</text></g>
         <g class="ve-n is-key" data-s="1" data-ref="api" transform="translate(300 60)"><rect class="sh" width="150" height="90" rx="6"/><path class="gl" transform="translate(12 12)" d="M8 0l7 4v8l-7 4-7-4V4z"/><text x="75" y="38">API</text><text class="sub" x="75" y="62">user-service</text></g>
-        <g class="ve-n" data-s="2" data-ref="redis" transform="translate(610 60)"><rect class="sh" width="170" height="90" rx="6"/><path class="gl" transform="translate(12 12)" d="M9 0L2 9h5l-1 7 7-9H8z"/><text x="85" y="38">Redis</text><text class="sub" x="85" y="62">TTL 60 s</text></g>
+        <g class="ve-n" data-s="2" data-ref="redis" transform="translate(610 60)"><rect class="sh" width="170" height="90" rx="6"/><path class="gl" transform="translate(12 12)" d="M9 0L2 9h5l-1 7 7-9H8z"/><text x="85" y="38">Redis</text><g class="ve-vals"><text class="sub" data-s="2" x="85" y="62">TTL 60 s</text><text class="sub" data-s="4" x="85" y="62">no key</text><text class="sub" data-s="5" x="85" y="62">TTL 60 s</text></g></g>
         <g class="ve-n" data-s="4" data-ref="pg" transform="translate(300 230)"><path class="sh" d="M0 10V70A75 10 0 0 0 150 70V10"/><ellipse class="sh lid" cx="75" cy="10" rx="75" ry="10"/><text x="75" y="46">Postgres</text></g>
       </svg>
     </div>
@@ -225,7 +247,7 @@
         <li data-n="1/5">The client asks the API for user 42.</li>
         <li data-n="2/5">The API asks Redis first.</li>
         <li data-n="3/5">A hit returns in about 1 ms. Done.</li>
-        <li data-n="4/5">A miss reads Postgres in about 9 ms.</li>
+        <li data-n="4/5">A miss reads Postgres in about 9 ms, because the key expired.</li>
         <li data-n="5/5">The API writes the row back, so the next read hits.</li>
       </ol>
       <button data-go="-1" aria-label="Previous step">←</button>
@@ -321,7 +343,9 @@
     if (range) range.max = n - 1;
     const show = (k) => {
       i = Math.max(0, Math.min(n - 1, k));
-      for (const el of parts) { el.classList.toggle('on', +el.dataset.s <= i + 1); el.classList.toggle('now', +el.dataset.s === i + 1); }
+      root.classList.remove('is-still');
+      // data-s lists the steps a part takes part in: it appears at the first ("0" = from the start) and is .now on each.
+      for (const el of parts) { const s = el.dataset.s.trim().split(' ').map(Number); el.classList.toggle('on', s[0] <= i + 1); el.classList.toggle('now', s.includes(i + 1)); }
       caps.forEach((c, j) => c.hidden = j !== i);
       root.classList.toggle('is-full', i === n - 1);
       root.dispatchEvent(new Event('ve:step'));
@@ -337,6 +361,8 @@
       timer = setInterval(() => (i < n - 1 ? show(i + 1) : stop()), 3500);
     });
     show(n - 1); // open on the full picture; Play replays from step 1
+    root.classList.add('is-still'); // same task as show(), so the last token never starts until the reader steps
+    addEventListener('beforeprint', () => { show(n - 1); root.classList.add('is-still'); }); // print shows the end state
   }
 
   if (!still) {

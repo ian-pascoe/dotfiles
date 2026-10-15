@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Picks a random theme family and prints its name, for random-theme and
+# random-theme-all. On a terminal it first previews each roll (the variant for
+# the saved mode and its full palette, see theme-palette) and asks to apply it,
+# reroll or quit; quitting exits 1. The preview and prompt go to stderr so
+# stdout stays the bare family name. Without a terminal it prints the first roll.
+
+families=$(list-themes)
+if [[ -z $families ]]; then
+  echo "No themes found in ~/.themes" >&2
+  exit 1
+fi
+
+if [[ ! -t 0 || ! -t 2 ]]; then
+  shuf -n 1 <<<"$families"
+  exit
+fi
+
+count=$(wc -l <<<"$families")
+theme=
+while true; do
+  # A reroll never repeats the theme just shown.
+  previous=$theme
+  theme=$(shuf -n 1 <<<"$families")
+  while ((count > 1)) && [[ $theme == "$previous" ]]; do
+    theme=$(shuf -n 1 <<<"$families")
+  done
+
+  variant=$(theme-resolve "$theme") || exit 1
+  {
+    echo
+    echo "$theme · $variant · $(theme-resolve --mode-of "$variant")"
+    theme-palette --full "$variant"
+    printf 'Apply? [Y]es / [r]eroll / [q]uit '
+  } >&2
+
+  read -rsn1 key
+  echo >&2
+  case $key in
+  '' | y | Y)
+    echo "$theme"
+    exit 0
+    ;;
+  r | R) ;;
+  *)
+    echo "Cancelled" >&2
+    exit 1
+    ;;
+  esac
+done

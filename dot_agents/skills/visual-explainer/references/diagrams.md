@@ -98,7 +98,31 @@ Open on the complete picture, because the first viewport must show the answer. O
 .ve-co circle { fill: var(--surface); stroke: var(--accent); stroke-width: 1.75; }
 .ve-co text { fill: var(--accent); font: 600 14px var(--font-mono); text-anchor: middle; dominant-baseline: central; }
 .ve-co.now circle { fill: var(--accent); } .ve-co.now text { fill: var(--surface); }
+.ve-co.q circle { stroke: var(--border-bright); } .ve-co.q text { fill: var(--text-dim); }   /* an edge number: quiet until its step */
+.ve-co.q.now circle { fill: var(--accent); stroke: var(--accent); } .ve-co.q.now text { fill: var(--surface); }
 ```
+
+## Replay: states and events
+
+When the subject is a state machine, a workflow, or a reducer, make each step one event. The caption says what happened and why: `miss → fetch, because the TTL expired (cache.ts:48)`. The "because" is the guard or branch that fired. Cite it; never invent it. Pick 6–12 events that carry one claim. Show the other branch as a second stepper or as small multiples, not as more steps. If the events come from a real run, such as a log or a test, say so in the figcaption.
+
+`data-s` may list several steps: a part appears at the first and lights on each, and `0` draws it from the start. Draw the whole machine with `0` so the reader sees every state while the run lights its path, and an edge that fires again lights again. On a step, the edges that fired light, the node's border lights, and each token runs its path once. A step can light a whole route: give every edge on it the step, and run one token along the route's joined `d`. Nothing moves on its own. Flow dots still start on the full picture. The last step is the full picture, so no edge lights there.
+
+```html
+<path class="ve-e" data-s="0 3 5" d="M730 90H800"/>                                              <!-- drawn all along; lights on 3 and 5 -->
+<g class="ve-co q" data-s="0 3 5" transform="translate(765 68)"><circle r="11"/><text>3</text></g>   <!-- its number, filled on 3 and 5 -->
+<circle class="ve-tok" data-s="6" r="5" style="offset-path: path('M910 150V295H650V150'); --dur: 2200ms"/>   <!-- a route -->
+<circle class="ve-tok" data-s="1" r="5" style="offset-path: path('M170 90H240'); --d: 130ms"/>   <!-- one of a burst -->
+<g class="ve-at job" data-s="3 4" style="--d: 850ms"><rect x="217" y="72" width="26" height="26" rx="4"/><text x="230" y="85">J3</text></g>   <!-- .ve-at shows and hides it; .job is your own fill and stroke, over an empty slot you draw -->
+<g class="ve-vals"><text class="sub" data-s="0" x="236" y="52">0 / 8</text><text class="sub" data-s="2" x="236" y="52">5 / 8</text></g>
+```
+
+- **Tokens** follow any `d` and run under the nodes, so a route's token enters each box and leaves from the far side. Put a token that lands in a slot, or leaves one, after the nodes. `--dur` lengthens a run (900 ms by default); `--d` delays it, so a burst is several tokens about 150 ms apart.
+- **Parts that come and go** are `.ve-at` groups: a job in a queue slot, a busy worker, the ring on the current state of a machine drawn inside a node. One shows only on the steps its `data-s` lists, and `--d` makes it arrive with its token. Draw the empty slot underneath it.
+- **A value that changes,** such as a count, a TTL, or a state name, is one text per step at the same spot inside `.ve-vals`, written in step order. The latest shows.
+- **A shared resource,** such as a worker pool or a set of permits, is a dashed boundary holding its slots and its count.
+- **Kind labels:** on a process figure, `<text class="ve-kind">` above the node name says what the box is: `fact`, `decision`, `state`, or `effect`. Number the edges with `.ve-co.q` when the captions refer to them.
+- The template's CSS runs all of this, hides tokens under reduced motion and in print, and prints the last step.
 
 ## Before / after
 

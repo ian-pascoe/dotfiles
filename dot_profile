@@ -29,6 +29,9 @@ export OPENCODE_EXPERIMENTAL=false
 export OPENCODE_EXPERIMENTAL_LSP_TOOL=true
 export OPENCODE_EXPERIMENTAL_OXFMT=true
 
+## Pi
+export PI_CACHE_RETENTION=long
+
 ## Editor
 if command -v nvim &>/dev/null; then
   export EDITOR='nvim'

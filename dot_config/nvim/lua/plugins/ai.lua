@@ -1,5 +1,6 @@
 -- Same Cloudflare Access-protected LLM proxy that pi uses (~/.pi/agent/models.json).
-local proxy_url = 'https://ai.ianpascoe.dev'
+local proxy_base_url = 'https://ai.ianpascoe.dev'
+local proxy_api_url = 'https://api.ai.ianpascoe.dev'
 
 -- `cloudflared access token` takes ~400ms and minuet's transforms run
 -- synchronously, so cache the JWT until shortly before it expires.
@@ -22,10 +23,10 @@ local function cf_access_token()
   if cf_token.value and os.time() < cf_token.exp - 60 then
     return cf_token.value
   end
-  local result = vim.system({ 'cloudflared', 'access', 'token', '-app=' .. proxy_url }, { text = true }):wait()
+  local result = vim.system({ 'cloudflared', 'access', 'token', '-app=' .. proxy_base_url }, { text = true }):wait()
   local token = vim.trim(result.stdout or '')
   if result.code ~= 0 or token == '' then
-    vim.notify_once('minuet: `cloudflared access token` failed; run `cloudflared access login ' .. proxy_url .. '`', vim.log.levels.WARN)
+    vim.notify_once('minuet: `cloudflared access token` failed; run `cloudflared access login ' .. proxy_base_url .. '`', vim.log.levels.WARN)
     return ''
   end
   local exp = jwt_exp(token)
@@ -83,7 +84,7 @@ return {
           api_key = function()
             return 'sk-dummy'
           end,
-          end_point = proxy_url .. '/chat/completions',
+          end_point = proxy_api_url .. '/chat/completions',
           -- Benchmarked against the proxy's models (2026-10): best speed/accuracy
           -- trade-off. Runner-up: 'hy4-preview' (more accurate, ~2x slower).
           model = 'gemini-3-flash',
