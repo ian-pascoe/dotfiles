@@ -2,6 +2,7 @@
 
 [core]
   excludesfile = ~/.config/git/ignore
+  checkStat = minimal              # Ignore inode/ctime so Syncthing-copied repos don't rewrite the index
 
 [alias]
   clone = clone --recurse-submodules
