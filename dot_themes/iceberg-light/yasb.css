@@ -1,0 +1,37 @@
+:root {
+  /* Iceberg Light palette (hand-derived from the cocopon/iceberg.vim "light" palette); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 232, 233, 236;
+  --foreground: 51, 55, 76;
+  --card-background: 220, 223, 231;
+  --popup-background: 204, 207, 224;
+  --primary: 45, 83, 158;
+  --secondary: 50, 118, 152;
+  --tertiary: 45, 83, 158;
+  --accent: 119, 89, 180;
+  --muted-background: 98, 103, 132;
+  --info: 45, 83, 158;
+  --success: 102, 142, 61;
+  --warning: 182, 102, 45;
+  --destructive: 204, 81, 122;
+  --border: 188, 190, 205;
+  --text: 51, 55, 76;
+  --foam: 63, 131, 166;
+  --gold: 182, 102, 45;
+  --love: 204, 81, 122;
+  --overlay: 98, 103, 132;
+  --highlight: 204, 207, 224;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

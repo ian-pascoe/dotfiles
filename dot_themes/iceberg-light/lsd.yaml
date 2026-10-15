@@ -1,0 +1,39 @@
+# Hand-derived from the cocopon/iceberg.vim "light" palette.
+user: "#2d539e"
+group: "#3f83a6"
+permission:
+  read: "#668e3d"
+  write: "#b6662d"
+  exec: "#cc517a"
+  exec-sticky: "#7759b4"
+  no-access: "#626784"
+  octal: "#3f83a6"
+  acl: "#3f83a6"
+  context: "#2d539e"
+date:
+  hour-old: "#668e3d"
+  day-old: "#2d539e"
+  older: "#626784"
+size:
+  none: "#626784"
+  small: "#668e3d"
+  medium: "#b6662d"
+  large: "#c57339"
+inode:
+  valid: "#7759b4"
+  invalid: "#626784"
+links:
+  valid: "#3f83a6"
+  invalid: "#626784"
+tree-edge: "#bcbecd"
+git-status:
+  default: "#33374c"
+  unmodified: "#626784"
+  ignored: "#626784"
+  new-in-index: "#668e3d"
+  new-in-workdir: "#668e3d"
+  typechange: "#b6662d"
+  deleted: "#cc517a"
+  renamed: "#2d539e"
+  modified: "#b6662d"
+  conflicted: "#cc517a"

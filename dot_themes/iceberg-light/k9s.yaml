@@ -1,0 +1,101 @@
+# Hand-derived from the cocopon/iceberg.vim "light" palette.
+k9s:
+  body:
+    fgColor: "#33374c"
+    bgColor: default
+    logoColor: "#2d539e"
+  prompt:
+    fgColor: "#33374c"
+    bgColor: default
+    suggestColor: "#2d539e"
+  help:
+    fgColor: "#33374c"
+    bgColor: default
+    sectionColor: "#668e3d"
+    keyColor: "#2d539e"
+    numKeyColor: "#cc517a"
+  frame:
+    title:
+      fgColor: "#3f83a6"
+      bgColor: default
+      highlightColor: "#7759b4"
+      counterColor: "#b6662d"
+      filterColor: "#668e3d"
+    border:
+      fgColor: "#2d539e"
+      focusColor: "#327698"
+    menu:
+      fgColor: "#33374c"
+      keyColor: "#2d539e"
+      numKeyColor: "#cc517a"
+    crumbs:
+      fgColor: "#e8e9ec"
+      bgColor: default
+      activeColor: "#b6662d"
+    status:
+      newColor: "#2d539e"
+      modifyColor: "#3f83a6"
+      addColor: "#668e3d"
+      pendingColor: "#b6662d"
+      errorColor: "#cc517a"
+      highlightColor: "#3f83a6"
+      killColor: "#7759b4"
+      completedColor: "#626784"
+  info:
+    fgColor: "#b6662d"
+    sectionColor: "#33374c"
+  views:
+    table:
+      fgColor: "#33374c"
+      bgColor: default
+      cursorFgColor: "#33374c"
+      cursorBgColor: "#cccfe0"
+      markColor: "#668e3d"
+      header:
+        fgColor: "#b6662d"
+        bgColor: default
+        sorterColor: "#3f83a6"
+    xray:
+      fgColor: "#33374c"
+      bgColor: default
+      cursorColor: "#cccfe0"
+      cursorTextColor: "#33374c"
+      graphicColor: "#7759b4"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#668e3d"
+        - "#cc517a"
+      defaultChartColors:
+        - "#668e3d"
+        - "#cc517a"
+      resourceColors:
+        cpu:
+          - "#2d539e"
+          - "#3f83a6"
+        mem:
+          - "#668e3d"
+          - "#b6662d"
+    yaml:
+      keyColor: "#2d539e"
+      valueColor: "#33374c"
+      colonColor: "#626784"
+    logs:
+      fgColor: "#33374c"
+      bgColor: default
+      indicator:
+        fgColor: "#3f83a6"
+        bgColor: default
+        toggleOnColor: "#668e3d"
+        toggleOffColor: "#626784"
+  dialog:
+    fgColor: "#b6662d"
+    bgColor: default
+    buttonFgColor: "#e8e9ec"
+    buttonBgColor: default
+    buttonFocusFgColor: "#e8e9ec"
+    buttonFocusBgColor: "#7759b4"
+    labelFgColor: "#b6662d"
+    fieldFgColor: "#33374c"

@@ -931,6 +931,29 @@
       "yellow": "#E2A478"
     },
     {
+      "background": "#E8E9EC",
+      "black": "#DCDFE7",
+      "blue": "#2D539E",
+      "brightBlack": "#8389A3",
+      "brightBlue": "#22478E",
+      "brightCyan": "#327698",
+      "brightGreen": "#598030",
+      "brightPurple": "#6845AD",
+      "brightRed": "#CC3768",
+      "brightWhite": "#262A3F",
+      "brightYellow": "#B6662D",
+      "cursorColor": "#33374C",
+      "cyan": "#3F83A6",
+      "foreground": "#33374C",
+      "green": "#668E3D",
+      "name": "iceberg-light",
+      "purple": "#7759B4",
+      "red": "#CC517A",
+      "selectionBackground": "#CCCFE0",
+      "white": "#33374C",
+      "yellow": "#C57339"
+    },
+    {
       "background": "#161617",
       "black": "#27272A",
       "blue": "#ACA1CF",
@@ -2219,6 +2242,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "iceberg-light",
+      "tab": {
+        "background": "#E8E9ECFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#DCDFE7FF",
+        "unfocusedBackground": "#CCCFE0FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,
