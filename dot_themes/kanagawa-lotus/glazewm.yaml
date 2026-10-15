@@ -1,0 +1,8 @@
+# Hand-derived from the rebelot/kanagawa.nvim "lotus" palette.
+window_effects:
+  focused_window:
+    border:
+      color: "#4d699b"
+  other_windows:
+    border:
+      color: "#e5ddb0"

@@ -1,0 +1,101 @@
+# Hand-derived from the rebelot/kanagawa.nvim "lotus" palette.
+k9s:
+  body:
+    fgColor: "#545464"
+    bgColor: default
+    logoColor: "#4d699b"
+  prompt:
+    fgColor: "#545464"
+    bgColor: default
+    suggestColor: "#4d699b"
+  help:
+    fgColor: "#545464"
+    bgColor: default
+    sectionColor: "#6f894e"
+    keyColor: "#4d699b"
+    numKeyColor: "#c84053"
+  frame:
+    title:
+      fgColor: "#5e857a"
+      bgColor: default
+      highlightColor: "#624c83"
+      counterColor: "#836f4a"
+      filterColor: "#6f894e"
+    border:
+      fgColor: "#4d699b"
+      focusColor: "#5e857a"
+    menu:
+      fgColor: "#545464"
+      keyColor: "#4d699b"
+      numKeyColor: "#c84053"
+    crumbs:
+      fgColor: "#545464"
+      bgColor: default
+      activeColor: "#836f4a"
+    status:
+      newColor: "#4d699b"
+      modifyColor: "#5e857a"
+      addColor: "#6f894e"
+      pendingColor: "#cc6d00"
+      errorColor: "#c84053"
+      highlightColor: "#4e8ca2"
+      killColor: "#624c83"
+      completedColor: "#716e61"
+  info:
+    fgColor: "#cc6d00"
+    sectionColor: "#545464"
+  views:
+    table:
+      fgColor: "#545464"
+      bgColor: default
+      cursorFgColor: "#545464"
+      cursorBgColor: "#c9cbd1"
+      markColor: "#5e857a"
+      header:
+        fgColor: "#836f4a"
+        bgColor: default
+        sorterColor: "#4e8ca2"
+    xray:
+      fgColor: "#545464"
+      bgColor: default
+      cursorColor: "#c9cbd1"
+      cursorTextColor: "#545464"
+      graphicColor: "#624c83"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#6f894e"
+        - "#c84053"
+      defaultChartColors:
+        - "#6f894e"
+        - "#c84053"
+      resourceColors:
+        cpu:
+          - "#4d699b"
+          - "#5e857a"
+        mem:
+          - "#6f894e"
+          - "#836f4a"
+    yaml:
+      keyColor: "#4d699b"
+      valueColor: "#545464"
+      colonColor: "#716e61"
+    logs:
+      fgColor: "#545464"
+      bgColor: default
+      indicator:
+        fgColor: "#5e857a"
+        bgColor: default
+        toggleOnColor: "#6f894e"
+        toggleOffColor: "#716e61"
+  dialog:
+    fgColor: "#836f4a"
+    bgColor: default
+    buttonFgColor: "#545464"
+    buttonBgColor: default
+    buttonFocusFgColor: "#f2ecbc"
+    buttonFocusBgColor: "#624c83"
+    labelFgColor: "#cc6d00"
+    fieldFgColor: "#545464"

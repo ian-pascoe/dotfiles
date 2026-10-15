@@ -1,0 +1,93 @@
+# Hand-derived from the rebelot/kanagawa.nvim "lotus" palette.
+# Kanagawa Lotus local Yazi flavor
+
+[mgr]
+cwd = { fg = "#4d699b" }
+find_keyword = { fg = "#836f4a", bold = true, italic = true }
+find_position = { fg = "#624c83", bg = "reset", bold = true, italic = true }
+marker_copied = { fg = "#6f894e", bg = "#6f894e" }
+marker_cut = { fg = "#c84053", bg = "#c84053" }
+marker_marked = { fg = "#5e857a", bg = "#5e857a" }
+marker_selected = { fg = "#836f4a", bg = "#836f4a" }
+count_copied = { fg = "#f2ecbc", bg = "#6f894e" }
+count_cut = { fg = "#f2ecbc", bg = "#c84053" }
+count_selected = { fg = "#f2ecbc", bg = "#836f4a" }
+border_symbol = "│"
+border_style = { fg = "#a09cac" }
+
+[tabs]
+active = { fg = "#f2ecbc", bg = "#4d699b", bold = true }
+inactive = { fg = "#4d699b", bg = "#e5ddb0" }
+
+[mode]
+normal_main = { fg = "#f2ecbc", bg = "#4d699b", bold = true }
+normal_alt = { fg = "#4d699b", bg = "#e5ddb0" }
+select_main = { fg = "#f2ecbc", bg = "#5e857a", bold = true }
+select_alt = { fg = "#5e857a", bg = "#e5ddb0" }
+unset_main = { fg = "#f2ecbc", bg = "#624c83", bold = true }
+unset_alt = { fg = "#624c83", bg = "#e5ddb0" }
+
+[status]
+perm_sep = { fg = "#a09cac" }
+perm_type = { fg = "#4d699b" }
+perm_read = { fg = "#6f894e" }
+perm_write = { fg = "#836f4a" }
+perm_exec = { fg = "#c84053" }
+progress_label = { fg = "#545464", bold = true }
+progress_normal = { fg = "#6f894e", bg = "#c9cbd1" }
+progress_error = { fg = "#836f4a", bg = "#c84053" }
+
+[pick]
+border = { fg = "#4d699b" }
+active = { fg = "#624c83", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#4d699b" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[cmp]
+border = { fg = "#4d699b" }
+
+[tasks]
+border = { fg = "#4d699b" }
+title = {}
+hovered = { fg = "#624c83", bold = true }
+
+[which]
+border = { fg = "#4d699b" }
+cand = { fg = "#5e857a" }
+rest = { fg = "#716e61" }
+desc = { fg = "#624c83" }
+separator = "  "
+separator_style = { fg = "#a09cac" }
+
+[help]
+on = { fg = "#5e857a" }
+run = { fg = "#624c83" }
+hovered = { reversed = true, bold = true }
+footer = { fg = "#f2ecbc", bg = "#545464" }
+
+[spot]
+border = { fg = "#4d699b" }
+title = { fg = "#4d699b" }
+tbl_col = { fg = "#5e857a" }
+tbl_cell = { fg = "#624c83", bg = "#c9cbd1" }
+
+[notify]
+title_info = { fg = "#6f894e" }
+title_warn = { fg = "#836f4a" }
+title_error = { fg = "#c84053" }
+
+[filetype]
+rules = [
+  { mime = "**/image/*", fg = "#5e857a" },
+  { mime = "**/{audio,video}/*", fg = "#836f4a" },
+  { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#624c83" },
+  { mime = "**/application/{pdf,doc,rtf}", fg = "#6f894e" },
+  { mime = "vfs/{absent,stale}", fg = "#716e61" },
+  { url = "*", fg = "#545464" },
+  { url = "*/", fg = "#4d699b" },
+]

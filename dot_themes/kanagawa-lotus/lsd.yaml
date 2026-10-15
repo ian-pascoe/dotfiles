@@ -1,0 +1,39 @@
+# Hand-derived from the rebelot/kanagawa.nvim "lotus" palette.
+user: "#4d699b"
+group: "#5e857a"
+permission:
+  read: "#6f894e"
+  write: "#836f4a"
+  exec: "#c84053"
+  exec-sticky: "#624c83"
+  no-access: "#716e61"
+  octal: "#4e8ca2"
+  acl: "#4e8ca2"
+  context: "#4d699b"
+date:
+  hour-old: "#5e857a"
+  day-old: "#4d699b"
+  older: "#716e61"
+size:
+  none: "#716e61"
+  small: "#6f894e"
+  medium: "#836f4a"
+  large: "#cc6d00"
+inode:
+  valid: "#624c83"
+  invalid: "#716e61"
+links:
+  valid: "#5e857a"
+  invalid: "#716e61"
+tree-edge: "#a09cac"
+git-status:
+  default: "#545464"
+  unmodified: "#716e61"
+  ignored: "#716e61"
+  new-in-index: "#6f894e"
+  new-in-workdir: "#6f894e"
+  typechange: "#836f4a"
+  deleted: "#c84053"
+  renamed: "#4d699b"
+  modified: "#cc6d00"
+  conflicted: "#c84053"

@@ -287,6 +287,29 @@
       "yellow": "#DCA561"
     },
     {
+      "background": "#F2ECBC",
+      "black": "#1F1F28",
+      "blue": "#4D699B",
+      "brightBlack": "#8A8980",
+      "brightBlue": "#6693BF",
+      "brightCyan": "#5E857A",
+      "brightGreen": "#6E915F",
+      "brightPurple": "#624C83",
+      "brightRed": "#D7474B",
+      "brightWhite": "#43436C",
+      "brightYellow": "#836F4A",
+      "cursorColor": "#43436C",
+      "cyan": "#597B75",
+      "foreground": "#545464",
+      "green": "#6F894E",
+      "name": "kanagawa-lotus",
+      "purple": "#B35B79",
+      "red": "#C84053",
+      "selectionBackground": "#545464",
+      "white": "#545464",
+      "yellow": "#77713F"
+    },
+    {
       "background": "#2D353B",
       "black": "#232A2E",
       "blue": "#7FBBB3",
@@ -1682,6 +1705,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "kanagawa-lotus",
+      "tab": {
+        "background": "#F2ECBCFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#E5DDB0FF",
+        "unfocusedBackground": "#E5DDB0FF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,
