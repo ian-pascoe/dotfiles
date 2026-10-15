@@ -563,6 +563,29 @@
       "yellow": "#F1FF5E"
     },
     {
+      "background": "#FFFFFF",
+      "black": "#FFFFFF",
+      "blue": "#0057D1",
+      "brightBlack": "#ACACAC",
+      "brightBlue": "#0057D1",
+      "brightCyan": "#008C99",
+      "brightGreen": "#008B0C",
+      "brightPurple": "#A018FF",
+      "brightRed": "#D11500",
+      "brightWhite": "#16181A",
+      "brightYellow": "#997B00",
+      "cursorColor": "#16181A",
+      "cyan": "#008C99",
+      "foreground": "#16181A",
+      "green": "#008B0C",
+      "name": "cyberdream-light",
+      "purple": "#A018FF",
+      "red": "#D11500",
+      "selectionBackground": "#ACACAC",
+      "white": "#16181A",
+      "yellow": "#997B00"
+    },
+    {
       "background": "#161616",
       "black": "#282828",
       "blue": "#78A9FF",
@@ -2129,6 +2152,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "cyberdream-light",
+      "tab": {
+        "background": "#FFFFFFFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#EAEAEAFF",
+        "unfocusedBackground": "#DADADAFF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

@@ -1,0 +1,37 @@
+:root {
+  /* Cyberdream Light palette, hand-derived from the scottmckendry/cyberdream.nvim light palette; values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 255, 255, 255;
+  --foreground: 22, 24, 26;
+  --card-background: 234, 234, 234;
+  --popup-background: 172, 172, 172;
+  --primary: 0, 87, 209;
+  --secondary: 0, 140, 153;
+  --tertiary: 0, 87, 209;
+  --accent: 160, 24, 255;
+  --muted-background: 123, 132, 150;
+  --info: 0, 87, 209;
+  --success: 0, 139, 12;
+  --warning: 153, 123, 0;
+  --destructive: 209, 21, 0;
+  --border: 172, 172, 172;
+  --text: 22, 24, 26;
+  --foam: 0, 140, 153;
+  --gold: 153, 123, 0;
+  --love: 209, 21, 0;
+  --overlay: 123, 132, 150;
+  --highlight: 172, 172, 172;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

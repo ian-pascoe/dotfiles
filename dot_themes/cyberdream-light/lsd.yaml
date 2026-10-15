@@ -1,0 +1,39 @@
+# Hand-derived from the scottmckendry/cyberdream.nvim "light" palette (lua/cyberdream/colors.lua).
+user: "#0057d1"
+group: "#008c99"
+permission:
+  read: "#008b0c"
+  write: "#997b00"
+  exec: "#d11500"
+  exec-sticky: "#a018ff"
+  no-access: "#7b8496"
+  octal: "#008c99"
+  acl: "#008c99"
+  context: "#0057d1"
+date:
+  hour-old: "#008b0c"
+  day-old: "#0057d1"
+  older: "#7b8496"
+size:
+  none: "#7b8496"
+  small: "#008b0c"
+  medium: "#997b00"
+  large: "#d17c00"
+inode:
+  valid: "#a018ff"
+  invalid: "#7b8496"
+links:
+  valid: "#008c99"
+  invalid: "#7b8496"
+tree-edge: "#acacac"
+git-status:
+  default: "#16181a"
+  unmodified: "#7b8496"
+  ignored: "#7b8496"
+  new-in-index: "#008b0c"
+  new-in-workdir: "#008b0c"
+  typechange: "#997b00"
+  deleted: "#d11500"
+  renamed: "#0057d1"
+  modified: "#997b00"
+  conflicted: "#d11500"

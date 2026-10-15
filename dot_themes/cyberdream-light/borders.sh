@@ -1,0 +1,2 @@
+export BORDERS_ACTIVE_COLOR=0xff0057d1
+export BORDERS_INACTIVE_COLOR=0xffacacac

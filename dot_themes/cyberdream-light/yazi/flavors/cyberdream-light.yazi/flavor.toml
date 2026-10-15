@@ -1,0 +1,93 @@
+# Hand-derived from the scottmckendry/cyberdream.nvim "light" palette (lua/cyberdream/colors.lua).
+# Cyberdream Light local Yazi flavor
+
+[mgr]
+cwd = { fg = "#0057d1" }
+find_keyword = { fg = "#997b00", bold = true, italic = true }
+find_position = { fg = "#a018ff", bg = "reset", bold = true, italic = true }
+marker_copied = { fg = "#008b0c", bg = "#008b0c" }
+marker_cut = { fg = "#d11500", bg = "#d11500" }
+marker_marked = { fg = "#008c99", bg = "#008c99" }
+marker_selected = { fg = "#997b00", bg = "#997b00" }
+count_copied = { fg = "#ffffff", bg = "#008b0c" }
+count_cut = { fg = "#ffffff", bg = "#d11500" }
+count_selected = { fg = "#ffffff", bg = "#997b00" }
+border_symbol = "│"
+border_style = { fg = "#acacac" }
+
+[tabs]
+active = { fg = "#ffffff", bg = "#0057d1", bold = true }
+inactive = { fg = "#0057d1", bg = "#eaeaea" }
+
+[mode]
+normal_main = { fg = "#ffffff", bg = "#0057d1", bold = true }
+normal_alt = { fg = "#0057d1", bg = "#eaeaea" }
+select_main = { fg = "#ffffff", bg = "#008b0c", bold = true }
+select_alt = { fg = "#008b0c", bg = "#eaeaea" }
+unset_main = { fg = "#ffffff", bg = "#a018ff", bold = true }
+unset_alt = { fg = "#a018ff", bg = "#eaeaea" }
+
+[status]
+perm_sep = { fg = "#acacac" }
+perm_type = { fg = "#0057d1" }
+perm_read = { fg = "#008b0c" }
+perm_write = { fg = "#997b00" }
+perm_exec = { fg = "#d11500" }
+progress_label = { fg = "#16181a", bold = true }
+progress_normal = { fg = "#008b0c", bg = "#acacac" }
+progress_error = { fg = "#ffffff", bg = "#d11500" }
+
+[pick]
+border = { fg = "#0057d1" }
+active = { fg = "#a018ff", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#0057d1" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[cmp]
+border = { fg = "#0057d1" }
+
+[tasks]
+border = { fg = "#0057d1" }
+title = {}
+hovered = { fg = "#a018ff", bold = true }
+
+[which]
+border = { fg = "#0057d1" }
+cand = { fg = "#008c99" }
+rest = { fg = "#7b8496" }
+desc = { fg = "#a018ff" }
+separator = "  "
+separator_style = { fg = "#acacac" }
+
+[help]
+on = { fg = "#008c99" }
+run = { fg = "#a018ff" }
+hovered = { reversed = true, bold = true }
+footer = { fg = "#ffffff", bg = "#16181a" }
+
+[spot]
+border = { fg = "#0057d1" }
+title = { fg = "#0057d1" }
+tbl_col = { fg = "#008c99" }
+tbl_cell = { fg = "#a018ff", bg = "#acacac" }
+
+[notify]
+title_info = { fg = "#008b0c" }
+title_warn = { fg = "#997b00" }
+title_error = { fg = "#d11500" }
+
+[filetype]
+rules = [
+  { mime = "**/image/*", fg = "#008c99" },
+  { mime = "**/{audio,video}/*", fg = "#997b00" },
+  { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#a018ff" },
+  { mime = "**/application/{pdf,doc,rtf}", fg = "#008b0c" },
+  { mime = "vfs/{absent,stale}", fg = "#7b8496" },
+  { url = "*", fg = "#16181a" },
+  { url = "*/", fg = "#0057d1" },
+]
