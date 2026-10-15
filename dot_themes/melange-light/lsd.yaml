@@ -1,0 +1,39 @@
+# Hand-derived from the savq/melange-nvim "light" palette.
+user: "#465AA4"
+group: "#3D6568"
+permission:
+  read: "#3A684A"
+  write: "#A06D00"
+  exec: "#BF0021"
+  exec-sticky: "#904180"
+  no-access: "#A98A78"
+  octal: "#3D6568"
+  acl: "#3D6568"
+  context: "#465AA4"
+date:
+  hour-old: "#3A684A"
+  day-old: "#465AA4"
+  older: "#A98A78"
+size:
+  none: "#A98A78"
+  small: "#3A684A"
+  medium: "#A06D00"
+  large: "#BC5C00"
+inode:
+  valid: "#904180"
+  invalid: "#A98A78"
+links:
+  valid: "#3D6568"
+  invalid: "#A98A78"
+tree-edge: "#A98A78"
+git-status:
+  default: "#54433A"
+  unmodified: "#A98A78"
+  ignored: "#A98A78"
+  new-in-index: "#3A684A"
+  new-in-workdir: "#3A684A"
+  typechange: "#A06D00"
+  deleted: "#BF0021"
+  renamed: "#465AA4"
+  modified: "#A06D00"
+  conflicted: "#BF0021"

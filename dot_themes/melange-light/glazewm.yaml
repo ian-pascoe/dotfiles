@@ -1,0 +1,8 @@
+# Hand-derived from the savq/melange-nvim "light" palette.
+window_effects:
+  focused_window:
+    border:
+      color: "#465AA4"
+  other_windows:
+    border:
+      color: "#E9E1DB"

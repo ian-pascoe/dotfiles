@@ -1,0 +1,37 @@
+:root {
+  /* Melange Light palette (hand-derived from the savq/melange-nvim "light" palette); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 241, 241, 241;
+  --foreground: 84, 67, 58;
+  --card-background: 233, 225, 219;
+  --popup-background: 217, 211, 206;
+  --primary: 70, 90, 164;
+  --secondary: 61, 101, 104;
+  --tertiary: 70, 90, 164;
+  --accent: 144, 65, 128;
+  --muted-background: 169, 138, 120;
+  --info: 70, 90, 164;
+  --success: 58, 104, 74;
+  --warning: 160, 109, 0;
+  --destructive: 191, 0, 33;
+  --border: 169, 138, 120;
+  --text: 84, 67, 58;
+  --foam: 61, 101, 104;
+  --gold: 160, 109, 0;
+  --love: 191, 0, 33;
+  --overlay: 169, 138, 120;
+  --highlight: 217, 211, 206;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1,0 +1,93 @@
+# Hand-derived from the savq/melange-nvim "light" palette.
+# Melange Light local Yazi flavor
+
+[mgr]
+cwd = { fg = "#465AA4" }
+find_keyword = { fg = "#A06D00", bold = true, italic = true }
+find_position = { fg = "#904180", bg = "reset", bold = true, italic = true }
+marker_copied = { fg = "#3A684A", bg = "#3A684A" }
+marker_cut = { fg = "#BF0021", bg = "#BF0021" }
+marker_marked = { fg = "#3D6568", bg = "#3D6568" }
+marker_selected = { fg = "#A06D00", bg = "#A06D00" }
+count_copied = { fg = "#F1F1F1", bg = "#3A684A" }
+count_cut = { fg = "#F1F1F1", bg = "#BF0021" }
+count_selected = { fg = "#F1F1F1", bg = "#A06D00" }
+border_symbol = "│"
+border_style = { fg = "#A98A78" }
+
+[tabs]
+active = { fg = "#F1F1F1", bg = "#465AA4", bold = true }
+inactive = { fg = "#465AA4", bg = "#E9E1DB" }
+
+[mode]
+normal_main = { fg = "#F1F1F1", bg = "#465AA4", bold = true }
+normal_alt = { fg = "#465AA4", bg = "#E9E1DB" }
+select_main = { fg = "#F1F1F1", bg = "#3A684A", bold = true }
+select_alt = { fg = "#3A684A", bg = "#E9E1DB" }
+unset_main = { fg = "#F1F1F1", bg = "#904180", bold = true }
+unset_alt = { fg = "#904180", bg = "#E9E1DB" }
+
+[status]
+perm_sep = { fg = "#A98A78" }
+perm_type = { fg = "#465AA4" }
+perm_read = { fg = "#3A684A" }
+perm_write = { fg = "#A06D00" }
+perm_exec = { fg = "#BF0021" }
+progress_label = { fg = "#54433A", bold = true }
+progress_normal = { fg = "#3A684A", bg = "#D9D3CE" }
+progress_error = { fg = "#A06D00", bg = "#BF0021" }
+
+[pick]
+border = { fg = "#465AA4" }
+active = { fg = "#904180", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#465AA4" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[cmp]
+border = { fg = "#465AA4" }
+
+[tasks]
+border = { fg = "#465AA4" }
+title = {}
+hovered = { fg = "#904180", bold = true }
+
+[which]
+border = { fg = "#465AA4" }
+cand = { fg = "#3D6568" }
+rest = { fg = "#A98A78" }
+desc = { fg = "#904180" }
+separator = "  "
+separator_style = { fg = "#A98A78" }
+
+[help]
+on = { fg = "#3D6568" }
+run = { fg = "#904180" }
+hovered = { reversed = true, bold = true }
+footer = { fg = "#F1F1F1", bg = "#54433A" }
+
+[spot]
+border = { fg = "#465AA4" }
+title = { fg = "#465AA4" }
+tbl_col = { fg = "#3D6568" }
+tbl_cell = { fg = "#904180", bg = "#D9D3CE" }
+
+[notify]
+title_info = { fg = "#3A684A" }
+title_warn = { fg = "#A06D00" }
+title_error = { fg = "#BF0021" }
+
+[filetype]
+rules = [
+  { mime = "**/image/*", fg = "#3D6568" },
+  { mime = "**/{audio,video}/*", fg = "#A06D00" },
+  { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#904180" },
+  { mime = "**/application/{pdf,doc,rtf}", fg = "#3A684A" },
+  { mime = "vfs/{absent,stale}", fg = "#A98A78" },
+  { url = "*", fg = "#54433A" },
+  { url = "*/", fg = "#465AA4" },
+]
