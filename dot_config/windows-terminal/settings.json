@@ -1023,6 +1023,29 @@
       "yellow": "#C4B28A"
     },
     {
+      "background": "#F2F1EF",
+      "black": "#22262D",
+      "blue": "#4D699B",
+      "brightBlack": "#6D6F6E",
+      "brightBlue": "#6693BF",
+      "brightCyan": "#5E857A",
+      "brightGreen": "#6E915F",
+      "brightPurple": "#624C83",
+      "brightRed": "#D7474B",
+      "brightWhite": "#43436C",
+      "brightYellow": "#836F4A",
+      "cursorColor": "#22262D",
+      "cyan": "#597B75",
+      "foreground": "#22262D",
+      "green": "#6F894E",
+      "name": "kanso-pearl",
+      "purple": "#B35B79",
+      "red": "#C84053",
+      "selectionBackground": "#E2E1DF",
+      "white": "#545464",
+      "yellow": "#77713F"
+    },
+    {
       "background": "#011627",
       "black": "#1D3B53",
       "blue": "#82AAFF",
@@ -2345,6 +2368,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "kanso-pearl",
+      "tab": {
+        "background": "#F2F1EFFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#E2E1DFFF",
+        "unfocusedBackground": "#E2E1DFFF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,

@@ -1,0 +1,39 @@
+# Hand-derived from the webhooked/kanso.nvim "pearl" palette.
+user: "#4D699B"
+group: "#597B75"
+permission:
+  read: "#6F894E"
+  write: "#836F4A"
+  exec: "#C84053"
+  exec-sticky: "#624C83"
+  no-access: "#6D6D69"
+  octal: "#597B75"
+  acl: "#597B75"
+  context: "#4D699B"
+date:
+  hour-old: "#6F894E"
+  day-old: "#4D699B"
+  older: "#6D6D69"
+size:
+  none: "#6D6D69"
+  small: "#6F894E"
+  medium: "#836F4A"
+  large: "#CC6D00"
+inode:
+  valid: "#624C83"
+  invalid: "#6D6D69"
+links:
+  valid: "#597B75"
+  invalid: "#6D6D69"
+tree-edge: "#9F9F99"
+git-status:
+  default: "#22262D"
+  unmodified: "#6D6D69"
+  ignored: "#6D6D69"
+  new-in-index: "#6F894E"
+  new-in-workdir: "#6F894E"
+  typechange: "#836F4A"
+  deleted: "#C84053"
+  renamed: "#4D699B"
+  modified: "#836F4A"
+  conflicted: "#C84053"

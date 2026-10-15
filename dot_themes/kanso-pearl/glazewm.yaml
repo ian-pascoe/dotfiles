@@ -1,0 +1,8 @@
+# Hand-derived from the webhooked/kanso.nvim "pearl" palette.
+window_effects:
+  focused_window:
+    border:
+      color: "#4D699B"
+  other_windows:
+    border:
+      color: "#E2E1DF"

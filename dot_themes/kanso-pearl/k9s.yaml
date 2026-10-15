@@ -1,0 +1,101 @@
+# Hand-derived from the webhooked/kanso.nvim "pearl" palette.
+k9s:
+  body:
+    fgColor: "#22262D"
+    bgColor: default
+    logoColor: "#4D699B"
+  prompt:
+    fgColor: "#22262D"
+    bgColor: default
+    suggestColor: "#4D699B"
+  help:
+    fgColor: "#22262D"
+    bgColor: default
+    sectionColor: "#6F894E"
+    keyColor: "#4D699B"
+    numKeyColor: "#C84053"
+  frame:
+    title:
+      fgColor: "#597B75"
+      bgColor: default
+      highlightColor: "#624C83"
+      counterColor: "#836F4A"
+      filterColor: "#6F894E"
+    border:
+      fgColor: "#4D699B"
+      focusColor: "#5E857A"
+    menu:
+      fgColor: "#22262D"
+      keyColor: "#4D699B"
+      numKeyColor: "#C84053"
+    crumbs:
+      fgColor: "#22262D"
+      bgColor: default
+      activeColor: "#836F4A"
+    status:
+      newColor: "#4D699B"
+      modifyColor: "#597B75"
+      addColor: "#6F894E"
+      pendingColor: "#836F4A"
+      errorColor: "#C84053"
+      highlightColor: "#597B75"
+      killColor: "#624C83"
+      completedColor: "#6D6D69"
+  info:
+    fgColor: "#836F4A"
+    sectionColor: "#22262D"
+  views:
+    table:
+      fgColor: "#22262D"
+      bgColor: default
+      cursorFgColor: "#22262D"
+      cursorBgColor: "#CACAC7"
+      markColor: "#6F894E"
+      header:
+        fgColor: "#836F4A"
+        bgColor: default
+        sorterColor: "#597B75"
+    xray:
+      fgColor: "#22262D"
+      bgColor: default
+      cursorColor: "#CACAC7"
+      cursorTextColor: "#22262D"
+      graphicColor: "#624C83"
+    charts:
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
+      defaultDialColors:
+        - "#6F894E"
+        - "#C84053"
+      defaultChartColors:
+        - "#6F894E"
+        - "#C84053"
+      resourceColors:
+        cpu:
+          - "#4D699B"
+          - "#597B75"
+        mem:
+          - "#6F894E"
+          - "#836F4A"
+    yaml:
+      keyColor: "#4D699B"
+      valueColor: "#22262D"
+      colonColor: "#6D6D69"
+    logs:
+      fgColor: "#22262D"
+      bgColor: default
+      indicator:
+        fgColor: "#597B75"
+        bgColor: default
+        toggleOnColor: "#6F894E"
+        toggleOffColor: "#6D6D69"
+  dialog:
+    fgColor: "#836F4A"
+    bgColor: default
+    buttonFgColor: "#22262D"
+    buttonBgColor: default
+    buttonFocusFgColor: "#F2F1EF"
+    buttonFocusBgColor: "#624C83"
+    labelFgColor: "#836F4A"
+    fieldFgColor: "#22262D"

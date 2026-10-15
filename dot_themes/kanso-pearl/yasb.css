@@ -1,0 +1,37 @@
+:root {
+  /* Kanso Pearl palette (hand-derived from the webhooked/kanso.nvim "pearl" palette); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 242, 241, 239;
+  --foreground: 34, 38, 45;
+  --card-background: 226, 225, 223;
+  --popup-background: 202, 202, 199;
+  --primary: 77, 105, 155;
+  --secondary: 94, 133, 122;
+  --tertiary: 77, 105, 155;
+  --accent: 98, 76, 131;
+  --muted-background: 109, 109, 105;
+  --info: 77, 105, 155;
+  --success: 111, 137, 78;
+  --warning: 131, 111, 74;
+  --destructive: 200, 64, 83;
+  --border: 159, 159, 153;
+  --text: 34, 38, 45;
+  --foam: 89, 123, 117;
+  --gold: 131, 111, 74;
+  --love: 200, 64, 83;
+  --overlay: 109, 109, 105;
+  --highlight: 202, 202, 199;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}
