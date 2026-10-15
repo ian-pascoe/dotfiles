@@ -1,0 +1,39 @@
+# Hand-derived from the sainnhe/gruvbox-material "light" (medium background, material foreground) palette.
+user: "#45707a"
+group: "#4c7a5d"
+permission:
+  read: "#6c782e"
+  write: "#b47109"
+  exec: "#c14a4a"
+  exec-sticky: "#945e80"
+  no-access: "#928374"
+  octal: "#4c7a5d"
+  acl: "#4c7a5d"
+  context: "#45707a"
+date:
+  hour-old: "#4c7a5d"
+  day-old: "#45707a"
+  older: "#928374"
+size:
+  none: "#928374"
+  small: "#6c782e"
+  medium: "#b47109"
+  large: "#c35e0a"
+inode:
+  valid: "#945e80"
+  invalid: "#928374"
+links:
+  valid: "#4c7a5d"
+  invalid: "#928374"
+tree-edge: "#ddccab"
+git-status:
+  default: "#654735"
+  unmodified: "#928374"
+  ignored: "#928374"
+  new-in-index: "#6c782e"
+  new-in-workdir: "#6c782e"
+  typechange: "#b47109"
+  deleted: "#c14a4a"
+  renamed: "#45707a"
+  modified: "#c35e0a"
+  conflicted: "#c14a4a"

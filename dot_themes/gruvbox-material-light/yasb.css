@@ -1,0 +1,37 @@
+:root {
+  /* Gruvbox Material Light palette (hand-derived from sainnhe/gruvbox-material "light"); values are RGB triples for YASB's rgb(var(--token)) usage. */
+  --background: 251, 241, 199;
+  --foreground: 101, 71, 53;
+  --card-background: 242, 229, 188;
+  --popup-background: 229, 213, 173;
+  --primary: 69, 112, 122;
+  --secondary: 76, 122, 93;
+  --tertiary: 76, 122, 93;
+  --accent: 148, 94, 128;
+  --muted-background: 124, 111, 100;
+  --info: 76, 122, 93;
+  --success: 108, 120, 46;
+  --warning: 180, 113, 9;
+  --destructive: 193, 74, 74;
+  --border: 221, 204, 171;
+  --text: 101, 71, 53;
+  --foam: 76, 122, 93;
+  --gold: 180, 113, 9;
+  --love: 193, 74, 74;
+  --overlay: 124, 111, 100;
+  --highlight: 229, 213, 173;
+
+  --card-foreground: var(--foreground);
+  --popup-foreground: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary-foreground: var(--background);
+  --tertiary-foreground: var(--background);
+  --accent-foreground: var(--background);
+  --muted-foreground: var(--background);
+  --info-foreground: var(--background);
+  --success-foreground: var(--background);
+  --warning-foreground: var(--background);
+  --destructive-foreground: var(--background);
+
+  --background-image: none;
+}

@@ -1046,6 +1046,29 @@
       "yellow": "#D8A657"
     },
     {
+      "background": "#FBF1C7",
+      "black": "#FBF1C7",
+      "blue": "#45707A",
+      "brightBlack": "#A89984",
+      "brightBlue": "#45707A",
+      "brightCyan": "#4C7A5D",
+      "brightGreen": "#6C782E",
+      "brightPurple": "#945E80",
+      "brightRed": "#C14A4A",
+      "brightWhite": "#4F3829",
+      "brightYellow": "#B47109",
+      "cursorColor": "#654735",
+      "cyan": "#4C7A5D",
+      "foreground": "#654735",
+      "green": "#6C782E",
+      "name": "gruvbox-material-light",
+      "purple": "#945E80",
+      "red": "#C14A4A",
+      "selectionBackground": "#654735",
+      "white": "#654735",
+      "yellow": "#B47109"
+    },
+    {
       "background": "#2C2E34",
       "black": "#181819",
       "blue": "#76CCE0",
@@ -2227,6 +2250,26 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "gruvbox-material-light",
+      "tab": {
+        "background": "#FBF1C7FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#F2E5BCFF",
+        "unfocusedBackground": "#F2E5BCFF"
+      },
+      "window": {
+        "applicationTheme": "light",
         "experimental.rainbowFrame": false,
         "frame": null,
         "unfocusedFrame": null,
