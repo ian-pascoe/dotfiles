@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: shades-of-purple",
+  "version": "1.0",
+  "description": "The shades-of-purple theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [23, 22, 48],
+      "frame_inactive": [23, 22, 48],
+      "frame_incognito": [23, 22, 48],
+      "frame_incognito_inactive": [23, 22, 48],
+      "background_tab": [23, 22, 48],
+      "background_tab_inactive": [23, 22, 48],
+      "toolbar": [30, 29, 64],
+      "tab_text": [255, 255, 255],
+      "tab_background_text": [154, 153, 169],
+      "tab_background_text_inactive": [154, 153, 169],
+      "toolbar_text": [255, 255, 255],
+      "toolbar_button_icon": [255, 255, 255],
+      "bookmark_text": [255, 255, 255],
+      "omnibox_background": [53, 52, 83],
+      "omnibox_text": [255, 255, 255],
+      "ntp_background": [30, 29, 64],
+      "ntp_text": [255, 255, 255],
+      "ntp_link": [127, 94, 255]
+    }
+  }
+}

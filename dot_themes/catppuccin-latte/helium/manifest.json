@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: catppuccin-latte",
+  "version": "1.0",
+  "description": "The catppuccin-latte theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [225, 227, 230],
+      "frame_inactive": [225, 227, 230],
+      "frame_incognito": [225, 227, 230],
+      "frame_incognito_inactive": [225, 227, 230],
+      "background_tab": [225, 227, 230],
+      "background_tab_inactive": [225, 227, 230],
+      "toolbar": [239, 241, 245],
+      "tab_text": [76, 79, 105],
+      "tab_background_text": [114, 117, 137],
+      "tab_background_text_inactive": [114, 117, 137],
+      "toolbar_text": [76, 79, 105],
+      "toolbar_button_icon": [76, 79, 105],
+      "bookmark_text": [76, 79, 105],
+      "omnibox_background": [228, 230, 235],
+      "omnibox_text": [76, 79, 105],
+      "ntp_background": [239, 241, 245],
+      "ntp_text": [76, 79, 105],
+      "ntp_link": [30, 102, 245]
+    }
+  }
+}

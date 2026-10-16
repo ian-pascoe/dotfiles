@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: poimandres",
+  "version": "1.0",
+  "description": "The poimandres theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [20, 23, 30],
+      "frame_inactive": [20, 23, 30],
+      "frame_incognito": [20, 23, 30],
+      "frame_incognito_inactive": [20, 23, 30],
+      "background_tab": [20, 23, 30],
+      "background_tab_inactive": [20, 23, 30],
+      "toolbar": [27, 30, 40],
+      "tab_text": [228, 240, 251],
+      "tab_background_text": [138, 146, 156],
+      "tab_background_text_inactive": [138, 146, 156],
+      "toolbar_text": [228, 240, 251],
+      "toolbar_button_icon": [228, 240, 251],
+      "bookmark_text": [228, 240, 251],
+      "omnibox_background": [47, 51, 61],
+      "omnibox_text": [228, 240, 251],
+      "ntp_background": [27, 30, 40],
+      "ntp_text": [228, 240, 251],
+      "ntp_link": [137, 221, 255]
+    }
+  }
+}

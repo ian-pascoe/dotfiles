@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: boo",
+  "version": "1.0",
+  "description": "The boo theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [14, 12, 12],
+      "frame_inactive": [14, 12, 12],
+      "frame_incognito": [14, 12, 12],
+      "frame_incognito_inactive": [14, 12, 12],
+      "background_tab": [14, 12, 12],
+      "background_tab_inactive": [14, 12, 12],
+      "toolbar": [18, 16, 16],
+      "tab_text": [247, 239, 240],
+      "tab_background_text": [144, 139, 139],
+      "tab_background_text_inactive": [144, 139, 139],
+      "toolbar_text": [247, 239, 240],
+      "toolbar_button_icon": [247, 239, 240],
+      "bookmark_text": [247, 239, 240],
+      "omnibox_background": [41, 38, 38],
+      "omnibox_text": [247, 239, 240],
+      "ntp_background": [18, 16, 16],
+      "ntp_text": [247, 239, 240],
+      "ntp_link": [132, 101, 135]
+    }
+  }
+}

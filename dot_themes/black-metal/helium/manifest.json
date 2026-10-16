@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: black-metal",
+  "version": "1.0",
+  "description": "The black-metal theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [0, 0, 0],
+      "frame_inactive": [0, 0, 0],
+      "frame_incognito": [0, 0, 0],
+      "frame_incognito_inactive": [0, 0, 0],
+      "background_tab": [0, 0, 0],
+      "background_tab_inactive": [0, 0, 0],
+      "toolbar": [0, 0, 0],
+      "tab_text": [193, 193, 193],
+      "tab_background_text": [110, 110, 110],
+      "tab_background_text_inactive": [110, 110, 110],
+      "toolbar_text": [193, 193, 193],
+      "toolbar_button_icon": [193, 193, 193],
+      "bookmark_text": [193, 193, 193],
+      "omnibox_background": [19, 19, 19],
+      "omnibox_text": [193, 193, 193],
+      "ntp_background": [0, 0, 0],
+      "ntp_text": [193, 193, 193],
+      "ntp_link": [170, 170, 170]
+    }
+  }
+}

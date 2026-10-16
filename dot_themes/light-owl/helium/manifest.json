@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: light-owl",
+  "version": "1.0",
+  "description": "The light-owl theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [236, 236, 236],
+      "frame_inactive": [236, 236, 236],
+      "frame_incognito": [236, 236, 236],
+      "frame_incognito_inactive": [236, 236, 236],
+      "background_tab": [236, 236, 236],
+      "background_tab_inactive": [236, 236, 236],
+      "toolbar": [251, 251, 251],
+      "tab_text": [64, 63, 83],
+      "tab_background_text": [123, 123, 136],
+      "tab_background_text_inactive": [123, 123, 136],
+      "toolbar_text": [64, 63, 83],
+      "toolbar_button_icon": [64, 63, 83],
+      "bookmark_text": [64, 63, 83],
+      "omnibox_background": [238, 238, 239],
+      "omnibox_text": [64, 63, 83],
+      "ntp_background": [251, 251, 251],
+      "ntp_text": [64, 63, 83],
+      "ntp_link": [41, 138, 208]
+    }
+  }
+}

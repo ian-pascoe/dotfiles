@@ -35,6 +35,7 @@ const requiredFiles = [
   "btop.theme",
   "ghostty.conf",
   "glazewm.yaml",
+  "helium/manifest.json",
   "k9s.yaml",
   "lsd.yaml",
   "pi.json",
@@ -154,6 +155,16 @@ describe.each([["dark"], ["light"]] as const)("generate (%s)", (mode) => {
     expect(read(`dot_config/yazi/flavors/symlink_${variant}.yazi.tmpl`)).toContain(
       `.themes/${variant}/yazi/flavors/${variant}.yazi`,
     );
+  });
+
+  test("writes a Helium theme whose toolbar is the background", () => {
+    const manifest = JSON.parse(read(`${dir}/helium/manifest.json`)) as {
+      name: string;
+      theme: { colors: Record<string, number[]> };
+    };
+    expect(manifest.name).toBe(`Theme: ${variant}`);
+    const hex = `#${manifest.theme.colors.toolbar!.map((n) => n.toString(16).padStart(2, "0")).join("")}`;
+    expect(hex).toBe(terminals[mode].background);
   });
 
   test("light.mode only for light variants", () => {

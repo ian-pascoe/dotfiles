@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: tokyo-night-day",
+  "version": "1.0",
+  "description": "The tokyo-night-day theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [212, 212, 217],
+      "frame_inactive": [212, 212, 217],
+      "frame_incognito": [212, 212, 217],
+      "frame_incognito_inactive": [212, 212, 217],
+      "background_tab": [212, 212, 217],
+      "background_tab_inactive": [212, 212, 217],
+      "toolbar": [225, 226, 231],
+      "tab_text": [55, 96, 191],
+      "tab_background_text": [82, 117, 201],
+      "tab_background_text_inactive": [82, 117, 201],
+      "toolbar_text": [55, 96, 191],
+      "toolbar_button_icon": [55, 96, 191],
+      "bookmark_text": [55, 96, 191],
+      "omnibox_background": [213, 217, 228],
+      "omnibox_text": [55, 96, 191],
+      "ntp_background": [225, 226, 231],
+      "ntp_text": [55, 96, 191],
+      "ntp_link": [46, 116, 218]
+    }
+  }
+}

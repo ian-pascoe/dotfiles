@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: bluloco",
+  "version": "1.0",
+  "description": "The bluloco theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [30, 33, 39],
+      "frame_inactive": [30, 33, 39],
+      "frame_incognito": [30, 33, 39],
+      "frame_incognito_inactive": [30, 33, 39],
+      "background_tab": [30, 33, 39],
+      "background_tab_inactive": [30, 33, 39],
+      "toolbar": [40, 44, 52],
+      "tab_text": [185, 192, 203],
+      "tab_background_text": [135, 140, 150],
+      "tab_background_text_inactive": [135, 140, 150],
+      "toolbar_text": [185, 192, 203],
+      "toolbar_button_icon": [185, 192, 203],
+      "bookmark_text": [185, 192, 203],
+      "omnibox_background": [55, 59, 67],
+      "omnibox_text": [185, 192, 203],
+      "ntp_background": [40, 44, 52],
+      "ntp_text": [185, 192, 203],
+      "ntp_link": [59, 122, 252]
+    }
+  }
+}

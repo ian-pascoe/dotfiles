@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: nightfly",
+  "version": "1.0",
+  "description": "The nightfly theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [1, 17, 29],
+      "frame_inactive": [1, 17, 29],
+      "frame_incognito": [1, 17, 29],
+      "frame_incognito_inactive": [1, 17, 29],
+      "background_tab": [1, 17, 29],
+      "background_tab_inactive": [1, 17, 29],
+      "toolbar": [1, 22, 39],
+      "tab_text": [189, 193, 198],
+      "tab_background_text": [108, 120, 130],
+      "tab_background_text_inactive": [108, 120, 130],
+      "toolbar_text": [189, 193, 198],
+      "toolbar_button_icon": [189, 193, 198],
+      "bookmark_text": [189, 193, 198],
+      "omnibox_background": [20, 39, 55],
+      "omnibox_text": [189, 193, 198],
+      "ntp_background": [1, 22, 39],
+      "ntp_text": [189, 193, 198],
+      "ntp_link": [130, 170, 255]
+    }
+  }
+}

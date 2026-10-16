@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: github-light",
+  "version": "1.0",
+  "description": "The github-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [240, 240, 240],
+      "frame_inactive": [240, 240, 240],
+      "frame_incognito": [240, 240, 240],
+      "frame_incognito_inactive": [240, 240, 240],
+      "background_tab": [240, 240, 240],
+      "background_tab_inactive": [240, 240, 240],
+      "toolbar": [255, 255, 255],
+      "tab_text": [31, 35, 40],
+      "tab_background_text": [122, 124, 127],
+      "tab_background_text_inactive": [122, 124, 127],
+      "toolbar_text": [31, 35, 40],
+      "toolbar_button_icon": [31, 35, 40],
+      "bookmark_text": [31, 35, 40],
+      "omnibox_background": [239, 240, 240],
+      "omnibox_text": [31, 35, 40],
+      "ntp_background": [255, 255, 255],
+      "ntp_text": [31, 35, 40],
+      "ntp_link": [9, 105, 218]
+    }
+  }
+}

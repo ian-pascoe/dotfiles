@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: retro-82",
+  "version": "1.0",
+  "description": "The retro-82 theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [4, 18, 35],
+      "frame_inactive": [4, 18, 35],
+      "frame_incognito": [4, 18, 35],
+      "frame_incognito_inactive": [4, 18, 35],
+      "background_tab": [4, 18, 35],
+      "background_tab_inactive": [4, 18, 35],
+      "toolbar": [5, 24, 46],
+      "tab_text": [246, 220, 172],
+      "tab_background_text": [138, 132, 115],
+      "tab_background_text_inactive": [138, 132, 115],
+      "toolbar_text": [246, 220, 172],
+      "toolbar_button_icon": [246, 220, 172],
+      "bookmark_text": [246, 220, 172],
+      "omnibox_background": [29, 44, 59],
+      "omnibox_text": [246, 220, 172],
+      "ntp_background": [5, 24, 46],
+      "ntp_text": [246, 220, 172],
+      "ntp_link": [63, 143, 138]
+    }
+  }
+}

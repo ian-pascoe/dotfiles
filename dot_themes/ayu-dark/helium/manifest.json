@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: ayu-dark",
+  "version": "1.0",
+  "description": "The ayu-dark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [8, 11, 15],
+      "frame_inactive": [8, 11, 15],
+      "frame_incognito": [8, 11, 15],
+      "frame_incognito_inactive": [8, 11, 15],
+      "background_tab": [8, 11, 15],
+      "background_tab_inactive": [8, 11, 15],
+      "toolbar": [11, 14, 20],
+      "tab_text": [191, 189, 182],
+      "tab_background_text": [114, 114, 113],
+      "tab_background_text_inactive": [114, 114, 113],
+      "toolbar_text": [191, 189, 182],
+      "toolbar_button_icon": [191, 189, 182],
+      "bookmark_text": [191, 189, 182],
+      "omnibox_background": [29, 32, 36],
+      "omnibox_text": [191, 189, 182],
+      "ntp_background": [11, 14, 20],
+      "ntp_text": [191, 189, 182],
+      "ntp_link": [83, 189, 250]
+    }
+  }
+}

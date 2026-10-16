@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: vitesse-dark",
+  "version": "1.0",
+  "description": "The vitesse-dark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [14, 14, 14],
+      "frame_inactive": [14, 14, 14],
+      "frame_incognito": [14, 14, 14],
+      "frame_incognito_inactive": [14, 14, 14],
+      "background_tab": [14, 14, 14],
+      "background_tab_inactive": [14, 14, 14],
+      "toolbar": [18, 18, 18],
+      "tab_text": [219, 215, 202],
+      "tab_background_text": [129, 126, 119],
+      "tab_background_text_inactive": [129, 126, 119],
+      "toolbar_text": [219, 215, 202],
+      "toolbar_button_icon": [219, 215, 202],
+      "bookmark_text": [219, 215, 202],
+      "omnibox_background": [38, 38, 36],
+      "omnibox_text": [219, 215, 202],
+      "ntp_background": [18, 18, 18],
+      "ntp_text": [219, 215, 202],
+      "ntp_link": [99, 148, 191]
+    }
+  }
+}

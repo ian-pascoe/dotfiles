@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: solarized-light",
+  "version": "1.0",
+  "description": "The solarized-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [238, 231, 213],
+      "frame_inactive": [238, 231, 213],
+      "frame_incognito": [238, 231, 213],
+      "frame_incognito_inactive": [238, 231, 213],
+      "background_tab": [238, 231, 213],
+      "background_tab_inactive": [238, 231, 213],
+      "toolbar": [253, 246, 227],
+      "tab_text": [101, 123, 131],
+      "tab_background_text": [126, 143, 146],
+      "tab_background_text_inactive": [126, 143, 146],
+      "toolbar_text": [101, 123, 131],
+      "toolbar_button_icon": [101, 123, 131],
+      "bookmark_text": [101, 123, 131],
+      "omnibox_background": [242, 237, 220],
+      "omnibox_text": [101, 123, 131],
+      "ntp_background": [253, 246, 227],
+      "ntp_text": [101, 123, 131],
+      "ntp_link": [44, 137, 202]
+    }
+  }
+}

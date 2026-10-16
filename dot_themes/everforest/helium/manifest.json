@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: everforest",
+  "version": "1.0",
+  "description": "The everforest theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [34, 40, 44],
+      "frame_inactive": [34, 40, 44],
+      "frame_incognito": [34, 40, 44],
+      "frame_incognito_inactive": [34, 40, 44],
+      "background_tab": [34, 40, 44],
+      "background_tab_inactive": [34, 40, 44],
+      "toolbar": [45, 53, 59],
+      "tab_text": [211, 198, 170],
+      "tab_background_text": [153, 148, 131],
+      "tab_background_text_inactive": [153, 148, 131],
+      "toolbar_text": [211, 198, 170],
+      "toolbar_button_icon": [211, 198, 170],
+      "bookmark_text": [211, 198, 170],
+      "omnibox_background": [62, 68, 70],
+      "omnibox_text": [211, 198, 170],
+      "ntp_background": [45, 53, 59],
+      "ntp_text": [211, 198, 170],
+      "ntp_link": [127, 187, 179]
+    }
+  }
+}

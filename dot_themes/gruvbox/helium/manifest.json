@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: gruvbox",
+  "version": "1.0",
+  "description": "The gruvbox theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [30, 30, 30],
+      "frame_inactive": [30, 30, 30],
+      "frame_incognito": [30, 30, 30],
+      "frame_incognito_inactive": [30, 30, 30],
+      "background_tab": [30, 30, 30],
+      "background_tab_inactive": [30, 30, 30],
+      "toolbar": [40, 40, 40],
+      "tab_text": [235, 219, 178],
+      "tab_background_text": [147, 138, 116],
+      "tab_background_text_inactive": [147, 138, 116],
+      "toolbar_text": [235, 219, 178],
+      "toolbar_button_icon": [235, 219, 178],
+      "bookmark_text": [235, 219, 178],
+      "omnibox_background": [60, 58, 54],
+      "omnibox_text": [235, 219, 178],
+      "ntp_background": [40, 40, 40],
+      "ntp_text": [235, 219, 178],
+      "ntp_link": [131, 165, 152]
+    }
+  }
+}

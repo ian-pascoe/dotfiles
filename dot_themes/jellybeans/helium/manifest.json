@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: jellybeans",
+  "version": "1.0",
+  "description": "The jellybeans theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [16, 16, 16],
+      "frame_inactive": [16, 16, 16],
+      "frame_incognito": [16, 16, 16],
+      "frame_incognito_inactive": [16, 16, 16],
+      "background_tab": [16, 16, 16],
+      "background_tab_inactive": [16, 16, 16],
+      "toolbar": [21, 21, 21],
+      "tab_text": [232, 232, 211],
+      "tab_background_text": [137, 137, 126],
+      "tab_background_text_inactive": [137, 137, 126],
+      "toolbar_text": [232, 232, 211],
+      "toolbar_button_icon": [232, 232, 211],
+      "bookmark_text": [232, 232, 211],
+      "omnibox_background": [42, 42, 40],
+      "omnibox_text": [232, 232, 211],
+      "ntp_background": [21, 21, 21],
+      "ntp_text": [232, 232, 211],
+      "ntp_link": [129, 151, 191]
+    }
+  }
+}

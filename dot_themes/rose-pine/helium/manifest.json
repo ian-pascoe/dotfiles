@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: rose-pine",
+  "version": "1.0",
+  "description": "The rose-pine theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [19, 17, 27],
+      "frame_inactive": [19, 17, 27],
+      "frame_incognito": [19, 17, 27],
+      "frame_incognito_inactive": [19, 17, 27],
+      "background_tab": [19, 17, 27],
+      "background_tab_inactive": [19, 17, 27],
+      "toolbar": [25, 23, 36],
+      "tab_text": [224, 222, 244],
+      "tab_background_text": [134, 132, 150],
+      "tab_background_text_inactive": [134, 132, 150],
+      "toolbar_text": [224, 222, 244],
+      "toolbar_button_icon": [224, 222, 244],
+      "bookmark_text": [224, 222, 244],
+      "omnibox_background": [45, 43, 57],
+      "omnibox_text": [224, 222, 244],
+      "ntp_background": [25, 23, 36],
+      "ntp_text": [224, 222, 244],
+      "ntp_link": [156, 207, 216]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: terafox",
+  "version": "1.0",
+  "description": "The terafox theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [16, 28, 30],
+      "frame_inactive": [16, 28, 30],
+      "frame_incognito": [16, 28, 30],
+      "frame_incognito_inactive": [16, 28, 30],
+      "background_tab": [16, 28, 30],
+      "background_tab_inactive": [16, 28, 30],
+      "toolbar": [21, 37, 40],
+      "tab_text": [230, 234, 234],
+      "tab_background_text": [136, 145, 147],
+      "tab_background_text_inactive": [136, 145, 147],
+      "toolbar_text": [230, 234, 234],
+      "toolbar_button_icon": [230, 234, 234],
+      "bookmark_text": [230, 234, 234],
+      "omnibox_background": [42, 57, 59],
+      "omnibox_text": [230, 234, 234],
+      "ntp_background": [21, 37, 40],
+      "ntp_text": [230, 234, 234],
+      "ntp_link": [90, 147, 170]
+    }
+  }
+}

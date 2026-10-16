@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: selenized-dark",
+  "version": "1.0",
+  "description": "The selenized-dark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [12, 45, 54],
+      "frame_inactive": [12, 45, 54],
+      "frame_incognito": [12, 45, 54],
+      "frame_incognito_inactive": [12, 45, 54],
+      "background_tab": [12, 45, 54],
+      "background_tab_inactive": [12, 45, 54],
+      "toolbar": [16, 60, 72],
+      "tab_text": [173, 188, 188],
+      "tab_background_text": [132, 155, 159],
+      "tab_background_text_inactive": [132, 155, 159],
+      "toolbar_text": [173, 188, 188],
+      "toolbar_button_icon": [173, 188, 188],
+      "bookmark_text": [173, 188, 188],
+      "omnibox_background": [32, 73, 84],
+      "omnibox_text": [173, 188, 188],
+      "ntp_background": [16, 60, 72],
+      "ntp_text": [173, 188, 188],
+      "ntp_link": [70, 149, 247]
+    }
+  }
+}

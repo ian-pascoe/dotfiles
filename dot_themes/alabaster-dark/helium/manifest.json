@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: alabaster-dark",
+  "version": "1.0",
+  "description": "The alabaster-dark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [11, 15, 16],
+      "frame_inactive": [11, 15, 16],
+      "frame_incognito": [11, 15, 16],
+      "frame_incognito_inactive": [11, 15, 16],
+      "background_tab": [11, 15, 16],
+      "background_tab_inactive": [11, 15, 16],
+      "toolbar": [14, 20, 21],
+      "tab_text": [206, 206, 206],
+      "tab_background_text": [120, 122, 123],
+      "tab_background_text_inactive": [120, 122, 123],
+      "toolbar_text": [206, 206, 206],
+      "toolbar_button_icon": [206, 206, 206],
+      "bookmark_text": [206, 206, 206],
+      "omnibox_background": [33, 39, 40],
+      "omnibox_text": [206, 206, 206],
+      "ntp_background": [14, 20, 21],
+      "ntp_text": [206, 206, 206],
+      "ntp_link": [33, 126, 188]
+    }
+  }
+}

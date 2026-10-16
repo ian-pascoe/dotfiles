@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: bamboo-light",
+  "version": "1.0",
+  "description": "The bamboo-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [235, 235, 211],
+      "frame_inactive": [235, 235, 211],
+      "frame_incognito": [235, 235, 211],
+      "frame_incognito_inactive": [235, 235, 211],
+      "background_tab": [235, 235, 211],
+      "background_tab_inactive": [235, 235, 211],
+      "toolbar": [250, 250, 224],
+      "tab_text": [58, 66, 56],
+      "tab_background_text": [119, 124, 109],
+      "tab_background_text_inactive": [119, 124, 109],
+      "toolbar_text": [58, 66, 56],
+      "toolbar_button_icon": [58, 66, 56],
+      "bookmark_text": [58, 66, 56],
+      "omnibox_background": [237, 237, 212],
+      "omnibox_text": [58, 66, 56],
+      "ntp_background": [250, 250, 224],
+      "ntp_text": [58, 66, 56],
+      "ntp_link": [23, 69, 213]
+    }
+  }
+}

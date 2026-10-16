@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: vague",
+  "version": "1.0",
+  "description": "The vague theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [15, 15, 16],
+      "frame_inactive": [15, 15, 16],
+      "frame_incognito": [15, 15, 16],
+      "frame_incognito_inactive": [15, 15, 16],
+      "background_tab": [15, 15, 16],
+      "background_tab_inactive": [15, 15, 16],
+      "toolbar": [20, 20, 21],
+      "tab_text": [205, 205, 205],
+      "tab_background_text": [122, 122, 122],
+      "tab_background_text_inactive": [122, 122, 122],
+      "toolbar_text": [205, 205, 205],
+      "toolbar_button_icon": [205, 205, 205],
+      "bookmark_text": [205, 205, 205],
+      "omnibox_background": [39, 39, 39],
+      "omnibox_text": [205, 205, 205],
+      "ntp_background": [20, 20, 21],
+      "ntp_text": [205, 205, 205],
+      "ntp_link": [110, 148, 178]
+    }
+  }
+}

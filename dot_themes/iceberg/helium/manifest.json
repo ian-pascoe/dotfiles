@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: iceberg",
+  "version": "1.0",
+  "description": "The iceberg theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [17, 18, 25],
+      "frame_inactive": [17, 18, 25],
+      "frame_incognito": [17, 18, 25],
+      "frame_incognito_inactive": [17, 18, 25],
+      "background_tab": [17, 18, 25],
+      "background_tab_inactive": [17, 18, 25],
+      "toolbar": [22, 24, 33],
+      "tab_text": [198, 200, 209],
+      "tab_background_text": [119, 121, 130],
+      "tab_background_text_inactive": [119, 121, 130],
+      "toolbar_text": [198, 200, 209],
+      "toolbar_button_icon": [198, 200, 209],
+      "bookmark_text": [198, 200, 209],
+      "omnibox_background": [40, 42, 51],
+      "omnibox_text": [198, 200, 209],
+      "ntp_background": [22, 24, 33],
+      "ntp_text": [198, 200, 209],
+      "ntp_link": [132, 160, 198]
+    }
+  }
+}

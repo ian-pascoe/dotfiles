@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: duskfox",
+  "version": "1.0",
+  "description": "The duskfox theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [26, 25, 41],
+      "frame_inactive": [26, 25, 41],
+      "frame_incognito": [26, 25, 41],
+      "frame_incognito_inactive": [26, 25, 41],
+      "background_tab": [26, 25, 41],
+      "background_tab_inactive": [26, 25, 41],
+      "toolbar": [35, 33, 54],
+      "tab_text": [224, 222, 244],
+      "tab_background_text": [139, 137, 159],
+      "tab_background_text_inactive": [139, 137, 159],
+      "toolbar_text": [224, 222, 244],
+      "toolbar_button_icon": [224, 222, 244],
+      "bookmark_text": [224, 222, 244],
+      "omnibox_background": [54, 52, 73],
+      "omnibox_text": [224, 222, 244],
+      "ntp_background": [35, 33, 54],
+      "ntp_text": [224, 222, 244],
+      "ntp_link": [86, 159, 186]
+    }
+  }
+}

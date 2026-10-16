@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: tokyodark",
+  "version": "1.0",
+  "description": "The tokyodark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [13, 14, 22],
+      "frame_inactive": [13, 14, 22],
+      "frame_incognito": [13, 14, 22],
+      "frame_incognito_inactive": [13, 14, 22],
+      "background_tab": [13, 14, 22],
+      "background_tab_inactive": [13, 14, 22],
+      "toolbar": [17, 18, 29],
+      "tab_text": [160, 168, 205],
+      "tab_background_text": [111, 116, 144],
+      "tab_background_text_inactive": [111, 116, 144],
+      "toolbar_text": [160, 168, 205],
+      "toolbar_button_icon": [160, 168, 205],
+      "bookmark_text": [160, 168, 205],
+      "omnibox_background": [31, 33, 47],
+      "omnibox_text": [160, 168, 205],
+      "ntp_background": [17, 18, 29],
+      "ntp_text": [160, 168, 205],
+      "ntp_link": [113, 153, 238]
+    }
+  }
+}

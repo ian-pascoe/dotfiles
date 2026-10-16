@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: no-clown-fiesta-light",
+  "version": "1.0",
+  "description": "The no-clown-fiesta-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [212, 212, 212],
+      "frame_inactive": [212, 212, 212],
+      "frame_incognito": [212, 212, 212],
+      "frame_incognito_inactive": [212, 212, 212],
+      "background_tab": [212, 212, 212],
+      "background_tab_inactive": [212, 212, 212],
+      "toolbar": [225, 225, 225],
+      "tab_text": [21, 21, 21],
+      "tab_background_text": [108, 108, 108],
+      "tab_background_text_inactive": [108, 108, 108],
+      "toolbar_text": [21, 21, 21],
+      "toolbar_button_icon": [21, 21, 21],
+      "bookmark_text": [21, 21, 21],
+      "omnibox_background": [211, 211, 211],
+      "omnibox_text": [21, 21, 21],
+      "ntp_background": [225, 225, 225],
+      "ntp_text": [21, 21, 21],
+      "ntp_link": [99, 114, 134]
+    }
+  }
+}

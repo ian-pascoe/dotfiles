@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: embark",
+  "version": "1.0",
+  "description": "The embark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [23, 21, 37],
+      "frame_inactive": [23, 21, 37],
+      "frame_incognito": [23, 21, 37],
+      "frame_incognito_inactive": [23, 21, 37],
+      "background_tab": [23, 21, 37],
+      "background_tab_inactive": [23, 21, 37],
+      "toolbar": [30, 28, 49],
+      "tab_text": [203, 227, 231],
+      "tab_background_text": [125, 137, 149],
+      "tab_background_text_inactive": [125, 137, 149],
+      "toolbar_text": [203, 227, 231],
+      "toolbar_button_icon": [203, 227, 231],
+      "bookmark_text": [203, 227, 231],
+      "omnibox_background": [47, 48, 67],
+      "omnibox_text": [203, 227, 231],
+      "ntp_background": [30, 28, 49],
+      "ntp_text": [203, 227, 231],
+      "ntp_link": [145, 221, 255]
+    }
+  }
+}

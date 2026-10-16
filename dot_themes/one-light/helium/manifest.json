@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: one-light",
+  "version": "1.0",
+  "description": "The one-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [235, 235, 235],
+      "frame_inactive": [235, 235, 235],
+      "frame_incognito": [235, 235, 235],
+      "frame_incognito_inactive": [235, 235, 235],
+      "background_tab": [235, 235, 235],
+      "background_tab_inactive": [235, 235, 235],
+      "toolbar": [250, 250, 250],
+      "tab_text": [56, 58, 66],
+      "tab_background_text": [120, 122, 127],
+      "tab_background_text_inactive": [120, 122, 127],
+      "toolbar_text": [56, 58, 66],
+      "toolbar_button_icon": [56, 58, 66],
+      "bookmark_text": [56, 58, 66],
+      "omnibox_background": [236, 237, 237],
+      "omnibox_text": [56, 58, 66],
+      "ntp_background": [250, 250, 250],
+      "ntp_text": [56, 58, 66],
+      "ntp_link": [64, 120, 242]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: nord",
+  "version": "1.0",
+  "description": "The nord theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [25, 25, 25],
+      "frame_inactive": [25, 25, 25],
+      "frame_incognito": [25, 25, 25],
+      "frame_incognito_inactive": [25, 25, 25],
+      "background_tab": [25, 25, 25],
+      "background_tab_inactive": [25, 25, 25],
+      "toolbar": [33, 33, 33],
+      "tab_text": [216, 222, 233],
+      "tab_background_text": [134, 137, 143],
+      "tab_background_text_inactive": [134, 137, 143],
+      "toolbar_text": [216, 222, 233],
+      "toolbar_button_icon": [216, 222, 233],
+      "bookmark_text": [216, 222, 233],
+      "omnibox_background": [51, 52, 53],
+      "omnibox_text": [216, 222, 233],
+      "ntp_background": [33, 33, 33],
+      "ntp_text": [216, 222, 233],
+      "ntp_link": [129, 161, 193]
+    }
+  }
+}

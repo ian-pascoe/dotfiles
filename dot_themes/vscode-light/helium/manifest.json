@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: vscode-light",
+  "version": "1.0",
+  "description": "The vscode-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [240, 240, 240],
+      "frame_inactive": [240, 240, 240],
+      "frame_incognito": [240, 240, 240],
+      "frame_incognito_inactive": [240, 240, 240],
+      "background_tab": [240, 240, 240],
+      "background_tab_inactive": [240, 240, 240],
+      "toolbar": [255, 255, 255],
+      "tab_text": [59, 59, 59],
+      "tab_background_text": [127, 127, 127],
+      "tab_background_text_inactive": [127, 127, 127],
+      "toolbar_text": [59, 59, 59],
+      "toolbar_button_icon": [59, 59, 59],
+      "bookmark_text": [59, 59, 59],
+      "omnibox_background": [241, 241, 241],
+      "omnibox_text": [59, 59, 59],
+      "ntp_background": [255, 255, 255],
+      "ntp_text": [59, 59, 59],
+      "ntp_link": [4, 81, 165]
+    }
+  }
+}

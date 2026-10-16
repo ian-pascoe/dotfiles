@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: palenight",
+  "version": "1.0",
+  "description": "The palenight theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [31, 34, 47],
+      "frame_inactive": [31, 34, 47],
+      "frame_incognito": [31, 34, 47],
+      "frame_incognito_inactive": [31, 34, 47],
+      "background_tab": [31, 34, 47],
+      "background_tab_inactive": [31, 34, 47],
+      "toolbar": [41, 45, 62],
+      "tab_text": [166, 172, 205],
+      "tab_background_text": [132, 138, 166],
+      "tab_background_text_inactive": [132, 138, 166],
+      "toolbar_text": [166, 172, 205],
+      "toolbar_button_icon": [166, 172, 205],
+      "bookmark_text": [166, 172, 205],
+      "omnibox_background": [54, 58, 76],
+      "omnibox_text": [166, 172, 205],
+      "ntp_background": [41, 45, 62],
+      "ntp_text": [166, 172, 205],
+      "ntp_link": [130, 170, 255]
+    }
+  }
+}

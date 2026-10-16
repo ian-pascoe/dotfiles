@@ -17,6 +17,7 @@ const requiredFiles = [
   "btop.theme",
   "ghostty.conf",
   "glazewm.yaml",
+  "helium/manifest.json",
   "k9s.yaml",
   "lsd.yaml",
   "pi.json",
@@ -192,6 +193,24 @@ describe.each(variants)("%s", (variant) => {
 
   test("pi.json colors resolve to concrete values", () => {
     expect(unresolvedThemeColors(JSON.parse(read(dir, "pi.json")) as ThemeJson)).toEqual([]);
+  });
+
+  // helium-theme reloads the extension until its name changes to the variant's.
+  test("helium/manifest.json is a theme for this variant", () => {
+    const manifest = JSON.parse(read(dir, "helium/manifest.json")) as {
+      name?: string;
+      theme?: { colors?: Record<string, unknown> };
+    };
+    expect(manifest.name).toBe(`Theme: ${variant}`);
+    const colors = Object.entries(manifest.theme?.colors ?? {});
+    expect(colors.length).toBeGreaterThan(0);
+    const invalid = colors.filter(
+      ([, value]) =>
+        !Array.isArray(value) ||
+        value.length !== 3 ||
+        !value.every((n) => Number.isInteger(n) && n >= 0 && n <= 255),
+    );
+    expect(invalid).toEqual([]);
   });
 
   test("tern.json is a complete Oh My Pi theme", () => {

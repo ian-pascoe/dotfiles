@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: cobalt2",
+  "version": "1.0",
+  "description": "The cobalt2 theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [14, 29, 42],
+      "frame_inactive": [14, 29, 42],
+      "frame_incognito": [14, 29, 42],
+      "frame_incognito_inactive": [14, 29, 42],
+      "background_tab": [14, 29, 42],
+      "background_tab_inactive": [14, 29, 42],
+      "toolbar": [19, 39, 56],
+      "tab_text": [255, 255, 255],
+      "tab_background_text": [149, 158, 165],
+      "tab_background_text_inactive": [149, 158, 165],
+      "toolbar_text": [255, 255, 255],
+      "toolbar_button_icon": [255, 255, 255],
+      "bookmark_text": [255, 255, 255],
+      "omnibox_background": [43, 61, 76],
+      "omnibox_text": [255, 255, 255],
+      "ntp_background": [19, 39, 56],
+      "ntp_text": [255, 255, 255],
+      "ntp_link": [64, 126, 218]
+    }
+  }
+}

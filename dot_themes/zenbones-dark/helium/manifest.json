@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: zenbones-dark",
+  "version": "1.0",
+  "description": "The zenbones-dark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [21, 19, 17],
+      "frame_inactive": [21, 19, 17],
+      "frame_incognito": [21, 19, 17],
+      "frame_incognito_inactive": [21, 19, 17],
+      "background_tab": [21, 19, 17],
+      "background_tab_inactive": [21, 19, 17],
+      "toolbar": [28, 25, 23],
+      "tab_text": [180, 189, 195],
+      "tab_background_text": [118, 123, 126],
+      "tab_background_text_inactive": [118, 123, 126],
+      "toolbar_text": [180, 189, 195],
+      "toolbar_button_icon": [180, 189, 195],
+      "bookmark_text": [180, 189, 195],
+      "omnibox_background": [43, 41, 40],
+      "omnibox_text": [180, 189, 195],
+      "ntp_background": [28, 25, 23],
+      "ntp_text": [180, 189, 195],
+      "ntp_link": [96, 153, 192]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: melange-light",
+  "version": "1.0",
+  "description": "The melange-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [227, 227, 227],
+      "frame_inactive": [227, 227, 227],
+      "frame_incognito": [227, 227, 227],
+      "frame_incognito_inactive": [227, 227, 227],
+      "background_tab": [227, 227, 227],
+      "background_tab_inactive": [227, 227, 227],
+      "toolbar": [241, 241, 241],
+      "tab_text": [84, 67, 58],
+      "tab_background_text": [127, 114, 107],
+      "tab_background_text_inactive": [127, 114, 107],
+      "toolbar_text": [84, 67, 58],
+      "toolbar_button_icon": [84, 67, 58],
+      "bookmark_text": [84, 67, 58],
+      "omnibox_background": [230, 229, 228],
+      "omnibox_text": [84, 67, 58],
+      "ntp_background": [241, 241, 241],
+      "ntp_text": [84, 67, 58],
+      "ntp_link": [112, 128, 159]
+    }
+  }
+}

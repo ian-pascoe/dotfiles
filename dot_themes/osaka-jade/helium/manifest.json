@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: osaka-jade",
+  "version": "1.0",
+  "description": "The osaka-jade theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [13, 21, 18],
+      "frame_inactive": [13, 21, 18],
+      "frame_incognito": [13, 21, 18],
+      "frame_incognito_inactive": [13, 21, 18],
+      "background_tab": [13, 21, 18],
+      "background_tab_inactive": [13, 21, 18],
+      "toolbar": [17, 28, 24],
+      "tab_text": [193, 196, 151],
+      "tab_background_text": [118, 124, 97],
+      "tab_background_text_inactive": [118, 124, 97],
+      "toolbar_text": [193, 196, 151],
+      "toolbar_button_icon": [193, 196, 151],
+      "bookmark_text": [193, 196, 151],
+      "omnibox_background": [35, 45, 37],
+      "omnibox_text": [193, 196, 151],
+      "ntp_background": [17, 28, 24],
+      "ntp_text": [193, 196, 151],
+      "ntp_link": [80, 148, 117]
+    }
+  }
+}

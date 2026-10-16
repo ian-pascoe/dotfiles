@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: matte-black",
+  "version": "1.0",
+  "description": "The matte-black theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [14, 14, 14],
+      "frame_inactive": [14, 14, 14],
+      "frame_incognito": [14, 14, 14],
+      "frame_incognito_inactive": [14, 14, 14],
+      "background_tab": [14, 14, 14],
+      "background_tab_inactive": [14, 14, 14],
+      "toolbar": [18, 18, 18],
+      "tab_text": [190, 190, 190],
+      "tab_background_text": [117, 117, 117],
+      "tab_background_text_inactive": [117, 117, 117],
+      "toolbar_text": [190, 190, 190],
+      "toolbar_button_icon": [190, 190, 190],
+      "bookmark_text": [190, 190, 190],
+      "omnibox_background": [35, 35, 35],
+      "omnibox_text": [190, 190, 190],
+      "ntp_background": [18, 18, 18],
+      "ntp_text": [190, 190, 190],
+      "ntp_link": [230, 142, 13]
+    }
+  }
+}

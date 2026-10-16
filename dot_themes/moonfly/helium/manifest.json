@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: moonfly",
+  "version": "1.0",
+  "description": "The moonfly theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [6, 6, 6],
+      "frame_inactive": [6, 6, 6],
+      "frame_incognito": [6, 6, 6],
+      "frame_incognito_inactive": [6, 6, 6],
+      "background_tab": [6, 6, 6],
+      "background_tab_inactive": [6, 6, 6],
+      "toolbar": [8, 8, 8],
+      "tab_text": [189, 189, 189],
+      "tab_background_text": [112, 112, 112],
+      "tab_background_text_inactive": [112, 112, 112],
+      "toolbar_text": [189, 189, 189],
+      "toolbar_button_icon": [189, 189, 189],
+      "bookmark_text": [189, 189, 189],
+      "omnibox_background": [26, 26, 26],
+      "omnibox_text": [189, 189, 189],
+      "ntp_background": [8, 8, 8],
+      "ntp_text": [189, 189, 189],
+      "ntp_link": [128, 160, 255]
+    }
+  }
+}

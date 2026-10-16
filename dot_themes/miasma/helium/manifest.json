@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: miasma",
+  "version": "1.0",
+  "description": "The miasma theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [26, 26, 26],
+      "frame_inactive": [26, 26, 26],
+      "frame_incognito": [26, 26, 26],
+      "frame_incognito_inactive": [26, 26, 26],
+      "background_tab": [26, 26, 26],
+      "background_tab_inactive": [26, 26, 26],
+      "toolbar": [34, 34, 34],
+      "tab_text": [194, 194, 176],
+      "tab_background_text": [129, 129, 118],
+      "tab_background_text_inactive": [129, 129, 118],
+      "toolbar_text": [194, 194, 176],
+      "toolbar_button_icon": [194, 194, 176],
+      "bookmark_text": [194, 194, 176],
+      "omnibox_background": [50, 50, 48],
+      "omnibox_text": [194, 194, 176],
+      "ntp_background": [34, 34, 34],
+      "ntp_text": [194, 194, 176],
+      "ntp_link": [120, 130, 75]
+    }
+  }
+}

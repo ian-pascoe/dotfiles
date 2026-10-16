@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: kanagawa-dragon",
+  "version": "1.0",
+  "description": "The kanagawa-dragon theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [18, 17, 17],
+      "frame_inactive": [18, 17, 17],
+      "frame_incognito": [18, 17, 17],
+      "frame_incognito_inactive": [18, 17, 17],
+      "background_tab": [18, 17, 17],
+      "background_tab_inactive": [18, 17, 17],
+      "toolbar": [24, 22, 22],
+      "tab_text": [197, 201, 197],
+      "tab_background_text": [119, 120, 118],
+      "tab_background_text_inactive": [119, 120, 118],
+      "toolbar_text": [197, 201, 197],
+      "toolbar_button_icon": [197, 201, 197],
+      "bookmark_text": [197, 201, 197],
+      "omnibox_background": [41, 40, 40],
+      "omnibox_text": [197, 201, 197],
+      "ntp_background": [24, 22, 22],
+      "ntp_text": [197, 201, 197],
+      "ntp_link": [139, 164, 176]
+    }
+  }
+}

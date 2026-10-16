@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: selenized-light",
+  "version": "1.0",
+  "description": "The selenized-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [236, 228, 206],
+      "frame_inactive": [236, 228, 206],
+      "frame_incognito": [236, 228, 206],
+      "frame_incognito_inactive": [236, 228, 206],
+      "background_tab": [236, 228, 206],
+      "background_tab_inactive": [236, 228, 206],
+      "toolbar": [251, 243, 219],
+      "tab_text": [83, 103, 109],
+      "tab_background_text": [110, 126, 127],
+      "tab_background_text_inactive": [110, 126, 127],
+      "toolbar_text": [83, 103, 109],
+      "toolbar_button_icon": [83, 103, 109],
+      "bookmark_text": [83, 103, 109],
+      "omnibox_background": [239, 233, 211],
+      "omnibox_text": [83, 103, 109],
+      "ntp_background": [251, 243, 219],
+      "ntp_text": [83, 103, 109],
+      "ntp_link": [0, 114, 212]
+    }
+  }
+}

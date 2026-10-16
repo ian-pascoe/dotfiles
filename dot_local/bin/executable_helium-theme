@@ -1,0 +1,186 @@
+#!/usr/bin/env bash
+# Applies the current theme (~/.config/theme) to Helium. Helium loads the
+# theme as an unpacked extension from a fixed folder, since Chromium resolves
+# symlinks when it loads one; this copies the variant's helium/manifest.json
+# there. On macOS it also makes a running Helium re-read the folder through
+# AppleScript, without a restart; on Linux the theme changes when Helium next
+# starts. set-theme runs it (Set-Theme.ps1 does the same on Windows).
+#   helium-theme [apply]   copy the current theme (and reload Helium on macOS)
+#   helium-theme setup     create the folder and print the one-time steps
+#                          that load it; until then, apply does nothing
+# The macOS reload runs JavaScript on helium://extensions, which needs Helium's
+# View > Developer > Allow JavaScript from Apple Events. It uses an open
+# extensions tab when there is one; otherwise it opens and closes a hidden
+# window, which brings Helium to the front, and then gives the focus back.
+
+set -uo pipefail
+
+theme_dir="$HOME/.config/theme/helium"
+load_dir="${XDG_STATE_HOME:-$HOME/.local/state}/helium-theme"
+
+is_mac() { [[ "$OSTYPE" == "darwin"* ]]; }
+
+sync_folder() {
+  if [[ ! -f $theme_dir/manifest.json ]]; then
+    echo "helium-theme: the current theme has no helium/manifest.json" >&2
+    return 1
+  fi
+  mkdir -p "$load_dir"
+  cp "$theme_dir/manifest.json" "$load_dir/manifest.json"
+  # Chromium's compiled copy of the theme. Helium starts from it when it
+  # exists, and a stale one also survives a reload.
+  rm -f "$load_dir/Cached Theme.pak"
+}
+
+setup() {
+  sync_folder || return 1
+  local folder
+  folder=$(cd "$load_dir" && pwd -P)
+  if is_mac; then
+    cat <<EOF
+One-time Helium setup on this Mac:
+  1. View > Developer > Allow JavaScript from Apple Events (lets helium-theme reload the theme).
+  2. Open helium://extensions and turn on Developer mode.
+  3. Load unpacked, then choose: $folder
+     (In the file picker, Cmd+Shift+G lets you type the path.)
+After that, set-theme updates Helium as it switches themes.
+EOF
+  else
+    cat <<EOF
+One-time Helium setup on this machine:
+  1. Open helium://extensions and turn on Developer mode.
+  2. Load unpacked, then choose: $folder
+     (In the file picker, Ctrl+L lets you type the path.)
+After that, set-theme updates the folder as it switches themes, and Helium
+shows the new theme the next time it starts.
+EOF
+  fi
+}
+
+# Escapes a value for a single-quoted JavaScript string.
+js_string() {
+  local s=${1//\\/\\\\}
+  printf "'%s'" "${s//\'/\\\'}"
+}
+
+reload() {
+  pgrep -xq Helium || return 0
+
+  local want id
+  want=$(sed -n 's/^ *"name": "\(.*\)",$/\1/p' "$load_dir/manifest.json" | head -1)
+  # Chromium names an unpacked extension after its resolved path: the first
+  # 32 hex digits of its SHA-256, each mapped from 0-f to a-p.
+  id=$(printf %s "$(cd "$load_dir" && pwd -P)" | shasum -a 256 | cut -c1-32 | tr 0-9a-f a-p)
+
+  # Reloading the active theme makes Chromium switch to the default theme and
+  # skip the reload, so it is disabled first: a disabled extension reloads
+  # from disk, and enabling it applies the new theme. Chromium uninstalls a
+  # theme left disabled, so enabling it again is not optional.
+  local js
+  js="(async () => {
+  const id = '$id', want = $(js_string "$want");
+  const m = chrome.management;
+  const name = async () => (await m.get(id).catch(() => ({}))).name;
+  const ext = await m.get(id).catch(() => null);
+  if (!ext) return 'not-loaded';
+  try {
+    if (ext.enabled) await m.setEnabled(id, false);
+    await chrome.developerPrivate.reload(id, { failQuietly: true });
+    for (let i = 0; i < 50 && (await name()) !== want; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+  } finally {
+    await m.setEnabled(id, true);
+  }
+  return 'applied ' + (await name());
+})()"
+
+  local front answer
+  front=$(lsappinfo info "$(lsappinfo front)" 2>/dev/null | sed -n '1s/^"\(.*\)" ASN:.*/\1/p')
+  answer=$(
+    osascript - "$js" 2>&1 <<'EOF'
+on run argv
+	set js to "window.__heliumTheme = 'pending'; Promise.resolve().then(() => " & item 1 of argv & ").then((v) => window.__heliumTheme = String(v), (e) => window.__heliumTheme = 'error: ' + e); 'started'"
+	tell application "Helium"
+		set target to missing value
+		set made to missing value
+		repeat with w in windows
+			set urls to URL of tabs of w
+			repeat with i from 1 to count of urls
+				if item i of urls starts with "chrome://extensions" then
+					set target to tab i of w
+					exit repeat
+				end if
+			end repeat
+			if target is not missing value then exit repeat
+		end repeat
+		if target is missing value then
+			set made to make new window with properties {visible:false}
+			set target to active tab of made
+			set URL of target to "helium://extensions"
+			repeat 100 times
+				if not (loading of target) then exit repeat
+				delay 0.05
+			end repeat
+		end if
+		execute target javascript js
+		set answer to "pending"
+		repeat 100 times
+			set answer to execute target javascript "window.__heliumTheme"
+			if answer is not "pending" then exit repeat
+			delay 0.1
+		end repeat
+		if made is not missing value then
+			close made
+			return "window " & answer
+		end if
+		return answer
+	end tell
+end run
+EOF
+  )
+  local status=$?
+
+  # A hidden window still brings Helium to the front.
+  if [[ $answer == window\ * ]]; then
+    answer=${answer#window }
+    if [[ -n $front && $front != Helium ]]; then
+      osascript -e "tell application \"$front\" to activate" >/dev/null 2>&1
+    fi
+  fi
+
+  case $answer in
+  "applied $want") return 0 ;;
+  applied\ *)
+    echo "helium-theme: Helium shows ${answer#applied }, not $want" >&2
+    return 1
+    ;;
+  not-loaded)
+    echo "helium-theme: Helium has not loaded the theme folder; run helium-theme setup" >&2
+    return 1
+    ;;
+  *"turned off"*)
+    echo "helium-theme: turn on View > Developer > Allow JavaScript from Apple Events in Helium" >&2
+    return 1
+    ;;
+  *)
+    echo "helium-theme: reloading Helium's theme failed: $answer" >&2
+    [[ $status -ne 0 ]] && return "$status"
+    return 1
+    ;;
+  esac
+}
+
+case ${1:-apply} in
+apply)
+  # Machines that never ran setup have no folder, and nothing to update.
+  [[ -d $load_dir ]] || exit 0
+  sync_folder || exit 1
+  if is_mac; then reload; fi
+  ;;
+setup) setup ;;
+*)
+  echo "Usage: $(basename "$0") [apply|setup]" >&2
+  exit 1
+  ;;
+esac

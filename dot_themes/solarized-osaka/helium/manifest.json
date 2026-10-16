@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: solarized-osaka",
+  "version": "1.0",
+  "description": "The solarized-osaka theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [0, 15, 19],
+      "frame_inactive": [0, 15, 19],
+      "frame_incognito": [0, 15, 19],
+      "frame_incognito_inactive": [0, 15, 19],
+      "background_tab": [0, 15, 19],
+      "background_tab_inactive": [0, 15, 19],
+      "toolbar": [0, 20, 25],
+      "tab_text": [131, 147, 149],
+      "tab_background_text": [103, 119, 122],
+      "tab_background_text_inactive": [103, 119, 122],
+      "toolbar_text": [131, 147, 149],
+      "toolbar_button_icon": [131, 147, 149],
+      "bookmark_text": [131, 147, 149],
+      "omnibox_background": [13, 33, 37],
+      "omnibox_text": [131, 147, 149],
+      "ntp_background": [0, 20, 25],
+      "ntp_text": [131, 147, 149],
+      "ntp_link": [38, 139, 211]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: modus-vivendi",
+  "version": "1.0",
+  "description": "The modus-vivendi theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [0, 0, 0],
+      "frame_inactive": [0, 0, 0],
+      "frame_incognito": [0, 0, 0],
+      "frame_incognito_inactive": [0, 0, 0],
+      "background_tab": [0, 0, 0],
+      "background_tab_inactive": [0, 0, 0],
+      "toolbar": [0, 0, 0],
+      "tab_text": [255, 255, 255],
+      "tab_background_text": [140, 140, 140],
+      "tab_background_text_inactive": [140, 140, 140],
+      "toolbar_text": [255, 255, 255],
+      "toolbar_button_icon": [255, 255, 255],
+      "bookmark_text": [255, 255, 255],
+      "omnibox_background": [26, 26, 26],
+      "omnibox_text": [255, 255, 255],
+      "ntp_background": [0, 0, 0],
+      "ntp_text": [255, 255, 255],
+      "ntp_link": [47, 175, 255]
+    }
+  }
+}

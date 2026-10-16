@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: dayfox",
+  "version": "1.0",
+  "description": "The dayfox theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [231, 227, 224],
+      "frame_inactive": [231, 227, 224],
+      "frame_incognito": [231, 227, 224],
+      "frame_incognito_inactive": [231, 227, 224],
+      "background_tab": [231, 227, 224],
+      "background_tab_inactive": [231, 227, 224],
+      "toolbar": [246, 242, 238],
+      "tab_text": [61, 43, 90],
+      "tab_background_text": [125, 113, 142],
+      "tab_background_text_inactive": [125, 113, 142],
+      "toolbar_text": [61, 43, 90],
+      "toolbar_button_icon": [61, 43, 90],
+      "bookmark_text": [61, 43, 90],
+      "omnibox_background": [233, 228, 228],
+      "omnibox_text": [61, 43, 90],
+      "ntp_background": [246, 242, 238],
+      "ntp_text": [61, 43, 90],
+      "ntp_link": [40, 72, 169]
+    }
+  }
+}

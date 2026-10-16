@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: cyberdream",
+  "version": "1.0",
+  "description": "The cyberdream theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [17, 18, 20],
+      "frame_inactive": [17, 18, 20],
+      "frame_incognito": [17, 18, 20],
+      "frame_incognito_inactive": [17, 18, 20],
+      "background_tab": [17, 18, 20],
+      "background_tab_inactive": [17, 18, 20],
+      "toolbar": [22, 24, 26],
+      "tab_text": [255, 255, 255],
+      "tab_background_text": [150, 151, 152],
+      "tab_background_text_inactive": [150, 151, 152],
+      "toolbar_text": [255, 255, 255],
+      "toolbar_button_icon": [255, 255, 255],
+      "bookmark_text": [255, 255, 255],
+      "omnibox_background": [45, 47, 49],
+      "omnibox_text": [255, 255, 255],
+      "ntp_background": [22, 24, 26],
+      "ntp_text": [255, 255, 255],
+      "ntp_link": [94, 161, 255]
+    }
+  }
+}

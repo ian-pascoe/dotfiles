@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: rose-pine-dawn",
+  "version": "1.0",
+  "description": "The rose-pine-dawn theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [235, 229, 223],
+      "frame_inactive": [235, 229, 223],
+      "frame_incognito": [235, 229, 223],
+      "frame_incognito_inactive": [235, 229, 223],
+      "background_tab": [235, 229, 223],
+      "background_tab_inactive": [235, 229, 223],
+      "toolbar": [250, 244, 237],
+      "tab_text": [87, 82, 121],
+      "tab_background_text": [121, 116, 146],
+      "tab_background_text_inactive": [121, 116, 146],
+      "toolbar_text": [87, 82, 121],
+      "toolbar_button_icon": [87, 82, 121],
+      "bookmark_text": [87, 82, 121],
+      "omnibox_background": [239, 233, 229],
+      "omnibox_text": [87, 82, 121],
+      "ntp_background": [250, 244, 237],
+      "ntp_text": [87, 82, 121],
+      "ntp_link": [86, 136, 151]
+    }
+  }
+}

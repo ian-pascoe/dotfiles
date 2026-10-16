@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: dracula",
+  "version": "1.0",
+  "description": "The dracula theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [30, 32, 41],
+      "frame_inactive": [30, 32, 41],
+      "frame_incognito": [30, 32, 41],
+      "frame_incognito_inactive": [30, 32, 41],
+      "background_tab": [30, 32, 41],
+      "background_tab_inactive": [30, 32, 41],
+      "toolbar": [40, 42, 54],
+      "tab_text": [248, 248, 242],
+      "tab_background_text": [154, 155, 157],
+      "tab_background_text_inactive": [154, 155, 157],
+      "toolbar_text": [248, 248, 242],
+      "toolbar_button_icon": [248, 248, 242],
+      "bookmark_text": [248, 248, 242],
+      "omnibox_background": [61, 63, 73],
+      "omnibox_text": [248, 248, 242],
+      "ntp_background": [40, 42, 54],
+      "ntp_text": [248, 248, 242],
+      "ntp_link": [189, 147, 249]
+    }
+  }
+}

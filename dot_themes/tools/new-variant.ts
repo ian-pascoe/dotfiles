@@ -911,6 +911,47 @@ function ternJson(variant: string, roles: Roles, c: Colors): string {
   });
 }
 
+/**
+ * Helium (Chromium) theme extension. Chromium takes [r, g, b] arrays; the tab
+ * strip sits a step darker than the toolbar in both modes. `name` and
+ * `description` change with the variant, so a reload can tell the new
+ * manifest has been read.
+ */
+export function heliumManifest(variant: string, mode: Mode, c: Colors): string {
+  const frame = toRgb(mix(c.background, "#000000", mode === "light" ? 0.06 : 0.25));
+  const [background, text, muted] = [toRgb(c.background), toRgb(c.text), toRgb(c.muted)];
+  const manifest = json({
+    manifest_version: 3,
+    name: `Theme: ${variant}`,
+    version: "1.0",
+    description: `The ${variant} theme variant from ~/.themes, applied by helium-theme.`,
+    theme: {
+      colors: {
+        frame,
+        frame_inactive: frame,
+        frame_incognito: frame,
+        frame_incognito_inactive: frame,
+        background_tab: frame,
+        background_tab_inactive: frame,
+        toolbar: background,
+        tab_text: text,
+        tab_background_text: muted,
+        tab_background_text_inactive: muted,
+        toolbar_text: text,
+        toolbar_button_icon: text,
+        bookmark_text: text,
+        omnibox_background: toRgb(c.popup),
+        omnibox_text: text,
+        ntp_background: background,
+        ntp_text: text,
+        ntp_link: toRgb(c.accent),
+      },
+    },
+  });
+  // One line per color, as the formatter writes it.
+  return manifest.replace(/\[\s+(\d+),\s+(\d+),\s+(\d+)\s+\]/g, "[$1, $2, $3]");
+}
+
 const stripPeriod = (text: string) => text.trim().replace(/\.$/, "");
 
 // ---------------------------------------------------------------- Windows Terminal
@@ -1029,6 +1070,7 @@ export function renderVariant(variant: string, roles: Roles): Map<string, string
     [`${dir}/btop.theme`, btop(c, source)],
     [`${dir}/ghostty.conf`, ghosttyConf(roles)],
     [`${dir}/glazewm.yaml`, glazewm(c)],
+    [`${dir}/helium/manifest.json`, heliumManifest(variant, roles.mode, c)],
     [`${dir}/k9s.yaml`, k9s(c, source)],
     [`${dir}/lsd.yaml`, lsd(c, source)],
     [`${dir}/pi.json`, piJson(variant, roles, c)],

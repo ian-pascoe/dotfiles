@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: zenburn",
+  "version": "1.0",
+  "description": "The zenburn theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [47, 47, 47],
+      "frame_inactive": [47, 47, 47],
+      "frame_incognito": [47, 47, 47],
+      "frame_incognito_inactive": [47, 47, 47],
+      "background_tab": [47, 47, 47],
+      "background_tab_inactive": [47, 47, 47],
+      "toolbar": [63, 63, 63],
+      "tab_text": [220, 220, 204],
+      "tab_background_text": [162, 162, 153],
+      "tab_background_text_inactive": [162, 162, 153],
+      "toolbar_text": [220, 220, 204],
+      "toolbar_button_icon": [220, 220, 204],
+      "bookmark_text": [220, 220, 204],
+      "omnibox_background": [79, 79, 77],
+      "omnibox_text": [220, 220, 204],
+      "ntp_background": [63, 63, 63],
+      "ntp_text": [220, 220, 204],
+      "ntp_link": [139, 151, 155]
+    }
+  }
+}

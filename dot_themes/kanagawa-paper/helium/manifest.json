@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: kanagawa-paper",
+  "version": "1.0",
+  "description": "The kanagawa-paper theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [23, 23, 30],
+      "frame_inactive": [23, 23, 30],
+      "frame_incognito": [23, 23, 30],
+      "frame_incognito_inactive": [23, 23, 30],
+      "background_tab": [23, 23, 30],
+      "background_tab_inactive": [23, 23, 30],
+      "toolbar": [31, 31, 40],
+      "tab_text": [220, 215, 186],
+      "tab_background_text": [135, 132, 120],
+      "tab_background_text_inactive": [135, 132, 120],
+      "toolbar_text": [220, 215, 186],
+      "toolbar_button_icon": [220, 215, 186],
+      "bookmark_text": [220, 215, 186],
+      "omnibox_background": [50, 49, 55],
+      "omnibox_text": [220, 215, 186],
+      "ntp_background": [31, 31, 40],
+      "ntp_text": [220, 215, 186],
+      "ntp_link": [108, 122, 123]
+    }
+  }
+}

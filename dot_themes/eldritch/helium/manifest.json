@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: eldritch",
+  "version": "1.0",
+  "description": "The eldritch theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [25, 26, 41],
+      "frame_inactive": [25, 26, 41],
+      "frame_incognito": [25, 26, 41],
+      "frame_incognito_inactive": [25, 26, 41],
+      "background_tab": [25, 26, 41],
+      "background_tab_inactive": [25, 26, 41],
+      "toolbar": [33, 35, 55],
+      "tab_text": [235, 250, 250],
+      "tab_background_text": [144, 153, 162],
+      "tab_background_text_inactive": [144, 153, 162],
+      "toolbar_text": [235, 250, 250],
+      "toolbar_button_icon": [235, 250, 250],
+      "bookmark_text": [235, 250, 250],
+      "omnibox_background": [53, 57, 75],
+      "omnibox_text": [235, 250, 250],
+      "ntp_background": [33, 35, 55],
+      "ntp_text": [235, 250, 250],
+      "ntp_link": [144, 113, 244]
+    }
+  }
+}

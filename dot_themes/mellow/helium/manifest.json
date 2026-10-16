@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: mellow",
+  "version": "1.0",
+  "description": "The mellow theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [17, 17, 17],
+      "frame_inactive": [17, 17, 17],
+      "frame_incognito": [17, 17, 17],
+      "frame_incognito_inactive": [17, 17, 17],
+      "background_tab": [17, 17, 17],
+      "background_tab_inactive": [17, 17, 17],
+      "toolbar": [22, 22, 23],
+      "tab_text": [201, 199, 205],
+      "tab_background_text": [120, 119, 123],
+      "tab_background_text_inactive": [120, 119, 123],
+      "toolbar_text": [201, 199, 205],
+      "toolbar_button_icon": [201, 199, 205],
+      "bookmark_text": [201, 199, 205],
+      "omnibox_background": [40, 40, 41],
+      "omnibox_text": [201, 199, 205],
+      "ntp_background": [22, 22, 23],
+      "ntp_text": [201, 199, 205],
+      "ntp_link": [172, 161, 207]
+    }
+  }
+}

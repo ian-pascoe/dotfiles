@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: horizon-bright",
+  "version": "1.0",
+  "description": "The horizon-bright theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [238, 226, 223],
+      "frame_inactive": [238, 226, 223],
+      "frame_incognito": [238, 226, 223],
+      "frame_incognito_inactive": [238, 226, 223],
+      "background_tab": [238, 226, 223],
+      "background_tab_inactive": [238, 226, 223],
+      "toolbar": [253, 240, 237],
+      "tab_text": [22, 22, 29],
+      "tab_background_text": [121, 115, 118],
+      "tab_background_text_inactive": [121, 115, 118],
+      "toolbar_text": [22, 22, 29],
+      "toolbar_button_icon": [22, 22, 29],
+      "bookmark_text": [22, 22, 29],
+      "omnibox_background": [237, 225, 222],
+      "omnibox_text": [22, 22, 29],
+      "ntp_background": [253, 240, 237],
+      "ntp_text": [22, 22, 29],
+      "ntp_link": [7, 140, 163]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: material-ocean",
+  "version": "1.0",
+  "description": "The material-ocean theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [11, 13, 20],
+      "frame_inactive": [11, 13, 20],
+      "frame_incognito": [11, 13, 20],
+      "frame_incognito_inactive": [11, 13, 20],
+      "background_tab": [11, 13, 20],
+      "background_tab_inactive": [11, 13, 20],
+      "toolbar": [15, 17, 26],
+      "tab_text": [143, 147, 162],
+      "tab_background_text": [112, 116, 129],
+      "tab_background_text_inactive": [112, 116, 129],
+      "toolbar_text": [143, 147, 162],
+      "toolbar_button_icon": [143, 147, 162],
+      "bookmark_text": [143, 147, 162],
+      "omnibox_background": [28, 30, 40],
+      "omnibox_text": [143, 147, 162],
+      "ntp_background": [15, 17, 26],
+      "ntp_text": [143, 147, 162],
+      "ntp_link": [130, 170, 255]
+    }
+  }
+}

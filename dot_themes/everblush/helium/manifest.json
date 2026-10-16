@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: everblush",
+  "version": "1.0",
+  "description": "The everblush theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [15, 20, 23],
+      "frame_inactive": [15, 20, 23],
+      "frame_incognito": [15, 20, 23],
+      "frame_incognito_inactive": [15, 20, 23],
+      "background_tab": [15, 20, 23],
+      "background_tab_inactive": [15, 20, 23],
+      "toolbar": [20, 27, 30],
+      "tab_text": [218, 218, 218],
+      "tab_background_text": [129, 132, 133],
+      "tab_background_text_inactive": [129, 132, 133],
+      "toolbar_text": [218, 218, 218],
+      "toolbar_button_icon": [218, 218, 218],
+      "bookmark_text": [218, 218, 218],
+      "omnibox_background": [40, 46, 49],
+      "omnibox_text": [218, 218, 218],
+      "ntp_background": [20, 27, 30],
+      "ntp_text": [218, 218, 218],
+      "ntp_link": [103, 176, 232]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: catppuccin",
+  "version": "1.0",
+  "description": "The catppuccin theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [23, 23, 35],
+      "frame_inactive": [23, 23, 35],
+      "frame_incognito": [23, 23, 35],
+      "frame_incognito_inactive": [23, 23, 35],
+      "background_tab": [23, 23, 35],
+      "background_tab_inactive": [23, 23, 35],
+      "toolbar": [30, 30, 46],
+      "tab_text": [205, 214, 244],
+      "tab_background_text": [126, 131, 155],
+      "tab_background_text_inactive": [126, 131, 155],
+      "toolbar_text": [205, 214, 244],
+      "toolbar_button_icon": [205, 214, 244],
+      "bookmark_text": [205, 214, 244],
+      "omnibox_background": [48, 48, 66],
+      "omnibox_text": [205, 214, 244],
+      "ntp_background": [30, 30, 46],
+      "ntp_text": [205, 214, 244],
+      "ntp_link": [137, 180, 250]
+    }
+  }
+}

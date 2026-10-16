@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: kanagawa-lotus",
+  "version": "1.0",
+  "description": "The kanagawa-lotus theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [227, 222, 177],
+      "frame_inactive": [227, 222, 177],
+      "frame_incognito": [227, 222, 177],
+      "frame_incognito_inactive": [227, 222, 177],
+      "background_tab": [227, 222, 177],
+      "background_tab_inactive": [227, 222, 177],
+      "toolbar": [242, 236, 188],
+      "tab_text": [84, 84, 100],
+      "tab_background_text": [113, 113, 118],
+      "tab_background_text_inactive": [113, 113, 118],
+      "toolbar_text": [84, 84, 100],
+      "toolbar_button_icon": [84, 84, 100],
+      "bookmark_text": [84, 84, 100],
+      "omnibox_background": [231, 225, 182],
+      "omnibox_text": [84, 84, 100],
+      "ntp_background": [242, 236, 188],
+      "ntp_text": [84, 84, 100],
+      "ntp_link": [77, 105, 155]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: github-dark",
+  "version": "1.0",
+  "description": "The github-dark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [10, 13, 17],
+      "frame_inactive": [10, 13, 17],
+      "frame_incognito": [10, 13, 17],
+      "frame_incognito_inactive": [10, 13, 17],
+      "background_tab": [10, 13, 17],
+      "background_tab_inactive": [10, 13, 17],
+      "toolbar": [13, 17, 23],
+      "tab_text": [230, 237, 243],
+      "tab_background_text": [132, 138, 144],
+      "tab_background_text_inactive": [132, 138, 144],
+      "toolbar_text": [230, 237, 243],
+      "toolbar_button_icon": [230, 237, 243],
+      "bookmark_text": [230, 237, 243],
+      "omnibox_background": [35, 39, 45],
+      "omnibox_text": [230, 237, 243],
+      "ntp_background": [13, 17, 23],
+      "ntp_text": [230, 237, 243],
+      "ntp_link": [88, 166, 255]
+    }
+  }
+}

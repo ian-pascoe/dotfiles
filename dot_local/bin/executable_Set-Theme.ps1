@@ -4,7 +4,8 @@
 .DESCRIPTION
   This script resolves a theme family or variant name to a theme variant (the same rules as the theme-resolve
   script), then links that variant from the user's .themes directory to the current theme configuration directory.
-  It also updates themes for various applications including bat, btop, k9s, lsd, and yazi, and sets the Windows
+  It also updates themes for various applications including bat, btop, Helium (at its next start), k9s, lsd, and
+  yazi, and sets the Windows
   app and system appearance: light for a variant with a light.mode file.
   A family name uses the saved mode (~/.local/state/theme/mode, or under XDG_STATE_HOME) unless a mode is given.
   The mode is saved when one is given or a variant name is used; a family with no variant in the wanted mode falls
@@ -127,6 +128,17 @@ $glazewmSettingsContent.window_effects.other_windows.border.color = $glazewmThem
 $glazewmUpdatedSettingsContent = $glazewmSettingsContent | ConvertTo-Yaml
 $glazewmUpdatedSettingsContent -replace "`r`n", "`n" | Set-Content $glazewmSettingsFile -NoNewline
 glazewm command wm-reload-config
+
+# helium: Helium loads the theme as an unpacked extension from this folder (Chromium resolves links when it loads
+# one, so it is a copy). Without the folder Helium was never set up here; see dot_themes/docs/helium.md in the chezmoi
+# source. Helium starts from its compiled Cached Theme.pak when there is one, so removing it makes the next start
+# rebuild the theme from the new manifest.
+$HeliumThemeDir = Join-Path $StateHome "helium-theme"
+$HeliumManifest = Join-Path $CURRENT_THEME_DIR "helium\manifest.json"
+if ((Test-Path $HeliumThemeDir -PathType Container) -and (Test-Path $HeliumManifest)) {
+  Copy-Item -Path $HeliumManifest -Destination (Join-Path $HeliumThemeDir "manifest.json") -Force
+  Remove-Item -Path (Join-Path $HeliumThemeDir "Cached Theme.pak") -Force -ErrorAction SilentlyContinue
+}
 
 # k9s
 $K9sSkinsDir = "$env:LOCALAPPDATA\k9s\skins"

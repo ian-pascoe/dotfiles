@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: monokai-pro-light",
+  "version": "1.0",
+  "description": "The monokai-pro-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [235, 229, 227],
+      "frame_inactive": [235, 229, 227],
+      "frame_incognito": [235, 229, 227],
+      "frame_incognito_inactive": [235, 229, 227],
+      "background_tab": [235, 229, 227],
+      "background_tab_inactive": [235, 229, 227],
+      "toolbar": [250, 244, 242],
+      "tab_text": [41, 36, 42],
+      "tab_background_text": [122, 117, 119],
+      "tab_background_text_inactive": [122, 117, 119],
+      "toolbar_text": [41, 36, 42],
+      "toolbar_button_icon": [41, 36, 42],
+      "bookmark_text": [41, 36, 42],
+      "omnibox_background": [235, 229, 228],
+      "omnibox_text": [41, 36, 42],
+      "ntp_background": [250, 244, 242],
+      "ntp_text": [41, 36, 42],
+      "ntp_link": [207, 90, 50]
+    }
+  }
+}

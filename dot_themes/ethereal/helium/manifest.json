@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: ethereal",
+  "version": "1.0",
+  "description": "The ethereal theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [5, 8, 23],
+      "frame_inactive": [5, 8, 23],
+      "frame_incognito": [5, 8, 23],
+      "frame_incognito_inactive": [5, 8, 23],
+      "background_tab": [5, 8, 23],
+      "background_tab_inactive": [5, 8, 23],
+      "toolbar": [6, 11, 30],
+      "tab_text": [255, 206, 173],
+      "tab_background_text": [143, 118, 109],
+      "tab_background_text_inactive": [143, 118, 109],
+      "toolbar_text": [255, 206, 173],
+      "toolbar_button_icon": [255, 206, 173],
+      "bookmark_text": [255, 206, 173],
+      "omnibox_background": [31, 31, 44],
+      "omnibox_text": [255, 206, 173],
+      "ntp_background": [6, 11, 30],
+      "ntp_text": [255, 206, 173],
+      "ntp_link": [125, 130, 217]
+    }
+  }
+}

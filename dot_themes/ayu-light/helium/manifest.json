@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: ayu-light",
+  "version": "1.0",
+  "description": "The ayu-light theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [233, 234, 235],
+      "frame_inactive": [233, 234, 235],
+      "frame_incognito": [233, 234, 235],
+      "frame_incognito_inactive": [233, 234, 235],
+      "background_tab": [233, 234, 235],
+      "background_tab_inactive": [233, 234, 235],
+      "toolbar": [248, 249, 250],
+      "tab_text": [92, 97, 102],
+      "tab_background_text": [119, 123, 128],
+      "tab_background_text_inactive": [119, 123, 128],
+      "toolbar_text": [92, 97, 102],
+      "toolbar_button_icon": [92, 97, 102],
+      "bookmark_text": [92, 97, 102],
+      "omnibox_background": [237, 238, 240],
+      "omnibox_text": [92, 97, 102],
+      "ntp_background": [248, 249, 250],
+      "ntp_text": [92, 97, 102],
+      "ntp_link": [61, 139, 192]
+    }
+  }
+}

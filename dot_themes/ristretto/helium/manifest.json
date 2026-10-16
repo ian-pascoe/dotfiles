@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: ristretto",
+  "version": "1.0",
+  "description": "The ristretto theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [33, 28, 28],
+      "frame_inactive": [33, 28, 28],
+      "frame_incognito": [33, 28, 28],
+      "frame_incognito_inactive": [33, 28, 28],
+      "background_tab": [33, 28, 28],
+      "background_tab_inactive": [33, 28, 28],
+      "toolbar": [44, 37, 37],
+      "tab_text": [255, 241, 243],
+      "tab_background_text": [160, 149, 150],
+      "tab_background_text_inactive": [160, 149, 150],
+      "toolbar_text": [255, 241, 243],
+      "toolbar_button_icon": [255, 241, 243],
+      "bookmark_text": [255, 241, 243],
+      "omnibox_background": [65, 57, 58],
+      "omnibox_text": [255, 241, 243],
+      "ntp_background": [44, 37, 37],
+      "ntp_text": [255, 241, 243],
+      "ntp_link": [243, 141, 112]
+    }
+  }
+}

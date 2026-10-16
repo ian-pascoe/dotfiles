@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: kanso-pearl",
+  "version": "1.0",
+  "description": "The kanso-pearl theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [227, 227, 225],
+      "frame_inactive": [227, 227, 225],
+      "frame_incognito": [227, 227, 225],
+      "frame_incognito_inactive": [227, 227, 225],
+      "background_tab": [227, 227, 225],
+      "background_tab_inactive": [227, 227, 225],
+      "toolbar": [242, 241, 239],
+      "tab_text": [34, 38, 45],
+      "tab_background_text": [115, 116, 120],
+      "tab_background_text_inactive": [115, 116, 120],
+      "toolbar_text": [34, 38, 45],
+      "toolbar_button_icon": [34, 38, 45],
+      "bookmark_text": [34, 38, 45],
+      "omnibox_background": [227, 227, 225],
+      "omnibox_text": [34, 38, 45],
+      "ntp_background": [242, 241, 239],
+      "ntp_text": [34, 38, 45],
+      "ntp_link": [77, 105, 155]
+    }
+  }
+}

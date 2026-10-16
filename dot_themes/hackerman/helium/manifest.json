@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: hackerman",
+  "version": "1.0",
+  "description": "The hackerman theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [8, 9, 17],
+      "frame_inactive": [8, 9, 17],
+      "frame_incognito": [8, 9, 17],
+      "frame_incognito_inactive": [8, 9, 17],
+      "background_tab": [8, 9, 17],
+      "background_tab_inactive": [8, 9, 17],
+      "toolbar": [11, 12, 22],
+      "tab_text": [221, 247, 255],
+      "tab_background_text": [127, 141, 150],
+      "tab_background_text_inactive": [127, 141, 150],
+      "toolbar_text": [221, 247, 255],
+      "toolbar_button_icon": [221, 247, 255],
+      "bookmark_text": [221, 247, 255],
+      "omnibox_background": [32, 36, 45],
+      "omnibox_text": [221, 247, 255],
+      "ntp_background": [11, 12, 22],
+      "ntp_text": [221, 247, 255],
+      "ntp_link": [130, 157, 212]
+    }
+  }
+}

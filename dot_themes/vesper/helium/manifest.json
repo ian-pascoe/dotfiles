@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: vesper",
+  "version": "1.0",
+  "description": "The vesper theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [12, 12, 12],
+      "frame_inactive": [12, 12, 12],
+      "frame_incognito": [12, 12, 12],
+      "frame_incognito_inactive": [12, 12, 12],
+      "background_tab": [12, 12, 12],
+      "background_tab_inactive": [12, 12, 12],
+      "toolbar": [16, 16, 16],
+      "tab_text": [184, 184, 184],
+      "tab_background_text": [116, 116, 116],
+      "tab_background_text_inactive": [116, 116, 116],
+      "toolbar_text": [184, 184, 184],
+      "toolbar_button_icon": [184, 184, 184],
+      "bookmark_text": [184, 184, 184],
+      "omnibox_background": [33, 33, 33],
+      "omnibox_text": [184, 184, 184],
+      "ntp_background": [16, 16, 16],
+      "ntp_text": [184, 184, 184],
+      "ntp_link": [153, 192, 255]
+    }
+  }
+}

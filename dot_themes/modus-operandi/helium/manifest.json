@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: modus-operandi",
+  "version": "1.0",
+  "description": "The modus-operandi theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [240, 240, 240],
+      "frame_inactive": [240, 240, 240],
+      "frame_incognito": [240, 240, 240],
+      "frame_incognito_inactive": [240, 240, 240],
+      "background_tab": [240, 240, 240],
+      "background_tab_inactive": [240, 240, 240],
+      "toolbar": [255, 255, 255],
+      "tab_text": [0, 0, 0],
+      "tab_background_text": [115, 115, 115],
+      "tab_background_text_inactive": [115, 115, 115],
+      "toolbar_text": [0, 0, 0],
+      "toolbar_button_icon": [0, 0, 0],
+      "bookmark_text": [0, 0, 0],
+      "omnibox_background": [237, 237, 237],
+      "omnibox_text": [0, 0, 0],
+      "ntp_background": [255, 255, 255],
+      "ntp_text": [0, 0, 0],
+      "ntp_link": [0, 49, 169]
+    }
+  }
+}

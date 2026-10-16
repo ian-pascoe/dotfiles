@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: lumon",
+  "version": "1.0",
+  "description": "The lumon theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [17, 27, 34],
+      "frame_inactive": [17, 27, 34],
+      "frame_incognito": [17, 27, 34],
+      "frame_incognito_inactive": [17, 27, 34],
+      "background_tab": [17, 27, 34],
+      "background_tab_inactive": [17, 27, 34],
+      "toolbar": [22, 36, 45],
+      "tab_text": [214, 226, 238],
+      "tab_background_text": [128, 141, 151],
+      "tab_background_text_inactive": [128, 141, 151],
+      "toolbar_text": [214, 226, 238],
+      "toolbar_button_icon": [214, 226, 238],
+      "bookmark_text": [214, 226, 238],
+      "omnibox_background": [41, 55, 64],
+      "omnibox_text": [214, 226, 238],
+      "ntp_background": [22, 36, 45],
+      "ntp_text": [214, 226, 238],
+      "ntp_link": [111, 184, 227]
+    }
+  }
+}

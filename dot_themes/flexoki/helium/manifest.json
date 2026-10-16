@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: flexoki",
+  "version": "1.0",
+  "description": "The flexoki theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [12, 11, 11],
+      "frame_inactive": [12, 11, 11],
+      "frame_incognito": [12, 11, 11],
+      "frame_incognito_inactive": [12, 11, 11],
+      "background_tab": [12, 11, 11],
+      "background_tab_inactive": [12, 11, 11],
+      "toolbar": [16, 15, 15],
+      "tab_text": [206, 205, 195],
+      "tab_background_text": [121, 120, 114],
+      "tab_background_text_inactive": [121, 120, 114],
+      "toolbar_text": [206, 205, 195],
+      "toolbar_button_icon": [206, 205, 195],
+      "bookmark_text": [206, 205, 195],
+      "omnibox_background": [35, 34, 33],
+      "omnibox_text": [206, 205, 195],
+      "ntp_background": [16, 15, 15],
+      "ntp_text": [206, 205, 195],
+      "ntp_link": [67, 133, 190]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: nordic",
+  "version": "1.0",
+  "description": "The nordic theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [27, 31, 38],
+      "frame_inactive": [27, 31, 38],
+      "frame_incognito": [27, 31, 38],
+      "frame_incognito_inactive": [27, 31, 38],
+      "background_tab": [27, 31, 38],
+      "background_tab_inactive": [27, 31, 38],
+      "toolbar": [36, 41, 51],
+      "tab_text": [192, 200, 216],
+      "tab_background_text": [129, 135, 150],
+      "tab_background_text_inactive": [129, 135, 150],
+      "toolbar_text": [192, 200, 216],
+      "toolbar_button_icon": [192, 200, 216],
+      "bookmark_text": [192, 200, 216],
+      "omnibox_background": [52, 57, 68],
+      "omnibox_text": [192, 200, 216],
+      "ntp_background": [36, 41, 51],
+      "ntp_text": [192, 200, 216],
+      "ntp_link": [94, 129, 172]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: material-lighter",
+  "version": "1.0",
+  "description": "The material-lighter theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [235, 235, 235],
+      "frame_inactive": [235, 235, 235],
+      "frame_incognito": [235, 235, 235],
+      "frame_incognito_inactive": [235, 235, 235],
+      "background_tab": [235, 235, 235],
+      "background_tab_inactive": [235, 235, 235],
+      "toolbar": [250, 250, 250],
+      "tab_text": [84, 110, 122],
+      "tab_background_text": [110, 133, 143],
+      "tab_background_text_inactive": [110, 133, 143],
+      "toolbar_text": [84, 110, 122],
+      "toolbar_button_icon": [84, 110, 122],
+      "bookmark_text": [84, 110, 122],
+      "omnibox_background": [238, 240, 241],
+      "omnibox_text": [84, 110, 122],
+      "ntp_background": [250, 250, 250],
+      "ntp_text": [84, 110, 122],
+      "ntp_link": [97, 130, 184]
+    }
+  }
+}

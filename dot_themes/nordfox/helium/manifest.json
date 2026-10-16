@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: nordfox",
+  "version": "1.0",
+  "description": "The nordfox theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [35, 39, 48],
+      "frame_inactive": [35, 39, 48],
+      "frame_incognito": [35, 39, 48],
+      "frame_incognito_inactive": [35, 39, 48],
+      "background_tab": [35, 39, 48],
+      "background_tab_inactive": [35, 39, 48],
+      "toolbar": [46, 52, 64],
+      "tab_text": [205, 206, 207],
+      "tab_background_text": [143, 146, 152],
+      "tab_background_text_inactive": [143, 146, 152],
+      "toolbar_text": [205, 206, 207],
+      "toolbar_button_icon": [205, 206, 207],
+      "bookmark_text": [205, 206, 207],
+      "omnibox_background": [62, 67, 78],
+      "omnibox_text": [205, 206, 207],
+      "ntp_background": [46, 52, 64],
+      "ntp_text": [205, 206, 207],
+      "ntp_link": [129, 161, 193]
+    }
+  }
+}

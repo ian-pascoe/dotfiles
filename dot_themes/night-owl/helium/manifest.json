@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: night-owl",
+  "version": "1.0",
+  "description": "The night-owl theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [1, 17, 29],
+      "frame_inactive": [1, 17, 29],
+      "frame_incognito": [1, 17, 29],
+      "frame_incognito_inactive": [1, 17, 29],
+      "background_tab": [1, 17, 29],
+      "background_tab_inactive": [1, 17, 29],
+      "toolbar": [1, 22, 39],
+      "tab_text": [214, 222, 235],
+      "tab_background_text": [118, 132, 147],
+      "tab_background_text_inactive": [118, 132, 147],
+      "toolbar_text": [214, 222, 235],
+      "toolbar_button_icon": [214, 222, 235],
+      "bookmark_text": [214, 222, 235],
+      "omnibox_background": [22, 42, 59],
+      "omnibox_text": [214, 222, 235],
+      "ntp_background": [1, 22, 39],
+      "ntp_text": [214, 222, 235],
+      "ntp_link": [130, 170, 255]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: one-dark",
+  "version": "1.0",
+  "description": "The one-dark theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [30, 33, 39],
+      "frame_inactive": [30, 33, 39],
+      "frame_incognito": [30, 33, 39],
+      "frame_incognito_inactive": [30, 33, 39],
+      "background_tab": [30, 33, 39],
+      "background_tab_inactive": [30, 33, 39],
+      "toolbar": [40, 44, 52],
+      "tab_text": [171, 178, 191],
+      "tab_background_text": [131, 138, 149],
+      "tab_background_text_inactive": [131, 138, 149],
+      "toolbar_text": [171, 178, 191],
+      "toolbar_button_icon": [171, 178, 191],
+      "bookmark_text": [171, 178, 191],
+      "omnibox_background": [53, 57, 66],
+      "omnibox_text": [171, 178, 191],
+      "ntp_background": [40, 44, 52],
+      "ntp_text": [171, 178, 191],
+      "ntp_link": [97, 175, 239]
+    }
+  }
+}

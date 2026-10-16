@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Theme: synthwave-84",
+  "version": "1.0",
+  "description": "The synthwave-84 theme variant from ~/.themes, applied by helium-theme.",
+  "theme": {
+    "colors": {
+      "frame": [29, 26, 40],
+      "frame_inactive": [29, 26, 40],
+      "frame_incognito": [29, 26, 40],
+      "frame_incognito_inactive": [29, 26, 40],
+      "background_tab": [29, 26, 40],
+      "background_tab_inactive": [29, 26, 40],
+      "toolbar": [38, 35, 53],
+      "tab_text": [255, 255, 255],
+      "tab_background_text": [157, 156, 164],
+      "tab_background_text_inactive": [157, 156, 164],
+      "toolbar_text": [255, 255, 255],
+      "toolbar_button_icon": [255, 255, 255],
+      "bookmark_text": [255, 255, 255],
+      "omnibox_background": [60, 57, 73],
+      "omnibox_text": [255, 255, 255],
+      "ntp_background": [38, 35, 53],
+      "ntp_text": [255, 255, 255],
+      "ntp_link": [3, 237, 249]
+    }
+  }
+}
