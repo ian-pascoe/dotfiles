@@ -5,6 +5,13 @@
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
+# GUI git clients (Tern's git panel, editors) run hooks with launchd's bare
+# PATH, which lacks the mise shims that provide pnpm and node.
+if [ -f "$HOME/.config/shell/path.bash" ]; then
+  source "$HOME/.config/shell/path.bash"
+  _bash_apply_base_path_order
+fi
+
 for script in format:check lint typecheck test; do
   if ! output=$(pnpm run -s "$script" 2>&1); then
     printf '%s\n\npre-commit: `pnpm run %s` failed\n' "$output" "$script" >&2

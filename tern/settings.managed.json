@@ -1,10 +1,11 @@
 {
-  "keymap": "tmux",
-  "keymap_prefix": "ctrl+a",
-  "pane_headers": "Split",
-  "tabs": "Vertical",
-  "theme_dark": "current",
-  "theme_light": "current",
+  "agent_command": "pi",
+  "code_font": "GeistMono Nerd Font",
+  "font_family": "GeistMono Nerd Font",
+  "font_family_bold": "GeistMono Nerd Font ",
+  "font_family_bold_italic": "GeistMono Nerd Font",
+  "font_family_italic": "GeistMono Nerd Font",
+  "font_size": 11,
   "keybinds": {
     "alt+r": "reload_config",
     "ctrl+insert": "edit.copy",
@@ -74,5 +75,15 @@
     "ctrl+j": "plugin.herdr.navigate_down",
     "ctrl+k": "plugin.herdr.navigate_up",
     "ctrl+l": "plugin.herdr.navigate_right"
-  }
+  },
+  "keymap": "tmux",
+  "keymap_prefix": "ctrl+a",
+  "opacity": 75,
+  "pane_headers": "Split",
+  "tabs": "Vertical",
+  "tabs_autohide": true,
+  "theme": "System",
+  "theme_dark": "current",
+  "theme_light": "current",
+  "ui_font": "Geist"
 }
