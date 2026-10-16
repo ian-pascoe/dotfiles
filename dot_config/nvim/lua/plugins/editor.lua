@@ -68,8 +68,16 @@ return {
       end
     end,
   },
+  { -- fff: file/grep backend for the Snacks picker (see config/fff_picker.lua)
+    'dmtrKovalenko/fff',
+    build = function()
+      require('fff.download').download_or_build_binary()
+    end,
+    lazy = false, -- fff initialises itself lazily
+  },
   {
     'folke/snacks.nvim',
+    dependencies = { 'dmtrKovalenko/fff' },
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
@@ -85,6 +93,65 @@ return {
       },
     },
     keys = {
+      -- fff-backed replacements for LazyVim's file/grep pickers
+      {
+        '<leader><space>',
+        function()
+          require('config.fff_picker').files({ cwd = LazyVim.root() })
+        end,
+        desc = 'Find Files (Root Dir)',
+      },
+      {
+        '<leader>ff',
+        function()
+          require('config.fff_picker').files({ cwd = LazyVim.root() })
+        end,
+        desc = 'Find Files (Root Dir)',
+      },
+      {
+        '<leader>fF',
+        function()
+          require('config.fff_picker').files()
+        end,
+        desc = 'Find Files (cwd)',
+      },
+      {
+        '<leader>/',
+        function()
+          require('config.fff_picker').grep({ cwd = LazyVim.root() })
+        end,
+        desc = 'Grep (Root Dir)',
+      },
+      {
+        '<leader>sg',
+        function()
+          require('config.fff_picker').grep({ cwd = LazyVim.root() })
+        end,
+        desc = 'Grep (Root Dir)',
+      },
+      {
+        '<leader>sG',
+        function()
+          require('config.fff_picker').grep()
+        end,
+        desc = 'Grep (cwd)',
+      },
+      {
+        '<leader>sw',
+        function()
+          require('config.fff_picker').grep_word({ cwd = LazyVim.root() })
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Visual selection or word (Root Dir)',
+      },
+      {
+        '<leader>sW',
+        function()
+          require('config.fff_picker').grep_word()
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Visual selection or word (cwd)',
+      },
       {
         '<leader>fd',
         function()
