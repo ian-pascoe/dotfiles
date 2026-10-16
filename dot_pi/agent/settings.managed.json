@@ -6,7 +6,7 @@
     "anthropic/claude-sonnet-5-5",
     "anthropic/claude-haiku-5-5"
   ],
-  "defaultTools": ["+codemode", "+tool_search", "+grep", "+find", "+ls"],
+  "defaultTools": ["+codemode", "+fffind", "+ffgrep", "+find", "+grep", "+ls", "+tool_search"],
   "defaultProjectTrust": "always",
   "tuiMode": "fullscreen",
   "quietStartup": "header",
@@ -16,12 +16,9 @@
   "collapseChangelog": true,
   "cacheWarming": "idle",
   "showCacheMissNotices": true,
-  "warnings": {
-    "anthropicExtraUsage": false
-  },
   "enableInstallTelemetry": false,
   "packages": [
-    "npm:@gotgenes/pi-anthropic-auth",
+    "npm:@ff-labs/pi-fff",
     "npm:@plannotator/pi-extension",
     "npm:pi-autoresearch",
     {
@@ -62,7 +59,7 @@
       ]
     }
   ],
-  "themes": ["~/.themes", "!tern.json"],
+  "themes": ["~/.themes", "~/.themes/**/pi.json"],
   "guardian": {
     "enabled": false,
     "classifierModel": "typesafe/jev-latest",
@@ -78,6 +75,8 @@
       "context_history",
       "context_notes",
       "context_rollover",
+      "fffind",
+      "ffgrep",
       "find",
       "grep",
       "ls",
@@ -104,6 +103,8 @@
     "enabled": true,
     "baseToolset": ["codemode", "context_*", "tool_search"],
     "readToolset": [
+      "fffind",
+      "ffgrep",
       "find",
       "grep",
       "ls",
