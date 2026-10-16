@@ -6,9 +6,9 @@ metadata:
 ---
 
 Prefer timing props directly on built-in interactive components and custom
-components made with `Interactive.withSchema({wrapInSequence: true})`.  
+components made with `Interactive.create()`.  
 Avoid wrapping a single timing-capable component in a redundant `<Sequence>`.
-Put `name`, `from`, `durationInFrames`, `loop`, `volume`, and `premountFor`
+Put `name`, `from`, `durationInFrames`, `loop`, and `volume`
 directly on `<Audio>` from `@remotion/media` whenever their combination gives the intended timing.
 
 See [Remotion Interactivity](../remotion-interactivity/REFERENCE.md) for creating
@@ -16,10 +16,10 @@ schema-wrapped components and [connected compositions](connected-compositions.md
 for registering them with their own Studio timelines.
 
 ```tsx
-// Title and Subtitle are exported with Interactive.withSchema({wrapInSequence: true}).
+// Title and Subtitle are exported with Interactive.create().
 <>
-  <Title name="Title" from={30} durationInFrames={60} premountFor={fps} />
-  <Subtitle name="Subtitle" from={60} durationInFrames={60} premountFor={fps} />
+  <Title name="Title" from={30} durationInFrames={60} />
+  <Subtitle name="Subtitle" from={60} durationInFrames={60} />
 </>
 ```
 
@@ -28,37 +28,21 @@ when overriding dimensions for descendants, or when the child does not accept
 timing props. Its default layout adds an absolutely positioned fill element;
 use `layout="none"` when no layout wrapper is needed.
 
-## Premounting
-
-Set `premountFor={fps}` on every timed component that supports the prop, using
-`fps` from `useVideoConfig()`. This mounts it one second before its start in
-Studio, allowing media and other content to prepare. Put the prop directly on
-the timed component, including `<Audio>`, `<Video>`, interactive components,
-`<Sequence>`, `<Series.Sequence>`, `<TransitionSeries.Sequence>`, and
-`<TransitionSeries.Overlay>`:
-
-```tsx
-<Title from={60} durationInFrames={90} premountFor={fps} />
-```
-
-Premount parent timeline items as well when a nested item must mount before the
-parent starts. The composition cannot premount before frame 0.
-
 ## TransitionSeries
 
-Use `<TransitionSeries>` for consecutive scenes that may need transitions. Without a transition, the scenes play without overlap. Use `<Series>` from `remotion` when transitions are not needed.
+Use `<TransitionSeries>` for consecutive scenes, with or without transitions. Without a transition, the scenes play without overlap.
 
 ```tsx
 import { TransitionSeries } from "@remotion/transitions";
 
 <TransitionSeries>
-  <TransitionSeries.Sequence durationInFrames={45} premountFor={fps}>
+  <TransitionSeries.Sequence durationInFrames={45}>
     <Intro />
   </TransitionSeries.Sequence>
-  <TransitionSeries.Sequence durationInFrames={60} premountFor={fps}>
+  <TransitionSeries.Sequence durationInFrames={60}>
     <MainContent />
   </TransitionSeries.Sequence>
-  <TransitionSeries.Sequence durationInFrames={30} premountFor={fps}>
+  <TransitionSeries.Sequence durationInFrames={30}>
     <Outro />
   </TransitionSeries.Sequence>
 </TransitionSeries>;
