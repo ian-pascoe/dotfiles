@@ -1,0 +1,6 @@
+schema = 1
+id = "layouts"
+name = "Layouts"
+version = "0.1.0"
+description = "Pre-defined split layouts: builds a tab from a declared tree of panes in the focused block's directory. Keys live in settings.json keybinds."
+window = "window.luau"

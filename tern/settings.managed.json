@@ -7,7 +7,7 @@
   "font_family_italic": "GeistMono Nerd Font",
   "font_size": 11,
   "keybinds": {
-    "alt+r": "reload_config",
+    "ctrl+a>r": "reload_config",
     "ctrl+insert": "edit.copy",
     "shift+insert": "edit.paste",
     "ctrl+a>shift+s": "preferences",
@@ -32,6 +32,7 @@
     "ctrl+a>shift+g": "plugin.worktrees.new",
     "ctrl+a>shift+w": "plugin.worktrees.open",
     "ctrl+a>alt+w": "plugin.worktrees.remove",
+    "ctrl+a>shift+o": "plugin.layouts.dev",
 
     "ctrl+a>t": "new_tab",
     "ctrl+a>,": "rename_tab",
@@ -68,7 +69,7 @@
 
     "ctrl+a>a": "plugin.annotate.capture",
     "ctrl+a>shift+a": "plugin.annotate.copy_context",
-    "ctrl+a>alt+a": "plugin.annotate.copy_archive",
+    "ctrl+a>shift+y": "plugin.annotate.copy_archive",
     "ctrl+a>m": "plugin.annotate.manage",
 
     "ctrl+h": "plugin.herdr.navigate_left",

@@ -451,6 +451,24 @@ local function warm_up()
 	end
 end
 
+-- A pane's info, and whether the API can address it by id. Tern 0.9.2's
+-- plugin API can't look up panes created since the update (ids at or above
+-- 2^44): events and cx.session:panes() hand out truncated ids that
+-- cx.session:pane, read and cx.layout reject, so their info comes from
+-- panes() instead.
+local function pane_info(cx, id: number): (any, boolean)
+	local info = cx.session:pane(id)
+	if info then
+		return info, true
+	end
+	for _, p in cx.session:panes() do
+		if p.pane == id then
+			return p, false
+		end
+	end
+	return nil, false
+end
+
 tern.on("window_start", function(cx)
 	known = snapshot(cx)
 	warm_up()
@@ -470,8 +488,9 @@ tern.on("focus", function(ev, cx)
 		return
 	end
 
-	local info = cx.session:pane(id)
-	if not enabled() or not info or info.kind ~= "file" or not info.path then
+	local info, addressable = pane_info(cx, id)
+	-- An unaddressable block can only be closed as the focused pane.
+	if not enabled() or not info or info.kind ~= "file" or not info.path or not (addressable or info.focused) then
 		return
 	end
 	local path = info.path :: string
@@ -488,7 +507,7 @@ tern.on("focus", function(ev, cx)
 	if not remote and pcall(tern.fs.list, path) then
 		return
 	end
-	local read = cx.session:read(id, { lines = 1 })
+	local read = addressable and cx.session:read(id, { lines = 1 })
 	if type(read) == "table" then
 		if read.dirty then
 			return
@@ -500,7 +519,11 @@ tern.on("focus", function(ev, cx)
 		end
 	end
 
-	cx.layout:close(id)
+	if addressable then
+		cx.layout:close(id)
+	else
+		cx:command("close_pane")
+	end
 	local focused = cx.session:focused()
 	local req = { path = path, how = "beside" }
 	if remote then

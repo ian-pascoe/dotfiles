@@ -5,32 +5,16 @@
       "command": "playwright-mcp",
       "args": ["--output-dir=${HOME}/.cache/playwright-mcp", "--extension"],
       "env": {
-        "DISPLAY": ":1",
-        "XDG_SESSION_TYPE": "x11",
         "PLAYWRIGHT_MCP_EXECUTABLE_PATH": "${DEFAULT_BROWSER_EXECUTABLE_PATH}",
         "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "${PLAYWRIGHT_MCP_EXTENSION_TOKEN}"
       },
-      "exposure": "deferred"
+      "exposure": "codemode"
     },
     "computer-use": {
       "enabled": true,
       "command": "cua-driver",
       "args": ["mcp"],
-      "env": {
-        "DISPLAY": ":1",
-        "XDG_SESSION_TYPE": "x11"
-      },
-      "exposure": "deferred",
-      "toolExposure": {
-        "*_agent_cursor_*": "hidden",
-        "*_config": "hidden",
-        "health_report": "hidden",
-        "check_permissions": "hidden",
-        "check_for_update": "hidden",
-        "install_ffmpeg": "hidden",
-        "parallel_mouse_drag": "hidden",
-        "mouse_button_*": "hidden"
-      }
+      "exposure": "codemode"
     },
     "executor": {
       "enabled": true,
@@ -40,6 +24,17 @@
     "upsy": {
       "enabled": true,
       "url": "https://upsy.ai/connect",
+      "exposure": "codemode"
+    },
+    "rea": {
+      "enabled": true,
+      "command": "rea",
+      "args": ["mcp"],
+      "env": {
+        "HOPPER_LAUNCHER_PATH": "/Applications/Hopper Disassembler.app/Contents/MacOS/hopper",
+        "GHIDRA_INSTALL_DIR": "/opt/homebrew/opt/ghidra/libexec",
+        "JAVA_HOME": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+      },
       "exposure": "codemode"
     }
   }

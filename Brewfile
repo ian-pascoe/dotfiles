@@ -1,7 +1,6 @@
 tap "abue-ammar/tinycast", trusted: true
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "nikitabobko/tap", trusted: true
-tap "stablyai/orca"
 tap "steipete/tap", trusted: true
 # Automatic configure script builder
 brew "autoconf"
@@ -33,14 +32,16 @@ brew "docker-compose"
 brew "docker-credential-helper"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GNU compiler collection
 brew "gcc"
+# TIFF library and utilities
+brew "libtiff"
+# Multi-platform software reverse engineering framework
+brew "ghidra"
 # Distributed revision control system
 brew "git"
 # Deliver Go binaries as fast and easily as possible
@@ -53,8 +54,6 @@ brew "ical-buddy"
 brew "libffi"
 # Conversion library
 brew "libiconv"
-# TIFF library and utilities
-brew "libtiff"
 # YAML Parser
 brew "libyaml"
 # Control and observe media playback from the command-line
@@ -63,20 +62,22 @@ brew "media-control"
 brew "mise"
 # Remote terminal application
 brew "mosh"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.14"
 # Port scanning utility for large networks
 brew "nmap"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # Regular expressions library
 brew "oniguruma"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
 # Package compiler and linker metadata toolkit
 brew "pkgconf"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.13"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
 # Generate C-based recognizers from regular expressions
 brew "re2c"
 # Create beautiful image of your source code
@@ -108,6 +109,8 @@ cask "aldente"
 cask "balenaetcher"
 # Display management tool
 cask "betterdisplay"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
 # Menu bar usage monitor for Codex and Claude
 cask "steipete/tap/codexbar", trusted: true
 cask "font-geist"
@@ -127,14 +130,14 @@ cask "hammerspoon"
 cask "handy"
 # Chromium-based web browser
 cask "helium-browser"
+# Reverse engineering tool that lets you disassemble, decompile and debug your app
+cask "hopper-disassembler"
 # Keyboard customiser
 cask "karabiner-elements"
 # App to manage software development and track bugs
 cask "linear"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# IDE for orchestrating AI coding agents across terminals and worktrees
-cask "stablyai/orca/orca", trusted: true
 # Utility to uninstall apps and remove leftover files from old/uninstalled apps
 cask "pearcleaner"
 # Minimal GUI for AI code agents

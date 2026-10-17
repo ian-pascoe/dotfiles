@@ -59,6 +59,7 @@
       ]
     }
   ],
+  "skills": ["~/.cua-driver/skills/cua-driver"],
   "themes": ["~/.themes", "~/.themes/**/pi.json"],
   "guardian": {
     "enabled": false,
