@@ -14,7 +14,12 @@
       "enabled": true,
       "command": "cua-driver",
       "args": ["mcp"],
-      "exposure": "codemode"
+      "exposure": "codemode",
+      "toolExposure": {
+        "browser_*": "hidden",
+        "get_browser_state": "hidden",
+        "page": "hidden"
+      }
     },
     "executor": {
       "enabled": true,

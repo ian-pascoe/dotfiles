@@ -23,7 +23,7 @@ local function cf_access_token()
   if cf_token.value and os.time() < cf_token.exp - 60 then
     return cf_token.value
   end
-  local result = vim.system({ 'cloudflared', 'access', 'token', '-app=' .. proxy_base_url }, { text = true }):wait()
+  local result = vim.system({ 'cloudflared', 'access', 'login', '--no-verbose', '--auto-close', '-app=' .. proxy_base_url }, { text = true }):wait()
   local token = vim.trim(result.stdout or '')
   if result.code ~= 0 or token == '' then
     vim.notify_once('minuet: `cloudflared access token` failed; run `cloudflared access login ' .. proxy_base_url .. '`', vim.log.levels.WARN)
