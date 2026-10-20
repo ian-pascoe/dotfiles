@@ -7,3 +7,7 @@
 .config/autohotkey/flow_launcher.ahk
 .themes/*/flow-launcher.xaml
 Documents/PowerShell/Scripts/Setup-FlowLauncher.ps1
+
+# rose-pine-dawn's wallpaper became a JPEG; drop the old PNG so set-bg does not
+# cycle back to it.
+.themes/rose-pine-dawn/backgrounds/background-1.png

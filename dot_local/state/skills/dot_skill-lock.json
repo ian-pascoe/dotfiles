@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "2c50fe96a4c552977a0aa489294050df6fd069c5",
+      "skillFolderHash": "f09f5ad7f7d913f9d4eeecd464c59868b27406ba",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-10-19T11:49:04.012Z"
+      "updatedAt": "2026-10-20T13:20:22.349Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -233,9 +233,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/remotion-dev/skills.git",
       "skillPath": "skills/remotion-best-practices/SKILL.md",
-      "skillFolderHash": "468853917f855717aa6a9090122008fac2c2fb55",
+      "skillFolderHash": "a2c9f34f5d8fda375d48812e1ca8254b9c58fd0a",
       "installedAt": "2026-07-21T10:41:08.762Z",
-      "updatedAt": "2026-10-16T15:58:02.620Z"
+      "updatedAt": "2026-10-20T13:20:24.979Z"
     },
     "herdr": {
       "source": "herdrdev/herdr",
@@ -440,7 +440,6 @@
     "opencode",
     "pi",
     "warp",
-    "zed",
-    "claude-code"
+    "zed"
   ]
 }

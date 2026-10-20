@@ -145,8 +145,6 @@ zoxide = "latest"
 "npm:@kitlangton/terminal-control-darwin-x64" = { version = "latest", os = [
   "macos/x64",
 ], allow_low_downloads = true }
-
-"npm:@earendil-works/pi-coding-agent" = "latest"
 "npm:@firecrawl/anydoc" = "latest"
 "npm:@googleworkspace/cli" = "latest"
 "npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
@@ -175,3 +173,4 @@ zoxide = "latest"
 "pipx:pytest" = "latest"
 "pipx:spotdl" = "latest"
 "pipx:trafilatura" = "latest"
+pi = "latest"

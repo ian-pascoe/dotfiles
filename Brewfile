@@ -140,8 +140,6 @@ cask "linear"
 cask "obsidian"
 # Utility to uninstall apps and remove leftover files from old/uninstalled apps
 cask "pearcleaner"
-# Minimal GUI for AI code agents
-cask "t3-code@nightly"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
 # Multi-platform VNC client and server

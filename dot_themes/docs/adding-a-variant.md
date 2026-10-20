@@ -42,10 +42,13 @@ modes.
   hunk with `pnpm hunk-themes`.
 - **Wallpaper**, `.chezmoiexternal.toml.tmpl`: an entry
   `[".themes/<variant>/backgrounds/background-1.jpg"]` and its credit line in
-  the header list. Pick a Pexels photo matching the variant's mode and mood,
-  unused elsewhere in the file; look at it before choosing (fetch
-  `https://images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg?w=640` and
-  read the image).
+  the header list. Pick a Pexels or free (not Unsplash+) Unsplash photo matching
+  the variant's mode and palette, unused elsewhere in the file. Subjects, in
+  order of preference: Christian imagery (churches, chapels, crosses, stained
+  glass), nature, cityscape, technology. Wikimedia and Pixabay block
+  chezmoi's downloader. Look at the photo before choosing (fetch
+  `https://images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg?w=640`, or
+  `.png` for some newer uploads, and read the image).
 
 ## Several variants at once
 
