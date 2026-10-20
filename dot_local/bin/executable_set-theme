@@ -8,9 +8,12 @@
 # when one is given or a variant name is used; a family with no variant in the
 # wanted mode falls back to its only variant and keeps the saved mode. On macOS
 # the system appearance follows the variant used: light with a light.mode file.
-# Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp pick the
-# theme up on their next start. helium-theme updates Helium's theme: live on
-# macOS, at Helium's next start on Linux.
+# Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp
+# pick the theme up on their next start. helium-theme updates Helium's theme:
+# live on macOS, at Helium's next start on Linux.
+# In WSL the Windows host follows: its Set-Theme.ps1 runs with the variant and
+# leaves WSL alone. When the switch starts on Windows, Set-Theme.ps1 runs this
+# script with THEME_FROM_WINDOWS set, so it does not run back.
 
 if [ -z "$1" ]; then
   echo "Usage: $0 <family|variant> [light|dark]"
@@ -72,4 +75,13 @@ set-bg 1
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew services restart borders
+fi
+
+if [[ -n ${WSL_DISTRO_NAME:-} && -z ${THEME_FROM_WINDOWS:-} ]] && command -v pwsh.exe >/dev/null; then
+  echo "Setting the Windows host's theme"
+  if ! pwsh.exe -NoProfile -NonInteractive -Command \
+    "& (Join-Path \$env:USERPROFILE '.local\bin\Set-Theme.ps1') -ThemeName '$THEME_VARIANT' -SkipWsl"; then
+    echo "Setting the Windows host's theme failed" >&2
+    exit 1
+  fi
 fi

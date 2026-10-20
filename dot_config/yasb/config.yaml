@@ -51,6 +51,7 @@ bars:
         - "volume"
         - "microphone"
         - "systray"
+        - "theme"
         - "notifications"
         - "clock"
 widgets:
@@ -381,6 +382,30 @@ widgets:
         color: "black"
         radius: 3
         offset: [1, 1]
+  # The current theme; click for the theme menu (Theme-Menu.ps1, like the
+  # Hammerspoon one on macOS). Middle click or Ctrl+Alt+Win+D toggles light and
+  # dark mode. Set-Theme.ps1 reloads YASB, so the label follows theme switches.
+  theme:
+    type: "yasb.custom.CustomWidget"
+    options:
+      label: "<span>\U000F03D8</span>{data[family]}"
+      label_alt: "<span>\U000F03D8</span>{data[line]}"
+      label_placeholder: ""
+      class_name: "theme-widget"
+      tooltip: true
+      tooltip_label: "{data[line]}"
+      exec_options:
+        run_cmd: 'pwsh -NoProfile -NonInteractive -File "%USERPROFILE%\.local\bin\Get-Theme.ps1" -Json'
+        run_interval: 60000
+        return_format: "json"
+        hide_empty: false
+      callbacks:
+        on_left: 'exec pwsh -NoProfile -File %USERPROFILE%\.local\bin\Theme-Menu.ps1'
+        on_middle: 'exec pwsh -NoProfile -File %USERPROFILE%\.local\bin\Theme-Menu.ps1 -ToggleMode'
+        on_right: "toggle_label"
+      keybindings:
+        - keys: "ctrl+alt+win+d"
+          action: 'exec pwsh -NoProfile -File %USERPROFILE%\.local\bin\Theme-Menu.ps1 -ToggleMode'
   notifications:
     type: "yasb.notifications.NotificationsWidget"
     options:

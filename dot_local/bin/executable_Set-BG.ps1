@@ -12,8 +12,10 @@ param(
   [int]$BackgroundIndex
 )
 
-$BACKGROUNDS_DIR = "$env:CURRENT_THEME_DIR\backgrounds"
-$CURRENT_BACKGROUND_LINK = "$env:XDG_CONFIG_HOME\background"
+Import-Module Themes
+
+$BACKGROUNDS_DIR = Join-Path (Get-CurrentThemeLink) "backgrounds"
+$CURRENT_BACKGROUND_LINK = Join-Path (Get-ThemeConfigHome) "background"
 
 $BACKGROUNDS = Get-ChildItem -Path $BACKGROUNDS_DIR -File -Recurse | Sort-Object FullName
 $TOTAL = $BACKGROUNDS.Count
@@ -30,8 +32,9 @@ if ($PSBoundParameters.ContainsKey('BackgroundIndex')) {
   }
   $NEW_BACKGROUND = $BACKGROUNDS[$BackgroundIndex - 1].FullName
 } else {
-  if (Test-Path $CURRENT_BACKGROUND_LINK) {
-    $CURRENT_BACKGROUND = (Get-Item $CURRENT_BACKGROUND_LINK).Target
+  $CurrentLink = Get-Item -LiteralPath $CURRENT_BACKGROUND_LINK -Force -ErrorAction SilentlyContinue
+  if ($CurrentLink -and $CurrentLink.LinkTarget) {
+    $CURRENT_BACKGROUND = $CurrentLink.LinkTarget
   } else {
     $CURRENT_BACKGROUND = $null
   }
@@ -52,7 +55,7 @@ if ($PSBoundParameters.ContainsKey('BackgroundIndex')) {
   }
 }
 
-New-Symlink -Target $NEW_BACKGROUND -Link $CURRENT_BACKGROUND_LINK -Force
+Set-ThemeLink -Target $NEW_BACKGROUND -Link $CURRENT_BACKGROUND_LINK
 
 Add-Type @"
 using System;
@@ -69,4 +72,4 @@ $SPIF_SENDCHANGE = 0x02
 
 [Wallpaper]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $NEW_BACKGROUND, $SPIF_UPDATEINIFILE -bor $SPIF_SENDCHANGE) | Out-Null
 
-Write-Log -Message "Set background to: $NEW_BACKGROUND" -Level Success
+Write-Host "Set background to: $NEW_BACKGROUND"

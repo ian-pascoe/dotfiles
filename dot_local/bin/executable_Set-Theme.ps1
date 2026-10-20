@@ -3,70 +3,49 @@
   Sets the current theme by creating symbolic links to the selected theme's resources.
 .DESCRIPTION
   This script resolves a theme family or variant name to a theme variant (the same rules as the theme-resolve
-  script), then links that variant from the user's .themes directory to the current theme configuration directory.
-  It also updates themes for various applications including bat, btop, Helium (at its next start), k9s, lsd, and
-  yazi, and sets the Windows
-  app and system appearance: light for a variant with a light.mode file.
+  script, through the Themes module), then links that variant from the user's .themes directory to the current theme
+  configuration directory. It also updates themes for various applications including bat, btop, GlazeWM, Helium (at
+  its next start), k9s, lsd, Windows Terminal, yazi and YASB, and sets the Windows app and system appearance: light
+  for a variant with a light.mode file. WezTerm watches the link itself.
   A family name uses the saved mode (~/.local/state/theme/mode, or under XDG_STATE_HOME) unless a mode is given.
   The mode is saved when one is given or a variant name is used; a family with no variant in the wanted mode falls
   back to its only variant and keeps the saved mode.
+  The WSL distribution follows: it runs its own set-theme with the variant. A set-theme run in WSL starts this script
+  in turn with -SkipWsl, so the theme can be switched from either side.
 .PARAMETER ThemeName
   The theme family or variant to set. HTML tags and spaces will be sanitized.
 .PARAMETER Mode
   light or dark; defaults to the saved mode.
+.PARAMETER SkipWsl
+  Leaves the WSL distribution alone (set when WSL's set-theme runs this script).
 #>
 param(
   [Parameter(Mandatory = $true)]
   [ArgumentCompleter({
       param($commandName, $parameterName, $wordToComplete)
-      if (-not $env:THEMES_DIR) { return }
-      Get-ChildItem -Path $env:THEMES_DIR -Directory | ForEach-Object {
-        $familyFile = Join-Path $_.FullName "family"
-        $family = if (Test-Path $familyFile) { "$(Get-Content $familyFile -TotalCount 1)".Trim() }
-        if ($family) { $family } else { $_.Name }
-      } | Sort-Object -Unique | Where-Object { $_ -like "$wordToComplete*" }
+      Get-ThemeFamily | ForEach-Object Name | Where-Object { $_ -like "$wordToComplete*" }
     })]
   [string]$ThemeName,
 
   [ValidateSet("light", "dark")]
-  [string]$Mode
+  [string]$Mode,
+
+  [switch]$SkipWsl
 )
 
-$CURRENT_THEME_DIR = "$env:XDG_CONFIG_HOME\theme"
-Set-EnvironmentVariable -Name CURRENT_THEME_DIR -Value $CURRENT_THEME_DIR -Persist
+Import-Module Themes
 
 $THEME_NAME = $ThemeName -replace '<[^>]+>', '' -replace ' ', '-'
 $THEME_NAME = $THEME_NAME.ToLower()
 
-# Resolve the name like the theme-resolve script: a variant is a folder in .themes, light when it has a light.mode
-# file; its family is named in its family file, or is the folder name. A family name wins over a folder name.
-$StateHome = if ($env:XDG_STATE_HOME) { $env:XDG_STATE_HOME } else { Join-Path $HOME ".local\state" }
-$ModeFile = Join-Path $StateHome "theme\mode"
-$SavedMode = if ((Test-Path $ModeFile) -and ("$(Get-Content $ModeFile -TotalCount 1)".Trim() -eq "light")) { "light" } else { "dark" }
+$SavedMode = Get-SavedThemeMode
 $WantedMode = if ($Mode) { $Mode } else { $SavedMode }
 
-$Variants = Get-ChildItem -Path $env:THEMES_DIR -Directory | ForEach-Object {
-  $familyFile = Join-Path $_.FullName "family"
-  $family = if (Test-Path $familyFile) { "$(Get-Content $familyFile -TotalCount 1)".Trim() }
-  [pscustomobject]@{
-    Name   = $_.Name
-    Family = if ($family) { $family } else { $_.Name }
-    Mode   = if (Test-Path (Join-Path $_.FullName "light.mode")) { "light" } else { "dark" }
-  }
-}
-$FamilyMembers = @($Variants | Where-Object { $_.Family -eq $THEME_NAME })
-if ($FamilyMembers) {
-  $Resolved = $FamilyMembers | Where-Object { $_.Mode -eq $WantedMode } | Select-Object -First 1
-  if (-not $Resolved) { $Resolved = $FamilyMembers | Select-Object -First 1 }
-} else {
-  $Resolved = $Variants | Where-Object { $_.Name -eq $THEME_NAME } | Select-Object -First 1
-}
-if (-not $Resolved) {
-  Write-Error "Theme '$THEME_NAME' is not a family or variant in $env:THEMES_DIR"
-  exit 1
-}
+# Errors for unknown names come from Resolve-Theme.
+$Resolved = Resolve-Theme $THEME_NAME $WantedMode
+$IsFamily = Test-ThemeFamily $THEME_NAME
 
-if (-not $FamilyMembers) {
+if (-not $IsFamily) {
   # A variant name decides the mode itself.
   if ($Mode -and $Mode -ne $Resolved.Mode) {
     Write-Warning "$($Resolved.Name) is a $($Resolved.Mode) variant; ignoring mode $Mode"
@@ -75,19 +54,23 @@ if (-not $FamilyMembers) {
 } elseif ($Resolved.Mode -eq $WantedMode) {
   $NewMode = $WantedMode
 } else {
-  Write-Log -Message "$THEME_NAME has no $WantedMode variant; using $($Resolved.Name) and keeping mode $SavedMode" -Level Info
+  Write-Host "$THEME_NAME has no $WantedMode variant; using $($Resolved.Name) and keeping mode $SavedMode"
   $NewMode = $SavedMode
 }
 if ($NewMode -ne $SavedMode) {
-  New-Item -ItemType Directory -Force -Path (Split-Path $ModeFile) | Out-Null
-  [IO.File]::WriteAllText($ModeFile, "$NewMode`n")
+  Save-ThemeMode $NewMode
 }
 
 $THEME_NAME = $Resolved.Name
-$THEME_PATH = Join-Path $env:THEMES_DIR $THEME_NAME
+$THEME_PATH = $Resolved.Path
+$CURRENT_THEME_DIR = Get-CurrentThemeLink
+$env:CURRENT_THEME_DIR = $CURRENT_THEME_DIR
+if ([Environment]::GetEnvironmentVariable("CURRENT_THEME_DIR", "User") -ne $CURRENT_THEME_DIR) {
+  [Environment]::SetEnvironmentVariable("CURRENT_THEME_DIR", $CURRENT_THEME_DIR, "User")
+}
 
-Write-Log -Message "Linking new theme: $THEME_NAME" -Level Info
-New-Symlink -Target $THEME_PATH -Link $CURRENT_THEME_DIR -Force
+Write-Host "Linking new theme: $THEME_NAME"
+Set-ThemeLink -Target $THEME_PATH -Link $CURRENT_THEME_DIR
 
 # Windows appearance follows the variant used, before apps reload.
 $PersonalizeKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
@@ -96,13 +79,14 @@ Set-ItemProperty -Path $PersonalizeKey -Name AppsUseLightTheme -Value $UseLight 
 Set-ItemProperty -Path $PersonalizeKey -Name SystemUsesLightTheme -Value $UseLight -Type DWord
 
 # bat
-$BatThemesDir = "$env:BAT_CONFIG_DIR\themes"
+$BatConfigDir = if ($env:BAT_CONFIG_DIR) { $env:BAT_CONFIG_DIR } else { Join-Path (Get-ThemeConfigHome) "bat" }
+$BatThemesDir = Join-Path $BatConfigDir "themes"
 if (-not (Test-Path $BatThemesDir)) {
   New-Item -ItemType Directory -Path $BatThemesDir | Out-Null
 }
 $BatTheme = Join-Path $CURRENT_THEME_DIR "bat.tmTheme"
 $BatLink = Join-Path $BatThemesDir "current.tmTheme"
-New-Symlink -Target $BatTheme -Link $BatLink -Force
+Set-ThemeLink -Target $BatTheme -Link $BatLink
 bat cache --build
 
 # btop
@@ -112,14 +96,14 @@ if (-not (Test-Path $BtopThemesDir)) {
 }
 $BtopTheme = Join-Path $CURRENT_THEME_DIR "btop.theme"
 $BtopLink = Join-Path $BtopThemesDir "current.theme"
-New-Symlink -Target $BtopTheme -Link $BtopLink -Force
+Set-ThemeLink -Target $BtopTheme -Link $BtopLink
 
 $BtopPersistedThemesDir = "$env:SCOOP\persist\btop\themes"
 $BtopPersistedLink = Join-Path $BtopPersistedThemesDir "current.theme"
-New-Symlink -Target $BtopTheme -Link $BtopPersistedLink -Force
+Set-ThemeLink -Target $BtopTheme -Link $BtopPersistedLink
 
 # glazewm
-$glazewmSettingsFile = Join-Path $env:HOME ".glzr\glazewm\config.yaml"
+$glazewmSettingsFile = Join-Path $HOME ".glzr\glazewm\config.yaml"
 $glazewmSettingsContent = Get-Content $glazewmSettingsFile -Raw | ConvertFrom-Yaml
 $glazewmThemeFile = Join-Path $CURRENT_THEME_DIR "glazewm.yaml"
 $glazewmThemeContent = Get-Content $glazewmThemeFile -Raw | ConvertFrom-Yaml
@@ -133,6 +117,7 @@ glazewm command wm-reload-config
 # one, so it is a copy). Without the folder Helium was never set up here; see dot_themes/docs/helium.md in the chezmoi
 # source. Helium starts from its compiled Cached Theme.pak when there is one, so removing it makes the next start
 # rebuild the theme from the new manifest.
+$StateHome = Split-Path (Get-ThemeStateDir)
 $HeliumThemeDir = Join-Path $StateHome "helium-theme"
 $HeliumManifest = Join-Path $CURRENT_THEME_DIR "helium\manifest.json"
 if ((Test-Path $HeliumThemeDir -PathType Container) -and (Test-Path $HeliumManifest)) {
@@ -147,12 +132,12 @@ if (-not (Test-Path $K9sSkinsDir)) {
 }
 $K9sTheme = Join-Path $CURRENT_THEME_DIR "k9s.yaml"
 $K9sLink = Join-Path $K9sSkinsDir "current.yaml"
-New-Symlink -Target $K9sTheme -Link $K9sLink -Force
+Set-ThemeLink -Target $K9sTheme -Link $K9sLink
 
 # lsd
 $LsdColors = Join-Path $CURRENT_THEME_DIR "lsd.yaml"
-$LsdLink = "$env:XDG_CONFIG_HOME\lsd\colors.yaml"
-New-Symlink -Target $LsdColors -Link $LsdLink -Force
+$LsdLink = Join-Path (Get-ThemeConfigHome) "lsd\colors.yaml"
+Set-ThemeLink -Target $LsdColors -Link $LsdLink
 
 # windows terminal
 $wtSettingsFile = Join-Path $env:SCOOP "persist\windows-terminal\settings\settings.json"
@@ -168,7 +153,7 @@ $wtUpdatedSettingsContent -replace "`r`n", "`n" | Set-Content $wtSettingsFile -N
 # yazi
 $YaziTheme = Join-Path $CURRENT_THEME_DIR "yazi\theme.toml"
 $YaziLink = "$env:YAZI_CONFIG_HOME\theme.toml"
-New-Symlink -Target $YaziTheme -Link $YaziLink -Force
+Set-ThemeLink -Target $YaziTheme -Link $YaziLink
 
 $YaziFlavorsDir = Join-Path $CURRENT_THEME_DIR "yazi\flavors"
 if (Test-Path $YaziFlavorsDir -PathType Container) {
@@ -178,13 +163,17 @@ if (Test-Path $YaziFlavorsDir -PathType Container) {
   }
   Get-ChildItem -Path $YaziFlavorsDir | ForEach-Object {
     $FlavorLink = Join-Path $YaziConfigFlavors $_.Name
-    New-Symlink -Target $_.FullName -Link $FlavorLink -Force
+    Set-ThemeLink -Target $_.FullName -Link $FlavorLink
   }
 }
 
-# Reload YASB to apply the new theme
-yasbc reload
-
 & "$PSScriptRoot\Set-BG.ps1" -BackgroundIndex 1
 
-wsl -d NixOS -- zsh -c "set-theme '$THEME_NAME'"
+# WSL follows; THEME_FROM_WINDOWS keeps its set-theme from starting this script again.
+if (-not $SkipWsl -and (Get-Command wsl -ErrorAction SilentlyContinue)) {
+  wsl -d (Get-ThemeWslDistro) -- env THEME_FROM_WINDOWS=1 zsh -c "set-theme '$THEME_NAME'"
+}
+
+# Reload YASB last: it restarts its process, which could end a theme menu that YASB started (see Theme-Menu.ps1).
+yasbc reload --silent
+exit 0

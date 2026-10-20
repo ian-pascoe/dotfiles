@@ -150,6 +150,10 @@ zoxide = "latest"
 "npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
 "npm:@playwright/mcp" = "latest"
 "npm:agent-browser" = "latest"
+# 2.0 betas are token-published without provenance; tarballs match the GitHub release assets.
+"npm:executor" = { version = "beta", trust_policy_excludes = [
+  "executor@2.0.0-beta.25 || 2.0.0-beta.25-darwin-arm64 || 2.0.0-beta.25-darwin-x64 || 2.0.0-beta.25-linux-arm64 || 2.0.0-beta.25-linux-x64 || 2.0.0-beta.25-win32-x64",
+] }
 "npm:hunkdiff" = "latest"
 "npm:impeccable" = "latest"
 

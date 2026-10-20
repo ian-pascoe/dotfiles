@@ -901,6 +901,28 @@
 
 /*
  * ---------------
+ * Theme
+ * ---------------
+ */
+.theme-widget {
+  background-color: rgba(var(--popup-background), var(--opacity-semi));
+  border: var(--size-xs) solid rgb(var(--border));
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xs) var(--spacing-md);
+  margin: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) var(--spacing-0);
+}
+.theme-widget:hover {
+  background-color: rgba(var(--muted-background), var(--opacity-medium));
+}
+.theme-widget .label {
+  /**/
+}
+.theme-widget .icon {
+  color: rgb(var(--accent));
+}
+
+/*
+ * ---------------
  * Notifications
  * ---------------
  */
