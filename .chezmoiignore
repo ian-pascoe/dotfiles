@@ -81,12 +81,14 @@ Documents/PowerShell
 .config/vcxsrv
 .config/yasb
 .local/bin/*.ps1
+.local/bin/*.cmd
 {{ end }}
 
 # Windows-Only Ignores
 {{ if eq .chezmoi.os "windows" }}
 .local/bin/*
 !.local/bin/*.ps1
+!.local/bin/*.cmd
 !.local/bin/install-package-manifests
 !.local/bin/sync-package-manifests
 {{ end }}

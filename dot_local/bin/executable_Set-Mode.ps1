@@ -13,7 +13,7 @@ param(
   [string]$Mode
 )
 
-Import-Module Themes
+Import-Module (Join-Path $HOME Documents PowerShell Modules Themes) -ErrorAction Stop
 
 $saved = Get-SavedThemeMode
 if (-not $Mode) {

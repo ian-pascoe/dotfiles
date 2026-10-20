@@ -33,7 +33,7 @@ param(
   [switch]$SkipWsl
 )
 
-Import-Module Themes
+Import-Module (Join-Path $HOME Documents PowerShell Modules Themes) -ErrorAction Stop
 
 $THEME_NAME = $ThemeName -replace '<[^>]+>', '' -replace ' ', '-'
 $THEME_NAME = $THEME_NAME.ToLower()
@@ -174,6 +174,6 @@ if (-not $SkipWsl -and (Get-Command wsl -ErrorAction SilentlyContinue)) {
   wsl -d (Get-ThemeWslDistro) -- env THEME_FROM_WINDOWS=1 zsh -c "set-theme '$THEME_NAME'"
 }
 
-# Reload YASB last: it restarts its process, which could end a theme menu that YASB started (see Theme-Menu.ps1).
+# Reload YASB last: it restarts its process.
 yasbc reload --silent
 exit 0

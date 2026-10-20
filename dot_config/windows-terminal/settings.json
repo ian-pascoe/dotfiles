@@ -45,10 +45,10 @@
         "startingDirectory": "%USERPROFILE%"
       },
       {
-        "commandline": "wsl -d NixOS --cd ~",
+        "commandline": "wsl -d Debian --cd ~",
         "guid": "{a4ad531d-2918-58a1-8af0-06a580dffdf0}",
         "hidden": false,
-        "name": "NixOS",
+        "name": "Debian",
         "pathTranslationStyle": "wsl",
         "startingDirectory": "~"
       }

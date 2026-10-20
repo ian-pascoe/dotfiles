@@ -175,9 +175,21 @@ function Update-PowerShell {
   }
 }
 
+$miseActivated = $false
+if (Test-Command -Name "mise") {
+  mise activate pwsh | Out-String | Invoke-Expression
+  $miseActivated = $true
+}
+
 # starship init
 if (Test-Command -Name "starship") {
   Invoke-Expression (& { (starship init powershell --print-full-init | Out-String) })
+
+  if ($miseActivated) {
+    function global:Invoke-Starship-PreCommand {
+      _mise_hook 
+    }
+  }
 }
 
 # zoxide
@@ -513,7 +525,7 @@ function Get-WSLPath {
   
   .DESCRIPTION
     Translates Windows-style paths to WSL/Unix-style paths using the specified
-    WSL distribution. Distribution can be set via WSL_NIXOS_DISTRO environment variable.
+    WSL distribution (Debian, or the WSL_DISTRO environment variable).
   
   .PARAMETER windowsPath
     The Windows path to convert.
@@ -525,10 +537,10 @@ function Get-WSLPath {
     [Parameter(Mandatory=$true)]
     [string]$windowsPath
   )
-  $distro = if ($env:WSL_NIXOS_DISTRO) {
-    $env:WSL_NIXOS_DISTRO 
+  $distro = if ($env:WSL_DISTRO) {
+    $env:WSL_DISTRO 
   } else {
-    "NixOS" 
+    "Debian" 
   }
   $escapedPath = $windowsPath.Replace('\', '\\')
   $wslPath = wsl -d $distro -- wslpath -a "$escapedPath"
@@ -1142,22 +1154,22 @@ function winutil {
   Invoke-RestMethod https://christitus.com/win | Invoke-Expression
 }
 
-function nix {
+function debian {
   <#
   .SYNOPSIS
-    Opens NixOS WSL distribution.
+    Opens the Debian WSL distribution.
   
   .DESCRIPTION
-    Launches the NixOS WSL distribution and changes to the home directory.
-    The distribution name can be customized via WSL_NIXOS_DISTRO environment variable.
+    Launches the Debian WSL distribution in its home directory.
+    The distribution name can be customized via the WSL_DISTRO environment variable.
   
   .EXAMPLE
-    nix
+    debian
   #>
-  $distro = if ($env:WSL_NIXOS_DISTRO) {
-    $env:WSL_NIXOS_DISTRO 
+  $distro = if ($env:WSL_DISTRO) {
+    $env:WSL_DISTRO 
   } else {
-    "NixOS" 
+    "Debian" 
   }
   wsl -d $distro --cd ~
 }

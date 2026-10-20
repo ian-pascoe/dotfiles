@@ -6,7 +6,7 @@
   with * on the family of the current theme. Redirected output stays bare family names for scripts and completion.
 #>
 
-Import-Module Themes
+Import-Module (Join-Path $HOME Documents PowerShell Modules Themes) -ErrorAction Stop
 
 $families = @(Get-ThemeFamily)
 if ([Console]::IsOutputRedirected) {

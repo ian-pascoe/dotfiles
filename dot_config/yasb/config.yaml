@@ -78,9 +78,9 @@ widgets:
         - name: "Terminal"
           launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe"
           icon: ""
-        - name: "NixOS Terminal"
-          launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe new-tab --profile NixOS"
-          icon: "󱄅"
+        - name: "Debian Terminal"
+          launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe new-tab --profile Debian"
+          icon: ""
       label_shadow:
         enabled: true
         color: "black"
@@ -385,6 +385,8 @@ widgets:
   # The current theme; click for the theme menu (Theme-Menu.ps1, like the
   # Hammerspoon one on macOS). Middle click or Ctrl+Alt+Win+D toggles light and
   # dark mode. Set-Theme.ps1 reloads YASB, so the label follows theme switches.
+  # Theme-Menu.cmd hands clicks to the menu, which keeps running after the
+  # first one so that it opens at once.
   theme:
     type: "yasb.custom.CustomWidget"
     options:
@@ -400,12 +402,12 @@ widgets:
         return_format: "json"
         hide_empty: false
       callbacks:
-        on_left: 'exec pwsh -NoProfile -File %USERPROFILE%\.local\bin\Theme-Menu.ps1'
-        on_middle: 'exec pwsh -NoProfile -File %USERPROFILE%\.local\bin\Theme-Menu.ps1 -ToggleMode'
+        on_left: 'exec %USERPROFILE%\.local\bin\Theme-Menu.cmd'
+        on_middle: 'exec %USERPROFILE%\.local\bin\Theme-Menu.cmd toggle-mode'
         on_right: "toggle_label"
       keybindings:
         - keys: "ctrl+alt+win+d"
-          action: 'exec pwsh -NoProfile -File %USERPROFILE%\.local\bin\Theme-Menu.ps1 -ToggleMode'
+          action: 'exec %USERPROFILE%\.local\bin\Theme-Menu.cmd toggle-mode'
   notifications:
     type: "yasb.notifications.NotificationsWidget"
     options:

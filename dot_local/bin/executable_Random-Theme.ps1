@@ -6,7 +6,7 @@
   Themes module).
 #>
 
-Import-Module Themes
+Import-Module (Join-Path $HOME Documents PowerShell Modules Themes) -ErrorAction Stop
 
 $theme = Get-RandomThemeFamily
 if (-not $theme) {

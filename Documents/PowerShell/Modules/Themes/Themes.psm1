@@ -9,6 +9,8 @@
   $env:XDG_STATE_HOME), dark by default. The current theme is the variant that ~/.config/theme (or under
   $env:XDG_CONFIG_HOME) links to.
   Nothing here needs the PowerShell profile, so the scripts also run with -NoProfile, as YASB and WSL start them.
+  The scripts import it by its path under $HOME, where chezmoi puts it: PowerShell looks for modules in the Documents
+  folder, which OneDrive can move elsewhere.
 #>
 
 function Get-ThemesDir {
@@ -41,26 +43,29 @@ function Get-ThemeVariant {
     return
   }
 
+  # .NET calls rather than cmdlets: the theme menu lists every variant, and cmdlets take seconds for that on Windows.
   $variants = [System.Collections.Generic.List[object]]::new()
-  foreach ($folder in Get-ChildItem -LiteralPath $dir -Directory) {
-    $familyFile = Join-Path $folder.FullName 'family'
-    $family = if (Test-Path -LiteralPath $familyFile) { "$(Get-Content -LiteralPath $familyFile -TotalCount 1)".Trim() }
-    $variants.Add([pscustomobject]@{
-        Name   = $folder.Name
-        Family = if ($family) { $family } else { $folder.Name }
-        Mode   = if (Test-Path -LiteralPath (Join-Path $folder.FullName 'light.mode')) { 'light' } else { 'dark' }
-        Path   = $folder.FullName
-      })
+  $keys = [System.Collections.Generic.List[string]]::new()
+  foreach ($folder in [IO.DirectoryInfo]::new($dir).EnumerateDirectories()) {
+    # Get-ChildItem skips these too.
+    if ($folder.Name.StartsWith('.') -or $folder.Attributes.HasFlag([IO.FileAttributes]::Hidden)) {
+      continue
+    }
+    $familyFile = [IO.Path]::Combine($folder.FullName, 'family')
+    $family = if ([IO.File]::Exists($familyFile)) { [IO.File]::ReadAllText($familyFile).Split("`n")[0].Trim() }
+    $variant = [pscustomobject]@{
+      Name   = $folder.Name
+      Family = if ($family) { $family } else { $folder.Name }
+      Mode   = if ([IO.File]::Exists([IO.Path]::Combine($folder.FullName, 'light.mode'))) { 'light' } else { 'dark' }
+      Path   = $folder.FullName
+    }
+    $variants.Add($variant)
+    $keys.Add("$($variant.Family)`0$($variant.Mode)`0$($variant.Name)")
   }
-  # Ordinal, like theme-resolve's LC_ALL=C sort.
-  $variants.Sort([Comparison[object]] {
-      param($a, $b)
-      $order = [string]::CompareOrdinal($a.Family, $b.Family)
-      if ($order -eq 0) { $order = [string]::CompareOrdinal($a.Mode, $b.Mode) }
-      if ($order -eq 0) { $order = [string]::CompareOrdinal($a.Name, $b.Name) }
-      $order
-    })
-  $variants
+  # By family, mode, then name, ordinal like theme-resolve's LC_ALL=C sort.
+  $sorted = $variants.ToArray()
+  [Array]::Sort($keys.ToArray(), $sorted, [StringComparer]::Ordinal)
+  $sorted
 }
 
 <#
@@ -180,13 +185,13 @@ function Set-ThemeLink {
 #>
 function Get-ThemePalette {
   param([Parameter(Mandatory)][string]$Name)
-  $conf = Join-Path (Join-Path (Get-ThemesDir) $Name) 'ghostty.conf'
-  if (-not (Test-Path -LiteralPath $conf)) {
+  $conf = [IO.Path]::Combine((Get-ThemesDir), $Name, 'ghostty.conf')
+  if (-not [IO.File]::Exists($conf)) {
     return $null
   }
 
   $colors = @{ Background = $null; Foreground = $null; Palette = [string[]]::new(16) }
-  foreach ($line in Get-Content -LiteralPath $conf) {
+  foreach ($line in [IO.File]::ReadLines($conf)) {
     $line = $line -replace '[\s#]', ''
     if ($line -match '^(background|foreground)=([0-9a-fA-F]{6})$') {
       $colors[$Matches[1]] = "#$($Matches[2])"
@@ -281,9 +286,9 @@ function Get-RandomThemeFamily {
   }
 }
 
-# The WSL distribution that follows this machine's theme (it runs the Linux theme scripts).
+# The WSL distribution that follows this machine's theme (it runs the Linux theme scripts): Debian, or $env:WSL_DISTRO.
 function Get-ThemeWslDistro {
-  if ($env:WSL_NIXOS_DISTRO) { $env:WSL_NIXOS_DISTRO } else { 'NixOS' }
+  if ($env:WSL_DISTRO) { $env:WSL_DISTRO } else { 'Debian' }
 }
 
 Export-ModuleMember -Function Get-ThemesDir, Get-ThemeConfigHome, Get-CurrentThemeLink, Get-ThemeStateDir,

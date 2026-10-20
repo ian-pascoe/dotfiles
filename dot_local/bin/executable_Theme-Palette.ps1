@@ -19,7 +19,7 @@ param(
   [switch]$Full
 )
 
-Import-Module Themes
+Import-Module (Join-Path $HOME Documents PowerShell Modules Themes) -ErrorAction Stop
 
 try {
   Format-ThemePalette $Name -Full:$Full

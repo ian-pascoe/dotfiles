@@ -29,7 +29,7 @@ param(
   [switch]$DryRun
 )
 
-Import-Module Themes
+Import-Module (Join-Path $HOME Documents PowerShell Modules Themes) -ErrorAction Stop
 
 # Resolve-Theme reports unknown names.
 try {

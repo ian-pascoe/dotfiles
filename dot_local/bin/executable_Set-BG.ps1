@@ -12,7 +12,7 @@ param(
   [int]$BackgroundIndex
 )
 
-Import-Module Themes
+Import-Module (Join-Path $HOME Documents PowerShell Modules Themes) -ErrorAction Stop
 
 $BACKGROUNDS_DIR = Join-Path (Get-CurrentThemeLink) "backgrounds"
 $CURRENT_BACKGROUND_LINK = Join-Path (Get-ThemeConfigHome) "background"
