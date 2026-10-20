@@ -60,6 +60,71 @@ local function with_git_sh(cx, cb: (sh: Shell?, cx: any) -> ())
 	end
 end
 
+-- Tern (since 0.9.2) hands plugins pane and tab ids cut to 44 bits, and the
+-- daemon's ids for panes created since are longer, so for those panes the
+-- numeric calls (cx.session:pane/read, cx:run, cx.layout:*) find nothing.
+-- cx.session lookups still take the full id as a string, and so does the
+-- tern CLI, which stands in for cx:run and cx.layout here until Tern fixes
+-- it (stencil-hq/tern-sdk#30).
+
+-- Whether the window API can address pane `id` by number.
+local function addressable(cx, id: number): boolean
+	return cx.session:pane(id) ~= nil
+end
+
+-- Pane `id`'s full id, as a resolve spec for cx.session and the tern CLI.
+local function full_id(cx, id: number): string?
+	for high = 0, 15 do
+		local spec = string.format("%.0f", id + high * 2 ^ 44)
+		local info = cx.session:pane(spec)
+		if info and info.pane == id then
+			return spec
+		end
+	end
+	return nil
+end
+
+-- The tern CLI: this half's PATH is the app's, which lacks it.
+local tern_path: string? = nil
+
+local function tern_bin(): string
+	if tern_path then
+		return tern_path
+	end
+	local home = tern.getenv("HOME") or ""
+	for _, path in {
+		"/Applications/Tern.app/Contents/MacOS/tern",
+		home .. "/Applications/Tern.app/Contents/MacOS/tern",
+		home .. "/.local/bin/tern",
+		"/opt/homebrew/bin/tern",
+		"/usr/local/bin/tern",
+		"/usr/bin/tern",
+	} do
+		if tern.fs.exists(path) then
+			tern_path = path
+			return path
+		end
+	end
+	tern_path = "tern"
+	return "tern"
+end
+
+-- Runs `tern <args>`, then cb(ok, stdout, cx) when given.
+local function cli(args: { string }, cb: ((ok: boolean, out: string, cx: any) -> ())?)
+	local argv = { tern_bin() }
+	for _, arg in args do
+		table.insert(argv, arg)
+	end
+	local ok = pcall(tern.process.run, argv, { timeout_ms = 5000 }, function(result, cx)
+		if cb then
+			cb(result.status == 0, result.stdout, cx)
+		end
+	end)
+	if not ok and cb then
+		cb(false, "", nil)
+	end
+end
+
 local function is_local(cx): boolean
 	return cx.hosts:current().kind == "local"
 end
@@ -159,11 +224,12 @@ local function run_git(cx, script: string, cwd: string, args: { string }, job)
 		return
 	end
 
-	local focused = cx.session:focused()
+	local focused = cx.session:pane("@focused")
 	if not focused then
 		cx:toast("error", "Worktrees: no focused block to run git beside")
 		return
 	end
+	local host = cx.hosts:current().name
 	local nonce = string.format("%06x", math.random(0, 0xffffff))
 	local cmd = "printf '_%s%s_\\n' TWB " .. nonce .. "; sh -c " .. quote(SCRIPTS[script]) .. " tern-worktree"
 	for _, arg in args do
@@ -173,26 +239,53 @@ local function run_git(cx, script: string, cwd: string, args: { string }, job)
 	-- until the title handler closes the block (or ends it after 10 minutes).
 	cmd ..= "; printf '_%s%s_%s_\\n' TWE " .. nonce .. ' "$?"'
 	cmd ..= "; printf '\\033]2;%s\\007' tern-worktree-" .. nonce .. "; exec sleep 600"
-	local pane = cx.layout:split(focused, "down", { cwd = cwd, command = cmd }, { focus = false })
-	if not pane then
-		cx:toast("error", "Worktrees: couldn't start git on " .. cx.hosts:current().name)
+	-- Jobs are found by the nonce in the title; "pane:<id>" maps a block
+	-- back to its job for pane_closed.
+	tern.kv.set("job:" .. nonce, { nonce = nonce, job = job })
+	if addressable(cx, focused.pane) then
+		local pane = cx.layout:split(focused.pane, "down", { cwd = cwd, command = cmd }, { focus = false })
+		if not pane then
+			tern.kv.set("job:" .. nonce, nil)
+			cx:toast("error", "Worktrees: couldn't start git on " .. host)
+			return
+		end
+		tern.kv.set("pane:" .. tostring(pane), nonce)
+		cx.layout:park(pane)
 		return
 	end
-	tern.kv.set("job:" .. tostring(pane), { nonce = nonce, job = job })
-	cx.layout:park(pane)
+	-- The CLI can't park a block: this one shows below the focused one until
+	-- git is done.
+	local split_args = { "split", full_id(cx, focused.pane) or "@focused", "down", "--json", "--cwd", cwd, "--", "sh", "-c", cmd }
+	cli(split_args, function(ok, out, cx2)
+		local block = ok and string.match(out, '"block"%s*:%s*(%d+)')
+		if not block then
+			tern.kv.set("job:" .. nonce, nil)
+			if cx2 then
+				cx2:toast("error", "Worktrees: couldn't start git on " .. host)
+			end
+			return
+		end
+		local info = cx2 and cx2.session:pane(block)
+		if info then
+			tern.kv.set("pane:" .. tostring(info.pane), nonce)
+		end
+	end)
 end
 
 tern.on("title", function(ev, cx)
 	local pane = ev and tonumber(ev.pane)
-	if not pane then
+	local nonce = ev and type(ev.title) == "string" and string.match(ev.title, "^tern%-worktree%-(%x+)$")
+	if not pane or not nonce then
 		return
 	end
-	local key = "job:" .. tostring(pane)
+	local key = "job:" .. nonce
 	local pending = tern.kv.get(key)
 	if type(pending) ~= "table" then
 		return
 	end
-	local text = cx.session:read(pane, { as = "text", lines = 2000 })
+	local native = addressable(cx, pane)
+	local spec = if native then pane else full_id(cx, pane)
+	local text = spec and cx.session:read(spec, { as = "text", lines = 2000 })
 	if type(text) ~= "string" then
 		return
 	end
@@ -202,14 +295,21 @@ tern.on("title", function(ev, cx)
 		return
 	end
 	tern.kv.set(key, nil)
-	cx.layout:close(pane)
+	tern.kv.set("pane:" .. tostring(pane), nil)
+	if native then
+		cx.layout:close(pane)
+	else
+		cli({ "close", tostring(spec) })
+	end
 	finish(cx, pending.job, tonumber(status) :: number, output)
 end)
 
 tern.on("pane_closed", function(ev)
 	local pane = ev and tonumber(ev.pane)
-	if pane and tern.kv.get("job:" .. tostring(pane)) ~= nil then
-		tern.kv.set("job:" .. tostring(pane), nil)
+	local nonce = pane and tern.kv.get("pane:" .. tostring(pane))
+	if type(nonce) == "string" then
+		tern.kv.set("pane:" .. tostring(pane), nil)
+		tern.kv.set("job:" .. nonce, nil)
 	end
 end)
 
@@ -407,10 +507,10 @@ local function suggest_branch(): string
 	return ADJECTIVES[math.random(#ADJECTIVES)] .. "-" .. NOUNS[math.random(#NOUNS)]
 end
 
--- The focused block's directory, where git finds the repository.
+-- The focused block's directory, where git finds the repository (looked up by
+-- spec: see `addressable`).
 local function focused_cwd(cx): string?
-	local focused = cx.session:focused()
-	local info = focused and cx.session:pane(focused)
+	local info = cx.session:pane("@focused")
 	local cwd = info and info.cwd
 	if not cwd or cwd == "" then
 		cx:toast("error", "Worktrees: focus a block inside a git repository")

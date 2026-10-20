@@ -122,10 +122,12 @@ local function format(list: { Annotation }): string
 end
 
 -- Where the text came from: the focused pane's session, tab and directory.
+-- Looked up by the "@focused" spec: Tern (since 0.9.2) hands plugins pane ids
+-- cut to 44 bits, and cx.session:pane misses panes whose real id is longer
+-- (stencil-hq/tern-sdk#30).
 local function context_of(cx)
 	local context = {}
-	local id = cx.session:focused()
-	local pane = id and cx.session:pane(id)
+	local pane = cx.session:pane("@focused")
 	if not pane then
 		return context
 	end

@@ -8,7 +8,7 @@
 # when one is given or a variant name is used; a family with no variant in the
 # wanted mode falls back to its only variant and keeps the saved mode. On macOS
 # the system appearance follows the variant used: light with a light.mode file.
-# Tern and Neovim watch the link themselves; k9s, yazi and pi/omp pick the
+# Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp pick the
 # theme up on their next start. helium-theme updates Helium's theme: live on
 # macOS, at Helium's next start on Linux.
 

@@ -87,6 +87,97 @@ local function inside(path: string, dir: string): boolean
 	return dir ~= "" and string.sub(path, 1, #dir) == dir and string.match(sep, SEP) ~= nil
 end
 
+-- Tern (since 0.9.2) hands plugins pane and tab ids cut to 44 bits, and the
+-- daemon's ids for panes created since are longer, so for those panes the
+-- numeric calls (cx.session:pane/read, cx:run, cx.layout:*) find nothing.
+-- cx.session lookups still take the full id as a string, and so does the
+-- tern CLI, which stands in for cx:run and cx.layout here until Tern fixes
+-- it (stencil-hq/tern-sdk#30).
+
+-- Whether the window API can address pane `id` by number.
+local function addressable(cx, id: number): boolean
+	return cx.session:pane(id) ~= nil
+end
+
+-- Pane `id`'s full id, as a resolve spec for cx.session and the tern CLI.
+local function full_id(cx, id: number): string?
+	for high = 0, 15 do
+		local spec = string.format("%.0f", id + high * 2 ^ 44)
+		local info = cx.session:pane(spec)
+		if info and info.pane == id then
+			return spec
+		end
+	end
+	return nil
+end
+
+-- The tern CLI: this half's PATH is the app's, which lacks it.
+local tern_path: string? = nil
+
+local function tern_bin(): string
+	if tern_path then
+		return tern_path
+	end
+	local home = tern.getenv("HOME") or ""
+	for _, path in {
+		"/Applications/Tern.app/Contents/MacOS/tern",
+		home .. "/Applications/Tern.app/Contents/MacOS/tern",
+		home .. "/.local/bin/tern",
+		"/opt/homebrew/bin/tern",
+		"/usr/local/bin/tern",
+		"/usr/bin/tern",
+	} do
+		if tern.fs.exists(path) then
+			tern_path = path
+			return path
+		end
+	end
+	tern_path = "tern"
+	return "tern"
+end
+
+-- Runs `tern <args>`, then cb(ok, stdout, cx) when given.
+local function cli(args: { string }, cb: ((ok: boolean, out: string, cx: any) -> ())?)
+	local argv = { tern_bin() }
+	for _, arg in args do
+		table.insert(argv, arg)
+	end
+	local ok = pcall(tern.process.run, argv, { timeout_ms = 5000 }, function(result, cx)
+		if cb then
+			cb(result.status == 0, result.stdout, cx)
+		end
+	end)
+	if not ok and cb then
+		cb(false, "", nil)
+	end
+end
+
+-- Focuses pane `id`, switching to its session.
+local function focus_pane(cx, id: number)
+	if addressable(cx, id) then
+		cx.layout:focus(id)
+		return
+	end
+	local spec = full_id(cx, id)
+	if spec then
+		cli({ "focus", spec })
+	end
+end
+
+-- Pane `id`'s info, from cx.session:panes() when the API can't address it.
+local function pane_info(cx, id: number)
+	local info = cx.session:pane(id)
+	if info then
+		return info
+	end
+	for _, p in cx.session:panes() do
+		if p.pane == id then
+			return p
+		end
+	end
+	return nil
+end
+
 local function is_nvim(program: string?): boolean
 	if program == nil then
 		return false
@@ -130,7 +221,7 @@ local function reusable(cx, tab: number?)
 	if not editor then
 		return nil
 	end
-	local pane = cx.session:pane(editor.pane)
+	local pane = pane_info(cx, editor.pane)
 	local alive
 	if is_remote(cx) then
 		-- A remote socket lives on the remote host, out of tern.fs's reach.
@@ -170,7 +261,7 @@ local function launch(cx, req, focused: number?, tab: number?)
 		command ..= " " .. (if windows then psquote(arg) elseif arg == "--" then arg else quote(arg))
 	end
 
-	local pane = focused and cx.session:pane(focused)
+	local pane = focused and pane_info(cx, focused)
 	local cwd = pane and pane.cwd or ""
 	if not inside(req.path, cwd) then
 		cwd = dirname(req.path)
@@ -180,12 +271,34 @@ local function launch(cx, req, focused: number?, tab: number?)
 		cwd = cwd,
 	}
 
+	local dir = if req.how == "below" then "down" else "right"
 	local opened
 	if req.how == "tab" or not focused then
 		opened = cx.layout:new_tab(spec)
 		tab = nil -- a new tab: don't remember it under the old one
+	elseif addressable(cx, focused) then
+		opened = cx.layout:split(focused, dir, spec)
 	else
-		opened = cx.layout:split(focused, if req.how == "below" then "down" else "right", spec)
+		-- The CLI runs argv, not a command line: the login shell runs it.
+		local split_args = { "split", full_id(cx, focused :: number) or "@focused", dir, "--json", "--cwd", cwd, "--" }
+		for _, arg in (if windows then powershell_argv(command) else { tern.getenv("SHELL") or "/bin/sh", "-lc", command }) do
+			table.insert(split_args, arg)
+		end
+		cli(split_args, function(ok, out, cx2)
+			local block = ok and string.match(out, '"block"%s*:%s*(%d+)')
+			if not block then
+				if cx2 then
+					cx2:toast("error", "Neovim editor: couldn't open " .. req.path)
+				end
+				return
+			end
+			cli({ "focus", block })
+			local info = cx2 and cx2.session:pane(block)
+			if info and tab then
+				editors[tab :: number] = { pane = info.pane, socket = socket }
+			end
+		end)
+		return
 	end
 	if opened and tab then
 		editors[tab] = { pane = opened, socket = socket }
@@ -318,10 +431,10 @@ local function discover(tab: number?, focused: number?, cb: (editor: any, cx: an
 			if tab and result.status == 0 then
 				local out = string.gsub(result.stdout, "\r", "")
 				for id, socket in string.gmatch(out, "(%d+)\t([^\n]+)") do
-					local pane = tonumber(id)
-					local info = pane and cx.session:pane(pane)
-					if info and info.tab == tab and (not found or pane == focused) then
-						found = { pane = pane, socket = socket }
+					-- $TERN_PANE is the full id, which cx.session takes as a string.
+					local info = cx.session:pane(id)
+					if info and info.tab == tab and (not found or info.pane == focused) then
+						found = { pane = info.pane, socket = socket }
 					end
 				end
 			end
@@ -342,7 +455,7 @@ local function send(editor, req, on_fail: (cx: any) -> ())
 				return
 			end
 			if result.status == 0 then
-				cx.layout:focus(editor.pane)
+				focus_pane(cx, editor.pane)
 			else
 				on_fail(cx)
 			end
@@ -405,11 +518,26 @@ end
 -- into it with cx:run (tern.process.run would run on this machine).
 local function open_remote(cx, req, focused: number?, tab: number?)
 	local editor = reusable(cx, tab) or (req.how ~= "tab" and find_by_program(cx, tab, focused))
-	if editor and pcall(cx.run, cx, editor.pane, typed_keys(req)) then
-		cx.layout:focus(editor.pane)
-	else
+	if not editor then
 		launch(cx, req, focused, tab)
+		return
 	end
+	if pcall(cx.run, cx, editor.pane, typed_keys(req)) then
+		focus_pane(cx, editor.pane)
+		return
+	end
+	local spec = full_id(cx, editor.pane)
+	if not spec then
+		launch(cx, req, focused, tab)
+		return
+	end
+	cli({ "send", spec, "text", typed_keys(req) }, function(ok, _, cx2)
+		if ok and cx2 then
+			focus_pane(cx2, editor.pane)
+		elseif cx2 then
+			launch(cx2, req, focused, tab)
+		end
+	end)
 end
 
 -- Path -> os.time() of its last route.open, routed or not, to tell the
@@ -421,8 +549,8 @@ tern.route.open(function(req, cx)
 	if not routable(req, cx) then
 		return nil
 	end
-	local focused = cx.session:focused()
-	local info = focused and cx.session:pane(focused)
+	local info = cx.session:pane("@focused")
+	local focused = info and info.pane
 	local tab = info and info.tab
 
 	if is_remote(cx) then
@@ -451,24 +579,6 @@ local function warm_up()
 	end
 end
 
--- A pane's info, and whether the API can address it by id. Tern 0.9.2's
--- plugin API can't look up panes created since the update (ids at or above
--- 2^44): events and cx.session:panes() hand out truncated ids that
--- cx.session:pane, read and cx.layout reject, so their info comes from
--- panes() instead.
-local function pane_info(cx, id: number): (any, boolean)
-	local info = cx.session:pane(id)
-	if info then
-		return info, true
-	end
-	for _, p in cx.session:panes() do
-		if p.pane == id then
-			return p, false
-		end
-	end
-	return nil, false
-end
-
 tern.on("window_start", function(cx)
 	known = snapshot(cx)
 	warm_up()
@@ -488,9 +598,9 @@ tern.on("focus", function(ev, cx)
 		return
 	end
 
-	local info, addressable = pane_info(cx, id)
-	-- An unaddressable block can only be closed as the focused pane.
-	if not enabled() or not info or info.kind ~= "file" or not info.path or not (addressable or info.focused) then
+	local info = pane_info(cx, id)
+	local spec = info and full_id(cx, id)
+	if not enabled() or not info or info.kind ~= "file" or not info.path or not (spec or info.focused) then
 		return
 	end
 	local path = info.path :: string
@@ -507,7 +617,7 @@ tern.on("focus", function(ev, cx)
 	if not remote and pcall(tern.fs.list, path) then
 		return
 	end
-	local read = addressable and cx.session:read(id, { lines = 1 })
+	local read = spec and cx.session:read(spec, { lines = 1 })
 	if type(read) == "table" then
 		if read.dirty then
 			return
@@ -519,10 +629,12 @@ tern.on("focus", function(ev, cx)
 		end
 	end
 
-	if addressable then
+	if addressable(cx, id) then
 		cx.layout:close(id)
-	else
+	elseif info.focused then
 		cx:command("close_pane")
+	else
+		cli({ "close", spec :: string })
 	end
 	local focused = cx.session:focused()
 	local req = { path = path, how = "beside" }
@@ -533,7 +645,7 @@ tern.on("focus", function(ev, cx)
 	-- Show the known Neovim at once; the open follows over its socket.
 	local editor = reusable(cx, info.tab)
 	if editor then
-		cx.layout:focus(editor.pane)
+		focus_pane(cx, editor.pane)
 	end
 	open_local(cx, req, cx.session:focused(), info.tab)
 end)
@@ -542,13 +654,18 @@ end)
 -- text editor; this captures it with `tern capture` on the block's host
 -- (remote ones too) and runs Neovim in a block split from it, then parks the
 -- block so Neovim fills its place. When Neovim quits, its block sets a title,
--- and the handler deals the parked block back into Neovim's place. Events can
--- reach another VM than the override's, so the state lives in tern.kv.
+-- and the handler deals the parked block back into Neovim's place. A block
+-- the window API can't address can't be split or parked: its Neovim gets a
+-- tab of its own, which closes when Neovim quits. Events can reach another VM
+-- than the override's, so the state lives in tern.kv.
 
--- A window pane id carries its host in the bits above 2^44 (local ones have
--- none); `tern capture` on that host knows the block by the rest.
-local function host_pane_id(pane: number): string
-	return string.format("%.0f", pane % 2 ^ 44)
+-- The id `tern capture` on the block's host knows it by: a local block's full
+-- id; for a remote one, the window id less its host bits (above 2^44).
+local function capture_id(cx, pane: number): string?
+	if is_remote(cx) then
+		return string.format("%.0f", pane % 2 ^ 44)
+	end
+	return full_id(cx, pane)
 end
 
 local function scrollback_key(pane: number): string
@@ -556,8 +673,9 @@ local function scrollback_key(pane: number): string
 end
 
 -- $1: block id on this host; $2: title that says Neovim quit; $3: the
--- block's title while Neovim runs. Trailing blank rows are dropped; the block
--- then waits for the plugin to close it.
+-- block's title while Neovim runs; $4: nonempty to end the block then.
+-- Trailing blank rows are dropped; the block otherwise waits for the plugin
+-- to close it.
 local SCROLLBACK = [[
 printf '\033]2;%s\007' "$3"
 f=$(mktemp "${TMPDIR:-/tmp}/tern-scrollback.XXXXXX")
@@ -565,11 +683,12 @@ tern capture "$1" --scrollback 2>&1 | awk 'NF { for (; n > 0; n--) print ""; pri
 nvim -R + -- "$f"
 rm -f "$f"
 printf '\033]2;%s\007' "$2"
+[ -n "$4" ] && exit 0
 exec sleep 600
 ]]
 
 -- The same in PowerShell, for panes on this machine running Windows; $id,
--- $marker and $title are set above it. The console title reaches Tern as
+-- $marker, $title and $exit are set above it. The console title reaches Tern as
 -- OSC 2 through ConPTY.
 local SCROLLBACK_WINDOWS = [=[
 [Console]::Title = $title
@@ -583,26 +702,47 @@ $keep = if ($n -gt 0) { $lines[0..($n - 1)] } else { @() }
 nvim -R + $f
 Remove-Item -LiteralPath $f -ErrorAction SilentlyContinue
 [Console]::Title = $marker
+if ($exit) { exit 0 }
 Start-Sleep -Seconds 600
 ]=]
 
 tern.override("open_scrollback", function(cx)
-	local focused = cx.session:focused()
-	local info = focused and cx.session:pane(focused)
+	local info = cx.session:pane("@focused")
 	if not info or (info.kind ~= "terminal" and info.kind ~= "agent") then
 		return false
 	end
-	local pane = focused :: number
+	local pane = info.pane
+	local block = capture_id(cx, pane)
+	if not block then
+		return false
+	end
+	local in_tab = not addressable(cx, pane)
 	local marker = string.format("tern-scrollback-%06x", math.random(0, 0xffffff))
 	local title = "scrollback: " .. info.title
 	local command
 	if windows_panes(cx) then
 		command = powershell_command(
-			string.format("$id = %s\n$marker = %s\n$title = %s\n", host_pane_id(pane), psquote(marker), psquote(title))
-				.. SCROLLBACK_WINDOWS
+			string.format(
+				"$id = %s\n$marker = %s\n$title = %s\n$exit = %s\n",
+				block,
+				psquote(marker),
+				psquote(title),
+				if in_tab then "$true" else "$false"
+			) .. SCROLLBACK_WINDOWS
 		)
 	else
-		command = "sh -c " .. quote(SCROLLBACK) .. " scrollback " .. host_pane_id(pane) .. " " .. marker .. " " .. quote(title)
+		command = "sh -c " .. quote(SCROLLBACK) .. " scrollback " .. block .. " " .. marker .. " " .. quote(title)
+		if in_tab then
+			command ..= " exit"
+		end
+	end
+	if in_tab then
+		local editor = cx.layout:new_tab({ command = command, cwd = info.cwd })
+		if not editor then
+			return false
+		end
+		tern.kv.set(scrollback_key(editor), { pane = pane, marker = marker, tab = true })
+		return true
 	end
 	local editor = cx.layout:split(pane, "down", { command = command, cwd = info.cwd })
 	if not editor then
@@ -637,6 +777,10 @@ tern.on("title", function(ev, cx)
 		return
 	end
 	tern.kv.set(scrollback_key(editor :: number), nil)
+	if job.tab then
+		focus_pane(cx, job.pane) -- Neovim's tab closes itself
+		return
+	end
 	restore(cx, editor :: number, job.pane)
 end)
 
@@ -648,6 +792,10 @@ tern.on("pane_closed", function(ev, cx)
 		return
 	end
 	tern.kv.set(scrollback_key(editor :: number), nil)
+	if job.tab then
+		focus_pane(cx, job.pane)
+		return
+	end
 	local info = cx.session:pane(job.pane)
 	if info and info.parked then
 		cx.layout:unpark(job.pane)
