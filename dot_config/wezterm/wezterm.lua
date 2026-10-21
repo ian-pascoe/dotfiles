@@ -74,6 +74,13 @@ config.colors = ghostty_colors(theme_file)
 wezterm.add_to_config_reload_watch_list(config_home)
 wezterm.add_to_config_reload_watch_list(theme_file)
 
+-- shell
+-- On Windows WezTerm starts %COMSPEC% (cmd.exe) and ignores $SHELL, so pwsh is
+-- set here. Elsewhere it starts the login shell from the password database.
+if wezterm.target_triple:find("windows") then
+  config.default_prog = { "pwsh.exe", "-NoLogo" }
+end
+
 -- window
 config.window_decorations = "RESIZE" -- macos-titlebar-style = hidden
 config.window_padding = { left = "10pt", right = "10pt", top = "10pt", bottom = "10pt" }
