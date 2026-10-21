@@ -52,7 +52,6 @@ mold = { version = "latest", os = ["linux"] }
 neovim = "latest"
 ninja = "latest"
 node = "latest"
-nub = { version = "latest", allow_builds = ["@nubjs/nub"] }
 nushell = "latest"
 oh-my-pi = { version = "latest", rename_exe = "omp" }
 # The PHP backend builds from source; system development libraries are still required.
