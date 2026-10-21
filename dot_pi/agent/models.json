@@ -23,22 +23,6 @@
         }
       }
     },
-    "opencode-go": {
-      "name": "OpenCode Go (Proxy)",
-      "baseUrl": "https://api.ai.ianpascoe.dev",
-      "apiKey": "sk-dummy",
-      "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
-      }
-    },
-    "xai": {
-      "name": "SpaceX AI (Proxy)",
-      "baseUrl": "https://api.ai.ianpascoe.dev/v1",
-      "apiKey": "sk-dummy",
-      "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
-      }
-    },
     "antigravity": {
       "name": "Antigravity (proxy)",
       "api": "google-generative-ai",
@@ -85,6 +69,30 @@
           "thinkingLevelMap": { "off": null, "minimal": null, "xhigh": null, "max": null }
         }
       ]
+    },
+    "opencode": {
+      "name": "OpenCode Zen (Proxy)",
+      "baseUrl": "https://api.ai.ianpascoe.dev",
+      "apiKey": "sk-dummy",
+      "headers": {
+        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
+      }
+    },
+    "opencode-go": {
+      "name": "OpenCode Go (Proxy)",
+      "baseUrl": "https://api.ai.ianpascoe.dev",
+      "apiKey": "sk-dummy",
+      "headers": {
+        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
+      }
+    },
+    "xai": {
+      "name": "SpaceX AI (Proxy)",
+      "baseUrl": "https://api.ai.ianpascoe.dev/v1",
+      "apiKey": "sk-dummy",
+      "headers": {
+        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
+      }
     }
   }
 }

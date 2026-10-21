@@ -3,7 +3,7 @@
     "browser-use": {
       "enabled": true,
       "command": "playwright-mcp",
-      "args": ["--output-dir=${HOME}/.cache/playwright-mcp", "--extension"],
+      "args": ["--output-dir", "~/.cache/playwright-mcp", "--extension"],
       "env": {
         "PLAYWRIGHT_MCP_EXECUTABLE_PATH": "${DEFAULT_BROWSER_EXECUTABLE_PATH}",
         "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "${PLAYWRIGHT_MCP_EXTENSION_TOKEN}"
