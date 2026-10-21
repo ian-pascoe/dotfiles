@@ -43,9 +43,10 @@ modes.
 - **Wallpaper**, `.chezmoiexternal.toml.tmpl`: an entry
   `[".themes/<variant>/backgrounds/background-1.jpg"]` and its credit line in
   the header list. Pick a Pexels or free (not Unsplash+) Unsplash photo matching
-  the variant's mode and palette, unused elsewhere in the file. Subjects, in
-  order of preference: Christian imagery (churches, chapels, crosses, stained
-  glass), nature, cityscape, technology. Wikimedia and Pixabay block
+  the variant's mode and palette, unused elsewhere in the file. Photo quality
+  and palette fit come first; among strong candidates prefer Christian
+  imagery, then nature, cityscape, technology, and keep church and chapel
+  shots a minority of the set. Wikimedia and Pixabay block
   chezmoi's downloader. Look at the photo before choosing (fetch
   `https://images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg?w=640`, or
   `.png` for some newer uploads, and read the image).
