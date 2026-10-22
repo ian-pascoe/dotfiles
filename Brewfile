@@ -111,6 +111,8 @@ cask "balenaetcher"
 cask "betterdisplay"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
+# Anthropic's official Claude AI desktop app
+cask "claude"
 # Menu bar usage monitor for Codex and Claude
 cask "steipete/tap/codexbar", trusted: true
 cask "font-geist"
@@ -146,5 +148,7 @@ cask "tailscale-app"
 cask "tigervnc"
 # Tiny, fully native launcher, hotkeys, and clipboard history
 cask "abue-ammar/tinycast/tinycast"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm"
 # Open-source version of the X.Org X Window System
 cask "xquartz"

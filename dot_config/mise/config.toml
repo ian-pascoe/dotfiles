@@ -56,6 +56,7 @@ nushell = "latest"
 oh-my-pi = { version = "latest", rename_exe = "omp" }
 # The PHP backend builds from source; system development libraries are still required.
 php = { version = "latest", os = ["linux", "macos"] }
+pi = "latest"
 pipx = "latest"
 playwright = "latest"
 pnpm = "latest"
@@ -176,4 +177,3 @@ zoxide = "latest"
 "pipx:pytest" = "latest"
 "pipx:spotdl" = "latest"
 "pipx:trafilatura" = "latest"
-pi = "latest"
