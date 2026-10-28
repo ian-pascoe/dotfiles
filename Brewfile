@@ -124,8 +124,6 @@ cask "font-symbols-only-nerd-font"
 cask "ghostty"
 # Web browser
 cask "google-chrome"
-# AI teammates that work across your apps and tools
-cask "grok-bot"
 # Desktop automation application
 cask "hammerspoon"
 # Speech to text application
@@ -142,6 +140,8 @@ cask "linear"
 cask "obsidian"
 # Utility to uninstall apps and remove leftover files from old/uninstalled apps
 cask "pearcleaner"
+# Minimal GUI for AI code agents
+cask "t3-code@nightly"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
 # Multi-platform VNC client and server
