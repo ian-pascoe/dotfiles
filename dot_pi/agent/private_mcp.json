@@ -23,13 +23,8 @@
     },
     "executor": {
       "enabled": true,
-      "url": "https://v2.executor.sh/mcp",
+      "url": "https://mcp.executor.sh/mcp",
       "exposure": "direct"
-    },
-    "upsy": {
-      "enabled": true,
-      "url": "https://upsy.ai/connect",
-      "exposure": "codemode"
     },
     "rea": {
       "enabled": true,
@@ -40,6 +35,11 @@
         "GHIDRA_INSTALL_DIR": "/opt/homebrew/opt/ghidra/libexec",
         "JAVA_HOME": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
       },
+      "exposure": "codemode"
+    },
+    "upsy": {
+      "enabled": true,
+      "url": "https://upsy.ai/connect",
       "exposure": "codemode"
     }
   }
