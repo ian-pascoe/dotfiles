@@ -58,7 +58,6 @@ nushell = "latest"
 oh-my-pi = { version = "latest", rename_exe = "omp" }
 # The PHP backend builds from source; system development libraries are still required.
 php = { version = "latest", os = ["linux", "macos"] }
-pi = "latest"
 pipx = "latest"
 playwright = "latest"
 pnpm = "latest"
@@ -134,6 +133,9 @@ zoxide = "latest"
 "cargo:lspctl" = "latest"
 "cargo:plannotator-tui" = "latest"
 
+"npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:@firecrawl/anydoc" = "latest"
+"npm:@googleworkspace/cli" = "latest"
 # Low-download packages: npm provenance points to anomalyco/terminal-control's npm-release.yml.
 "npm:@kitlangton/terminal-control-linux-x64-gnu" = { version = "latest", os = [
   "linux/x64",
@@ -147,8 +149,6 @@ zoxide = "latest"
 "npm:@kitlangton/terminal-control-darwin-x64" = { version = "latest", os = [
   "macos/x64",
 ], allow_low_downloads = true }
-"npm:@firecrawl/anydoc" = "latest"
-"npm:@googleworkspace/cli" = "latest"
 "npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
 "npm:@playwright/mcp" = "latest"
 "npm:agent-browser" = "latest"
