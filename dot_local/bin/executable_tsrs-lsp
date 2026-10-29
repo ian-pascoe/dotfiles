@@ -1,0 +1,25 @@
+#!/bin/sh
+# TypeScript's language server on tsrs (the Rust port of TypeScript 7), for Pi LSP and Neovim. Run it from the
+# project's root; arguments pass through (`tsrs-lsp --lsp --stdio`).
+#
+# Picks, in order:
+# 1. the Effect-patched tsrs that @effect/tsgo ships, from the nearest node_modules up from here, so an Effect
+#    project's editor shows the Effect diagnostics its tsconfig sets. The binary itself, not `effect-tsgo tsrs`: that
+#    goes through Node, whose non-blocking stdin breaks the server ("read header: Resource temporarily unavailable").
+# 2. tsrs on PATH (mise's npm:tsrs).
+# 3. tsc on PATH (TypeScript 7 serves LSP too).
+dir=$PWD
+while :; do
+  if [ -d "$dir/node_modules/@effect/tsgo" ]; then
+    # @effect/tsgo's platform package is installed next to it (pnpm's and Bun's isolated layouts, and npm's flat one).
+    real=$(cd "$dir/node_modules/@effect/tsgo" && pwd -P)
+    for bin in "$real"/../tsgo-*/artifacts/tsrs/*/tsrs; do
+      [ -x "$bin" ] && exec "$bin" "$@"
+    done
+  fi
+  [ "$dir" = / ] && break
+  dir=$(dirname "$dir")
+done
+
+command -v tsrs >/dev/null 2>&1 && exec tsrs "$@"
+exec tsc "$@"

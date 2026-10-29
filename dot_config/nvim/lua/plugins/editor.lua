@@ -260,6 +260,32 @@ return {
       'folke/snacks.nvim', -- picker integration
     },
     opts = {},
+    init = function()
+      -- `nvim +NeogitPopup`: Neogit alone in the cwd's repo, for terminal
+      -- popups such as Rex's prefix+g. Closing the status buffer quits nvim
+      -- unless it left a file open.
+      vim.api.nvim_create_user_command('NeogitPopup', function()
+        vim.api.nvim_create_autocmd('BufWipeout', {
+          group = vim.api.nvim_create_augroup('neogit_popup', { clear = true }),
+          callback = function(ev)
+            if vim.bo[ev.buf].filetype ~= 'NeogitStatus' then
+              return
+            end
+            -- Neogit opens a file from status in a callback it schedules after
+            -- this wipe; check once that has run.
+            vim.schedule(function()
+              vim.schedule(function()
+                local buf = vim.api.nvim_get_current_buf()
+                if vim.api.nvim_buf_get_name(buf) == '' and vim.bo[buf].buftype == '' then
+                  vim.cmd('qa')
+                end
+              end)
+            end)
+          end,
+        })
+        require('neogit').open({ kind = 'replace', cwd = vim.fn.getcwd() })
+      end, { desc = 'Neogit alone; quit nvim when it closes' })
+    end,
     keys = {
       {
         '<leader>gg',

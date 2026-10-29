@@ -186,15 +186,152 @@ bind_prefixed("[", "edit_scrollback")
 ----------------------------------------------------------------------------
 
 rex.action({
-  name = "lazygit",
-  title = "Lazygit",
+  name = "neogit",
+  title = "Neogit",
   category = "Commands",
   run = function(ctx)
+    -- NeogitPopup (nvim plugins/editor.lua) quits nvim when Neogit closes.
     local fg = foreground(ctx.block_id)
-    popup({ "lazygit" }, fg and fg.cwd or nil)
+    popup({ "nvim", "+NeogitPopup" }, fg and fg.cwd or nil)
   end,
 })
-bind_prefixed("g", "lazygit")
+bind_prefixed("g", "neogit")
+
+-- file_viewer = "prefix+f": yazi in a popup. A chosen file opens in the
+-- tab's Neovim pane, or a new one split beside the pane yazi was opened from.
+-- Yazi writes its choice to a file and quits; the popup then hands it to
+-- open_in_nvim below through `rex do`.
+local YAZI = [=[
+chosen=$(mktemp "${TMPDIR:-/tmp}/rex-yazi.XXXXXX")
+yazi --chooser-file="$chosen"
+if [[ -s $chosen ]]; then
+  args=$(jq -Rn --arg block "$1" '{block: $block, paths: [inputs | select(. != "")]}' <"$chosen")
+  if ! out=$("${REX_BIN_DIR:+$REX_BIN_DIR/}rex" "do" open_in_nvim --args "$args" 2>&1); then
+    printf '\nCouldn'"'"'t open in Neovim: %s\n\n' "$out" >&2
+    read -rsn1 -p 'Press any key to close'
+  fi
+fi
+rm -f "$chosen"
+]=]
+
+rex.action({
+  name = "file_viewer",
+  title = "File Viewer (Yazi)",
+  category = "Commands",
+  keywords = "yazi files browse open nvim",
+  run = function(ctx)
+    local fg = foreground(ctx.block_id)
+    popup({
+      "env",
+      "REX_CLIENT=" .. (ctx.client_id or ""),
+      "bash",
+      "-c",
+      YAZI,
+      "rex-yazi",
+      ctx.block_id or "",
+    }, fg and fg.cwd or nil)
+  end,
+})
+bind_prefixed("f", "file_viewer")
+
+local function is_nvim(name)
+  return name ~= nil and name:lower():match("^n?vim$") ~= nil
+end
+
+-- The tiled blocks of the window holding block_id (or the active window),
+-- in layout order.
+local function tiled_blocks(view, block_id)
+  local fallback
+  for _, window in ipairs(view.windows or {}) do
+    local tiled = {}
+    local holds = false
+    for _, layer in ipairs(window.layers or {}) do
+      for _, block in ipairs(layer.blocks or {}) do
+        holds = holds or block.block_id == block_id
+        if layer.kind == "tiled" then
+          table.insert(tiled, block.block_id)
+        end
+      end
+    end
+    if holds then
+      return tiled
+    end
+    if window.window_id == view.active_window_id then
+      fallback = tiled
+    end
+  end
+  return fallback or {}
+end
+
+-- Typed into Neovim: Ctrl-\ Ctrl-N reaches Normal mode from any mode, then
+-- each path opens with :edit.
+local function edit_keys(paths)
+  local keys = "\28\14"
+  for _, path in ipairs(paths) do
+    keys = keys .. ":call execute('edit ' . fnameescape('" .. path:gsub("'", "''") .. "'))\r"
+  end
+  return keys
+end
+
+-- Opens paths in a Neovim in the window of `block` (preferring that block),
+-- else in a new Neovim split to the right of it.
+rex.action({
+  name = "open_in_nvim",
+  title = "Open Files in Neovim",
+  category = "Commands",
+  args = { paths = "array", block = "string?" },
+  run = function(ctx, args)
+    if #args.paths == 0 then
+      return
+    end
+    local view, err = rex.session.view({})
+    if view == nil then
+      error(err, 0)
+    end
+    local origin = args.block ~= "" and args.block or nil
+    local blocks = tiled_blocks(view, origin or ctx.block_id)
+
+    local editor
+    for _, id in ipairs(blocks) do
+      local fg = foreground(id)
+      if fg and is_nvim(fg.name) and (not editor or id == origin) then
+        editor = id
+      end
+    end
+
+    if editor then
+      local _, werr = rex.block.call(TERMINAL, "write", { block_id = editor, data = edit_keys(args.paths) })
+      if werr ~= nil then
+        error(werr, 0)
+      end
+      rex.session.focus_block({ block_id = editor })
+      return
+    end
+
+    local anchor = origin
+    if not anchor or not foreground(anchor) then
+      anchor = blocks[1]
+    end
+    local fg = anchor and foreground(anchor)
+    local command = { "nvim", "--" }
+    for _, path in ipairs(args.paths) do
+      table.insert(command, path)
+    end
+    local _, serr = rex.session.new_split({
+      anchor_id = anchor,
+      direction = "horizontal",
+      side = "after",
+      focus = true,
+      layout = rex.layout.block({
+        flavor = SHELL,
+        options = { command = command, cwd = fg and fg.cwd or nil },
+      }),
+    })
+    if serr ~= nil then
+      error(serr, 0)
+    end
+  end,
+})
 
 ----------------------------------------------------------------------------
 -- Worktrees (herdr worktree workspaces, as in Tern's worktrees plugin)

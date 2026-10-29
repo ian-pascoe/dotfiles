@@ -161,7 +161,7 @@
   "lsp": {
     "servers": {
       "typescript": {
-        "command": "tsc",
+        "command": "tsrs-lsp",
         "args": ["--lsp", "--stdio"],
         "languages": [
           {
