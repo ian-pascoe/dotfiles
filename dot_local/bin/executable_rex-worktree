@@ -1,0 +1,200 @@
+#!/usr/bin/env bash
+# herdr's worktree workspaces for Rex: create, open and remove git worktrees
+# of the current directory's repository. Each worktree is its own session,
+# named "<repo>/<branch>" ("<repo>" for the main checkout). New worktrees go in
+# ~/.worktrees/<repo>/<branch> (shared with Tern's worktrees plugin), branched
+# from the current checkout's HEAD, or checking out the branch when it exists.
+#
+# Usage: rex-worktree new|open|remove
+#
+# init.lua's worktree_* actions run this in a popup over the focused pane, in
+# that pane's directory. Rex's Lua API has no prompts or pickers, so this asks
+# with read and fzf, then has init.lua's worktree_session and worktree_close
+# actions find, create, show or close the session.
+set -u
+
+WORKTREES=$HOME/.worktrees
+
+rex_bin=rex
+if [[ -n ${REX_BIN_DIR:-} && -x $REX_BIN_DIR/rex ]]; then
+  rex_bin=$REX_BIN_DIR/rex
+fi
+
+# Leaves the message on screen: the popup closes when this exits.
+die() {
+  printf '\n%s\n\n' "$*" >&2
+  read -rsn1 -p "Press any key to close"
+  exit 1
+}
+
+common=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) ||
+  die "Not inside a git repository: $PWD"
+root=$(dirname "$common")
+repo=$(basename "$root")
+here=$(git rev-parse --show-toplevel 2>/dev/null)
+
+session_name() { # path branch head
+  if [[ $1 == "$root" ]]; then
+    printf '%s' "$repo"
+  else
+    printf '%s/%s' "$repo" "${2:-${3:0:7}}"
+  fi
+}
+
+# Shows the session, starting one in path when there is none.
+open_session() { # name path
+  local out
+  out=$("$rex_bin" "do" worktree_session name="$1" path="$2" 2>&1) ||
+    die "Couldn't open session $1: $out"
+}
+
+sessions=$("$rex_bin" ls --json 2>/dev/null | jq -r '.sessions[].label' 2>/dev/null)
+
+has_session() {
+  grep -Fxq -- "$1" <<<"$sessions"
+}
+
+short_path() {
+  printf '%s' "${1/#$HOME/\~}"
+}
+
+# One tab-separated row per worktree: shown label, shown detail, path,
+# session, branch. Pickers search the label only.
+rows() { # include_main
+  local path="" branch="" head="" bare="" line
+  emit() {
+    [[ -z $path || -n $bare ]] && return
+    [[ $1 != 1 && $path == "$root" ]] && return
+    local name label mark=" " detail
+    name=$(session_name "$path" "$branch" "$head")
+    label=${branch:-detached ${head:0:7}}
+    [[ $path == "$here" ]] && mark="*"
+    detail=$(short_path "$path")
+    has_session "$name" && detail+="  · session"
+    printf '%s %-28s\t%s\t%s\t%s\t%s\n' "$mark" "$label" "$detail" "$path" "$name" "$label"
+  }
+  while IFS= read -r line; do
+    case $line in
+      "worktree "*)
+        emit "$1"
+        path=${line#worktree } branch="" head="" bare=""
+        ;;
+      "branch "*) branch=${line#branch refs/heads/} ;;
+      "HEAD "*) head=${line#HEAD } ;;
+      bare) bare=1 ;;
+    esac
+  done < <(git worktree list --porcelain)
+  emit "$1"
+}
+
+pick() { # prompt
+  fzf --reverse --no-multi --delimiter=$'\t' --with-nth=1,2 --nth=1 \
+    --prompt="$1 › " --header="$repo  (* current checkout)"
+}
+
+# Default worktree names, herdr-style: an adjective and a noun (64 × 64).
+ADJECTIVES=(
+  amber ancient autumn bold brave bright brisk calm
+  clear clever cosmic crimson crisp daring dusty eager
+  early fancy fierce frosty gentle gilded golden grand
+  green hidden hollow humble icy jolly keen lively
+  lucky lunar mellow misty modest noble nimble patient
+  polar proud quick quiet rapid rustic scarlet silent
+  silver sleepy snowy solar steady stormy sunny swift
+  tidy tranquil velvet vivid wandering wild windy young
+)
+NOUNS=(
+  anchor aspen badger beacon birch bison brook canyon
+  cedar cliff cloud comet coral cove crane delta
+  dune ember falcon fern field fjord forest fox
+  glacier grove harbor hawk heron island lagoon lantern
+  maple marsh meadow mesa moon moss nebula oak
+  orbit otter owl pebble pine prairie quartz raven
+  reef ridge river sparrow spruce stone summit thicket
+  tide tundra valley willow wolf wren yarrow zephyr
+)
+
+dest_for() { # branch
+  printf '%s/%s/%s' "$WORKTREES" "$repo" "${1//\//-}"
+}
+
+branch_taken() { # branch
+  git show-ref --quiet --verify "refs/heads/$1" ||
+    git show-ref --quiet --verify "refs/remotes/origin/$1" ||
+    [[ -e $(dest_for "$1") ]]
+}
+
+cmd_new() {
+  local suggestion branch base n existing dest out
+  suggestion=${ADJECTIVES[RANDOM % ${#ADJECTIVES[@]}]}-${NOUNS[RANDOM % ${#NOUNS[@]}]}
+  printf 'New worktree of %s\n\n' "$repo"
+  read -e -r -i "$suggestion" -p "Branch: " branch || exit 0
+  branch=${branch#"${branch%%[![:space:]]*}"}
+  branch=${branch%"${branch##*[![:space:]]}"}
+  [[ -z $branch ]] && exit 0
+  git check-ref-format --branch "$branch" >/dev/null 2>&1 || die "Not a valid branch name: $branch"
+
+  # A suggested name that's taken gets a -2, -3, ... suffix.
+  if [[ $branch == "$suggestion" ]]; then
+    base=$branch n=2
+    while branch_taken "$branch"; do
+      branch=$base-$n n=$((n + 1))
+    done
+  fi
+
+  # A branch some worktree already has opens that worktree.
+  existing=$(git worktree list --porcelain |
+    awk -v b="branch refs/heads/$branch" '/^worktree /{p=substr($0,10)} $0==b{print p; exit}')
+  if [[ -n $existing ]]; then
+    open_session "$(session_name "$existing" "$branch")" "$existing"
+    return
+  fi
+
+  dest=$(dest_for "$branch")
+  mkdir -p "$(dirname "$dest")" || die "Couldn't create $(dirname "$dest")"
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    out=$(git worktree add "$dest" "$branch" 2>&1)
+  elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+    out=$(git worktree add --track -b "$branch" "$dest" "origin/$branch" 2>&1)
+  else
+    out=$(git worktree add -b "$branch" "$dest" 2>&1)
+  fi || die "Couldn't create worktree $branch:"$'\n'"$out"
+  open_session "$repo/$branch" "$dest"
+}
+
+cmd_open() {
+  local choice path name
+  choice=$(rows 1 | pick "Open worktree") || exit 0
+  IFS=$'\t' read -r _ _ path name _ <<<"$choice"
+  open_session "$name" "$path"
+}
+
+cmd_remove() {
+  local list choice path name label confirm out
+  local force=()
+  list=$(rows 0)
+  [[ -z $list ]] && die "No worktrees to remove: $repo has only its main checkout"
+  choice=$(pick "Remove worktree" <<<"$list") || exit 0
+  IFS=$'\t' read -r _ _ path name label <<<"$choice"
+  confirm=$(printf '%s\tkeep\n%s\tforce\n' \
+    "Remove $label" "Force remove $label (discards its uncommitted changes)" |
+    fzf --reverse --no-multi --delimiter=$'\t' --with-nth=1 \
+      --prompt="Remove the worktree and close its session? › " \
+      --header="$(short_path "$path")") || exit 0
+  [[ ${confirm#*$'\t'} == force ]] && force=(--force)
+  # From the main checkout: the popup itself may be inside the worktree.
+  out=$(git -C "$root" worktree remove "${force[@]}" "$path" 2>&1) ||
+    die "Couldn't remove worktree $label:"$'\n'"$out"
+  # Last: this popup goes with the session when it's the worktree's own.
+  "$rex_bin" "do" worktree_close name="$name" >/dev/null 2>&1
+}
+
+case ${1:-} in
+  new) cmd_new ;;
+  open) cmd_open ;;
+  remove) cmd_remove ;;
+  *)
+    echo "usage: rex-worktree new|open|remove" >&2
+    exit 2
+    ;;
+esac

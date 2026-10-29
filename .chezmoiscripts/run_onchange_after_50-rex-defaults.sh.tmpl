@@ -1,14 +1,90 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
-# Rex app settings that init.lua can't reach (they live in the macOS app's
-# defaults, not the server config). Takes effect on relaunch.
-#   showsKeySequenceHints: no which-key panel after ctrl+a or in resize mode
-#   balancesSplitsOnCreation: closing a pane keeps the others' ratios
-#   terminalFont*: match Ghostty's font-family and font-size, smoothing on
+# Rex app settings: the macOS app keeps them in its defaults domain, out of
+# init.lua's reach. Quit Rex before this runs; it reads them on launch and
+# may write its own values back on quit. Edit a value here, then
+# `chezmoi apply` reruns the script.
+#
+# Left out on purpose:
+#   appearance, lightThemeID, darkThemeID, customThemes: set-theme owns them
+#     (init.lua's sync_theme action)
+#   window frames, open windows, session order, activity history, cached
+#     server routes: app state, not settings
 set -eu
-defaults write com.superlogical.rex Workspace.showsKeySequenceHints -bool false
-defaults write com.superlogical.rex Workspace.balancesSplitsOnCreation -bool false
-defaults write com.superlogical.rex Workspace.terminalFontName -string "GeistMono Nerd Font"
-defaults write com.superlogical.rex Workspace.terminalFontPointSize -float 12
-defaults write com.superlogical.rex Workspace.terminalFontSmoothing -bool true
+
+domain=com.superlogical.rex
+bool() { defaults write "$domain" "$1" -bool "$2"; }
+num() { defaults write "$domain" "$1" -float "$2"; }
+str() { defaults write "$domain" "$1" -string "$2"; }
+
+# --- Terminal ----------------------------------------------------------------
+str Workspace.terminalFontName "GeistMono Nerd Font" # match Ghostty's font-family
+num Workspace.terminalFontPointSize 12               # match Ghostty's font-size
+bool Workspace.terminalFontSmoothing false
+num Workspace.terminalCellHeightPercent 1 # line height, 1 = 100%
+bool Workspace.terminalSmoothScrolling true
+
+# --- Panes -------------------------------------------------------------------
+bool Workspace.balancesSplitsOnCreation false # closing a pane keeps the others' ratios
+str Workspace.paneDensity compact
+str Workspace.inactivePaneFadeMode both
+bool Workspace.usesStandardInactiveWindowPaneStyles true
+
+# --- Sidebar and tabs --------------------------------------------------------
+str Workspace.tabStyle vertical
+num Workspace.sidebarWidth 196
+bool Workspace.sidebarShowsActivity false
+str Workspace.tabIconTintMode off
+
+# --- Interface ---------------------------------------------------------------
+str Workspace.interfaceStyle useTheme
+str Workspace.animationStyle natural
+
+# --- Keyboard ----------------------------------------------------------------
+bool Workspace.showsKeySequenceHints false # no which-key panel after ctrl+a or in resize mode
+
+# --- Agents ------------------------------------------------------------------
+bool rex.agents.names-sessions true
+
+# --- Server ------------------------------------------------------------------
+bool rex.client.remoteControl true # `rex focus` (nvim) and Sidekick need it
+str rex.server.run-mode bundled
+bool rex.server.automatic-restart-enabled true
+bool rex.server.tailnet-enabled true
+defaults write "$domain" rex.server.web-client-origin-patterns -array "https://rex.superlogical.com"
+
+# --- Developer ---------------------------------------------------------------
+bool rex.developer-mode-enabled true
+bool rex.server.block-plugin-reload-enabled false
+
+# Other settings this Rex version knows, unset here so Rex's defaults apply.
+# Types are unconfirmed: set one in Settings, then check it with
+# `defaults read-type com.superlogical.rex <key>` before adding it above.
+#   Workspace.terminalFontStyle, terminalFontWeight, terminalFallbackFontNames,
+#     terminalAllowsLigatures, terminalImproveTextContrast,
+#     terminalCursorStyle, terminalCursorStyleForced,
+#     terminalCursorBlinkUsesCustomInterval,
+#     terminalCursorBlinkIntervalMilliseconds, terminalCopyOnSelect,
+#     terminalCopyAnimation, terminalOptionKeyBehavior, terminalPaddingColor,
+#     terminalSelectionBackground, terminalSelectionForeground,
+#     terminalSelectionRoundedCorners, terminalUseThemePalette,
+#     terminalStartupCommand, terminalCustomSchemeLinks,
+#     terminalTrustedLinkHandlers
+#   Workspace.showsPaneHeaders, showsActivePaneBorder, activePaneBorderColor,
+#     activePaneBorderOpacity, activePaneBorderTransition, fadesInactivePanes,
+#     inactiveWindowPaneFadeMode, usesInactivePaneStylesInInactiveWindows,
+#     usesPaneGlass, tintsPanesWithProgramBackground, focusFollowsMouse,
+#     hiddenPaneButtons
+#   Workspace.sidebarPosition, sidebarSwipe,
+#     preservesWindowWidthOnSidebarToggle, tabsFillAvailableSpace,
+#     tabIconColorMode, tabIconCount, usesThemeColorsForTabIcons,
+#     bouncesTabIcons, showsProgramStatusInTabs, prefersGeneratedTitles,
+#     shellIconTheme, hiddenChromeButtons
+#   Workspace.showsProgramActivityNotifications, showsProgramActivityDockBadge,
+#     playsProgramActivitySounds, programActivityStatusPreferences,
+#     showsIdleProgramsInActivity, showsProcessesInActivity,
+#     allowsTerminalNotifications, notificationPosition
+#   Workspace.appIcon, appIconVisibility, showsWindowOnLaunch,
+#     darkUsesExtendedThemePalette, lightUsesExtendedThemePalette,
+#     insertPathShowsRecentPaths
 {{ end -}}

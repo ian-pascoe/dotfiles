@@ -197,6 +197,100 @@ rex.action({
 bind_prefixed("g", "lazygit")
 
 ----------------------------------------------------------------------------
+-- Worktrees (herdr worktree workspaces, as in Tern's worktrees plugin)
+----------------------------------------------------------------------------
+
+-- Each git worktree is its own session, named "<repo>/<branch>". Rex has no
+-- prompts or pickers for actions, so ~/.local/bin/rex-worktree asks in a
+-- popup over the focused pane, runs git there, then calls worktree_session or
+-- worktree_close below through `rex do`.
+
+local function find_session(label)
+  local list, err = rex.call("session.list")
+  if list == nil then
+    error(err, 0)
+  end
+  for _, session in ipairs(list.sessions) do
+    if session.label == label then
+      return session
+    end
+  end
+  return nil
+end
+
+local worktree_ops = {
+  new = { title = "New Worktree…", key = "shift+g" }, -- new_worktree
+  open = { title = "Open Worktree…", key = "shift+w" }, -- open_worktree
+  remove = { title = "Remove Worktree…", key = "alt+w" }, -- remove_worktree
+}
+
+for op, spec in pairs(worktree_ops) do
+  rex.action({
+    name = "worktree_" .. op,
+    title = spec.title,
+    category = "Worktrees",
+    keywords = "git worktree branch session",
+    run = function(ctx)
+      local fg = foreground(ctx.block_id)
+      local cwd = fg and fg.cwd
+      if not cwd or cwd == "" then
+        error("Worktrees: focus a terminal inside a git repository", 0)
+      end
+      -- REX_CLIENT: the script's `rex do` shows the session in this client.
+      popup({ "env", "REX_CLIENT=" .. (ctx.client_id or ""), HOME .. "/.local/bin/rex-worktree", op }, cwd)
+    end,
+  })
+  bind_prefixed(spec.key, "worktree_" .. op)
+end
+
+-- Shows session `name`, starting it in `path` when there is none.
+rex.action({
+  name = "worktree_session",
+  title = "Show Worktree Session",
+  category = "Worktrees",
+  args = { name = "string", path = "string" },
+  run = function(_, args)
+    local session = find_session(args.name)
+    local id = session and session.session_id
+    if not id then
+      local created, err = rex.call("session.create", {
+        label = args.name,
+        initial_windows = {
+          { layout = rex.layout.block({ flavor = SHELL, options = { cwd = args.path } }) },
+        },
+      })
+      if created == nil then
+        error(err, 0)
+      end
+      id = created.session_id
+    end
+    rex.client.queue("session.select", { session_id = id })
+  end,
+})
+
+-- Closes session `name`, if there is one.
+rex.action({
+  name = "worktree_close",
+  title = "Close Worktree Session",
+  category = "Worktrees",
+  args = { name = "string" },
+  run = function(_, args)
+    local session = find_session(args.name)
+    if session then
+      -- The server only destroys a session this connection is attached to.
+      local id = session.session_id
+      local _, err = rex.call("session.attach", { session_id = id })
+      if err == nil then
+        _, err = rex.call("session.destroy", { session_id = id })
+      end
+      if err ~= nil then
+        error(err, 0)
+      end
+    end
+  end,
+})
+
+----------------------------------------------------------------------------
 -- Vim navigation (vim-herdr-navigation)
 ----------------------------------------------------------------------------
 

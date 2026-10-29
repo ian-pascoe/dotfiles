@@ -1,7 +1,7 @@
 -- herdr's worktree workspaces for Tern: create, open and remove git worktrees
 -- of the focused block's repository. Each worktree is its own session, named
 -- "<repo>/<branch>" ("<repo>" for the main checkout); new worktrees go in
--- ~/.tern/worktrees/<repo>/<branch> on the session's host, branched from the
+-- ~/.worktrees/<repo>/<branch> on the session's host, branched from the
 -- focused checkout's HEAD (or checking out the branch when it exists).
 --
 -- Git runs on the session's host. Locally that is tern.process.run. On a
@@ -156,7 +156,7 @@ if [ -n "$2" ]; then
 	base=$branch n=2
 	while git show-ref --quiet --verify "refs/heads/$branch" ||
 		git show-ref --quiet --verify "refs/remotes/origin/$branch" ||
-		[ -e "$HOME/.tern/worktrees/$name/$branch" ]; do
+		[ -e "$HOME/.worktrees/$name/$branch" ]; do
 		branch=$base-$n n=$((n + 1))
 	done
 fi
@@ -166,7 +166,7 @@ if [ -n "$existing" ]; then
 	printf 'session %s\npath %s\n' "$session" "$existing"
 	exit 0
 fi
-dest="$HOME/.tern/worktrees/$name/$(printf '%s' "$branch" | tr '/' '-')"
+dest="$HOME/.worktrees/$name/$(printf '%s' "$branch" | tr '/' '-')"
 mkdir -p "$(dirname "$dest")" || exit 1
 if git show-ref --verify --quiet "refs/heads/$branch"; then
 	git worktree add "$dest" "$branch" >/dev/null || exit 1

@@ -215,8 +215,9 @@ description = "review the agent's newest reply"
 # workspaces = "" # e.g. "ctrl+shift" makes ctrl+shift+1..9 switch workspaces directly
 # agents = ""     # e.g. "alt" makes alt+1..9 focus agent rows directly
 
-# [worktrees]
-# directory = "~/.herdr/worktrees"
+# Shared with Tern and Rex (tern/plugins/worktrees, rex-worktree).
+[worktrees]
+directory = "~/.worktrees"
 
 [ui]
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
