@@ -1,0 +1,14 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Rex app settings that init.lua can't reach (they live in the macOS app's
+# defaults, not the server config). Takes effect on relaunch.
+#   showsKeySequenceHints: no which-key panel after ctrl+a or in resize mode
+#   balancesSplitsOnCreation: closing a pane keeps the others' ratios
+#   terminalFont*: match Ghostty's font-family and font-size, smoothing on
+set -eu
+defaults write com.superlogical.rex Workspace.showsKeySequenceHints -bool false
+defaults write com.superlogical.rex Workspace.balancesSplitsOnCreation -bool false
+defaults write com.superlogical.rex Workspace.terminalFontName -string "GeistMono Nerd Font"
+defaults write com.superlogical.rex Workspace.terminalFontPointSize -float 12
+defaults write com.superlogical.rex Workspace.terminalFontSmoothing -bool true
+{{ end -}}
