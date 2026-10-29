@@ -10,6 +10,10 @@ local function in_tern()
   return vim.env.TERN_PANE ~= nil and not in_herdr() and not in_tmux()
 end
 
+local function in_rex()
+  return vim.env.REX_BLOCK ~= nil and not in_herdr() and not in_tmux() and not in_tern()
+end
+
 local function herdr_navigate(wincmd, dir)
   return function()
     local prev = vim.api.nvim_get_current_win()
@@ -32,6 +36,26 @@ local herdr_navigation_keys = {
   { '<c-j>', herdr_navigate('j', 'down'), desc = 'Navigate down' },
   { '<c-k>', herdr_navigate('k', 'up'), desc = 'Navigate up' },
   { '<c-l>', herdr_navigate('l', 'right'), desc = 'Navigate right' },
+}
+
+-- Rex hands ctrl+h/j/k/l to Vim (dot_config/rex/init.lua); at a split edge,
+-- `rex focus` moves to the Rex pane beside this terminal.
+local function rex_navigate(wincmd, dir)
+  return function()
+    local prev = vim.api.nvim_get_current_win()
+    vim.cmd('wincmd ' .. wincmd)
+    if vim.api.nvim_get_current_win() ~= prev or vim.fn.executable('rex') ~= 1 then
+      return
+    end
+    vim.system({ 'rex', 'focus', dir })
+  end
+end
+
+local rex_navigation_keys = {
+  { '<c-h>', rex_navigate('h', 'left'), desc = 'Navigate left' },
+  { '<c-j>', rex_navigate('j', 'down'), desc = 'Navigate down' },
+  { '<c-k>', rex_navigate('k', 'up'), desc = 'Navigate up' },
+  { '<c-l>', rex_navigate('l', 'right'), desc = 'Navigate right' },
 }
 
 -- Tern has no directional focus command, so find the pane beside ours in the
@@ -128,14 +152,14 @@ local tmux_navigation_keys = {
 return {
   {
     'christoomey/vim-tmux-navigator',
-    enabled = in_tmux() or in_herdr() or in_tern(),
+    enabled = in_tmux() or in_herdr() or in_tern() or in_rex(),
     lazy = false,
     init = function()
-      if in_herdr() or in_tern() then
+      if in_herdr() or in_tern() or in_rex() then
         vim.g.tmux_navigator_no_mappings = 1
       end
     end,
-    keys = in_herdr() and herdr_navigation_keys or in_tern() and tern_navigation_keys or tmux_navigation_keys,
+    keys = in_herdr() and herdr_navigation_keys or in_tern() and tern_navigation_keys or in_rex() and rex_navigation_keys or tmux_navigation_keys,
   },
   { -- vim learning game
     'ThePrimeagen/vim-be-good',

@@ -9,7 +9,8 @@
 # wanted mode falls back to its only variant and keeps the saved mode. On macOS
 # the system appearance follows the variant used: light with a light.mode file.
 # Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp
-# pick the theme up on their next start. helium-theme updates Helium's theme:
+# pick the theme up on their next start. Rex imports the variant's Ghostty
+# colors when it is running. helium-theme updates Helium's theme:
 # live on macOS, at Helium's next start on Linux.
 # In WSL the Windows host follows: its Set-Theme.ps1 runs with the variant and
 # leaves WSL alone. When the switch starts on Windows, Set-Theme.ps1 runs this
@@ -67,6 +68,20 @@ bat cache --build >/dev/null
 # Ghostty and btop reload their config on SIGUSR2 (herdr follows Ghostty's colors)
 pkill -USR2 -x ghostty 2>/dev/null
 pkill -USR2 -x btop 2>/dev/null
+
+# Rex imports the variant's Ghostty colors through the sync_theme action in
+# ~/.config/rex/init.lua; Rex.app accepts it only with Remote Control on.
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  rex_bin="${REX_BIN_DIR:-$HOME/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS}/rex"
+  if [[ -x $rex_bin ]]; then
+    "$rex_bin" --autostart=false "do" sync_theme >/dev/null 2>&1
+    # Status 4: no Rex server is running, so there is nothing to update.
+    case $? in
+    0 | 4) ;;
+    *) echo "Rex theme not synced (turn on Remote Control in Rex's Settings)" >&2 ;;
+    esac
+  fi
+fi
 
 # Helium loads its theme from a copy that helium-theme keeps
 command -v helium-theme >/dev/null && helium-theme
