@@ -74,6 +74,10 @@ return {
       require('fff.download').download_or_build_binary()
     end,
     lazy = false, -- fff initialises itself lazily
+    init = function()
+      -- fff logs at info by default; one session grew its log to 4 GB.
+      vim.g.fff = { logging = { enabled = false } }
+    end,
   },
   {
     'folke/snacks.nvim',

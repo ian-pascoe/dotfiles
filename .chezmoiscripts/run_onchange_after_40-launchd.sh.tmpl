@@ -1,0 +1,11 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Reload managed LaunchAgents when their plists change.
+# local.clean-code-sign-clones.plist: {{ include "Library/LaunchAgents/local.clean-code-sign-clones.plist.tmpl" | sha256sum }}
+set -eu
+domain="gui/$(id -u)"
+plist="$HOME/Library/LaunchAgents/local.clean-code-sign-clones.plist"
+launchctl bootout "$domain" "$plist" 2>/dev/null || true
+launchctl bootstrap "$domain" "$plist" ||
+	echo "warning: could not load $plist; it will load at next login" >&2
+{{ end -}}

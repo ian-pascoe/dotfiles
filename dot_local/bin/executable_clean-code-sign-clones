@@ -1,0 +1,23 @@
+#!/bin/sh
+# Remove leftover code-signing clones from Chromium-based browsers.
+#
+# Chrome, Helium, and friends clone their app bundle into
+# $(getconf DARWIN_USER_TEMP_DIR)../X/<bundle-id>.code_sign_clone/ on launch
+# and remove it on clean exit. Killed or crashed browsers (e.g. agent-driven
+# sessions) leave the clone behind, and neither tmp_cleaner nor dirhelper
+# cleans X/. Clones still open by a process, or younger than an hour, are kept.
+set -eu
+
+x_dir="$(getconf DARWIN_USER_TEMP_DIR)../X"
+
+for app in "$x_dir"/*.code_sign_clone; do
+	[ -d "$app" ] || continue
+	find "$app" -mindepth 1 -maxdepth 1 -type d -name 'code_sign_clone.*' -mmin +60 |
+		while IFS= read -r clone; do
+			if lsof -t +D "$clone" >/dev/null 2>&1; then
+				continue
+			fi
+			rm -rf "$clone"
+			echo "$(date '+%Y-%m-%dT%H:%M:%S%z') removed $clone"
+		done
+done
