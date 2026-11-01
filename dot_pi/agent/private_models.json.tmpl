@@ -1,13 +1,12 @@
+{{- /* Commissary API key for the ai.ianpascoe.dev proxy; read from 1Password at apply time. */ -}}
+{{- $commissaryKey := onepasswordRead "op://Agents/Commissary/credential" | trim | toJson -}}
 {
   "$schema": "https://raw.githubusercontent.com/earendil-works/pi/refs/heads/main/packages/coding-agent/schemas/models.schema.json",
   "providers": {
     "anthropic": {
       "name": "Anthropic (Proxy)",
       "baseUrl": "https://api.ai.ianpascoe.dev",
-      "apiKey": "sk-dummy",
-      "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
-      },
+      "apiKey": {{ $commissaryKey }},
       "modelOverrides": {
         "claude-fable-5-1": {
           "contextWindow": 400000
@@ -27,10 +26,7 @@
       "name": "Antigravity (proxy)",
       "api": "google-generative-ai",
       "baseUrl": "https://api.ai.ianpascoe.dev/v1beta",
-      "apiKey": "sk-dummy",
-      "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
-      },
+      "apiKey": {{ $commissaryKey }},
       "models": [
         {
           "id": "gemini-3-flash",
@@ -73,26 +69,17 @@
     "opencode": {
       "name": "OpenCode Zen (Proxy)",
       "baseUrl": "https://api.ai.ianpascoe.dev",
-      "apiKey": "sk-dummy",
-      "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
-      }
+      "apiKey": {{ $commissaryKey }}
     },
     "opencode-go": {
       "name": "OpenCode Go (Proxy)",
       "baseUrl": "https://api.ai.ianpascoe.dev",
-      "apiKey": "sk-dummy",
-      "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
-      }
+      "apiKey": {{ $commissaryKey }}
     },
     "xai": {
       "name": "SpaceX AI (Proxy)",
       "baseUrl": "https://api.ai.ianpascoe.dev/v1",
-      "apiKey": "sk-dummy",
-      "headers": {
-        "cf-access-token": "!cloudflared access token -app=https://ai.ianpascoe.dev"
-      }
+      "apiKey": {{ $commissaryKey }}
     }
   }
 }

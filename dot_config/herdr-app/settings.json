@@ -1,0 +1,9 @@
+{
+  "zoom": 1,
+  "sounds": {
+    "enabled": false
+  },
+  "minimum_contrast": 1,
+  "font": "GeistMono Nerd Font",
+  "font_size": 11
+}

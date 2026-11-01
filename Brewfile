@@ -1,4 +1,5 @@
 tap "abue-ammar/tinycast", trusted: true
+tap "anomalyco/tap"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "nikitabobko/tap", trusted: true
 tap "steipete/tap", trusted: true
@@ -126,10 +127,10 @@ cask "ghostty"
 cask "google-chrome"
 # Desktop automation application
 cask "hammerspoon"
-# Speech to text application
-cask "handy"
 # Chromium-based web browser
 cask "helium-browser"
+# Local voice dictation
+cask "anomalyco/tap/hex", trusted: true
 # Reverse engineering tool that lets you disassemble, decompile and debug your app
 cask "hopper-disassembler"
 # Keyboard customiser
