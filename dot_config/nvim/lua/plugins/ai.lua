@@ -1,37 +1,48 @@
--- Same Cloudflare Access-protected LLM proxy that pi uses (~/.pi/agent/models.json).
-local proxy_base_url = 'https://ai.ianpascoe.dev'
+-- Same LLM proxy that pi uses, with the same API key: chezmoi writes it into
+-- pi's models.json from 1Password, so read it from there.
 local proxy_api_url = 'https://api.ai.ianpascoe.dev'
+local proxy_api_key
 
--- `cloudflared access token` takes ~400ms and minuet's transforms run
--- synchronously, so cache the JWT until shortly before it expires.
-local cf_token = { value = nil, exp = 0 }
-
-local function jwt_exp(token)
-  local payload = token:match('^[^.]+%.([^.]+)%.')
-  if not payload then
-    return 0
-  end
-  payload = payload:gsub('-', '+'):gsub('_', '/')
-  payload = payload .. string.rep('=', (4 - #payload % 4) % 4)
-  local ok, claims = pcall(function()
-    return vim.json.decode(vim.base64.decode(payload))
-  end)
-  return ok and tonumber(claims.exp) or 0
+local function pi_models_path()
+  local agent_dir = vim.env.PI_CODING_AGENT_DIR
+  agent_dir = agent_dir and vim.fn.expand(agent_dir) or vim.fs.joinpath(vim.uv.os_homedir(), '.pi', 'agent')
+  return vim.fs.joinpath(agent_dir, 'models.json')
 end
 
-local function cf_access_token()
-  if cf_token.value and os.time() < cf_token.exp - 60 then
-    return cf_token.value
+--- The literal apiKey of a pi provider pointed at the proxy, or nil.
+local function read_proxy_api_key()
+  local path = pi_models_path()
+  local ok, config = pcall(function()
+    return vim.json.decode(table.concat(vim.fn.readfile(path), '\n'))
+  end)
+  if not ok or type(config) ~= 'table' or type(config.providers) ~= 'table' then
+    return nil
   end
-  local result = vim.system({ 'cloudflared', 'access', 'login', '--no-verbose', '--auto-close', '-app=' .. proxy_base_url }, { text = true }):wait()
-  local token = vim.trim(result.stdout or '')
-  if result.code ~= 0 or token == '' then
-    vim.notify_once('minuet: `cloudflared access token` failed; run `cloudflared access login ' .. proxy_base_url .. '`', vim.log.levels.WARN)
+  for _, provider in pairs(config.providers) do
+    local key = provider.apiKey
+    if
+      type(provider.baseUrl) == 'string'
+      and vim.startswith(provider.baseUrl, proxy_api_url)
+      and type(key) == 'string'
+      and key ~= ''
+      and not key:find('^!')
+      and not key:find('%$')
+    then
+      return key
+    end
+  end
+end
+
+local function proxy_key()
+  proxy_api_key = proxy_api_key or read_proxy_api_key()
+  if not proxy_api_key then
+    vim.notify_once(
+      'minuet: no API key for ' .. proxy_api_url .. ' in ' .. pi_models_path() .. '; run `chezmoi apply ~/.pi/agent/models.json`',
+      vim.log.levels.WARN
+    )
     return ''
   end
-  local exp = jwt_exp(token)
-  cf_token = { value = token, exp = exp > 0 and exp or os.time() + 300 }
-  return token
+  return proxy_api_key
 end
 
 return {
@@ -82,10 +93,7 @@ return {
       debounce = 600, -- Increase to reduce costs and avoid rate limits
       provider_options = {
         openai_compatible = {
-          -- The proxy injects the real key; minuet only needs a non-empty value.
-          api_key = function()
-            return 'sk-dummy'
-          end,
+          api_key = proxy_key,
           end_point = proxy_api_url .. '/chat/completions',
           -- Benchmarked against the proxy's models (2026-10): best speed/accuracy
           -- trade-off. Runner-up: 'hy4-preview' (more accurate, ~2x slower).
@@ -95,7 +103,6 @@ return {
           transform = {
             function(args)
               args.headers['User-Agent'] = 'minuet-ai.nvim'
-              args.headers['cf-access-token'] = cf_access_token()
               return args
             end,
           },
