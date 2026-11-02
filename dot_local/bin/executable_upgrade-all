@@ -190,9 +190,14 @@ fi
 # CUA Driver
 if has_cmd cua-driver; then
   echo "Updating CUA Driver..."
-  cua-driver update --apply
-  cua-driver skills update
-  echo "CUA Driver updated successfully!"
+  # cua-driver's HTTP client lacks SOCKS support: given a socks ALL_PROXY it
+  # ignores every proxy and connects directly. Unset it so HTTPS_PROXY applies.
+  if env -u ALL_PROXY -u all_proxy cua-driver update --apply &&
+    env -u ALL_PROXY -u all_proxy cua-driver skills update; then
+    echo "CUA Driver updated successfully!"
+  else
+    echo "CUA Driver update failed."
+  fi
 fi
 #########################################################################
 # Skills
