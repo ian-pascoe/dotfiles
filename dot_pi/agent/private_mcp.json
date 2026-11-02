@@ -37,6 +37,11 @@
       },
       "exposure": "codemode"
     },
+    "superlogical": {
+      "enabled": true,
+      "url": "https://www.superlogical.com/rex/community-mcp",
+      "exposure": "codemode"
+    },
     "upsy": {
       "enabled": true,
       "url": "https://upsy.ai/connect",
