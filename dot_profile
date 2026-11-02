@@ -33,7 +33,9 @@ export OPENCODE_EXPERIMENTAL_OXFMT=true
 export PI_CACHE_RETENTION=long
 
 ## Editor
-if command -v nvim &>/dev/null; then
+if [ -n "$REX_SESSION" ] && command -v neorex &>/dev/null; then
+  export EDITOR='neorex'
+elif command -v nvim &>/dev/null; then
   export EDITOR='nvim'
 else
   export EDITOR='vim'

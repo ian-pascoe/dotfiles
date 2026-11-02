@@ -18,4 +18,9 @@ return {
       },
     },
   },
+  { -- under neorex every window is its own Rex pane, which Neovim can't place
+    -- on its screen, so the smear's floats land at the pane's left edge
+    'sphamba/smear-cursor.nvim',
+    cond = vim.g.neorex == nil,
+  },
 }

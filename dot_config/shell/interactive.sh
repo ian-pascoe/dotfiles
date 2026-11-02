@@ -17,6 +17,11 @@ if command -v nvim &>/dev/null; then
   alias vim='nvim'
 fi
 
+# Inside a Rex session, use neorex, matching $EDITOR in ~/.profile.
+if [ -n "${REX_SESSION:-}" ] && command -v neorex &>/dev/null; then
+  alias nvim='neorex'
+fi
+
 ## LSD
 if command -v lsd &>/dev/null; then
   alias ls='lsd'
