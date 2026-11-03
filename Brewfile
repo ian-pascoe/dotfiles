@@ -23,6 +23,8 @@ brew "colima"
 brew "gmp"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Docker CLI plugin for extended build capabilities with BuildKit

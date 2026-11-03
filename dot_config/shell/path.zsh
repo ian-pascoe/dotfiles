@@ -33,6 +33,7 @@ _zsh_apply_base_path_order() {
     "$HOME/.local/share/pnpm/bin" \
     "$HOME/.npm-global/bin" \
     "$HOME/.cargo/bin" \
+    /opt/homebrew/opt/curl/bin \
     /opt/homebrew/bin \
     /opt/homebrew/sbin \
     "${linuxbrew[@]}"
