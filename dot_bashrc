@@ -33,9 +33,12 @@ set -o vi
 
 ## Bash Completion
 if command -v brew &>/dev/null; then
-  if [[ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
-    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+  # brew shellenv (login.sh) sets HOMEBREW_PREFIX; `brew --prefix` costs ~30ms.
+  __brew_prefix=${HOMEBREW_PREFIX:-$(brew --prefix)}
+  if [[ -f "$__brew_prefix/etc/profile.d/bash_completion.sh" ]]; then
+    source "$__brew_prefix/etc/profile.d/bash_completion.sh"
   fi
+  unset __brew_prefix
 elif [[ -f /usr/share/bash-completion/bash_completion ]]; then
   source /usr/share/bash-completion/bash_completion
 elif [[ -f /etc/bash_completion ]]; then

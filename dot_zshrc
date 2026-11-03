@@ -39,42 +39,36 @@ if [ -f "$HOME/.config/shell/completions.zsh" ]; then
   source "$HOME/.config/shell/completions.zsh"
 fi
 
-## ZPlug (autosuggestions + syntax highlighting)
-if command -v brew &>/dev/null; then
-  export ZPLUG_HOME="$(brew --prefix zplug 2>/dev/null)"
-elif [ -d "$HOME/.zplug" ]; then
-  export ZPLUG_HOME="$HOME/.zplug"
-fi
-if [ -n "${ZPLUG_HOME:-}" ] && [ -d "${ZPLUG_HOME}" ]; then
-  # compinit trusts its dump while the count of completion files is unchanged,
-  # so a removed function can be swapped for a new one unnoticed, and zplug
-  # first loads it with `compinit -C`, which skips even that check. Drop the
-  # dump once a day so it gets rebuilt.
-  __zcompdump=("$ZPLUG_HOME"/zcompdump(N.mh+24))
-  if ((${#__zcompdump})); then
-    rm -f "$ZPLUG_HOME"/zcompdump*
-  fi
-  unset __zcompdump
-
-  source "${ZPLUG_HOME}/init.zsh"
-
-  zplug "zsh-users/zsh-autosuggestions"
-  zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-  if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -rq; then
-      echo
-      zplug install
-    fi
-  fi
-  zplug load
+## Plugins (autosuggestions + syntax highlighting)
+# Sourced from the package manager's copies (Homebrew's zsh-autosuggestions and
+# zsh-syntax-highlighting, or the distro's). Prints the first that exists.
+__zsh_plugin() {
+  local dir
+  for dir in "${HOMEBREW_PREFIX:-/opt/homebrew}/share" /usr/share/zsh/plugins /usr/share; do
+    [[ -r $dir/$1/$1.zsh ]] && print -r -- "$dir/$1/$1.zsh" && return
+  done
+  return 1
+}
+if __zsh_plugin_file=$(__zsh_plugin zsh-autosuggestions); then
+  source "$__zsh_plugin_file"
 fi
 
 ## Completion
-if ! command -v compdef &>/dev/null; then
-  autoload -U compinit && compinit
+# `compinit -C` trusts its dump without checking for changed completion files,
+# saving the scan on every start. Rebuild the dump once a day, and whenever
+# completions.zsh has rebuilt its cache, so new and removed completions are
+# picked up.
+__zcompdump="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+__zcompdump_fresh=("$__zcompdump"(N.mh-24))
+autoload -U compinit
+if ((${#__zcompdump_fresh})) && ! [[ ${_zsh_completion_cache:-} -nt $__zcompdump ]]; then
+  compinit -C -d "$__zcompdump"
+else
+  mkdir -p "${__zcompdump:h}"
+  rm -f "$__zcompdump"
+  compinit -d "$__zcompdump"
 fi
+unset __zcompdump __zcompdump_fresh
 # Color completion lists like readline's colored-stats.
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 
@@ -97,7 +91,7 @@ if command -v starship &>/dev/null; then
   # subscript like [zle-keymap-select] into arithmetic ([zle - keymap - select]).
   __starship_keymap_widget='zle-keymap-select'
   if (($+functions[prompt_starship_precmd] == 0)); then
-    eval "$(starship init zsh)"
+    _shell_init_cache starship.zsh starship init zsh && source "$_shell_init_file"
   elif [[ ${widgets[$__starship_keymap_widget]:-} == user:starship_zle-keymap-select-wrapped &&
     ${__starship_preserved_zle_keymap_select:-} == starship_zle-keymap-select-wrapped ]]; then
     zle -N zle-keymap-select starship_zle-keymap-select
@@ -110,3 +104,11 @@ fi
 if (($+functions[_zsh_apply_base_path_order])); then
   _zsh_apply_base_path_order
 fi
+
+## Syntax Highlighting
+# Last, as zsh-syntax-highlighting asks, so it wraps every widget defined above.
+if __zsh_plugin_file=$(__zsh_plugin zsh-syntax-highlighting); then
+  source "$__zsh_plugin_file"
+fi
+unset __zsh_plugin_file
+unfunction __zsh_plugin

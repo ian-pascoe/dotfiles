@@ -91,10 +91,12 @@ brew "tailscale", restart_service: :changed
 brew "vhs"
 # General-purpose lossless data-compression library
 brew "zlib"
-# Next-generation plugin manager for zsh
-brew "zplug"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
 # A window border system for macOS
 brew "felixkratz/formulae/borders", trusted: true
 brew "yakitrak/yakitrak/obsidian-cli"

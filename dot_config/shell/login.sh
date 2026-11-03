@@ -10,11 +10,18 @@ else
   _shell_name='sh'
 fi
 
+## Init Script Cache (_shell_init_cache)
+if [ -f "$HOME/.config/shell/init-cache.sh" ]; then
+  . "$HOME/.config/shell/init-cache.sh"
+fi
+
 ## Homebrew/Linuxbrew
 if [ -x /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv "$_shell_name")"
+  _shell_init_cache "brew-shellenv.$_shell_name" /opt/homebrew/bin/brew shellenv "$_shell_name" &&
+    . "$_shell_init_file"
 elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv "$_shell_name")"
+  _shell_init_cache "brew-shellenv.$_shell_name" /home/linuxbrew/.linuxbrew/bin/brew shellenv "$_shell_name" &&
+    . "$_shell_init_file"
 fi
 
 ## Crosspack
@@ -45,8 +52,18 @@ if command -v mise &>/dev/null; then
 fi
 
 ## Tirith
-if command -v tirith &>/dev/null; then
-  eval "$(tirith init --shell "$_shell_name")"
+_shell_init_cache "tirith.$_shell_name" tirith init --shell "$_shell_name" &&
+  . "$_shell_init_file"
+
+## Tailscale
+# One `tailscale status` per login (~40ms each), shared with egress-proxy.sh.
+if command -v tailscale &>/dev/null && command -v jq &>/dev/null; then
+  _tailscale_status=$(tailscale status --json 2>/dev/null)
+  TAILSCALE_DOMAIN=$(printf '%s' "$_tailscale_status" | jq -r '
+    .Self.DNSName | sub("\\.$"; "") | split(".")[1:] | join(".")' 2>/dev/null)
+  TAILSCALE_IP=$(printf '%s' "$_tailscale_status" | jq -r '
+    [.Self.TailscaleIPs[]? | select(contains("."))][0] // empty' 2>/dev/null)
+  export TAILSCALE_DOMAIN TAILSCALE_IP
 fi
 
 ## Environment-Specific Env
@@ -58,6 +75,7 @@ fi
 if [ -f "$HOME/.config/shell/egress-proxy.sh" ]; then
   source "$HOME/.config/shell/egress-proxy.sh"
 fi
+unset _tailscale_status
 
 ## SSH terminal fallback
 if [ -n "${SSH_CONNECTION:-}" ] && [ "${TERM:-}" = "xterm-ghostty" ]; then

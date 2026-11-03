@@ -14,6 +14,17 @@
 # tailnet peer's MagicDNS name and addresses. Node's fetch ignores CIDR
 # entries, hence the per-peer addresses. Source this file again to pick up
 # new peers.
+#
+# login.sh passes the `tailscale status --json` it already read in
+# $_tailscale_status; sourced on its own, this file asks Tailscale itself.
+
+_egress_tailscale_status() {
+  if [ -n "${_tailscale_status:-}" ]; then
+    printf '%s\n' "$_tailscale_status"
+  else
+    tailscale status --json 2>/dev/null
+  fi
+}
 
 _egress_no_proxy() {
   {
@@ -23,7 +34,7 @@ _egress_no_proxy() {
       printf '%s\n' "$EGRESS_NO_PROXY_EXTRA" | tr ',' '\n'
     fi
     if command -v jq >/dev/null 2>&1 && command -v tailscale >/dev/null 2>&1; then
-      tailscale status --json 2>/dev/null | jq -r '
+      _egress_tailscale_status | jq -r '
         ([.Self] + [.Peer[]?])[]
         | (.DNSName // "" | rtrimstr(".") | split(".")[0]), .TailscaleIPs[]?'
     fi
@@ -36,7 +47,7 @@ _egress_proxy_reachable() {
   _egress_host=${EGRESS_PROXY_HTTP#*://}
   _egress_host=${_egress_host%%[:/]*}
   command -v tailscale >/dev/null 2>&1 && command -v jq >/dev/null 2>&1 || return 0
-  [ "$(tailscale status --json 2>/dev/null | jq -r --arg ip "$_egress_host" '
+  [ "$(_egress_tailscale_status | jq -r --arg ip "$_egress_host" '
     [.Peer[]? | select((.TailscaleIPs // []) | index($ip)) | .Online][0]
     | if . == null then true else . end
   ')" != false ]
@@ -63,5 +74,5 @@ if [ -n "${EGRESS_PROXY_HTTP:-}" ]; then
   fi
 fi
 
-unset -f _egress_no_proxy _egress_proxy_reachable
+unset -f _egress_no_proxy _egress_proxy_reachable _egress_tailscale_status
 unset _egress_host

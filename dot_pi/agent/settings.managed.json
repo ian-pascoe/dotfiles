@@ -189,9 +189,12 @@
         "requireRootMarker": true
       },
       "oxlint": {
-        "command": "oxlint",
-        "args": ["--lsp"],
-        "environment": { "GOMAXPROCS": "4" },
+        "command": "sh",
+        "args": [
+          "-c",
+          ": \"${OXLINT_TSGOLINT_PATH:=$(tsrslint-path)}\"; export OXLINT_TSGOLINT_PATH; exec oxlint --lsp"
+        ],
+        "environment": { "TSRSLINT_CHECKERS": "4" },
         "languages": [
           {
             "extensions": [".js", ".mjs", ".cjs"],

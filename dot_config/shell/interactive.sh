@@ -12,6 +12,11 @@ else
   return 0
 fi
 
+## Init Script Cache (_shell_init_cache)
+if [ -f "$HOME/.config/shell/init-cache.sh" ]; then
+  source "$HOME/.config/shell/init-cache.sh"
+fi
+
 ## Editor
 if command -v nvim &>/dev/null; then
   alias vim='nvim'
@@ -168,13 +173,14 @@ if command -v hunk &>/dev/null; then
 fi
 
 ## Completions
-if command -v omp &>/dev/null; then
-  eval "$(omp completions "$_shell_name")"
+# zsh loads omp's from the completion cache (completions.zsh) on first use.
+if [ "$_shell_name" = bash ]; then
+  _shell_init_cache omp-completions.bash omp completions bash &&
+    source "$_shell_init_file"
 fi
 
-if command -v hermes &>/dev/null; then
-  eval "$(hermes completion "$_shell_name")"
-fi
+_shell_init_cache "hermes-completion.$_shell_name" hermes completion "$_shell_name" &&
+  source "$_shell_init_file"
 
 # set-theme and set-theme-all take a theme family from list-themes, then a mode;
 # set-theme-all also takes -n/--dry-run before them, random-theme-all takes only
@@ -228,13 +234,12 @@ if command -v set-theme &>/dev/null; then
 fi
 
 ## FZF
-if command -v fzf &>/dev/null; then
-  eval "$(fzf --"$_shell_name")"
-fi
+_shell_init_cache "fzf.$_shell_name" fzf --"$_shell_name" &&
+  source "$_shell_init_file"
 
 ## Zoxide
-if command -v zoxide &>/dev/null; then
-  eval "$(zoxide init "$_shell_name")"
+if _shell_init_cache "zoxide.$_shell_name" zoxide init "$_shell_name"; then
+  source "$_shell_init_file"
   zd() {
     if [ $# -eq 0 ]; then
       builtin cd ~ && zoxide add "$(pwd)" && return

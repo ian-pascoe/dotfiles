@@ -19,6 +19,13 @@ _zsh_prepend_path_existing() {
 }
 
 _zsh_apply_base_path_order() {
+  # Only Linux has Linuxbrew. On macOS any lookup under /home wakes the
+  # automounter, ~18ms each, and this runs several times per shell.
+  local -a linuxbrew
+  case "$OSTYPE" in
+  linux*) linuxbrew=(/home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin) ;;
+  esac
+
   _zsh_prepend_path_existing \
     "$HOME/.local/bin" \
     "${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims" \
@@ -28,6 +35,5 @@ _zsh_apply_base_path_order() {
     "$HOME/.cargo/bin" \
     /opt/homebrew/bin \
     /opt/homebrew/sbin \
-    /home/linuxbrew/.linuxbrew/bin \
-    /home/linuxbrew/.linuxbrew/sbin
+    "${linuxbrew[@]}"
 }

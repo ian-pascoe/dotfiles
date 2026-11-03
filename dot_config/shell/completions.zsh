@@ -13,6 +13,7 @@ typeset -gA _zsh_generated_completions=(
   _bun 'bun completions'
   _cargo 'rustup completions zsh cargo'
   _gh 'gh completion -s zsh'
+  _omp 'omp completions zsh'
   _pnpm 'pnpm completion zsh'
   _rustup 'rustup completions zsh rustup'
   _starship 'starship completions zsh'
@@ -46,15 +47,23 @@ _zsh_build_completion_cache() {
     _zsh_is_compdef_file "$tmp/$name" || rm -f "$tmp/$name"
   done
 
+  print -r -- "$_zsh_completion_generators" >"$tmp/.generators"
   rm -rf "$dir" && mv "$tmp" "$dir"
 }
 
-# The directory's mtime is when it was built. Shells starting together (restored
-# tabs) would race on the swap, so only the one holding the lock rebuilds.
+# The directory's mtime is when it was built; .generators records the list
+# above it was built from, so a changed list rebuilds it too. Shells starting
+# together (restored tabs) would race on the swap, so only the one holding the
+# lock rebuilds.
+_zsh_completion_generators=
+for _zsh_name in ${(ok)_zsh_generated_completions}; do
+  _zsh_completion_generators+="$_zsh_name=${_zsh_generated_completions[$_zsh_name]};"
+done
+unset _zsh_name
 () {
   local dir=$_zsh_completion_cache lock fd
   local -a fresh=($dir(N/mh-24))
-  ((${#fresh})) && return
+  ((${#fresh})) && [[ -r $dir/.generators && $(<$dir/.generators) == "$_zsh_completion_generators" ]] && return
 
   lock="$dir.lock"
   mkdir -p "${dir:h}" && : >>"$lock" || return

@@ -165,6 +165,10 @@ zoxide = "latest"
 "npm:intelephense" = "latest"
 "npm:oxfmt" = "latest"
 "npm:oxlint" = "latest"
+# oxlint's type-aware backend for Pi's oxlint LSP (settings.managed.json points OXLINT_TSGOLINT_PATH at it):
+# tsgolint ported to Rust on tsrs, until oxc-project/tsrs#378 ships an official one. Kept next to
+# oxlint-tsgolint, whose `tsgolint` stays oxlint's PATH fallback elsewhere.
+"npm:@maschwenk/tsrslint" = "latest"
 "npm:oxlint-tsgolint" = "latest"
 "npm:pi-acp" = "latest"
 "npm:rea-agents" = "latest"

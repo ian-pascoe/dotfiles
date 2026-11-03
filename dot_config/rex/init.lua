@@ -35,14 +35,19 @@ local function foreground(block_id)
 end
 
 -- A floating pane over the active tab, like herdr's popup commands. The pane
--- closes when its command exits.
-local function popup(command, cwd)
+-- closes when its command exits. `options` adds shell block options, such as
+-- login = false.
+local function popup(command, cwd, options)
+  local block_options = { command = command, cwd = cwd }
+  for key, value in pairs(options or {}) do
+    block_options[key] = value
+  end
   local _, err = rex.session.new_layer({
     bounds = { 0.05, 0.05, 0.9, 0.9 },
     focus = true,
     layout = rex.layout.block({
       flavor = SHELL,
-      options = { command = command, cwd = cwd },
+      options = block_options,
     }),
   })
   if err ~= nil then
@@ -185,14 +190,31 @@ bind_prefixed("[", "edit_scrollback")
 -- Commands
 ----------------------------------------------------------------------------
 
+-- mise's link to its newest Neovim. Starting it directly skips the mise
+-- shim, which costs about 80ms a launch.
+local MISE_NVIM = (os.getenv("XDG_DATA_HOME") or HOME .. "/.local/share") .. "/mise/installs/neovim/latest/bin/nvim"
+
+local function nvim_bin()
+  local file = io.open(MISE_NVIM)
+  if file then
+    file:close()
+    return MISE_NVIM
+  end
+  return "nvim"
+end
+
 rex.action({
   name = "neogit",
   title = "Neogit",
   category = "Commands",
   run = function(ctx)
     -- NeogitPopup (nvim plugins/editor.lua) quits nvim when Neogit closes.
+    -- login = false: zsh reads only .zshenv (XDG dirs, EDITOR,
+    -- GIT_OPTIONAL_LOCKS) and skips the login profile (brew, mise activate,
+    -- ~/.env, egress proxy), which took ~0.5s of a ~1.1s open. The server's
+    -- PATH already has Homebrew and the mise shims.
     local fg = foreground(ctx.block_id)
-    popup({ "nvim", "+NeogitPopup" }, fg and fg.cwd or nil)
+    popup({ nvim_bin(), "+NeogitPopup" }, fg and fg.cwd or nil, { login = false })
   end,
 })
 bind_prefixed("g", "neogit")
