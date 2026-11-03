@@ -150,8 +150,8 @@ zoxide = "latest"
   "macos/x64",
 ], allow_low_downloads = true }
 "npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
-"npm:@playwright/mcp" = "latest"
-"npm:agent-browser" = "latest"
+"npm:agent-browser" = { version = "latest", allow_builds = ["agent-browser"] }
+"npm:agent-desktop" = { version = "latest", allow_builds = ["agent-desktop"] }
 # 2.0 betas are token-published without provenance; tarballs match the GitHub release assets.
 "npm:executor" = { version = "beta", trust_policy_excludes = [
   "executor@2.0.0-beta.33 || 2.0.0-beta.33-darwin-arm64 || 2.0.0-beta.33-darwin-x64 || 2.0.0-beta.33-linux-arm64 || 2.0.0-beta.33-linux-x64 || 2.0.0-beta.33-win32-x64",
@@ -179,8 +179,8 @@ zoxide = "latest"
 "npm:vscode-langservers-extracted" = "latest"
 "npm:yaml-language-server" = "latest"
 
-"pipx:browser-use" = "latest"
-"pipx:camoufox" = "latest"
+# PyYAML has no cp315 wheel; the source build lacks libyaml, so CLoader is missing.
+"pipx:camoufox" = { version = "latest", python = "3.13" }
 "pipx:pyflakes" = "latest"
 "pipx:pytest" = "latest"
 "pipx:spotdl" = "latest"

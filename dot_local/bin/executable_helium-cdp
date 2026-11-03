@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Prints the DevTools WebSocket URL of the running Helium, for
+#   agent-browser --session NAME --pin-tab connect "$(helium-cdp)"
+# Helium writes DevToolsActivePort (port, then browser path) to its profile
+# folder while helium://inspect/#remote-debugging is on. The port and path
+# change each time Helium starts, and agent-browser --auto-connect only looks
+# in Chrome, Chromium and Brave folders, so the URL is read fresh here.
+set -euo pipefail
+
+case "$(uname -s)" in
+Darwin) profile="$HOME/Library/Application Support/net.imput.helium" ;;
+*) profile="${XDG_CONFIG_HOME:-$HOME/.config}/net.imput.helium" ;;
+esac
+file="$profile/DevToolsActivePort"
+
+if ! pgrep -x -i helium >/dev/null; then
+  echo "helium-cdp: Helium is not running" >&2
+  exit 1
+fi
+if [[ ! -r $file ]]; then
+  echo "helium-cdp: remote debugging is off; turn it on at helium://inspect/#remote-debugging" >&2
+  exit 1
+fi
+
+{ read -r port && read -r path; } <"$file" || true
+if [[ -z ${port:-} || -z ${path:-} ]]; then
+  echo "helium-cdp: $file is incomplete" >&2
+  exit 1
+fi
+printf 'ws://127.0.0.1:%s%s\n' "$port" "$path"

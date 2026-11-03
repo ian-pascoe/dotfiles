@@ -1,26 +1,5 @@
 {
   "mcpServers": {
-    "browser-use": {
-      "enabled": true,
-      "command": "playwright-mcp",
-      "args": ["--output-dir", "~/.cache/playwright-mcp", "--extension"],
-      "env": {
-        "PLAYWRIGHT_MCP_EXECUTABLE_PATH": "${DEFAULT_BROWSER_EXECUTABLE_PATH}",
-        "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "${PLAYWRIGHT_MCP_EXTENSION_TOKEN}"
-      },
-      "exposure": "codemode"
-    },
-    "computer-use": {
-      "enabled": true,
-      "command": "cua-driver",
-      "args": ["mcp"],
-      "exposure": "codemode",
-      "toolExposure": {
-        "browser_*": "hidden",
-        "get_browser_state": "hidden",
-        "page": "hidden"
-      }
-    },
     "executor": {
       "enabled": true,
       "url": "https://mcp.executor.sh/mcp",
@@ -40,11 +19,6 @@
     "superlogical": {
       "enabled": true,
       "url": "https://www.superlogical.com/rex/community-mcp",
-      "exposure": "codemode"
-    },
-    "upsy": {
-      "enabled": true,
-      "url": "https://upsy.ai/connect",
       "exposure": "codemode"
     }
   }

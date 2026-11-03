@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "1f8ac53994435e13418a083940ab7c461c8c1dd5",
+      "skillFolderHash": "c08b2590d2be1bef41ca44be540584a1324a09d3",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-11-02T12:49:15.777Z"
+      "updatedAt": "2026-11-03T12:35:12.837Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -332,9 +332,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/nicobailon/visual-explainer.git",
       "skillPath": "plugins/visual-explainer/SKILL.md",
-      "skillFolderHash": "d8115f8f5d1edf84c162af66506d292d62e43411",
+      "skillFolderHash": "b45901bb744cb48d9a792f9d46fa831996d11f41",
       "installedAt": "2026-08-17T09:50:57.504Z",
-      "updatedAt": "2026-10-30T12:07:10.372Z"
+      "updatedAt": "2026-11-03T12:35:13.064Z"
     },
     "show-me": {
       "source": "humanlayer/skills",
@@ -625,6 +625,25 @@
       "skillFolderHash": "5fa69871913b9b96d694b72f6e86f9a3c179f189",
       "installedAt": "2026-10-31T11:59:33.683Z",
       "updatedAt": "2026-10-31T12:00:03.488Z"
+    },
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "skillFolderHash": "29ba9c12789b1c54ab76ad40e2472e646d141b85",
+      "pluginName": "agent-browser",
+      "installedAt": "2026-11-03T13:46:16.680Z",
+      "updatedAt": "2026-11-03T13:46:16.680Z"
+    },
+    "agent-desktop": {
+      "source": "vercel-labs/agent-desktop",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-desktop.git",
+      "skillPath": "skills/agent-desktop/SKILL.md",
+      "skillFolderHash": "c2bba5cd6a974b6a4d5b3cde7bf7028d15fc4749",
+      "installedAt": "2026-11-03T13:46:38.618Z",
+      "updatedAt": "2026-11-03T13:46:38.618Z"
     }
   },
   "dismissed": {
