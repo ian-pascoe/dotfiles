@@ -1,4 +1,4 @@
-// Every folder in dot_themes/ is a theme variant (see CONTEXT.md): a complete set
+// Every folder in dot_themes/ is a theme variant (see GLOSSARY.md): a complete set
 // of per-app files that ~/.config/theme can point at. This keeps the variants
 // complete and their families consistent. Source names carry the attributes:
 // `empty_light.mode` deploys the empty marker file `light.mode`.

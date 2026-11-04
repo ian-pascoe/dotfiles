@@ -6,7 +6,7 @@ variant is done when `pnpm test` is green and `pnpm check-nvim <variant>`
 applies its colorscheme with no error.
 
 Name variants in kebab case. A family's dark variant usually takes the family
-name (`horizon`, light `horizon-bright`); see `CONTEXT.md` for families and
+name (`horizon`, light `horizon-bright`); see `GLOSSARY.md` for families and
 modes.
 
 ## 1. Per-app files: the generator

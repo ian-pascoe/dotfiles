@@ -6,10 +6,10 @@ tern/**
 .pi/agent/settings.managed.json
 .pi/agent/settings.defaults.json
 docs/**
-CONTEXT-MAP.md
-**/CONTEXT.md
+GLOSSARY-MAP.md
+**/GLOSSARY.md
 **/docs/adr/**
-# Theming context docs; anything deployed into ~/.themes would list as a theme
+# Theming glossary docs; anything deployed into ~/.themes would list as a theme
 .themes/docs
 .themes/tools
 

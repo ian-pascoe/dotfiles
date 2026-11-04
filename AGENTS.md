@@ -1,4 +1,4 @@
-# Chezmoi Source
+# Chezmoi Dotfiles Instructions
 
 - Chezmoi source names encode target paths and attributes: for example,
   `dot_config/` deploys to `~/.config/`. Check `.chezmoiignore` for repo-only and

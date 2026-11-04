@@ -1,6 +1,6 @@
 // Theme-variant generator. A variant's colors live in one roles file,
 // dot_themes/tools/roles/<variant>.json; `generate` turns it into the per-app files of
-// dot_themes/<variant>/ (see ../CONTEXT.md and ../themes.test.ts for what a variant is).
+// dot_themes/<variant>/ (see ../GLOSSARY.md and ../themes.test.ts for what a variant is).
 //
 //   node dot_themes/tools/new-variant.ts seed <variant> --ghostty "<Bundled Name>" [--mode light|dark] [--family f]
 //   node dot_themes/tools/new-variant.ts seed <variant>            # template with terminal colors to fill

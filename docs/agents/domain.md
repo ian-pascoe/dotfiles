@@ -4,7 +4,7 @@ How engineering skills consume this repository's domain documentation.
 
 ## Before exploring
 
-Read `CONTEXT-MAP.md`, then read each `CONTEXT.md` relevant to the work.
+Read `GLOSSARY-MAP.md`, then read each `GLOSSARY.md` relevant to the work.
 
 Also read:
 
@@ -18,26 +18,26 @@ creates these files lazily when terminology or decisions are resolved.
 
 - **Pi agent configuration**
   - Source: `dot_pi/agent/`
-  - Glossary: `dot_pi/agent/CONTEXT.md`
+  - Glossary: `dot_pi/agent/GLOSSARY.md`
   - ADRs: `dot_pi/agent/docs/adr/`
 - **Oh My Pi configuration**
   - Source: `dot_omp/agent/`
-  - Glossary: `dot_omp/agent/CONTEXT.md`
+  - Glossary: `dot_omp/agent/GLOSSARY.md`
   - ADRs: `dot_omp/agent/docs/adr/`
 - **OpenCode configuration**
   - Source: `dot_config/opencode/`
-  - Glossary: `dot_config/opencode/CONTEXT.md`
+  - Glossary: `dot_config/opencode/GLOSSARY.md`
   - ADRs: `dot_config/opencode/docs/adr/`
 - **Theming**
   - Source: `dot_themes/`, theme scripts in `dot_local/bin/`
-  - Glossary: `dot_themes/CONTEXT.md`
+  - Glossary: `dot_themes/GLOSSARY.md`
   - ADRs: `dot_themes/docs/adr/`
 
 Read every affected context for cross-context changes.
 
 ## Use the glossary's vocabulary
 
-Use terms as defined by the relevant `CONTEXT.md`. Avoid synonyms that its glossary
+Use terms as defined by the relevant `GLOSSARY.md`. Avoid synonyms that its glossary
 explicitly rejects.
 
 If a needed concept is absent, reconsider whether it belongs to the domain or
