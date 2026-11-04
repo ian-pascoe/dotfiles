@@ -33,12 +33,12 @@ go = "latest"
 google-java-format = "latest"
 goreleaser = "latest"
 gradle = "latest"
-grok = { version = "latest", bin = "grok", platforms = { windows-arm64 = { bin = "grok.exe", url = "https://storage.googleapis.com/grok-build-public-artifacts/cli/grok-{{ version }}-windows-aarch64.exe" }, windows-x64 = { bin = "grok.exe", url = "https://storage.googleapis.com/grok-build-public-artifacts/cli/grok-{{ version }}-windows-x86_64.exe" } }, url = 'https://storage.googleapis.com/grok-build-public-artifacts/cli/grok-{{ version }}-{{ os() }}-{{ arch(x64="x86_64", arm64="aarch64") }}', version_list_url = "https://x.ai/cli/stable" }
 helm = "latest"
 herdr = "latest"
 imagemagick = "latest"
 java = ["25", "21"]
 jq = "latest"
+just = "latest"
 k9s = "latest"
 ktlint = "latest"
 kubectl = "latest"
@@ -55,9 +55,11 @@ neovim = "latest"
 ninja = "latest"
 node = "latest"
 nushell = "latest"
-oh-my-pi = { version = "latest", rename_exe = "omp" }
+oxfmt = "latest"
+oxlint = "latest"
 # The PHP backend builds from source; system development libraries are still required.
 php = { version = "latest", os = ["linux", "macos"] }
+pi = "latest"
 pipx = "latest"
 playwright = "latest"
 pnpm = "latest"
@@ -79,13 +81,12 @@ syncthing = "latest"
 taplo = "latest"
 terraform = "latest"
 terraform-ls = "latest"
-tmux = { version = "latest", os = ["linux", "macos"] }
 tree-sitter = "latest"
 uv = "latest"
+wrangler = "latest"
 yazi = "latest"
 yq = "latest"
 yt-dlp = "latest"
-zellij = "latest"
 zig = "latest"
 zls = "latest"
 zoxide = "latest"
@@ -133,7 +134,6 @@ zoxide = "latest"
 "cargo:lspctl" = "latest"
 "cargo:plannotator-tui" = "latest"
 
-"npm:@earendil-works/pi-coding-agent" = "latest"
 "npm:@firecrawl/anydoc" = "latest"
 "npm:@googleworkspace/cli" = "latest"
 # Low-download packages: npm provenance points to anomalyco/terminal-control's npm-release.yml.
@@ -149,12 +149,12 @@ zoxide = "latest"
 "npm:@kitlangton/terminal-control-darwin-x64" = { version = "latest", os = [
   "macos/x64",
 ], allow_low_downloads = true }
-"npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
 "npm:agent-browser" = { version = "latest", allow_builds = ["agent-browser"] }
 "npm:agent-desktop" = { version = "latest", allow_builds = ["agent-desktop"] }
+"npm:alchemy" = { version = "next", allow_builds = ["alchemy"] }
 # 2.0 betas are token-published without provenance; tarballs match the GitHub release assets.
 "npm:executor" = { version = "beta", trust_policy_excludes = [
-  "executor@2.0.0-beta.33 || 2.0.0-beta.33-darwin-arm64 || 2.0.0-beta.33-darwin-x64 || 2.0.0-beta.33-linux-arm64 || 2.0.0-beta.33-linux-x64 || 2.0.0-beta.33-win32-x64",
+  "executor@2.0.0-beta.35 || 2.0.0-beta.35-darwin-arm64 || 2.0.0-beta.35-darwin-x64 || 2.0.0-beta.35-linux-arm64 || 2.0.0-beta.35-linux-x64 || 2.0.0-beta.35-win32-x64",
 ] }
 "npm:hunkdiff" = "latest"
 "npm:impeccable" = "latest"
@@ -163,8 +163,6 @@ zoxide = "latest"
 "npm:bash-language-server" = "latest"
 "npm:dockerfile-language-server-nodejs" = "latest"
 "npm:intelephense" = "latest"
-"npm:oxfmt" = "latest"
-"npm:oxlint" = "latest"
 # oxlint's type-aware backend for Pi's oxlint LSP (settings.managed.json points OXLINT_TSGOLINT_PATH at it):
 # tsgolint ported to Rust on tsrs, until oxc-project/tsrs#378 ships an official one. Kept next to
 # oxlint-tsgolint, whose `tsgolint` stays oxlint's PATH fallback elsewhere.
@@ -185,4 +183,3 @@ zoxide = "latest"
 "pipx:pytest" = "latest"
 "pipx:spotdl" = "latest"
 "pipx:trafilatura" = "latest"
-just = "latest"

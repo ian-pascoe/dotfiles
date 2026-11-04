@@ -173,9 +173,13 @@ if command -v hunk &>/dev/null; then
 fi
 
 ## Completions
-# zsh loads omp's from the completion cache (completions.zsh) on first use.
+# zsh loads omp's and bun's from the completion cache (completions.zsh) on first use.
 if [ "$_shell_name" = bash ]; then
   _shell_init_cache omp-completions.bash omp completions bash &&
+    source "$_shell_init_file"
+  # bun picks the shell from $SHELL, not an argument. If bun is missing it
+  # prints nothing, so there is nothing to source.
+  _shell_init_cache bun-completions.bash env SHELL=bash bun completions &&
     source "$_shell_init_file"
 fi
 
