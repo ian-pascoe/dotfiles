@@ -36,5 +36,5 @@ Triage uses the five canonical labels. See `docs/agents/triage-labels.md`.
 
 ### Domain docs
 
-This repository uses multiple domain contexts for Pi, Oh My Pi, and OpenCode configuration.
+This repository uses multiple domain contexts: Pi agent configuration and Theming.
 See `docs/agents/domain.md`.
