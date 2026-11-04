@@ -1,4 +1,5 @@
 README.md
+LICENSE
 AGENTS.md
 CLAUDE.md
 .claude/mcp-servers.json
@@ -58,6 +59,8 @@ Brewfile
 Library/LaunchAgents/net.syncthing.syncthing.plist
 Library/LaunchAgents/local.clean-code-sign-clones.plist
 .local/bin/clean-code-sign-clones
+Library/LaunchAgents/local.clean-tmp.plist
+.local/bin/clean-tmp
 Library/Application Support/Tern
 .hammerspoon
 .config/aerospace

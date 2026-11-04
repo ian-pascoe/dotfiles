@@ -1,0 +1,109 @@
+#!/bin/sh
+# Remove my stale temporary files more often than macOS does.
+#
+# macOS's tmp_cleaner runs daily at midnight and only removes /tmp files
+# untouched for 3 days, and nothing routinely cleans the per-user
+# $TMPDIR (/var/folders/.../T), which agent-heavy use outgrows. Anything
+# younger than CLEAN_TMP_HOURS (default 24) is kept. Set CLEAN_TMP_DRY_RUN=1
+# to list what would be removed without removing it.
+set -eu
+export LC_ALL=C
+
+hours="${CLEAN_TMP_HOURS:-24}"
+mins=$((hours * 60))
+uid="$(id -u)"
+dry_run="${CLEAN_TMP_DRY_RUN:-}"
+newline='
+'
+
+log() {
+	echo "$(date '+%Y-%m-%dT%H:%M:%S%z') $*"
+}
+
+# /tmp: like tmp_cleaner, remove my files and symlinks whose access,
+# modification, and status-change times are all old, then my empty
+# directories. Other users' files, sockets, and X11 lock files are left alone.
+clean_tmp() {
+	dir=/private/tmp
+	cd "$dir" || return 0
+	action=-delete
+	[ -n "$dry_run" ] && action=-true
+	{
+		find -dx . -fstype local \( -type f -o -type l \) -user "$uid" \
+			-amin +"$mins" -mmin +"$mins" -cmin +"$mins" \
+			! -name '.X*-lock' "$action" -print
+		find -dx . -fstype local ! -name . -type d -empty -user "$uid" \
+			-mmin +"$mins" ! -name '.X11-unix' ! -name '.ICE-unix' \
+			! -name '.font-unix' ! -name '.XIM-unix' "$action" -print
+	} 2>/dev/null | while IFS= read -r path; do
+		log "${dry_run:+would have }removed $dir${path#.}"
+	done
+}
+
+# $TMPDIR: apps keep state here too, so remove whole top-level entries only
+# when all of these hold:
+# - the name looks generated (mktemp suffix, UUID, hash, or pid), so
+#   fixed-name app state such as zellij-501 or TemporaryItems is kept;
+# - nothing inside was modified, changed, or read within the window;
+# - no running process of mine has a file, cwd, or socket inside it.
+clean_user_tmpdir() {
+	dir="$(getconf DARWIN_USER_TEMP_DIR)"
+	cd "$dir" || return 0
+	real="$(pwd -P)"
+	work="$(mktemp -d)"
+	trap 'rm -rf "$work"' EXIT
+
+	# Without a usable process list, nothing can be shown to be unused.
+	lsof -n -P -w -u "$uid" -Fn 2>/dev/null >"$work/lsof" || true
+	[ -s "$work/lsof" ] || {
+		log "lsof returned nothing; skipping $dir"
+		return 0
+	}
+	awk -v a="$real/" -v b="${real#/private}/" '
+		/^n/ {
+			p = substr($0, 2)
+			if (index(p, a) == 1) p = substr(p, length(a) + 1)
+			else if (index(p, b) == 1) p = substr(p, length(b) + 1)
+			else next
+			sub(/\/.*/, "", p)
+			if (p != "") print p
+		}' "$work/lsof" >"$work/keep"
+
+	# Directory atimes are skipped because listing a directory, as this
+	# find does, updates its atime.
+	find -x . -mindepth 1 \( -mmin -"$mins" -o -cmin -"$mins" \
+		-o \( -type f -amin -"$mins" \) \) -print 2>/dev/null |
+		cut -d/ -f2 >>"$work/keep"
+	sort -u "$work/keep" -o "$work/keep"
+
+	find -x . -mindepth 1 -maxdepth 1 -user "$uid" ! -name 'com.apple.*' \
+		! -name "*$newline*" 2>/dev/null | cut -c3- | awk '
+		function generated(n,   base, s) {
+			if (n ~ /[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/) return 1
+			if (n ~ /[0-9a-f]{16}/) return 1
+			base = n
+			sub(/\.[A-Za-z]{1,5}$/, "", base)
+			# mktemp-style suffix: 6+ alphanumerics after a separator,
+			# with a digit or capital so plain words do not match.
+			if (base ~ /[-._+][A-Za-z0-9]{6,}$/) {
+				match(base, /[A-Za-z0-9]+$/)
+				s = substr(base, RSTART)
+				if (s ~ /[0-9A-Z]/) return 1
+			}
+			# pid or counter suffix, e.g. PSES-85050, proc-macro-srvff6e-0
+			if (base ~ /[0-9]{4,}$/ || base ~ /[0-9a-f]{4,}-[0-9]+$/) return 1
+			return 0
+		}
+		generated($0)' | sort -u >"$work/candidates"
+
+	comm -23 "$work/candidates" "$work/keep" | while IFS= read -r name; do
+		[ -n "$name" ] || continue
+		if [ -z "$dry_run" ]; then
+			rm -rf "./$name" 2>/dev/null || continue
+		fi
+		log "${dry_run:+would have }removed $dir$name"
+	done
+}
+
+clean_tmp
+clean_user_tmpdir
