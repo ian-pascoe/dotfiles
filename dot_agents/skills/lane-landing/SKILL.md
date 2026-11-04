@@ -27,7 +27,7 @@ Present the plan as an `escalating-to-user` ledger worded so "yes" approves it, 
 - the seams for each ticket
 - the excluded tickets and why
 - the open PRs being resumed
-- the repo's merge method: squash, merge commit, or rebase
+- the repo's merge method: squash, merge commit, or rebase, settled already when `code-host` found one in the code host config
 - the implementer model, by default the harness's implementation tier
 - the lane cap, by default three lanes building at once
 

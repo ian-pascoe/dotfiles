@@ -17,7 +17,7 @@ description: >
 
 # agent-desktop
 
-agent-desktop is a CLI that lets an AI agent observe and operate desktop apps through the OS accessibility tree. It is a tool, not an agent. Every command prints one JSON envelope (`ok`, `data` or `error`). The observe, act and verify loop runs in you.
+agent-desktop is a CLI that reads and operates desktop apps through the OS accessibility tree. Every command prints one JSON envelope (`ok`, `data` or `error`). It is a tool, not an agent: the observe, act and verify loop runs in you.
 
 ## Shell syntax
 

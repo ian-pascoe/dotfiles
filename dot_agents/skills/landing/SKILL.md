@@ -52,7 +52,7 @@ The code host's **merge rules** gate every merge: merge through them as they sta
 
 Wait while checks are pending; if anything else blocks, hold the PR and escalate.
 
-Merge (**Merge**), passing the method explicitly: squash, else a merge commit, else rebase, as the repo allows (**Merge methods & merge queue**). Pin the merge to the reviewed head; where the host can't, re-read the head first and go back to **Review** if it moved. Where the rules require a **merge queue**, this merge enters it: that is the host's gate, entered once landing's own gates pass.
+Merge (**Merge**), passing the method explicitly: the merge method `code-host` found in the code host config, else squash, else a merge commit, else rebase, as the repo allows (**Merge methods & merge queue**). If the repo no longer allows the config's method, hold the PR and escalate. Pin the merge to the reviewed head; where the host can't, re-read the head first and go back to **Review** if it moved. Where the rules require a **merge queue**, this merge enters it: that is the host's gate, entered once landing's own gates pass.
 
 Then read the PR back (**Read back**):
 

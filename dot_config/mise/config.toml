@@ -170,6 +170,7 @@ zoxide = "latest"
 "npm:oxlint-tsgolint" = "latest"
 "npm:pi-acp" = "latest"
 "npm:rea-agents" = "latest"
+"npm:skills" = "latest"
 "npm:sql-language-server" = "latest"
 # tsrs-lsp's fallback outside Effect projects. Pinned: mise skips prereleases for `latest`, and tsrs has only those.
 "npm:tsrs" = "latest"

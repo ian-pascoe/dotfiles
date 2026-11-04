@@ -7,7 +7,7 @@ Find the repo's **code host** and load its **code host reference** from `referen
 
 ## Find the code host
 
-The code host is the service holding the remote the branch pushes to: its push remote, else `origin`. Take the host you were told, by the user or a brief, else the one the tracker doc (`docs/agents/issue-tracker.md`) names, else the remote's hostname from this table:
+The code host is the service holding the remote the branch pushes to: its push remote, else the one the **code host config** (`docs/agents/code-host.md`) names, else `origin`. Take the host you were told, by the user or a brief, else the config's host and reference when it names that remote, else the one the tracker doc (`docs/agents/issue-tracker.md`) names, else the remote's hostname from this table:
 
 | Hostname                                                   | Reference         |
 | ---------------------------------------------------------- | ----------------- |
@@ -21,8 +21,10 @@ The code host is the service holding the remote the branch pushes to: its push r
 
 For any other hostname, probe in order: `https://<host>/api/forgejo/v1/version` answers, Forgejo; `https://<host>/api/v1/version` answers, Gitea; otherwise the host whose CLI (`gh`, `glab`, `cafe`) recognises the repo. When none does, or more than one, the host is **ambiguous**.
 
+Take the code host config's merge method too, if it names one, when it names that remote, for the skill that ran this one. A code host config naming a remote this repo doesn't have is **stale**: report it rather than detecting past it.
+
 ## Check access
 
 Check that the host's tool or token works and that you can push to that remote, or learn it from the first push where the host can't tell (**Detect & auth**).
 
-Done when you hold one reference whose tool works and can push, or can name what's missing: no remote, an ambiguous host, a host or edition no reference covers, missing auth, or no push access.
+Done when you hold one reference whose tool works and can push, plus the code host config's merge method if you took it; or can name what's missing: no remote, a stale code host config, an ambiguous host, a host or edition no reference covers, missing auth, or no push access.
