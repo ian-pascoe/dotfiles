@@ -1,0 +1,241 @@
+#!/usr/bin/env bash
+# plannotator-tui's Herdr review pane, in Rex: herdr-annotate's document and
+# agent-reply review, with the feedback sent straight to the agent's pane.
+#
+# Usage:
+#   rex-plannotator open [PATH] [--gate] [--result-file PATH]   (agents)
+#   rex-plannotator review --target BLOCK [...]                 (the popup)
+#
+# `review` runs plannotator-tui's Herdr pane entrypoint with HERDR_BIN_PATH
+# pointing back here, so the herdr commands it runs (agent prompt, pane get,
+# pane read, agent read) are answered with rex. That is plannotator-tui's
+# internal herdr contract, as of plannotator-tui 0.9.9; a newer release may
+# change it. init.lua's annotate_* actions and `open` show the review in a
+# popup.
+set -u
+
+rex_bin=rex
+if [[ -n ${REX_BIN_DIR:-} && -x $REX_BIN_DIR/rex ]]; then
+  rex_bin=$REX_BIN_DIR/rex
+fi
+
+rex() { "$rex_bin" "$@"; }
+
+self=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")
+
+# Leaves the message on screen: a popup closes when its command exits.
+die() {
+  printf '\n%s\n\n' "$*" >&2
+  [[ -t 0 ]] && read -rsn1 -p "Press any key to close"
+  exit 1
+}
+
+# Fails the way herdr does: a JSON envelope on stderr, whose code
+# plannotator-tui maps to "blocked" (retry later) or "unavailable".
+herdr_error() { # code message
+  jq -nc --arg code "$1" --arg message "$2" '{error: {code: $code, message: $message}}' >&2
+  exit 1
+}
+
+# For a flag's argument loop: dies unless the flag ($1) has a value ($2).
+need_value() {
+  [[ $# -ge 2 && -n $2 ]] || die "$1 needs a value"
+}
+
+absolute() { # path
+  if [[ $1 == /* ]]; then printf '%s' "$1"; else printf '%s/%s' "$PWD" "$1"; fi
+}
+
+# plannotator-tui's host label for the agent a program or Rex app name names,
+# or failure for a program whose transcripts it can't read.
+host_label() { # name
+  local name
+  name=$(tr '[:upper:]' '[:lower:]' <<<"${1##*/}")
+  case $name in
+  claude | claude-code | "claude code") echo claude ;;
+  codex | pi | omp | copilot | droid | hermes | opencode | cmd | agy) echo "$name" ;;
+  *) return 1 ;;
+  esac
+}
+
+# Reads the agent in block into $agent (its host label when plannotator-tui
+# knows it, else the name Rex reports), $agent_pid and $agent_cwd, and the
+# block's program status into $program_status. Returns 1 when the block
+# doesn't exist, 2 when no agent runs in it.
+#
+# An agent is a program that reports Rex's program status (shells and editors
+# report none), or a foreground process plannotator-tui knows by name.
+read_agent() { # block
+  local process app process_name record_pid process_pid
+  agent='' agent_pid='' agent_cwd=''
+  program_status=$(rex block call -b "$1" program_status 2>/dev/null) || return 1
+  process=$(rex block call -b "$1" process 2>/dev/null) || process='{}'
+  {
+    read -r app
+    read -r record_pid
+    read -r process_name
+    read -r process_pid
+    read -r agent_cwd
+  } < <(jq -nr --argjson s "$program_status" --argjson p "$process" '
+    ([$s.records[]? | select(.app)] | first) as $r
+    | $r.app, $r.owner.pid, $p.foreground.name, $p.foreground.pid,
+      ($p.foreground.cwd // $p.child.cwd)
+    | . // ""')
+  if [[ -n $app ]]; then
+    agent=$(host_label "$app") || agent=$app
+    agent_pid=${record_pid:-$process_pid}
+  elif agent=$(host_label "$process_name"); then
+    agent_pid=$process_pid
+  else
+    agent=''
+    return 2
+  fi
+}
+
+# herdr's `agent prompt`: the feedback as the agent's next message, pasted in
+# one piece when the agent takes bracketed paste, then Enter.
+agent_prompt() { # block text
+  local block=${1:-} text modes
+  [[ -n $block && -n ${2:-} ]] || herdr_error empty_agent_prompt "agent prompt needs a pane and text"
+  read_agent "$block"
+  case $? in
+  1) herdr_error pane_not_found "pane $block not found" ;;
+  2) herdr_error agent_not_found "no agent runs in pane $block" ;;
+  esac
+  if jq -e 'any(.records[]?; .state == "blocked")' <<<"$program_status" >/dev/null; then
+    herdr_error agent_blocked "the agent in $block is waiting at a prompt"
+  fi
+  # Control characters out, but for line breaks and tabs: quoted terminal text
+  # can carry ESC [201~, which would end the paste early.
+  text=$(printf '%s' "$2" | LC_ALL=C tr -d '\000-\010\013-\037\177')
+  modes=$(rex block call -b "$block" modes 2>/dev/null) || modes='{}'
+  if jq -e 'any(.modes[]?; .name == "bracketed_paste" and .set)' <<<"$modes" >/dev/null; then
+    text=$'\e[200~'$text$'\e[201~'
+  fi
+  printf '%s' "$text" | rex send -b "$block"
+  rex send-key -b "$block" enter
+}
+
+# herdr's `pane get` envelope, with the agent only when there is one.
+pane_get() { # block
+  read_agent "${1:-}"
+  [[ $? == 1 ]] && herdr_error pane_not_found "pane ${1:-} not found"
+  jq -nc --arg pane "$1" --arg agent "$agent" \
+    '{result: {pane: ({pane_id: $pane} + if $agent != "" then {agent: $agent} else {} end)}}'
+}
+
+# herdr's `pane read` and `agent read`: the block's recent output, its
+# soft-wrapped lines joined. Only --lines matters; the rest is always the same.
+read_output() { # block [flags]
+  local block=${1:-} lines=200 out
+  shift
+  while (($#)); do
+    [[ $1 == --lines && ${2:-} =~ ^[0-9]+$ ]] && lines=$2
+    shift
+  done
+  out=$(rex capture -b "$block" --trim --unwrap) || exit 1
+  tail -n "$lines" <<<"$out"
+}
+
+# Runs plannotator-tui's Herdr pane, with the environment herdr-annotate's
+# launcher would give it and this script standing in for herdr.
+#
+# What it opens: --file PATH (default: the folder it runs in), gated with
+# --gate; the agent's replies with --last, its newest straight away with
+# --newest; the target's recent output with --terminal (--lines N of it).
+# Feedback goes to --deliver-to, else to the agent in the target, else to the
+# clipboard.
+review() { # --target BLOCK [--deliver-to BLOCK] [--file PATH [--gate [--result-file PATH]] | --last [--newest] | --terminal [--lines N]]
+  local target='' deliver_to='' file=$PWD gate='' result_file='' last='' newest='' terminal='' lines=200
+  while (($#)); do
+    case $1 in
+    --target | --deliver-to | --file | --result-file | --lines) need_value "$@" ;;
+    esac
+    case $1 in
+    --target) target=$2 ;;
+    --deliver-to) deliver_to=$2 ;;
+    --file) file=$(absolute "$2") ;;
+    --result-file) result_file=$(absolute "$2") ;;
+    --lines) lines=$2 ;;
+    --gate) gate=1 ;;
+    --last) last=1 ;;
+    --newest) last=1 newest=1 ;;
+    --terminal) terminal=1 ;;
+    *) die "review: unknown argument $1" ;;
+    esac
+    case $1 in
+    --target | --deliver-to | --file | --result-file | --lines) shift ;;
+    esac
+    shift
+  done
+  [[ -n $target ]] || die "review: --target is required"
+  [[ $lines =~ ^[0-9]+$ ]] || die "--lines must be a number, not $lines"
+  read_agent "$target"
+  [[ $? == 1 ]] && die "Pane $target not found."
+  if [[ -n $last && -z $agent ]]; then
+    die "No agent runs in this pane, so there are no replies to review."
+  fi
+  if [[ -z $deliver_to && -n $agent ]]; then
+    deliver_to=$target
+  fi
+
+  unset "${!HERDR_@}" "${!PLANNOTATOR_TUI_@}"
+  export HERDR_ENV=1 HERDR_BIN_PATH=$self
+  if [[ -n $terminal ]]; then
+    export PLANNOTATOR_TUI_TERMINAL_PANE=$target PLANNOTATOR_TUI_TERMINAL_LINES=$lines
+  elif [[ -n $last ]]; then
+    export PLANNOTATOR_TUI_HOST=$agent PLANNOTATOR_TUI_CWD=${agent_cwd:-$PWD}
+    [[ -n $agent_pid ]] && export PLANNOTATOR_TUI_MESSAGE_PID=$agent_pid
+    [[ -n $newest ]] && export PLANNOTATOR_TUI_NEWEST=1
+  else
+    export PLANNOTATOR_TUI_FILE=$file
+    if [[ -n $gate ]]; then
+      export PLANNOTATOR_TUI_GATE=1
+      [[ -n $result_file ]] && export PLANNOTATOR_TUI_RESULT_FILE=$result_file
+    fi
+  fi
+  if [[ -n $deliver_to ]]; then
+    export PLANNOTATOR_TUI_DELIVER_TO=$deliver_to
+    [[ $deliver_to == "$target" && -n $agent ]] && export PLANNOTATOR_TUI_DELIVER_AGENT=$agent
+  fi
+  exec plannotator-tui herdr pane
+}
+
+# For agents: review PATH in a popup, the feedback arriving as the calling
+# agent's next message. init.lua's plannotator_popup action opens it.
+open_review() { # [PATH] [--gate] [--result-file PATH]
+  local path=$PWD args=() dir
+  [[ -n ${REX_BLOCK:-} ]] || { echo 'rex-plannotator open: not inside Rex (REX_BLOCK is unset)' >&2; exit 1; }
+  while (($#)); do
+    case $1 in
+    --gate) args+=(--gate) ;;
+    --result-file)
+      [[ -n ${2:-} ]] || { echo 'rex-plannotator open: --result-file needs a value' >&2; exit 1; }
+      args+=(--result-file "$(absolute "$2")")
+      shift
+      ;;
+    -*) { echo "rex-plannotator open: unknown flag $1" >&2; exit 1; } ;;
+    *) path=$(absolute "$1") ;;
+    esac
+    shift
+  done
+  [[ -e $path ]] || { echo "rex-plannotator open: $path: no such file or folder" >&2; exit 1; }
+  dir=$path
+  [[ -d $dir ]] || dir=$(dirname "$path")
+  jq -nc --arg dir "$dir" '{command: $ARGS.positional, cwd: $dir}' \
+    --args "$self" review --target "$REX_BLOCK" --deliver-to "$REX_BLOCK" --file "$path" \
+    ${args[@]+"${args[@]}"} |
+    rex "do" plannotator_popup --args -
+}
+
+case "${1:-} ${2:-}" in
+"review "*) review "${@:2}" ;;
+"open "*) open_review "${@:2}" ;;
+"agent prompt") agent_prompt "${@:3}" ;;
+"pane get") pane_get "${3:-}" ;;
+"pane read" | "agent read") read_output "${@:3}" ;;
+*)
+  printf 'rex-plannotator: unknown command: %s\n' "$*" >&2
+  exit 2
+  ;;
+esac

@@ -472,6 +472,61 @@ rex.action({
 })
 
 ----------------------------------------------------------------------------
+-- Plannotator (herdr-annotate's document review)
+----------------------------------------------------------------------------
+
+-- plannotator-tui's review in a popup over the focused pane, sending the
+-- feedback to the agent there (else to the clipboard), as herdr-annotate's
+-- annotate.* actions do in Herdr. ~/.local/bin/rex-plannotator runs
+-- plannotator-tui's Herdr pane and stands in for herdr behind it.
+local PLANNOTATOR = HOME .. "/.local/bin/rex-plannotator"
+
+-- Opens `command` in a popup in `cwd`. Agents reach it through
+-- `rex-plannotator open`.
+rex.action({
+  name = "plannotator_popup",
+  title = "Plannotator Review Popup",
+  category = "Plannotator",
+  args = { command = "array", cwd = "string?" },
+  run = function(_, args)
+    popup(args.command, args.cwd ~= "" and args.cwd or nil)
+  end,
+})
+
+local annotate_actions = {
+  { name = "open", title = "Review Documents in This Folder", key = "o" },
+  { name = "last", title = "Review the Agent's Last Reply", key = "shift+o", flags = { "--last" } },
+  { name = "last_newest", title = "Review the Agent's Newest Reply", key = "ctrl+o", flags = { "--newest" } },
+  -- No keys, as in herdr-annotate.
+  { name = "gate", title = "Review Documents Here, with Approve", flags = { "--gate" } },
+  { name = "terminal", title = "Review This Pane's Recent Output", flags = { "--terminal" } },
+}
+
+for _, spec in ipairs(annotate_actions) do
+  local name = "annotate_" .. spec.name
+  rex.action({
+    name = name,
+    title = spec.title,
+    category = "Plannotator",
+    keywords = "plannotator annotate review feedback markdown plan agent",
+    run = function(ctx)
+      if not ctx.block_id then
+        error("Plannotator: focus a terminal first", 0)
+      end
+      local fg = foreground(ctx.block_id)
+      local command = { PLANNOTATOR, "review", "--target", ctx.block_id }
+      for _, flag in ipairs(spec.flags or {}) do
+        table.insert(command, flag)
+      end
+      popup(command, fg and fg.cwd or nil)
+    end,
+  })
+  if spec.key then
+    bind_prefixed(spec.key, name)
+  end
+end
+
+----------------------------------------------------------------------------
 -- Vim navigation (vim-herdr-navigation)
 ----------------------------------------------------------------------------
 
