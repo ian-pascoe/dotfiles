@@ -8,9 +8,37 @@ interface Gate {
   env: string[];
   /** Commands that must be on PATH. */
   bin: string[];
+  /** Needs a human at a UI; subagents and `pi -p` have none. */
+  ui: boolean;
+  /**
+   * Tools the model must be able to reach, directly or through codemode;
+   * `bash|powershell` is met by either.
+   */
+  tools: string[];
 }
 
-const NO_GATE: Gate = { env: [], bin: [] };
+const NO_GATE: Gate = { env: [], bin: [], ui: false, tools: [] };
+
+/** What the session offers, read once on the first turn. */
+interface Session {
+  hasUI: boolean;
+  tools: Set<string>;
+}
+
+/**
+ * Active tools, plus the `codemode` and `deferred` tools an active tool such as
+ * codemode reaches. A tool activated later (by tool search) does not count.
+ */
+function reachableTools(pi: ExtensionAPI): Set<string> {
+  const active = new Set(pi.getActiveTools());
+  const all = pi.getAllTools().filter((tool) => tool.exposure !== "hidden");
+  const reacher = all.some((tool) => active.has(tool.name) && tool.reachesTools);
+  const reached = (tool: (typeof all)[number]) =>
+    reacher && (tool.exposure === "codemode" || tool.exposure === "deferred");
+  return new Set(
+    all.filter((tool) => active.has(tool.name) || reached(tool)).map((tool) => tool.name),
+  );
+}
 
 /** Reads a space-separated string or a YAML list of strings. */
 function words(value: unknown): string[] {
@@ -22,7 +50,13 @@ function words(value: unknown): string[] {
 function gateFrom(fields: unknown): Gate {
   if (typeof fields !== "object" || fields === null) return NO_GATE;
   const record = fields as Record<string, unknown>;
-  return { env: words(record["requires-env"]), bin: words(record["requires-bin"]) };
+  return {
+    env: words(record["requires-env"]),
+    bin: words(record["requires-bin"]),
+    // Agent Skills metadata values are strings; settings JSON can say `true`.
+    ui: record["requires-ui"] === true || record["requires-ui"] === "true",
+    tools: words(record["requires-tool"]),
+  };
 }
 
 /** An unreadable SKILL.md is left ungated: pi reports broken skills itself. */
@@ -47,7 +81,12 @@ function settingsGates(pi: ExtensionAPI): Record<string, unknown> {
 }
 
 function bothGates(a: Gate, b: Gate): Gate {
-  return { env: [...a.env, ...b.env], bin: [...a.bin, ...b.bin] };
+  return {
+    env: [...a.env, ...b.env],
+    bin: [...a.bin, ...b.bin],
+    ui: a.ui || b.ui,
+    tools: [...a.tools, ...b.tools],
+  };
 }
 
 function envHolds(requirement: string) {
@@ -77,30 +116,42 @@ function onPath(command: string) {
     .some((dir) => extensions.some((ext) => isExecutable(join(dir, command + ext))));
 }
 
-function gateHolds(gate: Gate) {
-  return gate.env.every(envHolds) && gate.bin.every(onPath);
+function gateHolds(gate: Gate, session: Session) {
+  return (
+    (!gate.ui || session.hasUI) &&
+    gate.tools.every((tool) => tool.split("|").some((name) => session.tools.has(name))) &&
+    gate.env.every(envHolds) &&
+    gate.bin.every(onPath)
+  );
 }
 
 /**
  * Hides skills from the model's skill list when the environment they need is
  * absent, so they cost no context there. `/skill:name` still loads them.
+ *
+ * A skill declares its gate in frontmatter `metadata`, or, when an installer
+ * owns its SKILL.md, under the `skillGates` setting keyed by skill name:
+ * `requires-env`, `requires-bin`, `requires-tool` and `requires-ui`.
  */
 export default function skillGates(pi: ExtensionAPI) {
-  // Env, PATH and settings are fixed until /reload reloads this extension, so
-  // each skill is judged once and the prompt stays stable across turns.
+  // Each skill is judged once, on the first turn it appears, so the prompt
+  // stays stable across turns; /reload reloads this extension and judges again.
   const verdicts = new Map<string, boolean>();
   let configured: Record<string, unknown> | undefined;
-  const isUseful = (skill: Skill) => {
-    let verdict = verdicts.get(skill.filePath);
-    if (verdict === undefined) {
-      configured ??= settingsGates(pi);
-      verdict = gateHolds(bothGates(frontmatterGate(skill), gateFrom(configured[skill.name])));
-      verdicts.set(skill.filePath, verdict);
-    }
-    return verdict;
-  };
+  let session: Session | undefined;
 
-  pi.on("before_agent_start", (event) => {
+  pi.on("before_agent_start", (event, ctx) => {
+    const gates = (configured ??= settingsGates(pi));
+    const offered = (session ??= { hasUI: ctx.hasUI, tools: reachableTools(pi) });
+    const isUseful = (skill: Skill) => {
+      let verdict = verdicts.get(skill.filePath);
+      if (verdict === undefined) {
+        const gate = bothGates(frontmatterGate(skill), gateFrom(gates[skill.name]));
+        verdict = gateHolds(gate, offered);
+        verdicts.set(skill.filePath, verdict);
+      }
+      return verdict;
+    };
     const { skills } = event.systemPromptOptions;
     const useful = skills.filter(isUseful);
     skills.splice(0, skills.length, ...useful);

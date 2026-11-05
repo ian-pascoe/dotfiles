@@ -3,6 +3,7 @@ name: glazewm
 description: "Control GlazeWM, the user's Windows tiling window manager, through the `glazewm` CLI. Use when the user mentions GlazeWM or asks you to find, focus, move, resize, tile or close windows, or to switch or rearrange workspaces or monitors, on their Windows machine."
 metadata:
   requires-bin: glazewm
+  requires-tool: bash|powershell
 ---
 
 # GlazeWM

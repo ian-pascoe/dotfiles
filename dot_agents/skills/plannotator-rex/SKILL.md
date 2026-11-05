@@ -3,6 +3,8 @@ name: plannotator-rex
 description: Open a Markdown plan or document for the human to review and annotate in a Rex popup; their feedback arrives as your next message. Use inside Rex (REX_BLOCK is set) when you have written a plan, spec, or design document that needs human review before you act on it.
 metadata:
   requires-env: REX_BLOCK
+  requires-ui: "true"
+  requires-tool: bash|powershell
 ---
 
 # plannotator-rex: hand a document to the human for review in Rex

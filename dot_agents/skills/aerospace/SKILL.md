@@ -3,6 +3,7 @@ name: aerospace
 description: "Control AeroSpace, the user's macOS tiling window manager, through the `aerospace` CLI. Use when the user mentions AeroSpace or asks you to find, focus, move, resize, tile or close windows, or to switch or rearrange workspaces or monitors, on their Mac."
 metadata:
   requires-bin: aerospace
+  requires-tool: bash|powershell
 ---
 
 # AeroSpace
