@@ -1,0 +1,10 @@
+{
+  "render.fps": "20",
+  "render.presenter": "animation",
+  "search.engine": "https://duckduckgo.com/?q=%s",
+  "search.suggestions": "https://duckduckgo.com/ac/?q=%s&type=list",
+  "telemetry.crashReports": "off",
+  "telemetry.usage": "off",
+  "updates.check": "on",
+  "window.transparent": "off"
+}
