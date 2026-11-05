@@ -73,9 +73,14 @@
     "baseUrl": "https://pi.ianpascoe.dev"
   },
   "skillGates": {
+    "agent-browser": { "requires-bin": "agent-browser", "requires-tool": "bash|powershell" },
+    "agent-desktop": { "requires-bin": "agent-desktop", "requires-tool": "bash|powershell" },
+    "ast-grep": { "requires-bin": "ast-grep", "requires-tool": "bash|powershell" },
+    "ast-grep-outline": { "requires-bin": "ast-grep", "requires-tool": "bash|powershell" },
     "code-review": { "requires-tool": "subagent" },
     "grilling": { "requires-ui": true },
     "herdr": { "requires-env": "HERDR_ENV=1", "requires-tool": "bash|powershell" },
+    "hunk-review": { "requires-bin": "hunk", "requires-tool": "bash|powershell" },
     "lane-landing": { "requires-tool": "subagent" },
     "plannotator-tui": {
       "requires-env": "HERDR_ENV=1",
