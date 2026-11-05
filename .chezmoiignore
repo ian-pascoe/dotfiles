@@ -64,6 +64,7 @@ Library/LaunchAgents/local.clean-tmp.plist
 Library/Application Support/Tern
 .hammerspoon
 .config/aerospace
+.agents/skills/aerospace
 .config/borders
 .config/karabiner
 # keys.json carries Herdr's macOS default bindings (cmd-*)
@@ -81,6 +82,7 @@ Library/Application Support/Tern
 {{ if ne .chezmoi.os "windows" }}
 AppData
 Documents/PowerShell
+.agents/skills/glazewm
 .wslconfig
 .config/autohotkey
 .config/scoop
