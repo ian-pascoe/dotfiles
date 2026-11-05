@@ -281,29 +281,37 @@ local function is_neorex(name)
   return name == "neorex" or name == "nrex"
 end
 
--- The tiled blocks of the window holding block_id (or the active window),
--- in layout order.
-local function tiled_blocks(view, block_id)
-  local fallback
+-- The window holding block_id, in any of its layers, else the active window.
+local function window_of(view, block_id)
+  local active
   for _, window in ipairs(view.windows or {}) do
-    local tiled = {}
-    local holds = false
     for _, layer in ipairs(window.layers or {}) do
       for _, block in ipairs(layer.blocks or {}) do
-        holds = holds or block.block_id == block_id
-        if layer.kind == "tiled" then
-          table.insert(tiled, block.block_id)
+        if block.block_id == block_id then
+          return window
         end
       end
     end
-    if holds then
-      return tiled
-    end
     if window.window_id == view.active_window_id then
-      fallback = tiled
+      active = window
     end
   end
-  return fallback or {}
+  return active
+end
+
+-- The tiled blocks of the window holding block_id (or the active window),
+-- in layout order.
+local function tiled_blocks(view, block_id)
+  local tiled = {}
+  local window = window_of(view, block_id)
+  for _, layer in ipairs(window and window.layers or {}) do
+    if layer.kind == "tiled" then
+      for _, block in ipairs(layer.blocks or {}) do
+        table.insert(tiled, block.block_id)
+      end
+    end
+  end
+  return tiled
 end
 
 -- Typed into a neorex pane: Ctrl-\ Ctrl-N reaches Normal mode from any mode, then
@@ -377,6 +385,75 @@ rex.action({
     end
   end,
 })
+
+----------------------------------------------------------------------------
+-- Browser (terminal-browser, https://terminal-browser.com)
+----------------------------------------------------------------------------
+
+-- prefix+w toggles a floating browser over the tab. Rex has no browser
+-- block yet, so this runs terminal-browser, which draws Chromium with Kitty
+-- graphics. Unlike the popups above, hiding it minimizes the layer, so the
+-- browser keeps its pages; quitting it (ctrl+q) closes the layer. One per
+-- tab, found by its block label. --no-merge keeps it from opening as a tab
+-- of another terminal-browser and leaving the layer empty.
+local TERMINAL_BROWSER = HOME .. "/.local/bin/terminal-browser"
+local BROWSER_LABEL = "Browser"
+
+-- The browser's floating layer in `window`, and its block, or nil.
+local function browser_layer(window)
+  for _, layer in ipairs(window.layers or {}) do
+    local block = layer.kind == "floating" and layer.blocks and layer.blocks[1]
+    if block and block.label == BROWSER_LABEL then
+      return layer, block
+    end
+  end
+  return nil
+end
+
+rex.action({
+  name = "browser",
+  title = "Toggle Browser",
+  category = "Commands",
+  keywords = "terminal-browser web browser localhost preview html",
+  run = function(ctx)
+    local view, err = rex.session.view({})
+    if view == nil then
+      error(err, 0)
+    end
+    local window = window_of(view, ctx.block_id)
+    if not window then
+      error("Browser: the session has no tab", 0)
+    end
+
+    local layer, block = browser_layer(window)
+    local result
+    if not layer then
+      local fg = foreground(ctx.block_id)
+      result, err = rex.session.new_layer({
+        window_id = window.window_id,
+        bounds = { 0.05, 0.05, 0.9, 0.9 },
+        focus = true,
+        layout = rex.layout.block({
+          flavor = SHELL,
+          label = BROWSER_LABEL,
+          options = {
+            command = { exists(TERMINAL_BROWSER) and TERMINAL_BROWSER or "terminal-browser", "open", "--no-merge" },
+            cwd = fg and fg.cwd or nil,
+            login = false,
+          },
+        }),
+      })
+    elseif layer.state ~= "minimized" and window.focused_block_id == block.block_id then
+      result, err = rex.session.set_layer_state({ layer_id = layer.layer_id, state = "minimized" })
+    else
+      result, err = rex.session.set_layer_state({ layer_id = layer.layer_id, state = "normal", focus = true })
+    end
+    if result == nil then
+      error(err, 0)
+    end
+  end,
+})
+bind_prefixed("w", "browser")
 
 ----------------------------------------------------------------------------
 -- Worktrees (herdr worktree workspaces, as in Tern's worktrees plugin)

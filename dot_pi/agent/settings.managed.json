@@ -63,9 +63,15 @@
         "+packages/pi-tps-tracker/skills/pi-tps-tracker/SKILL.md",
         "+packages/pi-web-tools/skills/pi-web-tools/SKILL.md"
       ]
+    },
+    {
+      "source": "git:github.com/ian-pascoe/cloudpid@pi-cloudpid"
     }
   ],
   "themes": ["~/.themes", "~/.themes/**/pi.json"],
+  "cloudpid": {
+    "baseUrl": "https://pi.ianpascoe.dev"
+  },
   "guardian": {
     "enabled": false,
     "classifierModel": "typesafe/jev-latest",

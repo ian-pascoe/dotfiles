@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "c528c01ad1a8dbbcaa91d03bfb9d529068873005",
+      "skillFolderHash": "222d025e21448db16e207fd82ea1331cd15b93e1",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-11-04T18:56:12.099Z"
+      "updatedAt": "2026-11-05T10:14:06.852Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -230,9 +230,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/remotion-dev/skills.git",
       "skillPath": "skills/remotion-best-practices/SKILL.md",
-      "skillFolderHash": "ca1933b507e5f3b2697d80c5aeffdefad697a61b",
+      "skillFolderHash": "b4b9ee33f89cf22644190efa3823b530b053b985",
       "installedAt": "2026-07-21T10:41:08.762Z",
-      "updatedAt": "2026-11-02T12:49:21.260Z"
+      "updatedAt": "2026-11-05T10:14:07.533Z"
     },
     "herdr": {
       "source": "herdrdev/herdr",
@@ -332,9 +332,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/nicobailon/visual-explainer.git",
       "skillPath": "plugins/visual-explainer/SKILL.md",
-      "skillFolderHash": "7be5dc3a3e6a1bc8757374d9cf35e48f6724e766",
+      "skillFolderHash": "5ab3ea281cc21457e33d3ecd9341afdd6bf6ffba",
       "installedAt": "2026-08-17T09:50:57.504Z",
-      "updatedAt": "2026-11-04T18:56:17.846Z"
+      "updatedAt": "2026-11-05T10:14:07.769Z"
     },
     "show-me": {
       "source": "humanlayer/skills",
@@ -641,9 +641,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-desktop.git",
       "skillPath": "skills/agent-desktop/SKILL.md",
-      "skillFolderHash": "f0508d68f434a9294541cdc03843b141b557e3af",
+      "skillFolderHash": "ff5b74d9d1d4bdba8ae60208e14c562533e0d708",
       "installedAt": "2026-11-03T13:46:38.618Z",
-      "updatedAt": "2026-11-04T18:56:26.685Z"
+      "updatedAt": "2026-11-05T10:14:07.844Z"
     },
     "setup-ian-pascoe-skills": {
       "source": "ian-pascoe/skills",
