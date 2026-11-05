@@ -2,7 +2,7 @@
 name: tern
 description: "Control Tern, Stencil's multiplexing terminal, through the `tern` CLI: list, create, rename and kill sessions, split blocks, run commands in another block, read a block's screen, send keys, open files beside the shell. Use when the user mentions Tern or asks to inspect or control Tern sessions, tabs or blocks."
 metadata:
-  requires-bin: tern
+  requires-env: TERN_PANE
   requires-tool: bash|powershell
 ---
 
