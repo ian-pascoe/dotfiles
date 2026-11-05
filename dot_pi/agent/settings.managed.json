@@ -72,6 +72,11 @@
   "cloudpid": {
     "baseUrl": "https://pi.ianpascoe.dev"
   },
+  "skillGates": {
+    "herdr": { "requires-env": "HERDR_ENV=1" },
+    "plannotator-tui": { "requires-env": "HERDR_ENV=1" },
+    "rex": { "requires-bin": "rex" }
+  },
   "guardian": {
     "enabled": false,
     "classifierModel": "typesafe/jev-latest",

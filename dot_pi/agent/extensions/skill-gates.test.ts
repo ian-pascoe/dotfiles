@@ -37,12 +37,13 @@ function skill(name: string, frontmatter = ""): Skill {
 }
 
 /** Loads the extension fresh, as pi does per process, and runs one turn. */
-async function visibleSkills(skills: Skill[]) {
+async function visibleSkills(skills: Skill[], settings: Record<string, unknown> = {}) {
   let handler: Handler | undefined;
   const recordingPi = {
     on(event: string, registered: Handler) {
       if (event === "before_agent_start") handler = registered;
     },
+    getSettings: () => structuredClone(settings),
   } as unknown as ExtensionAPI;
   skillGates(recordingPi);
   assert.ok(handler);
@@ -86,15 +87,26 @@ test("env requirements accept a bare name, values containing '=', and YAML lists
   assert.deepEqual(await visibleSkills([gated]), []);
 });
 
-test("installer-owned skills are gated without editing their frontmatter", async () => {
-  const herdr = skill("herdr");
-  const tui = skill("plannotator-tui");
+test("the skillGates setting gates a skill alongside its own frontmatter", async () => {
+  const installed = skill("installed");
+  const own = skill("own", "metadata:\n  requires-env: OWN_ENV\n");
+  const settings = {
+    skillGates: {
+      installed: { "requires-env": "MUX_ENV=1" },
+      own: { "requires-env": "MUX_ENV=1" },
+    },
+  };
 
-  vi.stubEnv("HERDR_ENV", undefined);
-  assert.deepEqual(await visibleSkills([herdr, tui]), []);
+  vi.stubEnv("MUX_ENV", undefined);
+  vi.stubEnv("OWN_ENV", "yes");
+  assert.deepEqual(await visibleSkills([installed, own], settings), []);
 
-  vi.stubEnv("HERDR_ENV", "1");
-  assert.deepEqual(await visibleSkills([herdr, tui]), ["herdr", "plannotator-tui"]);
+  vi.stubEnv("MUX_ENV", "1");
+  assert.deepEqual(await visibleSkills([installed, own], settings), ["installed", "own"]);
+
+  // A setting adds to the frontmatter gate; it cannot lift it.
+  vi.stubEnv("OWN_ENV", undefined);
+  assert.deepEqual(await visibleSkills([installed, own], settings), ["installed"]);
 });
 
 test("a skill requiring a command is listed only when that command is on PATH", async () => {
