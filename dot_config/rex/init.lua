@@ -5,7 +5,7 @@
 -- ~/.config/theme/ghostty.conf).
 --
 -- Docs: https://www.superlogical.com/rex/docs
--- Apply changes with `rex config reload` (or alt+r); check with `rex config check`.
+-- Apply changes with `rex config reload` (or prefix+ctrl+r); check with `rex config check`.
 
 local PREFIX = "ctrl+a"
 local SHELL = "com.superlogical.terminal.shell"
@@ -71,7 +71,8 @@ bind_prefixed("shift+;", "client.palette.toggle") -- prefix+:
 bind_prefixed("shift+s", "client.settings") -- settings
 bind_prefixed("d", "client.window.close") -- detach: sessions keep running on the server
 bind_prefixed("b", "client.sidebar.toggle") -- toggle_sidebar
-rex.bind("alt+r", "client.config.reload") -- reload_config
+-- reload_config; not alt+r, which AeroSpace takes for its resize mode.
+bind_prefixed("ctrl+r", "client.config.reload")
 
 ----------------------------------------------------------------------------
 -- Sessions (herdr workspaces)

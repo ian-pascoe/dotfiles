@@ -5,6 +5,11 @@
 -- Add keymap to search neovim config files
 vim.keymap.set('n', '<leader>sN', LazyVim.pick('files', { cwd = vim.fn.stdpath('config') }), { desc = 'Neovim config' })
 
+-- Move the selection with J/K: AeroSpace takes LazyVim's <A-j>/<A-k> system-wide.
+-- Same commands as LazyVim's; join and keyword lookup stay on J/K in Normal mode.
+vim.keymap.set('x', 'J', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move Down', silent = true })
+vim.keymap.set('x', 'K', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up', silent = true })
+
 -- No autcmd write
 vim.keymap.set('n', '<leader>W', '<cmd>noautocmd write<cr>', { desc = 'No autocmd write' })
 

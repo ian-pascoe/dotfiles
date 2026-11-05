@@ -1,3 +1,29 @@
+-- AeroSpace takes alt+a/d/f/h/i/m/p/r/s/t system-wide (aerospace.toml), so the
+-- picker's keys on them (Snacks' and LazyVim extras') never arrive. Move them
+-- to Alt keys AeroSpace leaves free, and drop the dead defaults.
+local picker_alt_moves = {
+  { '<a-a>', '<a-b>', 'sidekick_send' },
+  { '<a-s>', "<a-'>", 'flash' }, -- ' jumps to a mark
+  { '<a-t>', '<a-q>', 'trouble_open' }, -- a quickfix-style list
+  { '<a-d>', '<a-n>', 'inspect' },
+  { '<a-f>', '<a-y>', 'toggle_follow' },
+  { '<a-h>', '<a-.>', 'toggle_hidden' }, -- dotfiles
+  { '<a-i>', '<a-g>', 'toggle_ignored' }, -- gitignored
+  { '<a-m>', '<a-z>', 'toggle_maximize' }, -- zoom
+  { '<a-p>', '<a-e>', 'toggle_preview' }, -- eye
+  { '<a-r>', '<a-x>', 'toggle_regex' },
+}
+
+-- The picker window's keys for those moves; `spec` adds options such as mode.
+local function picker_alt_keys(spec)
+  local keys = {}
+  for _, move in ipairs(picker_alt_moves) do
+    keys[move[1]] = false
+    keys[move[2]] = vim.tbl_extend('force', { move[3] }, spec or {})
+  end
+  return keys
+end
+
 local function get_vaults()
   local workspaces = {}
 
@@ -93,6 +119,10 @@ return {
           files = { hidden = true },
           grep = { hidden = true },
           explorer = { hidden = true },
+        },
+        win = {
+          input = { keys = picker_alt_keys({ mode = { 'n', 'i' } }) },
+          list = { keys = picker_alt_keys() },
         },
       },
     },
