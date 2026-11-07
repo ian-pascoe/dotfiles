@@ -37,12 +37,10 @@
     "herdr": { "requires-env": "HERDR_ENV=1", "requires-tool": "bash|powershell" },
     "hunk-review": { "requires-bin": "hunk", "requires-tool": "bash|powershell" },
     "lane-landing": { "requires-tool": "subagent" },
-    "plannotator-tui": {
-      "requires-env": "HERDR_ENV=1",
-      "requires-tool": "bash|powershell"
-    },
+    "plannotator-tui": { "requires-env": "HERDR_ENV=1", "requires-tool": "bash|powershell" },
     "rex": { "requires-env": "REX_BLOCK", "requires-tool": "bash|powershell" },
-    "subagent-grilling": { "requires-tool": "subagent" }
+    "subagent-grilling": { "requires-tool": "subagent" },
+    "terminal-browser": { "requires-bin": "terminal-browser", "requires-tool": "bash|powershell" }
   },
   "guardian": {
     "enabled": false,
