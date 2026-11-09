@@ -57,13 +57,6 @@
       "Version": "2.6.1"
     },
     {
-      "Updated": "2025-11-11T11:18:43.1627995-05:00",
-      "Source": "extras",
-      "Info": "",
-      "Name": "helium",
-      "Version": "0.6.4.1"
-    },
-    {
       "Updated": "2025-10-17T10:06:43.3881145-04:00",
       "Source": "extras",
       "Info": "",
@@ -167,6 +160,13 @@
       "Info": "",
       "Name": "yasb",
       "Version": "1.8.4"
+    },
+    {
+      "Updated": "2026-11-09T00:00:00.0000000-05:00",
+      "Source": "extras",
+      "Info": "",
+      "Name": "zen-browser",
+      "Version": "1.24.1b"
     },
     {
       "Updated": "2025-10-27T09:40:19.2985944-04:00",

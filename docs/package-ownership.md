@@ -10,6 +10,12 @@ tools belong to Mise even though the backend is called `pipx`.
   repository, so `upgrade-all` installs newer releases and restarts
   `orca-serve.service`; it is deliberately absent from `private_apt.txt`, and
   APT pruning keeps it because no repository provides it.
+- Zen browser on Linux: no APT repository or `.deb` exists, so it is absent from
+  `private_apt.txt`. Install it once with the official tarball script
+  (`curl -fsSL https://github.com/zen-browser/updates-server/raw/refs/heads/main/install.sh | bash`),
+  which puts it in `~/.tarball-installations/zen` with a `~/.local/bin/zen`
+  launcher; it updates itself. macOS uses the `zen` cask and Windows the
+  `zen-browser` Scoop app.
 - `dot_config/scoop/scoopfile.json`: Windows apps, fonts, native libraries,
   toolchains and bootstrap tools.
 - `Brewfile`: macOS apps, native libraries, services and bootstrap tools.

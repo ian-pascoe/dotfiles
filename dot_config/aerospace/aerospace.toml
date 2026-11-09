@@ -81,8 +81,9 @@ outer.right = 5
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-alt-enter = "exec-and-forget open -na 'Ghostty'"
-alt-shift-enter = "exec-and-forget open -na 'Helium'"
+# A new window in the running Rex, then bring Rex forward (or launch it, which opens one).
+alt-enter = '''exec-and-forget "$HOME/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex" --autostart=false do client.window.new >/dev/null 2>&1; open -a 'Rex Beta' '''
+alt-shift-enter = "exec-and-forget open -na 'Zen'"
 alt-shift-q = "close"
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout

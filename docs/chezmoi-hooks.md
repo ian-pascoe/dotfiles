@@ -8,6 +8,7 @@ The scripts in `.chezmoiscripts/` run **after** files are deployed, in this orde
 | 20    | Install Pi dependencies with pnpm, lifecycle scripts disabled | `dot_pi/agent/package.json`   |
 | 30    | Refresh Bat's `current.tmTheme` and rebuild its cache         | Bat config and theme inputs   |
 | 40    | `systemctl --user daemon-reload`                              | Source user service units     |
+| 60    | Make Zen the default browser (macOS and Linux)                | None; runs once               |
 
 These are `run_onchange_after_` scripts: chezmoi hashes their rendered content,
 including input checksums, and records successful runs. Unchanged applies do not
@@ -42,6 +43,12 @@ repeat installation or reloads. Failures remain eligible for retry.
   Windows destination changes also trigger a rebuild.
   Neither variant chooses a theme, changes wallpaper, or restarts applications.
   If the theme only becomes available during an apply, run another apply.
+- The default-browser hook waits until Zen and its setter are installed:
+  `/Applications/Zen.app` and `defaultbrowser` (Brewfile) on macOS, the tarball
+  install's `~/.local/share/applications/zen.desktop` and `xdg-settings` on
+  Linux. macOS asks you to confirm the change; choosing to keep the old browser
+  is still recorded as a run, so set it by hand after that. Windows has no
+  hook, because it guards the default browser against scripted changes.
 - The systemd hook waits for a user-session bus. It does not enable, start, or
   restart services. Unavailable theme/session prerequisites render empty scripts,
   so a later apply can run them once available.

@@ -10,8 +10,7 @@
 # the system appearance follows the variant used: light with a light.mode file.
 # Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp
 # pick the theme up on their next start. Rex imports the variant's Ghostty
-# colors when it is running. helium-theme updates Helium's theme:
-# live on macOS, at Helium's next start on Linux.
+# colors when it is running.
 # In WSL the Windows host follows: its Set-Theme.ps1 runs with the variant and
 # leaves WSL alone. When the switch starts on Windows, Set-Theme.ps1 runs this
 # script with THEME_FROM_WINDOWS set, so it does not run back.
@@ -82,9 +81,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     esac
   fi
 fi
-
-# Helium loads its theme from a copy that helium-theme keeps
-command -v helium-theme >/dev/null && helium-theme
 
 set-bg 1
 

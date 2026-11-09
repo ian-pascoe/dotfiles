@@ -25,6 +25,8 @@ brew "gmp"
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Command-line tool for getting & setting the default browser
+brew "defaultbrowser"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Docker CLI plugin for extended build capabilities with BuildKit
@@ -89,6 +91,8 @@ brew "silicon"
 brew "spotify_player"
 # Easiest, most secure way to use WireGuard and 2FA
 brew "tailscale", restart_service: :changed
+# Terminal multiplexer
+brew "tmux"
 # Your CLI home video recorder
 brew "vhs"
 # General-purpose lossless data-compression library
@@ -127,12 +131,8 @@ cask "font-source-serif-4"
 cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
-# Web browser
-cask "google-chrome"
 # Desktop automation application
 cask "hammerspoon"
-# Chromium-based web browser
-cask "helium-browser"
 # Local voice dictation
 cask "anomalyco/tap/hex", trusted: true
 # Reverse engineering tool that lets you disassemble, decompile and debug your app
@@ -151,9 +151,11 @@ cask "t3-code@nightly"
 cask "tailscale-app"
 # Multi-platform VNC client and server
 cask "tigervnc"
-# Tiny, fully native launcher, hotkeys, and clipboard history
-cask "abue-ammar/tinycast/tinycast"
+# Application launcher and productivity tool
+cask "tinycast"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 # Open-source version of the X.Org X Window System
 cask "xquartz"
+# Gecko based web browser
+cask "zen"

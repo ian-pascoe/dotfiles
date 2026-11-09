@@ -165,7 +165,7 @@ keybindings:
   - bindings:
       - alt+shift+enter
     commands:
-      - shell-exec %SCOOP%\apps\helium\current\chrome.exe
+      - shell-exec %SCOOP%\apps\zen-browser\current\zen.exe
   - bindings:
       - alt+s
     commands:

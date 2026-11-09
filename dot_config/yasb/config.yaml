@@ -72,8 +72,8 @@ widgets:
     options:
       label: "{data}"
       app_list:
-        - name: "Helium Browser"
-          launch: "$env:SCOOP\\apps\\helium\\current\\chrome.exe"
+        - name: "Zen Browser"
+          launch: "$env:SCOOP\\apps\\zen-browser\\current\\zen.exe"
           icon: ""
         - name: "Terminal"
           launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe"
