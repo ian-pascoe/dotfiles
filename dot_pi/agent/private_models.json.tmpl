@@ -6,21 +6,7 @@
     "anthropic": {
       "name": "Anthropic (Proxy)",
       "baseUrl": "https://api.ai.ianpascoe.dev",
-      "apiKey": {{ $commissaryKey }},
-      "modelOverrides": {
-        "claude-fable-5-1": {
-          "contextWindow": 400000
-        },
-        "claude-opus-5-5": {
-          "contextWindow": 400000
-        },
-        "claude-sonnet-5-5": {
-          "contextWindow": 400000
-        },
-        "claude-haiku-5-5": {
-          "contextWindow": 400000
-        }
-      }
+      "apiKey": {{ $commissaryKey }}
     },
     "antigravity": {
       "name": "Antigravity (proxy)",

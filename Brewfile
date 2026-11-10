@@ -153,6 +153,8 @@ cask "tailscale-app"
 cask "tigervnc"
 # Application launcher and productivity tool
 cask "tinycast"
+# Editor for .tldr files
+cask "tldraw"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 # Open-source version of the X.Org X Window System
