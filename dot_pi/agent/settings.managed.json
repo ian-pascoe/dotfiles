@@ -121,19 +121,19 @@
     "modelRoles": {
       "small": {
         "model": "anthropic/claude-haiku-5-5",
-        "hint": "Cheap and fast. Use for explore (locating code, tracing behavior, finding reusable patterns), web and docs research, summarizing, and mechanical edits. Medium thinking is usually enough."
+        "hint": "Cheap and fast. Use only for exploration (locating code, tracing behavior, finding reusable patterns), web and docs research, summarizing, and mechanical edits. Medium thinking is usually enough."
       },
       "medium": {
         "model": "anthropic/claude-sonnet-5-5",
-        "hint": "Default workhorse. Use for scoped implementation tasks with a settled approach, tests, refactors, and work that spans several concerns or fits no other tier."
+        "hint": "Use only for well-specified tasks: a settled approach and clear acceptance criteria, such as executing one step of a reviewed plan, writing tests, or a scoped refactor."
       },
       "large": {
         "model": "anthropic/claude-opus-5-5",
-        "hint": "Use for planning and design, independent correctness or spec review, and diagnosing failures. Use high thinking for plan and review; set xhigh thinking for debugging, regressions, and security audits."
+        "hint": "Default workhorse. Use at medium thinking for implementation, work spanning several concerns, and anything not yet fully specified. Use high or xhigh thinking for debugging and regressions; escalate to xlarge when stuck."
       },
       "xlarge": {
         "model": "anthropic/claude-fable-5-2",
-        "hint": "Most capable and most expensive. Use only when large has failed or the problem is unusually hard."
+        "hint": "Most capable; twice large's per-token price. Use for planning and design, independent correctness or spec review, security audits, and debugging that large could not resolve. Keep tasks focused: mostly reading code and producing a plan, verdict, or diagnosis."
       }
     }
   },

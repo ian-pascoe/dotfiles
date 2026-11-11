@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "1967fbae974757d97721f282b366f830920363eb",
+      "skillFolderHash": "e92e2e77c815097cd5fa05c8eaee2a5399d92757",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-11-09T10:36:13.291Z"
+      "updatedAt": "2026-11-11T12:50:42.562Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -230,9 +230,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/remotion-dev/skills.git",
       "skillPath": "skills/remotion-best-practices/SKILL.md",
-      "skillFolderHash": "c0478424547a5fdea2cc9d41e9fd0b49a8964a27",
+      "skillFolderHash": "3dc2222e7061ed2e3b03692a0528b91601cf3496",
       "installedAt": "2026-07-21T10:41:08.762Z",
-      "updatedAt": "2026-11-09T10:36:13.979Z"
+      "updatedAt": "2026-11-11T12:50:43.329Z"
     },
     "herdr": {
       "source": "herdrdev/herdr",
@@ -641,9 +641,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-desktop.git",
       "skillPath": "skills/agent-desktop/SKILL.md",
-      "skillFolderHash": "ff5b74d9d1d4bdba8ae60208e14c562533e0d708",
+      "skillFolderHash": "ef953179861334f07a7ec948f1d34401de17b9b0",
       "installedAt": "2026-11-03T13:46:38.618Z",
-      "updatedAt": "2026-11-05T10:14:07.844Z"
+      "updatedAt": "2026-11-11T12:50:43.373Z"
     },
     "setup-ian-pascoe-skills": {
       "source": "ian-pascoe/skills",
