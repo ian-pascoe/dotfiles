@@ -4,7 +4,10 @@ import { parseFrontmatter, type ExtensionAPI, type Skill } from "@earendil-works
 
 /** Conditions a skill needs to be useful; every one must hold. */
 interface Gate {
-  /** `NAME` (set and non-empty) or `NAME=VALUE` (exactly that value). */
+  /**
+   * `NAME` (set and non-empty) or `NAME=VALUE` (exactly that value); a leading `!` requires
+   * the opposite.
+   */
   env: string[];
   /** Commands that must be on PATH. */
   bin: string[];
@@ -89,7 +92,8 @@ function bothGates(a: Gate, b: Gate): Gate {
   };
 }
 
-function envHolds(requirement: string) {
+function envHolds(requirement: string): boolean {
+  if (requirement.startsWith("!")) return !envHolds(requirement.slice(1));
   const split = requirement.indexOf("=");
   if (split === -1) return !!process.env[requirement];
   return process.env[requirement.slice(0, split)] === requirement.slice(split + 1);

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Pi for T3 Code: set this as the Binary path of T3 Code's Pi provider.
+# T3 Code brings its own subagents (delegate_task), secret prompt (request_secret),
+# checkpoints, and T3 tools, so drop pi's versions that would compete with them.
+set -eu
+
+export PI_HOST=t3code
+# pi-tps-tracker's styled notices show up as raw escape codes in T3 Code.
+export PI_DISABLED_EXTENSIONS="pi-tps-tracker,pi-git-checkpoints${PI_DISABLED_EXTENSIONS:+,$PI_DISABLED_EXTENSIONS}"
+
+# mcp__t3__*: the user-level t3 MCP server duplicates the tools T3 Code injects.
+exec pi --exclude-tools 'subagent*,agent_message,secret_*,mcp__t3__*' "$@"

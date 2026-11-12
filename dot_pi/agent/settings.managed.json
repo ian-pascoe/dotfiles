@@ -40,7 +40,11 @@
     "plannotator-tui": { "requires-env": "HERDR_ENV=1", "requires-tool": "bash|powershell" },
     "rex": { "requires-env": "REX_BLOCK", "requires-tool": "bash|powershell" },
     "subagent-grilling": { "requires-tool": "subagent" },
-    "terminal-browser": { "requires-bin": "terminal-browser", "requires-tool": "bash|powershell" }
+    "terminal-browser": {
+      "requires-bin": "terminal-browser",
+      "requires-env": "!PI_HOST=t3code",
+      "requires-tool": "bash|powershell"
+    }
   },
   "guardian": {
     "enabled": false,

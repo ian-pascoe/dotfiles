@@ -16,7 +16,11 @@ type InputHandler = (
 test("a lone dot continues the conversation without becoming a user message", async () => {
   let inputHandler: InputHandler | undefined;
   const sentMessages: Parameters<ExtensionAPI["sendMessage"]>[] = [];
+  const rendererTypes: string[] = [];
   const recordingPi = {
+    registerMessageRenderer(customType: string) {
+      rendererTypes.push(customType);
+    },
     on(_event: string, handler: InputHandler) {
       inputHandler = handler;
     },
@@ -27,6 +31,7 @@ test("a lone dot continues the conversation without becoming a user message", as
 
   continueConversationOnDot(recordingPi);
   assert.ok(inputHandler);
+  assert.deepEqual(rendererTypes, ["continuation"]);
 
   const context = {} as ExtensionContext;
   assert.deepEqual(
@@ -40,9 +45,9 @@ test("a lone dot continues the conversation without becoming a user message", as
   assert.deepEqual(sentMessages, [
     [
       {
-        customType: "continue-on-dot",
+        customType: "continuation",
         content: "Continue.",
-        display: false,
+        display: true,
       },
       { triggerTurn: true, deliverAs: "followUp" },
     ],

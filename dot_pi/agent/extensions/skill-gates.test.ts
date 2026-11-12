@@ -143,6 +143,16 @@ test("env requirements accept a bare name, values containing '=', and YAML lists
   assert.deepEqual(await visibleSkills([gated]), []);
 });
 
+test("a '!' env requirement hides a skill when the variable matches", async () => {
+  const gated = skill("terminal-only", "metadata:\n  requires-env: '!HOST=t3code'\n");
+
+  vi.stubEnv("HOST", undefined);
+  assert.deepEqual(await visibleSkills([gated]), ["terminal-only"]);
+
+  vi.stubEnv("HOST", "t3code");
+  assert.deepEqual(await visibleSkills([gated]), []);
+});
+
 test("the skillGates setting gates a skill alongside its own frontmatter", async () => {
   const installed = skill("installed");
   const own = skill("own", "metadata:\n  requires-env: OWN_ENV\n");

@@ -114,6 +114,8 @@ zoxide = "latest"
 ] }
 # `air` in the registry is the Go live-reload tool, not Posit's R formatter.
 "github:posit-dev/air" = "latest"
+# Linear's issues from the shell (`linear issue …`); the agents' fallback when Executor's Linear app is unavailable.
+"github:schpet/linear-cli" = "latest"
 
 "go:github.com/go-delve/delve/cmd/dlv" = "latest"
 "go:github.com/simeji/jid/cmd/jid" = "latest"
