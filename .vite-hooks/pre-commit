@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Runs the repo's checks before each commit. `pnpm install` installs the Vite+
+# hook dispatcher (the `prepare` script runs `vp config`); bypass once with
+# `git commit --no-verify`, or set VP_GIT_HOOKS=0.
+# chezmoi skips dot-prefixed source entries, so this folder is never deployed.
+
+# The Vite+ dispatcher runs hooks with `sh -e`, ignoring the shebang; re-exec
+# under bash for pipefail and path.bash.
+if [ -z "${BASH_VERSION:-}" ]; then exec bash "$0" "$@"; fi
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+# GUI git clients (Tern's git panel, editors) run hooks with launchd's bare
+# PATH, which lacks the mise shims that provide vp, pnpm, and node.
+if [ -f "$HOME/.config/shell/path.bash" ]; then
+  source "$HOME/.config/shell/path.bash"
+  _bash_apply_base_path_order
+fi
+
+# Format and lint staged files (the `staged` block in vite.config.ts), then run
+# the whole-repo checks that staged files alone can't cover.
+vp staged
+for script in typecheck test; do
+  if ! output=$(pnpm run -s "$script" 2>&1); then
+    printf '%s\n\npre-commit: `pnpm run %s` failed\n' "$output" "$script" >&2
+    exit 1
+  fi
+done
