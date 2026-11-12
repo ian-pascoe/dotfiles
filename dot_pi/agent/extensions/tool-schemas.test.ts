@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { ExtensionAPI, ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
-import { test } from "vitest";
+import { test } from "vite-plus/test";
 import toolSchemas from "./tool-schemas.js";
 
 type CommandHandler = Parameters<ExtensionAPI["registerCommand"]>[1]["handler"];

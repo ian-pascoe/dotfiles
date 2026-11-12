@@ -109,14 +109,16 @@ To add a theme, see
 ## Development
 
 Repo tooling (formatting, linting, tests for themes and scripts) is a
-[pnpm](https://pnpm.io/) workspace:
+[pnpm](https://pnpm.io/) workspace driven by [Vite+](https://viteplus.dev/)
+(`vp`), configured in `vite.config.ts`:
 
 ```sh
 pnpm install        # also installs the pre-commit hook
-pnpm format         # oxfmt
-pnpm lint           # oxlint
-pnpm typecheck
-pnpm test           # vitest
+pnpm format         # vp fmt
+pnpm lint           # vp lint
+pnpm typecheck      # tsc, then each package's typecheck via vp run
+pnpm test           # vp test
+vp check            # format + lint + type-aware checks in one pass
 ```
 
 ## Acknowledgements

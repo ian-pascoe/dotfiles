@@ -9,7 +9,7 @@ import type {
   Skill,
   ToolInfo,
 } from "@earendil-works/pi-coding-agent";
-import { afterEach, test, vi } from "vitest";
+import { afterEach, test, vi } from "vite-plus/test";
 import skillGates from "./skill-gates.js";
 
 type Handler = (event: BeforeAgentStartEvent, ctx: ExtensionContext) => unknown;

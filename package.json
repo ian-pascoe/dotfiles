@@ -4,25 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "format": "oxfmt",
-    "format:check": "oxfmt --check",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
     "check-nvim": "bash dot_themes/tools/check-nvim.sh",
     "hunk-themes": "bash dot_themes/tools/hunk-themes.sh",
     "prepare": "git config core.hooksPath .githooks",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix",
     "new-variant": "node dot_themes/tools/new-variant.ts",
-    "test": "vitest run",
-    "typecheck": "tsc --noEmit && turbo typecheck"
+    "test": "vp test run",
+    "typecheck": "tsc --noEmit && vp run --filter '!@ian-pascoe/dotfiles-chezmoi' typecheck"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
-    "oxfmt": "^0.76.0",
-    "oxlint": "^1.91.0",
-    "oxlint-tsgolint": "^7.0.2005",
-    "turbo": "^2.11.10",
     "typescript": "^7.0.2",
-    "vitest": "^5.1.0"
+    "vite-plus": "catalog:"
   },
   "devEngines": {
     "packageManager": {

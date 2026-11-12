@@ -22,14 +22,11 @@ bun.lock
 pnpm-lock.yaml
 pnpm-workspace.yaml
 tsconfig.json
+**/vite.config.ts
 
 # Python
 **/__pycache__/**
 **/.ruff_cache/**
-
-# TurboRepo
-turbo.json
-**/.turbo/**
 
 # Syncthing
 **/.stfolder/

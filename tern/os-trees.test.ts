@@ -3,7 +3,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect, test } from "vitest";
+import { expect, test } from "vite-plus/test";
 
 const tern = dirname(fileURLToPath(import.meta.url));
 const source = dirname(tern);

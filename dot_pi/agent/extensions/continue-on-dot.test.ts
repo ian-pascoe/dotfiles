@@ -5,7 +5,7 @@ import type {
   InputEvent,
   InputEventResult,
 } from "@earendil-works/pi-coding-agent";
-import { test } from "vitest";
+import { test } from "vite-plus/test";
 import continueConversationOnDot from "./continue-on-dot.js";
 
 type InputHandler = (

@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, rmSync, symlinkSync, unlinkSync } from "node:fs
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { ExtensionAPI, ExtensionContext, Theme } from "@earendil-works/pi-coding-agent";
-import { afterEach, test, vi } from "vitest";
+import { afterEach, test, vi } from "vite-plus/test";
 import { followSystemTheme } from "./active-theme.js";
 
 type Handler = (event: unknown, ctx: ExtensionContext) => unknown;

@@ -4,7 +4,7 @@ import type {
   ExtensionContext,
   TerminalInputHandler,
 } from "@earendil-works/pi-coding-agent";
-import { test } from "vitest";
+import { test } from "vite-plus/test";
 import pasteImageOnEmptyPaste, { CTRL_V, EMPTY_PASTE } from "./paste-image-on-empty-paste.js";
 
 type Handler = (event: unknown, ctx: ExtensionContext) => void;

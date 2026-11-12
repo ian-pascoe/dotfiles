@@ -250,6 +250,11 @@ if has_cmd docker; then
   docker system prune -af --volumes
   echo "Docker system cleaned successfully!"
 fi
+if has_cmd colima; then
+  echo "Cleaning up Colima filesystem..."
+  colima ssh -- sudo fstrim -a
+  echo "Colima filesystem cleanup completed successfully!"
+fi
 if has_cmd git; then
   echo "Running git garbage collection..."
   find "$HOME" -type d -name ".git" -prune -exec sh -c 'cd "$(dirname "{}")" && git gc --auto' \; >/dev/null 2>&1

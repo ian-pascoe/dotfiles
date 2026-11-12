@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { ClassifierApi, ClassifierContext, ClassifierModel } from "@earendil-works/pi-ai";
-import { test } from "vitest";
+import { test } from "vite-plus/test";
 import { classify, SUBQ_API, SUBQ_BASE_URL } from "./subq.js";
 
 const model: ClassifierModel<ClassifierApi> = {

@@ -16,7 +16,6 @@ __pycache__/
 node_modules/
 
 # TurboRepo
-.turbo/
 
 # Misc
 tmp/
@@ -28,3 +27,4 @@ log/
 /.brv/config.json
 /.brv/dream-state.json
 /.brv/review-backups
+.vitest/
