@@ -94,6 +94,9 @@ if has_cmd npm; then
   echo "Global npm modules updated successfully!"
   echo "Cleaning up npm cache..."
   npm cache clean --force
+  # npm cache clean leaves npx's package installs behind.
+  npm_cache="$(npm config get cache)"
+  [ -n "$npm_cache" ] && rm -rf "${npm_cache}/_npx"
   echo "npm cache cleaned successfully!"
 fi
 #########################################################################

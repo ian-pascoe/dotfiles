@@ -230,9 +230,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/remotion-dev/skills.git",
       "skillPath": "skills/remotion-best-practices/SKILL.md",
-      "skillFolderHash": "3dc2222e7061ed2e3b03692a0528b91601cf3496",
+      "skillFolderHash": "c258c072991d762e93b946a8ac40bc8da4e04c70",
       "installedAt": "2026-07-21T10:41:08.762Z",
-      "updatedAt": "2026-11-11T12:50:43.329Z"
+      "updatedAt": "2026-11-12T17:48:09.672Z"
     },
     "herdr": {
       "source": "herdrdev/herdr",
@@ -631,10 +631,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "29ba9c12789b1c54ab76ad40e2472e646d141b85",
+      "skillFolderHash": "cd4185523189fb04c1d24bea0100b6aa2ce7421e",
       "pluginName": "agent-browser",
       "installedAt": "2026-11-03T13:46:16.680Z",
-      "updatedAt": "2026-11-03T13:46:16.680Z"
+      "updatedAt": "2026-11-12T17:48:09.721Z"
     },
     "agent-desktop": {
       "source": "vercel-labs/agent-desktop",

@@ -6,6 +6,7 @@ aqua.github_attestations = false
 7zip = "latest"
 actionlint = "latest"
 ast-grep = "latest"
+aube = "latest"
 awscli = "latest"
 bat = "latest"
 # These upstream packages are Linux-only
