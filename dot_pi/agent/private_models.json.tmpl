@@ -1,5 +1,5 @@
 {{- /* Commissary API key for the ai.ianpascoe.dev proxy; read from 1Password at apply time. */ -}}
-{{- $commissaryKey := onepasswordRead "op://Agents/Commissary/credential" | trim | toJson -}}
+{{- $commissaryKey := onepasswordRead "op://Agents/Commissary Pi/credential" | trim | toJson -}}
 {
   "$schema": "https://raw.githubusercontent.com/earendil-works/pi/refs/heads/main/packages/coding-agent/schemas/models.schema.json",
   "providers": {

@@ -182,7 +182,7 @@ rex.action({
     local file = assert(io.open(path, "w"))
     file:write(screen.content)
     file:close()
-    popup({ "sh", "-c", '${VISUAL:-${EDITOR:-neorex}} + "$1"; rm -f "$1"', "sh", path })
+    popup({ "sh", "-c", '${VISUAL:-${EDITOR:-neopane}} + "$1"; rm -f "$1"', "sh", path })
   end,
 })
 bind_prefixed("[", "edit_scrollback")
@@ -191,11 +191,11 @@ bind_prefixed("[", "edit_scrollback")
 -- Commands
 ----------------------------------------------------------------------------
 
--- neorex (https://github.com/ian-pascoe/neorex), installed by its
+-- neopane (https://github.com/ian-pascoe/neopane), installed by its
 -- `just install`: one headless Neovim whose windows are each a Rex pane.
-local NEOREX = HOME .. "/.local/bin/neorex"
+local NEOPANE = HOME .. "/.local/bin/neopane"
 
--- mise's link to its newest Neovim. neorex starts `nvim` from PATH; putting
+-- mise's link to its newest Neovim. neopane starts `nvim` from PATH; putting
 -- this first skips the mise shim, which costs about 80ms a launch.
 local MISE_NVIM_DIR = (os.getenv("XDG_DATA_HOME") or HOME .. "/.local/share") .. "/mise/installs/neovim/latest/bin"
 
@@ -207,13 +207,13 @@ local function exists(path)
   return file ~= nil
 end
 
--- The command running neorex with `args` (Neovim arguments).
-local function neorex(args)
+-- The command running neopane with `args` (Neovim arguments).
+local function neopane(args)
   local command = { "env" }
   if exists(MISE_NVIM_DIR .. "/nvim") then
     table.insert(command, "PATH=" .. MISE_NVIM_DIR .. ":" .. (os.getenv("PATH") or ""))
   end
-  table.insert(command, exists(NEOREX) and NEOREX or "neorex")
+  table.insert(command, exists(NEOPANE) and NEOPANE or "neopane")
   for _, arg in ipairs(args) do
     table.insert(command, arg)
   end
@@ -225,29 +225,29 @@ rex.action({
   title = "Neogit",
   category = "Commands",
   run = function(ctx)
-    -- NeogitPopup (nvim plugins/editor.lua) quits Neovim, and so neorex,
+    -- NeogitPopup (nvim plugins/editor.lua) quits Neovim, and so neopane,
     -- when Neogit closes.
     -- login = false: zsh reads only .zshenv (XDG dirs, EDITOR,
     -- GIT_OPTIONAL_LOCKS) and skips the login profile (brew, mise activate,
     -- ~/.env, egress proxy), which took ~0.5s of a ~1.1s open. The server's
     -- PATH already has Homebrew and the mise shims.
     local fg = foreground(ctx.block_id)
-    popup(neorex({ "+NeogitPopup" }), fg and fg.cwd or nil, { login = false })
+    popup(neopane({ "+NeogitPopup" }), fg and fg.cwd or nil, { login = false })
   end,
 })
 bind_prefixed("g", "neogit")
 
 -- file_viewer = "prefix+f": yazi in a popup. A chosen file opens in the
--- tab's neorex pane, or a new neorex split beside the pane yazi was opened
+-- tab's neopane pane, or a new neopane split beside the pane yazi was opened
 -- from. Yazi writes its choice to a file and quits; the popup then hands it
--- to open_in_neorex below through `rex do`.
+-- to open_in_neopane below through `rex do`.
 local YAZI = [=[
 chosen=$(mktemp "${TMPDIR:-/tmp}/rex-yazi.XXXXXX")
 yazi --chooser-file="$chosen"
 if [[ -s $chosen ]]; then
   args=$(jq -Rn --arg block "$1" '{block: $block, paths: [inputs | select(. != "")]}' <"$chosen")
-  if ! out=$("${REX_BIN_DIR:+$REX_BIN_DIR/}rex" "do" open_in_neorex --args "$args" 2>&1); then
-    printf '\nCouldn'"'"'t open in neorex: %s\n\n' "$out" >&2
+  if ! out=$("${REX_BIN_DIR:+$REX_BIN_DIR/}rex" "do" open_in_neopane --args "$args" 2>&1); then
+    printf '\nCouldn'"'"'t open in neopane: %s\n\n' "$out" >&2
     read -rsn1 -p 'Press any key to close'
   fi
 fi
@@ -258,7 +258,7 @@ rex.action({
   name = "file_viewer",
   title = "File Viewer (Yazi)",
   category = "Commands",
-  keywords = "yazi files browse open nvim neovim neorex",
+  keywords = "yazi files browse open nvim neovim neopane",
   run = function(ctx)
     local fg = foreground(ctx.block_id)
     popup({
@@ -274,11 +274,11 @@ rex.action({
 })
 bind_prefixed("f", "file_viewer")
 
--- A neorex pane's foreground process: the launcher (`neorex`, or its `nrex`
--- link) in the first pane, `neorex pane` in the rest.
-local function is_neorex(name)
+-- A neopane pane's foreground process: the launcher (`neopane`, or its `npane`
+-- link) in the first pane, `neopane pane` in the rest.
+local function is_neopane(name)
   name = name and name:lower()
-  return name == "neorex" or name == "nrex"
+  return name == "neopane" or name == "npane"
 end
 
 -- The window holding block_id, in any of its layers, else the active window.
@@ -314,7 +314,7 @@ local function tiled_blocks(view, block_id)
   return tiled
 end
 
--- Typed into a neorex pane: Ctrl-\ Ctrl-N reaches Normal mode from any mode, then
+-- Typed into a neopane pane: Ctrl-\ Ctrl-N reaches Normal mode from any mode, then
 -- each path opens with :edit.
 local function edit_keys(paths)
   local keys = "\28\14"
@@ -324,12 +324,12 @@ local function edit_keys(paths)
   return keys
 end
 
--- Opens paths in a neorex pane in the window of `block` (preferring that
--- block), else in a new neorex split to the right of it. All of a neorex's
+-- Opens paths in a neopane pane in the window of `block` (preferring that
+-- block), else in a new neopane split to the right of it. All of a neopane's
 -- panes share one Neovim, so any of them will do.
 rex.action({
-  name = "open_in_neorex",
-  title = "Open Files in neorex",
+  name = "open_in_neopane",
+  title = "Open Files in neopane",
   category = "Commands",
   args = { paths = "array", block = "string?" },
   run = function(ctx, args)
@@ -346,7 +346,7 @@ rex.action({
     local editor
     for _, id in ipairs(blocks) do
       local fg = foreground(id)
-      if fg and is_neorex(fg.name) and (not editor or id == origin) then
+      if fg and is_neopane(fg.name) and (not editor or id == origin) then
         editor = id
       end
     end
@@ -369,7 +369,7 @@ rex.action({
     for _, path in ipairs(args.paths) do
       table.insert(nvim_args, path)
     end
-    local command = neorex(nvim_args)
+    local command = neopane(nvim_args)
     local _, serr = rex.session.new_split({
       anchor_id = anchor,
       direction = "horizontal",
@@ -608,7 +608,7 @@ end
 -- Vim navigation (vim-herdr-navigation)
 ----------------------------------------------------------------------------
 
--- ctrl+h/j/k/l moves between panes. neorex's windows are Rex panes, so Rex
+-- ctrl+h/j/k/l moves between panes. neopane's windows are Rex panes, so Rex
 -- moves between them itself. When a plain Vim is in the foreground the key
 -- goes to Vim instead, which moves between its own splits and, at an edge,
 -- calls `rex focus` to cross into the next pane

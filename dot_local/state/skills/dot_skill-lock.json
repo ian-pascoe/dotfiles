@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "e92e2e77c815097cd5fa05c8eaee2a5399d92757",
+      "skillFolderHash": "494bbfc564b85457890aeffc0d801fa3b15a982f",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-11-11T12:50:42.562Z"
+      "updatedAt": "2026-11-13T14:44:14.084Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -631,10 +631,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "cd4185523189fb04c1d24bea0100b6aa2ce7421e",
+      "skillFolderHash": "d75a393c9a371295c6d6be46c34938e76ef21184",
       "pluginName": "agent-browser",
       "installedAt": "2026-11-03T13:46:16.680Z",
-      "updatedAt": "2026-11-12T17:48:09.721Z"
+      "updatedAt": "2026-11-13T14:44:14.124Z"
     },
     "agent-desktop": {
       "source": "vercel-labs/agent-desktop",

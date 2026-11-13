@@ -5,6 +5,12 @@
 -- enable prettier only if a config file is present in the project
 vim.g.lazyvim_prettier_needs_config = true
 
+vim.filetype.add({
+  pattern = {
+    ['.*%.Jenkinsfile'] = 'groovy',
+  },
+})
+
 -- Tern's remote panes come from its daemon, not sshd, so they have no
 -- SSH_CONNECTION; their identity chain names how the user reached the host.
 local function in_remote_tern_pane()

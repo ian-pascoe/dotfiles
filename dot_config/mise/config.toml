@@ -167,17 +167,21 @@ zoxide = "latest"
 "npm:bash-language-server" = "latest"
 "npm:dockerfile-language-server-nodejs" = "latest"
 "npm:intelephense" = "latest"
-# oxlint's type-aware backend for Pi's oxlint LSP (settings.managed.json points OXLINT_TSGOLINT_PATH at it):
-# tsgolint ported to Rust on tsrs, until oxc-project/tsrs#378 ships an official one. Kept next to
-# oxlint-tsgolint, whose `tsgolint` stays oxlint's PATH fallback elsewhere.
-"npm:@maschwenk/tsrslint" = "latest"
+# oxlint's fallback type-aware backend: its `tsgolint` on PATH, used when OXLINT_TSGOLINT_PATH is unset. Pi's
+# oxlint LSP points that at tsrs's `tsrs-lint` instead (settings.managed.json).
 "npm:oxlint-tsgolint" = "latest"
 "npm:pi-acp" = "latest"
 "npm:rea-agents" = "latest"
 "npm:skills" = "latest"
 "npm:sql-language-server" = "latest"
-# tsrs-lsp's fallback outside Effect projects. Pinned: mise skips prereleases for `latest`, and tsrs has only those.
-"npm:tsrs" = "latest"
+# tsrs-lsp's fallback outside Effect projects, and the `tsrs-lint` backend for Pi's oxlint LSP. Pinned exactly:
+# mise skips prereleases for `latest`, and every current tsrs is one (`latest` resolves to an unrelated 0.0.0).
+# The exclusion: aube flags every trusted-publisher release as a downgrade from the maintainer's manual
+# 0.0.0-bootstrap.0 placeholder. 0.24.0's SLSA provenance names oxc-project/tsrs's release.yml on main (checked
+# 2026-11-13). Re-check provenance and move the exclusion with each version bump.
+"npm:tsrs" = { version = "0.24.0-ts7.1.0-beta", trust_policy_excludes = [
+  "tsrs@0.24.0-ts7.1.0-beta",
+] }
 "npm:typescript" = "latest"
 "npm:vscode-langservers-extracted" = "latest"
 "npm:yaml-language-server" = "latest"

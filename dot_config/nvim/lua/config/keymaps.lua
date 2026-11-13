@@ -2,8 +2,12 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- Add keymap to search neovim config files
-vim.keymap.set('n', '<leader>sN', LazyVim.pick('files', { cwd = vim.fn.stdpath('config') }), { desc = 'Neovim config' })
+-- Search the Neovim config in its chezmoi source: `chezmoi apply` overwrites edits to ~/.config/nvim.
+vim.keymap.set('n', '<leader>sN', function()
+  local source = vim.fs.joinpath(vim.uv.os_homedir(), '.local', 'share', 'chezmoi', 'dot_config', 'nvim')
+  local cwd = vim.fn.isdirectory(source) == 1 and source or vim.fn.stdpath('config')
+  require('config.fff_picker').files({ cwd = cwd })
+end, { desc = 'Neovim config' })
 
 -- Move the selection with J/K: AeroSpace takes LazyVim's <A-j>/<A-k> system-wide.
 -- Same commands as LazyVim's; join and keyword lookup stay on J/K in Normal mode.

@@ -1,10 +1,6 @@
 ---@class util
 local M = {}
 
-function M.is_win()
-  return vim.uv.os_uname().sysname:find('Windows') ~= nil
-end
-
 -- Directory holding the `theme` link to the current ~/.themes entry.
 function M.theme_dir()
   return vim.env.XDG_CONFIG_HOME or vim.fs.joinpath(vim.env.HOME, '.config')

@@ -1,0 +1,6 @@
+{{/* lazy.nvim writes its lockfile through this link into the source tree, so
+     plugin updates show up as chezmoi git diffs and every machine installs the
+     committed versions. chezmoi ignores the dot-named source file itself. */ -}}
+{{ if ne .chezmoi.os "windows" -}}
+{{ joinPath .chezmoi.sourceDir "dot_config/nvim/.lazy-lock.json" }}
+{{ end -}}

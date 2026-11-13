@@ -24,76 +24,22 @@ local function picker_alt_keys(spec)
   return keys
 end
 
+-- Obsidian vaults under ~/vaults that exist on this machine.
 local function get_vaults()
+  local root = vim.fs.joinpath(vim.uv.os_homedir(), 'vaults')
   local workspaces = {}
-
-  local vaults_path = vim.fn.finddir('vaults', os.getenv('HOME'))
-  if vaults_path == '' then
-    return workspaces
+  for _, name in ipairs({ 'personal', 'family', 'work' }) do
+    local path = vim.fs.joinpath(root, name)
+    if vim.fn.isdirectory(path) == 1 then
+      workspaces[#workspaces + 1] = { name = name, path = path }
+    end
   end
-
-  local personal_vault_name = 'personal'
-  local personal_vault_path = vim.fn.finddir(personal_vault_name, vaults_path)
-  if personal_vault_path ~= '' then
-    workspaces = vim.list_extend(workspaces, {
-      {
-        name = personal_vault_name,
-        path = personal_vault_path,
-      },
-    })
-  end
-
-  local family_vault_name = 'family'
-  local family_vault_path = vim.fn.finddir(family_vault_name, vaults_path)
-  if family_vault_path ~= '' then
-    workspaces = vim.list_extend(workspaces, {
-      {
-        name = family_vault_name,
-        path = family_vault_path,
-      },
-    })
-  end
-
-  local work_vault_name = 'work'
-  local work_vault_path = vim.fn.finddir(work_vault_name, vaults_path)
-  if work_vault_path ~= '' then
-    workspaces = vim.list_extend(workspaces, {
-      {
-        name = work_vault_name,
-        path = work_vault_path,
-      },
-    })
-  end
-
   return workspaces
 end
 
 local vault_workspaces = get_vaults()
 
 return {
-  {
-    'ibhagwan/fzf-lua',
-    opts = function(_, opts)
-      opts.winopts = opts.winopts or {}
-
-      local previous_on_create = opts.winopts.on_create
-      opts.winopts.on_create = function(event, ...)
-        if type(previous_on_create) == 'function' then
-          previous_on_create(event, ...)
-        end
-
-        local bufnr = event and event.bufnr or vim.api.nvim_get_current_buf()
-        vim.schedule(function()
-          if not vim.api.nvim_buf_is_valid(bufnr) then
-            return
-          end
-
-          vim.keymap.set('t', '<C-j>', '<Down>', { buffer = bufnr, nowait = true, silent = true })
-          vim.keymap.set('t', '<C-k>', '<Up>', { buffer = bufnr, nowait = true, silent = true })
-        end)
-      end
-    end,
-  },
   { -- fff: file/grep backend for the Snacks picker (see config/fff_picker.lua)
     'dmtrKovalenko/fff',
     build = function()
@@ -340,6 +286,16 @@ return {
   { -- diffview: q closes it from the diff or the file panel
     'sindrets/diffview.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose' },
+    -- <leader>gd/gD/gf stay LazyVim's Snacks pickers; Diffview gets <leader>gv.
+    keys = {
+      { '<leader>gv', '', desc = '+diffview' },
+      { '<leader>gvd', '<cmd>DiffviewOpen<cr>', desc = 'Diff working tree' },
+      { '<leader>gvb', '<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<cr>', desc = 'Diff branch vs origin' },
+      { '<leader>gvf', '<cmd>DiffviewFileHistory %<cr>', desc = 'File history' },
+      { '<leader>gvF', '<cmd>DiffviewFileHistory<cr>', desc = 'Repo history' },
+      { '<leader>gvf', "<cmd>'<,'>DiffviewFileHistory<cr>", mode = 'x', desc = 'Selection history' },
+      { '<leader>gvq', '<cmd>DiffviewClose<cr>', desc = 'Close Diffview' },
+    },
     opts = {
       keymaps = {
         view = { { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' } } },
@@ -363,19 +319,16 @@ return {
     },
   },
   {
-    'epwalsh/obsidian.nvim',
-    enabled = vault_workspaces ~= nil and #vault_workspaces > 0,
+    'obsidian-nvim/obsidian.nvim', -- community fork; epwalsh/obsidian.nvim is unmaintained
+    enabled = #vault_workspaces > 0,
     ft = { 'markdown' },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
+    opts = {
+      workspaces = vault_workspaces,
+      legacy_commands = false, -- `:Obsidian <sub>` instead of the deprecated `:ObsidianX`
     },
-    opts = function(_, opts)
-      opts.workspaces = vault_workspaces
-    end,
   },
   { -- Directory diffing plugin
     'will133/vim-dirdiff',
-    cmd = 'DirDiff',
-    opts = {},
+    cmd = 'DirDiff', -- Vimscript plugin: no Lua module, so no opts
   },
 }

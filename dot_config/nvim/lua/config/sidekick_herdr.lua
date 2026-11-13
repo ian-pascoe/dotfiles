@@ -1,4 +1,5 @@
 local Config = require('sidekick.config')
+local Mux = require('config.sidekick_mux')
 local Util = require('sidekick.util')
 
 ---@class sidekick.cli.muxer.Herdr: sidekick.cli.Session
@@ -9,29 +10,15 @@ M.__index = M
 M.external = true
 M.priority = 50
 
----@param cmd string[]
----@return table?
-local function exec_json(cmd)
-  local _, stdout = Util.exec(cmd, { notify = false })
-  if not stdout then
-    return
-  end
-  local ok, value = pcall(vim.json.decode, stdout)
-
-  if ok and type(value) == 'table' then
-    return value
-  end
-end
-
 function M:is_running()
-  local response = exec_json({ 'herdr', 'pane', 'get', self.herdr_pane_id })
+  local response = Mux.exec_json({ 'herdr', 'pane', 'get', self.herdr_pane_id })
   local pane = response and response.result and response.result.pane
   return pane and pane.agent == self.tool.name or false
 end
 
 ---@return sidekick.cli.session.State[]
 function M.sessions()
-  local response = exec_json({ 'herdr', 'pane', 'list' })
+  local response = Mux.exec_json({ 'herdr', 'pane', 'list' })
   local panes = response and response.result and response.result.panes
   if type(panes) ~= 'table' then
     return {}
