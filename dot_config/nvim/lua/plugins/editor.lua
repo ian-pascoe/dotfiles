@@ -293,7 +293,7 @@ return {
       'sindrets/diffview.nvim', -- diff integration
       'folke/snacks.nvim', -- picker integration
     },
-    opts = {},
+    opts = { kind = 'replace' },
     init = function()
       -- `nvim +NeogitPopup`: Neogit alone in the cwd's repo, for terminal
       -- popups such as Rex's prefix+g. Closing the status buffer quits nvim
