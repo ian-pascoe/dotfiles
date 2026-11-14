@@ -1,0 +1,2 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- includeTemplate "t3-settings.json.tmpl" (dict "stdin" .chezmoi.stdin "managed" "t3/client-settings.managed.json") -}}

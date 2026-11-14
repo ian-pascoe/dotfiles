@@ -1,0 +1,21 @@
+{{- /*
+  A T3 Code settings file (settings.json or client-settings.json) with the keys
+  of t3/<name>.managed.json replaced at the top level, objects as a whole. The
+  rest is state T3 Code writes: onboarding, project and environment ids, the
+  model lists, and the defaultTheme set-theme publishes. Go templates can't
+  keep key order, so when nothing managed changed, the file is returned
+  untouched instead of re-sorted.
+  Called with dict "stdin" (the current file) and "managed" (the repo path).
+*/ -}}
+{{- $current := .stdin | trim -}}
+{{- $settings := dict -}}
+{{- if $current }}{{ $settings = fromJson $current }}{{ end -}}
+{{- $before := toJson $settings -}}
+{{- range $key, $value := include .managed | fromJson -}}
+{{-   $_ := set $settings $key $value -}}
+{{- end -}}
+{{- if eq $before (toJson $settings) -}}
+{{-   .stdin -}}
+{{- else -}}
+{{-   toPrettyJson $settings -}}
+{{- end -}}

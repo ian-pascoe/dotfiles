@@ -4,12 +4,17 @@ AGENTS.md
 CLAUDE.md
 .claude/mcp-servers.json
 tern/**
+t3/**
 .pi/agent/settings.managed.json
 .pi/agent/settings.defaults.json
 docs/**
 GLOSSARY-MAP.md
 **/GLOSSARY.md
 **/docs/adr/**
+# T3 Code's settings only where T3 Code is installed
+{{ if not (stat (joinPath .chezmoi.homeDir ".t3" "userdata")) }}
+.t3
+{{ end }}
 # Theming glossary docs; anything deployed into ~/.themes would list as a theme
 .themes/docs
 .themes/tools

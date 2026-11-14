@@ -1,0 +1,76 @@
+{
+  "defaultAutoPull": true,
+  "storageCleanup": {
+    "worktreeAfterDays": 8,
+    "worktreeSettledAfterDays": 8,
+    "worktreeOnMerge": true,
+    "worktreeOnDelete": true,
+    "browserArtifactsAfterDays": 14,
+    "logsAfterDays": 7
+  },
+  "idleCompaction": "onReturn",
+  "linkedEnvironmentsEnabled": true,
+  "addProjectBaseDirectory": "~/src",
+  "branchNamingMode": "semantic",
+  "removeAgentCreditsOnMerge": true,
+  "sourceControlWritingStyle": {
+    "mode": "conventional_commits"
+  },
+  "defaultModelSelection": {
+    "instanceId": "pi",
+    "model": "anthropic/claude-opus-5-5"
+  },
+  "textGenerationModelSelection": {
+    "instanceId": "pi",
+    "model": "anthropic/claude-haiku-5-5",
+    "options": [
+      {
+        "id": "thinking",
+        "value": "low"
+      }
+    ]
+  },
+  "providerInstances": {
+    "grok": {
+      "driver": "grok",
+      "enabled": false,
+      "config": {
+        "binaryPath": "grok",
+        "customModels": []
+      }
+    },
+    "codex": {
+      "driver": "codex",
+      "enabled": false,
+      "config": {
+        "binaryPath": "codex",
+        "homePath": "",
+        "shadowHomePath": "",
+        "launchArgs": "",
+        "customModels": []
+      }
+    },
+    "opencode": {
+      "driver": "opencode",
+      "enabled": false,
+      "config": {
+        "binaryPath": "opencode",
+        "serverUrl": "",
+        "serverPassword": "",
+        "customModels": []
+      }
+    },
+    "pi": {
+      "driver": "pi",
+      "displayName": "Pi",
+      "enabled": true,
+      "config": {
+        "binaryPath": "pi-t3"
+      }
+    },
+    "claudeAgent": {
+      "driver": "claudeAgent",
+      "enabled": false
+    }
+  }
+}
