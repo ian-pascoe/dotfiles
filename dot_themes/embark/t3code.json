@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Embark",
+  "appearance": "dark",
+  "canvas": "#1e1c31",
+  "accent": "#91ddff",
+  "colors": {
+    "text": "#cbe3e7",
+    "error": "#f48fb1",
+    "warning": "#ffe6b3",
+    "terminalBackground": "#1e1c31",
+    "terminalForeground": "#cbe3e7",
+    "terminalCursor": "#a1efd3",
+    "terminalSelection": "#3e3859"
+  }
+}

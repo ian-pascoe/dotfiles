@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "One Dark",
+  "appearance": "dark",
+  "canvas": "#282c34",
+  "accent": "#61afef",
+  "colors": {
+    "text": "#abb2bf",
+    "error": "#e06c75",
+    "warning": "#e5c07b",
+    "terminalBackground": "#282c34",
+    "terminalForeground": "#abb2bf",
+    "terminalCursor": "#56b6c2",
+    "terminalSelection": "#3e4451"
+  }
+}

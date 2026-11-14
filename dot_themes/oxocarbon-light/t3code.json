@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Oxocarbon Light",
+  "appearance": "light",
+  "canvas": "#ffffff",
+  "accent": "#0f62fe",
+  "colors": {
+    "text": "#161616",
+    "error": "#d02670",
+    "warning": "#8e6a00",
+    "terminalBackground": "#ffffff",
+    "terminalForeground": "#161616",
+    "terminalCursor": "#161616",
+    "terminalSelection": "#d0d0d0"
+  }
+}

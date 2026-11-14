@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Hackerman",
+  "appearance": "dark",
+  "canvas": "#0b0c16",
+  "accent": "#82fb9c",
+  "colors": {
+    "text": "#ddf7ff",
+    "error": "#50f872",
+    "warning": "#50f7d4",
+    "terminalBackground": "#0b0c16",
+    "terminalForeground": "#ddf7ff",
+    "terminalCursor": "#ddf7ff",
+    "terminalSelection": "#1f253a"
+  }
+}

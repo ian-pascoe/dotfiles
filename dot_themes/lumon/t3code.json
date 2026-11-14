@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Lumon",
+  "appearance": "dark",
+  "canvas": "#16242d",
+  "accent": "#8bc9eb",
+  "colors": {
+    "text": "#d6e2ee",
+    "error": "#4d86b0",
+    "warning": "#9dcae5",
+    "terminalBackground": "#16242d",
+    "terminalForeground": "#d6e2ee",
+    "terminalCursor": "#f2fcff",
+    "terminalSelection": "#243d56"
+  }
+}

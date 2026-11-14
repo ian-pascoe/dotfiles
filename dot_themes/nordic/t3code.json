@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Nordic",
+  "appearance": "dark",
+  "canvas": "#242933",
+  "accent": "#88c0d0",
+  "colors": {
+    "text": "#c0c8d8",
+    "error": "#c5727a",
+    "warning": "#ebcb8b",
+    "terminalBackground": "#242933",
+    "terminalForeground": "#c0c8d8",
+    "terminalCursor": "#c0c8d8",
+    "terminalSelection": "#2e3440"
+  }
+}

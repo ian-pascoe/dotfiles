@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Nord",
+  "appearance": "dark",
+  "canvas": "#212121",
+  "accent": "#88c0d0",
+  "colors": {
+    "text": "#d8dee9",
+    "error": "#bf616a",
+    "warning": "#ebcb8b",
+    "terminalBackground": "#212121",
+    "terminalForeground": "#d8dee9",
+    "terminalCursor": "#ebcb8b",
+    "terminalSelection": "#d8dee9"
+  }
+}

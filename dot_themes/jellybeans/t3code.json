@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Jellybeans",
+  "appearance": "dark",
+  "canvas": "#151515",
+  "accent": "#8fbfdc",
+  "colors": {
+    "text": "#e8e8d3",
+    "error": "#d74545",
+    "warning": "#fad07a",
+    "terminalBackground": "#151515",
+    "terminalForeground": "#e8e8d3",
+    "terminalCursor": "#b0d0f0",
+    "terminalSelection": "#404040"
+  }
+}

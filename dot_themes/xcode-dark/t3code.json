@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Xcode Dark",
+  "appearance": "dark",
+  "canvas": "#292a30",
+  "accent": "#4eb0cc",
+  "colors": {
+    "text": "#dfdfe0",
+    "error": "#ff8170",
+    "warning": "#d9c97c",
+    "terminalBackground": "#292a30",
+    "terminalForeground": "#dfdfe0",
+    "terminalCursor": "#dfdfe0",
+    "terminalSelection": "#414453"
+  }
+}

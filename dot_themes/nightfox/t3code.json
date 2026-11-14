@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Nightfox",
+  "appearance": "dark",
+  "canvas": "#192330",
+  "accent": "#719cd6",
+  "colors": {
+    "text": "#cdcecf",
+    "error": "#c94f6d",
+    "warning": "#dbc074",
+    "terminalBackground": "#192330",
+    "terminalForeground": "#cdcecf",
+    "terminalCursor": "#cdcecf",
+    "terminalSelection": "#2b3b51"
+  }
+}

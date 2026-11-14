@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "TokyoDark",
+  "appearance": "dark",
+  "canvas": "#11121d",
+  "accent": "#7199ee",
+  "colors": {
+    "text": "#a0a8cd",
+    "error": "#ee6d85",
+    "warning": "#d7a65f",
+    "terminalBackground": "#11121d",
+    "terminalForeground": "#a0a8cd",
+    "terminalCursor": "#a0a8cd",
+    "terminalSelection": "#a0a8cd"
+  }
+}

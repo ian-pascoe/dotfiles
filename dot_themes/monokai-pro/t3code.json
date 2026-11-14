@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Monokai Pro",
+  "appearance": "dark",
+  "canvas": "#2d2a2e",
+  "accent": "#ffd866",
+  "colors": {
+    "text": "#fcfcfa",
+    "error": "#ff6188",
+    "warning": "#ffd866",
+    "terminalBackground": "#2d2a2e",
+    "terminalForeground": "#fcfcfa",
+    "terminalCursor": "#c1c0c0",
+    "terminalSelection": "#5b595c"
+  }
+}

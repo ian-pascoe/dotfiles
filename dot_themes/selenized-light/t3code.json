@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Selenized Light",
+  "appearance": "light",
+  "canvas": "#fbf3db",
+  "accent": "#0072d4",
+  "colors": {
+    "text": "#53676d",
+    "error": "#d2212d",
+    "warning": "#ad8900",
+    "terminalBackground": "#fbf3db",
+    "terminalForeground": "#53676d",
+    "terminalCursor": "#53676d",
+    "terminalSelection": "#ece3cc"
+  }
+}

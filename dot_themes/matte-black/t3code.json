@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Matte Black",
+  "appearance": "dark",
+  "canvas": "#121212",
+  "accent": "#e68e0d",
+  "colors": {
+    "text": "#bebebe",
+    "error": "#d35f5f",
+    "warning": "#f59e0b",
+    "terminalBackground": "#121212",
+    "terminalForeground": "#bebebe",
+    "terminalCursor": "#eaeaea",
+    "terminalSelection": "#333333"
+  }
+}

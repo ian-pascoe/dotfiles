@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Everblush",
+  "appearance": "dark",
+  "canvas": "#141b1e",
+  "accent": "#6cbfbf",
+  "colors": {
+    "text": "#dadada",
+    "error": "#e57474",
+    "warning": "#e5c76b",
+    "terminalBackground": "#141b1e",
+    "terminalForeground": "#dadada",
+    "terminalCursor": "#dadada",
+    "terminalSelection": "#2d3437"
+  }
+}

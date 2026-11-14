@@ -10,7 +10,8 @@
 # the system appearance follows the variant used: light with a light.mode file.
 # Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp
 # pick the theme up on their next start. Rex imports the variant's Ghostty
-# colors when it is running.
+# colors when it is running. T3 Code publishes the variant's t3code.json and
+# switches its connected clients to it.
 # In WSL the Windows host follows: its Set-Theme.ps1 runs with the variant and
 # leaves WSL alone. When the switch starts on Windows, Set-Theme.ps1 runs this
 # script with THEME_FROM_WINDOWS set, so it does not run back.
@@ -80,6 +81,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     *) echo "Rex theme not synced (turn on Remote Control in Rex's Settings)" >&2 ;;
     esac
   fi
+fi
+
+# T3 Code publishes the file into its themes folder under one fixed id, so
+# switching replaces the previous variant's theme instead of piling them up.
+t3_bin=$(command -v t3 || echo "$HOME/.t3/bin/t3")
+if [[ -x $t3_bin && -f $THEME_PATH/t3code.json ]]; then
+  "$t3_bin" theme set --id dotfiles "$THEME_PATH/t3code.json" >/dev/null ||
+    echo "T3 Code theme not set" >&2
 fi
 
 set-bg 1

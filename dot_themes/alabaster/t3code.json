@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Alabaster",
+  "appearance": "light",
+  "canvas": "#f7f7f7",
+  "accent": "#325cc0",
+  "colors": {
+    "text": "#000000",
+    "error": "#aa3731",
+    "warning": "#bc7500",
+    "terminalBackground": "#f7f7f7",
+    "terminalForeground": "#000000",
+    "terminalCursor": "#007acc",
+    "terminalSelection": "#bfdbfe"
+  }
+}

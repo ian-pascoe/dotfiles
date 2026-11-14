@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Shades of Purple",
+  "appearance": "dark",
+  "canvas": "#1e1d40",
+  "accent": "#fad000",
+  "colors": {
+    "text": "#ffffff",
+    "error": "#ec3a37",
+    "warning": "#fad000",
+    "terminalBackground": "#1e1d40",
+    "terminalForeground": "#ffffff",
+    "terminalCursor": "#fad000",
+    "terminalSelection": "#b362ff"
+  }
+}

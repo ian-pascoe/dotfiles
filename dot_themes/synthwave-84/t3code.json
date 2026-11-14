@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "SynthWave '84",
+  "appearance": "dark",
+  "canvas": "#262335",
+  "accent": "#ff7edb",
+  "colors": {
+    "text": "#ffffff",
+    "error": "#fe4450",
+    "warning": "#fede5d",
+    "terminalBackground": "#262335",
+    "terminalForeground": "#ffffff",
+    "terminalCursor": "#f97e72",
+    "terminalSelection": "#413e4e"
+  }
+}

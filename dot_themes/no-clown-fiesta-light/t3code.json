@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "No Clown Fiesta Light",
+  "appearance": "light",
+  "canvas": "#e1e1e1",
+  "accent": "#57788d",
+  "colors": {
+    "text": "#151515",
+    "error": "#874e42",
+    "warning": "#b89058",
+    "terminalBackground": "#e1e1e1",
+    "terminalForeground": "#151515",
+    "terminalCursor": "#151515",
+    "terminalSelection": "#c6d5de"
+  }
+}

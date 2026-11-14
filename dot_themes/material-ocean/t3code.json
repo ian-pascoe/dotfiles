@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Material Ocean",
+  "appearance": "dark",
+  "canvas": "#0f111a",
+  "accent": "#82aaff",
+  "colors": {
+    "text": "#8f93a2",
+    "error": "#ff5370",
+    "warning": "#ffcb6b",
+    "terminalBackground": "#0f111a",
+    "terminalForeground": "#8f93a2",
+    "terminalCursor": "#ffcc00",
+    "terminalSelection": "#1f2233"
+  }
+}

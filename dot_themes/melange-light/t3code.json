@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Melange Light",
+  "appearance": "light",
+  "canvas": "#f1f1f1",
+  "accent": "#465aa4",
+  "colors": {
+    "text": "#54433a",
+    "error": "#bf0021",
+    "warning": "#a06d00",
+    "terminalBackground": "#f1f1f1",
+    "terminalForeground": "#54433a",
+    "terminalCursor": "#54433a",
+    "terminalSelection": "#d9d3ce"
+  }
+}

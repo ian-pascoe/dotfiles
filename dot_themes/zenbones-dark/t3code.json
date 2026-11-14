@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Zenbones Dark",
+  "appearance": "dark",
+  "canvas": "#1c1917",
+  "accent": "#6099c0",
+  "colors": {
+    "text": "#b4bdc3",
+    "error": "#de6e7c",
+    "warning": "#b77e64",
+    "terminalBackground": "#1c1917",
+    "terminalForeground": "#b4bdc3",
+    "terminalCursor": "#c4cacf",
+    "terminalSelection": "#3d4042"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Palenight",
+  "appearance": "dark",
+  "canvas": "#292d3e",
+  "accent": "#82aaff",
+  "colors": {
+    "text": "#a6accd",
+    "error": "#ff5370",
+    "warning": "#ffcb6b",
+    "terminalBackground": "#292d3e",
+    "terminalForeground": "#a6accd",
+    "terminalCursor": "#ffcc00",
+    "terminalSelection": "#444267"
+  }
+}

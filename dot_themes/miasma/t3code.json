@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Miasma",
+  "appearance": "dark",
+  "canvas": "#222222",
+  "accent": "#78824b",
+  "colors": {
+    "text": "#c2c2b0",
+    "error": "#b36d43",
+    "warning": "#c9a554",
+    "terminalBackground": "#222222",
+    "terminalForeground": "#c2c2b0",
+    "terminalCursor": "#c7c7c7",
+    "terminalSelection": "#e4c47a"
+  }
+}

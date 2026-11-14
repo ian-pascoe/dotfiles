@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Xcode Light",
+  "appearance": "light",
+  "canvas": "#ffffff",
+  "accent": "#0f68a0",
+  "colors": {
+    "text": "#262626",
+    "error": "#d12f1b",
+    "warning": "#78492a",
+    "terminalBackground": "#ffffff",
+    "terminalForeground": "#262626",
+    "terminalCursor": "#262626",
+    "terminalSelection": "#b4d8fd"
+  }
+}

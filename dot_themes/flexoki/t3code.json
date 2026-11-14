@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Flexoki",
+  "appearance": "dark",
+  "canvas": "#100f0f",
+  "accent": "#4385be",
+  "colors": {
+    "text": "#cecdc3",
+    "error": "#d14d41",
+    "warning": "#d0a215",
+    "terminalBackground": "#100f0f",
+    "terminalForeground": "#cecdc3",
+    "terminalCursor": "#3aa99f",
+    "terminalSelection": "#282726"
+  }
+}

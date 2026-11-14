@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Light Owl",
+  "appearance": "light",
+  "canvas": "#fbfbfb",
+  "accent": "#4876d6",
+  "colors": {
+    "text": "#403f53",
+    "error": "#de3d3b",
+    "warning": "#a97c00",
+    "terminalBackground": "#fbfbfb",
+    "terminalForeground": "#403f53",
+    "terminalCursor": "#403f53",
+    "terminalSelection": "#e0e0e0"
+  }
+}

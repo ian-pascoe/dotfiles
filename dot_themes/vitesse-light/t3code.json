@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Vitesse Light",
+  "appearance": "light",
+  "canvas": "#ffffff",
+  "accent": "#1e754f",
+  "colors": {
+    "text": "#393a34",
+    "error": "#ab5959",
+    "warning": "#998418",
+    "terminalBackground": "#ffffff",
+    "terminalForeground": "#393a34",
+    "terminalCursor": "#393a34",
+    "terminalSelection": "#eaeaea"
+  }
+}

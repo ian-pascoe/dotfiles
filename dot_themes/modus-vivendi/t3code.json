@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Modus Vivendi",
+  "appearance": "dark",
+  "canvas": "#000000",
+  "accent": "#2fafff",
+  "colors": {
+    "text": "#ffffff",
+    "error": "#ff5f59",
+    "warning": "#d0bc00",
+    "terminalBackground": "#000000",
+    "terminalForeground": "#ffffff",
+    "terminalCursor": "#ffffff",
+    "terminalSelection": "#7030af"
+  }
+}

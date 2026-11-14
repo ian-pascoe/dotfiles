@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Cobalt2",
+  "appearance": "dark",
+  "canvas": "#132738",
+  "accent": "#ffc600",
+  "colors": {
+    "text": "#ffffff",
+    "error": "#f40e17",
+    "warning": "#ffc600",
+    "terminalBackground": "#132738",
+    "terminalForeground": "#ffffff",
+    "terminalCursor": "#f0cc09",
+    "terminalSelection": "#18354f"
+  }
+}

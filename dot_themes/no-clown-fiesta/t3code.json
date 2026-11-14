@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "No Clown Fiesta",
+  "appearance": "dark",
+  "canvas": "#151515",
+  "accent": "#bad7ff",
+  "colors": {
+    "text": "#e1e1e1",
+    "error": "#b46958",
+    "warning": "#f4bf75",
+    "terminalBackground": "#151515",
+    "terminalForeground": "#e1e1e1",
+    "terminalCursor": "#d0d0d0",
+    "terminalSelection": "#373737"
+  }
+}

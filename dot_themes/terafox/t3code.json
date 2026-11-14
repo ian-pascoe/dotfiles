@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Terafox",
+  "appearance": "dark",
+  "canvas": "#152528",
+  "accent": "#5a93aa",
+  "colors": {
+    "text": "#e6eaea",
+    "error": "#e85c51",
+    "warning": "#fda47f",
+    "terminalBackground": "#152528",
+    "terminalForeground": "#e6eaea",
+    "terminalCursor": "#e6eaea",
+    "terminalSelection": "#293e40"
+  }
+}

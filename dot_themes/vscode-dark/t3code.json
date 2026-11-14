@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "VS Code Dark Modern",
+  "appearance": "dark",
+  "canvas": "#1f1f1f",
+  "accent": "#3794ff",
+  "colors": {
+    "text": "#cccccc",
+    "error": "#f14c4c",
+    "warning": "#cca700",
+    "terminalBackground": "#1f1f1f",
+    "terminalForeground": "#cccccc",
+    "terminalCursor": "#ffffff",
+    "terminalSelection": "#3a3d41"
+  }
+}

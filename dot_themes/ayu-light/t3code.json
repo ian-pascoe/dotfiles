@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Ayu Light",
+  "appearance": "light",
+  "canvas": "#f8f9fa",
+  "accent": "#dc6e1e",
+  "colors": {
+    "text": "#5c6166",
+    "error": "#d94a4a",
+    "warning": "#ad741f",
+    "terminalBackground": "#f8f9fa",
+    "terminalForeground": "#5c6166",
+    "terminalCursor": "#ffaa33",
+    "terminalSelection": "#035bd6"
+  }
+}

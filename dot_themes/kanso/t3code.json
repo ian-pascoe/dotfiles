@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Kanso Zen",
+  "appearance": "dark",
+  "canvas": "#090e13",
+  "accent": "#7fb4ca",
+  "colors": {
+    "text": "#c5c9c7",
+    "error": "#e46876",
+    "warning": "#e6c384",
+    "terminalBackground": "#090e13",
+    "terminalForeground": "#c5c9c7",
+    "terminalCursor": "#c5c9c7",
+    "terminalSelection": "#393b44"
+  }
+}

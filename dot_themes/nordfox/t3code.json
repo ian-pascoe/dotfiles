@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Nordfox",
+  "appearance": "dark",
+  "canvas": "#2e3440",
+  "accent": "#81a1c1",
+  "colors": {
+    "text": "#cdcecf",
+    "error": "#bf616a",
+    "warning": "#ebcb8b",
+    "terminalBackground": "#2e3440",
+    "terminalForeground": "#cdcecf",
+    "terminalCursor": "#cdcecf",
+    "terminalSelection": "#3e4a5b"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Cyberdream",
+  "appearance": "dark",
+  "canvas": "#16181a",
+  "accent": "#5ef1ff",
+  "colors": {
+    "text": "#ebecef",
+    "error": "#ff6e5e",
+    "warning": "#ff5ea0",
+    "terminalBackground": "#16181a",
+    "terminalForeground": "#ffffff",
+    "terminalCursor": "#ffffff",
+    "terminalSelection": "#3c4048"
+  }
+}

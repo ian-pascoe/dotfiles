@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Cyberdream Light",
+  "appearance": "light",
+  "canvas": "#ffffff",
+  "accent": "#008c99",
+  "colors": {
+    "text": "#25282c",
+    "error": "#d11500",
+    "warning": "#f40064",
+    "terminalBackground": "#ffffff",
+    "terminalForeground": "#16181a",
+    "terminalCursor": "#16181a",
+    "terminalSelection": "#acacac"
+  }
+}

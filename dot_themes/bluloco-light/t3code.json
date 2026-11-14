@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Bluloco Light",
+  "appearance": "light",
+  "canvas": "#f9f9f9",
+  "accent": "#275fe4",
+  "colors": {
+    "text": "#373a41",
+    "error": "#d52753",
+    "warning": "#9c7f1c",
+    "terminalBackground": "#f9f9f9",
+    "terminalForeground": "#373a41",
+    "terminalCursor": "#f32759",
+    "terminalSelection": "#daf0ff"
+  }
+}

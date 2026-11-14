@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Material Lighter",
+  "appearance": "light",
+  "canvas": "#fafafa",
+  "accent": "#6182b8",
+  "colors": {
+    "text": "#546e7a",
+    "error": "#e53935",
+    "warning": "#c37101",
+    "terminalBackground": "#fafafa",
+    "terminalForeground": "#546e7a",
+    "terminalCursor": "#272727",
+    "terminalSelection": "#dceeed"
+  }
+}

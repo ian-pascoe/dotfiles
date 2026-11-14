@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Oxocarbon",
+  "appearance": "dark",
+  "canvas": "#161616",
+  "accent": "#78a9ff",
+  "colors": {
+    "text": "#f2f4f8",
+    "error": "#ee5396",
+    "warning": "#ffe97b",
+    "terminalBackground": "#161616",
+    "terminalForeground": "#f2f4f8",
+    "terminalCursor": "#f2f4f8",
+    "terminalSelection": "#393939"
+  }
+}

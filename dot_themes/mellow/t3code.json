@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Mellow",
+  "appearance": "dark",
+  "canvas": "#161617",
+  "accent": "#aca1cf",
+  "colors": {
+    "text": "#c9c7cd",
+    "error": "#f5a191",
+    "warning": "#e6b99d",
+    "terminalBackground": "#161617",
+    "terminalForeground": "#c9c7cd",
+    "terminalCursor": "#e3e2e5",
+    "terminalSelection": "#3c3b3e"
+  }
+}

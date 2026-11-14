@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Modus Operandi",
+  "appearance": "light",
+  "canvas": "#ffffff",
+  "accent": "#0031a9",
+  "colors": {
+    "text": "#000000",
+    "error": "#a60000",
+    "warning": "#6f5500",
+    "terminalBackground": "#ffffff",
+    "terminalForeground": "#000000",
+    "terminalCursor": "#000000",
+    "terminalSelection": "#dfa0f0"
+  }
+}

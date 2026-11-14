@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Bluloco Dark",
+  "appearance": "dark",
+  "canvas": "#282c34",
+  "accent": "#3691ff",
+  "colors": {
+    "text": "#b9c0cb",
+    "error": "#ff6480",
+    "warning": "#f9c859",
+    "terminalBackground": "#282c34",
+    "terminalForeground": "#b9c0cb",
+    "terminalCursor": "#ffcc00",
+    "terminalSelection": "#b9c0ca"
+  }
+}

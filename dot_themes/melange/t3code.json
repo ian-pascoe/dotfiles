@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Melange",
+  "appearance": "dark",
+  "canvas": "#292522",
+  "accent": "#a3a9ce",
+  "colors": {
+    "text": "#ece1d7",
+    "error": "#d47766",
+    "warning": "#ebc06d",
+    "terminalBackground": "#292522",
+    "terminalForeground": "#ece1d7",
+    "terminalCursor": "#ece1d7",
+    "terminalSelection": "#403a36"
+  }
+}

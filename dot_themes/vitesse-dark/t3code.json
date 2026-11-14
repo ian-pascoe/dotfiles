@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Vitesse Dark",
+  "appearance": "dark",
+  "canvas": "#121212",
+  "accent": "#4d9375",
+  "colors": {
+    "text": "#dbd7ca",
+    "error": "#cb7676",
+    "warning": "#e6cc77",
+    "terminalBackground": "#121212",
+    "terminalForeground": "#dbd7ca",
+    "terminalCursor": "#dbd7ca",
+    "terminalSelection": "#272727"
+  }
+}

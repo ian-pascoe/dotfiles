@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Osaka Jade",
+  "appearance": "dark",
+  "canvas": "#111c18",
+  "accent": "#509475",
+  "colors": {
+    "text": "#c1c497",
+    "error": "#ff5345",
+    "warning": "#e5c736",
+    "terminalBackground": "#111c18",
+    "terminalForeground": "#c1c497",
+    "terminalCursor": "#f7e8b2",
+    "terminalSelection": "#32473b"
+  }
+}

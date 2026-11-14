@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Horizon Bright",
+  "appearance": "light",
+  "canvas": "#fdf0ed",
+  "accent": "#e73665",
+  "colors": {
+    "text": "#16161d",
+    "error": "#da103f",
+    "warning": "#af5427",
+    "terminalBackground": "#fdf0ed",
+    "terminalForeground": "#16161d",
+    "terminalCursor": "#d3a89d",
+    "terminalSelection": "#f9cec3"
+  }
+}

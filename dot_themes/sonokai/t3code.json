@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Sonokai",
+  "appearance": "dark",
+  "canvas": "#2c2e34",
+  "accent": "#e7c664",
+  "colors": {
+    "text": "#e2e2e3",
+    "error": "#fc5d7c",
+    "warning": "#e7c664",
+    "terminalBackground": "#2c2e34",
+    "terminalForeground": "#e2e2e3",
+    "terminalCursor": "#e2e2e3",
+    "terminalSelection": "#414550"
+  }
+}

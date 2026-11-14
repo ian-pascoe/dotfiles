@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Ayu Dark",
+  "appearance": "dark",
+  "canvas": "#0b0e14",
+  "accent": "#e6b450",
+  "colors": {
+    "text": "#bfbdb6",
+    "error": "#f07178",
+    "warning": "#ffb454",
+    "terminalBackground": "#0b0e14",
+    "terminalForeground": "#bfbdb6",
+    "terminalCursor": "#e6b450",
+    "terminalSelection": "#409fff"
+  }
+}

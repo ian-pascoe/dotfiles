@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Kanagawa Lotus",
+  "appearance": "light",
+  "canvas": "#f2ecbc",
+  "accent": "#4d699b",
+  "colors": {
+    "text": "#545464",
+    "error": "#c84053",
+    "warning": "#836f4a",
+    "terminalBackground": "#f2ecbc",
+    "terminalForeground": "#545464",
+    "terminalCursor": "#43436c",
+    "terminalSelection": "#545464"
+  }
+}

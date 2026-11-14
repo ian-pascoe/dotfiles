@@ -913,6 +913,47 @@ function ternJson(variant: string, roles: Roles, c: Colors): string {
 
 const stripPeriod = (text: string) => text.trim().replace(/\.$/, "");
 
+// ---------------------------------------------------------------- T3 Code
+
+/**
+ * What a T3 Code theme is drawn from. A roles file has all of it, and so do a variant's
+ * pi.json and ghostty.conf, which is how the variants that predate t3code.json got theirs.
+ */
+export interface T3CodeInput {
+  name: string;
+  mode: Mode;
+  text: string;
+  accent: string;
+  red: string;
+  yellow: string;
+  terminal: Pick<TerminalColors, "background" | "foreground" | "cursor" | "selectionBackground">;
+}
+
+/**
+ * A T3 Code environment theme file, which `set-theme` publishes with `t3 theme set`.
+ * T3 Code derives its whole palette, with contrast checks, from `canvas` (the terminal
+ * background, which is the theme's main background) and `accent`; `colors` then pins the
+ * text, status and terminal colors to the variant's own.
+ */
+export function t3codeJson(input: T3CodeInput): string {
+  return json({
+    version: 1,
+    name: input.name.slice(0, 48),
+    appearance: input.mode,
+    canvas: input.terminal.background,
+    accent: input.accent,
+    colors: {
+      text: input.text,
+      error: input.red,
+      warning: input.yellow,
+      terminalBackground: input.terminal.background,
+      terminalForeground: input.terminal.foreground,
+      terminalCursor: input.terminal.cursor,
+      terminalSelection: input.terminal.selectionBackground,
+    },
+  });
+}
+
 // ---------------------------------------------------------------- Windows Terminal
 
 const ansiNames = ["black", "red", "green", "yellow", "blue", "purple", "cyan", "white"] as const;
@@ -1033,6 +1074,18 @@ export function renderVariant(variant: string, roles: Roles): Map<string, string
     [`${dir}/lsd.yaml`, lsd(c, source)],
     [`${dir}/pi.json`, piJson(variant, roles, c)],
     [`${dir}/tern.json`, ternJson(variant, roles, c)],
+    [
+      `${dir}/t3code.json`,
+      t3codeJson({
+        name: roles.name,
+        mode: roles.mode,
+        text: c.text,
+        accent: c.accent,
+        red: c.red,
+        yellow: c.yellow,
+        terminal: roles.terminal,
+      }),
+    ],
     [`${dir}/yasb.css`, yasb(c, roles.name, source)],
     [`${dir}/yazi/theme.toml`, yaziTheme(variant)],
     [`${dir}/yazi/flavors/${variant}.yazi/flavor.toml`, yaziFlavor(c, roles.name)],

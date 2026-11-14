@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Everforest Light",
+  "appearance": "light",
+  "canvas": "#fdf6e3",
+  "accent": "#3a94c5",
+  "colors": {
+    "text": "#5c6a72",
+    "error": "#f85552",
+    "warning": "#dfa000",
+    "terminalBackground": "#fdf6e3",
+    "terminalForeground": "#5c6a72",
+    "terminalCursor": "#f57d26",
+    "terminalSelection": "#eaedc8"
+  }
+}

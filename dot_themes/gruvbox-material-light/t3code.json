@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Gruvbox Material Light",
+  "appearance": "light",
+  "canvas": "#fbf1c7",
+  "accent": "#45707a",
+  "colors": {
+    "text": "#654735",
+    "error": "#c14a4a",
+    "warning": "#b47109",
+    "terminalBackground": "#fbf1c7",
+    "terminalForeground": "#654735",
+    "terminalCursor": "#654735",
+    "terminalSelection": "#654735"
+  }
+}

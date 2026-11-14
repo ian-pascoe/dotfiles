@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Darcula",
+  "appearance": "dark",
+  "canvas": "#202020",
+  "accent": "#6897bb",
+  "colors": {
+    "text": "#adadad",
+    "error": "#ff6b68",
+    "warning": "#ffc66d",
+    "terminalBackground": "#202020",
+    "terminalForeground": "#adadad",
+    "terminalCursor": "#ffffff",
+    "terminalSelection": "#1a3272"
+  }
+}

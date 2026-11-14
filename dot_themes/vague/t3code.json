@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Vague",
+  "appearance": "dark",
+  "canvas": "#141415",
+  "accent": "#7e98e8",
+  "colors": {
+    "text": "#cdcdcd",
+    "error": "#d8647e",
+    "warning": "#f3be7c",
+    "terminalBackground": "#141415",
+    "terminalForeground": "#cdcdcd",
+    "terminalCursor": "#cdcdcd",
+    "terminalSelection": "#252530"
+  }
+}

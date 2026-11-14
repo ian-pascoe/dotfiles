@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "GitHub Light",
+  "appearance": "light",
+  "canvas": "#ffffff",
+  "accent": "#0969da",
+  "colors": {
+    "text": "#1f2328",
+    "error": "#cf222e",
+    "warning": "#9a6700",
+    "terminalBackground": "#ffffff",
+    "terminalForeground": "#1f2328",
+    "terminalCursor": "#0969da",
+    "terminalSelection": "#1f2328"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Black Metal (Immortal)",
+  "appearance": "dark",
+  "canvas": "#000000",
+  "accent": "#7799bb",
+  "colors": {
+    "text": "#c1c1c1",
+    "error": "#5f8787",
+    "warning": "#aaaaaa",
+    "terminalBackground": "#000000",
+    "terminalForeground": "#c1c1c1",
+    "terminalCursor": "#c1c1c1",
+    "terminalSelection": "#222222"
+  }
+}

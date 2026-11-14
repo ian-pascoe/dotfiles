@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Zenbones Light",
+  "appearance": "light",
+  "canvas": "#f0edec",
+  "accent": "#286486",
+  "colors": {
+    "text": "#2c363c",
+    "error": "#a8334c",
+    "warning": "#944927",
+    "terminalBackground": "#f0edec",
+    "terminalForeground": "#2c363c",
+    "terminalCursor": "#2c363c",
+    "terminalSelection": "#cbd9e3"
+  }
+}

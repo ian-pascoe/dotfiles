@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "GitHub Dark",
+  "appearance": "dark",
+  "canvas": "#0d1117",
+  "accent": "#58a6ff",
+  "colors": {
+    "text": "#e6edf3",
+    "error": "#f85149",
+    "warning": "#d29922",
+    "terminalBackground": "#0d1117",
+    "terminalForeground": "#e6edf3",
+    "terminalCursor": "#2f81f7",
+    "terminalSelection": "#e6edf3"
+  }
+}

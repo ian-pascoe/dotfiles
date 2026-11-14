@@ -38,6 +38,7 @@ const requiredFiles = [
   "k9s.yaml",
   "lsd.yaml",
   "pi.json",
+  "t3code.json",
   "tern.json",
   "yasb.css",
   "yazi/theme.toml",

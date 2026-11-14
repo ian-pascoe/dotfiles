@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Kanagawa Paper",
+  "appearance": "dark",
+  "canvas": "#1f1f28",
+  "accent": "#859fac",
+  "colors": {
+    "text": "#dcd7ba",
+    "error": "#c4746e",
+    "warning": "#c4b28a",
+    "terminalBackground": "#1f1f28",
+    "terminalForeground": "#dcd7ba",
+    "terminalCursor": "#c4b28a",
+    "terminalSelection": "#363646"
+  }
+}

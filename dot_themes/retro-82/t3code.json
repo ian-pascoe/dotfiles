@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Retro 82",
+  "appearance": "dark",
+  "canvas": "#05182e",
+  "accent": "#faa968",
+  "colors": {
+    "text": "#f6dcac",
+    "error": "#f85525",
+    "warning": "#e97b3c",
+    "terminalBackground": "#05182e",
+    "terminalForeground": "#f6dcac",
+    "terminalCursor": "#faa968",
+    "terminalSelection": "#134e5a"
+  }
+}

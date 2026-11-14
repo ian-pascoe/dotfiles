@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Solarized Osaka",
+  "appearance": "dark",
+  "canvas": "#001419",
+  "accent": "#268bd3",
+  "colors": {
+    "text": "#839395",
+    "error": "#db302d",
+    "warning": "#b28500",
+    "terminalBackground": "#001419",
+    "terminalForeground": "#839395",
+    "terminalCursor": "#839395",
+    "terminalSelection": "#1a6397"
+  }
+}

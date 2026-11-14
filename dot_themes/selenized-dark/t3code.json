@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Selenized Dark",
+  "appearance": "dark",
+  "canvas": "#103c48",
+  "accent": "#4695f7",
+  "colors": {
+    "text": "#adbcbc",
+    "error": "#fa5750",
+    "warning": "#dbb32d",
+    "terminalBackground": "#103c48",
+    "terminalForeground": "#adbcbc",
+    "terminalCursor": "#adbcbc",
+    "terminalSelection": "#184956"
+  }
+}

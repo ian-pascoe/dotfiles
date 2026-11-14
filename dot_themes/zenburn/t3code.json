@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Zenburn",
+  "appearance": "dark",
+  "canvas": "#3f3f3f",
+  "accent": "#94bff3",
+  "colors": {
+    "text": "#dcdccc",
+    "error": "#cc9393",
+    "warning": "#f0dfaf",
+    "terminalBackground": "#3f3f3f",
+    "terminalForeground": "#dcdccc",
+    "terminalCursor": "#73635a",
+    "terminalSelection": "#21322f"
+  }
+}

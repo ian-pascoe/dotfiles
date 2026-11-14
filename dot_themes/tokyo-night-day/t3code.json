@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Tokyo Night Day",
+  "appearance": "light",
+  "canvas": "#e1e2e7",
+  "accent": "#2e7de9",
+  "colors": {
+    "text": "#3760bf",
+    "error": "#c64343",
+    "warning": "#8c6c3e",
+    "terminalBackground": "#e1e2e7",
+    "terminalForeground": "#3760bf",
+    "terminalCursor": "#3760bf",
+    "terminalSelection": "#99a7df"
+  }
+}

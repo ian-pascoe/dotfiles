@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Iceberg",
+  "appearance": "dark",
+  "canvas": "#161821",
+  "accent": "#84a0c6",
+  "colors": {
+    "text": "#c6c8d1",
+    "error": "#e27878",
+    "warning": "#e9b189",
+    "terminalBackground": "#161821",
+    "terminalForeground": "#c6c8d1",
+    "terminalCursor": "#c6c8d1",
+    "terminalSelection": "#c6c8d1"
+  }
+}

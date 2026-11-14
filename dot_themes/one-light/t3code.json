@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "One Light",
+  "appearance": "light",
+  "canvas": "#fafafa",
+  "accent": "#4078f2",
+  "colors": {
+    "text": "#383a42",
+    "error": "#e45649",
+    "warning": "#986801",
+    "terminalBackground": "#fafafa",
+    "terminalForeground": "#383a42",
+    "terminalCursor": "#0184bc",
+    "terminalSelection": "#dcdcdc"
+  }
+}

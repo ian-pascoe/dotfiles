@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Horizon",
+  "appearance": "dark",
+  "canvas": "#1c1e26",
+  "accent": "#e95678",
+  "colors": {
+    "text": "#d5d8da",
+    "error": "#e95678",
+    "warning": "#fab795",
+    "terminalBackground": "#1c1e26",
+    "terminalForeground": "#d5d8da",
+    "terminalCursor": "#6c6f93",
+    "terminalSelection": "#6c6f93"
+  }
+}

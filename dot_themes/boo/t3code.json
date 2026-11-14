@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Boo",
+  "appearance": "dark",
+  "canvas": "#121010",
+  "accent": "#e15774",
+  "colors": {
+    "text": "#f7eff0",
+    "error": "#fe697d",
+    "warning": "#dfb8bc",
+    "terminalBackground": "#121010",
+    "terminalForeground": "#f7eff0",
+    "terminalCursor": "#fca2ae",
+    "terminalSelection": "#473234"
+  }
+}

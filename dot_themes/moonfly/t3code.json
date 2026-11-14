@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Moonfly",
+  "appearance": "dark",
+  "canvas": "#080808",
+  "accent": "#80a0ff",
+  "colors": {
+    "text": "#bdbdbd",
+    "error": "#ff5d5d",
+    "warning": "#e3c78a",
+    "terminalBackground": "#080808",
+    "terminalForeground": "#bdbdbd",
+    "terminalCursor": "#9e9e9e",
+    "terminalSelection": "#b2ceee"
+  }
+}

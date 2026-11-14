@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Catppuccin",
+  "appearance": "dark",
+  "canvas": "#1e1e2e",
+  "accent": "#89b4fa",
+  "colors": {
+    "text": "#cdd6f4",
+    "error": "#f38ba8",
+    "warning": "#f9e2af",
+    "terminalBackground": "#1e1e2e",
+    "terminalForeground": "#cdd6f4",
+    "terminalCursor": "#f5e0dc",
+    "terminalSelection": "#585b70"
+  }
+}

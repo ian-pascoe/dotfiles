@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Flexoki Light",
+  "appearance": "light",
+  "canvas": "#fffcf0",
+  "accent": "#205ea6",
+  "colors": {
+    "text": "#100f0f",
+    "error": "#af3029",
+    "warning": "#ad8301",
+    "terminalBackground": "#fffcf0",
+    "terminalForeground": "#100f0f",
+    "terminalCursor": "#100f0f",
+    "terminalSelection": "#cecdc3"
+  }
+}

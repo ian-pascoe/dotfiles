@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Iceberg Light",
+  "appearance": "light",
+  "canvas": "#e8e9ec",
+  "accent": "#2d539e",
+  "colors": {
+    "text": "#33374c",
+    "error": "#cc517a",
+    "warning": "#b6662d",
+    "terminalBackground": "#e8e9ec",
+    "terminalForeground": "#33374c",
+    "terminalCursor": "#33374c",
+    "terminalSelection": "#33374c"
+  }
+}

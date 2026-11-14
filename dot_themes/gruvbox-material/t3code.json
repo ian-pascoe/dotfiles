@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Gruvbox Material",
+  "appearance": "dark",
+  "canvas": "#282828",
+  "accent": "#7daea3",
+  "colors": {
+    "text": "#d4be98",
+    "error": "#ea6962",
+    "warning": "#d8a657",
+    "terminalBackground": "#282828",
+    "terminalForeground": "#d4be98",
+    "terminalCursor": "#d4be98",
+    "terminalSelection": "#45403d"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Monokai Pro Ristretto",
+  "appearance": "dark",
+  "canvas": "#2c2525",
+  "accent": "#f9cc6c",
+  "colors": {
+    "text": "#fff1f3",
+    "error": "#fd6883",
+    "warning": "#f9cc6c",
+    "terminalBackground": "#2c2525",
+    "terminalForeground": "#fff1f3",
+    "terminalCursor": "#c3b7b8",
+    "terminalSelection": "#5b5353"
+  }
+}

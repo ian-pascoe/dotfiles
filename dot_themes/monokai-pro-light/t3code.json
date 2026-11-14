@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Monokai Pro Light",
+  "appearance": "light",
+  "canvas": "#faf4f2",
+  "accent": "#cc7a0a",
+  "colors": {
+    "text": "#29242a",
+    "error": "#e14775",
+    "warning": "#cc7a0a",
+    "terminalBackground": "#faf4f2",
+    "terminalForeground": "#29242a",
+    "terminalCursor": "#706b6e",
+    "terminalSelection": "#bfb9ba"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Kanagawa",
+  "appearance": "dark",
+  "canvas": "#1f1f28",
+  "accent": "#7e9cd8",
+  "colors": {
+    "text": "#dcd7ba",
+    "error": "#c34043",
+    "warning": "#dca561",
+    "terminalBackground": "#1f1f28",
+    "terminalForeground": "#dcd7ba",
+    "terminalCursor": "#7aa89f",
+    "terminalSelection": "#2d4f67"
+  }
+}

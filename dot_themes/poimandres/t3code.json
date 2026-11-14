@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Poimandres",
+  "appearance": "dark",
+  "canvas": "#1b1e28",
+  "accent": "#add7ff",
+  "colors": {
+    "text": "#e4f0fb",
+    "error": "#d0679d",
+    "warning": "#fffac2",
+    "terminalBackground": "#1b1e28",
+    "terminalForeground": "#e4f0fb",
+    "terminalCursor": "#a6accd",
+    "terminalSelection": "#506477"
+  }
+}

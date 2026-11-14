@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Duskfox",
+  "appearance": "dark",
+  "canvas": "#232136",
+  "accent": "#569fba",
+  "colors": {
+    "text": "#e0def4",
+    "error": "#eb6f92",
+    "warning": "#f6c177",
+    "terminalBackground": "#232136",
+    "terminalForeground": "#e0def4",
+    "terminalCursor": "#e0def4",
+    "terminalSelection": "#433c59"
+  }
+}

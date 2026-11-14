@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Ayu Mirage",
+  "appearance": "dark",
+  "canvas": "#1f2430",
+  "accent": "#ffcc66",
+  "colors": {
+    "text": "#cccac2",
+    "error": "#f28779",
+    "warning": "#ffd173",
+    "terminalBackground": "#1f2430",
+    "terminalForeground": "#cccac2",
+    "terminalCursor": "#ffcc66",
+    "terminalSelection": "#409fff"
+  }
+}

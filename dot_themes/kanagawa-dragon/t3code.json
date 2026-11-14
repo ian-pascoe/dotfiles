@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Kanagawa Dragon",
+  "appearance": "dark",
+  "canvas": "#181616",
+  "accent": "#8ba4b0",
+  "colors": {
+    "text": "#c5c9c5",
+    "error": "#c4746e",
+    "warning": "#c4b28a",
+    "terminalBackground": "#181616",
+    "terminalForeground": "#c5c9c5",
+    "terminalCursor": "#c8c093",
+    "terminalSelection": "#2d4f67"
+  }
+}

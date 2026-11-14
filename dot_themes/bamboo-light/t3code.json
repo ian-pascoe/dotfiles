@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Bamboo Light",
+  "appearance": "light",
+  "canvas": "#fafae0",
+  "accent": "#27850b",
+  "colors": {
+    "text": "#3a4238",
+    "error": "#c72a3c",
+    "warning": "#a77b00",
+    "terminalBackground": "#fafae0",
+    "terminalForeground": "#3a4238",
+    "terminalCursor": "#0f0800",
+    "terminalSelection": "#a1a7a0"
+  }
+}

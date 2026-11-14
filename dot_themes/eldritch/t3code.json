@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Eldritch",
+  "appearance": "dark",
+  "canvas": "#212337",
+  "accent": "#a48cf2",
+  "colors": {
+    "text": "#ebfafa",
+    "error": "#f16c75",
+    "warning": "#f1fc79",
+    "terminalBackground": "#212337",
+    "terminalForeground": "#ebfafa",
+    "terminalCursor": "#37f499",
+    "terminalSelection": "#bf4f8e"
+  }
+}

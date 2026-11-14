@@ -20,6 +20,7 @@ const requiredFiles = [
   "k9s.yaml",
   "lsd.yaml",
   "pi.json",
+  "t3code.json",
   "tern.json",
   "yasb.css",
   "yazi/theme.toml",
@@ -192,6 +193,23 @@ describe.each(variants)("%s", (variant) => {
 
   test("pi.json colors resolve to concrete values", () => {
     expect(unresolvedThemeColors(JSON.parse(read(dir, "pi.json")) as ThemeJson)).toEqual([]);
+  });
+
+  // T3 Code refuses the theme file when these fail its schema.
+  test("t3code.json is a T3 Code theme in the variant's mode", () => {
+    const t3 = JSON.parse(read(dir, "t3code.json")) as {
+      name: string;
+      appearance: string;
+      canvas: string;
+      accent: string;
+      colors: Record<string, string>;
+    };
+    expect(t3.name.trim().length).toBeGreaterThan(0);
+    expect(t3.name.length).toBeLessThanOrEqual(48);
+    expect(t3.appearance).toBe(isLight(variant) ? "light" : "dark");
+    for (const color of [t3.canvas, t3.accent, ...Object.values(t3.colors)]) {
+      expect(color).toMatch(/^#[0-9a-f]{6}$/);
+    }
   });
 
   test("tern.json is a complete Oh My Pi theme", () => {

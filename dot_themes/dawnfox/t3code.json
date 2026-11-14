@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Dawnfox",
+  "appearance": "light",
+  "canvas": "#faf4ed",
+  "accent": "#286983",
+  "colors": {
+    "text": "#575279",
+    "error": "#b4637a",
+    "warning": "#ea9d34",
+    "terminalBackground": "#faf4ed",
+    "terminalForeground": "#575279",
+    "terminalCursor": "#575279",
+    "terminalSelection": "#d0d8d8"
+  }
+}

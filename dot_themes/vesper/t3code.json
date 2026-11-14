@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Vesper",
+  "appearance": "dark",
+  "canvas": "#101010",
+  "accent": "#99c0ff",
+  "colors": {
+    "text": "#b8b8b8",
+    "error": "#ff8080",
+    "warning": "#ffc799",
+    "terminalBackground": "#101010",
+    "terminalForeground": "#b8b8b8",
+    "terminalCursor": "#99ffe4",
+    "terminalSelection": "#262626"
+  }
+}

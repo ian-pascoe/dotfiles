@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Ethereal",
+  "appearance": "dark",
+  "canvas": "#060b1e",
+  "accent": "#7d82d9",
+  "colors": {
+    "text": "#ffcead",
+    "error": "#ed5b5a",
+    "warning": "#e9bb4f",
+    "terminalBackground": "#060b1e",
+    "terminalForeground": "#ffcead",
+    "terminalCursor": "#ffcead",
+    "terminalSelection": "#252e56"
+  }
+}

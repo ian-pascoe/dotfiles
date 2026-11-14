@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Nightfly",
+  "appearance": "dark",
+  "canvas": "#011627",
+  "accent": "#82aaff",
+  "colors": {
+    "text": "#bdc1c6",
+    "error": "#fc514e",
+    "warning": "#e3d18a",
+    "terminalBackground": "#011627",
+    "terminalForeground": "#bdc1c6",
+    "terminalCursor": "#9ca1aa",
+    "terminalSelection": "#b2ceee"
+  }
+}

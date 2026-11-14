@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Dayfox",
+  "appearance": "light",
+  "canvas": "#f6f2ee",
+  "accent": "#2848a9",
+  "colors": {
+    "text": "#3d2b5a",
+    "error": "#a5222f",
+    "warning": "#ac5402",
+    "terminalBackground": "#f6f2ee",
+    "terminalForeground": "#3d2b5a",
+    "terminalCursor": "#3d2b5a",
+    "terminalSelection": "#e7d2be"
+  }
+}

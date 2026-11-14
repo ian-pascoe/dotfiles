@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Kanso Pearl",
+  "appearance": "light",
+  "canvas": "#f2f1ef",
+  "accent": "#4d699b",
+  "colors": {
+    "text": "#22262d",
+    "error": "#c84053",
+    "warning": "#836f4a",
+    "terminalBackground": "#f2f1ef",
+    "terminalForeground": "#22262d",
+    "terminalCursor": "#22262d",
+    "terminalSelection": "#e2e1df"
+  }
+}

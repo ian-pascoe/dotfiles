@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "Bamboo",
+  "appearance": "dark",
+  "canvas": "#252623",
+  "accent": "#8fb573",
+  "colors": {
+    "text": "#f1e9d2",
+    "error": "#e75a7c",
+    "warning": "#dbb651",
+    "terminalBackground": "#252623",
+    "terminalForeground": "#f1e9d2",
+    "terminalCursor": "#fff8f0",
+    "terminalSelection": "#5b5e5a"
+  }
+}
