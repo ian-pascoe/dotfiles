@@ -1,11 +1,12 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 # Reload managed LaunchAgents when their plists change.
+# local.clean-caches.plist: {{ include "Library/LaunchAgents/local.clean-caches.plist.tmpl" | sha256sum }}
 # local.clean-code-sign-clones.plist: {{ include "Library/LaunchAgents/local.clean-code-sign-clones.plist.tmpl" | sha256sum }}
 # local.clean-tmp.plist: {{ include "Library/LaunchAgents/local.clean-tmp.plist.tmpl" | sha256sum }}
 set -eu
 domain="gui/$(id -u)"
-for label in local.clean-code-sign-clones local.clean-tmp; do
+for label in local.clean-caches local.clean-code-sign-clones local.clean-tmp; do
 	plist="$HOME/Library/LaunchAgents/$label.plist"
 	launchctl bootout "$domain" "$plist" 2>/dev/null || true
 	launchctl bootstrap "$domain" "$plist" ||

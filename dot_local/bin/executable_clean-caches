@@ -1,0 +1,88 @@
+#!/bin/sh
+# Prune regenerable caches and stores that grow without bound.
+#
+# Each step removes only what its tool considers unused, so nothing a project
+# or running program needs is lost; anything removed is re-downloaded on
+# demand. Tools that are missing, and Docker when no daemon is running, are
+# skipped, and a failing step is logged without stopping the others. Set
+# CLEAN_CACHES_DRY_RUN=1 to report what would be removed instead.
+set -u
+export LC_ALL=C
+
+# launchd starts jobs with a minimal PATH.
+PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ENV_HINTS=1
+
+dry_run="${CLEAN_CACHES_DRY_RUN:-}"
+
+log() {
+	echo "$(date '+%Y-%m-%dT%H:%M:%S%z') $*"
+}
+
+has() {
+	command -v "$1" >/dev/null 2>&1
+}
+
+step() {
+	log "running: $*"
+	"$@" 2>&1 || log "failed ($?): $*"
+}
+
+free_kib() {
+	df -k "$HOME" | awk 'NR == 2 { print $4 }'
+}
+
+before="$(free_kib)"
+log "start${dry_run:+ (dry run)}; $((before / 1048576)) GiB free"
+
+# pnpm: one store per store-dir. Both of these are in use on this machine.
+if has pnpm; then
+	for store in "$HOME/Library/pnpm/store" "$HOME/.local/share/pnpm/store"; do
+		[ -d "$store" ] || continue
+		if [ -n "$dry_run" ]; then
+			log "would prune pnpm store $store ($(du -sh "$store" | cut -f1))"
+		else
+			step pnpm store prune --store-dir "$store"
+		fi
+	done
+fi
+
+# Homebrew: old formula versions and downloads older than 30 days.
+if has brew; then
+	if [ -n "$dry_run" ]; then
+		step brew cleanup --prune=30 --dry-run
+	else
+		step brew cleanup --prune=30
+	fi
+fi
+
+# mise: tool versions no tracked config or stub selects, and stale cache.
+if has mise; then
+	if [ -n "$dry_run" ]; then
+		step mise prune --tools --dry-run
+	else
+		step mise prune --tools
+		step mise cache prune
+	fi
+fi
+
+# uv: dangling cache entries and unused cached environments.
+if has uv && [ -z "$dry_run" ]; then
+	step uv cache prune
+fi
+
+# Docker: build cache unused for a week and dangling images. Never starts a
+# daemon. OrbStack returns freed VM disk space to the host on its own.
+if has docker && docker info >/dev/null 2>&1; then
+	if [ -n "$dry_run" ]; then
+		step docker system df
+	else
+		step docker builder prune --force --filter until=168h
+		step docker image prune --force
+	fi
+else
+	log "no Docker daemon running; skipping Docker"
+fi
+
+after="$(free_kib)"
+log "done; $((after / 1048576)) GiB free ($(((after - before) / 1024)) MiB reclaimed)"

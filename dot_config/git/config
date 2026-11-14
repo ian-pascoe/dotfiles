@@ -50,6 +50,11 @@
 [submodule]
   recurse = true                  # Recurse into submodules for many commands (clone still needs --recurse-submodules)
 
+[hook "worktree-submodule-reference"]
+  # New linked worktrees borrow submodule objects from the main checkout's clones
+  command = \"$HOME/.config/git/worktree-submodule-reference\"
+  event = post-checkout
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

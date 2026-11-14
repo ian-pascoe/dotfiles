@@ -17,8 +17,6 @@ brew "bison"
 brew "blueutil"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
-# Container runtimes on MacOS (and Linux) with minimal setup
-brew "colima"
 # GNU multiple precision arithmetic library
 brew "gmp"
 # GNU File, Shell, and Text utilities
@@ -143,6 +141,8 @@ cask "karabiner-elements"
 cask "linear"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Replacement for Docker Desktop
+cask "orbstack"
 # Utility to uninstall apps and remove leftover files from old/uninstalled apps
 cask "pearcleaner"
 # Minimal GUI for AI code agents

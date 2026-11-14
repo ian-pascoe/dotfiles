@@ -1,0 +1,30 @@
+#!/bin/sh
+# post-checkout hook (wired up in ~/.config/git/config as hook.worktree-submodule-reference).
+#
+# When `git worktree add` creates a linked worktree, clone its submodules borrowing objects
+# (git alternates) from the main checkout's submodule repos in $GIT_COMMON_DIR/modules/<name>,
+# instead of a full clone per worktree. Same commit as the main checkout: nothing is fetched.
+# Different commit: only the missing objects are fetched.
+#
+# Caveat: the worktree's submodule depends on the main checkout's submodule repo; if that repo
+# prunes objects the worktree still uses (gc after a remote force-push), the worktree breaks.
+
+# Only a fresh checkout (previous HEAD all zeros): worktree add or clone.
+case $1 in *[!0]*) exit 0 ;; esac
+
+git_dir=$(git rev-parse --absolute-git-dir) || exit 0
+common_dir=$(cd "$(git rev-parse --git-common-dir)" && pwd -P) || exit 0
+[ "$(cd "$git_dir" && pwd -P)" != "$common_dir" ] || exit 0 # main checkout, not a linked worktree
+[ -f .gitmodules ] || exit 0
+
+git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
+	while read -r key path; do
+		name=${key#submodule.}
+		name=${name%.path}
+		ref=$common_dir/modules/$name
+		[ -d "$ref/objects" ] || continue # main checkout never cloned it
+		[ -e "$path/.git" ] && continue   # already populated
+		git submodule update --init --reference "$ref" -- "$path" ||
+			echo "worktree-submodule-reference: $path: falling back to a normal clone" >&2
+	done
+exit 0

@@ -20,11 +20,6 @@
       "enabled": true,
       "url": "https://www.superlogical.com/rex/community-mcp",
       "exposure": "codemode"
-    },
-    "t3": {
-      "enabled": true,
-      "url": "https://t3.ianpascoe.dev/mcp",
-      "exposure": "codemode"
     }
   }
 }
