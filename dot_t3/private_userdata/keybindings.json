@@ -1,6 +1,6 @@
 [
   {
-    "key": "mod+f",
+    "key": "ctrl+f",
     "command": "preview.find",
     "when": "previewFocus"
   },
@@ -26,12 +26,12 @@
     "when": "!terminalFocus"
   },
   {
-    "key": "mod+shift+b",
+    "key": "ctrl+shift+b",
     "command": "threadPanel.toggle",
     "when": "!terminalFocus"
   },
   {
-    "key": "mod+t",
+    "key": "ctrl+t",
     "command": "rightPanel.new",
     "when": "rightPanelOpen && !terminalFocus"
   },
@@ -40,12 +40,12 @@
     "command": "view.reopenClosed"
   },
   {
-    "key": "mod+f",
+    "key": "ctrl+f",
     "command": "chat.find",
     "when": "!terminalFocus && !previewFocus"
   },
   {
-    "key": "mod+j",
+    "key": "ctrl+`",
     "command": "terminal.toggle"
   },
   {
@@ -96,43 +96,43 @@
     "command": "thread.next"
   },
   {
-    "key": "mod+1",
+    "key": "ctrl+1",
     "command": "thread.jump.1"
   },
   {
-    "key": "mod+2",
+    "key": "ctrl+2",
     "command": "thread.jump.2"
   },
   {
-    "key": "mod+3",
+    "key": "ctrl+3",
     "command": "thread.jump.3"
   },
   {
-    "key": "mod+4",
+    "key": "ctrl+4",
     "command": "thread.jump.4"
   },
   {
-    "key": "mod+5",
+    "key": "ctrl+5",
     "command": "thread.jump.5"
   },
   {
-    "key": "mod+6",
+    "key": "ctrl+6",
     "command": "thread.jump.6"
   },
   {
-    "key": "mod+7",
+    "key": "ctrl+7",
     "command": "thread.jump.7"
   },
   {
-    "key": "mod+8",
+    "key": "ctrl+8",
     "command": "thread.jump.8"
   },
   {
-    "key": "mod+9",
+    "key": "ctrl+9",
     "command": "thread.jump.9"
   },
   {
-    "key": "mod+k",
+    "key": "ctrl+k",
     "command": "commandPalette.toggle",
     "when": "!terminalFocus"
   },
@@ -142,47 +142,47 @@
     "when": "!terminalFocus"
   },
   {
-    "key": "mod+1",
+    "key": "ctrl+1",
     "command": "modelPicker.jump.1",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+2",
+    "key": "ctrl+2",
     "command": "modelPicker.jump.2",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+3",
+    "key": "ctrl+3",
     "command": "modelPicker.jump.3",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+4",
+    "key": "ctrl+4",
     "command": "modelPicker.jump.4",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+5",
+    "key": "ctrl+5",
     "command": "modelPicker.jump.5",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+6",
+    "key": "ctrl+6",
     "command": "modelPicker.jump.6",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+7",
+    "key": "ctrl+7",
     "command": "modelPicker.jump.7",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+8",
+    "key": "ctrl+8",
     "command": "modelPicker.jump.8",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+9",
+    "key": "ctrl+9",
     "command": "modelPicker.jump.9",
     "when": "modelPickerOpen"
   },
@@ -209,27 +209,27 @@
     "when": "previewFocus"
   },
   {
-    "key": "mod+l",
+    "key": "ctrl+l",
     "command": "preview.focusUrl",
     "when": "previewFocus"
   },
   {
-    "key": "mod+=",
+    "key": "ctrl+=",
     "command": "preview.zoomIn",
     "when": "previewFocus"
   },
   {
-    "key": "mod++",
+    "key": "ctrl++",
     "command": "preview.zoomIn",
     "when": "previewFocus"
   },
   {
-    "key": "mod+-",
+    "key": "ctrl+-",
     "command": "preview.zoomOut",
     "when": "previewFocus"
   },
   {
-    "key": "mod+0",
+    "key": "ctrl+0",
     "command": "preview.resetZoom",
     "when": "previewFocus"
   },
@@ -268,7 +268,7 @@
     "when": "!terminalFocus"
   },
   {
-    "key": "mod+shift+enter",
+    "key": "ctrl+shift+enter",
     "command": "thread.steerQueuedMessage",
     "when": "!terminalFocus"
   },
@@ -308,12 +308,12 @@
     "when": "!terminalFocus"
   },
   {
-    "key": "mod+shift+arrowup",
+    "key": "ctrl+shift+arrowup",
     "command": "modelPicker.previousProvider",
     "when": "modelPickerOpen"
   },
   {
-    "key": "mod+shift+arrowdown",
+    "key": "ctrl+shift+arrowdown",
     "command": "modelPicker.nextProvider",
     "when": "modelPickerOpen"
   },
@@ -368,22 +368,22 @@
     "when": "usagePageOpen"
   },
   {
-    "key": "mod+shift+1",
+    "key": "ctrl+shift+1",
     "command": "usage.period.day",
     "when": "usagePageOpen"
   },
   {
-    "key": "mod+shift+2",
+    "key": "ctrl+shift+2",
     "command": "usage.period.week",
     "when": "usagePageOpen"
   },
   {
-    "key": "mod+shift+3",
+    "key": "ctrl+shift+3",
     "command": "usage.period.month",
     "when": "usagePageOpen"
   },
   {
-    "key": "mod+shift+4",
+    "key": "ctrl+shift+4",
     "command": "usage.period.quarter",
     "when": "usagePageOpen"
   },
@@ -393,12 +393,12 @@
     "when": "composerFocus"
   },
   {
-    "key": "mod+enter",
+    "key": "ctrl+enter",
     "command": "composer.sendAlternate",
     "when": "composerFocus && turnRunning"
   },
   {
-    "key": "mod+enter",
+    "key": "ctrl+enter",
     "command": "composer.sendBackground",
     "when": "composerFocus && draftThreadRoute"
   },

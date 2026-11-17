@@ -2,7 +2,12 @@
 ## ~/.inputrc
 ##=========================================
 # Readline settings for bash and other readline programs. Bash-only behavior
-# sits under `$if Bash`; vi mode itself is enabled in ~/.bashrc so other
+# sits under `## Ctrl+Left/Right move by word, as in text fields (Alt+arrows switch
+## herdr/Rex tabs)
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+$if Bash`; vi mode itself is enabled in ~/.bashrc so other
 # readline programs keep emacs keys.
 
 # A user inputrc replaces the system one, so keep its defaults.

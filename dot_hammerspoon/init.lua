@@ -740,6 +740,9 @@ bind(hyper, "/", "Show shortcut cheatsheet", showCheatsheet)
 bind(hyper, ".", "Toggle Hammerspoon console", hs.toggleConsole)
 bind(hyper, "O", "Open dotfiles folder", openDotfiles)
 
+-- Keybinding cheat sheet: cmd+k (via AeroSpace) or hold cmd alone.
+keepAlive.cheatsheet = require("cheatsheet").start()
+
 keepAlive.powerWatcher = hs.battery.watcher
   .new(function()
     syncCaffeineWithPower(true)

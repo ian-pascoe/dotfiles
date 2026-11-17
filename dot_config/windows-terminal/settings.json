@@ -1,7 +1,15 @@
 {
   "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema",
-  "actions": [],
+  "actions": [
+    {
+      "command": {
+        "action": "switchToTab",
+        "index": 8
+      },
+      "id": "User.SwitchToTab8"
+    }
+  ],
   "alwaysShowTabs": true,
   "copyFormatting": "none",
   "copyOnSelect": false,
@@ -15,6 +23,58 @@
     {
       "id": "Terminal.PasteFromClipboard",
       "keys": "shift+insert"
+    },
+    {
+      "id": "Terminal.OpenNewTab",
+      "keys": "ctrl+shift+t"
+    },
+    {
+      "id": "Terminal.SwitchToTab0",
+      "keys": "ctrl+alt+1"
+    },
+    {
+      "id": "Terminal.SwitchToTab1",
+      "keys": "ctrl+alt+2"
+    },
+    {
+      "id": "Terminal.SwitchToTab2",
+      "keys": "ctrl+alt+3"
+    },
+    {
+      "id": "Terminal.SwitchToTab3",
+      "keys": "ctrl+alt+4"
+    },
+    {
+      "id": "Terminal.SwitchToTab4",
+      "keys": "ctrl+alt+5"
+    },
+    {
+      "id": "Terminal.SwitchToTab5",
+      "keys": "ctrl+alt+6"
+    },
+    {
+      "id": "Terminal.SwitchToTab6",
+      "keys": "ctrl+alt+7"
+    },
+    {
+      "id": "Terminal.SwitchToTab7",
+      "keys": "ctrl+alt+8"
+    },
+    {
+      "id": "User.SwitchToTab8",
+      "keys": "ctrl+alt+9"
+    },
+    {
+      "id": "Terminal.IncreaseFontSize",
+      "keys": "ctrl+plus"
+    },
+    {
+      "id": "Terminal.DecreaseFontSize",
+      "keys": "ctrl+minus"
+    },
+    {
+      "id": "Terminal.ResetFontSize",
+      "keys": "ctrl+0"
     }
   ],
   "launchMode": "focus",

@@ -31,6 +31,14 @@ for __keymap in viins vicmd; do
 done
 unset __keymap
 
+# Ctrl+Left/Right move by word, as in text fields; Alt+arrows switch herdr/Rex
+# tabs (Omarchy's preset).
+for __keymap in viins vicmd; do
+  bindkey -M "$__keymap" '^[[1;5D' backward-word
+  bindkey -M "$__keymap" '^[[1;5C' forward-word
+done
+unset __keymap
+
 # Shift-Tab cycles completions backward.
 bindkey -M viins '^[[Z' reverse-menu-complete
 

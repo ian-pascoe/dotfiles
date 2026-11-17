@@ -110,3 +110,9 @@ CapsLock & `::Send("^``")
     global capsUsedWithOtherKey
     capsUsedWithOtherKey := true
 }
+
+; GlazeWM binds Alt chords as Omarchy's SUPER (Win sits in an awkward thumb
+; spot). It swallows the chord key, so an app sees a lone Alt press and
+; highlights its menu bar on release. Sending the unassigned vkE8 key on LAlt
+; down masks that. Alt+<key> shortcuts still work; F10 still opens menus.
+~LAlt::Send("{Blind}{vkE8}")

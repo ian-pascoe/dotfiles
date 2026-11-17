@@ -64,6 +64,7 @@ Library/LaunchAgents/local.clean-code-sign-clones.plist
 Library/LaunchAgents/local.clean-tmp.plist
 .local/bin/clean-tmp
 Library/Application Support/Tern
+Library/KeyBindings
 .hammerspoon
 .config/aerospace
 .agents/skills/aerospace

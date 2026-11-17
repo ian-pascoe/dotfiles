@@ -1,18 +1,19 @@
 -- Rex configuration, kept in step with ~/.config/herdr/config.toml so the
--- muscle memory carries over: the same ctrl+a prefix, the same keys after it,
+-- muscle memory carries over: Omarchy's herdr preset (ctrl+space prefix,
+-- direct alt chords), the same custom keys after the prefix,
 -- the same vim-aware ctrl+h/j/k/l, and the terminal colors of the current
 -- theme variant (herdr's "terminal" theme follows Ghostty, which reads
 -- ~/.config/theme/ghostty.conf).
 --
 -- Docs: https://www.superlogical.com/rex/docs
--- Apply changes with `rex config reload` (or prefix+ctrl+r); check with `rex config check`.
+-- Apply changes with `rex config reload` (or prefix+q); check with `rex config check`.
 
-local PREFIX = "ctrl+a"
+local PREFIX = "ctrl+space"
 local SHELL = "com.superlogical.terminal.shell"
 local TERMINAL = "com.superlogical.terminal"
 local HOME = os.getenv("HOME")
 
--- "ctrl+a>x": a key pressed after the prefix, like herdr's "prefix+x".
+-- "ctrl+space>x": a key pressed after the prefix, like herdr's "prefix+x".
 local function prefixed(key)
   return PREFIX .. ">" .. key
 end
@@ -59,7 +60,7 @@ end
 -- Prefix
 ----------------------------------------------------------------------------
 
--- Press the prefix twice to send it to the terminal (start of line in shells).
+-- Press the prefix twice to send it to the terminal.
 bind_prefixed(PREFIX, "pane.send_key", { key = PREFIX })
 
 ----------------------------------------------------------------------------
@@ -71,8 +72,7 @@ bind_prefixed("shift+;", "client.palette.toggle") -- prefix+:
 bind_prefixed("shift+s", "client.settings") -- settings
 bind_prefixed("d", "client.window.close") -- detach: sessions keep running on the server
 bind_prefixed("b", "client.sidebar.toggle") -- toggle_sidebar
--- reload_config; not alt+r, which AeroSpace takes for its resize mode.
-bind_prefixed("ctrl+r", "client.config.reload")
+bind_prefixed("q", "client.config.reload") -- reload_config
 
 ----------------------------------------------------------------------------
 -- Sessions (herdr workspaces)
@@ -80,11 +80,13 @@ bind_prefixed("ctrl+r", "client.config.reload")
 
 bind_prefixed("s", "session.switch") -- workspace_picker
 bind_prefixed("alt+g", "session.switch") -- goto: Rex's closest picker
-bind_prefixed("ctrl+c", "session.new") -- new_workspace
+bind_prefixed("shift+c", "session.new") -- new_workspace
 bind_prefixed("shift+r", "session.rename") -- rename_workspace
-bind_prefixed("shift+d", "session.close") -- close_workspace
+bind_prefixed("shift+k", "session.close") -- close_workspace
 bind_prefixed("shift+p", "session.previous") -- previous_workspace
 bind_prefixed("shift+n", "session.next") -- next_workspace
+rex.bind("alt+up", "session.previous")
+rex.bind("alt+down", "session.next")
 
 -- switch_workspace = "prefix+shift+1..9"
 rex.action({
@@ -112,40 +114,47 @@ end
 -- Tabs
 ----------------------------------------------------------------------------
 
-bind_prefixed("t", "client.tab.new") -- new_tab
-bind_prefixed(",", "client.tab.rename") -- rename_tab
+bind_prefixed("c", "client.tab.new") -- new_tab
+bind_prefixed("r", "client.tab.rename") -- rename_tab
+bind_prefixed("k", "client.tab.close") -- close_tab
 bind_prefixed("p", "client.tab.previous") -- previous_tab
 bind_prefixed("n", "client.tab.next") -- next_tab
-bind_prefixed("shift+x", "client.tab.close") -- close_tab
+rex.bind("alt+left", "client.tab.previous")
+rex.bind("alt+right", "client.tab.next")
+rex.bind("alt+shift+left", "client.tab.move.backward") -- move_tab_previous
+rex.bind("alt+shift+right", "client.tab.move.forward") -- move_tab_next
 
 for i = 1, 9 do
   bind_prefixed(tostring(i), "client.tab.goto", { index = i }) -- switch_tab
+  rex.bind("alt+" .. i, "client.tab.goto", { index = i })
 end
 
 ----------------------------------------------------------------------------
 -- Panes
 ----------------------------------------------------------------------------
 
-bind_prefixed("h", "pane.focus", { direction = "left", wrap = false })
-bind_prefixed("j", "pane.focus", { direction = "down", wrap = false })
-bind_prefixed("k", "pane.focus", { direction = "up", wrap = false })
-bind_prefixed("l", "pane.focus", { direction = "right", wrap = false })
-bind_prefixed("shift+h", "pane.move", { direction = "left" }) -- swap_pane_left
-bind_prefixed("shift+j", "pane.move", { direction = "down" }) -- swap_pane_down
-bind_prefixed("shift+k", "pane.move", { direction = "up" }) -- swap_pane_up
-bind_prefixed("shift+l", "pane.move", { direction = "right" }) -- swap_pane_right
-bind_prefixed("tab", "pane.focus_next") -- cycle_pane_next
-bind_prefixed("shift+tab", "pane.focus_previous") -- cycle_pane_previous
+-- Arrows for direction, as everywhere else: ctrl+alt focuses, +shift resizes.
+for _, direction in ipairs({ "left", "down", "up", "right" }) do
+  rex.bind("ctrl+alt+" .. direction, "pane.focus", { direction = direction, wrap = false })
+  rex.bind("ctrl+alt+shift+" .. direction, "pane.resize", { direction = direction })
+end
 
-bind_prefixed("shift+\\", "pane.split", { direction = "right" }) -- split_vertical (prefix+|)
-bind_prefixed("-", "pane.split", { direction = "down" }) -- split_horizontal (prefix+minus)
+bind_prefixed("h", "pane.split", { direction = "down" }) -- split_horizontal
+bind_prefixed("v", "pane.split", { direction = "right" }) -- split_vertical
+rex.bind("alt+enter", "pane.split", { direction = "down" })
+rex.bind("alt+shift+enter", "pane.split", { direction = "right" })
 bind_prefixed("x", "pane.close") -- close_pane
+rex.bind("alt+esc", "pane.close")
 bind_prefixed("z", "pane.zoom") -- zoom
+bind_prefixed("shift+o", "pane.rename") -- rename_pane
+bind_prefixed("[", "pane.copy_mode.enter") -- copy_mode
 
--- resize_mode = "prefix+r": hjkl or arrows resize, shift for bigger steps,
--- escape or enter leaves.
+-- resize_mode = prefix+ctrl+arrows: hjkl or arrows resize, shift for bigger
+-- steps, = balances, escape or enter leaves.
 rex.mode("resize", { exclusive = true })
-bind_prefixed("r", "client.mode.enter", { name = "resize" })
+for _, direction in ipairs({ "left", "down", "up", "right" }) do
+  bind_prefixed("ctrl+" .. direction, "client.mode.enter", { name = "resize" })
+end
 
 local resize_keys = {
   left = { "h", "left" },
@@ -162,7 +171,7 @@ end
 rex.bind("resize/=", "pane.balance")
 rex.bind("resize/enter", "client.mode.exit")
 
--- edit_scrollback = "prefix+[": open the focused pane's scrollback in $EDITOR.
+-- edit_scrollback = "prefix+e": open the focused pane's scrollback in $EDITOR.
 rex.action({
   name = "edit_scrollback",
   title = "Edit Scrollback in $EDITOR",
@@ -185,7 +194,7 @@ rex.action({
     popup({ "sh", "-c", '${VISUAL:-${EDITOR:-neopane}} + "$1"; rm -f "$1"', "sh", path })
   end,
 })
-bind_prefixed("[", "edit_scrollback")
+bind_prefixed("e", "edit_scrollback")
 
 ----------------------------------------------------------------------------
 -- Commands
@@ -573,7 +582,7 @@ rex.action({
 
 local annotate_actions = {
   { name = "open", title = "Review Documents in This Folder", key = "o" },
-  { name = "last", title = "Review the Agent's Last Reply", key = "shift+o", flags = { "--last" } },
+  { name = "last", title = "Review the Agent's Last Reply", key = "alt+o", flags = { "--last" } }, -- shift+o renames the pane
   { name = "last_newest", title = "Review the Agent's Newest Reply", key = "ctrl+o", flags = { "--newest" } },
   -- No keys, as in herdr-annotate.
   { name = "gate", title = "Review Documents Here, with Approve", flags = { "--gate" } },

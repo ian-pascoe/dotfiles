@@ -1,0 +1,50 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Omarchy-style app shortcuts on macOS. AeroSpace owns cmd+t/f/1-9/minus/equal
+# (SUPER on Omarchy), so the app shortcuts it displaced move to ctrl, where
+# Linux and Windows apps keep them. Karabiner can't forward ctrl to cmd here:
+# AeroSpace would catch the forwarded cmd chord.
+#
+# NSUserKeyEquivalents rebinds menu items by exact title: ^ ctrl, $ shift,
+# ~ option, @ cmd. Titles an app doesn't have are ignored. Apps pick changes up
+# on relaunch. Text navigation (Home/End, ctrl+arrows) lives in
+# ~/Library/KeyBindings/DefaultKeyBinding.dict.
+set -eu
+
+# --- Every app ---------------------------------------------------------------
+defaults write -g NSUserKeyEquivalents -dict \
+  "New Tab" "^t" \
+  "Find" "^f" \
+  "Find…" "^f" \
+  "Find..." "^f" \
+  "Find in Page…" "^f" \
+  "Zoom In" "^=" \
+  "Zoom Out" "^-" \
+  "Actual Size" "^0"
+
+# --- Terminals ---------------------------------------------------------------
+# ctrl+t/f belong to the shell, so terminals take the Linux terminal keys
+# instead. An app-domain value shadows the global one whole.
+for terminal in com.mitchellh.ghostty com.github.wez.wezterm dev.herdr.app \
+  so.stencil.tern com.apple.Terminal; do
+  defaults write "$terminal" NSUserKeyEquivalents -dict # their own configs bind keys
+done
+defaults write com.superlogical.rex NSUserKeyEquivalents -dict \
+  "New Tab" "^\$t" \
+  "Increase Font Size" "^=" \
+  "Decrease Font Size" "^-" \
+  "Reset Font Size" "^0"
+
+# --- Mission Control ---------------------------------------------------------
+# AeroSpace replaces Spaces, so free ctrl+left/right (and +shift) for word
+# movement: 79-82 are "Move left/right a space".
+disable_hotkey() { # id, key code, modifier flags
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$1" \
+    "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>$2</integer><integer>$3</integer></array><key>type</key><string>standard</string></dict></dict>"
+}
+disable_hotkey 79 123 8650752
+disable_hotkey 80 123 8781824
+disable_hotkey 81 124 8650752
+disable_hotkey 82 124 8781824
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u || true
+{{ end -}}

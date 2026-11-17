@@ -64,6 +64,8 @@ brew "libyaml"
 brew "media-control"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
+# Deep clean and optimize your Mac
+brew "mole"
 # Remote terminal application
 brew "mosh"
 # Port scanning utility for large networks
@@ -144,6 +146,8 @@ cask "karabiner-elements"
 cask "keycastr"
 # App to manage software development and track bugs
 cask "linear"
+# Deep clean, analyze, and optimize app
+cask "mole-app"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Replacement for Docker Desktop

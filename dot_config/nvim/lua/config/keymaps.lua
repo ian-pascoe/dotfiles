@@ -9,10 +9,12 @@ vim.keymap.set('n', '<leader>sN', function()
   require('config.fff_picker').files({ cwd = cwd })
 end, { desc = 'Neovim config' })
 
--- Move the selection with J/K: AeroSpace takes LazyVim's <A-j>/<A-k> system-wide.
--- Same commands as LazyVim's; join and keyword lookup stay on J/K in Normal mode.
-vim.keymap.set('x', 'J', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move Down', silent = true })
-vim.keymap.set('x', 'K', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up', silent = true })
+-- On Windows (and WSL) GlazeWM takes LazyVim's <A-j>/<A-k>; move the selection
+-- with J/K there instead. Join and keyword lookup stay on J/K in Normal mode.
+if vim.fn.has('win32') == 1 or vim.fn.has('wsl') == 1 then
+  vim.keymap.set('x', 'J', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move Down', silent = true })
+  vim.keymap.set('x', 'K', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up', silent = true })
+end
 
 -- No autcmd write
 vim.keymap.set('n', '<leader>W', '<cmd>noautocmd write<cr>', { desc = 'No autocmd write' })

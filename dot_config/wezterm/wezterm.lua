@@ -116,6 +116,12 @@ config.send_composed_key_when_right_alt_is_pressed = false
 config.keys = {
   { key = "Insert", mods = "CTRL", action = wezterm.action.CopyTo("Clipboard") },
   { key = "Insert", mods = "SHIFT", action = wezterm.action.PasteFrom("Clipboard") },
+  -- alt+enter splits a herdr pane (Omarchy's preset), not fullscreen.
+  { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
 }
+-- ctrl+alt+shift+arrows resize herdr panes, not WezTerm's.
+for _, arrow in ipairs({ "LeftArrow", "RightArrow", "UpArrow", "DownArrow" }) do
+  table.insert(config.keys, { key = arrow, mods = "CTRL|ALT|SHIFT", action = wezterm.action.DisableDefaultAssignment })
+end
 
 return config

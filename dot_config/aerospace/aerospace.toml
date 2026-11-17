@@ -80,77 +80,108 @@ outer.right = 5
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
+# Bindings follow Omarchy's Hyprland defaults (github.com/basecamp/omarchy,
+# default/hypr/bindings/), with cmd standing in for SUPER. Omarchy actions with no
+# AeroSpace equivalent are left out, so their cmd shortcuts keep their macOS meaning.
+# cmd-space stays with Tinycast (Omarchy's SUPER+SPACE launcher menu).
+
+# Applications
 # A new window in the running Rex, then bring Rex forward (or launch it, which opens one).
-alt-enter = '''exec-and-forget "$HOME/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex" --autostart=false do client.window.new >/dev/null 2>&1; open -a 'Rex Beta' '''
-alt-shift-enter = "exec-and-forget open -na 'Zen'"
-alt-shift-q = "close"
+cmd-enter = '''exec-and-forget "$HOME/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex" --autostart=false do client.window.new >/dev/null 2>&1; open -a 'Rex Beta' '''
+cmd-shift-enter = "exec-and-forget open -na 'Zen'"
+cmd-shift-b = "exec-and-forget open -na 'Zen'"
+cmd-k = 'exec-and-forget open -g hammerspoon://keybindings' # cheat sheet (Hammerspoon)
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#layout
-alt-slash = 'layout tiles horizontal vertical'
-alt-comma = 'layout accordion horizontal vertical'
-alt-v = 'layout horizontal vertical'
-alt-t = 'layout floating tiling'
-alt-shift-space = 'layout floating tiling'
-alt-f = 'fullscreen'
-alt-m = 'macos-native-minimize'
+# Windows. cmd-w is left to apps, whose macOS default already closes the window or tab.
+cmd-q = 'close'
+cmd-j = 'layout horizontal vertical' # toggle split
+cmd-t = 'layout floating tiling' # toggle floating
+cmd-f = 'fullscreen'
+cmd-m = 'macos-native-minimize'
+cmd-l = 'layout tiles accordion' # cycle workspace layout
+cmd-alt-l = 'layout tiles accordion'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
-alt-j = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
-alt-k = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
-alt-l = 'focus right --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+# Focus
+cmd-left = 'focus left --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+cmd-down = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+cmd-up = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+cmd-right = 'focus right --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+alt-tab = 'focus dfs-next --boundaries-action wrap-around-the-workspace'
+alt-shift-tab = 'focus dfs-prev --boundaries-action wrap-around-the-workspace'
+ctrl-alt-tab = 'focus-monitor --wrap-around next'
+ctrl-alt-shift-tab = 'focus-monitor --wrap-around prev'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-shift-h = 'move left --boundaries all-monitors-outer-frame'
-alt-shift-j = 'move down --boundaries all-monitors-outer-frame'
-alt-shift-k = 'move up --boundaries all-monitors-outer-frame'
-alt-shift-l = 'move right --boundaries all-monitors-outer-frame'
+# Swap windows
+cmd-shift-left = 'swap left'
+cmd-shift-down = 'swap down'
+cmd-shift-up = 'swap up'
+cmd-shift-right = 'swap right'
 
-alt-u = 'resize width -50'
-alt-i = 'resize height -50'
-alt-o = 'resize height +50'
-alt-p = 'resize width +50'
+# Resize: minus/equal change width, add shift for height; alt is a little, ctrl a lot.
+cmd-minus = 'resize width -100'
+cmd-equal = 'resize width +100'
+cmd-shift-minus = 'resize height -100'
+cmd-shift-equal = 'resize height +100'
+cmd-alt-minus = 'resize width -25'
+cmd-alt-equal = 'resize width +25'
+cmd-shift-alt-minus = 'resize height -25'
+cmd-shift-alt-equal = 'resize height +25'
+cmd-ctrl-minus = 'resize width -300'
+cmd-ctrl-equal = 'resize width +300'
+cmd-ctrl-shift-minus = 'resize height -300'
+cmd-ctrl-shift-equal = 'resize height +300'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-minus = 'resize smart -50'
-alt-equal = 'resize smart +50'
+# Workspaces
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
+cmd-7 = 'workspace 7'
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
+# Move window to workspace and follow it
+cmd-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+cmd-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+cmd-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+cmd-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+cmd-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+cmd-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+cmd-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+cmd-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+cmd-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
-alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
-alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
-alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
-alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
-alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+# Move window to workspace silently
+cmd-shift-alt-1 = 'move-node-to-workspace 1'
+cmd-shift-alt-2 = 'move-node-to-workspace 2'
+cmd-shift-alt-3 = 'move-node-to-workspace 3'
+cmd-shift-alt-4 = 'move-node-to-workspace 4'
+cmd-shift-alt-5 = 'move-node-to-workspace 5'
+cmd-shift-alt-6 = 'move-node-to-workspace 6'
+cmd-shift-alt-7 = 'move-node-to-workspace 7'
+cmd-shift-alt-8 = 'move-node-to-workspace 8'
+cmd-shift-alt-9 = 'move-node-to-workspace 9'
 
-alt-a = 'exec-and-forget aerospace list-workspaces --monitor all --empty no | aerospace workspace --wrap-around --stdin prev'
-alt-s = 'exec-and-forget aerospace list-workspaces --monitor all --empty no | aerospace workspace --wrap-around --stdin next'
-alt-d = 'workspace-back-and-forth'
+cmd-tab = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around --stdin next'
+cmd-shift-tab = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around --stdin prev'
+cmd-ctrl-tab = 'workspace-back-and-forth'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-alt-tab = 'workspace-back-and-forth'
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+# Monitors
+cmd-shift-alt-left = 'move-workspace-to-monitor left'
+cmd-shift-alt-right = 'move-workspace-to-monitor right'
+cmd-shift-alt-up = 'move-workspace-to-monitor up'
+cmd-shift-alt-down = 'move-workspace-to-monitor down'
+cmd-shift-ctrl-left = 'move-node-to-monitor --focus-follows-window left'
+cmd-shift-ctrl-right = 'move-node-to-monitor --focus-follows-window right'
+cmd-shift-ctrl-up = 'move-node-to-monitor --focus-follows-window up'
+cmd-shift-ctrl-down = 'move-node-to-monitor --focus-follows-window down'
 
+# AeroSpace-only modes (no Omarchy equivalent)
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-alt-shift-semicolon = ['mode service']
-alt-r = 'mode resize'
-alt-shift-r = 'reload-config'
+cmd-shift-semicolon = ['mode service']
+cmd-ctrl-r = 'mode resize'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -161,10 +192,10 @@ f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling
 backspace = ['close-all-windows-but-current', 'mode main']
 
 
-alt-shift-h = ['join-with left', 'mode main']
-alt-shift-j = ['join-with down', 'mode main']
-alt-shift-k = ['join-with up', 'mode main']
-alt-shift-l = ['join-with right', 'mode main']
+cmd-shift-left = ['join-with left', 'mode main']
+cmd-shift-down = ['join-with down', 'mode main']
+cmd-shift-up = ['join-with up', 'mode main']
+cmd-shift-right = ['join-with right', 'mode main']
 
 down = 'volume down'
 up = 'volume up'

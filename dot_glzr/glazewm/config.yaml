@@ -55,85 +55,30 @@ window_effects:
       enabled: true
 keybindings:
   - bindings:
-      - alt+h
-      - alt+left
+      - alt+enter
     commands:
-      - focus --direction left
+      - shell-exec %SCOOP%\apps\windows-terminal\current\wt.exe
   - bindings:
-      - alt+l
-      - alt+right
+      - alt+shift+enter
+      - alt+shift+b
     commands:
-      - focus --direction right
+      - shell-exec %SCOOP%\apps\zen-browser\current\zen.exe
   - bindings:
       - alt+k
-      - alt+up
     commands:
-      - focus --direction up
+      - shell-exec %USERPROFILE%\.config\keybindings\cheatsheet.html
+  - bindings:
+      - alt+q
+    commands:
+      - close
   - bindings:
       - alt+j
-      - alt+down
-    commands:
-      - focus --direction down
-  - bindings:
-      - alt+shift+h
-      - alt+shift+left
-    commands:
-      - move --direction left
-  - bindings:
-      - alt+shift+l
-      - alt+shift+right
-    commands:
-      - move --direction right
-  - bindings:
-      - alt+shift+k
-      - alt+shift+up
-    commands:
-      - move --direction up
-  - bindings:
-      - alt+shift+j
-      - alt+shift+down
-    commands:
-      - move --direction down
-  - bindings:
-      - alt+u
-    commands:
-      - resize --width -2%
-  - bindings:
-      - alt+p
-    commands:
-      - resize --width +2%
-  - bindings:
-      - alt+o
-    commands:
-      - resize --height +2%
-  - bindings:
-      - alt+i
-    commands:
-      - resize --height -2%
-  - bindings:
-      - alt+r
-    commands:
-      - wm-enable-binding-mode --name resize
-  - bindings:
-      - alt+shift+p
-    commands:
-      - wm-toggle-pause
-  - bindings:
-      - alt+v
     commands:
       - toggle-tiling-direction
   - bindings:
-      - alt+space
-    commands:
-      - wm-cycle-focus
-  - bindings:
-      - alt+shift+space
-    commands:
-      - toggle-floating --centered
-  - bindings:
       - alt+t
     commands:
-      - toggle-tiling
+      - toggle-floating --centered
   - bindings:
       - alt+f
     commands:
@@ -143,41 +88,85 @@ keybindings:
     commands:
       - toggle-minimized
   - bindings:
-      - alt+shift+q
+      - alt+left
     commands:
-      - close
+      - focus --direction left
   - bindings:
-      - alt+shift+e
+      - alt+down
     commands:
-      - wm-exit
+      - focus --direction down
   - bindings:
-      - alt+shift+r
+      - alt+up
     commands:
-      - wm-reload-config
+      - focus --direction up
   - bindings:
-      - alt+shift+w
+      - alt+right
     commands:
-      - wm-redraw
+      - focus --direction right
   - bindings:
-      - alt+enter
+      - alt+shift+left
     commands:
-      - shell-exec %SCOOP%\apps\windows-terminal\current\wt.exe
+      - move --direction left
   - bindings:
-      - alt+shift+enter
+      - alt+shift+down
     commands:
-      - shell-exec %SCOOP%\apps\zen-browser\current\zen.exe
+      - move --direction down
   - bindings:
-      - alt+s
+      - alt+shift+up
     commands:
-      - focus --next-active-workspace
+      - move --direction up
   - bindings:
-      - alt+a
+      - alt+shift+right
     commands:
-      - focus --prev-active-workspace
+      - move --direction right
   - bindings:
-      - alt+d
+      - alt+oem_minus
     commands:
-      - focus --recent-workspace
+      - resize --width -5%
+  - bindings:
+      - alt+oem_plus
+    commands:
+      - resize --width +5%
+  - bindings:
+      - alt+shift+oem_minus
+    commands:
+      - resize --height -5%
+  - bindings:
+      - alt+shift+oem_plus
+    commands:
+      - resize --height +5%
+  - bindings:
+      - alt+lwin+oem_minus
+    commands:
+      - resize --width -2%
+  - bindings:
+      - alt+lwin+oem_plus
+    commands:
+      - resize --width +2%
+  - bindings:
+      - alt+lwin+shift+oem_minus
+    commands:
+      - resize --height -2%
+  - bindings:
+      - alt+lwin+shift+oem_plus
+    commands:
+      - resize --height +2%
+  - bindings:
+      - alt+ctrl+oem_minus
+    commands:
+      - resize --width -15%
+  - bindings:
+      - alt+ctrl+oem_plus
+    commands:
+      - resize --width +15%
+  - bindings:
+      - alt+ctrl+shift+oem_minus
+    commands:
+      - resize --height -15%
+  - bindings:
+      - alt+ctrl+shift+oem_plus
+    commands:
+      - resize --height +15%
   - bindings:
       - alt+1
     commands:
@@ -214,22 +203,6 @@ keybindings:
       - alt+9
     commands:
       - focus --workspace 9
-  - bindings:
-      - alt+shift+a
-    commands:
-      - move-workspace --direction left
-  - bindings:
-      - alt+shift+f
-    commands:
-      - move-workspace --direction right
-  - bindings:
-      - alt+shift+d
-    commands:
-      - move-workspace --direction up
-  - bindings:
-      - alt+shift+s
-    commands:
-      - move-workspace --direction down
   - bindings:
       - alt+shift+1
     commands:
@@ -275,6 +248,102 @@ keybindings:
     commands:
       - move --workspace 9
       - focus --workspace 9
+  - bindings:
+      - alt+lwin+shift+1
+    commands:
+      - move --workspace 1
+  - bindings:
+      - alt+lwin+shift+2
+    commands:
+      - move --workspace 2
+  - bindings:
+      - alt+lwin+shift+3
+    commands:
+      - move --workspace 3
+  - bindings:
+      - alt+lwin+shift+4
+    commands:
+      - move --workspace 4
+  - bindings:
+      - alt+lwin+shift+5
+    commands:
+      - move --workspace 5
+  - bindings:
+      - alt+lwin+shift+6
+    commands:
+      - move --workspace 6
+  - bindings:
+      - alt+lwin+shift+7
+    commands:
+      - move --workspace 7
+  - bindings:
+      - alt+lwin+shift+8
+    commands:
+      - move --workspace 8
+  - bindings:
+      - alt+lwin+shift+9
+    commands:
+      - move --workspace 9
+  - bindings:
+      - alt+ctrl+right
+    commands:
+      - focus --next-active-workspace-on-monitor
+  - bindings:
+      - alt+ctrl+left
+    commands:
+      - focus --prev-active-workspace-on-monitor
+  - bindings:
+      - alt+ctrl+tab
+    commands:
+      - focus --recent-workspace
+  - bindings:
+      - alt+lwin+shift+left
+    commands:
+      - move-workspace --direction left
+  - bindings:
+      - alt+lwin+shift+right
+    commands:
+      - move-workspace --direction right
+  - bindings:
+      - alt+lwin+shift+up
+    commands:
+      - move-workspace --direction up
+  - bindings:
+      - alt+lwin+shift+down
+    commands:
+      - move-workspace --direction down
+  - bindings:
+      - alt+ctrl+shift+left
+    commands:
+      - move --workspace-in-direction left
+      - focus --workspace-in-direction left
+  - bindings:
+      - alt+ctrl+shift+right
+    commands:
+      - move --workspace-in-direction right
+      - focus --workspace-in-direction right
+  - bindings:
+      - alt+ctrl+shift+up
+    commands:
+      - move --workspace-in-direction up
+      - focus --workspace-in-direction up
+  - bindings:
+      - alt+ctrl+shift+down
+    commands:
+      - move --workspace-in-direction down
+      - focus --workspace-in-direction down
+  - bindings:
+      - alt+shift+oem_semicolon
+    commands:
+      - wm-enable-binding-mode --name service
+  - bindings:
+      - alt+ctrl+r
+    commands:
+      - wm-enable-binding-mode --name resize
+  - bindings:
+      - alt+shift+p
+    commands:
+      - wm-toggle-pause
 binding_modes:
   - name: resize
     keybindings:
@@ -282,27 +351,78 @@ binding_modes:
           - h
           - left
         commands:
-          - resize --width -2%
-      - bindings:
-          - l
-          - right
-        commands:
-          - resize --width +2%
-      - bindings:
-          - k
-          - up
-        commands:
-          - resize --height -2%
+          - resize --width -3%
       - bindings:
           - j
           - down
         commands:
-          - resize --height +2%
+          - resize --height +3%
+      - bindings:
+          - k
+          - up
+        commands:
+          - resize --height -3%
+      - bindings:
+          - l
+          - right
+        commands:
+          - resize --width +3%
+      - bindings:
+          - shift+h
+          - shift+left
+        commands:
+          - resize --width -1%
+      - bindings:
+          - shift+j
+          - shift+down
+        commands:
+          - resize --height +1%
+      - bindings:
+          - shift+k
+          - shift+up
+        commands:
+          - resize --height -1%
+      - bindings:
+          - shift+l
+          - shift+right
+        commands:
+          - resize --width +1%
       - bindings:
           - escape
           - enter
         commands:
           - wm-disable-binding-mode --name resize
+  - name: service
+    keybindings:
+      - bindings:
+          - escape
+        commands:
+          - wm-disable-binding-mode --name service
+          - wm-reload-config
+      - bindings:
+          - enter
+        commands:
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - r
+        commands:
+          - wm-redraw
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - f
+        commands:
+          - toggle-floating --centered
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - space
+        commands:
+          - wm-cycle-focus
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - shift+e
+        commands:
+          - wm-disable-binding-mode --name service
+          - wm-exit
 workspaces:
   - keep_alive: true
     bind_to_monitor: 0

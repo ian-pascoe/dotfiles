@@ -1,0 +1,25 @@
+/* Linux/Windows text navigation in Cocoa text fields (and apps that honor them).
+   AeroSpace owns cmd+arrows (SUPER on Omarchy). Takes effect on app relaunch.
+   ^ ctrl, $ shift, ~ option, @ cmd. */
+{
+  /* Home/End: line start/end; ctrl: document start/end; shift selects. */
+  "\UF729"   = "moveToBeginningOfLine:";
+  "\UF72B"   = "moveToEndOfLine:";
+  "$\UF729"  = "moveToBeginningOfLineAndModifySelection:";
+  "$\UF72B"  = "moveToEndOfLineAndModifySelection:";
+  "^\UF729"  = "moveToBeginningOfDocument:";
+  "^\UF72B"  = "moveToEndOfDocument:";
+  "^$\UF729" = "moveToBeginningOfDocumentAndModifySelection:";
+  "^$\UF72B" = "moveToEndOfDocumentAndModifySelection:";
+
+  /* ctrl+left/right: by word; shift selects. Needs Mission Control's
+     ctrl+arrow shortcuts off (run_onchange_after_50-keyboard-shortcuts). */
+  "^\UF702"  = "moveWordLeft:";
+  "^\UF703"  = "moveWordRight:";
+  "^$\UF702" = "moveWordLeftAndModifySelection:";
+  "^$\UF703" = "moveWordRightAndModifySelection:";
+
+  /* ctrl+backspace / ctrl+delete: delete a word. */
+  "^\U007F"  = "deleteWordBackward:";
+  "^\UF728"  = "deleteWordForward:";
+}

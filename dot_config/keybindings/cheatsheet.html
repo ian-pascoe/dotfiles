@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Keybindings</title>
+    <!-- One page, landscape. Opened by cmd+k / holding cmd (macOS, Hammerspoon),
+     Alt+K (Windows, GlazeWM). Source: ~/.local/share/chezmoi/dot_config/keybindings/ -->
+    <style>
+      :root {
+        --bg: #191724;
+        --card: #1f1d2e;
+        --fg: #e0def4;
+        --muted: #908caa;
+        --accent: #ebbcba;
+        --key: #26233a;
+        --line: #403d52;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #faf4ed;
+          --card: #fffaf3;
+          --fg: #575279;
+          --muted: #797593;
+          --accent: #d7827e;
+          --key: #f2e9e1;
+          --line: #dfdad9;
+        }
+      }
+      @page {
+        size: landscape;
+        margin: 7mm;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          11.5px/1.35 "GeistMono Nerd Font",
+          ui-monospace,
+          Menlo,
+          Consolas,
+          monospace;
+        padding: 14px 16px;
+        border-radius: 14px;
+        min-height: 100vh;
+      }
+      header {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 15px;
+        margin: 0;
+        color: var(--accent);
+      }
+      .legend {
+        color: var(--muted);
+      }
+      .legend b {
+        color: var(--fg);
+      }
+      main {
+        columns: 4 250px;
+        column-gap: 12px;
+      }
+      section {
+        break-inside: avoid;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 7px 9px;
+        margin: 0 0 10px;
+      }
+      h2 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0 0 4px;
+        color: var(--accent);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td {
+        padding: 1.5px 0;
+        vertical-align: top;
+      }
+      td:first-child {
+        white-space: nowrap;
+        padding-right: 8px;
+        width: 1%;
+      }
+      kbd {
+        font: inherit;
+        font-size: 10.5px;
+        background: var(--key);
+        border: 1px solid var(--line);
+        border-bottom-width: 2px;
+        border-radius: 4px;
+        padding: 0 4px;
+      }
+      .note {
+        color: var(--muted);
+        font-size: 10.5px;
+        margin-top: 3px;
+      }
+      .os {
+        color: var(--muted);
+        font-size: 10px;
+      }
+      @media print {
+        body {
+          background: none;
+          padding: 0;
+        }
+        section {
+          background: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Keybindings</h1>
+      <span class="legend"
+        ><b>Super</b> = ⌘ cmd on Mac · Alt on Windows · Super on Omarchy (Windows:
+        <b>Super Alt</b> = Alt ⊞)</span
+      >
+      <span class="legend"><b>Ctrl</b> = Caps Lock (tap = Esc) · app shortcuts</span>
+      <span class="legend"><b>Alt</b> = next to Space · editors &amp; terminals</span>
+    </header>
+    <main>
+      <section>
+        <h2>Windows</h2>
+        <table>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>Enter</kbd></td>
+            <td>Terminal</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>Enter</kbd> / <kbd>B</kbd></td>
+            <td>Browser</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>Q</kbd></td>
+            <td>Close window</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>T</kbd></td>
+            <td>Float / tile</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>F</kbd></td>
+            <td>Fullscreen</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>J</kbd></td>
+            <td>Toggle split direction</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>L</kbd></td>
+            <td>Tiles ↔ accordion <span class="os">Mac</span></td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>M</kbd></td>
+            <td>Minimize</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>←↓↑→</kbd></td>
+            <td>Focus</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>←↓↑→</kbd></td>
+            <td>Swap / move window</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>Tab</kbd></td>
+            <td>Next window (<kbd>⇧</kbd> previous; native on Win)</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>Tab</kbd></td>
+            <td>Next monitor <span class="os">Mac</span></td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>K</kbd></td>
+            <td>This sheet (Mac: or hold <kbd>⌘</kbd>)</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Workspaces &amp; monitors</h2>
+        <table>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>1–9</kbd></td>
+            <td>Go to workspace</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>1–9</kbd></td>
+            <td>Move window there, follow</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>Alt</kbd> <kbd>1–9</kbd></td>
+            <td>Move window there, stay</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>Tab</kbd></td>
+            <td>Next workspace (<kbd>⇧</kbd> previous)</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="os">Win</span> <kbd>Alt</kbd> <kbd>Ctrl</kbd> <kbd>→</kbd> / <kbd>←</kbd>
+            </td>
+            <td>Next / previous workspace</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>Ctrl</kbd> <kbd>Tab</kbd></td>
+            <td>Last workspace</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>Alt</kbd> <kbd>←→</kbd></td>
+            <td>Workspace → monitor</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>Ctrl</kbd> <kbd>←→</kbd></td>
+            <td>Window → monitor</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Resize &amp; modes</h2>
+        <table>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>−</kbd> / <kbd>=</kbd></td>
+            <td>Narrower / wider</td>
+          </tr>
+          <tr>
+            <td>… <kbd>⇧</kbd></td>
+            <td>Height instead of width</td>
+          </tr>
+          <tr>
+            <td>… <kbd>Alt</kbd> / <kbd>Ctrl</kbd></td>
+            <td>A little / a lot</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>Ctrl</kbd> <kbd>R</kbd></td>
+            <td>Resize mode: <kbd>hjkl</kbd>, <kbd>Esc</kbd> exits</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>;</kbd></td>
+            <td>Service mode, then:</td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;<kbd>Esc</kbd></td>
+            <td>Reload WM config</td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;<kbd>R</kbd> / <kbd>F</kbd></td>
+            <td>Reset (Win: redraw) / float</td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;<kbd>Bksp</kbd></td>
+            <td>Close other windows <span class="os">Mac</span></td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>P</kbd></td>
+            <td>Pause GlazeWM <span class="os">Win</span></td>
+          </tr>
+        </table>
+        <div class="note">Mac steps 100 / 25 / 300 px · Windows 5 / 2 / 15 %</div>
+      </section>
+
+      <section>
+        <h2>Apps (browser, T3, editors)</h2>
+        <table>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>T</kbd></td>
+            <td>New tab</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>F</kbd></td>
+            <td>Find</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>L</kbd></td>
+            <td>Address bar</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>1–9</kbd></td>
+            <td>Go to tab</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>=</kbd> <kbd>−</kbd> <kbd>0</kbd></td>
+            <td>Zoom in / out / reset</td>
+          </tr>
+          <tr>
+            <td><kbd>⌘</kbd> <kbd>W</kbd> · <kbd>Ctrl</kbd> <kbd>W</kbd></td>
+            <td>Close tab (Mac · Win)</td>
+          </tr>
+          <tr>
+            <td><kbd>⌘</kbd> <kbd>C V X A</kbd></td>
+            <td>Clipboard on Mac (Win: <kbd>Ctrl</kbd>)</td>
+          </tr>
+        </table>
+        <div class="note">
+          Mac: menu shortcuts remapped system-wide; Zen's tab and address-bar keys are set in Zen →
+          Settings → Keyboard Shortcuts.
+        </div>
+      </section>
+
+      <section>
+        <h2>Text fields</h2>
+        <table>
+          <tr>
+            <td><kbd>Home</kbd> / <kbd>End</kbd></td>
+            <td>Line start / end</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>Home</kbd> / <kbd>End</kbd></td>
+            <td>Document start / end</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>←→</kbd></td>
+            <td>Word left / right</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>Bksp</kbd> / <kbd>Del</kbd></td>
+            <td>Delete word</td>
+          </tr>
+          <tr>
+            <td>… <kbd>⇧</kbd></td>
+            <td>Select while moving</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Terminal</h2>
+        <table>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>⇧</kbd> <kbd>T</kbd></td>
+            <td>New terminal tab <span class="os">no herdr</span></td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>=</kbd> <kbd>−</kbd> <kbd>0</kbd></td>
+            <td>Font size</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>⇧</kbd> <kbd>F</kbd></td>
+            <td>Search</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>←→</kbd></td>
+            <td>Word left / right (shell)</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Rex / Herdr / Tern — direct</h2>
+        <table>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>Enter</kbd></td>
+            <td>Split down (<kbd>⇧</kbd> right)</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>Esc</kbd></td>
+            <td>Close pane</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>←↓↑→</kbd></td>
+            <td>Focus pane (<kbd>⇧</kbd> resize)</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>1–9</kbd></td>
+            <td>Go to tab</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>←→</kbd></td>
+            <td>Prev / next tab (<kbd>⇧</kbd> move)</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>↑↓</kbd></td>
+            <td>Prev / next session</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>hjkl</kbd></td>
+            <td>Navigate (vim-aware)</td>
+          </tr>
+        </table>
+        <div class="note">Windows: GlazeWM owns Alt — use the prefix keys.</div>
+      </section>
+
+      <section>
+        <h2>… prefix <kbd>Ctrl</kbd> <kbd>Space</kbd>, then</h2>
+        <table>
+          <tr>
+            <td><kbd>c</kbd> <kbd>r</kbd> <kbd>k</kbd></td>
+            <td>New / rename / close tab</td>
+          </tr>
+          <tr>
+            <td><kbd>h</kbd> <kbd>v</kbd></td>
+            <td>Split down / right</td>
+          </tr>
+          <tr>
+            <td><kbd>x</kbd> <kbd>z</kbd> <kbd>;</kbd></td>
+            <td>Close / zoom / last pane</td>
+          </tr>
+          <tr>
+            <td><kbd>⇧O</kbd> <kbd>[</kbd></td>
+            <td>Rename pane / copy mode</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>←→</kbd></td>
+            <td>Resize mode</td>
+          </tr>
+          <tr>
+            <td><kbd>⇧C</kbd> <kbd>⇧R</kbd> <kbd>⇧K</kbd></td>
+            <td>New / rename / close session</td>
+          </tr>
+          <tr>
+            <td><kbd>s</kbd> <kbd>⇧1–9</kbd></td>
+            <td>Session picker / go to</td>
+          </tr>
+          <tr>
+            <td><kbd>g</kbd> <kbd>f</kbd> <kbd>w</kbd> <kbd>e</kbd></td>
+            <td>Git / files / browser / scrollback</td>
+          </tr>
+          <tr>
+            <td><kbd>o</kbd> <kbd>Alt</kbd> <kbd>o</kbd></td>
+            <td>Review docs / last reply</td>
+          </tr>
+          <tr>
+            <td><kbd>q</kbd> <kbd>d</kbd> <kbd>?</kbd></td>
+            <td>Reload / detach / help</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>T3 Code</h2>
+        <table>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>K</kbd></td>
+            <td>Command palette</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>`</kbd></td>
+            <td>Toggle terminal</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>1–9</kbd></td>
+            <td>Jump to thread</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>Enter</kbd></td>
+            <td>Alternate / background send</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>⇧</kbd> <kbd>Enter</kbd></td>
+            <td>Steer queued message</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>⇧</kbd> <kbd>B</kbd></td>
+            <td>Thread panel</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Neovim (LazyVim defaults)</h2>
+        <table>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>J</kbd> / <kbd>K</kbd></td>
+            <td>Move line / selection</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>hjkl</kbd></td>
+            <td>Window / pane navigation</td>
+          </tr>
+        </table>
+        <div class="note">
+          Windows: visual <kbd>J</kbd>/<kbd>K</kbd> move lines; picker <kbd>T</kbd> <kbd>F</kbd>
+          <kbd>M</kbd> → <kbd>X</kbd> <kbd>Y</kbd> <kbd>Z</kbd>.
+        </div>
+        <div class="note">
+          Picker <kbd>Alt</kbd> +: <kbd>H</kbd> hidden · <kbd>I</kbd> ignored ·
+          <kbd>M</kbd> maximize · <kbd>P</kbd> preview · <kbd>R</kbd> regex · <kbd>S</kbd> flash ·
+          <kbd>T</kbd> trouble
+        </div>
+      </section>
+
+      <section>
+        <h2>Mac extras</h2>
+        <table>
+          <tr>
+            <td><kbd>⌘</kbd> <kbd>Space</kbd></td>
+            <td>Tinycast launcher</td>
+          </tr>
+          <tr>
+            <td><kbd>Hyper</kbd> <kbd>A</kbd> / <kbd>V</kbd></td>
+            <td>App launcher / clipboard history</td>
+          </tr>
+          <tr>
+            <td><kbd>Hyper</kbd> <kbd>C</kbd> / <kbd>M</kbd></td>
+            <td>Caffeine / mic mute</td>
+          </tr>
+          <tr>
+            <td><kbd>Hyper</kbd> <kbd>D</kbd> / <kbd>O</kbd></td>
+            <td>Dark mode / dotfiles</td>
+          </tr>
+          <tr>
+            <td><kbd>Hyper</kbd> <kbd>R</kbd> <kbd>/</kbd> <kbd>.</kbd></td>
+            <td>Hammerspoon reload / list / console</td>
+          </tr>
+        </table>
+        <div class="note">Hyper = <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>⌘</kbd></div>
+      </section>
+    </main>
+  </body>
+</html>

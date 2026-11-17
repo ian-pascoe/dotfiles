@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
-# Gives the Herdr app the current theme variant's terminal colors, as Rex's
-# sync_theme action does: ~/.config/theme/ghostty.conf becomes
+# Gives the Herdr app the current theme variant, as Rex's sync_theme action
+# does: ~/.config/theme/ghostty.conf supplies the terminal colors and the
+# variant's pi.json its UI roles (accent, muted text, borders, selection,
+# agent states), and together they become
 # ~/.config/herdr-app/themes/dotfiles-<mode>.json, which the app then uses for
-# that appearance. One file per mode, so switching variants replaces it
+# that appearance. Herdr derives the surfaces (chrome, canvas, popovers) from
+# the background. One file per mode, so switching variants replaces it
 # instead of piling themes up. set-theme runs this.
 set -eu
 
 link=$HOME/.config/theme
 conf=$link/ghostty.conf
+pi=$link/pi.json
 [[ -f $conf ]] || { echo "herdr-app-sync-theme: no $conf" >&2; exit 1; }
 mode=dark
 [[ -e $link/light.mode ]] && mode=light
@@ -15,22 +19,65 @@ name=dotfiles-$mode
 dir=${HERDR_APP_HOME:-$HOME/.config/herdr-app}/themes
 mkdir -p "$dir"
 
+# Pi's color slots name a var or hold a color; resolve them all to colors.
+roles='{}'
+if [[ -f $pi ]]; then
+  roles=$(jq -c '
+    .vars as $v
+    | .colors | map_values(if type == "string" and $v[.] then $v[.] else . end)
+    | map_values(select(type == "string" and test("^#[0-9A-Fa-f]{6}$")) | ascii_downcase)
+  ' "$pi")
+fi
+
 # Ghostty's `key = value` lines; palette lines are `palette = N=#rrggbb`.
 awk -F' *= *' '
   /^[[:space:]]*#/ { next }
   $1 == "palette" { split($0, p, "="); gsub(/[[:space:]]/, "", p[2]); gsub(/[[:space:]]/, "", p[3]); print "ansi" p[2] "\t" p[3]; next }
   NF >= 2 { gsub(/[[:space:]]/, "", $2); print $1 "\t" $2 }
 ' "$conf" |
-  jq -Rn '
+  jq -Rn --argjson r "$roles" '
+    def rgb: ascii_downcase | ltrimstr("#") | [.[0:2], .[2:4], .[4:6]]
+      | map(explode | map(if . >= 97 then . - 87 else . - 48 end) | .[0] * 16 + .[1]);
+    def hx: "0123456789abcdef" as $s | [(. / 16 | floor), (. % 16)] | map($s[.:. + 1]) | add;
+    # a blended toward b by t (0..1)
+    def mix(a; b; t): [(a | rgb), (b | rgb)] | transpose
+      | map(.[0] * (1 - t) + .[1] * t | round | hx) | "#" + add;
+    def lum: rgb | map(. / 255 | if . <= 0.03928 then . / 12.92 else pow((. + 0.055) / 1.055; 2.4) end)
+      | .[0] * 0.2126 + .[1] * 0.7152 + .[2] * 0.0722;
+    def contrast(a; b): [(a | lum), (b | lum)] | (max + 0.05) / (min + 0.05);
+
     [inputs | split("\t") | {(.[0]): .[1]}] | add as $c
     | ([range(16) | $c["ansi\(.)"]]) as $ansi
     | if ($ansi | any(. == null)) or $c.background == null or $c.foreground == null
       then error("ghostty.conf lacks inline colors") else . end
+    | $c.background as $bg | $c.foreground as $fg
+    | ($r.accent // $ansi[4]) as $accent
+    # text on the accent: whichever of background and foreground reads better
+    | (if contrast($accent; $bg) >= contrast($accent; $fg) then $bg else $fg end) as $on_accent
+    | ($r.muted // mix($fg; $bg; 0.45)) as $faint
     | {
-        background: $c.background,
-        foreground: $c.foreground,
+        background: $bg,
+        foreground: $fg,
         selection: ($c["selection-background"] // $ansi[8]),
-        ansi: $ansi
+        ansi: $ansi,
+        colors: {
+          foreground: $fg,
+          accent: $accent,
+          accent_foreground: $on_accent,
+          ring: $accent,
+          solid: $accent,
+          solid_foreground: $on_accent,
+          muted: mix($fg; $faint; 0.45),
+          dim: $faint,
+          border: ($r.borderMuted // mix($bg; $fg; 0.12)),
+          selected: ($r.selectedBg // mix($bg; $fg; 0.1)),
+          hover: mix($bg; ($r.selectedBg // $fg); 0.6),
+          working: ($r.warning // $ansi[3]),
+          blocked: ($r.error // $ansi[1]),
+          done: ($r.success // $ansi[2]),
+          idle: $faint,
+          unknown: $faint
+        }
       }
       + if $c["cursor-color"] then {cursor: $c["cursor-color"]} else {} end
   ' >"$dir/$name.json.tmp"
