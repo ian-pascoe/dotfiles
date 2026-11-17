@@ -42,7 +42,7 @@
     "alt-p": "tab.prev",
     "alt-shift-n": "space.next",
     "alt-shift-p": "space.prev",
-    "ctrl-space shift-/": "app.palette",
+    "ctrl-space shift-/": "app.help",
     "ctrl-space shift-;": "app.palette",
     "ctrl-space :": "app.palette",
     "ctrl-space d": "window.close",
@@ -110,6 +110,7 @@
     "ctrl-j": "mod.open:nav-down",
     "ctrl-k": "mod.open:nav-up",
     "ctrl-l": "mod.open:nav-right",
-    "ctrl-space ctrl-l": "send:\f"
+    "ctrl-space ctrl-l": "send:\f",
+    "ctrl-space ctrl-space": "send:\u0000"
   }
 }
