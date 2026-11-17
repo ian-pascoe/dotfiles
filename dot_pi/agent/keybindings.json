@@ -1,16 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/earendil-works/pi/refs/heads/main/packages/coding-agent/schemas/keybindings.schema.json",
   "app.interrupt": "ctrl+\\",
-  "app.session.tree": "alt+t",
+  "app.session.tree": "alt+shift+t",
   "tui.select.up": ["up", "ctrl+k"],
   "tui.select.down": ["down", "ctrl+j"],
   "tui.select.pageUp": ["pageUp", "ctrl+b"],
   "tui.select.pageDown": ["pageDown", "ctrl+f"],
-  "tui.altScreen.lineUp": "alt+k",
-  "tui.altScreen.lineDown": "alt+j",
+  "tui.altScreen.lineUp": "ctrl+alt+k",
+  "tui.altScreen.lineDown": "ctrl+alt+j",
   "tui.altScreen.halfPageUp": "alt+u",
   "tui.altScreen.halfPageDown": "alt+d",
-  "tui.altScreen.search": ["ctrl+shift+f", "alt+/"],
-  "app.tree.foldOrUp": ["ctrl+left", "alt+left", "alt+h"],
-  "app.tree.unfoldOrDown": ["ctrl+right", "alt+right", "alt+l"]
+  "tui.altScreen.search": ["ctrl+shift+f", "alt+s"],
+  "app.tree.foldOrUp": ["ctrl+left", "alt+,"],
+  "app.tree.unfoldOrDown": ["ctrl+right", "alt+."]
 }

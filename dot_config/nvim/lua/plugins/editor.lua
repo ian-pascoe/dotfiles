@@ -1,14 +1,20 @@
--- On Windows (and WSL), GlazeWM takes alt+f/j/k/m/t system-wide as Omarchy's
--- SUPER (glazewm/config.yaml), so the picker's keys on them never arrive there.
--- Move those to free Alt keys and drop the dead defaults; macOS keeps LazyVim's.
+-- The terminal multiplexers take alt+n/p (tabs) everywhere, so the picker's
+-- alt+p preview toggle moves to alt+v. On Windows (and WSL), GlazeWM also
+-- takes alt+e/f/h/j/k/l/m/q/r/t system-wide as Super (glazewm/config.yaml),
+-- so the picker keys on those move to free Alt keys too; macOS keeps the rest.
 local on_windows = vim.fn.has('win32') == 1 or vim.fn.has('wsl') == 1
-local picker_alt_moves = on_windows
-    and {
-      { '<a-t>', '<a-x>', 'trouble_open' }, -- a quickfix-style list
-      { '<a-f>', '<a-y>', 'toggle_follow' },
-      { '<a-m>', '<a-z>', 'toggle_maximize' }, -- zoom
-    }
-  or {}
+local picker_alt_moves = {
+  { '<a-p>', '<a-v>', 'toggle_preview' },
+}
+if on_windows then
+  vim.list_extend(picker_alt_moves, {
+    { '<a-t>', '<a-x>', 'trouble_open' }, -- a quickfix-style list
+    { '<a-f>', '<a-y>', 'toggle_follow' },
+    { '<a-m>', '<a-z>', 'toggle_maximize' }, -- zoom
+    { '<a-h>', '<a-.>', 'toggle_hidden' }, -- dotfiles
+    { '<a-r>', '<a-g>', 'toggle_regex' },
+  })
+end
 
 -- The picker window's keys for those moves; `spec` adds options such as mode.
 local function picker_alt_keys(spec)

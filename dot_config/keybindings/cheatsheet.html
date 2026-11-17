@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>Keybindings</title>
-    <!-- One page, landscape. Opened by cmd+k / holding cmd (macOS, Hammerspoon),
-     Alt+K (Windows, GlazeWM). Source: ~/.local/share/chezmoi/dot_config/keybindings/ -->
+    <!-- One page, landscape. Opened by holding cmd or Hyper+/ (macOS, Hammerspoon),
+     Alt+Shift+/ (Windows, GlazeWM). Source: ~/.local/share/chezmoi/dot_config/keybindings/ -->
     <style>
       :root {
         --bg: #191724;
@@ -133,11 +133,11 @@
     <header>
       <h1>Keybindings</h1>
       <span class="legend"
-        ><b>Super</b> = ⌘ cmd on Mac · Alt on Windows · Super on Omarchy (Windows:
-        <b>Super Alt</b> = Alt ⊞)</span
+        ><b>Super</b> = ⌘ cmd on Mac · Alt on Windows (Windows: <b>Super Alt</b> = Alt ⊞) ·
+        <b>hjkl</b> = ←↓↑→ everywhere</span
       >
       <span class="legend"><b>Ctrl</b> = Caps Lock (tap = Esc) · app shortcuts</span>
-      <span class="legend"><b>Alt</b> = next to Space · editors &amp; terminals</span>
+      <span class="legend"><b>Ctrl hjkl</b> = panes · <b>Alt n/p</b> = tabs</span>
     </header>
     <main>
       <section>
@@ -156,6 +156,14 @@
             <td>Close window</td>
           </tr>
           <tr>
+            <td><kbd>Super</kbd> <kbd>hjkl</kbd></td>
+            <td>Focus (crosses monitors; arrows too)</td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>hjkl</kbd></td>
+            <td>Swap / move window</td>
+          </tr>
+          <tr>
             <td><kbd>Super</kbd> <kbd>T</kbd></td>
             <td>Float / tile</td>
           </tr>
@@ -164,11 +172,11 @@
             <td>Fullscreen</td>
           </tr>
           <tr>
-            <td><kbd>Super</kbd> <kbd>J</kbd></td>
+            <td><kbd>Super</kbd> <kbd>E</kbd></td>
             <td>Toggle split direction</td>
           </tr>
           <tr>
-            <td><kbd>Super</kbd> <kbd>L</kbd></td>
+            <td><kbd>Super</kbd> <kbd>;</kbd></td>
             <td>Tiles ↔ accordion <span class="os">Mac</span></td>
           </tr>
           <tr>
@@ -176,24 +184,20 @@
             <td>Minimize</td>
           </tr>
           <tr>
-            <td><kbd>Super</kbd> <kbd>←↓↑→</kbd></td>
-            <td>Focus</td>
-          </tr>
-          <tr>
-            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>←↓↑→</kbd></td>
-            <td>Swap / move window</td>
-          </tr>
-          <tr>
             <td><kbd>Alt</kbd> <kbd>Tab</kbd></td>
-            <td>Next window (<kbd>⇧</kbd> previous; native on Win)</td>
+            <td>Next window (<kbd>⇧</kbd> previous) <span class="os">Mac</span></td>
           </tr>
           <tr>
             <td><kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>Tab</kbd></td>
             <td>Next monitor <span class="os">Mac</span></td>
           </tr>
           <tr>
-            <td><kbd>Super</kbd> <kbd>K</kbd></td>
-            <td>This sheet (Mac: or hold <kbd>⌘</kbd>)</td>
+            <td>Hold <kbd>⌘</kbd> · <kbd>Hyper</kbd> <kbd>/</kbd></td>
+            <td>This sheet <span class="os">Mac</span></td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>/</kbd></td>
+            <td>This sheet <span class="os">Win</span></td>
           </tr>
         </table>
       </section>
@@ -215,6 +219,14 @@
           </tr>
           <tr>
             <td><kbd>Super</kbd> <kbd>Tab</kbd></td>
+            <td>Last workspace <span class="os">Mac</span></td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>`</kbd></td>
+            <td>Last workspace (Alt Tab stays native) <span class="os">Win</span></td>
+          </tr>
+          <tr>
+            <td><kbd>Super</kbd> <kbd>Ctrl</kbd> <kbd>Tab</kbd></td>
             <td>Next workspace (<kbd>⇧</kbd> previous)</td>
           </tr>
           <tr>
@@ -222,10 +234,6 @@
               <span class="os">Win</span> <kbd>Alt</kbd> <kbd>Ctrl</kbd> <kbd>→</kbd> / <kbd>←</kbd>
             </td>
             <td>Next / previous workspace</td>
-          </tr>
-          <tr>
-            <td><kbd>Super</kbd> <kbd>Ctrl</kbd> <kbd>Tab</kbd></td>
-            <td>Last workspace</td>
           </tr>
           <tr>
             <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>Alt</kbd> <kbd>←→</kbd></td>
@@ -236,6 +244,11 @@
             <td>Window → monitor</td>
           </tr>
         </table>
+        <div class="note">
+          Directional focus crosses monitors. Service mode (<kbd>Super</kbd> <kbd>⇧</kbd>
+          <kbd>;</kbd>): <kbd>hjkl</kbd> window → monitor, <kbd>⇧</kbd> <kbd>hjkl</kbd> workspace →
+          monitor.
+        </div>
       </section>
 
       <section>
@@ -254,12 +267,20 @@
             <td>A little / a lot</td>
           </tr>
           <tr>
-            <td><kbd>Super</kbd> <kbd>Ctrl</kbd> <kbd>R</kbd></td>
-            <td>Resize mode: <kbd>hjkl</kbd>, <kbd>Esc</kbd> exits</td>
+            <td><kbd>Super</kbd> <kbd>R</kbd></td>
+            <td>Resize mode: <kbd>hjkl</kbd> (<kbd>⇧</kbd> finer), <kbd>Esc</kbd> exits</td>
           </tr>
           <tr>
             <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>;</kbd></td>
             <td>Service mode, then:</td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;<kbd>hjkl</kbd></td>
+            <td>Window → monitor</td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;<kbd>⇧</kbd> <kbd>hjkl</kbd></td>
+            <td>Workspace → monitor</td>
           </tr>
           <tr>
             <td>&nbsp;&nbsp;<kbd>Esc</kbd></td>
@@ -274,7 +295,7 @@
             <td>Close other windows <span class="os">Mac</span></td>
           </tr>
           <tr>
-            <td><kbd>Super</kbd> <kbd>⇧</kbd> <kbd>P</kbd></td>
+            <td><kbd>Super</kbd> <kbd>Ctrl</kbd> <kbd>P</kbd></td>
             <td>Pause GlazeWM <span class="os">Win</span></td>
           </tr>
         </table>
@@ -295,6 +316,10 @@
           <tr>
             <td><kbd>Ctrl</kbd> <kbd>L</kbd></td>
             <td>Address bar</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>R</kbd></td>
+            <td>Reload</td>
           </tr>
           <tr>
             <td><kbd>Ctrl</kbd> <kbd>1–9</kbd></td>
@@ -371,67 +396,65 @@
         <h2>Rex / Herdr / Tern — direct</h2>
         <table>
           <tr>
-            <td><kbd>Alt</kbd> <kbd>Enter</kbd></td>
-            <td>Split down (<kbd>⇧</kbd> right)</td>
-          </tr>
-          <tr>
-            <td><kbd>Alt</kbd> <kbd>Esc</kbd></td>
-            <td>Close pane</td>
-          </tr>
-          <tr>
-            <td><kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>←↓↑→</kbd></td>
-            <td>Focus pane (<kbd>⇧</kbd> resize)</td>
-          </tr>
-          <tr>
-            <td><kbd>Alt</kbd> <kbd>1–9</kbd></td>
-            <td>Go to tab</td>
-          </tr>
-          <tr>
-            <td><kbd>Alt</kbd> <kbd>←→</kbd></td>
-            <td>Prev / next tab (<kbd>⇧</kbd> move)</td>
-          </tr>
-          <tr>
-            <td><kbd>Alt</kbd> <kbd>↑↓</kbd></td>
-            <td>Prev / next session</td>
-          </tr>
-          <tr>
             <td><kbd>Ctrl</kbd> <kbd>hjkl</kbd></td>
-            <td>Navigate (vim-aware)</td>
+            <td>Pane (vim-aware; Vim, fzf, lazygit get it)</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>N</kbd> / <kbd>P</kbd></td>
+            <td>Next / previous tab</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>⇧</kbd> <kbd>N</kbd> / <kbd>P</kbd></td>
+            <td>Next / previous session</td>
           </tr>
         </table>
-        <div class="note">Windows: GlazeWM owns Alt — use the prefix keys.</div>
+        <div class="note">
+          Everything else is behind the prefix: Super (⌘ / Alt) belongs to the window manager.
+        </div>
       </section>
 
       <section>
         <h2>… prefix <kbd>Ctrl</kbd> <kbd>Space</kbd>, then</h2>
         <table>
           <tr>
-            <td><kbd>c</kbd> <kbd>r</kbd> <kbd>k</kbd></td>
-            <td>New / rename / close tab</td>
-          </tr>
-          <tr>
-            <td><kbd>h</kbd> <kbd>v</kbd></td>
-            <td>Split down / right</td>
+            <td><kbd>v</kbd> <kbd>s</kbd></td>
+            <td>Split side by side / stacked</td>
           </tr>
           <tr>
             <td><kbd>x</kbd> <kbd>z</kbd> <kbd>;</kbd></td>
-            <td>Close / zoom / last pane</td>
+            <td>Close / zoom / last pane (<kbd>;</kbd> Herdr)</td>
+          </tr>
+          <tr>
+            <td><kbd>r</kbd></td>
+            <td>Resize mode: <kbd>hjkl</kbd> (not Tern)</td>
           </tr>
           <tr>
             <td><kbd>⇧O</kbd> <kbd>[</kbd></td>
-            <td>Rename pane / copy mode</td>
+            <td>Rename pane (Herdr) / copy mode (Herdr, Rex)</td>
           </tr>
           <tr>
-            <td><kbd>Ctrl</kbd> <kbd>←→</kbd></td>
-            <td>Resize mode</td>
+            <td><kbd>c</kbd> <kbd>,</kbd> <kbd>⇧X</kbd></td>
+            <td>New / rename / close tab</td>
+          </tr>
+          <tr>
+            <td><kbd>n</kbd> <kbd>p</kbd> <kbd>1–9</kbd></td>
+            <td>Next / previous / go to tab</td>
+          </tr>
+          <tr>
+            <td><kbd>Space</kbd> <kbd>⇧1–9</kbd></td>
+            <td>Session picker / go to</td>
+          </tr>
+          <tr>
+            <td><kbd>⇧N</kbd> <kbd>⇧P</kbd></td>
+            <td>Next / previous session</td>
           </tr>
           <tr>
             <td><kbd>⇧C</kbd> <kbd>⇧R</kbd> <kbd>⇧K</kbd></td>
             <td>New / rename / close session</td>
           </tr>
           <tr>
-            <td><kbd>s</kbd> <kbd>⇧1–9</kbd></td>
-            <td>Session picker / go to</td>
+            <td><kbd>Ctrl</kbd> <kbd>L</kbd></td>
+            <td>Send Ctrl L (clear screen)</td>
           </tr>
           <tr>
             <td><kbd>g</kbd> <kbd>f</kbd> <kbd>w</kbd> <kbd>e</kbd></td>
@@ -444,6 +467,36 @@
           <tr>
             <td><kbd>q</kbd> <kbd>d</kbd> <kbd>?</kbd></td>
             <td>Reload / detach / help</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Pi</h2>
+        <table>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>U</kbd> / <kbd>D</kbd></td>
+            <td>Half page up / down</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>K</kbd> / <kbd>J</kbd></td>
+            <td>Line up / down</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>S</kbd></td>
+            <td>Search transcript</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>⇧</kbd> <kbd>T</kbd></td>
+            <td>Session tree</td>
+          </tr>
+          <tr>
+            <td><kbd>Alt</kbd> <kbd>,</kbd> / <kbd>.</kbd></td>
+            <td>Tree: fold / unfold</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> <kbd>J</kbd> / <kbd>K</kbd></td>
+            <td>Lists: down / up</td>
           </tr>
         </table>
       </section>
@@ -492,11 +545,12 @@
         </table>
         <div class="note">
           Windows: visual <kbd>J</kbd>/<kbd>K</kbd> move lines; picker <kbd>T</kbd> <kbd>F</kbd>
-          <kbd>M</kbd> → <kbd>X</kbd> <kbd>Y</kbd> <kbd>Z</kbd>.
+          <kbd>M</kbd> <kbd>H</kbd> <kbd>R</kbd> → <kbd>X</kbd> <kbd>Y</kbd> <kbd>Z</kbd>
+          <kbd>.</kbd> <kbd>G</kbd>.
         </div>
         <div class="note">
           Picker <kbd>Alt</kbd> +: <kbd>H</kbd> hidden · <kbd>I</kbd> ignored ·
-          <kbd>M</kbd> maximize · <kbd>P</kbd> preview · <kbd>R</kbd> regex · <kbd>S</kbd> flash ·
+          <kbd>M</kbd> maximize · <kbd>V</kbd> preview · <kbd>R</kbd> regex · <kbd>S</kbd> flash ·
           <kbd>T</kbd> trouble
         </div>
       </section>

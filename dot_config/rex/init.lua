@@ -1,7 +1,8 @@
 -- Rex configuration, kept in step with ~/.config/herdr/config.toml so the
--- muscle memory carries over: Omarchy's herdr preset (ctrl+space prefix,
--- direct alt chords), the same custom keys after the prefix,
--- the same vim-aware ctrl+h/j/k/l, and the terminal colors of the current
+-- muscle memory carries over: the shared Vim-like scheme
+-- (~/.config/keybindings/cheatsheet.html) with the ctrl+space prefix, only
+-- alt+n/p and alt+shift+n/p as direct chords, the same custom keys after the
+-- prefix, the same vim-aware ctrl+h/j/k/l, and the terminal colors of the current
 -- theme variant (herdr's "terminal" theme follows Ghostty, which reads
 -- ~/.config/theme/ghostty.conf).
 --
@@ -62,6 +63,8 @@ end
 
 -- Press the prefix twice to send it to the terminal.
 bind_prefixed(PREFIX, "pane.send_key", { key = PREFIX })
+-- ctrl+l moves to the pane on the right, so prefix+ctrl+l sends it (clear screen).
+bind_prefixed("ctrl+l", "pane.send_key", { key = "ctrl+l" })
 
 ----------------------------------------------------------------------------
 -- App
@@ -78,15 +81,15 @@ bind_prefixed("q", "client.config.reload") -- reload_config
 -- Sessions (herdr workspaces)
 ----------------------------------------------------------------------------
 
-bind_prefixed("s", "session.switch") -- workspace_picker
+bind_prefixed("space", "session.switch") -- workspace_picker
 bind_prefixed("alt+g", "session.switch") -- goto: Rex's closest picker
 bind_prefixed("shift+c", "session.new") -- new_workspace
 bind_prefixed("shift+r", "session.rename") -- rename_workspace
 bind_prefixed("shift+k", "session.close") -- close_workspace
 bind_prefixed("shift+p", "session.previous") -- previous_workspace
 bind_prefixed("shift+n", "session.next") -- next_workspace
-rex.bind("alt+up", "session.previous")
-rex.bind("alt+down", "session.next")
+rex.bind("alt+shift+p", "session.previous")
+rex.bind("alt+shift+n", "session.next")
 
 -- switch_workspace = "prefix+shift+1..9"
 rex.action({
@@ -115,43 +118,33 @@ end
 ----------------------------------------------------------------------------
 
 bind_prefixed("c", "client.tab.new") -- new_tab
-bind_prefixed("r", "client.tab.rename") -- rename_tab
-bind_prefixed("k", "client.tab.close") -- close_tab
+bind_prefixed(",", "client.tab.rename") -- rename_tab
+bind_prefixed("shift+x", "client.tab.close") -- close_tab (prefix+k stays unbound for now)
 bind_prefixed("p", "client.tab.previous") -- previous_tab
 bind_prefixed("n", "client.tab.next") -- next_tab
-rex.bind("alt+left", "client.tab.previous")
-rex.bind("alt+right", "client.tab.next")
-rex.bind("alt+shift+left", "client.tab.move.backward") -- move_tab_previous
-rex.bind("alt+shift+right", "client.tab.move.forward") -- move_tab_next
+rex.bind("alt+p", "client.tab.previous")
+rex.bind("alt+n", "client.tab.next")
 
 for i = 1, 9 do
   bind_prefixed(tostring(i), "client.tab.goto", { index = i }) -- switch_tab
-  rex.bind("alt+" .. i, "client.tab.goto", { index = i })
 end
 
 ----------------------------------------------------------------------------
 -- Panes
 ----------------------------------------------------------------------------
 
--- Arrows for direction, as everywhere else: ctrl+alt focuses, +shift resizes.
-for _, direction in ipairs({ "left", "down", "up", "right" }) do
-  rex.bind("ctrl+alt+" .. direction, "pane.focus", { direction = direction, wrap = false })
-  rex.bind("ctrl+alt+shift+" .. direction, "pane.resize", { direction = direction })
-end
-
-bind_prefixed("h", "pane.split", { direction = "down" }) -- split_horizontal
-bind_prefixed("v", "pane.split", { direction = "right" }) -- split_vertical
-rex.bind("alt+enter", "pane.split", { direction = "down" })
-rex.bind("alt+shift+enter", "pane.split", { direction = "right" })
+-- ctrl+h/j/k/l moves between panes (Vim navigation, below).
+bind_prefixed("v", "pane.split", { direction = "right" }) -- split_vertical: side by side
+bind_prefixed("s", "pane.split", { direction = "down" }) -- split_horizontal
 bind_prefixed("x", "pane.close") -- close_pane
-rex.bind("alt+esc", "pane.close")
 bind_prefixed("z", "pane.zoom") -- zoom
 bind_prefixed("shift+o", "pane.rename") -- rename_pane
 bind_prefixed("[", "pane.copy_mode.enter") -- copy_mode
 
--- resize_mode = prefix+ctrl+arrows: hjkl or arrows resize, shift for bigger
--- steps, = balances, escape or enter leaves.
+-- resize_mode = prefix+r or prefix+ctrl+arrows: hjkl or arrows resize, shift
+-- for bigger steps, = balances, escape or enter leaves.
 rex.mode("resize", { exclusive = true })
+bind_prefixed("r", "client.mode.enter", { name = "resize" })
 for _, direction in ipairs({ "left", "down", "up", "right" }) do
   bind_prefixed("ctrl+" .. direction, "client.mode.enter", { name = "resize" })
 end
@@ -622,8 +615,10 @@ end
 -- goes to Vim instead, which moves between its own splits and, at an edge,
 -- calls `rex focus` to cross into the next pane
 -- (dot_config/nvim/lua/plugins/util.lua).
--- Nested multiplexers get the key too, so they navigate their own panes.
-local passthrough = { herdr = true, tmux = true, zellij = true }
+-- Nested multiplexers get the key too, so they navigate their own panes, and
+-- so do short-lived TUIs that move their selection with it (fzf, lazygit), as
+-- HERDR_NAV_PASSTHROUGH_RE does for Herdr.
+local passthrough = { herdr = true, tmux = true, zellij = true, fzf = true, lazygit = true }
 
 -- Same matcher as vim-tmux-navigator: ^g?(view|l?n?vim?x?)(diff)?$
 local function wants_nav_keys(name)

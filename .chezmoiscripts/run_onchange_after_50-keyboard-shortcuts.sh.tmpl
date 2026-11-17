@@ -1,9 +1,9 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
-# Omarchy-style app shortcuts on macOS. AeroSpace owns cmd+t/f/1-9/minus/equal
-# (SUPER on Omarchy), so the app shortcuts it displaced move to ctrl, where
-# Linux and Windows apps keep them. Karabiner can't forward ctrl to cmd here:
-# AeroSpace would catch the forwarded cmd chord.
+# Ctrl app shortcuts on macOS. cmd is Super, the window tier: AeroSpace owns
+# cmd+h/j/k/l/e/r/t/f/q/m/;/1-9/tab/enter/minus/equal, so the app shortcuts it
+# displaced move to ctrl, where Linux and Windows apps keep them. Karabiner
+# can't forward ctrl to cmd here: AeroSpace would catch the forwarded cmd chord.
 #
 # NSUserKeyEquivalents rebinds menu items by exact title: ^ ctrl, $ shift,
 # ~ option, @ cmd. Titles an app doesn't have are ignored. Apps pick changes up
@@ -18,6 +18,9 @@ defaults write -g NSUserKeyEquivalents -dict \
   "Find…" "^f" \
   "Find..." "^f" \
   "Find in Page…" "^f" \
+  "Reload Page" "^r" \
+  "Reload This Page" "^r" \
+  "Reload" "^r" \
   "Zoom In" "^=" \
   "Zoom Out" "^-" \
   "Actual Size" "^0"

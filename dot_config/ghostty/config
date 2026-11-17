@@ -28,26 +28,13 @@ keybind = ctrl+insert=copy_to_clipboard
 keybind = shift+insert=paste_from_clipboard
 
 # Linux terminal keys on every OS. On macOS AeroSpace owns cmd+t/=/-
-# (SUPER on Omarchy); these are Ghostty's Linux defaults. Tab numbers stay
-# unbound so alt+1..9 reaches herdr (Omarchy's preset).
+# (cmd is Super, the window tier); these are Ghostty's Linux defaults.
 keybind = ctrl+shift+t=new_tab
 keybind = ctrl+shift+f=start_search
 keybind = ctrl+equal=increase_font_size:1
 keybind = ctrl+minus=decrease_font_size:1
 keybind = ctrl+0=reset_font_size
 
-# Leave Omarchy's herdr keys to herdr: Ghostty's Linux defaults put tabs on
-# alt+1..9 and split focus on ctrl+alt+arrows.
-keybind = alt+1=unbind
-keybind = alt+2=unbind
-keybind = alt+3=unbind
-keybind = alt+4=unbind
-keybind = alt+5=unbind
-keybind = alt+6=unbind
-keybind = alt+7=unbind
-keybind = alt+8=unbind
-keybind = alt+9=unbind
-keybind = ctrl+alt+left=unbind
-keybind = ctrl+alt+right=unbind
-keybind = ctrl+alt+up=unbind
-keybind = ctrl+alt+down=unbind
+# Option sends Alt (ESC-prefixed), whatever the keyboard layout, so the
+# multiplexers get alt+n/p and alt+shift+n/p. Ghostty binds none of those.
+macos-option-as-alt = true

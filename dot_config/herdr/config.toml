@@ -62,56 +62,62 @@ manifest_check = true
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
 prefix = "ctrl+space"
 
-# Omarchy's herdr preset (basecamp/omarchy config/herdr/config.toml), shared
-# with Rex, the Herdr app, and Tern: direct alt chords for the common moves,
-# the prefix for the rest. My own prefix keys keep their letters where free.
+# The mux tier of the shared Vim-like scheme (~/.config/keybindings/cheatsheet.html),
+# the same in Rex, the Herdr app, and Tern. ctrl+h/j/k/l moves between panes
+# (custom commands below); the only direct chords are alt+n/p (tabs) and
+# alt+shift+n/p (workspaces), since the window managers own Super (cmd on
+# macOS, alt on Windows) for everything else. The rest sits behind the prefix.
 help = "prefix+?"
 settings = "prefix+shift+s"
 detach = "prefix+d"
 reload_config = "prefix+q"
-workspace_picker = "prefix+s"
+workspace_picker = "prefix+space"
 goto = "prefix+alt+g"
 new_workspace = "prefix+shift+c"
 rename_workspace = "prefix+shift+r"
 close_workspace = "prefix+shift+k"
-previous_workspace = ["prefix+shift+p", "alt+up"]
-next_workspace = ["prefix+shift+n", "alt+down"]
+previous_workspace = ["prefix+shift+p", "alt+shift+p"]
+next_workspace = ["prefix+shift+n", "alt+shift+n"]
 switch_workspace = "prefix+shift+1..9"
 new_tab = "prefix+c"
-rename_tab = "prefix+r"
-close_tab = "prefix+k"
-switch_tab = ["prefix+1..9", "alt+1..9"]
-previous_tab = ["prefix+p", "alt+left"]
-next_tab = ["prefix+n", "alt+right"]
-move_tab_previous = "alt+shift+left"
-move_tab_next = "alt+shift+right"
+rename_tab = "prefix+comma"
+# prefix+k (the old close_tab) stays unbound for now.
+close_tab = "prefix+shift+x"
+switch_tab = "prefix+1..9"
+previous_tab = ["prefix+p", "alt+p"]
+next_tab = ["prefix+n", "alt+n"]
 rename_pane = "prefix+shift+o"
 copy_mode = "prefix+["
 edit_scrollback = "prefix+e"
-split_horizontal = ["prefix+h", "alt+enter"]
-split_vertical = ["prefix+v", "alt+shift+enter"]
-close_pane = ["prefix+x", "alt+esc"]
+# split_vertical is side by side ("split right", Vim's :vsplit).
+split_vertical = "prefix+v"
+split_horizontal = "prefix+s"
+close_pane = "prefix+x"
 zoom = "prefix+z"
 last_pane = "prefix+;"
-focus_pane_left = "ctrl+alt+left"
-focus_pane_down = "ctrl+alt+down"
-focus_pane_up = "ctrl+alt+up"
-focus_pane_right = "ctrl+alt+right"
-resize_mode = ["prefix+ctrl+left", "prefix+ctrl+down", "prefix+ctrl+up", "prefix+ctrl+right"]
-resize_pane_left = "ctrl+alt+shift+left"
-resize_pane_down = "ctrl+alt+shift+down"
-resize_pane_up = "ctrl+alt+shift+up"
-resize_pane_right = "ctrl+alt+shift+right"
+# Unset, so the default prefix+h/j/k/l don't come back; ctrl+h/j/k/l move instead.
+focus_pane_left = ""
+focus_pane_down = ""
+focus_pane_up = ""
+focus_pane_right = ""
+# In resize mode h/j/k/l or the arrows resize.
+resize_mode = [
+  "prefix+r",
+  "prefix+ctrl+left",
+  "prefix+ctrl+down",
+  "prefix+ctrl+up",
+  "prefix+ctrl+right",
+]
 toggle_sidebar = "prefix+b"
 
 # Navigate-mode movement. These local shortcuts win while navigate mode is open.
 # They are independent from focus_pane_*. Do not include prefix+, esc, enter, tab, or 1..9 here.
 navigate_workspace_up = "p"
 navigate_workspace_down = "n"
-# navigate_pane_left = "h"      # left arrow always focuses the pane to the left
-# navigate_pane_down = "j"
-# navigate_pane_up = "k"
-# navigate_pane_right = "l"     # right arrow always focuses the pane to the right
+navigate_pane_left = "h" # left arrow always focuses the pane to the left
+navigate_pane_down = "j"
+navigate_pane_up = "k"
+navigate_pane_right = "l" # right arrow always focuses the pane to the right
 
 # Custom commands use the same binding syntax.
 # type = "shell" runs detached in the background.
@@ -127,29 +133,40 @@ type = "popup"
 command = "lazygit"
 
 ## Vim navigation
+# HERDR_NAV_PASSTHROUGH_RE: besides Vim, these TUIs get ctrl+h/j/k/l
+# themselves (fzf and lazygit move their selection with them). Set here, not
+# in the shell, so it reaches the script whatever environment the server has.
 [[keys.command]]
 key = "ctrl+h"
 type = "shell"
-command = '~/.config/herdr/scripts/navigate.sh left'
+command = "HERDR_NAV_PASSTHROUGH_RE='^(fzf|lazygit)$' ~/.config/herdr/scripts/navigate.sh left"
 description = "navigate left (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+j"
 type = "shell"
-command = '~/.config/herdr/scripts/navigate.sh down'
+command = "HERDR_NAV_PASSTHROUGH_RE='^(fzf|lazygit)$' ~/.config/herdr/scripts/navigate.sh down"
 description = "navigate down (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+k"
 type = "shell"
-command = '~/.config/herdr/scripts/navigate.sh up'
+command = "HERDR_NAV_PASSTHROUGH_RE='^(fzf|lazygit)$' ~/.config/herdr/scripts/navigate.sh up"
 description = "navigate up (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+l"
 type = "shell"
-command = '~/.config/herdr/scripts/navigate.sh right'
+command = "HERDR_NAV_PASSTHROUGH_RE='^(fzf|lazygit)$' ~/.config/herdr/scripts/navigate.sh right"
 description = "navigate right (vim/herdr)"
+
+# prefix then ctrl+l sends a literal ctrl+l (clear screen), which ctrl+l
+# itself no longer reaches.
+[[keys.command]]
+key = "prefix+ctrl+l"
+type = "shell"
+command = '"${HERDR_BIN_PATH:-herdr}" pane send-keys "$HERDR_PANE_ID" ctrl+l'
+description = "send ctrl+l (clear screen)"
 
 ## File viewer
 [[keys.command]]

@@ -108,7 +108,8 @@ config.cursor_blink_ease_out = "Constant"
 config.audible_bell = "Disabled" -- bell-features = no-system,no-audio
 config.hide_mouse_cursor_when_typing = false -- mouse-hide-while-typing = false
 config.scrollback_lines = 10000 -- near scrollback-limit = 10000000 bytes
--- macos-option-as-alt is true on US layouts: both Option keys send Alt.
+-- macos-option-as-alt = true: both Option keys send Alt, so the multiplexers
+-- get alt+n/p and alt+shift+n/p. WezTerm binds none of those.
 config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 
@@ -116,12 +117,6 @@ config.send_composed_key_when_right_alt_is_pressed = false
 config.keys = {
   { key = "Insert", mods = "CTRL", action = wezterm.action.CopyTo("Clipboard") },
   { key = "Insert", mods = "SHIFT", action = wezterm.action.PasteFrom("Clipboard") },
-  -- alt+enter splits a herdr pane (Omarchy's preset), not fullscreen.
-  { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
 }
--- ctrl+alt+shift+arrows resize herdr panes, not WezTerm's.
-for _, arrow in ipairs({ "LeftArrow", "RightArrow", "UpArrow", "DownArrow" }) do
-  table.insert(config.keys, { key = arrow, mods = "CTRL|ALT|SHIFT", action = wezterm.action.DisableDefaultAssignment })
-end
 
 return config

@@ -80,28 +80,31 @@ outer.right = 5
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-# Bindings follow Omarchy's Hyprland defaults (github.com/basecamp/omarchy,
-# default/hypr/bindings/), with cmd standing in for SUPER. Omarchy actions with no
-# AeroSpace equivalent are left out, so their cmd shortcuts keep their macOS meaning.
-# cmd-space stays with Tinycast (Omarchy's SUPER+SPACE launcher menu).
+# The Super tier of the shared Vim-like scheme (~/.config/keybindings/cheatsheet.html),
+# with cmd as Super; GlazeWM (~/.glzr/glazewm/config.yaml) is the same with alt.
+# hjkl moves focus, shift+hjkl moves the window, arrows are aliases.
+# cmd shortcuts not bound here keep their macOS meaning.
+# cmd-space stays with Tinycast. The cheat sheet is Hammerspoon's: hold cmd, or Hyper+/.
 
 # Applications
 # A new window in the running Rex, then bring Rex forward (or launch it, which opens one).
 cmd-enter = '''exec-and-forget "$HOME/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex" --autostart=false do client.window.new >/dev/null 2>&1; open -a 'Rex Beta' '''
 cmd-shift-enter = "exec-and-forget open -na 'Zen'"
 cmd-shift-b = "exec-and-forget open -na 'Zen'"
-cmd-k = 'exec-and-forget open -g hammerspoon://keybindings' # cheat sheet (Hammerspoon)
 
 # Windows. cmd-w is left to apps, whose macOS default already closes the window or tab.
 cmd-q = 'close'
-cmd-j = 'layout horizontal vertical' # toggle split
+cmd-e = 'layout horizontal vertical' # toggle split direction
+cmd-semicolon = 'layout tiles accordion' # cycle workspace layout
 cmd-t = 'layout floating tiling' # toggle floating
 cmd-f = 'fullscreen'
 cmd-m = 'macos-native-minimize'
-cmd-l = 'layout tiles accordion' # cycle workspace layout
-cmd-alt-l = 'layout tiles accordion'
 
-# Focus
+# Focus: hjkl, arrows as aliases. Crossing a monitor's edge focuses the next monitor.
+cmd-h = 'focus left --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+cmd-j = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+cmd-k = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
+cmd-l = 'focus right --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
 cmd-left = 'focus left --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
 cmd-down = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
 cmd-up = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors'
@@ -112,6 +115,10 @@ ctrl-alt-tab = 'focus-monitor --wrap-around next'
 ctrl-alt-shift-tab = 'focus-monitor --wrap-around prev'
 
 # Swap windows
+cmd-shift-h = 'swap left'
+cmd-shift-j = 'swap down'
+cmd-shift-k = 'swap up'
+cmd-shift-l = 'swap right'
 cmd-shift-left = 'swap left'
 cmd-shift-down = 'swap down'
 cmd-shift-up = 'swap up'
@@ -164,11 +171,12 @@ cmd-shift-alt-7 = 'move-node-to-workspace 7'
 cmd-shift-alt-8 = 'move-node-to-workspace 8'
 cmd-shift-alt-9 = 'move-node-to-workspace 9'
 
-cmd-tab = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around --stdin next'
-cmd-shift-tab = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around --stdin prev'
-cmd-ctrl-tab = 'workspace-back-and-forth'
+cmd-tab = 'workspace-back-and-forth'
+# Next / previous non-empty workspace on this monitor (cmd-tab is back-and-forth).
+cmd-ctrl-tab = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around --stdin next'
+cmd-ctrl-shift-tab = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around --stdin prev'
 
-# Monitors
+# Monitors. Service mode (cmd-shift-semicolon) has the hjkl versions.
 cmd-shift-alt-left = 'move-workspace-to-monitor left'
 cmd-shift-alt-right = 'move-workspace-to-monitor right'
 cmd-shift-alt-up = 'move-workspace-to-monitor up'
@@ -178,10 +186,9 @@ cmd-shift-ctrl-right = 'move-node-to-monitor --focus-follows-window right'
 cmd-shift-ctrl-up = 'move-node-to-monitor --focus-follows-window up'
 cmd-shift-ctrl-down = 'move-node-to-monitor --focus-follows-window down'
 
-# AeroSpace-only modes (no Omarchy equivalent)
-# See: https://nikitabobko.github.io/AeroSpace/commands#mode
+# Modes. See: https://nikitabobko.github.io/AeroSpace/commands#mode
 cmd-shift-semicolon = ['mode service']
-cmd-ctrl-r = 'mode resize'
+cmd-r = 'mode resize'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -191,6 +198,15 @@ r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
+# Move the window (hjkl) or the whole workspace (shift-hjkl) to the monitor that way.
+h = ['move-node-to-monitor --focus-follows-window left', 'mode main']
+j = ['move-node-to-monitor --focus-follows-window down', 'mode main']
+k = ['move-node-to-monitor --focus-follows-window up', 'mode main']
+l = ['move-node-to-monitor --focus-follows-window right', 'mode main']
+shift-h = ['move-workspace-to-monitor left', 'mode main']
+shift-j = ['move-workspace-to-monitor down', 'mode main']
+shift-k = ['move-workspace-to-monitor up', 'mode main']
+shift-l = ['move-workspace-to-monitor right', 'mode main']
 
 cmd-shift-left = ['join-with left', 'mode main']
 cmd-shift-down = ['join-with down', 'mode main']

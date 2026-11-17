@@ -82,15 +82,20 @@ end
 
 -- Vim-aware pane navigation (herdr's scripts/navigate.sh). A Vim in the
 -- focused pane gets the Ctrl chord and moves between its own splits; at an
--- edge it calls `tern focus` itself (nvim lua/plugins/util.lua). Any other
--- program: Tern moves pane focus.
+-- edge it calls `tern focus` itself (nvim lua/plugins/util.lua). Short-lived
+-- TUIs that move their selection with the chord (fzf, lazygit) get it too, as
+-- HERDR_NAV_PASSTHROUGH_RE does for Herdr. Any other program: Tern moves pane
+-- focus.
 
 -- vim-tmux-navigator's matcher: vi, vim, nvim, lvim, gvim, view, *diff...
-local function is_vim(program: string?): boolean
+local function wants_nav_keys(program: string?): boolean
 	if not program then
 		return false
 	end
 	local name = string.lower(string.match(program, "[^/]+$") or program)
+	if name == "fzf" or name == "lazygit" then
+		return true
+	end
 	name = (string.gsub(name, "diff$", ""))
 	return string.match(name, "^g?view$") ~= nil or string.match(name, "^g?l?n?vim?x?$") ~= nil
 end
@@ -109,7 +114,7 @@ for _, dir in ipairs({ "left", "down", "up", "right" }) do
 		group = "herdr",
 		run = function(cx)
 			local pane = cx.session:pane("@focused")
-			if not pane or not is_vim(pane.program) then
+			if not pane or not wants_nav_keys(pane.program) then
 				cx:action("focus_pane:" .. dir)
 			elseif not pcall(cx.run, cx, pane.pane, CHORDS[dir]) then
 				cli({ "send", full_id(cx, pane.pane) or "@focused", "text", CHORDS[dir] })

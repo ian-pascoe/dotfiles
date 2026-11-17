@@ -1,7 +1,7 @@
 -- Keybinding cheat sheet overlay (~/.config/keybindings/cheatsheet.html).
 --
--- Two ways in, like Omarchy's SUPER+K and which-key:
---   * cmd+k (bound in AeroSpace, which opens hammerspoon://keybindings) toggles it.
+-- Two ways in, which-key style:
+--   * Hyper+/ (init.lua), or opening hammerspoon://keybindings, toggles it.
 --   * Holding cmd on its own for HOLD_SECONDS peeks at it until cmd is released.
 -- Esc or a click outside closes a toggled sheet.
 local M = {}

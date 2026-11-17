@@ -1,5 +1,5 @@
 /* Linux/Windows text navigation in Cocoa text fields (and apps that honor them).
-   AeroSpace owns cmd+arrows (SUPER on Omarchy). Takes effect on app relaunch.
+   AeroSpace owns cmd+arrows (cmd is Super). Takes effect on app relaunch.
    ^ ctrl, $ shift, ~ option, @ cmd. */
 {
   /* Home/End: line start/end; ctrl: document start/end; shift selects. */

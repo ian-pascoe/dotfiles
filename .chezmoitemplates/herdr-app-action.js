@@ -134,8 +134,10 @@ function isNeopane(name) {
 // the app moves between them itself. When a plain Vim is in the foreground the
 // key goes to Vim instead, which moves between its own splits and, at an edge,
 // runs `herdr-app do pane.go` (dot_config/nvim/lua/plugins/util.lua).
-// Nested multiplexers get the key too, so they navigate their own panes.
-const PASSTHROUGH = new Set(["herdr", "tmux", "zellij"]);
+// Nested multiplexers get the key too, so they navigate their own panes, and
+// so do short-lived TUIs that move their selection with it (fzf, lazygit), as
+// HERDR_NAV_PASSTHROUGH_RE does for Herdr.
+const PASSTHROUGH = new Set(["herdr", "tmux", "zellij", "fzf", "lazygit"]);
 const NAV_KEYS = { left: "ctrl+h", down: "ctrl+j", up: "ctrl+k", right: "ctrl+l" };
 
 // Same matcher as vim-tmux-navigator: ^g?(view|l?n?vim?x?)(diff)?$

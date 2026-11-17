@@ -53,6 +53,10 @@ window_effects:
     border:
       color: "#403D52"
       enabled: true
+# The Super tier of the shared Vim-like scheme (~/.config/keybindings/cheatsheet.html),
+# with alt as Super; AeroSpace on macOS is the same with cmd. hjkl moves focus,
+# shift+hjkl moves the window, arrows are aliases. Leave alt+n/p and
+# alt+shift+n/p free: the terminal multiplexers use them for tabs and sessions.
 keybindings:
   - bindings:
       - alt+enter
@@ -64,7 +68,7 @@ keybindings:
     commands:
       - shell-exec %SCOOP%\apps\zen-browser\current\zen.exe
   - bindings:
-      - alt+k
+      - alt+shift+oem_question
     commands:
       - shell-exec %USERPROFILE%\.config\keybindings\cheatsheet.html
   - bindings:
@@ -72,7 +76,7 @@ keybindings:
     commands:
       - close
   - bindings:
-      - alt+j
+      - alt+e
     commands:
       - toggle-tiling-direction
   - bindings:
@@ -88,34 +92,42 @@ keybindings:
     commands:
       - toggle-minimized
   - bindings:
+      - alt+h
       - alt+left
     commands:
       - focus --direction left
   - bindings:
+      - alt+j
       - alt+down
     commands:
       - focus --direction down
   - bindings:
+      - alt+k
       - alt+up
     commands:
       - focus --direction up
   - bindings:
+      - alt+l
       - alt+right
     commands:
       - focus --direction right
   - bindings:
+      - alt+shift+h
       - alt+shift+left
     commands:
       - move --direction left
   - bindings:
+      - alt+shift+j
       - alt+shift+down
     commands:
       - move --direction down
   - bindings:
+      - alt+shift+k
       - alt+shift+up
     commands:
       - move --direction up
   - bindings:
+      - alt+shift+l
       - alt+shift+right
     commands:
       - move --direction right
@@ -285,15 +297,18 @@ keybindings:
     commands:
       - move --workspace 9
   - bindings:
+      - alt+ctrl+tab
       - alt+ctrl+right
     commands:
       - focus --next-active-workspace-on-monitor
   - bindings:
+      - alt+ctrl+shift+tab
       - alt+ctrl+left
     commands:
       - focus --prev-active-workspace-on-monitor
+  # Alt+Tab stays the native window switcher; back-and-forth is Alt+`.
   - bindings:
-      - alt+ctrl+tab
+      - alt+oem_tilde
     commands:
       - focus --recent-workspace
   - bindings:
@@ -337,11 +352,12 @@ keybindings:
     commands:
       - wm-enable-binding-mode --name service
   - bindings:
-      - alt+ctrl+r
+      - alt+r
     commands:
       - wm-enable-binding-mode --name resize
+  # Not alt+shift+p: the terminal multiplexers' previous-session chord.
   - bindings:
-      - alt+shift+p
+      - alt+ctrl+p
     commands:
       - wm-toggle-pause
 binding_modes:
@@ -423,6 +439,51 @@ binding_modes:
         commands:
           - wm-disable-binding-mode --name service
           - wm-exit
+      # Move the window (hjkl) or the whole workspace (shift+hjkl) to the monitor that way.
+      - bindings:
+          - h
+        commands:
+          - move --workspace-in-direction left
+          - focus --workspace-in-direction left
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - j
+        commands:
+          - move --workspace-in-direction down
+          - focus --workspace-in-direction down
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - k
+        commands:
+          - move --workspace-in-direction up
+          - focus --workspace-in-direction up
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - l
+        commands:
+          - move --workspace-in-direction right
+          - focus --workspace-in-direction right
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - shift+h
+        commands:
+          - move-workspace --direction left
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - shift+j
+        commands:
+          - move-workspace --direction down
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - shift+k
+        commands:
+          - move-workspace --direction up
+          - wm-disable-binding-mode --name service
+      - bindings:
+          - shift+l
+        commands:
+          - move-workspace --direction right
+          - wm-disable-binding-mode --name service
 workspaces:
   - keep_alive: true
     bind_to_monitor: 0
