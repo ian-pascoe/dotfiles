@@ -31,8 +31,9 @@ local remote_tern = in_remote_tern_pane()
 if vim.env.SSH_CONNECTION or remote_tern then
   vim.o.clipboard = 'unnamedplus'
 
-  -- Herdr and Tern relay OSC 52 copies but never answer reads.
-  if vim.env.HERDR_ENV == '1' or remote_tern then
+  -- Herdr, the Herdr app (HC_TERMINAL_ID) and Tern relay OSC 52 copies but
+  -- never answer reads.
+  if vim.env.HERDR_ENV == '1' or vim.env.HC_TERMINAL_ID or remote_tern then
     local function paste_from_unnamed_register()
       return { vim.fn.getreg('"', 1, true), vim.fn.getregtype('"') }
     end

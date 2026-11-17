@@ -14,6 +14,11 @@ local function in_rex()
   return vim.env.REX_BLOCK ~= nil and not in_herdr() and not in_tmux() and not in_tern()
 end
 
+-- The Herdr desktop app: herdr-core runs its terminals and sets HC_TERMINAL_ID.
+local function in_herdr_app()
+  return vim.env.HC_TERMINAL_ID ~= nil and not in_herdr() and not in_tmux() and not in_tern() and not in_rex()
+end
+
 local function herdr_navigate(wincmd, dir)
   return function()
     local prev = vim.api.nvim_get_current_win()
@@ -50,6 +55,33 @@ local function rex_navigate(wincmd, dir)
     vim.system({ 'rex', 'focus', dir })
   end
 end
+
+-- The Herdr app hands ctrl+h/j/k/l to Vim (dot_config/herdr-app/keys.json and
+-- its nav-* mods); at a split edge, `herdr-app do pane.go` moves to the pane
+-- beside this terminal.
+local function herdr_app_navigate(wincmd, dir)
+  return function()
+    local prev = vim.api.nvim_get_current_win()
+    vim.cmd('wincmd ' .. wincmd)
+    if vim.api.nvim_get_current_win() ~= prev then
+      return
+    end
+    local bin = vim.fn.exepath('herdr-app')
+    if bin == '' then
+      bin = vim.fs.joinpath(vim.uv.os_homedir(), '.local', 'bin', 'herdr-app')
+    end
+    if vim.fn.executable(bin) == 1 then
+      vim.system({ bin, 'do', 'pane.go', '--direction', dir })
+    end
+  end
+end
+
+local herdr_app_navigation_keys = {
+  { '<c-h>', herdr_app_navigate('h', 'left'), desc = 'Navigate left' },
+  { '<c-j>', herdr_app_navigate('j', 'down'), desc = 'Navigate down' },
+  { '<c-k>', herdr_app_navigate('k', 'up'), desc = 'Navigate up' },
+  { '<c-l>', herdr_app_navigate('l', 'right'), desc = 'Navigate right' },
+}
 
 local rex_navigation_keys = {
   { '<c-h>', rex_navigate('h', 'left'), desc = 'Navigate left' },
@@ -152,14 +184,18 @@ local tmux_navigation_keys = {
 return {
   {
     'christoomey/vim-tmux-navigator',
-    enabled = in_tmux() or in_herdr() or in_tern() or in_rex(),
+    enabled = in_tmux() or in_herdr() or in_tern() or in_rex() or in_herdr_app(),
     lazy = false,
     init = function()
-      if in_herdr() or in_tern() or in_rex() then
+      if in_herdr() or in_tern() or in_rex() or in_herdr_app() then
         vim.g.tmux_navigator_no_mappings = 1
       end
     end,
-    keys = in_herdr() and herdr_navigation_keys or in_tern() and tern_navigation_keys or in_rex() and rex_navigation_keys or tmux_navigation_keys,
+    keys = in_herdr() and herdr_navigation_keys
+      or in_tern() and tern_navigation_keys
+      or in_rex() and rex_navigation_keys
+      or in_herdr_app() and herdr_app_navigation_keys
+      or tmux_navigation_keys,
   },
   { -- vim learning game
     'ThePrimeagen/vim-be-good',

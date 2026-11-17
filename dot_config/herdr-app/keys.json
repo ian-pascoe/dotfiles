@@ -57,25 +57,32 @@
     "ctrl-7": "space.select:7",
     "ctrl-8": "space.select:8",
     "ctrl-9": "space.select:9",
+    "ctrl-a shift-/": "app.palette",
+    "ctrl-a shift-;": "app.palette",
     "ctrl-a shift-s": "app.settings",
+    "ctrl-a d": "window.close",
+    "ctrl-a b": "layout.toggle:sidebar",
     "ctrl-a s": "mod.open:picker",
+    "ctrl-a alt-g": "mod.open:picker",
     "ctrl-a ctrl-c": "space.new",
     "ctrl-a shift-r": "space.rename",
+    "ctrl-a shift-d": "space.close",
     "ctrl-a shift-p": "space.prev",
     "ctrl-a shift-n": "space.next",
+    "ctrl-a shift-1": "space.select:1",
+    "ctrl-a shift-2": "space.select:2",
+    "ctrl-a shift-3": "space.select:3",
+    "ctrl-a shift-4": "space.select:4",
+    "ctrl-a shift-5": "space.select:5",
+    "ctrl-a shift-6": "space.select:6",
+    "ctrl-a shift-7": "space.select:7",
+    "ctrl-a shift-8": "space.select:8",
+    "ctrl-a shift-9": "space.select:9",
     "ctrl-a t": "tab.new",
     "ctrl-a ,": "tab.rename",
     "ctrl-a p": "tab.prev",
     "ctrl-a n": "tab.next",
     "ctrl-a shift-x": "tab.close",
-    "ctrl-a h": "pane.go:left",
-    "ctrl-a j": "pane.go:down",
-    "ctrl-a k": "pane.go:up",
-    "ctrl-a l": "pane.go:right",
-    "ctrl-a |": "pane.split:right",
-    "ctrl-a -": "pane.split:down",
-    "ctrl-a x": "pane.close",
-    "ctrl-a z": "pane.zoom",
     "ctrl-a 1": "tab.select:1",
     "ctrl-a 2": "tab.select:2",
     "ctrl-a 3": "tab.select:3",
@@ -85,15 +92,51 @@
     "ctrl-a 7": "tab.select:7",
     "ctrl-a 8": "tab.select:8",
     "ctrl-a 9": "tab.select:9",
-    "ctrl-a shift-1": "space.select:1",
-    "ctrl-a shift-2": "space.select:2",
-    "ctrl-a shift-3": "space.select:3",
-    "ctrl-a shift-4": "space.select:4",
-    "ctrl-a shift-5": "space.select:5",
-    "ctrl-a shift-6": "space.select:6",
-    "ctrl-a shift-7": "space.select:7",
-    "ctrl-a shift-8": "space.select:8",
-    "ctrl-a shift-9": "space.select:9"
+    "ctrl-a h": "pane.go:left",
+    "ctrl-a j": "pane.go:down",
+    "ctrl-a k": "pane.go:up",
+    "ctrl-a l": "pane.go:right",
+    "ctrl-a shift-h": {
+      "command": "pane.swap",
+      "args": {
+        "direction": "left"
+      }
+    },
+    "ctrl-a shift-j": {
+      "command": "pane.swap",
+      "args": {
+        "direction": "down"
+      }
+    },
+    "ctrl-a shift-k": {
+      "command": "pane.swap",
+      "args": {
+        "direction": "up"
+      }
+    },
+    "ctrl-a shift-l": {
+      "command": "pane.swap",
+      "args": {
+        "direction": "right"
+      }
+    },
+    "ctrl-a tab": "mod.open:cycle-pane-next",
+    "ctrl-a shift-tab": "mod.open:cycle-pane-prev",
+    "ctrl-a |": "pane.split:right",
+    "ctrl-a -": "pane.split:down",
+    "ctrl-a x": "pane.close",
+    "ctrl-a z": "pane.zoom",
+    "ctrl-a r": "mod.open:resize-mode",
+    "ctrl-a [": "mod.open:edit-scrollback",
+    "ctrl-a g": "mod.open:neogit",
+    "ctrl-a f": "mod.open:file-viewer",
+    "ctrl-a w": "mod.open:browser",
+    "ctrl-a shift-g": "mod.open:worktree-new",
+    "ctrl-a shift-w": "mod.open:worktree-open",
+    "ctrl-a alt-w": "mod.open:worktree-remove",
+    "ctrl-a o": "mod.open:annotate-open",
+    "ctrl-a shift-o": "mod.open:annotate-last",
+    "ctrl-a ctrl-o": "mod.open:annotate-newest"
   },
   "terminal": {
     "cmd-c": "terminal.copy",
@@ -105,6 +148,10 @@
     "cmd-left": "send:\u0001",
     "cmd-right": "send:\u0005",
     "cmd-backspace": "send:\u0015",
-    "ctrl-a ctrl-a": "send:\u0001"
+    "ctrl-a ctrl-a": "send:\u0001",
+    "ctrl-h": "mod.open:nav-left",
+    "ctrl-j": "mod.open:nav-down",
+    "ctrl-k": "mod.open:nav-up",
+    "ctrl-l": "mod.open:nav-right"
   }
 }

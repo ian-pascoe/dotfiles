@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Gives the Herdr app the current theme variant's terminal colors, as Rex's
+# sync_theme action does: ~/.config/theme/ghostty.conf becomes
+# ~/.config/herdr-app/themes/dotfiles-<mode>.json, which the app then uses for
+# that appearance. One file per mode, so switching variants replaces it
+# instead of piling themes up. set-theme runs this.
+set -eu
+
+link=$HOME/.config/theme
+conf=$link/ghostty.conf
+[[ -f $conf ]] || { echo "herdr-app-sync-theme: no $conf" >&2; exit 1; }
+mode=dark
+[[ -e $link/light.mode ]] && mode=light
+name=dotfiles-$mode
+dir=${HERDR_APP_HOME:-$HOME/.config/herdr-app}/themes
+mkdir -p "$dir"
+
+# Ghostty's `key = value` lines; palette lines are `palette = N=#rrggbb`.
+awk -F' *= *' '
+  /^[[:space:]]*#/ { next }
+  $1 == "palette" { split($0, p, "="); gsub(/[[:space:]]/, "", p[2]); gsub(/[[:space:]]/, "", p[3]); print "ansi" p[2] "\t" p[3]; next }
+  NF >= 2 { gsub(/[[:space:]]/, "", $2); print $1 "\t" $2 }
+' "$conf" |
+  jq -Rn '
+    [inputs | split("\t") | {(.[0]): .[1]}] | add as $c
+    | ([range(16) | $c["ansi\(.)"]]) as $ansi
+    | if ($ansi | any(. == null)) or $c.background == null or $c.foreground == null
+      then error("ghostty.conf lacks inline colors") else . end
+    | {
+        background: $c.background,
+        foreground: $c.foreground,
+        selection: ($c["selection-background"] // $ansi[8]),
+        ansi: $ansi
+      }
+      + if $c["cursor-color"] then {cursor: $c["cursor-color"]} else {} end
+  ' >"$dir/$name.json.tmp"
+mv "$dir/$name.json.tmp" "$dir/$name.json"
+
+# Fails when the app isn't running; it reads the file when it starts.
+herdr_app=$(command -v herdr-app || echo "$HOME/.local/bin/herdr-app")
+if [[ -x $herdr_app ]]; then
+  "$herdr_app" "do" app.theme --name "$name" >/dev/null 2>&1 || true
+fi

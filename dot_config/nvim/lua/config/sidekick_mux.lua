@@ -1,4 +1,5 @@
--- Helpers shared by the sidekick session backends for Herdr, Tern and Rex.
+-- Helpers shared by the sidekick session backends for Herdr, Herdr app, Tern
+-- and Rex.
 
 local Config = require('sidekick.config')
 local Util = require('sidekick.util')
@@ -22,9 +23,12 @@ end
 --- Run each pane's process command in parallel. Each prints a JSON report
 --- with the pane's `child` program and its `foreground` program; return the
 --- child's pid and the foreground's cwd (sparing sidekick's per-process lsof).
+--- `adapt` maps a report of another shape to `{ child, foreground }`; each
+--- result keeps the decoded report as `report`.
 ---@param cmds table<string, string[]> process command by pane id
----@return table<string, { pid: integer, cwd: string? }>
-function M.programs(cmds)
+---@param adapt? fun(report: table): { child: table?, foreground: table? }?
+---@return table<string, { pid: integer, cwd: string?, report: table }>
+function M.programs(cmds, adapt)
   local jobs = {}
   for id, cmd in pairs(cmds) do
     jobs[id] = vim.system(cmd, { text = true })
@@ -32,10 +36,11 @@ function M.programs(cmds)
   local ret = {}
   for id, job in pairs(jobs) do
     local result = job:wait(2000)
-    local ok, info = pcall(vim.json.decode, result.stdout or '')
-    if result.code == 0 and ok and type(info) == 'table' and type(info.child) == 'table' then
+    local ok, report = pcall(vim.json.decode, result.stdout or '')
+    local info = ok and type(report) == 'table' and (adapt and adapt(report) or report) or nil
+    if result.code == 0 and type(info) == 'table' and type(info.child) == 'table' and type(info.child.pid) == 'number' then
       local front = type(info.foreground) == 'table' and info.foreground or info.child
-      ret[id] = { pid = info.child.pid, cwd = type(front.cwd) == 'string' and front.cwd or nil }
+      ret[id] = { pid = info.child.pid, cwd = type(front.cwd) == 'string' and front.cwd or nil, report = report }
     end
   end
   return ret

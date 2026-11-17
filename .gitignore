@@ -28,3 +28,8 @@ log/
 /.brv/dream-state.json
 /.brv/review-backups
 .vitest/
+
+# herdr-app check writes these into a mod folder it checks
+dot_config/herdr-app/mods/*/gpui-kit.d.ts
+dot_config/herdr-app/mods/*/herdr.d.ts
+dot_config/herdr-app/mods/*/jsconfig.json

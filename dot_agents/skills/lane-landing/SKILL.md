@@ -3,7 +3,7 @@ name: lane-landing
 description: Land many tickets in parallel lanes of implementer subagents, reviewing each before its PR opens and merging it once its checks pass. Use when the user asks for a parent issue's tickets, or a list of tickets, to be landed or merged, not just implemented.
 ---
 
-Land a set of tickets as the **orchestrator**: plan them into **lanes**, have **implementer** subagents build them, and take each through the `landing` skill's review, checks, and merge yourself. A lane is an ordered chain of tickets, linked by blocked-by edges, that land one after another; lanes land in parallel. Each ticket lands on the default branch on its own, with no integration branch. Run `code-host`, `landing`, and `escalating-to-user`; each holds except where this skill overrides it.
+Land a set of tickets as the **orchestrator**: plan them into **lanes**, have **implementer** subagents build them, and take each through the `landing` skill's review, checks, and merge yourself. A lane is an ordered chain of tickets, linked by blocked-by edges, that land one after another; lanes land in parallel. Each ticket lands on the default branch on its own, with no integration branch. Run `code-host`, `landing`, `closing-the-loop`, and `escalating-to-user`; each holds except where this skill overrides it.
 
 ## Gather the tickets
 
@@ -11,7 +11,7 @@ Take a parent issue (its open children, as the tracker doc defines them, recursi
 
 From a parent, leave out children triaged as `needs-triage`, `needs-info`, `ready-for-human`, or `wontfix`, children with an open PR authored by an account other than yours (**Who am I**), and children blocked by tickets outside the run.
 
-The code host and the tracker are the run's only state, so a rerun resumes: closed tickets have landed, open PRs of yours that close in-scope tickets (**Find PRs**) resume at **Review** or **Pass checks**, as `landing`'s **Start** sends them, once the plan lists them, and the rerun removes worktrees left by landed tickets.
+The code host and the tracker are the run's only state, so a rerun resumes: closed tickets have landed, open PRs of yours that close in-scope tickets (**Find PRs**) resume where `landing`'s **Start** sends them, once the plan lists them, and the rerun removes worktrees left by landed tickets.
 
 ## Plan the lanes
 
@@ -35,7 +35,7 @@ Present the plan as an `escalating-to-user` ledger worded so "yes" approves it, 
 
 A ticket is ready once its blockers have landed. It may start sooner, stacked on its in-lane blocker, once the blocker has passed review and its PR is open, if the host can retarget a PR (**Retarget**); otherwise it waits for the blocker to land, and the ledger says so. Keep one ticket building per lane, up to the lane cap; a ticket stops building once it has passed review.
 
-For each ready ticket, spawn a fresh implementer in its own worktree on a new branch `<ticket>-<slug>`, cut from the default branch, or from its blocker's branch when stacking, where its PR targets that branch. Brief it with pointers to the ticket, its seams, and the lane plan. It runs `landing`'s **Start** and **Build**, ending there even on a branch with an open PR, and reports its branch. It fixes the findings and check failures you send it and reports each fix, holding every push until you tell it that diff passed review and name its head; then it runs **Open the PR**, pushing that head, leaving the review report to you. It never merges. It brings you the decisions it would escalate, and you make the call.
+For each ready ticket, spawn a fresh implementer in its own worktree on a new branch `<ticket>-<slug>`, cut from the default branch, or from its blocker's branch when stacking, where its PR targets that branch. Brief it with pointers to the ticket, its seams, and the lane plan. It runs `landing`'s **Start** and **Build**, ending there even on a branch with an open PR, and reports its branch. It fixes the findings and check failures you send it and reports each fix, holding every push until you tell it that diff passed review and name its head; then it runs **Open the PR**, pushing that head, leaving the review report to you. It never merges. It brings you the decisions it would escalate, and you make the call. With each report it sends the new entries of its friction log, as `closing-the-loop` defines it; you keep one log for the run, with your own entries from review, checks, and merges. The log isn't run state: a rerun starts its own.
 
 Run `landing`'s **Review** yourself on each branch and each fix an implementer reports, posting each passing report once the push lands, and **Pass checks** and **Merge** on each PR, sending blocking findings and check failures to its implementer. Hold new tickets while a check is red on the default branch's head (**Checks**), until it is green.
 
@@ -52,4 +52,4 @@ When a ticket lands, remove its worktree and local branch and end its implemente
 
 ## Finish
 
-When every in-scope ticket has landed, comment a summary on the parent listing any children left open, and close the parent once none are. Present the ledger: landed PRs, held tickets with their escalations, open PRs, and worktree paths, and every decision including dismissed findings.
+When every in-scope ticket has landed, comment a summary on the parent listing any children left open, and close the parent once none are. Present the ledger: landed PRs, held tickets with their escalations, open PRs, and worktree paths, every decision including dismissed findings, and `closing-the-loop`'s report, run once on the whole run's log as `landing`'s **Retro** runs it.

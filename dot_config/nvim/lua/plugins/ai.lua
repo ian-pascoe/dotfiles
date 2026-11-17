@@ -80,6 +80,8 @@ return {
         require('sidekick.cli.session').register('tern', require('config.sidekick_tern'))
       elseif vim.env.REX_BLOCK and not vim.env.TMUX and vim.fn.executable('rex') == 1 then
         require('sidekick.cli.session').register('rex', require('config.sidekick_rex'))
+      elseif vim.env.HC_TERMINAL_ID and not vim.env.TMUX and vim.fn.executable('hc') == 1 then
+        require('sidekick.cli.session').register('herdr_app', require('config.sidekick_herdr_app'))
       end
     end,
   },

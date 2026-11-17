@@ -17,6 +17,25 @@ vim.keymap.set('x', 'K', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv
 -- No autcmd write
 vim.keymap.set('n', '<leader>W', '<cmd>noautocmd write<cr>', { desc = 'No autocmd write' })
 
+-- The Herdr app's file viewer (its open-in-neopane mod) lists the files yazi
+-- chose in ~/.cache/herdr-app/neopane-edit.json, then presses <C-M-F12> in a
+-- neopane pane: hc can't type ':' into a terminal.
+if vim.env.HC_TERMINAL_ID then
+  vim.keymap.set('n', '<C-M-F12>', function()
+    local path = vim.fs.joinpath(vim.uv.os_homedir(), '.cache', 'herdr-app', 'neopane-edit.json')
+    local file = io.open(path)
+    if not file then
+      return
+    end
+    local ok, paths = pcall(vim.json.decode, file:read('*a'))
+    file:close()
+    os.remove(path)
+    for _, p in ipairs(ok and type(paths) == 'table' and paths or {}) do
+      vim.cmd.edit(vim.fn.fnameescape(p))
+    end
+  end, { desc = 'Open files the Herdr app chose' })
+end
+
 -- Herdr annotate
 if vim.env.HERDR_ENV == '1' then
   vim.keymap.set('x', '<leader>aa', function()

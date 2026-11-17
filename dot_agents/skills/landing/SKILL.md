@@ -3,7 +3,7 @@ name: landing
 description: Land a change by building it, passing code-review, opening its PR, and merging it once its checks pass. Use when the user asks for a change to be landed or merged, not just implemented.
 ---
 
-Land the **change** the user approved: a ticket they name, or the plan just settled in the conversation. It is landed when its PR is merged into the default branch and its tickets are closed. Run the `code-host`, `tdd`, `code-review`, and `pr` skills where named, and decide along the way under `escalating-to-user`; each holds except where this skill overrides it. Each round of fixes, for review or checks, is one cycle; after three cycles, hold the change and escalate.
+Land the **change** the user approved: a ticket they name, or the plan just settled in the conversation. It is landed when its PR is merged into the default branch and its tickets are closed. Run the `code-host`, `tdd`, `code-review`, `pr`, and `closing-the-loop` skills where named, and decide along the way under `escalating-to-user`; each holds except where this skill overrides it. Each round of fixes, for review or checks, is one cycle; after three cycles, hold the change and escalate. From the start, keep a friction log as `closing-the-loop` defines it.
 
 ## Start
 
@@ -60,6 +60,10 @@ Then read the PR back (**Read back**):
 - **In a required merge queue**: wait as for checks. Ejected for another PR's failure, re-enqueue once, which counts as the rerun; ejected for its own, handle it as a failed check.
 - **Anything else**, such as auto-merge switched on or a merge still pending: cancel any auto-merge, hold the PR, and escalate.
 
+## Retro
+
+Run `closing-the-loop` on the friction log, once the change has landed or is held. Pass it no current scope, so every fix it keeps for this repo, a held change's included, becomes a follow-up ticket.
+
 ## Present the ledger
 
-Present the ledger after acting rather than before: the change landed, or held with its escalations and any open PR, every decision including dismissed findings, and any dirty files left out.
+Present the ledger after acting rather than before: the change landed, or held with its escalations and any open PR, every decision including dismissed findings, any dirty files left out, and `closing-the-loop`'s report.

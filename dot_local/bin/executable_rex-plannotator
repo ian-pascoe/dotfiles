@@ -19,7 +19,7 @@ if [[ -n ${REX_BIN_DIR:-} && -x $REX_BIN_DIR/rex ]]; then
   rex_bin=$REX_BIN_DIR/rex
 fi
 
-rex() { "$rex_bin" "$@"; }
+rex() { command "$rex_bin" "$@"; }
 
 self=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")
 

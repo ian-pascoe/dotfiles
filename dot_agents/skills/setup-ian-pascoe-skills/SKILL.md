@@ -8,7 +8,7 @@ Configure this repo for the skills from `ian-pascoe/skills`: check their prerequ
 
 ## 1. Check prerequisites
 
-These skills run mattpocock's `grilling`, `research`, `domain-modeling`, `tdd`, `codebase-design`, `code-review`, and `pr` by name. List any missing from your available skills, and show the user the exact command that installs them at the scope this skill is installed at, adding `-g` when it sits in a user-level skills folder rather than this repo's:
+These skills run mattpocock's `grilling`, `research`, `domain-modeling`, `tdd`, `codebase-design`, `code-review`, `pr`, and `writing-for-agents` by name. List any missing from your available skills, and show the user the exact command that installs them at the scope this skill is installed at, adding `-g` when it sits in a user-level skills folder rather than this repo's:
 
 ```bash
 npx skills@latest add mattpocock/skills --skill <missing skills> [-g] -y

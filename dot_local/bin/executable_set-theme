@@ -11,7 +11,8 @@
 # Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp
 # pick the theme up on their next start. Rex imports the variant's Ghostty
 # colors when it is running. T3 Code publishes the variant's t3code.json and
-# switches its connected clients to it.
+# switches its connected clients to it. The Herdr app gets the variant's Ghostty
+# colors as a theme (herdr-app-sync-theme).
 # In WSL the Windows host follows: its Set-Theme.ps1 runs with the variant and
 # leaves WSL alone. When the switch starts on Windows, Set-Theme.ps1 runs this
 # script with THEME_FROM_WINDOWS set, so it does not run back.
@@ -81,6 +82,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     *) echo "Rex theme not synced (turn on Remote Control in Rex's Settings)" >&2 ;;
     esac
   fi
+fi
+
+# The Herdr app gets the variant's Ghostty colors as a theme of its own.
+if command -v herdr-app >/dev/null 2>&1 || [[ -x $HOME/.local/bin/herdr-app ]]; then
+  herdr-app-sync-theme || echo "Herdr app theme not synced" >&2
 fi
 
 # T3 Code publishes the file into its themes folder under one fixed id, so

@@ -1,6 +1,7 @@
 tap "abue-ammar/tinycast", trusted: true
 tap "anomalyco/tap"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
+tap "homebrew/core"
 tap "nikitabobko/tap", trusted: true
 tap "steipete/tap", trusted: true
 # Automatic configure script builder
@@ -131,12 +132,16 @@ cask "font-symbols-only-nerd-font"
 cask "ghostty"
 # Desktop automation application
 cask "hammerspoon"
+# Desktop app for terminals and coding agents
+cask "herdr-app"
 # Local voice dictation
 cask "anomalyco/tap/hex", trusted: true
 # Reverse engineering tool that lets you disassemble, decompile and debug your app
 cask "hopper-disassembler"
 # Keyboard customiser
 cask "karabiner-elements"
+# Open-source keystroke visualiser
+cask "keycastr"
 # App to manage software development and track bugs
 cask "linear"
 # Knowledge base that works on top of a local folder of plain text Markdown files

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Opens a command in a popup over the Herdr app's window, as Rex's floating
+# layers: a terminal outside every tab, closed when the command exits.
+# Returns at once.
+#
+# Usage: herdr-app-popup [--cwd DIR] -- CMD [ARGS...]
+#
+# The app's commands take no command line for a popup, so this leaves the
+# request in ~/.cache/herdr-app/popup-request.json and opens the `popup` mod
+# (~/.config/herdr-app/mods/popup), which reads it.
+set -eu
+
+cwd=$PWD
+while (($#)); do
+  case $1 in
+  --cwd)
+    [[ -n ${2:-} ]] || { echo "herdr-app-popup: --cwd needs a value" >&2; exit 2; }
+    cwd=$2
+    shift 2
+    ;;
+  --) shift; break ;;
+  *) break ;;
+  esac
+done
+(($#)) || { echo "usage: herdr-app-popup [--cwd DIR] -- CMD [ARGS...]" >&2; exit 2; }
+
+herdr_app=$(command -v herdr-app || echo "$HOME/.local/bin/herdr-app")
+dir=$HOME/.cache/herdr-app # the mod can't read the environment
+mkdir -p "$dir"
+jq -nc --arg cwd "$cwd" '{command: $ARGS.positional, cwd: $cwd}' --args "$@" >"$dir/popup-request.json"
+out=$("$herdr_app" "do" mod.open --name popup 2>&1) || {
+  echo "herdr-app-popup: $out" >&2
+  exit 1
+}

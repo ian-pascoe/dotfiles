@@ -1,0 +1,5 @@
+{
+  "place": "none",
+  "title": "Toggle Browser",
+  "overlay": { "kind": "popup", "width": 1, "height": 1, "frame": "none" }
+}
