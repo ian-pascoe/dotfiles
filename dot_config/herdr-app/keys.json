@@ -43,6 +43,8 @@
     "alt-shift-n": "space.next",
     "alt-shift-p": "space.prev",
     "ctrl-space shift-/": "app.palette",
+    "ctrl-space shift-;": "app.palette",
+    "ctrl-space :": "app.palette",
     "ctrl-space d": "window.close",
     "ctrl-space v": "pane.split:right",
     "ctrl-space s": "pane.split:down",

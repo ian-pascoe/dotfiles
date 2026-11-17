@@ -11,6 +11,7 @@
     "shift+insert": "edit.paste",
     "ctrl+space>q": "reload_config",
     "ctrl+space>shift+/": "palette",
+    "ctrl+space>shift+;": "palette",
     "ctrl+space>shift+s": "preferences",
     "ctrl+space>d": "quit",
     "ctrl+space>b": "toggle_sidebar",
