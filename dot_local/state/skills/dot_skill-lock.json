@@ -230,9 +230,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/remotion-dev/skills.git",
       "skillPath": "skills/remotion-best-practices/SKILL.md",
-      "skillFolderHash": "aade8a50cec5f7879c07f73c8f8024c1c376fa99",
+      "skillFolderHash": "69304a1c9e2f7f12e45997319f5ec110d71168cd",
       "installedAt": "2026-07-21T10:41:08.762Z",
-      "updatedAt": "2026-11-16T12:52:37.823Z"
+      "updatedAt": "2026-11-18T10:36:14.208Z",
+      "commit": "6f55706d1069e512430582ad86e4e57dc07afe1b"
     },
     "herdr": {
       "source": "herdrdev/herdr",
