@@ -1,5 +1,6 @@
 {
   "defaultAutoPull": true,
+  "worktreesDirectory": "~/.worktrees",
   "storageCleanup": {
     "worktreeAfterDays": 8,
     "worktreeSettledAfterDays": 8,
@@ -33,32 +34,15 @@
   "providerInstances": {
     "grok": {
       "driver": "grok",
-      "enabled": false,
-      "config": {
-        "binaryPath": "grok",
-        "customModels": []
-      }
+      "enabled": false
     },
     "codex": {
       "driver": "codex",
-      "enabled": false,
-      "config": {
-        "binaryPath": "codex",
-        "homePath": "",
-        "shadowHomePath": "",
-        "launchArgs": "",
-        "customModels": []
-      }
+      "enabled": false
     },
     "opencode": {
       "driver": "opencode",
-      "enabled": false,
-      "config": {
-        "binaryPath": "opencode",
-        "serverUrl": "",
-        "serverPassword": "",
-        "customModels": []
-      }
+      "enabled": false
     },
     "pi": {
       "driver": "pi",
