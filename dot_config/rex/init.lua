@@ -145,10 +145,8 @@ for key, direction in pairs({ h = "left", j = "down", k = "up", l = "right" }) d
   bind_prefixed("shift+" .. key, "pane.move." .. direction)
 end
 bind_prefixed("shift+o", "pane.rename") -- rename_pane
--- copy_mode: Rex's copy mode (pane.copy_mode.enter) is Bleeding Edge only, and
--- unknown actions do nothing on Beta. Until it ships there, prefix+[ opens the
--- scrollback in Neovim (as prefix+e does) for Vim motions, search and yank.
-bind_prefixed("[", "edit_scrollback")
+-- copy_mode (Rex Bleeding Edge): hjkl/w/b moves, v selects, y yanks, / searches.
+bind_prefixed("[", "pane.copy_mode.enter")
 
 -- resize_mode = prefix+r or prefix+ctrl+arrows: hjkl or arrows resize, shift
 -- for bigger steps, = balances, escape or enter leaves.
