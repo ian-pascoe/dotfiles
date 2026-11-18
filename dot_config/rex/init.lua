@@ -85,7 +85,7 @@ bind_prefixed("space", "session.switch") -- workspace_picker
 bind_prefixed("alt+g", "session.switch") -- goto: Rex's closest picker
 bind_prefixed("shift+c", "session.new") -- new_workspace
 bind_prefixed("shift+r", "session.rename") -- rename_workspace
-bind_prefixed("shift+k", "session.close") -- close_workspace
+bind_prefixed("shift+d", "session.close") -- close_workspace
 bind_prefixed("shift+p", "session.previous") -- previous_workspace
 bind_prefixed("shift+n", "session.next") -- next_workspace
 rex.bind("alt+shift+p", "session.previous")
@@ -120,6 +120,8 @@ end
 bind_prefixed("c", "client.tab.new") -- new_tab
 bind_prefixed(",", "client.tab.rename") -- rename_tab
 bind_prefixed("shift+x", "client.tab.close") -- close_tab (prefix+k stays unbound for now)
+bind_prefixed("shift+,", "client.tab.move.backward") -- move_tab_previous (prefix+<)
+bind_prefixed("shift+.", "client.tab.move.forward") -- move_tab_next (prefix+>)
 bind_prefixed("p", "client.tab.previous") -- previous_tab
 bind_prefixed("n", "client.tab.next") -- next_tab
 rex.bind("alt+p", "client.tab.previous")
@@ -138,8 +140,15 @@ bind_prefixed("v", "pane.split", { direction = "right" }) -- split_vertical: sid
 bind_prefixed("s", "pane.split", { direction = "down" }) -- split_horizontal
 bind_prefixed("x", "pane.close") -- close_pane
 bind_prefixed("z", "pane.zoom") -- zoom
+-- swap_pane_*: prefix+shift+h/j/k/l, as Super+shift+h/j/k/l moves a window.
+for key, direction in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
+  bind_prefixed("shift+" .. key, "pane.move." .. direction)
+end
 bind_prefixed("shift+o", "pane.rename") -- rename_pane
-bind_prefixed("[", "pane.copy_mode.enter") -- copy_mode
+-- copy_mode: Rex's copy mode (pane.copy_mode.enter) is Bleeding Edge only, and
+-- unknown actions do nothing on Beta. Until it ships there, prefix+[ opens the
+-- scrollback in Neovim (as prefix+e does) for Vim motions, search and yank.
+bind_prefixed("[", "edit_scrollback")
 
 -- resize_mode = prefix+r or prefix+ctrl+arrows: hjkl or arrows resize, shift
 -- for bigger steps, = balances, escape or enter leaves.

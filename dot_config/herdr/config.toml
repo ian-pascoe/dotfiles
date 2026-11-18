@@ -75,7 +75,7 @@ workspace_picker = "prefix+space"
 goto = "prefix+alt+g"
 new_workspace = "prefix+shift+c"
 rename_workspace = "prefix+shift+r"
-close_workspace = "prefix+shift+k"
+close_workspace = "prefix+shift+d"
 previous_workspace = ["prefix+shift+p", "alt+shift+p"]
 next_workspace = ["prefix+shift+n", "alt+shift+n"]
 switch_workspace = "prefix+shift+1..9"
@@ -83,6 +83,8 @@ new_tab = "prefix+c"
 rename_tab = "prefix+comma"
 # prefix+k (the old close_tab) stays unbound for now.
 close_tab = "prefix+shift+x"
+move_tab_previous = "prefix+shift+comma"
+move_tab_next = "prefix+shift+period"
 switch_tab = "prefix+1..9"
 previous_tab = ["prefix+p", "alt+p"]
 next_tab = ["prefix+n", "alt+n"]
@@ -95,6 +97,11 @@ split_horizontal = "prefix+s"
 close_pane = "prefix+x"
 zoom = "prefix+z"
 last_pane = "prefix+;"
+# Swap with the neighbouring pane, as Super+shift+h/j/k/l moves a window.
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
 # Unset, so the default prefix+h/j/k/l don't come back; ctrl+h/j/k/l move instead.
 focus_pane_left = ""
 focus_pane_down = ""
