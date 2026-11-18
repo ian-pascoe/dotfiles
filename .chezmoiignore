@@ -70,8 +70,6 @@ Library/KeyBindings
 .agents/skills/aerospace
 .config/borders
 .config/karabiner
-# keys.json carries Herdr's macOS default bindings (cmd-*)
-.config/herdr-app
 {{ end }}
 
 # Non-Linux Ignores

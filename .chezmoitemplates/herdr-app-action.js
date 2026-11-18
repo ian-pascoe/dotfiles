@@ -6,6 +6,11 @@
 // does its work and closes itself. Mods can't import across folders, so
 // chezmoi pastes this file into each mod's main.js
 // (.chezmoitemplates/herdr-app-action.js). Edit it there.
+//
+// chezmoi also fills in the OS below. macOS and Linux run the actions'
+// commands through zsh and sh; Windows runs them through PowerShell 7
+// (pwsh), opens Neovim where the others open neopane (macOS and Linux only),
+// and has no Plannotator review (herdr-app-plannotator is a bash script).
 
 import { View, div } from "gpui-kit";
 import {
@@ -26,8 +31,9 @@ import {
   notify,
 } from "herdr";
 
+const WINDOWS = "{{ .chezmoi.os }}" === "windows";
 const HOME = home();
-const TERMINAL_BROWSER = HOME + "/.local/bin/terminal-browser";
+const TERMINAL_BROWSER = WINDOWS ? "terminal-browser" : HOME + "/.local/bin/terminal-browser";
 const PLANNOTATOR = HOME + "/.local/bin/herdr-app-plannotator";
 const CACHE = HOME + "/.cache/herdr-app";
 
@@ -47,6 +53,11 @@ function programOf(address) {
   return (pane ?? terminals().find((t) => t.address === address))?.program ?? null;
 }
 
+// A process name as the matchers below expect it: `nvim`, not `nvim.exe`.
+function processName(name) {
+  return (name ?? "").toLowerCase().replace(/\.exe$/, "");
+}
+
 // The foreground process of a terminal, as `hc get` reports it.
 async function foreground(address) {
   if (!address) return null;
@@ -58,10 +69,34 @@ async function foreground(address) {
   }
 }
 
+// A PowerShell single-quoted string: nothing in it expands.
+function psQuote(s) {
+  return "'" + String(s).replace(/'/g, "''") + "'";
+}
+
+// Runs a PowerShell script with `args` in $argv. pwsh -Command passes no
+// arguments to its script, so they're written into it as literals.
+function pwsh(script, args = []) {
+  return [
+    "pwsh",
+    "-NoLogo",
+    "-NoProfile",
+    "-Command",
+    `$argv = @(${args.map(psQuote).join(", ")}); ${script}`,
+  ];
+}
+
 // Runs `command` through zsh -c: zsh reads only .zshenv (XDG dirs, EDITOR,
-// GIT_OPTIONAL_LOCKS) and skips the login profile, as Rex's popups do with
-// login = false. The app's PATH already has Homebrew and the mise shims.
+// GIT_OPTIONAL_LOCKS, PATH with the mise shims) and skips the login profile,
+// as Rex's popups do with login = false. On Windows, through pwsh, which finds
+// mise's shims and other .cmd programs on PATH as a shell would.
 function shell(command) {
+  if (WINDOWS) {
+    return pwsh(
+      "$rest = @($argv | Select-Object -Skip 1); & $argv[0] @rest; exit $LASTEXITCODE",
+      command,
+    );
+  }
   return ["zsh", "-c", 'exec "$@"', "zsh", ...command];
 }
 
@@ -107,6 +142,8 @@ async function popup(cx, command, cwd) {
 }
 
 function neopane(args) {
+  // neopane runs on macOS and Linux only: Windows gets a plain Neovim.
+  if (WINDOWS) return ["nvim", ...args];
   // mise's link to its newest Neovim first: neopane starts `nvim` from PATH,
   // and the mise shim costs about 80ms a launch.
   return [
@@ -121,8 +158,10 @@ function neopane(args) {
   ];
 }
 
+// The editor neopane() starts, as a terminal's foreground process.
 function isNeopane(name) {
-  name = (name ?? "").toLowerCase();
+  name = processName(name);
+  if (WINDOWS) return name === "nvim";
   return name === "neopane" || name === "npane";
 }
 
@@ -142,7 +181,7 @@ const NAV_KEYS = { left: "ctrl+h", down: "ctrl+j", up: "ctrl+k", right: "ctrl+l"
 
 // Same matcher as vim-tmux-navigator: ^g?(view|l?n?vim?x?)(diff)?$
 function wantsNavKeys(name) {
-  name = (name ?? "").toLowerCase();
+  name = processName(name);
   if (PASSTHROUGH.has(name)) return true;
   name = name.replace(/^g/, "").replace(/diff$/, "");
   return name === "view" || /^l?n?vim?x?$/.test(name);
@@ -176,9 +215,25 @@ function cyclePane(by) {
 }
 
 // edit_scrollback: the focused terminal's screen and history in $EDITOR.
+// $argv: the terminal.
+const SCROLLBACK_PS = `
+[Console]::OutputEncoding = [Text.Encoding]::UTF8
+$f = Join-Path ([IO.Path]::GetTempPath()) "herdr-scrollback-$([guid]::NewGuid()).txt"
+hc read $argv[0] --lines 100000 | Out-File -Encoding utf8 $f
+$editor = if ($env:VISUAL) { $env:VISUAL } elseif ($env:EDITOR) { $env:EDITOR } else { 'nvim' }
+$words = -split $editor
+$rest = @($words | Select-Object -Skip 1)
+& $words[0] @rest '+' $f
+Remove-Item -Force $f
+`;
+
 async function editScrollback(cx) {
   const f = focused();
   if (!f?.terminal) return;
+  if (WINDOWS) {
+    await popup(cx, pwsh(SCROLLBACK_PS, [f.terminal]), f.cwd);
+    return;
+  }
   await popup(
     cx,
     [
@@ -225,10 +280,38 @@ fi
 rm -f "$chosen"
 `;
 
+// The same in PowerShell. $argv: the pane, the cache folder.
+const YAZI_PS = `
+$chosen = Join-Path ([IO.Path]::GetTempPath()) "herdr-yazi-$([guid]::NewGuid()).txt"
+yazi "--chooser-file=$chosen"
+if ((Test-Path $chosen) -and (Get-Item $chosen).Length -gt 0) {
+  $paths = @(Get-Content -Encoding utf8 $chosen | Where-Object { $_ -ne '' })
+  New-Item -ItemType Directory -Force $argv[1] | Out-Null
+  ConvertTo-Json -Compress -InputObject @{ pane = $argv[0]; paths = $paths } |
+    Set-Content -Encoding utf8 (Join-Path $argv[1] 'open-in-neopane.json')
+  $out = herdr-app do mod.open --name open-in-neopane 2>&1
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "\`nCouldn't open in Neovim: $out\`n"
+    Write-Host -NoNewline 'Press any key to close'
+    [void][Console]::ReadKey($true)
+  }
+}
+Remove-Item -Force -ErrorAction SilentlyContinue $chosen
+`;
+
 async function fileViewer(cx) {
   const f = focused();
   const fg = await foreground(f?.terminal);
-  await popup(cx, ["bash", "-c", YAZI, "herdr-yazi", f?.pane ?? ""], fg?.cwd ?? f?.cwd);
+  const command = WINDOWS
+    ? pwsh(YAZI_PS, [f?.pane ?? "", CACHE])
+    : ["bash", "-c", YAZI, "herdr-yazi", f?.pane ?? ""];
+  await popup(cx, command, fg?.cwd ?? f?.cwd);
+}
+
+// Reads a JSON file the commands above wrote (PowerShell may add a BOM).
+async function readJson(path) {
+  const text = await readTextFile(path);
+  return text ? JSON.parse(text.replace(/^\uFEFF/, "")) : null;
 }
 
 // Opens the paths yazi chose in a neopane pane of the origin pane's tab
@@ -237,9 +320,9 @@ async function fileViewer(cx) {
 // keys reach Normal mode, and <C-M-F12> (nvim config/keymaps.lua) edits the
 // files listed in neopane-edit.json.
 async function openInNeopane() {
-  const text = await readTextFile(CACHE + "/open-in-neopane.json");
-  if (!text) return;
-  const { pane: origin, paths } = JSON.parse(text);
+  const request = await readJson(CACHE + "/open-in-neopane.json");
+  if (!request) return;
+  const { pane: origin, paths } = request;
   if (!paths?.length) return;
   const anchor = panes().find((p) => p.pane === origin) ?? focusedPane();
   const tab = panes().filter((p) => p.tab === anchor?.tab && p.terminal);
@@ -251,13 +334,21 @@ async function openInNeopane() {
   }
 
   if (editor) {
-    await exec("sh", [
-      "-c",
-      'mkdir -p "$1" && printf "%s" "$2" >"$1/neopane-edit.json"',
-      "sh",
-      CACHE,
-      JSON.stringify(paths),
-    ]);
+    const [cmd, ...args] = WINDOWS
+      ? pwsh(
+          "New-Item -ItemType Directory -Force $argv[0] | Out-Null; " +
+            "[IO.File]::WriteAllText((Join-Path $argv[0] 'neopane-edit.json'), $argv[1])",
+          [CACHE, JSON.stringify(paths)],
+        )
+      : [
+          "sh",
+          "-c",
+          'mkdir -p "$1" && printf "%s" "$2" >"$1/neopane-edit.json"',
+          "sh",
+          CACHE,
+          JSON.stringify(paths),
+        ];
+    await exec(cmd, args);
     await hc(["keys", editor.terminal, "ctrl+\\", "ctrl+n", "ctrl+alt+f12"]);
     run("pane.focus", { pane: editor.pane });
     return;
@@ -329,6 +420,10 @@ function worktree(action) {
 // annotate.* actions do in Herdr. ~/.local/bin/herdr-app-plannotator runs
 // plannotator-tui's Herdr pane and stands in for herdr behind it.
 async function annotate(cx, flags) {
+  if (WINDOWS)
+    throw new Error(
+      "Plannotator review needs herdr-app-plannotator, a bash script, so it isn't set up on Windows",
+    );
   const f = focused();
   if (!f?.terminal) return;
   const fg = await foreground(f.terminal);
@@ -337,9 +432,9 @@ async function annotate(cx, flags) {
 
 // `herdr-app-popup`: a command a script asked for, in a popup.
 async function popupRequest(cx) {
-  const text = await readTextFile(CACHE + "/popup-request.json");
-  if (!text) return;
-  const { command, cwd } = JSON.parse(text);
+  const request = await readJson(CACHE + "/popup-request.json");
+  if (!request) return;
+  const { command, cwd } = request;
   if (command?.length) await popup(cx, command, cwd || null);
 }
 

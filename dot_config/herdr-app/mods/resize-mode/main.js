@@ -7,12 +7,15 @@
 // layout.resize {id, weight} sizes a pane or split against its siblings. The
 // split tree and its weights come from herdr-core's "herdr-app" document,
 // read once when the mode opens and kept in step with each resize after.
+//
+// The document comes from herdr-core's API (doc.get over `hc connect`), not
+// its state folder, which moves with the OS. Mods can't feed a program's
+// stdin, so a shell redirects it from doc-get.jsonl beside this file.
 
 import { View, div } from "gpui-kit";
 import { h_flex } from "gpui-base";
-import { props, closeOverlay, focused, run, readTextFile, home, theme, notify } from "herdr";
+import { props, closeOverlay, focused, run, exec, appHome, window, theme, notify } from "herdr";
 
-const DOCS = home() + "/.local/state/herdr-core/default/docs.json";
 // Share of the split moved per key, as Rex's 1 and 15 cells roughly are.
 const STEP = 0.03;
 const BIG_STEP = 0.12;
@@ -48,10 +51,30 @@ function* walk(node) {
   for (const child of node.children ?? []) yield* walk(child);
 }
 
+// The app's layout document: every space, its tabs and their split trees.
+async function readLayout() {
+  const cwd = appHome() + "/mods/resize-mode";
+  const command = "hc connect < doc-get.jsonl";
+  const r =
+    window().platform === "windows"
+      ? await exec("cmd", ["/d", "/c", command], { cwd })
+      : await exec("sh", ["-c", command], { cwd });
+  for (const line of r.stdout.split("\n")) {
+    let reply;
+    try {
+      reply = JSON.parse(line);
+    } catch {
+      continue;
+    }
+    if (reply?.id !== 1) continue;
+    if (reply.error) throw new Error(reply.error.message ?? "doc.get failed");
+    return reply.result?.value ?? null;
+  }
+  throw new Error(r.stderr.trim() || "hc connect gave no reply");
+}
+
 async function loadTab(tabId) {
-  const text = await readTextFile(DOCS);
-  if (!text) return null;
-  const doc = JSON.parse(text)["herdr-app"]?.value;
+  const doc = await readLayout();
   for (const space of doc?.spaces ?? []) {
     for (const tab of space.tabs ?? []) {
       if (tab.id === tabId) return tab.root;
