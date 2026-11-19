@@ -5,8 +5,9 @@
   This script resolves a theme family or variant name to a theme variant (the same rules as the theme-resolve
   script, through the Themes module), then links that variant from the user's .themes directory to the current theme
   configuration directory. It also updates themes for various applications including bat, btop, GlazeWM, k9s, lsd,
-  Windows Terminal, yazi and YASB, and sets the Windows app and system appearance: light for a variant with a
-  light.mode file. WezTerm watches the link itself.
+  T3 Code, Windows Terminal, yazi and YASB, and sets the Windows app and system appearance: light for a variant with
+  a light.mode file. WezTerm watches the link itself. T3 Code publishes the variant's t3code.json and switches its
+  connected clients to it.
   A family name uses the saved mode (~/.local/state/theme/mode, or under XDG_STATE_HOME) unless a mode is given.
   The mode is saved when one is given or a variant name is used; a family with no variant in the wanted mode falls
   back to its only variant and keeps the saved mode.
@@ -126,6 +127,18 @@ Set-ThemeLink -Target $K9sTheme -Link $K9sLink
 $LsdColors = Join-Path $CURRENT_THEME_DIR "lsd.yaml"
 $LsdLink = Join-Path (Get-ThemeConfigHome) "lsd\colors.yaml"
 Set-ThemeLink -Target $LsdColors -Link $LsdLink
+
+# T3 Code publishes the file into its themes folder under one fixed id, so
+# switching replaces the previous variant's theme instead of piling them up.
+$T3Command = Get-Command t3 -CommandType Application, ExternalScript -ErrorAction SilentlyContinue | Select-Object -First 1
+$T3Bin = if ($T3Command) { $T3Command.Source } else { Join-Path $HOME ".t3\bin\t3.cmd" }
+$T3Theme = Join-Path $THEME_PATH "t3code.json"
+if ((Test-Path $T3Bin -PathType Leaf) -and (Test-Path $T3Theme -PathType Leaf)) {
+  & $T3Bin theme set --id dotfiles $T3Theme | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Write-Warning "T3 Code theme not set"
+  }
+}
 
 # windows terminal
 $wtSettingsFile = Join-Path $env:SCOOP "persist\windows-terminal\settings\settings.json"
