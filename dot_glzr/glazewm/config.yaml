@@ -61,7 +61,7 @@ keybindings:
   - bindings:
       - alt+enter
     commands:
-      - shell-exec %SCOOP%\apps\windows-terminal\current\wt.exe
+      - shell-exec %SCOOP%\apps\wezterm\current\wezterm-gui.exe
   - bindings:
       - alt+shift+enter
       - alt+shift+b

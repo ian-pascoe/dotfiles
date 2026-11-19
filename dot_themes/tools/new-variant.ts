@@ -18,7 +18,7 @@ import { parseArgs } from "node:util";
 
 export type Mode = "light" | "dark";
 
-/** What Ghostty and Windows Terminal show: the terminal's own colors. */
+/** What Ghostty shows: the terminal's own colors. */
 export interface TerminalColors {
   background: string;
   foreground: string;
@@ -954,99 +954,6 @@ export function t3codeJson(input: T3CodeInput): string {
   });
 }
 
-// ---------------------------------------------------------------- Windows Terminal
-
-const ansiNames = ["black", "red", "green", "yellow", "blue", "purple", "cyan", "white"] as const;
-
-/** Windows Terminal color scheme, keys in the alphabetical order settings.json keeps. */
-function windowsScheme(variant: string, roles: Roles): Record<string, string> {
-  const t = roles.terminal;
-  const scheme: Record<string, string> = {
-    background: t.background,
-    foreground: t.foreground,
-    cursorColor: t.cursor,
-    selectionBackground: t.selectionBackground,
-    name: variant,
-  };
-  ansiNames.forEach((color, index) => {
-    scheme[color] = t.palette[index]!;
-    scheme[`bright${color[0]!.toUpperCase()}${color.slice(1)}`] = t.palette[index + 8]!;
-  });
-  return Object.fromEntries(
-    Object.entries(scheme)
-      .sort(([a], [b]) => (a < b ? -1 : 1))
-      .map(([key, value]) => [key, key === "name" ? value : value.toUpperCase()]),
-  );
-}
-
-function windowsTheme(variant: string, roles: Roles, c: Colors) {
-  const light = roles.mode === "light";
-  return {
-    name: variant,
-    tab: {
-      background: `${c.background.toUpperCase()}FF`,
-      iconStyle: "default",
-      showCloseButton: "always",
-      unfocusedBackground: null,
-    },
-    tabRow: {
-      background: `${(light ? c.panel : c.popup).toUpperCase()}FF`,
-      unfocusedBackground: `${(light ? c.bgSelect : c.bgPending).toUpperCase()}FF`,
-    },
-    window: {
-      applicationTheme: roles.mode,
-      "experimental.rainbowFrame": false,
-      frame: null,
-      unfocusedFrame: null,
-      useMica: false,
-    },
-  };
-}
-
-export type Upsert = "inserted" | "replaced" | "unchanged";
-
-function upsertByName(list: { name?: string }[], entry: { name: string }): Upsert {
-  const index = list.findIndex((item) => item.name === entry.name);
-  if (index === -1) {
-    list.push(entry);
-    return "inserted";
-  }
-  if (JSON.stringify(list[index]) === JSON.stringify(entry)) return "unchanged";
-  list[index] = entry;
-  return "replaced";
-}
-
-/**
- * Inserts or replaces (by name) the variant's scheme and theme in Windows Terminal's
- * settings.json. The file is rewritten as 2-space JSON, which is how it is kept, so only
- * the variant's entries change; a file in any other shape is refused rather than reflowed.
- */
-export function upsertWindowsTerminal(
-  file: string,
-  variant: string,
-  roles: Roles,
-  c: Colors = resolveColors(roles),
-): { scheme: Upsert; theme: Upsert } {
-  const text = readFileSync(file, "utf8");
-  const settings = JSON.parse(text) as {
-    schemes?: { name: string }[];
-    themes?: { name: string }[];
-  };
-  if (json(settings) !== text) {
-    throw new Error(`${file} is not 2-space JSON as JSON.stringify writes it; format it first`);
-  }
-  settings.schemes ??= [];
-  settings.themes ??= [];
-  const result = {
-    scheme: upsertByName(settings.schemes, windowsScheme(variant, roles) as { name: string }),
-    theme: upsertByName(settings.themes, windowsTheme(variant, roles, c)),
-  };
-  if (result.scheme !== "unchanged" || result.theme !== "unchanged") {
-    writeFileSync(file, json(settings));
-  }
-  return result;
-}
-
 // ---------------------------------------------------------------- generate
 
 function resolveColors(roles: Roles): Colors {
@@ -1096,7 +1003,6 @@ export function renderVariant(variant: string, roles: Roles): Map<string, string
   return files;
 }
 
-export const windowsTerminalFile = "dot_config/windows-terminal/settings.json";
 const rolesPath = (root: string, variant: string) =>
   join(root, "dot_themes/tools/roles", `${variant}.json`);
 
@@ -1117,8 +1023,6 @@ export interface FileResult {
 
 export interface GenerateResult {
   files: FileResult[];
-  /** Absent when the root has no Windows Terminal settings.json. */
-  windowsTerminal?: { scheme: Upsert; theme: Upsert };
   warnings: string[];
 }
 
@@ -1149,13 +1053,7 @@ export function generate(
     files.push({ path, status });
   }
 
-  const settings = join(root, windowsTerminalFile);
-  if (!existsSync(settings))
-    warnings.push(`${windowsTerminalFile} not found; Windows Terminal skipped`);
-  const windowsTerminal = existsSync(settings)
-    ? upsertWindowsTerminal(settings, variant, roles)
-    : undefined;
-  return { files, ...(windowsTerminal ? { windowsTerminal } : {}), warnings };
+  return { files, warnings };
 }
 
 // ---------------------------------------------------------------- seed
@@ -1460,11 +1358,6 @@ export function main(argv: string[], io: Io = { out: console.log, err: console.e
       const result = generate(name, { root, force: values.force });
       for (const { path, status } of result.files) {
         io.out(`${status.padEnd(9)} ${path}`);
-      }
-      if (result.windowsTerminal) {
-        io.out(
-          `windows-terminal: scheme ${result.windowsTerminal.scheme}, theme ${result.windowsTerminal.theme}`,
-        );
       }
       for (const warning of result.warnings) io.out(`warning: ${warning}`);
       if (result.files.some((file) => file.status === "skipped")) {

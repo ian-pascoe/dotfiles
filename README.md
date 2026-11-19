@@ -47,7 +47,7 @@ chezmoi apply       # apply the source state to $HOME
 | ----------------- | ----------------------------------------------------------------------------------------------------- |
 | Shells            | Zsh, Bash, PowerShell, [Starship](https://starship.rs/) prompt                                        |
 | Editor            | [Neovim](https://neovim.io/) ([LazyVim](https://www.lazyvim.org/))                                    |
-| Terminals         | Ghostty, WezTerm, Windows Terminal, Tern, Rex, Herdr                                                  |
+| Terminals         | Ghostty, WezTerm, Tern, Rex, Herdr                                                                    |
 | Window management | AeroSpace, JankyBorders, Karabiner-Elements, Hammerspoon (macOS); GlazeWM, YASB, AutoHotkey (Windows) |
 | CLI tools         | bat, btop, fastfetch, k9s, lsd, yazi, spotify-player                                                  |
 | Coding agents     | [Pi](https://github.com/badlogic/pi-mono) config, extensions and skills; Plannotator                  |

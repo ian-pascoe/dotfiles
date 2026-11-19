@@ -92,12 +92,6 @@ const externalWallpapers = new Set(
   [...externals.matchAll(/^\["\.themes\/([^/"]+)\/backgrounds\//gm)].map((match) => match[1]!),
 );
 
-// Set-Theme.ps1 sets Windows Terminal's colorScheme and theme to the variant's name.
-const windowsTerminal = JSON.parse(read(source, "dot_config/windows-terminal/settings.json")) as {
-  schemes: { name: string }[];
-  themes: { name: string }[];
-};
-
 // Oh My Pi loads tern.json as its `current` theme (dot_omp/private_agent/themes)
 // and rejects a theme missing any of these; thinkingMax and
 // assistantMessageText are optional.
@@ -145,11 +139,6 @@ describe.each(variants)("%s", (variant) => {
 
   test("maps to a hunk diff theme", () => {
     expect(hunkThemes).toContain(hunkMapping.get(variant) ?? variant);
-  });
-
-  test("has a Windows Terminal scheme and theme", () => {
-    expect(windowsTerminal.schemes.map((scheme) => scheme.name)).toContain(variant);
-    expect(windowsTerminal.themes.map((theme) => theme.name)).toContain(variant);
   });
 
   // yazi only finds flavors in ~/.config/yazi/flavors, so each flavor the

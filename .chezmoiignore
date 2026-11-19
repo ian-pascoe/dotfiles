@@ -87,7 +87,6 @@ Documents/PowerShell
 .wslconfig
 .config/autohotkey
 .config/scoop
-.config/windows-terminal
 .config/vcxsrv
 .config/yasb
 .local/bin/*.ps1

@@ -141,18 +141,18 @@
       "Version": "21.1.16.1"
     },
     {
+      "Updated": "2026-11-19T00:00:00.0000000-05:00",
+      "Source": "extras",
+      "Info": "",
+      "Name": "wezterm",
+      "Version": "20240203-110809-5046fc22"
+    },
+    {
       "Updated": "2025-11-11T12:56:21.1968602-05:00",
       "Source": "main",
       "Info": "",
       "Name": "win32yank",
       "Version": "0.1.1"
-    },
-    {
-      "Updated": "2025-10-14T09:51:52.2682885-04:00",
-      "Source": "extras",
-      "Info": "",
-      "Name": "windows-terminal",
-      "Version": "1.23.12811.0"
     },
     {
       "Updated": "2025-11-11T11:19:36.103289-05:00",

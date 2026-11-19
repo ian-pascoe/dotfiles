@@ -22,10 +22,9 @@ modes.
    until they read on the background.
 3. When an upstream port exists (bat `.tmTheme`, yazi flavor), drop it in and
    pin it to a commit with a source comment, as `dawnfox/bat.tmTheme` does.
-4. `pnpm new-variant generate <variant>` writes every missing per-app file,
-   the yazi flavor link and the Windows Terminal scheme and theme. It skips
-   files that exist, so upstream files from step 3 survive; `--force`
-   regenerates.
+4. `pnpm new-variant generate <variant>` writes every missing per-app file
+   and the yazi flavor link. It skips files that exist, so upstream files
+   from step 3 survive; `--force` regenerates.
 
 ## 2. Shared files the generator leaves to you
 

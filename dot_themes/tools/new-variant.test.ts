@@ -13,8 +13,6 @@ import {
   parseGhosttyTheme,
   parseRoles,
   seed,
-  upsertWindowsTerminal,
-  windowsTerminalFile,
   type Mode,
   type Roles,
   type TerminalColors,
@@ -119,20 +117,9 @@ const write = (path: string, content: string) => {
 const read = (path: string) => readFileSync(join(root, path), "utf8");
 const writeRoles = (variant: string, roles: unknown) =>
   write(`dot_themes/tools/roles/${variant}.json`, `${JSON.stringify(roles, null, 2)}\n`);
-const emptySettings = () =>
-  write(
-    windowsTerminalFile,
-    `${JSON.stringify({ schemes: [], themes: [], theme: "x" }, null, 2)}\n`,
-  );
-const settings = () =>
-  JSON.parse(read(windowsTerminalFile)) as {
-    schemes: { name: string; background: string }[];
-    themes: { name: string; window: { applicationTheme: string } }[];
-  };
 
 beforeEach(() => {
   root = mkdtempSync(join(tmpdir(), "new-variant-"));
-  emptySettings();
 });
 afterEach(() => rmSync(root, { recursive: true, force: true }));
 
@@ -204,12 +191,6 @@ describe.each([["dark"], ["light"]] as const)("generate (%s)", (mode) => {
     expect(bat).toContain(`<string>theme.${mode}.${variant}</string>`);
     expect(bat).toMatch(/<string>[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}<\/string>/);
   });
-
-  test("inserts a Windows Terminal scheme and theme", () => {
-    expect(settings().schemes.map((scheme) => scheme.name)).toEqual([variant]);
-    expect(settings().themes.map((theme) => theme.name)).toEqual([variant]);
-    expect(settings().themes[0]!.window.applicationTheme).toBe(mode);
-  });
 });
 
 describe("variants without a family", () => {
@@ -241,82 +222,6 @@ describe("existing files", () => {
     generate("kept", { root });
     const second = generate("kept", { root });
     expect(second.files.every((file) => file.status === "unchanged")).toBe(true);
-    expect(second.windowsTerminal).toEqual({ scheme: "unchanged", theme: "unchanged" });
-  });
-});
-
-describe("Windows Terminal settings", () => {
-  test("replaces the variant's entries by name, leaving others alone, idempotently", () => {
-    writeRoles("one", fixture("dark"));
-    writeRoles("two", fixture("light"));
-    expect(generate("one", { root }).windowsTerminal).toEqual({
-      scheme: "inserted",
-      theme: "inserted",
-    });
-    generate("two", { root });
-    const before = read(windowsTerminalFile);
-    expect(settings().schemes.map((scheme) => scheme.name)).toEqual(["one", "two"]);
-
-    // Same roles: byte-identical file.
-    generate("one", { root });
-    expect(read(windowsTerminalFile)).toBe(before);
-
-    // Changed roles: "one" replaced in place, "two" untouched.
-    const roles = fixture("dark");
-    roles.terminal.background = "#101010";
-    roles.colors.background = "#101010";
-    writeRoles("one", roles);
-    expect(generate("one", { root }).windowsTerminal).toEqual({
-      scheme: "replaced",
-      theme: "replaced",
-    });
-    expect(settings().schemes.map((scheme) => scheme.name)).toEqual(["one", "two"]);
-    expect(settings().schemes[0]!.background).toBe("#101010");
-    expect(settings().themes.map((theme) => theme.name)).toEqual(["one", "two"]);
-    expect(read(windowsTerminalFile)).toBe(`${JSON.stringify(settings(), null, 2)}\n`);
-  });
-
-  test("the generated scheme has the keys of the existing entries", () => {
-    writeRoles("keys", fixture("dark"));
-    generate("keys", { root });
-    expect(Object.keys(settings().schemes[0]!)).toEqual([
-      "background",
-      "black",
-      "blue",
-      "brightBlack",
-      "brightBlue",
-      "brightCyan",
-      "brightGreen",
-      "brightPurple",
-      "brightRed",
-      "brightWhite",
-      "brightYellow",
-      "cursorColor",
-      "cyan",
-      "foreground",
-      "green",
-      "name",
-      "purple",
-      "red",
-      "selectionBackground",
-      "white",
-      "yellow",
-    ]);
-  });
-
-  test("a root without settings.json skips it with a warning", () => {
-    rmSync(join(root, windowsTerminalFile));
-    writeRoles("nowt", fixture("dark"));
-    const result = generate("nowt", { root });
-    expect(result.windowsTerminal).toBeUndefined();
-    expect(result.warnings.join("\n")).toContain("Windows Terminal skipped");
-  });
-
-  test("refuses a file that is not canonical 2-space JSON", () => {
-    write(windowsTerminalFile, '{"schemes":[],"themes":[]}');
-    expect(() =>
-      upsertWindowsTerminal(join(root, windowsTerminalFile), "x", fixture("dark")),
-    ).toThrow(/2-space JSON/);
   });
 });
 
@@ -460,7 +365,6 @@ describe("main", () => {
     expect(result.out).toContain("dot_config/nvim/lua/plugins/colorscheme.lua");
     expect(result.out).toContain("dot_config/shell/interactive.sh");
     expect(result.out).toContain(".chezmoiexternal.toml.tmpl");
-    expect(result.out).toContain("windows-terminal: scheme inserted, theme inserted");
   });
 
   test("reports skipped files", () => {

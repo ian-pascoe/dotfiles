@@ -5,8 +5,8 @@
   This script resolves a theme family or variant name to a theme variant (the same rules as the theme-resolve
   script, through the Themes module), then links that variant from the user's .themes directory to the current theme
   configuration directory. It also updates themes for various applications including bat, btop, GlazeWM, k9s, lsd,
-  T3 Code, Windows Terminal, yazi and YASB, and sets the Windows app and system appearance: light for a variant with
-  a light.mode file. WezTerm watches the link itself. T3 Code publishes the variant's t3code.json and switches its
+  T3 Code, yazi and YASB, and sets the Windows app and system appearance: light for a variant with a light.mode
+  file. WezTerm watches the link itself. T3 Code publishes the variant's t3code.json and switches its
   connected clients to it.
   A family name uses the saved mode (~/.local/state/theme/mode, or under XDG_STATE_HOME) unless a mode is given.
   The mode is saved when one is given or a variant name is used; a family with no variant in the wanted mode falls
@@ -139,17 +139,6 @@ if ((Test-Path $T3Bin -PathType Leaf) -and (Test-Path $T3Theme -PathType Leaf)) 
     Write-Warning "T3 Code theme not set"
   }
 }
-
-# windows terminal
-$wtSettingsFile = Join-Path $env:SCOOP "persist\windows-terminal\settings\settings.json"
-$wtSettingsContent = Get-Content $wtSettingsFile -Raw | ConvertFrom-Json
-# change profiles.default.colorScheme to the new theme name
-$wtSettingsContent.profiles.defaults.colorScheme = $THEME_NAME
-# change theme to the new theme name
-$wtSettingsContent.theme = $THEME_NAME
-# Write back the updated settings
-$wtUpdatedSettingsContent = $wtSettingsContent | ConvertTo-Json -Depth 99
-$wtUpdatedSettingsContent -replace "`r`n", "`n" | Set-Content $wtSettingsFile -NoNewline
 
 # yazi
 $YaziTheme = Join-Path $CURRENT_THEME_DIR "yazi\theme.toml"

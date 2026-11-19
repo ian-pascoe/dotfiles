@@ -76,10 +76,10 @@ widgets:
           launch: "$env:SCOOP\\apps\\zen-browser\\current\\zen.exe"
           icon: ""
         - name: "Terminal"
-          launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe"
+          launch: "$env:SCOOP\\apps\\wezterm\\current\\wezterm-gui.exe"
           icon: ""
         - name: "Debian Terminal"
-          launch: "$env:SCOOP\\apps\\windows-terminal\\current\\wt.exe new-tab --profile Debian"
+          launch: "$env:SCOOP\\apps\\wezterm\\current\\wezterm-gui.exe start --domain WSL:Debian"
           icon: ""
       label_shadow:
         enabled: true
