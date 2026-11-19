@@ -13,6 +13,8 @@ import {
   parseGhosttyTheme,
   parseRoles,
   seed,
+  zedInput,
+  zedJson,
   type Mode,
   type Roles,
   type TerminalColors,
@@ -40,6 +42,7 @@ const requiredFiles = [
   "tern.json",
   "yasb.css",
   "yazi/theme.toml",
+  "zed.json",
 ];
 
 const terminals: Record<Mode, TerminalColors> = {
@@ -184,6 +187,15 @@ describe.each([["dark"], ["light"]] as const)("generate (%s)", (mode) => {
       Number(m[1]),
     );
     expect(palette).toEqual(Array.from({ length: 16 }, (_, i) => i));
+  });
+
+  // The backfill of the variants that predate zed.json reads pi.json and
+  // ghostty.conf; a generated variant has to come out the same from them.
+  test("zed.json is what its pi.json and ghostty.conf give", () => {
+    const zed = JSON.parse(read(`${dir}/zed.json`)) as { name: string };
+    const pi = JSON.parse(read(`${dir}/pi.json`));
+    const terminal = parseGhosttyTheme(read(`${dir}/ghostty.conf`));
+    expect(read(`${dir}/zed.json`)).toBe(zedJson(zedInput(pi, terminal, zed.name, mode)));
   });
 
   test("bat.tmTheme names the variant", () => {

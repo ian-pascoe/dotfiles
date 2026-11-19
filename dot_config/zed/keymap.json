@@ -1,0 +1,239 @@
+// Zed's vim mode with LazyVim's keys, as dot_config/nvim sets them up, and the
+// shared scheme in ~/.config/keybindings/cheatsheet.html: Ctrl hjkl moves
+// between panes, Ctrl 1-9 picks a tab, Ctrl = - 0 zooms. The window manager
+// owns Super (cmd on macOS, Alt on Windows), so nothing here binds cmd, and on
+// Windows nothing binds the Alt keys GlazeWM takes. Managed whole by chezmoi.
+[
+  // ---- everywhere ------------------------------------------------------------
+  {
+    "context": "Workspace",
+    "bindings": {
+      // AeroSpace owns cmd+= / cmd+- / cmd+1-9 on macOS.
+      "ctrl-=": "zed::IncreaseBufferFontSize",
+      "ctrl--": "zed::DecreaseBufferFontSize",
+      "ctrl-0": "zed::ResetBufferFontSize",
+      "ctrl-1": ["pane::ActivateItem", 0],
+      "ctrl-2": ["pane::ActivateItem", 1],
+      "ctrl-3": ["pane::ActivateItem", 2],
+      "ctrl-4": ["pane::ActivateItem", 3],
+      "ctrl-5": ["pane::ActivateItem", 4],
+      "ctrl-6": ["pane::ActivateItem", 5],
+      "ctrl-7": ["pane::ActivateItem", 6],
+      "ctrl-8": ["pane::ActivateItem", 7],
+      "ctrl-9": "pane::ActivateLastItem"
+    }
+  },
+  {
+    // LazyVim's terminal toggle; ctrl-` (T3 Code's) stays Zed's default. Bound
+    // in the editor and the terminal themselves, which outrank Workspace: Zed's
+    // own ctrl-/ comments lines on Linux and Windows (gcc does that here).
+    "context": "Editor && VimControl && !menu || Terminal",
+    "bindings": {
+      "ctrl-/": "terminal_panel::Toggle"
+    }
+  },
+
+  // ---- panes: Ctrl hjkl, like Neovim inside Rex, Herdr and Tern ---------------
+  {
+    "context": "Editor && VimControl && !menu || Terminal || Dock || EmptyPane || SharedScreen",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+
+  // ---- normal and visual mode -------------------------------------------------
+  {
+    "context": "Editor && VimControl && !menu",
+    "bindings": {
+      // flash.nvim's jump; Zed has no labels, so sneak to two characters
+      "s": "vim::PushSneak",
+      "shift-s": "vim::PushSneakBackward",
+
+      // buffers are tabs
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
+
+      // LSP (K, gd, gD, gy, gI, [d, ]d are vim mode's defaults)
+      "g r": "editor::FindAllReferences",
+      "[ h": "editor::GoToPreviousHunk",
+      "] h": "editor::GoToHunk",
+
+      // oil's `-`: the project panel at this file
+      "-": "pane::RevealInProjectPanel",
+
+      // <leader>. Unbind vim's bare `space` (move right): while a prefix is
+      // also a complete binding, Zed fires it after 1s and the which-key
+      // popup vanishes with it. Unbound, the leader waits for the next key.
+      "space": null,
+      "space space": "file_finder::Toggle",
+      "space /": "pane::DeploySearch",
+      "space ,": "tab_switcher::Toggle",
+      "space :": "command_palette::Toggle",
+      "space e": "project_panel::ToggleFocus",
+      "space E": "pane::RevealInProjectPanel",
+      "space -": "pane::SplitDown",
+      "space |": "pane::SplitRight",
+      "space l": "zed::Extensions",
+
+      "space f f": "file_finder::Toggle",
+      "space f b": "tab_switcher::Toggle",
+      "space f n": "workspace::NewFile",
+      "space f p": "projects::OpenRecent",
+      "space f t": "terminal_panel::Toggle",
+      "space f T": "workspace::NewCenterTerminal",
+
+      "space s g": "pane::DeploySearch",
+      "space s w": "pane::DeploySearch", // seeded with the word under the cursor
+      "space s s": "outline::Toggle",
+      "space s S": "project_symbols::Toggle",
+      "space s d": "diagnostics::Deploy",
+      "space s k": "zed::OpenKeymap",
+      "space s C": "command_palette::Toggle",
+
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space c f": "editor::Format",
+      "space c d": "editor::Hover",
+      "space c s": "outline_panel::ToggleFocus",
+
+      "space x x": "diagnostics::Deploy",
+
+      "space b d": "pane::CloseActiveItem",
+      "space b o": "pane::CloseOtherItems",
+      "space b b": "pane::AlternateFile",
+      "space `": "pane::AlternateFile",
+
+      "space w d": "pane::CloseActiveItem",
+      "space w m": "workspace::ToggleZoom",
+      "space u Z": "workspace::ToggleZoom",
+
+      "space g g": "git_panel::ToggleFocus",
+      "space g n": ["task::Spawn", { "task_name": "Neogit", "reveal_target": "center" }],
+      "space g b": "git::Blame",
+      "space g d": "git::Diff",
+      "space g h s": "git::ToggleStaged",
+      "space g h r": "git::Restore",
+      "space g h p": "editor::ToggleSelectedDiffHunks",
+
+      "space y": ["task::Spawn", { "task_name": "yazi", "reveal_target": "center" }],
+      "space Y": ["task::Spawn", { "task_name": "yazi (cwd)", "reveal_target": "center" }],
+
+      "space u w": "editor::ToggleSoftWrap",
+      "space u h": "editor::ToggleInlayHints",
+      "space u l": "editor::ToggleLineNumbers",
+      "space u L": "editor::ToggleRelativeLineNumbers",
+
+      "space d b": "editor::ToggleBreakpoint",
+      "space d c": "debugger::Continue",
+      "space d i": "debugger::StepInto",
+      "space d o": "debugger::StepOut",
+      "space d O": "debugger::StepOver",
+      "space d p": "debugger::Pause",
+      "space d t": "debugger::Stop",
+      "space d r": "debugger::Rerun",
+
+      "space q q": "zed::Quit",
+
+      "ctrl-s": "workspace::Save" // LazyVim saves on Ctrl S in every mode
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "shift-y": ["workspace::SendKeystrokes", "y $"] // Neovim's Y
+    }
+  },
+
+  // ---- moving lines -------------------------------------------------------------
+  // LazyVim's Alt J/K, except on Windows, where GlazeWM takes them: there visual
+  // J/K move the selection, as dot_config/nvim/lua/config/keymaps.lua does.
+  {
+    "context": "Editor && !menu && os != windows",
+    "bindings": {
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !menu && os == windows",
+    "bindings": {
+      "shift-j": "editor::MoveLineDown",
+      "shift-k": "editor::MoveLineUp"
+    }
+  },
+
+  // ---- insert mode --------------------------------------------------------------
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-s": "workspace::Save",
+      "ctrl-k": "editor::ShowSignatureHelp", // LazyVim's; digraphs move to ctrl-x ctrl-k
+      "ctrl-x ctrl-k": ["vim::PushDigraph", {}]
+    }
+  },
+
+  // ---- completion menu: blink.cmp's default preset ---------------------------
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {
+      "ctrl-y": "editor::ConfirmCompletion",
+      "ctrl-e": "editor::Cancel",
+      "ctrl-n": "editor::ContextMenuNext",
+      "ctrl-p": "editor::ContextMenuPrevious"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && !showing_completions",
+    "bindings": {
+      "ctrl-space": "editor::ShowCompletions"
+    }
+  },
+
+  // ---- pickers: Ctrl J/K move through lists, as in Snacks and Pi -------------
+  {
+    "context": "Picker > Editor",
+    "bindings": {
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious"
+    }
+  },
+
+  // ---- when no file is open -------------------------------------------------------
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space": null,
+      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space f p": "projects::OpenRecent",
+      "space /": "pane::DeploySearch",
+      "space e": "project_panel::ToggleFocus",
+      "space g g": "git_panel::ToggleFocus",
+      "space q q": "zed::Quit"
+    }
+  },
+
+  // ---- panels ---------------------------------------------------------------------
+  {
+    // oil and neo-tree close on q; <leader>e toggles back to the editor.
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "q": "workspace::ToggleLeftDock",
+      "space": null, // was project_panel::Open; keeps the leader pending (see above)
+      "space e": "workspace::ToggleLeftDock",
+      "a": "project_panel::NewFile",
+      "r": "project_panel::Rename"
+    }
+  },
+  {
+    "context": "GitPanel && !GitBranchSelector && !GitRepositorySelector",
+    "bindings": {
+      "q": "git_panel::Close"
+    }
+  }
+]

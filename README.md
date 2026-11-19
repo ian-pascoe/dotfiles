@@ -43,15 +43,15 @@ chezmoi apply       # apply the source state to $HOME
 
 ## What's inside
 
-| Area              | Tools                                                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------------- |
-| Shells            | Zsh, Bash, PowerShell, [Starship](https://starship.rs/) prompt                                        |
-| Editor            | [Neovim](https://neovim.io/) ([LazyVim](https://www.lazyvim.org/))                                    |
-| Terminals         | Ghostty, WezTerm, Tern, Rex, Herdr                                                                    |
-| Window management | AeroSpace, JankyBorders, Karabiner-Elements, Hammerspoon (macOS); GlazeWM, YASB, AutoHotkey (Windows) |
-| CLI tools         | bat, btop, fastfetch, k9s, lsd, yazi, spotify-player                                                  |
-| Coding agents     | [Pi](https://github.com/badlogic/pi-mono) config, extensions and skills; Plannotator                  |
-| Themes            | 100+ coordinated themes with wallpapers, in light and dark variants                                   |
+| Area              | Tools                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------ |
+| Shells            | Zsh, Bash, PowerShell, [Starship](https://starship.rs/) prompt                                         |
+| Editor            | [Neovim](https://neovim.io/) ([LazyVim](https://www.lazyvim.org/)), [Zed](https://zed.dev/) (vim mode) |
+| Terminals         | Ghostty, WezTerm, Tern, Rex, Herdr                                                                     |
+| Window management | AeroSpace, JankyBorders, Karabiner-Elements, Hammerspoon (macOS); GlazeWM, YASB, AutoHotkey (Windows)  |
+| CLI tools         | bat, btop, fastfetch, k9s, lsd, yazi, spotify-player                                                   |
+| Coding agents     | [Pi](https://github.com/badlogic/pi-mono) config, extensions and skills; Plannotator                   |
+| Themes            | 100+ coordinated themes with wallpapers, in light and dark variants                                    |
 
 ## Layout
 

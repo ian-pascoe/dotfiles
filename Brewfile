@@ -168,5 +168,7 @@ cask "tldraw"
 cask "wezterm"
 # Open-source version of the X.Org X Window System
 cask "xquartz"
+# Multiplayer code editor
+cask "zed"
 # Gecko based web browser
 cask "zen"

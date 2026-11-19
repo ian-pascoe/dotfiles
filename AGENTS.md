@@ -22,6 +22,10 @@
 - T3 Code settings: edit the managed keys in `t3/settings.managed.json` (server)
   and `t3/client-settings.managed.json` (desktop); keys left out are T3 Code's
   own state. `keybindings.json` is managed whole.
+- Zed: edit `dot_config/zed/` (managed whole); Windows's
+  `AppData/Roaming/Zed/` holds only stubs that include it
+  (`dot_config/zed/zed.test.ts` checks). Check keymap actions against
+  `zed --dump-all-actions`.
 - Theme variants: adding one or changing what a variant touches →
   `dot_themes/docs/adding-a-variant.md`.
 - Installed skill changes are complete only when `dot_agents/skills/` and the

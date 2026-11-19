@@ -2,7 +2,7 @@
 #!/bin/sh
 # Ctrl app shortcuts on macOS. cmd is Super, the window tier: AeroSpace owns
 # cmd+h/j/k/l/e/r/t/f/q/m/;/1-9/tab/enter/minus/equal, so the app shortcuts it
-# displaced move to ctrl, where Linux and Windows apps keep them. Karabiner
+# displaced move to ctrl (and the system screenshots to option, below), where Linux and Windows apps keep them. Karabiner
 # can't forward ctrl to cmd here: AeroSpace would catch the forwarded cmd chord.
 #
 # NSUserKeyEquivalents rebinds menu items by exact title: ^ ctrl, $ shift,
@@ -41,13 +41,30 @@ defaults write com.superlogical.rex NSUserKeyEquivalents -dict \
 # --- Mission Control ---------------------------------------------------------
 # AeroSpace replaces Spaces, so free ctrl+left/right (and +shift) for word
 # movement: 79-82 are "Move left/right a space".
-disable_hotkey() { # id, key code, modifier flags
+hotkey() { # id, enabled (true/false), character, key code, modifier flags
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$1" \
-    "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>$2</integer><integer>$3</integer></array><key>type</key><string>standard</string></dict></dict>"
+    "<dict><key>enabled</key><$2/><key>value</key><dict><key>parameters</key><array><integer>$3</integer><integer>$4</integer><integer>$5</integer></array><key>type</key><string>standard</string></dict></dict>"
+}
+disable_hotkey() { # id, key code, modifier flags
+  hotkey "$1" false 65535 "$2" "$3"
 }
 disable_hotkey 79 123 8650752
 disable_hotkey 80 123 8781824
 disable_hotkey 81 124 8650752
 disable_hotkey 82 124 8781824
+
+# --- Screenshots -------------------------------------------------------------
+# macOS takes cmd+shift+3/4/5/6, which AeroSpace needs for moving windows to
+# workspaces. Option is the OS tier (Karabiner makes a PC keyboard's Win key
+# option), so screenshots keep their keys with option for cmd, and the toolbar
+# sits on option+shift+s like Windows' Win+Shift+S. Ctrl copies instead of
+# saving, as on stock macOS. Flags: shift 131072, option 524288, ctrl 262144.
+hotkey 28 true 51 20 655360  # ⌥⇧3 screen → file
+hotkey 29 true 51 20 917504  # ⌃⌥⇧3 screen → clipboard
+hotkey 30 true 52 21 655360  # ⌥⇧4 area → file
+hotkey 31 true 52 21 917504  # ⌃⌥⇧4 area → clipboard
+hotkey 184 true 115 1 655360 # ⌥⇧S screenshot and recording toolbar
+disable_hotkey 181 22 1179648 # ⌘⇧6 Touch Bar → file
+disable_hotkey 182 22 1441792 # ⌃⌘⇧6 Touch Bar → clipboard
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u || true
 {{ end -}}

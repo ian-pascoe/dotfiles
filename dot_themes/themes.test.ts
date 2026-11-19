@@ -24,6 +24,7 @@ const requiredFiles = [
   "tern.json",
   "yasb.css",
   "yazi/theme.toml",
+  "zed.json",
 ];
 
 // Folders in dot_themes/ that are documentation or tooling, not variants.
@@ -185,6 +186,38 @@ describe.each(variants)("%s", (variant) => {
   });
 
   // T3 Code refuses the theme file when these fail its schema.
+  // set-theme links zed.json into Zed's themes folder, and Zed's settings.json
+  // selects its theme by this one name.
+  test("zed.json is one Zed theme named Dotfiles in the variant's mode", () => {
+    const zed = JSON.parse(read(dir, "zed.json")) as {
+      name: string;
+      themes: {
+        name: string;
+        appearance: string;
+        style: Record<string, unknown> & {
+          syntax: Record<string, { color: string }>;
+          players: Record<string, string>[];
+        };
+      }[];
+    };
+    expect(zed.name.trim().length).toBeGreaterThan(0);
+    expect(zed.themes).toHaveLength(1);
+    const [theme] = zed.themes;
+    expect(theme!.name).toBe("Dotfiles");
+    expect(theme!.appearance).toBe(isLight(variant) ? "light" : "dark");
+    const { syntax, players, accents, ...style } = theme!.style;
+    const colors = [
+      ...Object.values(style),
+      ...(accents as string[]),
+      ...Object.values(syntax).map((entry) => entry.color),
+      ...players.flatMap((player) => Object.values(player)),
+    ].filter((color) => color !== null);
+    for (const color of colors) expect(color).toMatch(/^#[0-9a-f]{6}([0-9a-f]{2})?$/);
+    // Readable code text; Solarized Light's own base00 on base3 is 4.1.
+    const text = style["editor.foreground"] as string;
+    expect(contrast(text, style["editor.background"] as string)).toBeGreaterThanOrEqual(4);
+  });
+
   test("t3code.json is a T3 Code theme in the variant's mode", () => {
     const t3 = JSON.parse(read(dir, "t3code.json")) as {
       name: string;

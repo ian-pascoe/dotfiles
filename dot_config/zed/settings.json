@@ -1,0 +1,81 @@
+// Zed, set up to match Neovim (LazyVim), Ghostty and T3 Code. Managed whole by
+// chezmoi: changes made in Zed's UI are overwritten on the next `chezmoi apply`.
+// Windows gets this file through AppData/Roaming/Zed/settings.json.tmpl.
+{
+  // set-theme links the current variant's zed.json into themes/ under this one
+  // name, so switching themes never touches this file.
+  "theme": "Dotfiles",
+
+  // fonts: the editor and terminal match Ghostty and WezTerm, the UI T3 Code
+  "buffer_font_family": "GeistMono Nerd Font",
+  "buffer_font_size": 13,
+  "ui_font_family": "Geist",
+  "ui_font_size": 16,
+
+  // vim, as LazyVim sets it up
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true
+  },
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 300
+  },
+  "relative_line_numbers": "enabled",
+  "vertical_scroll_margin": 4, // scrolloff
+  "use_smartcase_search": true, // ignorecase + smartcase
+  "soft_wrap": "editor_width", // vim.opt.wrap = true
+  "show_whitespaces": "trailing", // listchars
+  "whitespace_map": { "space": "·", "tab": "→" },
+  "tab_size": 2,
+  "format_on_save": "on",
+
+  // chrome
+  "scrollbar": { "show": "never" },
+  "toolbar": { "quick_actions": false },
+  "tab_bar": { "show_nav_history_buttons": false },
+  "title_bar": { "show_onboarding_banner": false, "show_sign_in": false },
+
+  // T3 Code and Pi are the agents; Zed is only the editor.
+  "disable_ai": true,
+
+  // The languages of the LazyVim extras in dot_config/nvim/lazyvim.json.
+  "auto_install_extensions": {
+    "ansible": true,
+    "astro": true,
+    "biome": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "git-firefly": true,
+    "groovy": true,
+    "helm": true,
+    "java": true,
+    "lua": true,
+    "make": true,
+    "neocmake": true,
+    "nix": true,
+    "nu": true,
+    "oxc": true,
+    "prisma": true,
+    "ruby": true,
+    "sql": true,
+    "svelte": true,
+    "terraform": true,
+    "toml": true,
+    "zig": true
+  },
+  "file_types": {
+    "Groovy": ["*.Jenkinsfile"]
+  },
+
+  "terminal": {
+    "font_family": "GeistMono Nerd Font",
+    "font_size": 12
+  },
+  "windows": {
+    // WezTerm and Neovim use pwsh on Windows too.
+    "terminal": {
+      "shell": { "with_arguments": { "program": "pwsh", "args": ["-NoLogo"] } }
+    }
+  }
+}

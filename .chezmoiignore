@@ -95,6 +95,8 @@ Documents/PowerShell
 
 # Windows-Only Ignores
 {{ if eq .chezmoi.os "windows" }}
+# Zed reads %APPDATA%\Zed there, whose stubs include dot_config/zed
+.config/zed
 .local/bin/*
 !.local/bin/*.ps1
 !.local/bin/*.cmd

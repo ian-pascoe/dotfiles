@@ -954,6 +954,333 @@ export function t3codeJson(input: T3CodeInput): string {
   });
 }
 
+// ---------------------------------------------------------------- Zed
+
+/** The one theme name every zed.json uses; Zed's settings.json selects it. */
+export const zedThemeName = "Dotfiles";
+
+/** What a Zed theme is drawn from: a variant's pi.json colors and its terminal colors. */
+export interface ZedInput {
+  name: string;
+  mode: Mode;
+  terminal: TerminalColors;
+  text: string;
+  textSoft: string;
+  muted: string;
+  dim: string;
+  accent: string;
+  accent2: string;
+  red: string;
+  green: string;
+  yellow: string;
+  orange: string;
+  purple: string;
+  bgSelect: string;
+  borderMuted: string;
+  syntax: {
+    comment: string;
+    keyword: string;
+    function: string;
+    variable: string;
+    string: string;
+    number: string;
+    type: string;
+    operator: string;
+    punctuation: string;
+  };
+}
+
+interface PiTheme {
+  vars?: Record<string, string>;
+  colors: Record<string, string>;
+}
+
+/**
+ * A Zed theme's input from a variant's pi.json and terminal colors: every variant has
+ * both, including the hand-written ones that predate zed.json, and `generate` draws on
+ * the same pi.json, so both paths give the same theme. pi's empty `text` is the
+ * terminal's default foreground.
+ */
+export function zedInput(
+  pi: PiTheme,
+  terminal: TerminalColors,
+  name: string,
+  mode: Mode,
+): ZedInput {
+  const vars = pi.vars ?? {};
+  const color = (key: string): string => {
+    let value = pi.colors[key];
+    for (let depth = 0; value !== undefined && value in vars && depth < 5; depth++) {
+      value = vars[value];
+    }
+    if (key === "text" && value === "") return terminal.foreground;
+    if (!isHex(value)) {
+      throw new Error(`pi.json colors.${key}: expected a color, got ${JSON.stringify(value)}`);
+    }
+    return value.toLowerCase();
+  };
+  return {
+    name,
+    mode,
+    terminal,
+    text: color("text"),
+    textSoft: color("toolOutput"),
+    muted: color("muted"),
+    dim: color("dim"),
+    accent: color("accent"),
+    accent2: color("borderAccent"),
+    red: color("error"),
+    green: color("success"),
+    yellow: color("warning"),
+    orange: color("mdHeading"),
+    purple: color("customMessageLabel"),
+    bgSelect: color("selectedBg"),
+    borderMuted: color("borderMuted"),
+    syntax: {
+      comment: color("syntaxComment"),
+      keyword: color("syntaxKeyword"),
+      function: color("syntaxFunction"),
+      variable: color("syntaxVariable"),
+      string: color("syntaxString"),
+      number: color("syntaxNumber"),
+      type: color("syntaxType"),
+      operator: color("syntaxOperator"),
+      punctuation: color("syntaxPunctuation"),
+    },
+  };
+}
+
+/**
+ * A Zed theme file holding one theme, named `zedThemeName`, which `set-theme` links into
+ * Zed's themes folder. The editor and terminal sit on the terminal background, as
+ * Neovim does in Ghostty; panels, bars and popups step from it toward the text color.
+ */
+export function zedJson(input: ZedInput): string {
+  const { terminal: t, syntax: s } = input;
+  const bg = t.background;
+  const fg = input.text;
+  const step = (amount: number) => mix(bg, fg, amount);
+  const alpha = (color: string, value: number) =>
+    `${color}${Math.round(value * 255)
+      .toString(16)
+      .padStart(2, "0")}`;
+  const surface = step(0.04);
+  const elevated = step(0.08);
+  const hover = step(0.1);
+  const border = step(0.14);
+  const borderVariant = step(0.09);
+  // pi's muted text and faint borders were tuned for a terminal; lift them where Zed
+  // puts them on its surfaces and in the gutter.
+  const muted = readable(input.muted, surface, fg, 3.5);
+  const lineNumber = readable(input.borderMuted, bg, fg, 2.5);
+
+  const ansi = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"];
+  const terminalColors: Record<string, string> = {
+    "terminal.background": bg,
+    "terminal.foreground": t.foreground,
+    "terminal.bright_foreground": t.palette[15]!,
+    "terminal.dim_foreground": muted,
+  };
+  ansi.forEach((name, i) => {
+    terminalColors[`terminal.ansi.${name}`] = t.palette[i]!;
+    terminalColors[`terminal.ansi.bright_${name}`] = t.palette[i + 8]!;
+    terminalColors[`terminal.ansi.dim_${name}`] = mix(t.palette[i]!, bg, 0.35);
+  });
+
+  const status: Record<string, string> = {};
+  const statuses: [string, string][] = [
+    ["conflict", input.orange],
+    ["created", input.green],
+    ["deleted", input.red],
+    ["error", input.red],
+    ["hidden", input.dim],
+    ["hint", input.dim],
+    ["ignored", input.dim],
+    ["info", input.accent],
+    ["modified", input.yellow],
+    ["predictive", input.dim],
+    ["renamed", input.accent],
+    ["success", input.green],
+    ["unreachable", muted],
+    ["warning", input.yellow],
+  ];
+  for (const [name, color] of statuses) {
+    status[name] = color;
+    status[`${name}.background`] = alpha(color, 0.1);
+    status[`${name}.border`] = mix(color, bg, 0.6);
+  }
+
+  const style = (
+    color: string,
+    fontStyle: string | null = null,
+    fontWeight: number | null = null,
+  ) => ({
+    color,
+    font_style: fontStyle,
+    font_weight: fontWeight,
+  });
+  const syntax = {
+    attribute: style(input.yellow),
+    boolean: style(s.number),
+    comment: style(s.comment, "italic"),
+    "comment.doc": style(s.comment, "italic"),
+    constant: style(s.number),
+    constructor: style(s.type),
+    embedded: style(fg),
+    emphasis: style(input.accent, "italic"),
+    "emphasis.strong": style(input.orange, null, 700),
+    enum: style(s.type),
+    function: style(s.function),
+    hint: style(input.dim),
+    keyword: style(s.keyword),
+    label: style(input.accent2),
+    link_text: style(input.accent),
+    link_uri: style(t.palette[6]!),
+    namespace: style(input.purple),
+    number: style(s.number),
+    operator: style(s.operator),
+    predictive: style(input.dim, "italic"),
+    preproc: style(s.keyword),
+    primary: style(fg),
+    property: style(input.accent2),
+    punctuation: style(s.punctuation),
+    "punctuation.bracket": style(s.punctuation),
+    "punctuation.delimiter": style(s.punctuation),
+    "punctuation.list_marker": style(input.accent),
+    "punctuation.markup": style(s.punctuation),
+    "punctuation.special": style(input.orange),
+    selector: style(s.keyword),
+    "selector.pseudo": style(input.accent2),
+    string: style(s.string),
+    "string.escape": style(t.palette[6]!),
+    "string.regex": style(input.orange),
+    "string.special": style(input.orange),
+    "string.special.symbol": style(input.orange),
+    tag: style(s.keyword),
+    "text.literal": style(s.string),
+    title: style(input.orange, null, 700),
+    type: style(s.type),
+    // Most code is variables, so they take the text color; pi's variable color, often
+    // a highlight, marks parameters.
+    variable: style(fg),
+    "variable.parameter": style(s.variable),
+    "variable.special": style(input.purple),
+    variant: style(s.type),
+  };
+
+  const playerColors = [
+    input.accent,
+    input.purple,
+    input.green,
+    input.orange,
+    t.palette[6]!,
+    input.red,
+    input.yellow,
+  ];
+  const players = playerColors.map((color, i) => ({
+    cursor: i === 0 ? t.cursor : color,
+    background: color,
+    selection: i === 0 ? t.selectionBackground : alpha(color, 0.25),
+  }));
+
+  return json({
+    $schema: "https://zed.dev/schema/themes/v0.2.0.json",
+    name: input.name,
+    author: "dotfiles (dot_themes/tools/new-variant.ts)",
+    themes: [
+      {
+        name: zedThemeName,
+        appearance: input.mode,
+        style: {
+          background: surface,
+          border,
+          "border.variant": borderVariant,
+          "border.focused": input.accent,
+          "border.selected": alpha(input.accent, 0.5),
+          "border.transparent": "#00000000",
+          "border.disabled": borderVariant,
+          "elevated_surface.background": elevated,
+          "surface.background": surface,
+          "element.background": surface,
+          "element.hover": hover,
+          "element.active": input.bgSelect,
+          "element.selected": input.bgSelect,
+          "element.disabled": surface,
+          "drop_target.background": alpha(input.accent, 0.25),
+          "ghost_element.background": "#00000000",
+          "ghost_element.hover": hover,
+          "ghost_element.active": input.bgSelect,
+          "ghost_element.selected": input.bgSelect,
+          "ghost_element.disabled": surface,
+          text: fg,
+          "text.muted": muted,
+          "text.placeholder": input.dim,
+          "text.disabled": input.dim,
+          "text.accent": input.accent,
+          icon: fg,
+          "icon.muted": muted,
+          "icon.disabled": input.dim,
+          "icon.placeholder": muted,
+          "icon.accent": input.accent,
+          "status_bar.background": surface,
+          "title_bar.background": surface,
+          "title_bar.inactive_background": bg,
+          "toolbar.background": bg,
+          "tab_bar.background": surface,
+          "tab.inactive_background": surface,
+          "tab.active_background": bg,
+          "search.match_background": alpha(input.yellow, 0.3),
+          "search.active_match_background": alpha(input.orange, 0.45),
+          "panel.background": surface,
+          "panel.focused_border": null,
+          "pane.focused_border": null,
+          "scrollbar.thumb.background": alpha(fg, 0.25),
+          "scrollbar.thumb.hover_background": hover,
+          "scrollbar.thumb.border": hover,
+          "scrollbar.track.background": "#00000000",
+          "scrollbar.track.border": borderVariant,
+          "editor.foreground": fg,
+          "editor.background": bg,
+          "editor.gutter.background": bg,
+          "editor.subheader.background": surface,
+          "editor.active_line.background": alpha(input.bgSelect, 0.5),
+          "editor.highlighted_line.background": surface,
+          "editor.line_number": lineNumber,
+          "editor.active_line_number": fg,
+          "editor.hover_line_number": muted,
+          "editor.invisible": input.borderMuted,
+          "editor.wrap_guide": alpha(fg, 0.05),
+          "editor.active_wrap_guide": alpha(fg, 0.1),
+          "editor.indent_guide": borderVariant,
+          "editor.indent_guide_active": border,
+          "editor.document_highlight.read_background": alpha(input.accent, 0.1),
+          "editor.document_highlight.write_background": alpha(input.accent, 0.2),
+          ...terminalColors,
+          "link_text.hover": input.accent,
+          "version_control.added": input.green,
+          "version_control.modified": input.yellow,
+          "version_control.deleted": input.red,
+          "version_control.word_added": alpha(input.green, 0.35),
+          "version_control.word_deleted": alpha(input.red, 0.35),
+          "version_control.conflict_marker.ours": alpha(input.green, 0.1),
+          "version_control.conflict_marker.theirs": alpha(input.accent, 0.1),
+          ...status,
+          players,
+          accents: [
+            input.accent,
+            input.purple,
+            t.palette[6]!,
+            input.green,
+            input.yellow,
+            input.orange,
+          ],
+          syntax,
+        },
+      },
+    ],
+  });
+}
+
 // ---------------------------------------------------------------- generate
 
 function resolveColors(roles: Roles): Colors {
@@ -994,6 +1321,12 @@ export function renderVariant(variant: string, roles: Roles): Map<string, string
       }),
     ],
     [`${dir}/yasb.css`, yasb(c, roles.name, source)],
+    [
+      `${dir}/zed.json`,
+      zedJson(
+        zedInput(JSON.parse(piJson(variant, roles, c)), roles.terminal, roles.name, roles.mode),
+      ),
+    ],
     [`${dir}/yazi/theme.toml`, yaziTheme(variant)],
     [`${dir}/yazi/flavors/${variant}.yazi/flavor.toml`, yaziFlavor(c, roles.name)],
     [`dot_config/yazi/flavors/symlink_${variant}.yazi.tmpl`, yaziLink(variant)],

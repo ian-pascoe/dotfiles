@@ -5,7 +5,7 @@
   This script resolves a theme family or variant name to a theme variant (the same rules as the theme-resolve
   script, through the Themes module), then links that variant from the user's .themes directory to the current theme
   configuration directory. It also updates themes for various applications including bat, btop, GlazeWM, k9s, lsd,
-  T3 Code, yazi and YASB, and sets the Windows app and system appearance: light for a variant with a light.mode
+  T3 Code, yazi, YASB and Zed, and sets the Windows app and system appearance: light for a variant with a light.mode
   file. WezTerm watches the link itself. T3 Code publishes the variant's t3code.json and switches its
   connected clients to it.
   A family name uses the saved mode (~/.local/state/theme/mode, or under XDG_STATE_HOME) unless a mode is given.
@@ -155,6 +155,18 @@ if (Test-Path $YaziFlavorsDir -PathType Container) {
     $FlavorLink = Join-Path $YaziConfigFlavors $_.Name
     Set-ThemeLink -Target $_.FullName -Link $FlavorLink
   }
+}
+
+# zed: Zed watches its themes folder, so a new link there makes it reload.
+$ZedDir = Join-Path $env:APPDATA "Zed"
+if (Test-Path $ZedDir -PathType Container) {
+  $ZedThemesDir = Join-Path $ZedDir "themes"
+  if (-not (Test-Path $ZedThemesDir)) {
+    New-Item -ItemType Directory -Path $ZedThemesDir | Out-Null
+  }
+  $ZedTheme = Join-Path $CURRENT_THEME_DIR "zed.json"
+  $ZedLink = Join-Path $ZedThemesDir "dotfiles.json"
+  Set-ThemeLink -Target $ZedTheme -Link $ZedLink
 }
 
 & "$PSScriptRoot\Set-BG.ps1" -BackgroundIndex 1

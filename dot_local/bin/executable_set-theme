@@ -2,7 +2,7 @@
 # Switches the current theme: resolves a theme family or variant name (see
 # theme-resolve), points ~/.config/theme at ~/.themes/<variant>, then tells
 # running apps to reload. Every app's theme link goes through ~/.config/theme
-# and is managed by chezmoi, so nothing else is relinked here.
+# and is managed by chezmoi, so only Zed's is made again here, to wake it.
 #   set-theme <family|variant> [light|dark]
 # A family name uses the saved mode unless a mode is given. The mode is saved
 # when one is given or a variant name is used; a family with no variant in the
@@ -11,8 +11,9 @@
 # Tern, Neovim and WezTerm watch the link themselves; k9s, yazi and pi/omp
 # pick the theme up on their next start. Rex imports the variant's Ghostty
 # colors when it is running. T3 Code publishes the variant's t3code.json and
-# switches its connected clients to it. The Herdr app gets the variant's Ghostty
-# colors as a theme (herdr-app-sync-theme).
+# switches its connected clients to it. Zed reloads the variant's zed.json when
+# its link is made again. The Herdr app gets the variant's Ghostty colors as a
+# theme (herdr-app-sync-theme).
 # In WSL the Windows host follows: its Set-Theme.ps1 runs with the variant and
 # leaves WSL alone. When the switch starts on Windows, Set-Theme.ps1 runs this
 # script with THEME_FROM_WINDOWS set, so it does not run back.
@@ -95,6 +96,13 @@ t3_bin=$(command -v t3 || echo "$HOME/.t3/bin/t3")
 if [[ -x $t3_bin && -f $THEME_PATH/t3code.json ]]; then
   "$t3_bin" theme set --id dotfiles "$THEME_PATH/t3code.json" >/dev/null ||
     echo "T3 Code theme not set" >&2
+fi
+
+# Zed watches its themes folder, not what the link there resolves to, so its
+# chezmoi-managed link to ~/.config/theme/zed.json is made again to tell it.
+zed_theme="$HOME/.config/zed/themes/dotfiles.json"
+if [[ -L $zed_theme ]]; then
+  ln -sfn "$CURRENT_THEME_DIR/zed.json" "$zed_theme"
 fi
 
 set-bg 1

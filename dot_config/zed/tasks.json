@@ -1,0 +1,35 @@
+// Terminal tools that keymap.json opens in the editor area, as Neovim's
+// yazi.nvim and Neogit do. Managed whole by chezmoi.
+[
+  {
+    // <leader>y: yazi at the current file. Files it opens go to this Zed window.
+    "label": "yazi",
+    "command": "yazi",
+    "args": ["$ZED_FILE"],
+    "env": { "EDITOR": "zed -a" },
+    "reveal_target": "center",
+    "hide": "always",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
+    // <leader>Y: yazi at the project root
+    "label": "yazi (cwd)",
+    "command": "yazi",
+    "env": { "EDITOR": "zed -a" },
+    "reveal_target": "center",
+    "hide": "always",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
+    // <leader>gn: Neogit alone, as Rex's prefix+g opens it
+    "label": "Neogit",
+    "command": "nvim",
+    "args": ["+NeogitPopup"],
+    "reveal_target": "center",
+    "hide": "always",
+    "show_summary": false,
+    "show_command": false
+  }
+]
