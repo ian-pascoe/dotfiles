@@ -19,7 +19,13 @@
   },
   "defaultModelSelection": {
     "instanceId": "pi",
-    "model": "anthropic/claude-opus-5-5"
+    "model": "anthropic/claude-opus-5-5",
+    "options": [
+      {
+        "id": "thinking",
+        "value": "high"
+      }
+    ]
   },
   "textGenerationModelSelection": {
     "instanceId": "pi",
@@ -32,12 +38,16 @@
     ]
   },
   "providerInstances": {
-    "grok": {
-      "driver": "grok",
+    "claudeAgent": {
+      "driver": "claudeAgent",
       "enabled": false
     },
     "codex": {
       "driver": "codex",
+      "enabled": false
+    },
+    "grok": {
+      "driver": "grok",
       "enabled": false
     },
     "opencode": {
@@ -51,10 +61,6 @@
       "config": {
         "binaryPath": "pi-t3"
       }
-    },
-    "claudeAgent": {
-      "driver": "claudeAgent",
-      "enabled": false
     }
   }
 }
