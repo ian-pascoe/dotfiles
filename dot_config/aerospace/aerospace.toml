@@ -234,6 +234,12 @@ shift-l = 'resize width +10'
 enter = ['mode main']
 esc = ['mode main']
 
+# Window rules. See: https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
+# Hex (anomalyco/hex) floats.
+[[on-window-detected]]
+if.app-id = 'anomaly.hex'
+run = 'layout floating'
+
 [workspace-to-monitor-force-assignment]
 1 = 1
 2 = 1

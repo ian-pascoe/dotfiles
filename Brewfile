@@ -22,6 +22,26 @@ brew "btop"
 brew "gmp"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# File comparison utilities
+brew "diffutils"
+# Collection of GNU find, xargs, and locate
+brew "findutils"
+# GNU awk utility
+brew "gawk"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# GNU version of the tar archiving utility
+brew "gnu-tar"
+# GNU grep, egrep and fgrep
+brew "grep"
+# Lock file during command
+brew "flock"
+# Command-line option parsing utility
+brew "gnu-getopt"
+# Utility for directing compilation
+brew "make"
+# Utility that provides fast incremental file transfer
+brew "rsync"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Command-line tool for getting & setting the default browser
@@ -106,7 +126,7 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 # A window border system for macOS
 brew "felixkratz/formulae/borders", trusted: true
-brew "yakitrak/yakitrak/obsidian-cli"
+brew "yakitrak/yakitrak/notesmd-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password

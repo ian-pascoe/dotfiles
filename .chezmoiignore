@@ -5,6 +5,7 @@ CLAUDE.md
 .claude/mcp-servers.json
 tern/**
 t3/**
+hex/**
 .pi/agent/settings.managed.json
 .pi/agent/settings.defaults.json
 docs/**
@@ -64,6 +65,7 @@ Library/LaunchAgents/local.clean-code-sign-clones.plist
 Library/LaunchAgents/local.clean-tmp.plist
 .local/bin/clean-tmp
 Library/Application Support/Tern
+Library/Application Support/hex
 Library/KeyBindings
 .hammerspoon
 .config/aerospace

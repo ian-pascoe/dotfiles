@@ -1,0 +1,8 @@
+{
+  "release_microphone_while_idle": true,
+  "labs": {
+    "live_text": true,
+    "unload_idle": true,
+    "unload_idle_minutes": 5
+  }
+}

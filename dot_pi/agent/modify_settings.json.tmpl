@@ -10,4 +10,8 @@ input=$(cat)
 printf '%s\n' "$input" |
   jq --slurpfile defaults "$dir/settings.defaults.json" \
     --slurpfile managed "$dir/settings.managed.json" \
+{{- if eq .chezmoi.os "darwin" }}
+    '$defaults[0] + . + $managed[0] + {shellPath: "/opt/homebrew/bin/bash"}'
+{{- else }}
     '$defaults[0] + . + $managed[0]'
+{{- end }}

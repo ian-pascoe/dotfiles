@@ -40,6 +40,20 @@ _bash_apply_base_path_order() {
   linux*) linuxbrew=(/home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin) ;;
   esac
 
+  # On macOS, GNU tools shadow their BSD namesakes (the BSD ones stay at
+  # /usr/bin/<name>) so commands written for Linux, including agents', work.
+  local gnubin=()
+  case "$OSTYPE" in
+  darwin*)
+    local pkg
+    for pkg in coreutils findutils gnu-sed grep gawk gnu-tar make; do
+      gnubin+=("/opt/homebrew/opt/$pkg/libexec/gnubin")
+    done
+    # Keg-only: no gnubin, and Homebrew never links it into its bin.
+    gnubin+=(/opt/homebrew/opt/gnu-getopt/bin)
+    ;;
+  esac
+
   _bash_prepend_path_existing \
     "$HOME/.local/bin" \
     "${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims" \
@@ -47,6 +61,7 @@ _bash_apply_base_path_order() {
     "$HOME/.local/share/pnpm/bin" \
     "$HOME/.npm-global/bin" \
     "$HOME/.cargo/bin" \
+    ${gnubin[@]+"${gnubin[@]}"} \
     /opt/homebrew/bin \
     /opt/homebrew/sbin \
     ${linuxbrew[@]+"${linuxbrew[@]}"}

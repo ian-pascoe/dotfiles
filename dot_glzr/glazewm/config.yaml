@@ -19,6 +19,12 @@ window_rules:
           regex: Chrome_WidgetWin_1|MozillaDialogClass
       - window_process:
           equals: keyviz
+  # Hex (anomalyco/hex) floats.
+  - commands:
+      - set-floating
+    match:
+      - window_process:
+          equals: hex
 window_behavior:
   state_defaults:
     fullscreen:
