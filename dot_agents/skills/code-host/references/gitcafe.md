@@ -4,7 +4,7 @@
 - **Tool:** `cafe` 0.12.0, checked 2026-10-30
 - **Exercised:** not yet
 - **Sources:** https://git.cafe/docs/index.md, https://git.cafe/docs/reference/cli.md, https://git.cafe/docs/reference/api.md, https://git.cafe/docs/getting-started/cli.md, https://git.cafe/docs/pull-requests/merge.md, https://git.cafe/docs/repositories/repository-rulesets.md, https://git.cafe/docs/ci/actions.md, https://git.cafe/docs/ci/buildkite.md, https://git.cafe/docs/issues/issues.md, https://git.cafe/api/openapi/json
-- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo
+- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo, `<file>` image file, `<e>` evidence commit, `<path>` file path in the evidence commit
 
 Global flags: `--repo/-R <owner>/<repo>`, `--host`, `--json`, `--yes`, `--no-input`. Pass `--repo` outside a clone. With `--json`, results are in `.data`. Never use `cafe stack` commands: PRs are plain PRs with `--base`.
 
@@ -58,6 +58,19 @@ A standalone comment, not part of a review and not an open thread. Use it for th
 - Items carry `createdAt`, `author`, `body`, `threadId`.
 - Paginate with `--cursor`.
 - Order is not stated in the docs; sort by `createdAt` client-side.
+
+## Attach media
+
+`cafe` has no upload command; attachments take two API calls through `cafe api`, up to 10 MiB each, PNG, JPEG, GIF, or WebP:
+
+1. Reserve: `POST /repos/<owner>/<repo>/attachments/` with `{"requestKey":"<unique key>","sha256":"<hex digest of the file>","size":<bytes>}` → `.id`.
+2. Upload: `PUT /repos/<owner>/<repo>/attachments/<id>` with the file's exact bytes and `Content-Length`. Bytes whose digest differs are refused with `409`.
+
+Read it back at `/api/attachments/<id>`, which follows the repo's visibility. Put `![alt](/api/attachments/<id>)` in the comment or body in place of the local reference. **Unverified**: the `cafe api` flags for a JSON body and a raw-byte `PUT` (check `cafe api --help`), and the Markdown form GitCafe itself writes for an attachment; where either fails, link committed files instead.
+
+Video: attachments take only PNG, JPEG, GIF, and WebP; post a GIF.
+
+Committed file: `https://git.cafe/<owner>/<repo>/blob/<e>/<path>`. **Unverified**: whether it serves the image raw.
 
 ## Checks
 

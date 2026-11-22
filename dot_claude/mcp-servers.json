@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "executor": {
+      "type": "http",
+      "url": "https://mcp.executor.sh/mcp",
+      "alwaysLoad": true
+    },
+    "rea": {
+      "type": "stdio",
+      "command": "rea",
+      "args": ["mcp"],
+      "env": {
+        "HOPPER_LAUNCHER_PATH": "/Applications/Hopper Disassembler.app/Contents/MacOS/hopper",
+        "GHIDRA_INSTALL_DIR": "/opt/homebrew/opt/ghidra/libexec",
+        "JAVA_HOME": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+      }
+    },
+    "superlogical": {
+      "type": "http",
+      "url": "https://www.superlogical.com/rex/community-mcp"
+    }
+  }
+}

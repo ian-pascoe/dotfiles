@@ -2,17 +2,24 @@
 
 The scripts in `.chezmoiscripts/` run **after** files are deployed, in this order:
 
-| Order | Action                                                        | Checksum inputs               |
-| ----- | ------------------------------------------------------------- | ----------------------------- |
-| 10    | `mise install`                                                | `dot_config/mise/config.toml` |
-| 20    | Install Pi dependencies with pnpm, lifecycle scripts disabled | `dot_pi/agent/package.json`   |
-| 30    | Refresh Bat's `current.tmTheme` and rebuild its cache         | Bat config and theme inputs   |
-| 40    | `systemctl --user daemon-reload`                              | Source user service units     |
-| 60    | Make Zen the default browser (macOS and Linux)                | None; runs once               |
+| Order | Action                                                        | Checksum inputs                                                   |
+| ----- | ------------------------------------------------------------- | ----------------------------------------------------------------- |
+| 10    | `mise install`                                                | `dot_config/mise/config.toml`                                     |
+| 20    | Install Pi dependencies with pnpm, lifecycle scripts disabled | `dot_pi/agent/package.json`                                       |
+| 25    | Link each `~/.agents/skills` skill into `~/.claude/skills`    | None; runs every apply                                            |
+| 26    | Install the dotfiles marketplace's Claude Code plugins        | `dot_claude/dotfiles-marketplace/.claude-plugin/marketplace.json` |
+| 30    | Refresh Bat's `current.tmTheme` and rebuild its cache         | Bat config and theme inputs                                       |
+| 40    | `systemctl --user daemon-reload`                              | Source user service units                                         |
+| 60    | Make Zen the default browser (macOS and Linux)                | None; runs once                                                   |
 
-These are `run_onchange_after_` scripts: chezmoi hashes their rendered content,
+Except for the skill links, these are `run_onchange_after_` scripts: chezmoi hashes their rendered content,
 including input checksums, and records successful runs. Unchanged applies do not
 repeat installation or reloads. Failures remain eligible for retry.
+
+The skill-link hook is a `run_after_` script because skills also arrive outside
+chezmoi (`skills add`, Plannotator); it is idempotent, never replaces an existing
+`~/.claude/skills` entry, and prunes only dangling links into `~/.agents/skills`.
+It has no Windows variant.
 
 ## Prerequisites and boundaries
 

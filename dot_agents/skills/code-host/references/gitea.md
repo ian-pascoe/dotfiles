@@ -3,8 +3,8 @@
 - **Hosts:** Gitea instances (gitea.com or self-hosted). `gitea.com` is known; other hostnames need the API probe (see Detect & auth). Forgejo and Codeberg are a different host: use `forgejo.md`.
 - **Tool:** `gt` 0.2.0 on Gitea 28+; REST via curl with `GITEA_TOKEN` below 28, checked 2026-10-30
 - **Exercised:** not yet
-- **Sources:** https://gitea.com/gitea/cli, https://gitea.com/gitea/cli/src/branch/main/internal/app/, https://gitea.com/swagger.v1.json, https://docs.gitea.com/usage/access-control/protected-branches, https://docs.gitea.com/usage/automatically-linked-references
-- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo, `<host>` instance hostname
+- **Sources:** https://gitea.com/gitea/cli, https://gitea.com/gitea/cli/src/branch/main/internal/app/, https://gitea.com/swagger.v1.json, https://docs.gitea.com/usage/access-control/protected-branches, https://docs.gitea.com/usage/automatically-linked-references, https://docs.gitea.com/api/operations/issue-create-issue-attachment/
+- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo, `<host>` instance hostname, `<file>` image file, `<e>` evidence commit, `<path>` file path in the evidence commit
 
 ## Detect & auth
 
@@ -58,6 +58,14 @@ REST (below 28): `POST /repos/<owner>/<repo>/issues/<n>/comments` with `{"body":
 `gt pr view <n> --comments` (comments and reviews).
 
 REST (below 28): `GET /repos/<owner>/<repo>/issues/<n>/comments`. Order: **Unverified**: check the API page (assume nothing; sort by `created_at`).
+
+## Attach media
+
+A PR is an issue, so upload each file as an issue attachment. REST, on any version: `curl -s -H "Authorization: token $GITEA_TOKEN" -F "attachment=@<file>" "https://<host>/api/v1/repos/<owner>/<repo>/issues/<n>/assets"` → `.browser_download_url`. Put `![alt](<url>)` in the comment or body in place of the local reference. The instance's allowed types and size cap: `GET /settings/attachment` (no auth). `gt` has no upload command: **Unverified**, check `gt pr comment --help` before first use.
+
+Video: the default allowed types include `.mp4`, `.webm`, and `.mov`, up to 100 MB; embed it as `<video src="<url>" controls></video>`, which Gitea's sanitizer keeps.
+
+Committed file: `https://<host>/<owner>/<repo>/raw/commit/<e>/<path>`.
 
 ## Checks
 

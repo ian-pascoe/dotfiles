@@ -3,8 +3,8 @@
 - **Hosts:** `github.com`, `*.ghe.com`, and any GitHub Enterprise Server hostname (read from `git remote get-url origin`).
 - **Tool:** `gh` 2.103.3, checked 2026-10-30
 - **Exercised:** partly: Open PR, Comment, Checks, and Merge by `landing` since 0.2.0; the read-only commands checked against `gh` 2.103.3 on 2026-10-30
-- **Sources:** https://cli.github.com/manual, https://docs.github.com/en/graphql/reference/pulls, https://docs.github.com/en/rest/repos/rules, https://docs.github.com/en/rest/branches/branch-protection, https://docs.github.com/en/rest/issues/comments, https://docs.github.com/en/rest/pulls/comments, https://docs.github.com/en/rest/pulls/pulls, https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue, https://github.com/cli/cli
-- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo
+- **Sources:** https://cli.github.com/manual, https://docs.github.com/en/graphql/reference/pulls, https://docs.github.com/en/rest/repos/rules, https://docs.github.com/en/rest/branches/branch-protection, https://docs.github.com/en/rest/issues/comments, https://docs.github.com/en/rest/pulls/comments, https://docs.github.com/en/rest/pulls/pulls, https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue, https://github.com/cli/cli, https://docs.github.com/en/github-cli/github-cli/attaching-files-with-github-cli, https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files
+- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo, `<file>` image file, `<e>` evidence commit, `<path>` file path in the evidence commit
 
 ## Detect & auth
 
@@ -44,6 +44,16 @@
 `gh pr view <n> --json comments`. `comments` holds issue-level comments only; review summaries are in `reviews[].body`, a different list.
 
 REST: `gh api repos/<owner>/<repo>/issues/<n>/comments`. Ordered oldest first, so the latest is last.
+
+## Attach media
+
+`gh pr comment <n> --body-file c.md --attach <file>`, repeating `--attach` per file (up to 50); `gh pr create` and `gh pr edit` take it too. Each attached file is uploaded, and a body reference to its local path, like `![head at 390×844](./home-390x844-head.png)`, is rewritten to the uploaded URL; an attached file the body doesn't reference is appended. Paths in a `--body-file` resolve from its directory, then the working directory. Images and video only, 10 MB per image; needs push access. Private repos' uploads are visible only to people with access.
+
+`--attach` is in `gh` 2.105.0; on a `gh` whose `gh pr comment --help` lacks it, link committed files instead.
+
+Video: `--attach` takes `.mp4`, `.mov`, and `.webm`; a reference alone in its paragraph, like `![](./demo.mp4)`, becomes a player, and one inside a sentence a link. 10 MB on a free plan, 100 MB on a paid one.
+
+Committed file: `https://github.com/<owner>/<repo>/blob/<e>/<path>?raw=true`, on Enterprise its own host. **Unverified**: check that it renders inline for a private repo before first use.
 
 ## Checks
 

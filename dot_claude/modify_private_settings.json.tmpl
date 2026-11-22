@@ -1,0 +1,20 @@
+#!/bin/sh
+# Manage only the keys in settings.managed.json (deep-merged, so hooks for
+# other events and other plugins stay); the rest of settings.json is Claude
+# Code state (what /model, /effort and /config save, installer-added hooks).
+# settings.defaults.json fills in that state where missing.
+# Requests go through the Commissary proxy; its key is read from 1Password
+# at apply time, which is why this target is private.
+set -eu
+
+dir="$CHEZMOI_SOURCE_DIR/dot_claude"
+input=$(cat)
+[ -n "$input" ] || input='{}'
+printf '%s\n' "$input" |
+  jq --indent 2 --slurpfile defaults "$dir/settings.defaults.json" \
+    --slurpfile managed "$dir/settings.managed.json" \
+    --arg token {{ onepasswordRead "op://Agents/Commissary Pi/credential" | trim | squote }} \
+    --arg marketplace {{ joinPath .chezmoi.homeDir ".claude" "dotfiles-marketplace" | quote }} \
+    '$defaults[0] * . * $managed[0]
+      * {env: {ANTHROPIC_BASE_URL: "https://api.ai.ianpascoe.dev", ANTHROPIC_AUTH_TOKEN: $token}}
+      * {extraKnownMarketplaces: {dotfiles: {source: {source: "directory", path: $marketplace}}}}'

@@ -3,8 +3,8 @@
 - **Hosts:** gitlab.com and self-managed GitLab at any hostname (repo paths can be `group/sub/project`). `glab` resolves the instance from `git remote`, `GITLAB_HOST`, or its config. GitLab calls a PR a merge request (MR); `<n>` is its iid.
 - **Tool:** `glab` (docs for GitLab 19.x; latest release seen v1.126.0), falling back to `glab api`; checked 2026-10-30
 - **Exercised:** not yet
-- **Sources:** https://docs.gitlab.com/cli/, https://gitlab.com/gitlab-org/cli, https://docs.gitlab.com/api/merge_requests/, https://docs.gitlab.com/api/projects/, https://docs.gitlab.com/api/discussions/, https://docs.gitlab.com/api/notes/, https://docs.gitlab.com/api/merge_request_approvals/, https://docs.gitlab.com/ci/pipelines/merge_trains/, https://docs.gitlab.com/user/project/issues/managing_issues/
-- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo
+- **Sources:** https://docs.gitlab.com/cli/, https://gitlab.com/gitlab-org/cli, https://docs.gitlab.com/api/merge_requests/, https://docs.gitlab.com/api/projects/, https://docs.gitlab.com/api/discussions/, https://docs.gitlab.com/api/notes/, https://docs.gitlab.com/api/merge_request_approvals/, https://docs.gitlab.com/ci/pipelines/merge_trains/, https://docs.gitlab.com/user/project/issues/managing_issues/, https://docs.gitlab.com/api/project_markdown_uploads/, https://docs.gitlab.com/cli/api/
+- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo, `<file>` image file, `<e>` evidence commit, `<path>` file path in the evidence commit
 
 `glab api` accepts `:id` (current project) and `:fullpath` placeholders.
 
@@ -50,6 +50,14 @@ Without `--resolvable=false` the note is a resolvable thread and blocks merge un
 `glab mr note list <n> --type general -F json` (`--type all|general|diff|system`; experimental).
 
 Fallback: `glab api projects/:id/merge_requests/<n>/notes`. REST default is `sort=desc`, newest first. Add `-f order_by=created_at -f sort=asc` for oldest first. Fields: `.author.username`, `.body`, `.created_at`.
+
+## Attach media
+
+Upload each file: `glab api --method POST projects/:id/uploads --form "file=@<file>"` → `.markdown`, like `![name](/uploads/<secret>/name.png)`. Put it in the note or description in place of the local reference; it renders in this project's MRs. GitLab may rename the file, such as spaces to underscores, so take the name from the response. Uploads count against a daily per-user limit (10,240 MB by default; `429` past it).
+
+Video: the same upload; an image reference to an `.mp4`, `.m4v`, `.mov`, `.webm`, or `.ogv` file renders as a player.
+
+Committed file: `https://gitlab.com/<owner>/<repo>/-/raw/<e>/<path>`, on self-managed its own host.
 
 ## Checks
 

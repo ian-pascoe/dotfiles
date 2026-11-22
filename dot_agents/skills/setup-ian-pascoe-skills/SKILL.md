@@ -1,10 +1,10 @@
 ---
 name: setup-ian-pascoe-skills
-description: Configure this repo for Ian Pascoe's skills, checking their prerequisites and recording its code host. Run once per repo, after setup-matt-pocock-skills.
+description: Configure this repo for Ian Pascoe's skills, checking their prerequisites, recording its code host, and, when it has a UI, capturing its product context with impeccable. Run once per repo, after setup-matt-pocock-skills.
 disable-model-invocation: true
 ---
 
-Configure this repo for the skills from `ian-pascoe/skills`: check their prerequisites, then write the repo's **code host config**, `docs/agents/code-host.md`, which `code-host` reads before detecting the host itself.
+Configure this repo for the skills from `ian-pascoe/skills`: check their prerequisites, write the repo's **code host config**, `docs/agents/code-host.md`, which `code-host` reads before detecting the host itself, then, when the repo has a UI, capture its product context with `impeccable`'s `init`.
 
 ## 1. Check prerequisites
 
@@ -15,6 +15,8 @@ npx skills@latest add mattpocock/skills --skill <missing skills> [-g] -y
 ```
 
 Run it once the user agrees; otherwise leave the command with them and carry on.
+
+The repo **has a UI** when it builds something a user sees: web pages, or a desktop or mobile app. Ask the user when the code leaves it unclear. Only then do these skills need pbakaus's `impeccable`, which `validating-ui` and step 4 run, a driver for `validating-ui` (`agent-browser` for web pages and Electron apps, `agent-desktop` for native desktop apps), and `ffmpeg` for its demos. Treat the ones it needs as prerequisites the same way, with the install commands from the `ian-pascoe/skills` README's UI validation section.
 
 Then read `docs/agents/issue-tracker.md`. If it's missing, stop and tell the user to run `/setup-matt-pocock-skills` first, installing it the same way if they lack it, then this again: its tracker doc and `## Agent skills` block are what this skill builds on.
 
@@ -54,6 +56,12 @@ On a rerun, update the config and the entry in place, keeping the user's edits a
 
 Done when both are written as the user confirmed or edited them.
 
-## 4. Report
+## 4. Capture product context
 
-Tell the user what you wrote, any access still missing on this machine, and any prerequisites left to install. `code-host` reads the config from now on, and the landing skills its merge method; the user can edit it directly, or rerun this skill to detect afresh.
+Skip this step when the repo has no UI. Otherwise run `impeccable`'s `init`. It interviews the user about the product's users, purpose, and constraints, and writes `PRODUCT.md`, which `impeccable`'s `audit` and `critique` read when `validating-ui` runs them; on a rerun it asks only what has gone stale. When `impeccable` isn't installed, leave the step with the user, naming the install command from step 1.
+
+Done when the repo has no UI, `PRODUCT.md` holds the product record the user confirmed, or the step is with the user.
+
+## 5. Report
+
+Tell the user what you wrote, including the files `init` says to commit, any access still missing on this machine, and any prerequisites or steps left with them. `code-host` reads the config from now on, and the landing skills its merge method; the user can edit it directly, or rerun this skill to detect afresh.

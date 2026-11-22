@@ -4,7 +4,7 @@
 - **Tool:** REST via curl (no official Bitbucket CLI; `acli` has no Bitbucket commands), checked 2026-10-30
 - **Exercised:** not yet
 - **Sources:** https://api.bitbucket.org/swagger.json, https://developer.atlassian.com/cloud/bitbucket/oauth-2, https://developer.atlassian.com/cloud/bitbucket/rest/intro/#filtering, https://support.atlassian.com/bitbucket-cloud/docs/suggest-or-require-checks-before-a-merge/, https://support.atlassian.com/bitbucket-cloud/docs/enable-an-issue-tracker/, https://developer.atlassian.com/cloud/acli/reference/commands/
-- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<workspace>/<repo>` repo
+- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<workspace>/<repo>` repo, `<file>` image file, `<e>` evidence commit, `<path>` file path in the evidence commit
 
 Base `https://api.bitbucket.org/2.0`. Every call below is `curl -u "$BITBUCKET_EMAIL:$BITBUCKET_API_TOKEN" …`; write `AUTH` for that prefix. Send JSON with `-H 'Content-Type: application/json'`.
 
@@ -48,6 +48,14 @@ Only open PRs can be mutated. **Unverified**: check the PUT body shape in the AP
 ## List comments
 
 `AUTH "https://api.bitbucket.org/2.0/repositories/<workspace>/<repo>/pullrequests/<n>/comments"` (paginated; follow `.next`). Oldest first by default (`sort` param). Returns global comments, inline comments, and replies: keep entries with no `inline` and no `parent`. Fields: `.user.display_name`, `.content.raw`, `.created_on`.
+
+## Attach media
+
+No PR attachment API. Upload each file to the repo's downloads: `AUTH -X POST "https://api.bitbucket.org/2.0/repositories/<workspace>/<repo>/downloads" -F "files=@<file>"`, served at `https://bitbucket.org/<workspace>/<repo>/downloads/<name>`. An upload with an existing name replaces that file, so prefix each name with the branch and head. Put `![alt](<url>)` in the body in place of the local reference. **Unverified**: check that it renders inline for a private repo before first use; where it doesn't, link committed files instead.
+
+Video: no player is documented; post a GIF.
+
+Committed file: `https://bitbucket.org/<workspace>/<repo>/raw/<e>/<path>`.
 
 ## Checks
 

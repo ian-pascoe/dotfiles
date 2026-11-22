@@ -1,0 +1,252 @@
+{
+  "basedpyright": {
+    "args": ["--from", "basedpyright", "basedpyright-langserver", "--stdio"],
+    "command": "uvx",
+    "extensionToLanguage": {
+      ".py": "python",
+      ".pyi": "python",
+      ".pyw": "python"
+    }
+  },
+  "bash": {
+    "args": ["start"],
+    "command": "bash-language-server",
+    "extensionToLanguage": {
+      ".bash": "shellscript",
+      ".sh": "shellscript"
+    },
+    "settings": {
+      "bashIde": {
+        "globPattern": "*@(.sh|.bash)"
+      }
+    }
+  },
+  "clangd": {
+    "command": "clangd",
+    "extensionToLanguage": {
+      ".C": "cpp",
+      ".c": "c",
+      ".cc": "cpp",
+      ".cpp": "cpp",
+      ".cu": "cuda-cpp",
+      ".cuh": "cuda-cpp",
+      ".cxx": "cpp",
+      ".h": "c",
+      ".hh": "cpp",
+      ".hpp": "cpp",
+      ".hxx": "cpp",
+      ".ipp": "cpp",
+      ".mm": "objective-cpp",
+      ".tpp": "cpp"
+    }
+  },
+  "csharp": {
+    "command": "csharp-ls",
+    "extensionToLanguage": {
+      ".cs": "csharp"
+    },
+    "initializationOptions": {
+      "AutomaticWorkspaceInit": true
+    }
+  },
+  "css": {
+    "args": ["--stdio"],
+    "command": "vscode-css-language-server",
+    "extensionToLanguage": {
+      ".css": "css",
+      ".less": "less",
+      ".scss": "scss"
+    },
+    "initializationOptions": {
+      "provideFormatter": true
+    }
+  },
+  "dart": {
+    "args": ["language-server", "--protocol=lsp"],
+    "command": "dart",
+    "extensionToLanguage": {
+      ".dart": "dart"
+    }
+  },
+  "dockerfile": {
+    "args": ["--stdio"],
+    "command": "docker-langserver",
+    "extensionToLanguage": {
+      ".dockerfile": "dockerfile"
+    }
+  },
+  "gopls": {
+    "command": "gopls",
+    "extensionToLanguage": {
+      ".go": "go"
+    }
+  },
+  "html": {
+    "args": ["--stdio"],
+    "command": "vscode-html-language-server",
+    "extensionToLanguage": {
+      ".htm": "html",
+      ".html": "html"
+    },
+    "initializationOptions": {
+      "provideFormatter": true
+    }
+  },
+  "java": {
+    "command": "jdtls",
+    "extensionToLanguage": {
+      ".java": "java"
+    }
+  },
+  "json": {
+    "args": ["--stdio"],
+    "command": "vscode-json-language-server",
+    "extensionToLanguage": {
+      ".json": "json",
+      ".jsonc": "jsonc"
+    },
+    "initializationOptions": {
+      "provideFormatter": true
+    }
+  },
+  "kotlin": {
+    "args": ["--stdio"],
+    "command": "intellij-server",
+    "extensionToLanguage": {
+      ".kt": "kotlin",
+      ".kts": "kotlin"
+    }
+  },
+  "lua": {
+    "command": "lua-language-server",
+    "extensionToLanguage": {
+      ".lua": "lua"
+    },
+    "settings": {
+      "Lua": {
+        "telemetry": {
+          "enable": false
+        }
+      }
+    }
+  },
+  "markdown": {
+    "args": ["server"],
+    "command": "marksman",
+    "extensionToLanguage": {
+      ".markdown": "markdown",
+      ".md": "markdown"
+    }
+  },
+  "nix": {
+    "command": "nil",
+    "extensionToLanguage": {
+      ".nix": "nix"
+    }
+  },
+  "php": {
+    "args": ["--stdio"],
+    "command": "intelephense",
+    "extensionToLanguage": {
+      ".php": "php",
+      ".phtml": "php"
+    },
+    "settings": {
+      "intelephense": {
+        "telemetry": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "r": {
+    "args": ["--no-echo", "-e", "languageserver::run()"],
+    "command": "R",
+    "extensionToLanguage": {
+      ".R": "r",
+      ".r": "r"
+    }
+  },
+  "ruby": {
+    "command": "ruby-lsp",
+    "extensionToLanguage": {
+      ".gemspec": "ruby",
+      ".rake": "ruby",
+      ".rb": "ruby"
+    }
+  },
+  "rust": {
+    "command": "rust-analyzer",
+    "extensionToLanguage": {
+      ".rs": "rust"
+    }
+  },
+  "sql": {
+    "args": ["up", "--method", "stdio"],
+    "command": "sql-language-server",
+    "extensionToLanguage": {
+      ".sql": "sql"
+    }
+  },
+  "swift": {
+    "command": "sourcekit-lsp",
+    "extensionToLanguage": {
+      ".swift": "swift"
+    }
+  },
+  "terraform": {
+    "args": ["serve"],
+    "command": "terraform-ls",
+    "extensionToLanguage": {
+      ".tf": "terraform",
+      ".tfvars": "terraform-vars"
+    }
+  },
+  "toml": {
+    "args": ["lsp", "stdio"],
+    "command": "taplo",
+    "extensionToLanguage": {
+      ".toml": "toml"
+    }
+  },
+  "typescript": {
+    "args": ["--lsp", "--stdio"],
+    "command": "tsrs-lsp",
+    "extensionToLanguage": {
+      ".cjs": "javascript",
+      ".cts": "typescript",
+      ".js": "javascript",
+      ".jsx": "javascriptreact",
+      ".mjs": "javascript",
+      ".mts": "typescript",
+      ".ts": "typescript",
+      ".tsx": "typescriptreact"
+    }
+  },
+  "yaml": {
+    "args": ["--stdio"],
+    "command": "yaml-language-server",
+    "extensionToLanguage": {
+      ".yaml": "yaml",
+      ".yml": "yaml"
+    },
+    "settings": {
+      "redhat": {
+        "telemetry": {
+          "enabled": false
+        }
+      },
+      "yaml": {
+        "format": {
+          "enable": true
+        }
+      }
+    }
+  },
+  "zig": {
+    "command": "zls",
+    "extensionToLanguage": {
+      ".zig": "zig"
+    }
+  }
+}

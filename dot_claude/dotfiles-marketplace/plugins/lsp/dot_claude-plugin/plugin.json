@@ -1,0 +1,5 @@
+{
+  "name": "lsp",
+  "version": "1.0.0",
+  "description": "Language servers for Claude Code's LSP tool."
+}

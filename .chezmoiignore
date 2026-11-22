@@ -2,12 +2,14 @@ README.md
 LICENSE
 AGENTS.md
 CLAUDE.md
-.claude/mcp-servers.json
 tern/**
 t3/**
 hex/**
 .pi/agent/settings.managed.json
 .pi/agent/settings.defaults.json
+.claude/settings.managed.json
+.claude/settings.defaults.json
+.claude/mcp-servers.json
 docs/**
 GLOSSARY-MAP.md
 **/GLOSSARY.md

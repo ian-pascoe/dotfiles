@@ -1,0 +1,24 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/bin/sh
+# Claude Code skills: ~/.agents/skills is the source of truth. Link each skill
+# into ~/.claude/skills one by one (never the whole directory, which also holds
+# Claude Code's own synced skills). Existing entries are left alone; links into
+# ~/.agents/skills whose skill is gone are pruned. Runs on every apply because
+# skills also arrive outside chezmoi (`skills add`, Plannotator).
+set -eu
+src="$HOME/.agents/skills"
+dst="$HOME/.claude/skills"
+[ -d "$src" ] || exit 0
+mkdir -p "$dst"
+for dir in "$src"/*/; do
+  name=$(basename "$dir")
+  [ -f "$dir/SKILL.md" ] || continue
+  [ -e "$dst/$name" ] || [ -L "$dst/$name" ] || ln -s "../../.agents/skills/$name" "$dst/$name"
+done
+for link in "$dst"/*; do
+  [ -L "$link" ] && [ ! -e "$link" ] || continue
+  case $(readlink "$link") in
+  ../../.agents/skills/* | "$src"/*) rm "$link" ;;
+  esac
+done
+{{ end -}}

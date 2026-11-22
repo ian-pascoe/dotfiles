@@ -1,0 +1,235 @@
+{
+  "formatters": {
+    "oxfmt": {
+      "command": "oxfmt",
+      "args": ["--no-error-on-unmatched-pattern", "$FILE"],
+      "files": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".mjs",
+          ".cjs",
+          ".mts",
+          ".cts",
+          ".json",
+          ".jsonc",
+          ".md",
+          ".yml",
+          ".yaml",
+          ".css",
+          ".scss",
+          ".less",
+          ".html",
+          ".htm",
+          ".vue",
+          ".mdx",
+          ".graphql",
+          ".gql",
+          ".hbs"
+        ]
+      },
+      "rootMarkers": [".oxfmtrc.json", ".oxfmtrc.jsonc"],
+      "requireRootMarker": true
+    },
+    "rustfmt": {
+      "command": "rustfmt",
+      "args": ["$FILE"],
+      "files": {
+        "extensions": [".rs"]
+      },
+      "rootMarkers": ["Cargo.toml"],
+      "requireRootMarker": true
+    },
+    "ruff": {
+      "command": "ruff",
+      "args": ["format", "$FILE"],
+      "files": {
+        "extensions": [".py", ".pyi", ".pyw"]
+      },
+      "rootMarkers": ["pyproject.toml", "ruff.toml", ".ruff.toml"]
+    },
+    "gofmt": {
+      "command": "gofmt",
+      "args": ["-w", "$FILE"],
+      "files": {
+        "extensions": [".go"]
+      },
+      "rootMarkers": ["go.work", "go.mod"]
+    },
+    "clang-format": {
+      "command": "clang-format",
+      "args": ["-i", "$FILE"],
+      "files": {
+        "extensions": [
+          ".c",
+          ".h",
+          ".cc",
+          ".cpp",
+          ".cxx",
+          ".C",
+          ".hh",
+          ".hpp",
+          ".hxx",
+          ".ipp",
+          ".tpp",
+          ".mm",
+          ".cu",
+          ".cuh"
+        ]
+      },
+      "rootMarkers": [".clang-format", "_clang-format"]
+    },
+    "google-java-format": {
+      "command": "google-java-format",
+      "args": ["--replace", "$FILE"],
+      "files": {
+        "extensions": [".java"]
+      },
+      "rootMarkers": ["pom.xml", "build.gradle", "build.gradle.kts"]
+    },
+    "ktlint": {
+      "command": "ktlint",
+      "args": ["--format", "$FILE"],
+      "files": {
+        "extensions": [".kt", ".kts"]
+      },
+      "rootMarkers": [
+        "settings.gradle",
+        "settings.gradle.kts",
+        "pom.xml",
+        "build.gradle",
+        "build.gradle.kts"
+      ]
+    },
+    "csharpier": {
+      "command": "csharpier",
+      "args": ["format", "$FILE"],
+      "files": {
+        "extensions": [".cs"]
+      },
+      "rootMarkers": [
+        ".csharpierrc",
+        ".csharpierrc.json",
+        ".csharpierrc.yaml",
+        "*.sln",
+        "*.slnx",
+        "*.csproj"
+      ],
+      "requireRootMarker": true
+    },
+    "rubocop": {
+      "command": "bundle",
+      "args": [
+        "exec",
+        "rubocop",
+        "--autocorrect",
+        "--only",
+        "Layout",
+        "--force-exclusion",
+        "$FILE"
+      ],
+      "files": {
+        "extensions": [".rb", ".rake", ".gemspec"],
+        "fileNames": ["Gemfile", "Rakefile", "Guardfile"]
+      },
+      "rootMarkers": ["Gemfile"],
+      "requireRootMarker": true
+    },
+    "php-cs-fixer": {
+      "command": "php-cs-fixer",
+      "args": ["fix", "--path-mode=intersection", "--allow-risky=no", "$FILE"],
+      "files": {
+        "extensions": [".php", ".phtml"]
+      },
+      "rootMarkers": [".php-cs-fixer.php", ".php-cs-fixer.dist.php"],
+      "requireRootMarker": true
+    },
+    "swift-format": {
+      "command": "swift",
+      "args": ["format", "--in-place", "$FILE"],
+      "files": {
+        "extensions": [".swift"]
+      },
+      "rootMarkers": [".swift-format", "Package.swift", "*.xcodeproj", "*.xcworkspace"]
+    },
+    "dart-format": {
+      "command": "dart",
+      "args": ["format", "$FILE"],
+      "files": {
+        "extensions": [".dart"]
+      },
+      "rootMarkers": ["pubspec.yaml"],
+      "requireRootMarker": true
+    },
+    "stylua": {
+      "command": "stylua",
+      "args": ["--search-parent-directories", "--respect-ignores", "$FILE"],
+      "files": {
+        "extensions": [".lua"]
+      },
+      "rootMarkers": ["stylua.toml", ".stylua.toml"]
+    },
+    "shfmt": {
+      "command": "shfmt",
+      "args": ["-w", "$FILE"],
+      "files": {
+        "extensions": [".sh", ".bash"],
+        "fileNames": [".bashrc", ".bash_profile", ".bash_login", ".bash_logout", ".profile"]
+      },
+      "rootMarkers": []
+    },
+    "taplo": {
+      "command": "taplo",
+      "args": ["format", "$FILE"],
+      "files": {
+        "extensions": [".toml"]
+      },
+      "rootMarkers": ["taplo.toml", ".taplo.toml"]
+    },
+    "sqlfluff": {
+      "command": "uvx",
+      "args": ["sqlfluff", "format", "$FILE"],
+      "files": {
+        "extensions": [".sql"]
+      },
+      "rootMarkers": [".sqlfluff"],
+      "requireRootMarker": true
+    },
+    "air": {
+      "command": "air",
+      "args": ["format", "$FILE"],
+      "files": {
+        "extensions": [".r", ".R"]
+      },
+      "rootMarkers": ["air.toml", ".air.toml", "*.Rproj", "DESCRIPTION"]
+    },
+    "terraform-fmt": {
+      "command": "terraform",
+      "args": ["fmt", "$FILE"],
+      "files": {
+        "extensions": [".tf", ".tfvars"]
+      },
+      "rootMarkers": [".terraform", ".terraform.lock.hcl", "*.tf"],
+      "requireRootMarker": true
+    },
+    "nixfmt": {
+      "command": "nixfmt",
+      "args": ["$FILE"],
+      "files": {
+        "extensions": [".nix"]
+      },
+      "rootMarkers": ["flake.nix", "shell.nix", "default.nix"],
+      "requireRootMarker": true
+    },
+    "zig-fmt": {
+      "command": "zig",
+      "args": ["fmt", "$FILE"],
+      "files": {
+        "extensions": [".zig"]
+      },
+      "rootMarkers": ["build.zig"]
+    }
+  }
+}

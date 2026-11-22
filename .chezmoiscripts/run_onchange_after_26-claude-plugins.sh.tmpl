@@ -1,0 +1,14 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/bin/sh
+# Install the dotfiles marketplace's plugins into Claude Code. settings.json
+# declares the marketplace and enables them, but Claude Code only loads a
+# plugin once it is installed. Directory plugins load in place, so later edits
+# need no reinstall; this reruns only when the plugin list changes. Both
+# commands are no-ops when already done.
+# Marketplace: {{ include "dot_claude/dotfiles-marketplace/dot_claude-plugin/marketplace.json" | sha256sum }}
+set -eu
+export MISE_GLOBAL_CONFIG_FILE="$HOME/.config/mise/config.toml"
+claude() { mise --cd "$HOME/.config/mise" exec -- claude "$@"; }
+claude plugin marketplace add "$HOME/.claude/dotfiles-marketplace"
+claude plugin install lsp@dotfiles --scope user
+{{ end -}}

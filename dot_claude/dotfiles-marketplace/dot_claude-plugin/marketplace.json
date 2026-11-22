@@ -1,0 +1,12 @@
+{
+  "name": "dotfiles",
+  "owner": { "name": "dotfiles" },
+  "description": "Claude Code plugins managed by chezmoi.",
+  "plugins": [
+    {
+      "name": "lsp",
+      "source": "./plugins/lsp",
+      "description": "Language servers for Claude Code's LSP tool."
+    }
+  ]
+}

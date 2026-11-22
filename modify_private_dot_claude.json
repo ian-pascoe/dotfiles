@@ -1,0 +1,14 @@
+#!/bin/sh
+# Claude Code user-scope MCP servers from dot_claude/mcp-servers.json (repo-only,
+# in Claude Code's own format). Only those server entries are managed; the rest
+# of ~/.claude.json is Claude Code state, and servers added with
+# `claude mcp add` are kept. Claude Code defers MCP tools behind tool search
+# unless a server sets `alwaysLoad`.
+# jq -j omits the trailing newline, matching how Claude Code saves the file.
+set -eu
+
+input=$(cat)
+[ -n "$input" ] || input='{}'
+printf '%s\n' "$input" |
+  jq -j --slurpfile servers "$CHEZMOI_SOURCE_DIR/dot_claude/mcp-servers.json" '
+    .mcpServers = ((.mcpServers // {}) + $servers[0].mcpServers)'

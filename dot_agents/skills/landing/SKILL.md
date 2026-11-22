@@ -3,7 +3,7 @@ name: landing
 description: Land a change by building it, passing code-review, opening its PR, and merging it once its checks pass. Use when the user asks for a change to be landed or merged, not just implemented.
 ---
 
-Land the **change** the user approved: a ticket they name, or the plan just settled in the conversation. It is landed when its PR is merged into the default branch and its tickets are closed. Run the `code-host`, `tdd`, `code-review`, `pr`, and `closing-the-loop` skills where named, and decide along the way under `escalating-to-user`; each holds except where this skill overrides it. Each round of fixes, for review or checks, is one cycle; after three cycles, hold the change and escalate. From the start, keep a friction log as `closing-the-loop` defines it.
+Land the **change** the user approved: a ticket they name, or the plan just settled in the conversation. It is landed when its PR is merged into the default branch and its tickets are closed. Run the `code-host`, `tdd`, `code-review`, `validating-ui`, `pr`, and `closing-the-loop` skills where named, and decide along the way under `escalating-to-user`; each holds except where this skill overrides it. Each round of fixes, for review or checks, is one cycle; after three cycles, hold the change and escalate. From the start, keep a friction log as `closing-the-loop` defines it.
 
 ## Start
 
@@ -21,9 +21,9 @@ Typecheck and run single test files as you go, and the full suite once at the en
 
 ## Review
 
-Review every diff before the push that carries it, so checks run only on reviewed code; every later fix comes back through this section. The PR's **target** is the default branch, or the branch a stacked change stacks on. Fetch, then run `code-review` with `origin/<target>` as the fixed point, writing `git diff origin/<target>...HEAD` to a file named for the branch and giving its path to the reviewers, so they review the diff even without a shell. Blocking findings are every Spec finding and every hard violation of a documented standard; baseline smells are advisory, so fix the ones you agree with and list the rest in the PR. Clear each blocker by fixing it, or by dismissing it with a reason recorded as a decision, escalating a dismissal only the user can judge. Review again after fixes, until no blockers remain.
+Review every diff before the push that carries it, so checks run only on reviewed code; every later fix comes back through this section. The PR's **target** is the default branch, or the branch a stacked change stacks on. Fetch. When the diff changes UI, first run `validating-ui` with `origin/<target>` as the fixed point, the change's spec, and the friction log, so its fixes are in the diff `code-review` sees; after later fixes, run it on just the surfaces they touch. Then run `code-review` with `origin/<target>` as the fixed point, writing `git diff origin/<target>...HEAD` to a file named for the branch and giving its path to the reviewers, so they review the diff even without a shell. Blocking findings are every Spec finding, every hard violation of a documented standard, and every UI blocker `validating-ui` left open; baseline smells and the advisory UI findings it left are advisory, so fix the ones you agree with and list the rest in the PR. Clear each blocker by fixing it, or by dismissing it with a reason recorded as a decision, escalating a dismissal only the user can judge. Review again after fixes, until no blockers remain.
 
-Post each passing report as a **review report**: a top-level comment the host doesn't count as an open thread (**Comment**), or where the host has none, a `## Review` section of the PR body (**Edit PR body**), naming the head commit it reviewed, with its dismissals and their reasons, so a later run can tell which diff was reviewed; the first waits for **Open the PR**.
+Post each passing report as a **review report**: a top-level comment the host doesn't count as an open thread (**Comment**), or where the host has none, a `## Review` section of the PR body (**Edit PR body**), naming the head commit it reviewed, with its dismissals and their reasons and any UI report `validating-ui` returned, its screenshots and demos posted as `validating-ui` says, so a later run can tell which diff was reviewed; the first waits for **Open the PR**.
 
 ## Open the PR
 
@@ -66,4 +66,4 @@ Run `closing-the-loop` on the friction log, once the change has landed or is hel
 
 ## Present the ledger
 
-Present the ledger after acting rather than before: the change landed, or held with its escalations and any open PR, every decision including dismissed findings, any dirty files left out, and `closing-the-loop`'s report.
+Present the ledger after acting rather than before: the change landed, or held with its escalations and any open PR, each surface `validating-ui` checked with its head screenshots beside its base, and its demos, every decision including dismissed findings, any dirty files left out, and `closing-the-loop`'s report.

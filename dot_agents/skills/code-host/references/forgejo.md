@@ -4,7 +4,7 @@
 - **Tool:** REST via curl (`FORGEJO_TOKEN`), checked 2026-10-30
 - **Exercised:** not yet
 - **Sources:** https://codeberg.org/swagger.v1.json, https://codeberg.org/forgejo/forgejo/raw/branch/forgejo/services/pull/check.go, https://codeberg.org/forgejo/forgejo (`routers/api/v1/repo/pull.go`, `models/git/protected_branch.go`), https://forgejo.org/docs/v9.0/user/versions, https://forgejo.org/docs/latest/user/actions/, https://forgejo.org/docs/latest/user/linked-references/
-- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo, `<host>` instance hostname
+- **Placeholders:** `<n>` PR number, `<b>` PR branch, `<t>` target branch, `<sha>` reviewed head, `<ticket>` ticket number, `<owner>/<repo>` repo, `<host>` instance hostname, `<file>` image file, `<e>` evidence commit, `<path>` file path in the evidence commit
 
 Every call below is `curl -sS -H "Authorization: token $FORGEJO_TOKEN" -H "Content-Type: application/json" "https://<host>/api/v1/<path>"`; shown as `API <path>`, with `-X <verb>` and `-d` added where stated. **Unverified**: check the token header form on the API page before first use.
 
@@ -43,6 +43,14 @@ Every call below is `curl -sS -H "Authorization: token $FORGEJO_TOKEN" -H "Conte
 ## List comments
 
 `API repos/<owner>/<repo>/issues/<n>/comments` → each entry's `.user.login`, `.body`, `.created_at`. Order: **Unverified**: check the API page before first use; sort by `.created_at` yourself.
+
+## Attach media
+
+A PR is an issue, so upload each file as an issue attachment, with multipart rather than `API`'s JSON header: `curl -sS -H "Authorization: token $FORGEJO_TOKEN" -F "attachment=@<file>" "https://<host>/api/v1/repos/<owner>/<repo>/issues/<n>/assets"` → `.browser_download_url`. Put `![alt](<url>)` in the comment or body in place of the local reference. The instance's allowed types and size cap: `API settings/attachment`.
+
+Video: embed an uploaded `.mp4` or `.webm` as `<video src="<url>" controls></video>`. **Unverified**: Forgejo inherits Gitea's allowed types and its sanitizer's `video` element; check `API settings/attachment` and a rendered comment on first use, posting a GIF where it fails.
+
+Committed file: `https://<host>/<owner>/<repo>/raw/commit/<e>/<path>`.
 
 ## Checks
 
