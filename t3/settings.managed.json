@@ -40,7 +40,7 @@
   "providerInstances": {
     "claudeAgent": {
       "driver": "claudeAgent",
-      "enabled": false
+      "enabled": true
     },
     "codex": {
       "driver": "codex",
