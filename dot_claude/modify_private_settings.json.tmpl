@@ -4,7 +4,9 @@
 # Code state (what /model, /effort and /config save, installer-added hooks).
 # settings.defaults.json fills in that state where missing.
 # Requests go through the Commissary proxy; its key is read from 1Password
-# at apply time, which is why this target is private.
+# at apply time, which is why this target is private. Without the 1Password
+# CLI (a t3flare container, whose managed settings route models) the routing
+# is left out.
 set -eu
 
 dir="$CHEZMOI_SOURCE_DIR/dot_claude"
@@ -13,8 +15,12 @@ input=$(cat)
 printf '%s\n' "$input" |
   jq --indent 2 --slurpfile defaults "$dir/settings.defaults.json" \
     --slurpfile managed "$dir/settings.managed.json" \
+{{- if lookPath "op" }}
     --arg token {{ onepasswordRead "op://Agents/Commissary Pi/credential" | trim | squote }} \
+{{- end }}
     --arg marketplace {{ joinPath .chezmoi.homeDir ".claude" "dotfiles-marketplace" | quote }} \
     '$defaults[0] * . * $managed[0]
+{{- if lookPath "op" }}
       * {env: {ANTHROPIC_BASE_URL: "https://api.ai.ianpascoe.dev", ANTHROPIC_AUTH_TOKEN: $token}}
+{{- end }}
       * {extraKnownMarketplaces: {dotfiles: {source: {source: "directory", path: $marketplace}}}}'
