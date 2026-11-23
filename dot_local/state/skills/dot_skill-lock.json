@@ -606,11 +606,11 @@
       "source": "ian-pascoe/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ian-pascoe/skills.git",
-      "commit": "9d093dd72ad4743890cdf55e4e71c6e17941f740",
+      "commit": "e037e46e3f973c9dd7305fdb3177f70008fb925e",
       "skillPath": "skills/lane-landing/SKILL.md",
-      "skillFolderHash": "bffb4b7d1c5590eb3f404bd60135ba29fdc6c17f",
+      "skillFolderHash": "9d3f55934282f93f2adcb2ba55b0ff44b7cb2738",
       "installedAt": "2026-10-30T12:27:08.347Z",
-      "updatedAt": "2026-11-22T11:59:21.546Z"
+      "updatedAt": "2026-11-23T09:01:06.909Z"
     },
     "address-pr-review": {
       "source": "ian-pascoe/skills",
