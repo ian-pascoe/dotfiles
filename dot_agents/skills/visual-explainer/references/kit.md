@@ -21,7 +21,7 @@ The kit is the shared CSS, fonts, SVG defs, and script of every page. You write 
   </header>
   <figure>
     <div class="frame"><svg class="ve-svg" viewBox="0 0 800 300" aria-label="What the picture shows">…</svg></div>
-    <figcaption><span class="fig-n">Fig. 1</span>The claim in one sentence.</figcaption>
+    <figcaption><span class="fig-n"></span>The claim in one sentence.</figcaption>
   </figure>
   <section>
     <div class="sec-head"><p class="ve-label caps">Load</p><h2>The takeaway as a heading</h2></div>
@@ -34,6 +34,8 @@ The kit is the shared CSS, fonts, SVG defs, and script of every page. You write 
 
 The renderer adds the charset, viewport, favicon, fonts, kit CSS and script, and the SVG defs (`#ve-ah` arrowhead, `#ve-node` fill, `#ve-w-on` / `#ve-w-off` waffle cells).
 
+It also numbers each empty `.fig-n` in page order, and writes that number into an empty `<a href="#id"></a>` that points at `<figure id="id">`. A tag left open or a closing tag with nothing to close is a render error.
+
 **Registers:** `data-register="instrument"` (default), `blueprint`, `paper`, or `editorial` (`style-guide.md`). Use the tokens as `var(--accent)`, `var(--s-4)`; a page's own `:root { --accent: … }` wins over the kit.
 
 The kit already styles plain HTML, so a page adds none of it: a section's paragraphs and lists at 65ch, `<pre>` code blocks, bare `<ul>`/`<ol>`, and the gaps between a section's blocks. A page's own rule always wins.
@@ -42,7 +44,7 @@ The kit already styles plain HTML, so a page adds none of it: a section's paragr
 
 | Part | Markup |
 |---|---|
-| Node | `<g class="ve-n [is-key]"><rect class="sh"/> [<path class="gl"/>] <text/> [<text class="sub"/>]</g>`; text centres on its `y`; a datastore is `path.sh` + `ellipse.sh.lid`; `<text class="ve-kind">` names the kind |
+| Node | `<g class="ve-n [is-key]"><rect class="sh"/> [<path class="gl"/>] <text/> [<text class="sub"/>]</g>`; text centres on its `x` and `y` (kit CSS sets `text-anchor: middle`, which beats a `text-anchor` attribute), so `x` is the box centre; a datastore is `path.sh` + `ellipse.sh.lid`; `<text class="ve-kind">` names the kind |
 | Edge | `<path class="ve-e [is-hot\|is-async]"/>`, arrowhead included, + `<text class="ve-el [l\|r]">verb</text>` (`l` ends at `x`, `r` starts there); draw edges before nodes |
 | Boundary, slots, axes | `rect.ve-bnd` + `text.ve-bnd-t` tag; `rect.ve-slot` (`.is-on` filled); `.ve-axis` lines + `text.ve-axis-t` |
 | Label | `<text class="ve-tag [key\|risk]">` for a note or a count on a drawing; SVG text with no fill renders black, which is a render error |
@@ -51,7 +53,7 @@ The kit already styles plain HTML, so a page adds none of it: a section's paragr
 | KPI strip | `.kpis` › `.kpi`: `<span class="ve-label">Hit rate</span><span class="val"><span data-count="94">94</span><span class="unit">%</span></span>` + a data tag; `data-count` counts up |
 | Small multiples | `.cases` › `<div class="case" data-st="ok\|warn\|risk">`: a chip, `<h3>`, `<svg class="ve-mini" viewBox="0 0 240 128">`; changed parts `.is-st`, a missing part `.is-off` |
 | Chips | `<span class="chip ok\|warn\|risk">word</span>` |
-| Section nav | 4+ sections: `<nav class="ve-toc" aria-label="Sections"><div><a href="#load">Load</a>…</div><span class="pos"></span></nav>` before `<main>`; the section in view is marked and counted |
+| Section nav | 4+ sections: `<nav class="ve-toc" aria-label="Sections"><div><a href="#load">Load</a>…</div><span class="pos"></span></nav>` before `<main>`; the section in view is marked and counted. A long page: `data-layout="side"` makes it a left column on a wide screen, and `<a class="sub" href="#h3-id">` after its section's link adds a subsection, shown indented there |
 | Linked highlighting | `data-ref="redis"` on any part; a prose term is `<span class="ve-ref" data-ref="redis" tabindex="0">` (`diagrams.md`) |
 | Stepper, replay, callouts, dimensions, flow dots | `.ve-steps` with `data-s`, `.ve-tok`, `.ve-at`, `.ve-vals` (`motion.md`); `.ve-co`, `.ve-dim`, `data-flow` (`diagrams.md`) |
 

@@ -5,6 +5,7 @@
     "defaultMode": "bypassPermissions"
   },
   "skipDangerousModePermissionPrompt": true,
+  "autoMemoryEnabled": false,
   "tui": "fullscreen",
   "hooks": {
     "PostToolUse": [
