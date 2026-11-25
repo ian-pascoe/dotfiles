@@ -1,0 +1,30 @@
+{{ if eq .chezmoi.os "windows" -}}
+# Telemetry opt-outs for Windows. The env vars of ~/.config/shell/telemetry.env
+# become user environment variables, so every process sees them, including
+# PowerShell itself (POWERSHELL_TELEMETRY_OPTOUT is read before the profile)
+# and GUI apps; restart running apps to pick them up. Then the tool-written
+# settings, as the .sh variant does.
+$ErrorActionPreference = 'Stop'
+$telemetryEnv = @'
+{{ include "dot_config/shell/telemetry.env" }}
+'@
+foreach ($line in $telemetryEnv -split "`r?`n") {
+  if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)=(.*)$') {
+    $name, $value = $Matches[1], $Matches[2].Trim()
+    if ([Environment]::GetEnvironmentVariable($name, 'User') -ne $value) {
+      [Environment]::SetEnvironmentVariable($name, $value, 'User')
+    }
+    Set-Item -Path "Env:$name" -Value $value
+  }
+}
+
+# Go and gopls: writes "off <date>" to %AppData%\go\telemetry\mode.
+if (Get-Command go -ErrorAction SilentlyContinue) {
+  go telemetry off
+}
+
+# Dart: sets reporting=0 in ~/.dart-tool/dart-flutter-telemetry.config.
+if (Get-Command dart -ErrorAction SilentlyContinue) {
+  dart --disable-analytics | Out-Null
+}
+{{ end -}}

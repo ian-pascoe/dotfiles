@@ -39,6 +39,9 @@
   // T3 Code and Pi are the agents; Zed is only the editor.
   "disable_ai": true,
 
+  // no usage metrics or crash reports to Zed
+  "telemetry": { "diagnostics": false, "metrics": false },
+
   // The languages of the LazyVim extras in dot_config/nvim/lazyvim.json.
   "auto_install_extensions": {
     "ansible": true,

@@ -2,6 +2,9 @@ local hyper = { "ctrl", "alt", "cmd" }
 local hotkeyDocs = {}
 local log = hs.logger.new("init", "info")
 
+-- No crash reports to Hammerspoon's Sentry (persists in its defaults).
+hs.uploadCrashData(false)
+
 -- Watchers, timers, and menubar items held only by locals can be garbage
 -- collected once init.lua finishes, which silently stops them. Keep them here.
 keepAlive = {}

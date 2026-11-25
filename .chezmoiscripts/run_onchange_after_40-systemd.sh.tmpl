@@ -2,6 +2,7 @@
 {{ if and (eq .chezmoi.os "linux") (stat (joinPath $runtimeDir "bus")) -}}
 #!/bin/sh
 set -eu
+# environment.d: {{ include "dot_config/shell/telemetry.env" | sha256sum }}
 {{ range glob (joinPath .chezmoi.sourceDir "dot_config/systemd/user/*.service") -}}
 # {{ base . }}: {{ include . | sha256sum }}
 {{ end -}}

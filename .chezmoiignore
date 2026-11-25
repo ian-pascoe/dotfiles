@@ -79,6 +79,7 @@ Library/KeyBindings
 # Non-Linux Ignores
 {{ if ne .chezmoi.os "linux" }}
 .config/systemd
+.config/environment.d
 .config/tern
 .config/tigervnc
 {{ end }}

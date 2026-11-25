@@ -23,6 +23,13 @@ export XDG_VIDEOS_DIR="$HOME/Videos"
 export XDG_PUBLICSHARE_DIR="$HOME/Public"
 export XDG_TEMPLATES_DIR="$HOME/Templates"
 
+## Telemetry Opt-Outs (KEY=VALUE lines, exported)
+if [ -f "$HOME/.config/shell/telemetry.env" ]; then
+  set -a
+  . "$HOME/.config/shell/telemetry.env"
+  set +a
+fi
+
 ## OpenCode
 export OPENCODE_ENABLE_EXA=true
 export OPENCODE_EXPERIMENTAL=false

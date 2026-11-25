@@ -1,0 +1,43 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/bin/sh
+# Telemetry opt-outs that live in tool-written state, not in a file chezmoi can
+# own: each command writes its own setting. Env-var opt-outs are in
+# ~/.config/shell/telemetry.env. Runs after mise (10) has installed the tools;
+# edit this file to rerun it.
+set -eu
+
+# Go and gopls: writes "off <date>" to <UserConfigDir>/go/telemetry/mode
+# (the default, "local", collects counters on disk).
+if command -v go >/dev/null 2>&1; then
+  go telemetry off
+fi
+
+# Dart: sets reporting=0 in ~/.dart-tool/dart-flutter-telemetry.config, a file
+# the Dart tools also stamp with notice dates.
+if command -v dart >/dev/null 2>&1; then
+  dart --disable-analytics >/dev/null
+fi
+
+# Syncthing: decline usage reporting and stop crash-report uploads. Its
+# config.xml also holds device keys, so set the two options through the
+# running daemon; if it isn't running, rerun this after it starts
+# (`chezmoi state delete-bucket --bucket=scriptState`, then apply).
+if command -v syncthing >/dev/null 2>&1; then
+  if syncthing cli config options uraccepted set -- -1 2>/dev/null &&
+    syncthing cli config options crenabled set false 2>/dev/null; then
+    :
+  else
+    echo "telemetry: Syncthing isn't running; its usage and crash reporting are unchanged" >&2
+  fi
+fi
+{{- if eq .chezmoi.os "darwin" }}
+
+# Zen: Firefox enterprise policies, read from the app's defaults domain. Zen
+# already strips Mozilla telemetry; this covers anything it missed. Zen shows
+# "managed by your organization" in its menu while policies are on.
+zen=app.zen-browser.zen
+defaults write "$zen" EnterprisePoliciesEnabled -bool true
+defaults write "$zen" DisableTelemetry -bool true
+defaults write "$zen" DisableFirefoxStudies -bool true
+{{- end }}
+{{ end -}}
