@@ -1,4 +1,7 @@
-{{- /* Commissary API key for the ai.ianpascoe.dev proxy; read from 1Password at apply time. */ -}}
+{{- /* Commissary API key for the ai.ianpascoe.dev proxy; read from 1Password at apply time. Without the
+1Password CLI (a t3flare container, whose own routing supplies the models) the template renders empty, so
+chezmoi deploys no models.json. */ -}}
+{{- if lookPath "op" -}}
 {{- $commissaryKey := onepasswordRead "op://Agents/Commissary Pi/credential" | trim | toJson -}}
 {
   "$schema": "https://raw.githubusercontent.com/earendil-works/pi/refs/heads/main/packages/coding-agent/schemas/models.schema.json",
@@ -64,3 +67,4 @@
     }
   }
 }
+{{ end -}}
