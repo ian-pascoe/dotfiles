@@ -7,6 +7,7 @@
 - Global CLIs come from t3flare's Global mise config (`$MISE_GLOBAL_CONFIG_FILE`, set in t3flare's Environment settings), not `~/.config/mise/config.toml`; OS packages come from apt, installed by t3flare's Image setup.
 - `sed` is GNU sed, so an in-place edit is `sed -i`, with no `''` after it.
 - Each t3flare Workspace is a checkout under `/w/`; t3flare creates thread worktrees itself.
+- Each Container start empties `/tmp`; keep scratch that must outlive a restart (review notes, friction logs, test fixtures) under `/workspace/`.
 - Create other git worktrees in the repo's `.worktrees/` when the repo gitignores it; otherwise in `~/.worktrees/<repo>/`.
 {{- else }}
 
