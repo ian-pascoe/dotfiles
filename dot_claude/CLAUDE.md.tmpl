@@ -19,6 +19,10 @@
 - Create git worktrees in the repo's `.worktrees/` when the repo gitignores it; otherwise in `~/.worktrees/<repo>/`.
 {{- end }}
 
+## Machine resources
+
+Several agents share this machine, so verify a change with **targeted checks**: the test files it touches (one file per run), the typecheck of the one package it changed, and format and lint on its changed files. CI runs the full suite and repo-wide checks on every pull request; leave those to it. This holds over any repo instruction to run a full check locally before pushing, and unless the user asks, run no whole-suite, repo-wide or background check. Git hooks follow it too: a hook you add, enable or change checks only the staged files, never the whole suite or repo. Pass this rule on in every brief you give a subagent.
+
 ## Subagent models
 
 When you start a subagent with the `Agent` tool, pick its `model` by the task. These instructions explicitly ask for the effort levels named below, so pass them as the `Agent` tool's `effort`.
