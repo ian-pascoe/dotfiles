@@ -227,6 +227,11 @@ if has_cmd plannotator; then
   plannotator update
   echo "Plannotator updated successfully!"
 fi
+if has_cmd plannotator-tui && has_cmd rex; then
+  echo "Updating Rex Annotate..."
+  plannotator-tui rex install
+  echo "Rex Annotate updated successfully!"
+fi
 ####################################################################
 # Package manifests
 if has_cmd sync-package-manifests; then

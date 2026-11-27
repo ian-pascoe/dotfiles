@@ -15,10 +15,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pbakaus/impeccable.git",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "skillFolderHash": "4f98d7e1f73dfd7a84ce64d41146c1689614e982",
+      "skillFolderHash": "235e068f9d3fc2402691a14e3e0f4b8ca4b070cb",
       "installedAt": "2026-04-16T13:30:50.747Z",
-      "updatedAt": "2026-11-25T12:11:32.469Z",
-      "commit": "9e460a87ef338ee9d12c7beed8fedc597a5af5f7"
+      "updatedAt": "2026-11-27T11:53:11.476Z",
+      "commit": "2fc5e1459efbbf06d92c7306517c286bf12490cf"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -335,10 +335,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/nicobailon/visual-explainer.git",
       "skillPath": "plugins/visual-explainer/SKILL.md",
-      "skillFolderHash": "558e390c63f5a09430b27f3ae9ce5165c8230ba9",
+      "skillFolderHash": "4cf4981dff7a2606557bb18cb0bdf57edffb7944",
       "installedAt": "2026-08-17T09:50:57.504Z",
-      "updatedAt": "2026-11-25T12:11:33.211Z",
-      "commit": "e49079f3748b8431bd5d9c09c652461fb755cb86"
+      "updatedAt": "2026-11-27T11:53:11.728Z",
+      "commit": "916b21212eac7ed002d00ef5dd12695099775521"
     },
     "show-me": {
       "source": "humanlayer/skills",
@@ -406,13 +406,13 @@
       "updatedAt": "2026-10-30T12:07:08.314Z"
     },
     "plannotator-tui": {
-      "source": "plannotator/herdr-annotate",
+      "source": "plannotator/plannotator-tui",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/plannotator/herdr-annotate.git",
+      "sourceUrl": "https://github.com/plannotator/plannotator-tui.git",
       "skillPath": "skills/plannotator-tui/SKILL.md",
-      "skillFolderHash": "c6b9c35885b352dc4784d762519876730c8e332f",
+      "skillFolderHash": "ce25cbed0963e5739d688a7d922e1381df18fbd8",
       "installedAt": "2026-09-24T18:42:51.969Z",
-      "updatedAt": "2026-10-30T12:07:11.834Z"
+      "updatedAt": "2026-11-27T12:10:33.000Z"
     },
     "pr": {
       "source": "mattpocock/skills",

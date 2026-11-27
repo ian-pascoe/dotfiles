@@ -1,0 +1,10 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/bin/sh
+# Rex Annotate: plannotator-tui writes its Rex module next to init.lua, which
+# loads it. upgrade-all rewrites it after upgrading plannotator-tui.
+set -eu
+# mise config: {{ include "dot_config/mise/config.toml" | sha256sum }}
+command -v plannotator-tui >/dev/null 2>&1 || exit 0
+command -v rex >/dev/null 2>&1 || exit 0
+plannotator-tui rex install
+{{ end -}}
