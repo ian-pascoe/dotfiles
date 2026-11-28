@@ -1,7 +1,27 @@
 {
   "mcpServers": {
     "executor": {
-      "url": "https://mcp.executor.sh/mcp"
+      "url": "https://mcp.executor.sh/mcp",
+      "tools": {
+        "call": {
+          "eager": true
+        },
+        "describe": {
+          "eager": true
+        },
+        "execute": {
+          "eager": true
+        },
+        "resume": {
+          "eager": true
+        },
+        "search": {
+          "eager": true
+        },
+        "skills": {
+          "eager": true
+        }
+      }
     }
   }
 }

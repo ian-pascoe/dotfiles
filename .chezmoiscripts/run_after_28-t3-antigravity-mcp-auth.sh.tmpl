@@ -1,0 +1,13 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/bin/sh
+# Share standalone `agy` CLI MCP OAuth tokens with T3 Code's isolated
+# Antigravity profile so OAuth MCP servers authenticated via `agy` -> `/mcp`
+# work in T3 Code too. Only links when both the token file and T3's
+# antigravity-acp directory exist, and leaves an existing entry untouched.
+set -eu
+src="$HOME/.gemini/antigravity-cli/mcp_oauth_tokens.json"
+dst_dir="$HOME/.t3/userdata/providers/antigravity/ac0a3dfd6dddb20962cecff6ee5fe65e19d3923be20e52c5ab52ff877f7e4c32/antigravity-acp"
+dst="$dst_dir/mcp_oauth_tokens.json"
+[ -f "$src" ] && [ -d "$dst_dir" ] || exit 0
+[ -e "$dst" ] || [ -L "$dst" ] || ln -s "$src" "$dst"
+{{ end -}}

@@ -4,6 +4,7 @@ tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", tr
 tap "homebrew/core"
 tap "nikitabobko/tap", trusted: true
 tap "steipete/tap", trusted: true
+tap "yakitrak/yakitrak", trusted: true
 # Automatic configure script builder
 brew "autoconf"
 # Library for command-line editing
@@ -22,30 +23,12 @@ brew "btop"
 brew "gmp"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# File comparison utilities
-brew "diffutils"
-# Collection of GNU find, xargs, and locate
-brew "findutils"
-# GNU awk utility
-brew "gawk"
-# GNU implementation of the famous stream editor
-brew "gnu-sed"
-# GNU version of the tar archiving utility
-brew "gnu-tar"
-# GNU grep, egrep and fgrep
-brew "grep"
-# Lock file during command
-brew "flock"
-# Command-line option parsing utility
-brew "gnu-getopt"
-# Utility for directing compilation
-brew "make"
-# Utility that provides fast incremental file transfer
-brew "rsync"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Command-line tool for getting & setting the default browser
 brew "defaultbrowser"
+# File comparison utilities
+brew "diffutils"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Docker CLI plugin for extended build capabilities with BuildKit
@@ -58,8 +41,14 @@ brew "docker-credential-helper"
 brew "fastfetch"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Collection of GNU find, xargs, and locate
+brew "findutils"
+# Lock file during command
+brew "flock"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU awk utility
+brew "gawk"
 # GNU compiler collection
 brew "gcc"
 # TIFF library and utilities
@@ -68,8 +57,16 @@ brew "libtiff"
 brew "ghidra"
 # Distributed revision control system
 brew "git"
+# Command-line option parsing utility
+brew "gnu-getopt"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# GNU version of the tar archiving utility
+brew "gnu-tar"
 # Deliver Go binaries as fast and easily as possible
 brew "goreleaser"
+# GNU grep, egrep and fgrep
+brew "grep"
 # Improved top (interactive process viewer)
 brew "htop"
 # Get events and tasks from the macOS calendar database
@@ -80,6 +77,8 @@ brew "libffi"
 brew "libiconv"
 # YAML Parser
 brew "libyaml"
+# Utility for directing compilation
+brew "make"
 # Control and observe media playback from the command-line
 brew "media-control"
 # Polyglot runtime manager (asdf rust clone)
@@ -106,6 +105,8 @@ brew "python@3.13"
 brew "python@3.14"
 # Generate C-based recognizers from regular expressions
 brew "re2c"
+# Utility that provides fast incremental file transfer
+brew "rsync"
 # Create beautiful image of your source code
 brew "silicon"
 # Command driven spotify player
@@ -126,7 +127,7 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 # A window border system for macOS
 brew "felixkratz/formulae/borders", trusted: true
-brew "yakitrak/yakitrak/notesmd-cli"
+brew "yakitrak/yakitrak/notesmd-cli", link: false
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
@@ -139,10 +140,6 @@ cask "aldente"
 cask "balenaetcher"
 # Display management tool
 cask "betterdisplay"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
-# Anthropic's official Claude AI desktop app
-cask "claude"
 # Menu bar usage monitor for Codex and Claude
 cask "steipete/tap/codexbar", trusted: true
 cask "font-geist"
@@ -152,6 +149,8 @@ cask "font-source-serif-4"
 cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Native desktop AI assistant from Google
+cask "google-gemini"
 # Desktop automation application
 cask "hammerspoon"
 # Desktop app for terminals and coding agents
