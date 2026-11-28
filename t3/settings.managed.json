@@ -44,6 +44,10 @@
       "driver": "claudeAgent",
       "enabled": true
     },
+    "antigravity": {
+      "driver": "antigravity",
+      "enabled": true
+    },
     "codex": {
       "driver": "codex",
       "enabled": false

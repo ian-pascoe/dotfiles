@@ -1,0 +1,7 @@
+{{- /*
+  T3 Code runs its `antigravity` provider instance with an isolated GEMINI_HOME
+  at ~/.t3/userdata/providers/antigravity/<sha256(instanceId)> and intentionally
+  does not symlink ~/.gemini/config/mcp_config.json into it. Mirror the global
+  Antigravity MCP config here so `executor` is available inside T3 Code too.
+*/ -}}
+{{- include "dot_gemini/config/mcp_config.json" -}}
